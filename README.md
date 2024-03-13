@@ -1,4 +1,4 @@
-# Oh my ghost!
+# {Project Name}
 
 ## Description
 
