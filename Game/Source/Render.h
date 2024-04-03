@@ -57,6 +57,8 @@ public:
 	SDL_Rect viewport;
 	SDL_Color background;
 	TTF_Font* font;
+	TTF_Font* primary_font;
+	TTF_Font* secondary_font;
 };
 
 #endif // __RENDER_H__

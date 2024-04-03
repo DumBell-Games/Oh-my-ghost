@@ -296,6 +296,7 @@ public:
 
 			pMyList = pNewItem;
 			pOtherList = pOtherList->next;
+			++size; 
 		}
 	}
 };

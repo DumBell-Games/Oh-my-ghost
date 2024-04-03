@@ -10,6 +10,8 @@
 #include "GuiManager.h"
 #include "Optick/include/optick.h"
 
+#include "DialogManager.h"
+
 #include "Defs.h"
 #include "Log.h"
 
@@ -40,6 +42,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	map = new Map();
 	entityManager = new EntityManager();
 	guiManager = new GuiManager();
+	dialogManager = new DialogManager();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -54,6 +57,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene);
 	AddModule(entityManager);
 	AddModule(guiManager);
+	AddModule(dialogManager);
 
 	// Render last to swap buffer
 	AddModule(render);
