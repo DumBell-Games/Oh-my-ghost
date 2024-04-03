@@ -43,18 +43,27 @@ bool Player::Update(float dt)
 
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 		position.x += -0.2*dt;
+		if(app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
+			position.x += -0.3*dt;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
 		position.x += 0.2*dt;
+		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
+			position.x += 0.3*dt;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
 		position.y += -0.2 * dt;
+		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
+			position.y += -0.3 * dt;
+
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
 		position.y += 0.2 * dt;
+		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
+			position.y += 0.3 * dt;
 	}
 		
 	app->render->DrawTexture(texture,position.x,position.y);
