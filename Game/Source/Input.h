@@ -2,6 +2,7 @@
 #define __INPUT_H__
 
 #include "Module.h"
+#include <vector>
 
 //#define NUM_KEYS 352
 #define NUM_MOUSE_BUTTONS 5
@@ -47,6 +48,9 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
+	// Encuentra todos los mandos compatibles conectado al pc
+	void FindControllers();
+
 	// Check key states (includes mouse and joy buttons)
 	KeyState GetKey(int id) const
 	{
@@ -69,6 +73,7 @@ private:
 	bool windowEvents[WE_COUNT];
 	KeyState*	keyboard;
 	KeyState mouseButtons[NUM_MOUSE_BUTTONS];
+	std::unique_ptr<std::vector<std::unique_ptr<SDL_GameController>>> controllers;
 	int	mouseMotionX;
 	int mouseMotionY;
 	int mouseX;

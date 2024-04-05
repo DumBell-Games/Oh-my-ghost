@@ -6,6 +6,7 @@
 #include "Log.h"
 
 #include "SDL/include/SDL.h"
+#include <memory>
 
 #define MAX_KEYS 300
 
@@ -29,13 +30,19 @@ bool Input::Awake(pugi::xml_node config)
 {
 	LOG("Init SDL input event system");
 	bool ret = true;
-	SDL_Init(0);
+	if (SDL_Init(SDL_INIT_GAMECONTROLLER) < 0) {
+		LOG("SDL_GAMECONTROLLER could not initialize! SDL Error: %s\n", SDL_GetError());
+		ret = false;
+	}
+	controllers = std::make_unique<std::vector<std::unique_ptr<SDL_GameController>>>();
 
-	if(SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
+	if(ret && SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
 	{
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
 	}
+
+	// TODO Asignacion de teclas personalizadas
 
 	return ret;
 }
@@ -136,11 +143,19 @@ bool Input::PreUpdate()
 // Called before quitting
 bool Input::CleanUp()
 {
+
 	LOG("Quitting SDL event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
 }
 
+void Input::FindControllers() {
+	for (int i = 0; i < SDL_NumJoysticks(); i++) {
+		if (SDL_IsGameController(i)) {
+			controllers->push_back(SDL_GameControllerOpen(i));
+		}
+	}
+}
 
 bool Input::GetWindowEvent(EventWindow ev)
 {
@@ -158,3 +173,4 @@ void Input::GetMouseMotion(int& x, int& y)
 	x = mouseMotionX;
 	y = mouseMotionY;
 }
+
