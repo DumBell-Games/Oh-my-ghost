@@ -10,6 +10,8 @@
 
 #define MAX_KEYS 300
 
+#define DEAD_ZONE 0.05f
+
 Input::Input() : Module()
 {
 	name.Create("input");
@@ -43,7 +45,39 @@ bool Input::Awake(pugi::xml_node config)
 
 	// TODO Asignacion de teclas personalizadas
 
+	for (size_t i = 0; i < ControlID::ID_COUNT; i++)
+	{
+		bindings.push_back(ControlBinding());
+	}
 
+	//Roger: Esto es 100% temporal
+	bindings[CONFIRM]
+		.SetPButton(SDL_CONTROLLER_BUTTON_A)
+		.SetPKey(SDL_SCANCODE_SPACE);
+
+	bindings[BACK]
+		.SetPButton(SDL_CONTROLLER_BUTTON_B)
+		.SetPKey(SDL_SCANCODE_LSHIFT);
+
+	bindings[PAUSE]
+		.SetPButton(SDL_CONTROLLER_BUTTON_START)
+		.SetPKey(SDL_SCANCODE_P);
+
+	bindings[MOVE_HORIZONTAL]
+		.SetAxisControl(true)
+		.SetAxis(SDL_CONTROLLER_AXIS_LEFTX)
+		.SetPButton(SDL_CONTROLLER_BUTTON_DPAD_RIGHT)
+		.SetNButton(SDL_CONTROLLER_BUTTON_DPAD_LEFT)
+		.SetPKey(SDL_SCANCODE_D)
+		.SetNKey(SDL_SCANCODE_A);
+
+	bindings[MOVE_VERTICAL]
+		.SetAxisControl(true)
+		.SetAxis(SDL_CONTROLLER_AXIS_LEFTY)
+		.SetPButton(SDL_CONTROLLER_BUTTON_DPAD_DOWN)
+		.SetNButton(SDL_CONTROLLER_BUTTON_DPAD_UP)
+		.SetPKey(SDL_SCANCODE_S)
+		.SetNKey(SDL_SCANCODE_W);
 
 	return ret;
 }
@@ -89,6 +123,8 @@ bool Input::PreUpdate()
 			mouseButtons[i] = KEY_IDLE;
 	}
 
+	UpdateBindings();
+
 	while(SDL_PollEvent(&event) != 0)
 	{
 		switch(event.type)
@@ -127,27 +163,20 @@ bool Input::PreUpdate()
 				//LOG("Mouse button %d up", event.button.button-1);
 			break;
 
-			case SDL_MOUSEMOTION:
+			case SDL_MOUSEMOTION: {
 				int scale = app->win->GetScale();
 				mouseMotionX = event.motion.xrel / scale;
 				mouseMotionY = event.motion.yrel / scale;
 				mouseX = event.motion.x / scale;
 				mouseY = event.motion.y / scale;
 				//LOG("Mouse motion x %d y %d", mouse_motion_x, mouse_motion_y);
-
+			}
 			break;
-
-			case SDL_CONTROLLERBUTTONDOWN:
-
-				break;
-
-			case SDL_CONTROLLERAXISMOTION:
-
-				break;
 
 			case SDL_CONTROLLERDEVICEADDED:
 				AddController(event.cdevice.which);
 			break;
+
 			case SDL_CONTROLLERDEVICEREMOVED:
 				if (!controllers.empty()) {
 					for (size_t i = 0; i < controllers.size(); i++)
@@ -197,6 +226,24 @@ const ControlBinding& Input::GetBind(ControlID id)
 	return bindings[id];
 }
 
+KeyState Input::GetButton(ControlID id)
+{
+	return GetBind(id).State();
+}
+
+float Input::GetAxis(ControlID x)
+{
+	return GetBind(x).Axis();
+}
+
+fPoint Input::GetAxis(ControlID x, ControlID y)
+{
+	fPoint ret;
+	ret.x = GetBind(x).Axis();
+	ret.y = (y == NONE) ? 0 : GetBind(y).Axis();
+	return ret;
+}
+
 bool Input::GetWindowEvent(EventWindow ev)
 {
 	return windowEvents[ev];
@@ -216,43 +263,60 @@ void Input::GetMouseMotion(int& x, int& y)
 
 void ControlBinding::Update(Input* input)
 {
-	// TODO (Roger) limpiar esta funcion
-
-	// Si este binding no es un eje, no recoge los datos relacionados con ejes para ahorrar calculos con coma flotante
-	// key > 0 es para comprobar que este asignado (0 es que no esta asignado o es una tecla desconocida)
-	bool kP = posKey > 0 ? input->GetKeyRaw(posKey) : false;
-	bool kN;
 	SDL_GameController* c = input->GetController();
-	bool bP = false, bN = false;
-	if (c) {
-		// boton >= 0 es para comprobar que este asignado (-1 si no está asignado o es un boton invalido)
-		if (posButton >= 0) bP = SDL_GameControllerGetButton(c, posButton);
-	}
+	bool bP = false, bN = false; // Botones de mando (buttons)
+	bool kP = false, kN = false; // Teclas de teclado (keys)
 
+	// Si este binding no es un eje, no recoge los datos relacionados con ejes para ahorrar llamadas extra
 	if (isAxisControl) {
-		kN = negKey > 0 && isAxisControl ? input->GetKeyRaw(negKey) : false;
+		kP = input->GetKeyRaw(posKey);
+		kN = input->GetKeyRaw(negKey);
 
 		Sint16 axisTemp = 0;
 		if (c) {
-			if (negButton >= 0) bN = SDL_GameControllerGetButton(c, negButton);
+			bP = SDL_GameControllerGetButton(c, posButton);
+			bN = SDL_GameControllerGetButton(c, negButton);
 			axisTemp = SDL_GameControllerGetAxis(c, axis);
 		}
-
 		if (axisTemp == 0) {
-			axisVal = -kN - bN + kP + bP; // Ambos botones pulsados = 0 movimiento, gana el lado que tenga mas "potencia"
+			axisVal = -kN - bN + kP + bP; // Botones opuestos pulsados = 0 movimiento, gana el lado que tenga mas "potencia"
 		}
 		else
 		{
 			axisVal = axisTemp / 32767.0f;
+			// TODO deadzone por config
+			if (abs(axisVal) <= DEAD_ZONE) axisVal = 0;
 		}
-
 		// Clamp function
 		axisVal = MAX(-maxVal, MIN(maxVal, axisVal));
 
-	}else if (kP || bP) {
-		state = state == KEY_IDLE ? KEY_DOWN : KEY_REPEAT;
 	}
-	else state = KEY_UP;
+	else {
+		kP = input->GetKeyRaw(posKey);
+		if (c) {
+			bP = SDL_GameControllerGetButton(c, posButton);
+		}
 
+		if (kP || bP)
+			state = state == KEY_IDLE ? KEY_DOWN : KEY_REPEAT;
+		else if (state == KEY_DOWN || state == KEY_REPEAT)
+			state = KEY_UP;
+		else
+			state = KEY_IDLE;
+	}
 
+}
+
+void ControlBinding::LogData(ControlID id) const
+{
+	LOG("[Binding %i]\n", id);
+	LOG("PosKey: %i\n", posKey);
+	LOG("NegKey: %i\n", negKey);
+	LOG("PosButton: %i\n", posButton);
+	LOG("NegButton: %i\n", negButton);
+	LOG("State: %i\n", state);
+	LOG("IsAxis: %i\n", isAxisControl);
+	LOG("Axis: %i\n", axis);
+	LOG("AxisVal: %i\n", axisVal);
+	LOG("MaxVal: %i\n", maxVal);
 }

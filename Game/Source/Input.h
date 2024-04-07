@@ -2,6 +2,7 @@
 #define __INPUT_H__
 
 #include "Module.h"
+#include "Point.h"
 #include <vector>
 #include <memory>
 
@@ -23,6 +24,8 @@ enum ControlID {
 	CONFIRM,
 	BACK,
 	PAUSE,
+	MOVE_HORIZONTAL,
+	MOVE_VERTICAL,
 
 	ID_COUNT
 };
@@ -47,7 +50,10 @@ enum KeyState
 struct ControlBinding {
 public:
 
-	ControlBinding(ControlID _id, SDL_Scancode _posKey, SDL_GameControllerButton _posButton, SDL_Scancode _negKey, SDL_GameControllerButton _negButton, SDL_GameControllerAxis _axis, float _maxVal) : id(_id), posKey(_posKey), posButton(_posButton), negKey(_negKey), negButton(_negButton), axis(_axis), maxVal(_maxVal)
+	ControlBinding()
+	{}
+
+	ControlBinding(SDL_Scancode _posKey, SDL_GameControllerButton _posButton, SDL_Scancode _negKey, SDL_GameControllerButton _negButton, SDL_GameControllerAxis _axis, float _maxVal) : posKey(_posKey), posButton(_posButton), negKey(_negKey), negButton(_negButton), axis(_axis), maxVal(_maxVal)
 	{
 		// If any axis-related values is assigned, this binding will update axis data
 		isAxisControl = (axis != SDL_CONTROLLER_AXIS_INVALID
@@ -58,24 +64,35 @@ public:
 
 	void Update(Input* input);
 
-	void AssignPosKey(SDL_Scancode id) { posKey = id; }
-	void AssignPosButton(SDL_GameControllerButton id) { posButton = id; }
-	void AssignNegKey(SDL_Scancode id) { negKey = id; }
-	void AssignNegButton(SDL_GameControllerButton id) { negButton = id; }
-	void AssignAxis(SDL_GameControllerAxis id) { axis = id; }
-	void AssignMaxVal(float val) { maxVal = abs(val); axisVal = MAX(-maxVal, MIN(maxVal, axisVal)); }
+	ControlBinding& SetPKey(SDL_Scancode id) { posKey = id; return *this; }
+	ControlBinding& SetPButton(SDL_GameControllerButton id) { posButton = id; return *this; }
+	ControlBinding& SetNKey(SDL_Scancode id) { negKey = id; return *this; }
+	ControlBinding& SetNButton(SDL_GameControllerButton id) { negButton = id; return *this; }
+	ControlBinding& SetAxisControl(bool val) { isAxisControl = val; axisVal = 0; return *this; }
+	ControlBinding& SetAxis(SDL_GameControllerAxis id) { axis = id; return *this; }
+	ControlBinding& SetMaxVal(float val) { maxVal = abs(val); axisVal = MAX(-maxVal, MIN(maxVal, axisVal)); return *this; }
+
+	// Devuelve el estado del control, combinando teclado y mando
+	KeyState State() const { return state; }
+	// Si isAxisControl == false siempre devolvera 0
+	float Axis() const { return axisVal; }
+
+	void LogData(ControlID id) const;
 
 private:
 
-	bool isAxisControl;
+	bool isAxisControl = false;
 
-	ControlID id = ControlID::NONE;
+	// Teclas y botones
 	SDL_Scancode posKey = SDL_Scancode::SDL_SCANCODE_UNKNOWN;
 	SDL_GameControllerButton posButton = SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_INVALID;
+
+	// Solo para ejes
 	SDL_Scancode negKey = SDL_Scancode::SDL_SCANCODE_UNKNOWN;
 	SDL_GameControllerButton negButton = SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_INVALID;
 	SDL_GameControllerAxis axis = SDL_GameControllerAxis::SDL_CONTROLLER_AXIS_INVALID;
 
+	// Valores
 	KeyState state = KeyState::KEY_IDLE;
 	float axisVal = 0.0f;
 	float maxVal = 1.0f;
@@ -135,6 +152,14 @@ public:
 
 	// Devuelve el estado de un boton, ya sea de teclado o mando
 	const ControlBinding& GetBind(ControlID id);
+
+	// Devuelve el estado del boton cuyo id coincide con el proporcionado
+	KeyState GetButton(ControlID id);
+
+	// Devuelve un eje
+	float GetAxis(ControlID x);
+	// Devuelve dos ejes
+	fPoint GetAxis(ControlID x, ControlID y);
 
 	// Check if a certain window event happened
 	bool GetWindowEvent(EventWindow ev);

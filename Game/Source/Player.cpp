@@ -41,6 +41,14 @@ bool Player::Update(float dt)
 {
 	//L03: DONE 4: render the player texture and modify the position of the player using WSAD keys and render the texture
 
+	fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
+	KeyState sprint = app->input->GetButton(BACK);
+	float speed = (sprint == KEY_REPEAT) ? 0.5f : 0.2f;
+
+	position.x += speed * joystick.x * dt;
+	position.y += speed * joystick.y * dt;
+
+	/*
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
 		position.x += -0.2*dt;
 		if(app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
@@ -65,6 +73,7 @@ bool Player::Update(float dt)
 		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			position.y += 0.3 * dt;
 	}
+	*/
 		
 	app->render->DrawTexture(texture,position.x,position.y);
 
