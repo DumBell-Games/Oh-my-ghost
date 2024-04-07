@@ -5,10 +5,6 @@
 #include "Defs.h"
 #include "Log.h"
 
-#include <memory>
-#include <stdexcept>
-#include <algorithm>
-
 #define MAX_KEYS 300
 
 #define DEAD_ZONE 0.05f
@@ -183,12 +179,10 @@ bool Input::PreUpdate()
 			break;
 
 			case SDL_CONTROLLERDEVICEREMOVED:
-				if (!controllers.empty()) {
-					for (size_t i = 0; i < controllers.size(); i++)
-					{
-						if (event.cdevice.which == SDL_JoystickInstanceID(SDL_GameControllerGetJoystick(controllers[i].get()))) {
-							unique_gameController_t sink = std::move(controllers[i]);
-						}
+				for (size_t i = 0; i < controllers.size(); i++)
+				{
+					if (event.cdevice.which == SDL_JoystickInstanceID(SDL_GameControllerGetJoystick(controllers[i].get()))) {
+						unique_gameController_t sink = std::move(controllers[i]);
 					}
 				}
 				FindControllers();
@@ -246,9 +240,7 @@ bool Input::GetWindowEvent(EventWindow ev)
 
 const ControlBinding& Input::GetBind(ControlID id)
 {
-	// TODO (Roger) limpieza (borra el chequeo de id)
-	if (id < 0 || id >= bindings.size()) { LOG("Comprueba la configuracion de controles, aqui faltan controles por configurar."); return bindings[0]; }
-	return bindings[id];
+	return bindings.at(id);
 }
 
 void Input::UpdateBindings()
@@ -260,7 +252,7 @@ void Input::UpdateBindings()
 }
 
 void Input::FindControllers() {
-	controllers.clear();
+	controllers.clear(); // NOTE esto puede causar problemas en juegos multijugador, pero como este es de un solo jugador no pasa nada
 	for (int i = 0; i < SDL_NumJoysticks(); i++) {
 		if (SDL_IsGameController(i)) {
 			AddController(i);
