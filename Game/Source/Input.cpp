@@ -7,6 +7,7 @@
 
 #include <memory>
 #include <stdexcept>
+#include <algorithm>
 
 #define MAX_KEYS 300
 
@@ -78,6 +79,10 @@ bool Input::Awake(pugi::xml_node config)
 		.SetNButton(SDL_CONTROLLER_BUTTON_DPAD_UP)
 		.SetPKey(SDL_SCANCODE_S)
 		.SetNKey(SDL_SCANCODE_W);
+
+	bindings[APP_EXIT]
+		.SetPButton(SDL_CONTROLLER_BUTTON_BACK)
+		.SetPKey(SDL_SCANCODE_ESCAPE);
 
 	return ret;
 }
@@ -182,10 +187,11 @@ bool Input::PreUpdate()
 					for (size_t i = 0; i < controllers.size(); i++)
 					{
 						if (event.cdevice.which == SDL_JoystickInstanceID(SDL_GameControllerGetJoystick(controllers[i].get()))) {
-							controllers[i].reset();
+							unique_gameController_t sink = std::move(controllers[i]);
 						}
 					}
 				}
+				FindControllers();
 			break;
 		}
 	}
@@ -201,29 +207,6 @@ bool Input::CleanUp()
 	LOG("Quitting SDL event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
-}
-
-void Input::UpdateBindings()
-{
-	for (size_t i = 0; i < bindings.size(); i++)
-	{
-		bindings[i].Update(this);
-	}
-}
-
-void Input::FindControllers() {
-	for (int i = 0; i < SDL_NumJoysticks(); i++) {
-		if (SDL_IsGameController(i)) {
-			AddController(i);
-		}
-	}
-}
-
-const ControlBinding& Input::GetBind(ControlID id)
-{
-	// TODO (Roger) limpieza (borra el chequeo de id)
-	if (id < 0 || id >= bindings.size()) { LOG("Comprueba la configuracion de controles, aqui faltan controles por configurar."); return bindings[0]; }
-	return bindings[id];
 }
 
 KeyState Input::GetButton(ControlID id)
@@ -244,11 +227,6 @@ fPoint Input::GetAxis(ControlID x, ControlID y)
 	return ret;
 }
 
-bool Input::GetWindowEvent(EventWindow ev)
-{
-	return windowEvents[ev];
-}
-
 void Input::GetMousePosition(int& x, int& y)
 {
 	x = mouseX;
@@ -259,6 +237,50 @@ void Input::GetMouseMotion(int& x, int& y)
 {
 	x = mouseMotionX;
 	y = mouseMotionY;
+}
+
+bool Input::GetWindowEvent(EventWindow ev)
+{
+	return windowEvents[ev];
+}
+
+const ControlBinding& Input::GetBind(ControlID id)
+{
+	// TODO (Roger) limpieza (borra el chequeo de id)
+	if (id < 0 || id >= bindings.size()) { LOG("Comprueba la configuracion de controles, aqui faltan controles por configurar."); return bindings[0]; }
+	return bindings[id];
+}
+
+void Input::UpdateBindings()
+{
+	for (size_t i = 0; i < bindings.size(); i++)
+	{
+		bindings[i].Update(this);
+	}
+}
+
+void Input::FindControllers() {
+	controllers.clear();
+	for (int i = 0; i < SDL_NumJoysticks(); i++) {
+		if (SDL_IsGameController(i)) {
+			AddController(i);
+		}
+	}
+}
+
+inline void Input::AddController(Sint32 id) {
+	bool reassigned = false;
+	for (size_t i = 0; i < controllers.size(); i++)
+	{
+		if (!controllers[i]) {
+			unique_gameController_t source = unique_gameController_t(SDL_GameControllerOpen(id), SDL_GameControllerClose);
+			controllers[i] = std::move(source);
+			reassigned = true;
+			break;
+		}
+	}
+	if (!reassigned)
+		controllers.push_back(unique_gameController_t(SDL_GameControllerOpen(id), SDL_GameControllerClose));
 }
 
 void ControlBinding::Update(Input* input)

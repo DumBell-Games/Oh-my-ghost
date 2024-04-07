@@ -26,7 +26,7 @@ enum ControlID {
 	PAUSE,
 	MOVE_HORIZONTAL,
 	MOVE_VERTICAL,
-
+	APP_EXIT,
 	ID_COUNT
 };
 
@@ -120,17 +120,6 @@ public:
 	// Called before quitting
 	bool CleanUp();
 
-	// Actualiza los controles asignados
-	void UpdateBindings();
-
-	// Encuentra todos los mandos compatibles conectado al pc
-	void FindControllers();
-
-	// Añade el mando con el id proporcionado a la lista de mandos detectados
-	void AddController(Sint32 id) {
-		controllers.push_back(unique_gameController_t(SDL_GameControllerOpen(id), SDL_GameControllerClose));
-	}
-
 	// Por defecto devuelve el primer mando, o nullptr si no hay mandos conectados
 	SDL_GameController* GetController(uint id = 0) { return (id < controllers.size()) ? controllers[id].get() : nullptr; }
 
@@ -140,18 +129,10 @@ public:
 		return keyboard[id];
 	}
 
-	bool GetKeyRaw(int id) const
-	{
-		return keyboardRaw[id];
-	}
-
 	KeyState GetMouseButtonDown(int id) const
 	{
 		return mouseButtons[id - 1];
 	}
-
-	// Devuelve el estado de un boton, ya sea de teclado o mando
-	const ControlBinding& GetBind(ControlID id);
 
 	// Devuelve el estado del boton cuyo id coincide con el proporcionado
 	KeyState GetButton(ControlID id);
@@ -161,12 +142,31 @@ public:
 	// Devuelve dos ejes
 	fPoint GetAxis(ControlID x, ControlID y);
 
-	// Check if a certain window event happened
-	bool GetWindowEvent(EventWindow ev);
-
 	// Get mouse / axis position
 	void GetMousePosition(int &x, int &y);
 	void GetMouseMotion(int& x, int& y);
+
+	// Check if a certain window event happened
+	bool GetWindowEvent(EventWindow ev);
+
+private:
+
+	bool GetKeyRaw(int id) const
+	{
+		return keyboardRaw[id];
+	}
+
+	// Devuelve el estado de un boton, ya sea de teclado o mando
+	const ControlBinding& GetBind(ControlID id);
+
+	// Actualiza los controles asignados
+	void UpdateBindings();
+
+	// Encuentra todos los mandos compatibles conectado al pc
+	void FindControllers();
+
+	// Añade el mando con el id proporcionado a la lista de mandos detectados
+	void AddController(Sint32 id);
 
 private:
 	bool windowEvents[WE_COUNT];
@@ -180,6 +180,8 @@ private:
 	int mouseY;
 
 	std::vector<ControlBinding> bindings;
+
+	friend ControlBinding;
 
 };
 
