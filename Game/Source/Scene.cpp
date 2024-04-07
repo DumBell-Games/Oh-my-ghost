@@ -133,7 +133,8 @@ bool Scene::PostUpdate()
 {
 	bool ret = true;
 
-	if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	//if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	if (app->input->GetButton(APP_EXIT) == KEY_DOWN)
 		ret = false;
 
 	return ret;

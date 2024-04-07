@@ -82,6 +82,7 @@
     <ClInclude Include="Source\Dialog.h" />
     <ClInclude Include="Source\DialogManager.h" />
     <ClInclude Include="Source\DialogTriggerEntity.h" />
+    <ClInclude Include="Source\InputTest.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
