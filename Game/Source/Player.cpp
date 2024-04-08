@@ -94,3 +94,15 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	}
 }
+
+bool Player::LoadState(pugi::xml_node& node)
+{
+
+	return true;
+}
+
+bool Player::SaveState(pugi::xml_node& node)
+{
+	
+	return true;
+}
