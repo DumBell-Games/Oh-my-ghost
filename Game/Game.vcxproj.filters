@@ -27,6 +27,7 @@
     <ClCompile Include="Source\GuiManager.cpp" />
     <ClCompile Include="Source\DialogManager.cpp" />
     <ClCompile Include="Source\DialogTriggerEntity.cpp" />
+    <ClCompile Include="Source\menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -83,6 +84,7 @@
     <ClInclude Include="Source\DialogManager.h" />
     <ClInclude Include="Source\DialogTriggerEntity.h" />
     <ClInclude Include="Source\InputTest.h" />
+    <ClInclude Include="Source\menu.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

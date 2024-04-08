@@ -20,6 +20,7 @@ class Audio;
 class Scene;
 class EntityManager;
 class Map;
+class TitleScreen;
 //L07 DONE 2: Add Physics module
 class Physics;
 class GuiManager;
@@ -104,6 +105,7 @@ public:
 	Scene* scene;
 	EntityManager* entityManager;
 	Map* map;
+	TitleScreen* titlescreen;
 	//L07 DONE 2: Add Physics module
 	Physics* physics;
 	GuiManager* guiManager;
