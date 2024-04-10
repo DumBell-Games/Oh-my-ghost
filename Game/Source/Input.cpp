@@ -42,12 +42,14 @@ bool Input::Awake(pugi::xml_node config)
 
 	// TODO Asignacion de teclas personalizadas
 
+	filePath = config.attribute("bindingsFile").as_string("controls.xml");
+
 	for (size_t i = 0; i < ControlID::ID_COUNT; i++)
 	{
 		bindings.push_back(ControlBinding());
 	}
 
-	//Roger: Esto es 100% temporal
+	//Default (por si hay errores en el archivo de configuracion)
 	bindings[CONFIRM]
 		.SetPButton(SDL_CONTROLLER_BUTTON_A)
 		.SetPKey(SDL_SCANCODE_SPACE);
@@ -79,6 +81,32 @@ bool Input::Awake(pugi::xml_node config)
 	bindings[APP_EXIT]
 		.SetPButton(SDL_CONTROLLER_BUTTON_BACK)
 		.SetPKey(SDL_SCANCODE_ESCAPE);
+
+	pugi::xml_document controlsDoc;
+	pugi::xml_parse_result result = controlsDoc.load_file(filePath.GetString());
+	if (result)
+	{
+		LOG("control bindings file parsed without errors");
+
+		for (pugi::xml_node bindingNode = controlsDoc.child("controls").child("binding"); bindingNode; bindingNode = bindingNode.next_sibling("binding"))
+		{
+			ControlID id = (ControlID)bindingNode.attribute("id").as_int(ControlID::NONE);
+			SDL_Scancode pK = (SDL_Scancode)bindingNode.attribute("pKey").as_int(SDL_Scancode::SDL_SCANCODE_UNKNOWN);
+			SDL_Scancode nK = (SDL_Scancode)bindingNode.attribute("nKey").as_int(SDL_Scancode::SDL_SCANCODE_UNKNOWN);
+			SDL_GameControllerButton pB = (SDL_GameControllerButton)bindingNode.attribute("pBut").as_int(SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_INVALID);
+			SDL_GameControllerButton nB = (SDL_GameControllerButton)bindingNode.attribute("nBut").as_int(SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_INVALID);
+			bool isAxis = bindingNode.attribute("isAxis").as_bool(false);
+			SDL_GameControllerAxis axis = (SDL_GameControllerAxis)bindingNode.attribute("axis").as_int(SDL_GameControllerAxis::SDL_CONTROLLER_AXIS_INVALID);
+
+			bindings[id].Map(pK, nK, pB, nB, isAxis, axis);
+		}
+	}
+	else
+	{
+		LOG("Error loading control bindings: %s", result.description());
+		if (result.status == pugi::status_file_not_found)
+			SaveBindings();
+	}
 
 	return ret;
 }
@@ -238,6 +266,27 @@ bool Input::GetWindowEvent(EventWindow ev)
 	return windowEvents[ev];
 }
 
+bool Input::SaveBindings()
+{
+	pugi::xml_document controlsDoc;
+	pugi::xml_node rootNode = controlsDoc.append_child("controls");
+
+	for (int i = 0; i < ControlID::ID_COUNT; i++)
+	{
+		pugi::xml_node bindNode = rootNode.append_child("binding");
+		bindNode.append_attribute("id").set_value(i);
+		bindNode.append_attribute("pKey").set_value(bindings[i].posKey);
+		bindNode.append_attribute("nKey").set_value(bindings[i].negKey);
+		bindNode.append_attribute("pBut").set_value(bindings[i].posButton);
+		bindNode.append_attribute("nBut").set_value(bindings[i].negButton);
+		bindNode.append_attribute("isAxis").set_value(bindings[i].isAxisControl);
+		bindNode.append_attribute("axis").set_value(bindings[i].axis);
+	}
+	controlsDoc.save_file(filePath.GetString());
+
+	return true;
+}
+
 const ControlBinding& Input::GetBind(ControlID id)
 {
 	return bindings.at(id);
@@ -319,6 +368,16 @@ void ControlBinding::Update(Input* input)
 			state = KEY_IDLE;
 	}
 
+}
+
+void ControlBinding::Map(SDL_Scancode& _pKey, SDL_Scancode& _nKey, SDL_GameControllerButton& _pBut, SDL_GameControllerButton& _nBut, bool _isAxis, SDL_GameControllerAxis _axis)
+{
+	posKey = _pKey;
+	negKey = _nKey;
+	posButton = _pBut;
+	negButton = _nBut;
+	isAxisControl = _isAxis;
+	axis = _axis;
 }
 
 void ControlBinding::LogData(ControlID id) const
