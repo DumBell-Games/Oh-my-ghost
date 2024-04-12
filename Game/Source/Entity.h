@@ -5,6 +5,8 @@
 #include "SString.h"
 #include "Input.h"
 #include "Render.h"
+#include "SDL/include/SDL.h"
+#include <memory>
 
 enum class EntityType
 {
@@ -37,10 +39,17 @@ public:
 		return true;
 	}
 
+	virtual bool Render() 
+	{
+		return true;
+	}
+
 	virtual bool CleanUp()
 	{
 		return true;
 	}
+
+	void OnCollision(PhysBody const * bodyA, PhysBody const * bodyB) {}
 
 	virtual bool LoadState(pugi::xml_node&)
 	{
@@ -74,12 +83,25 @@ public:
 
 	};
 
+	int GetId() const { return id; }
+
+	// TODO actualizar posicion del pbody en caso de que exista
+	virtual void SetPosition(iPoint newPos) {
+		position = newPos;
+	}
+
+	iPoint GetPosition() {
+		return position;
+	}
 
 
 public:
 
 	SString name;
+	int id;
 	EntityType type;
+	std::shared_ptr<SDL_Texture> texture;
+	std::unique_ptr<PhysBody> pbody;
 	bool active = true;
 	pugi::xml_node parameters; 
 
