@@ -256,8 +256,7 @@ bool DialogManager::Update(float dt) {
 			
 			
 			indexText = 1;
-			dialogues.Del(dialogues.At(0));
-			
+			dialogues.Del(dialogues.At(0));			
 			
 
 
