@@ -28,6 +28,7 @@
     <ClCompile Include="Source\DialogManager.cpp" />
     <ClCompile Include="Source\DialogTriggerEntity.cpp" />
     <ClCompile Include="Source\menu.cpp" />
+    <ClCompile Include="Source\Npc.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -85,6 +86,7 @@
     <ClInclude Include="Source\DialogTriggerEntity.h" />
     <ClInclude Include="Source\InputTest.h" />
     <ClInclude Include="Source\menu.h" />
+    <ClInclude Include="Source\Npc.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -96,5 +98,8 @@
     <Filter Include="External\PugiXml">
       <UniqueIdentifier>{2855ff7f-53a1-413d-a75b-18b4ade921dd}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="..\Output\config.xml" />
   </ItemGroup>
 </Project>

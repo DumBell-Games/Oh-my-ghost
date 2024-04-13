@@ -26,6 +26,9 @@
     <item x="384" y="352" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="200" y="672" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="500" y="672" texturepath="Assets/Textures/goldCoin.png"/>
+	  
+	 <npc x="200" y="672" texturePath="Assets/Textures/dogNpc.png"/>
+	 <npc x="300" y="672" texturePath="Assets/Textures/dogNpc.png"/>
   </scene>
   
 </config>

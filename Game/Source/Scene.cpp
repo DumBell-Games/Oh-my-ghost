@@ -9,6 +9,7 @@
 #include "Item.h"
 #include "Optick/include/optick.h"
 #include "DialogTriggerEntity.h"
+#include "Npc.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -52,6 +53,12 @@ bool Scene::Awake(pugi::xml_node config)
 		DialogTrigger* dialogTrigger = (DialogTrigger*)app->entityManager->CreateEntity(EntityType::DIALOG_TRIGGER);
 		dialogTrigger->parameters = itemNode;
 	}
+	for (pugi::xml_node itemNode = config.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
+	{
+		Npc* npc = (Npc*)app->entityManager->CreateEntity(EntityType::NPC);
+		npc->parameters = itemNode;
+	}
+
 	return ret;
 }
 

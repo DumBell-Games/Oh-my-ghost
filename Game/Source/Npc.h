@@ -1,20 +1,21 @@
-#ifndef __PLAYER_H__
-#define __PLAYER_H__
+#pragma once
 
 #include "Entity.h"
 #include "Point.h"
+
 #include "SDL/include/SDL.h"
 #include "Box2D/Box2D/Box2D.h"
 
+
 struct SDL_Texture;
 
-class Player : public Entity
+class Npc : public Entity
 {
 public:
 
-	Player();
-	
-	virtual ~Player();
+	Npc();
+
+	virtual ~Npc();
 
 	bool Awake();
 
@@ -34,13 +35,10 @@ public:
 	SDL_Texture* texture = NULL;
 	pugi::xml_node config;
 	uint texW, texH;
+	const char* texturePath;
 
-	float acceleration = 0.2f;
+	PhysBody* nBody;
 
-	//Audio fx
-	int pickCoinFxId;
 
-	PhysBody* pBody;
 };
 
-#endif // __PLAYER_H__
