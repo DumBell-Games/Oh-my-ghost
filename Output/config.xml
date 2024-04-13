@@ -32,12 +32,16 @@
     <item x="200" y="672" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="500" y="672" texturepath="Assets/Textures/goldCoin.png"/>
 	  
-	 <npc x="200" y="672" texturePath="Assets/Textures/dogNpc.png"/>
-	 <npc x="300" y="672" texturePath="Assets/Textures/dogNpc.png"/>
-	 <npc x="500" y="672" texturePath="Assets/Textures/dogNpc.png"/>
-	 <npc x="700" y="672" texturePath="Assets/Textures/dogNpc.png"/>
+	<npc x="200" y="672" texturePath="Assets/Textures/dogNpc.png"/>
+	<npc x="300" y="672" texturePath="Assets/Textures/dogNpc.png"/>
+	<npc x="500" y="672" texturePath="Assets/Textures/dogNpc.png"/>
+	<npc x="700" y="672" texturePath="Assets/Textures/dogNpc.png"/>
+
+	<enemy x="300" y="272" texturePath="Assets/Textures/pigNpc.png"/>
+	<enemy x="500" y="272" texturePath="Assets/Textures/pigNpc.png"/>
+	<enemy x="700" y="272" texturePath="Assets/Textures/pigNpc.png"/>
 	
-	  <dialogTrigger x="200" y="672" texturepath="Assets/Textures/player2.png"  facetexturepath="Assets/Textures/player2_face.png" name="Sisebuto" repeat="true">
+		<dialogTrigger x="200" y="672" texturepath="Assets/Textures/player2.png"  facetexturepath="Assets/Textures/player2_face.png" name="Sisebuto" repeat="true">
 		<sentences>
 			<sentence name="Springy"	facetexturepath="Assets/Textures/cats_face1.png" text="Hola"/>
 			<sentence name="Sisebuto"	facetexturepath="Assets/Textures/cats_face2.png" text="(Hablaría borracho) Déjame en paz *burp*, a no ser que me quieras pagar otra ronda, que entonces sí te haré caso"/>
@@ -49,18 +53,18 @@
 			<sentence name="Springy"	facetexturepath="Assets/Textures/cats_face1.png" text="*Debería conseguir dinero quizás…*"/>	
 		</repeat_sentences>
 	</dialogTrigger>
-	  <dialogTrigger x="300" y="672" texturepath="Assets/Textures/player2.png"  facetexturepath="Assets/Textures/player2_face.png" name="Sisebuto" repeat="true">
-		  <sentences>
-			  <sentence name="Homeless"	facetexturepath="Assets/Textures/cats_face1.png" text="zZzZzZZZzZZZ"/>
-			  <sentence name ="Springy" type="choose" text="*Anda tiene 5 PawCoins, ¿le robo?*">
-				  <option1 text="Sí">
-					  <sentence text="Vale ya tengo 5 PawCoins pero me siento sucio, al menos puedo comprarle el copazo a Sisebuto" />
-				  </option1>
-				  <option2 text="No">
-					  <sentence text="Voy a buscar otra forma más limpia de conseguir dinero"/>
-				  </option2>
-			  </sentence>	
-		  </sentences>
+		<dialogTrigger x="300" y="672" texturepath="Assets/Textures/player2.png"  facetexturepath="Assets/Textures/player2_face.png" name="Sisebuto" repeat="true">
+			<sentences>
+				<sentence name="Homeless"	facetexturepath="Assets/Textures/cats_face1.png" text="zZzZzZZZzZZZ"/>
+				<sentence name ="Springy" type="choose" text="*Anda tiene 5 PawCoins, ¿le robo?*">
+					<option1 text="Sí">
+						<sentence text="Vale ya tengo 5 PawCoins pero me siento sucio, al menos puedo comprarle el copazo a Sisebuto" />
+					</option1>
+					<option2 text="No">
+						<sentence text="Voy a buscar otra forma más limpia de conseguir dinero"/>
+					</option2>
+				</sentence>	
+			</sentences>
 	</dialogTrigger>
 	<dialogTrigger x="500" y="672" texturepath="Assets/Textures/player2.png"  facetexturepath="Assets/Textures/player2_face.png" name="Sisebuto" repeat="true">
 		  <sentences>
@@ -105,6 +109,23 @@
 			 
 		  </sentences>
 		
+	  </dialogTrigger>
+	  <dialogTrigger x="500" y="272" texturepath="Assets/Textures/player2.png"  facetexturepath="Assets/Textures/player2_face.png" name="Sisebuto" repeat="true">
+		  <sentences>
+			  <sentence name="Fernando"	text="No pasa el filtro"/>
+		  </sentences>
+		  <repeat_sentences>
+			  <sentence name="Fernando"	text="QUE NO PASA EL FILTRO, QUIEN HA SIO QUIEN HA SIO, PEG"/>
+		  </repeat_sentences>
+	  </dialogTrigger>
+	  
+	  <dialogTrigger x="700" y="272" texturepath="Assets/Textures/player2.png"  facetexturepath="Assets/Textures/player2_face.png" name="Sisebuto" repeat="true">
+		  <sentences>
+			  <sentence name="Porcino"	text="He roto la puerta de mi coche de 60000€, *PAM* *PAM* *PAM*, vaya mal rato, higo"/>
+		</sentences>
+		  <repeat_sentences>
+			  <sentence name="Porcino"	text="He roto la puerta de mi coche de 60000€, *PAM* *PAM* *PAM*, vaya mal rato, higo"/>
+		  </repeat_sentences>
 	  </dialogTrigger>
   </scene>
 	

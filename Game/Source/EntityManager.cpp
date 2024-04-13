@@ -6,6 +6,7 @@
 #include "Textures.h"
 #include "Scene.h"
 #include "Npc.h"
+#include "Enemies.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -97,6 +98,10 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	case EntityType::NPC:
 		entity = new Npc();
 		break;
+	case EntityType::ENEMY:
+		entity = new Enemy();
+		break;
+		
 	default:
 		break;
 	}

@@ -29,6 +29,7 @@ enum class ColliderType {
 	PLATFORM, 
 	DIALOG_TRIGGER,
 	NPC,
+	ENEMY,
 	UNKNOWN
 	// ..
 };

@@ -10,6 +10,7 @@
 #include "Optick/include/optick.h"
 #include "DialogTriggerEntity.h"
 #include "Npc.h"
+#include "Enemies.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -57,6 +58,11 @@ bool Scene::Awake(pugi::xml_node config)
 	{
 		Npc* npc = (Npc*)app->entityManager->CreateEntity(EntityType::NPC);
 		npc->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("enemy"); itemNode; itemNode = itemNode.next_sibling("enemy"))
+	{
+		Enemy* enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
+		enemy->parameters = itemNode;
 	}
 
 	return ret;
