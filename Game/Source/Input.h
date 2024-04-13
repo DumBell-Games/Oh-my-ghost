@@ -12,6 +12,11 @@
 #define NUM_MOUSE_BUTTONS 5
 //#define LAST_KEYS_PRESSED_BUFFER 50
 
+#define JOYSTICK_MAX 32767
+#define DEAD_ZONE 0.05f
+#define DEAD_ZONE_INT_MAX (JOYSTICK_MAX-100)
+#define DEAD_ZONE_INT_MIN 100
+
 struct SDL_Rect;
 class Input;
 
@@ -51,15 +56,18 @@ struct ControlBinding {
 public:
 
 	ControlBinding()
-	{}
+	{
+		SetDeadZone(DEAD_ZONE);
+	}
 
-	ControlBinding(SDL_Scancode _posKey, SDL_GameControllerButton _posButton, SDL_Scancode _negKey, SDL_GameControllerButton _negButton, SDL_GameControllerAxis _axis, float _maxVal) : posKey(_posKey), posButton(_posButton), negKey(_negKey), negButton(_negButton), axis(_axis), maxVal(_maxVal)
+	ControlBinding(SDL_Scancode _posKey, SDL_GameControllerButton _posButton, SDL_Scancode _negKey, SDL_GameControllerButton _negButton, SDL_GameControllerAxis _axis, float _maxVal, float _deadZone) : posKey(_posKey), posButton(_posButton), negKey(_negKey), negButton(_negButton), axis(_axis), maxVal(_maxVal)
 	{
 		// If any axis-related values is assigned, this binding will update axis data
 		isAxisControl = (axis != SDL_CONTROLLER_AXIS_INVALID
 			|| negKey != SDL_SCANCODE_UNKNOWN
 			|| negButton != SDL_CONTROLLER_BUTTON_INVALID);
 			
+		SetDeadZone(_deadZone);
 	}
 
 	void Update(Input* input);
@@ -72,6 +80,7 @@ public:
 	ControlBinding& SetAxisControl(bool val) { isAxisControl = val; axisVal = 0; return *this; }
 	ControlBinding& SetAxis(SDL_GameControllerAxis id) { axis = id; return *this; }
 	ControlBinding& SetMaxVal(float val) { maxVal = abs(val); axisVal = MAX(-maxVal, MIN(maxVal, axisVal)); return *this; }
+	ControlBinding& SetDeadZone(float val) { deadZone = MAX(DEAD_ZONE_INT_MIN, MIN(DEAD_ZONE_INT_MAX, abs(val)*JOYSTICK_MAX)); return *this; }
 
 	// Devuelve el estado del control, combinando teclado y mando
 	KeyState State() const { return state; }
@@ -97,6 +106,7 @@ public:
 	KeyState state = KeyState::KEY_IDLE;
 	float axisVal = 0.0f;
 	float maxVal = 1.0f;
+	int deadZone; // Set in constructor
 };
 
 class Input : public Module
