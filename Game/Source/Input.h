@@ -64,6 +64,7 @@ public:
 
 	void Update(Input* input);
 
+	void Map(SDL_Scancode& _pKey, SDL_Scancode& _nKey, SDL_GameControllerButton& _pBut, SDL_GameControllerButton& _nBut, bool _isAxis, SDL_GameControllerAxis _axis);
 	ControlBinding& SetPKey(SDL_Scancode id) { posKey = id; return *this; }
 	ControlBinding& SetPButton(SDL_GameControllerButton id) { posButton = id; return *this; }
 	ControlBinding& SetNKey(SDL_Scancode id) { negKey = id; return *this; }
@@ -79,7 +80,7 @@ public:
 
 	void LogData(ControlID id) const;
 
-private:
+public:
 
 	bool isAxisControl = false;
 
@@ -149,6 +150,8 @@ public:
 	// Check if a certain window event happened
 	bool GetWindowEvent(EventWindow ev);
 
+	bool SaveBindings();
+
 private:
 
 	bool GetKeyRaw(int id) const
@@ -169,6 +172,9 @@ private:
 	void AddController(Sint32 id);
 
 private:
+
+	SString filePath;
+
 	bool windowEvents[WE_COUNT];
 	const Uint8* keyboardRaw;
 	KeyState*	keyboard;
