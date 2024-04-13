@@ -7,8 +7,6 @@
 
 #define MAX_KEYS 300
 
-#define DEAD_ZONE 0.05f
-
 Input::Input() : Module()
 {
 	name.Create("input");
@@ -97,6 +95,7 @@ bool Input::Awake(pugi::xml_node config)
 			SDL_GameControllerButton nB = (SDL_GameControllerButton)bindingNode.attribute("nBut").as_int(SDL_GameControllerButton::SDL_CONTROLLER_BUTTON_INVALID);
 			bool isAxis = bindingNode.attribute("isAxis").as_bool(false);
 			SDL_GameControllerAxis axis = (SDL_GameControllerAxis)bindingNode.attribute("axis").as_int(SDL_GameControllerAxis::SDL_CONTROLLER_AXIS_INVALID);
+			int deadzone = bindingNode.attribute("deadzone").as_float(DEAD_ZONE);
 
 			bindings[id].Map(pK, nK, pB, nB, isAxis, axis);
 		}
@@ -281,6 +280,7 @@ bool Input::SaveBindings()
 		bindNode.append_attribute("nBut").set_value(bindings[i].negButton);
 		bindNode.append_attribute("isAxis").set_value(bindings[i].isAxisControl);
 		bindNode.append_attribute("axis").set_value(bindings[i].axis);
+		bindNode.append_attribute("deadzone").set_value(bindings[i].deadZone/32768);
 	}
 	controlsDoc.save_file(filePath.GetString());
 
@@ -341,14 +341,14 @@ void ControlBinding::Update(Input* input)
 			bN = SDL_GameControllerGetButton(c, negButton);
 			axisTemp = SDL_GameControllerGetAxis(c, axis);
 		}
-		if (axisTemp == 0) {
+		if (abs(axisTemp) < deadZone) {
 			axisVal = -kN - bN + kP + bP; // Botones opuestos pulsados = 0 movimiento, gana el lado que tenga mas "potencia"
 		}
 		else
 		{
 			axisVal = axisTemp / 32767.0f;
 			// TODO deadzone por config
-			if (abs(axisVal) <= DEAD_ZONE) axisVal = 0;
+			//if (abs(axisVal) <= DEAD_ZONE) axisVal = 0;
 		}
 		// Clamp function
 		axisVal = MAX(-maxVal, MIN(maxVal, axisVal));
