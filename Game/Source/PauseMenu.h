@@ -32,7 +32,8 @@ public:
     int titleSound;
     int menuIndex = 1;
     
-
+    int screenWidth;
+    int screenHeight;
    
 
     //gui list
