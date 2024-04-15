@@ -12,6 +12,24 @@ PauseMenu::PauseMenu(bool startEnabled) : Module()
 {
 }
 
-// Destructor
 PauseMenu::~PauseMenu()
 {}
+
+bool PauseMenu::Start() {
+
+	return true;
+}
+bool PauseMenu::Update(float dt) {
+
+	return true;
+}
+bool PauseMenu::PostUpdate() {
+
+	return true;
+}
+bool PauseMenu::CleanUp(){
+	return true;
+}
+void PauseMenu::CreatePauseButtons() {
+
+}
