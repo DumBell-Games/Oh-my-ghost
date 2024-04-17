@@ -30,6 +30,10 @@ bool Player::Start() {
 
 	texture = app->tex->Load(config.attribute("texturePath").as_string());
 
+	pBody = app->physics->CreateCircle(position.x + 32, position.y + 32, 16, bodyType::DYNAMIC);
+	pBody->listener = this;
+	pBody->ctype = ColliderType::PLAYER;
+
 	//initialize audio effect
 	pickCoinFxId = app->audio->LoadFx(config.attribute("coinfxpath").as_string());
 
@@ -45,36 +49,48 @@ bool Player::Update(float dt)
 	KeyState sprint = app->input->GetButton(BACK);
 	float speed = (sprint == KEY_REPEAT) ? 0.5f : 0.2f;
 
+	b2Vec2 impulse = b2Vec2_zero;
+	b2Vec2 vel = b2Vec2(0, -GRAVITY_Y);
+
 	position.x += speed * joystick.x * dt;
 	position.y += speed * joystick.y * dt;
 
-	/*
+	b2Transform pBodyPos = pBody->body->GetTransform();
+	position.x = METERS_TO_PIXELS(pBodyPos.p.x) - 32 / 2;
+	position.y = METERS_TO_PIXELS(pBodyPos.p.y) - 32 / 2;
+	
 	if (app->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT) {
-		position.x += -0.2*dt;
+		impulse.x -= acceleration;
+		vel = b2Vec2(speed * dt, -GRAVITY_Y);
+
 		if(app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			position.x += -0.3*dt;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT) {
-		position.x += 0.2*dt;
+		impulse.x += acceleration;
+		vel = b2Vec2(-speed * dt, -GRAVITY_Y);
 		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			position.x += 0.3*dt;
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT) {
-		position.y += -0.2 * dt;
+		impulse.y -= acceleration;
+		vel = b2Vec2(0, speed * dt);
 		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			position.y += -0.3 * dt;
 
 	}
 
 	if (app->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT) {
-		position.y += 0.2 * dt;
+		impulse.y += acceleration;
+		vel = b2Vec2(0, -speed * dt);
 		if (app->input->GetKey(SDL_SCANCODE_LSHIFT) == KEY_REPEAT)
 			position.y += 0.3 * dt;
 	}
-	*/
-		
+	pBody->body->ApplyLinearImpulse(impulse, pBody->body->GetPosition(), false);
+	pBody->body->SetLinearVelocity(b2Clamp(pBody->body->GetLinearVelocity(), -vel, vel));
+
 	app->render->DrawTexture(texture,position.x,position.y);
 
 	return true;
@@ -102,4 +118,16 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	default:
 		break;
 	}
+}
+
+bool Player::LoadState(pugi::xml_node& node)
+{
+
+	return true;
+}
+
+bool Player::SaveState(pugi::xml_node& node)
+{
+	
+	return true;
 }

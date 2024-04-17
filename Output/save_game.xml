@@ -8,7 +8,21 @@
 	<:anonymous />
 	<scene />
 	<entitymanager />
+	<entitymanager>
+		<entitymanager>
+			<Player x="710" y="476" />
+			<item />
+			<item />
+			<item />
+			<item />
+			<item />
+			<Player x="39" y="748" />
+			<Player x="39" y="888" />
+		</entitymanager>
+	</entitymanager>
+	<guiManager />
+	<dialogmanager />
 	<renderer>
-		<camera x="977" y="0" />
+		<camera x="0" y="0" />
 	</renderer>
 </game_state>
