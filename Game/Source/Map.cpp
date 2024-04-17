@@ -1,3 +1,4 @@
+
 #include "App.h"
 #include "Render.h"
 #include "Textures.h"
@@ -286,34 +287,6 @@ bool Map::Load(SString mapFileName)
 
         //Resets the map
         if (mapFileXML) mapFileXML.reset();
-    }
-
-    ListItem<MapLayer*>* mapLayerItem;
-    mapLayerItem = mapData.layers.start;
-    navigationLayer = mapLayerItem->data;
-
-    while (mapLayerItem != NULL) {
-
-        if (mapLayerItem->data->properties.GetProperty("Collisions") != NULL && mapLayerItem->data->properties.GetProperty("Collisions")->value) {
-
-            for (int x = 0; x < mapLayerItem->data->width; x++)
-            {
-                for (int y = 0; y < mapLayerItem->data->height; y++)
-                {
-                    int gid = mapLayerItem->data->Get(x, y);
-
-                    if (gid == 49)
-                    {
-                        iPoint pos = MapToWorld(x, y);
-
-                        PhysBody* c1 = app->physics->CreateRectangle(pos.x + (mapData.tilewidth / 2), pos.y + (mapData.tileheight / 2),
-                            mapData.tilewidth, mapData.tileheight, STATIC);
-                        c1->ctype = ColliderType::PLATFORM;
-                    }
-                }
-            }
-        }
-        mapLayerItem = mapLayerItem->next;
     }
 
     mapLoaded = ret;

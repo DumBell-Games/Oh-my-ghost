@@ -11,8 +11,6 @@ enum class EntityType
 	PLAYER,
 	ITEM,
 	DIALOG_TRIGGER,
-	NPC,
-	ENEMY,
 	UNKNOWN
 };
 
