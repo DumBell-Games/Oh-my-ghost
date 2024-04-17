@@ -32,10 +32,6 @@ public:
 	void DestroyEntity(Entity* entity);
 
 	void AddEntity(Entity* entity);
-	
-	bool LoadState(pugi::xml_node node);
-
-	bool SaveState(pugi::xml_node node);
 
 public:
 
