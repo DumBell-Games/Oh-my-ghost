@@ -8,6 +8,18 @@
 	<:anonymous />
 	<scene />
 	<entitymanager />
+	<entitymanager>
+		<entitymanager>
+			<Player x="710" y="476" />
+			<item />
+			<item />
+			<item />
+			<item />
+			<item />
+			<Player x="39" y="748" />
+			<Player x="39" y="888" />
+		</entitymanager>
+	</entitymanager>
 	<guiManager />
 	<dialogmanager />
 	<renderer>

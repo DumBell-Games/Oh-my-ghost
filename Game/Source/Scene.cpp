@@ -137,6 +137,15 @@ bool Scene::Update(float dt)
 	// L14: DONE 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) fullscreen = true;
+	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) fullscreen = false;
+	if (fullscreen == true) {
+		app->win->FullscreenMode();
+	}
+	else {
+		app->win->UnFullscreenMode();
+	}
+
 
 	return true;
 }

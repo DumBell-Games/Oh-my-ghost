@@ -142,3 +142,13 @@ bool EntityManager::Update(float dt)
 
 	return ret;
 }
+
+bool EntityManager::LoadState(pugi::xml_node node) {
+
+	return true;
+}
+
+bool EntityManager::SaveState(pugi::xml_node node) {
+	
+	return true;
+}

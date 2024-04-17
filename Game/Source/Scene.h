@@ -53,6 +53,8 @@ private:
 
 	// L15: TODO 2: Declare a GUI Control Button 
 	GuiControlButton* gcButtom;
+
+	bool fullscreen = false;
 };
 
 #endif // __SCENE_H__
