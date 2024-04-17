@@ -105,7 +105,7 @@ public:
 	Scene* scene;
 	EntityManager* entityManager;
 	Map* map;
-	TitleScreen* titlescreen;
+	//TitleScreen* titlescreen;
 	//L07 DONE 2: Add Physics module
 	Physics* physics;
 	GuiManager* guiManager;

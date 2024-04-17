@@ -40,7 +40,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	//L07 DONE 2: Add Physics module
 	physics = new Physics();
 	scene = new Scene();
-	titlescreen = new TitleScreen();
+	//titlescreen = new TitleScreen();
 	map = new Map();
 	entityManager = new EntityManager();
 	guiManager = new GuiManager();
@@ -57,7 +57,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	AddModule(map);
 	AddModule(scene);
-	AddModule(titlescreen);
+	//AddModule(titlescreen);
 	AddModule(entityManager);
 	AddModule(guiManager);
 	AddModule(dialogManager);
