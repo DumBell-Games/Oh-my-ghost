@@ -29,6 +29,8 @@ public:
 	// Additional methods
 	Entity* CreateEntity(EntityType type);
 
+	Entity* CreateFromMap(char name, pugi::xml_node& data);
+
 	void DestroyEntity(Entity* entity);
 
 	void AddEntity(Entity* entity);

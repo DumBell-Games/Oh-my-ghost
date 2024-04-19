@@ -20,6 +20,7 @@ class Audio;
 class Scene;
 class EntityManager;
 class Map;
+class Reload;
 class TitleScreen;
 class PauseMenu;
 //L07 DONE 2: Add Physics module
@@ -110,6 +111,7 @@ public:
 	Scene* scene;
 	EntityManager* entityManager;
 	Map* map;
+	Reload* reload; // Module (un/re)loader
 	TitleScreen* titlescreen;
 	PauseMenu* pause;
 	//L07 DONE 2: Add Physics module

@@ -6,6 +6,7 @@
 #include "Audio.h"
 #include "Scene.h"
 #include "Map.h"
+#include "Reload.h"
 #include "Physics.h"
 #include "GuiManager.h"
 #include "Optick/include/optick.h"
@@ -44,6 +45,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	titlescreen = new TitleScreen();
 	pause = new PauseMenu();
 	map = new Map();
+	reload = new Reload();
 	entityManager = new EntityManager();
 	guiManager = new GuiManager();
 	dialogManager = new DialogManager();
@@ -64,6 +66,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(entityManager);
 	AddModule(guiManager);
 	AddModule(dialogManager);
+
+	AddModule(reload);
 
 	// Render last to swap buffer
 	AddModule(render);
