@@ -20,6 +20,7 @@ bool Reload::Awake(pugi::xml_node config)
 		SString presetName = presetNode.attribute("name").as_string();
 		float fadeOut = presetNode.attribute("fadeOut").as_float();
 		float fadeIn = presetNode.attribute("fadeIn").as_float();
+		// Add a preset to the list, keep the pointer to add modules to said preset
 		ReloadPreset* preset = presetList.Add(new ReloadPreset(presetName, fadeOut, fadeIn))->data;
 		for (pugi::xml_node& moduleNode = presetNode.child("module"); moduleNode != NULL; moduleNode = moduleNode.next_sibling("module"))
 		{
@@ -57,15 +58,15 @@ bool Reload::PostUpdate()
 		// Steps in order: fade out -> reload modules -> fade in -> finished
 		switch (currentStep)
 		{
-		case FADE_OUT: {
+		case ReloadStep::FADE_OUT: {
 			FadeOut();
 			break;
 		}
-		case RELOAD: {
+		case ReloadStep::RELOAD: {
 			ReloadModules();
 			break;
 		}
-		case FADE_IN: {
+		case ReloadStep::FADE_IN: {
 			FadeIn();
 			break;
 		}

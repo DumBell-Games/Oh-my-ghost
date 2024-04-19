@@ -92,6 +92,24 @@ void App::AddModule(Module* module)
 	modules.Add(module);
 }
 
+Module* App::GetModule(const char* name)
+{
+	Module* ret = nullptr;
+	for (ListItem<Module*>* item = modules.start; item; item = item->next)
+	{
+		if (item->data->name == name) {
+			ret = item->data;
+			break;
+		}
+	}
+	return ret;
+}
+
+pugi::xml_node App::GetConfig(const Module& module)
+{
+	return configFile.child("config").child(module.name.GetString());
+}
+
 // Called before render is available
 bool App::Awake()
 {

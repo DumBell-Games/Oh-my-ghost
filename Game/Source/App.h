@@ -52,6 +52,10 @@ public:
 	// Add a new module to handle
 	void AddModule(Module* module);
 
+	Module* GetModule(const char* name);
+
+	pugi::xml_node GetConfig(const Module& module);
+
 	// Exposing some properties for reading
 	int GetArgc() const;
 	const char* GetArgv(int index) const;

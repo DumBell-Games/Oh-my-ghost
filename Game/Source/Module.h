@@ -12,12 +12,32 @@ class Module
 {
 public:
 
-	Module() : active(false)
+	Module(bool startEnabled = false) : active(startEnabled), awoken(startEnabled), needsAwaking(false)
 	{}
 
 	void Init()
 	{
 		active = true;
+	}
+
+	bool Enable()
+	{
+		bool ret = false;
+		if (!active) {
+			active = true;
+			ret = Start();
+		}
+		return ret;
+	}
+
+	bool Disable()
+	{
+		bool ret = false;
+		if (active) {
+			active = false;
+			ret = CleanUp();
+		}
+		return ret;
 	}
 
 	// Called before render is available
@@ -79,6 +99,9 @@ public:
 
 	SString name;
 	bool active;
+	bool awoken;
+	bool needsAwaking;
+
 
 };
 
