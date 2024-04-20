@@ -12,6 +12,10 @@
 #include "Optick/include/optick.h"
 #include "menu.h"
 #include "PauseMenu.h"
+#include "EntityManager.h"
+#include "TeamScreen.h"
+#include "IntroScreen.h"
+#include "FadeToBlack.h"
 
 #include "DialogManager.h"
 
@@ -43,12 +47,15 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	physics = new Physics();
 	scene = new Scene();
 	titlescreen = new TitleScreen();
+	introScreen = new IntroScreen();
+	teamScreen = new TeamScreen();
 	pause = new PauseMenu();
 	map = new Map();
 	reload = new Reload();
 	entityManager = new EntityManager();
 	guiManager = new GuiManager();
 	dialogManager = new DialogManager();
+	fadeToBlack = new FadeToBlack();
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -62,10 +69,13 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(scene);
 	AddModule(titlescreen);
+	AddModule(introScreen);
+	AddModule(teamScreen);
 	AddModule(pause);
 	AddModule(entityManager);
 	AddModule(guiManager);
 	AddModule(dialogManager);
+	AddModule(fadeToBlack);
 
 	AddModule(reload);
 

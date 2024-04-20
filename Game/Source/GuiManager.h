@@ -34,7 +34,7 @@ public:
 	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, GuiOnClick_f observer, SDL_Rect sliderBounds = { 0,0,0,0 });
 
 	void DestroyGuiControl(GuiControl* ctrl);
-
+  
 public:
 
 	List<GuiControl*> guiControlsList;

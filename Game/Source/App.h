@@ -22,11 +22,14 @@ class EntityManager;
 class Map;
 class Reload;
 class TitleScreen;
+class IntroScreen;
+class TeamScreen;
 class PauseMenu;
 //L07 DONE 2: Add Physics module
 class Physics;
 class GuiManager;
 class DialogManager;
+class FadeToBlack;
 
 class App
 {
@@ -116,11 +119,14 @@ public:
 	Map* map;
 	Reload* reload; // Module (un/re)loader
 	TitleScreen* titlescreen;
+	IntroScreen* introScreen;
+	TeamScreen* teamScreen;
 	PauseMenu* pause;
 	//L07 DONE 2: Add Physics module
 	Physics* physics;
 	GuiManager* guiManager;
 	DialogManager* dialogManager;
+	FadeToBlack* fadeToBlack;
 
 
 private:

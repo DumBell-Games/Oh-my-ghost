@@ -12,29 +12,31 @@ class Module
 {
 public:
 
-	Module(bool startEnabled = false) : active(startEnabled), awoken(startEnabled), needsAwaking(false)
+	Module(bool startEnabled = false) : active(startEnabled), awoken(false), needsAwaking(false)
 	{}
 
 	void Init()
 	{
-		active = true;
+		active = isEnabled = true;
 	}
 
+  // Switches isEnabled and calls Start() method
 	bool Enable()
 	{
 		bool ret = false;
 		if (!active) {
-			active = true;
+			active = isEnabled = true;
 			ret = Start();
 		}
 		return ret;
 	}
 
+  // Switches isEnabled and calls CleanUp() method
 	bool Disable()
 	{
 		bool ret = false;
 		if (active) {
-			active = false;
+			active = isEnabled = false;
 			ret = CleanUp();
 		}
 		return ret;
@@ -95,14 +97,20 @@ public:
 		return true;
 	}
 
+	inline bool IsEnabled() const { return isEnabled; }
+
 public:
 
 	SString name;
-	bool active;
+	bool active;	
+  
+  // variable para FadeToBlack
+	bool isEnabled = true;
+
+  // variables para modulo Reload
 	bool awoken;
-	bool needsAwaking;
-
-
+	bool needsAwaking; // Algunos módulos necesitan volver a ejecutar Awake() cuando se activan (Ejemplo: EntityManager si se ha creado alguna entidad antes de iniciarlo)
+  
 };
 
 #endif // __MODULE_H__

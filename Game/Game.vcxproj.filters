@@ -31,6 +31,9 @@
     <ClCompile Include="Source\Npc.cpp" />
     <ClCompile Include="Source\PauseMenu.cpp" />
     <ClCompile Include="Source\Enemies.cpp" />
+    <ClCompile Include="Source\FadeToBlack.cpp" />
+    <ClCompile Include="Source\TeamScreen.cpp" />
+    <ClCompile Include="Source\IntroScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Window.h" />
@@ -91,6 +94,9 @@
     <ClInclude Include="Source\Npc.h" />
     <ClInclude Include="Source\PauseMenu.h" />
     <ClInclude Include="Source\Enemies.h" />
+    <ClInclude Include="Source\FadeToBlack.h" />
+    <ClInclude Include="Source\TeamScreen.h" />
+    <ClInclude Include="Source\IntroScreen.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -105,5 +111,6 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Output\config.xml" />
+    <Xml Include="..\Output\controls.xml" />
   </ItemGroup>
 </Project>

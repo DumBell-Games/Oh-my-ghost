@@ -39,6 +39,8 @@ public:
 
     int screenWidth;
     int screenHeight;
+
+    int menuFx;
            
     //gui list
     List<GuiControlButton*> titleButtons;

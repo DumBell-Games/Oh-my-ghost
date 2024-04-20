@@ -176,3 +176,23 @@ bool Audio::PlayFx(unsigned int id, int repeat)
 
 	return ret;
 }
+
+// Unload WAV
+bool Audio::UnloadFx(unsigned int id)
+{
+	bool ret = false;
+
+	if (!active)
+		return false;
+
+	if (id > 0 && id <= fx.Count())
+	{
+		ListItem<Mix_Chunk*>* item = fx.At(id - 1);
+		Mix_FreeChunk(item->data);
+		fx.Del(item);
+		ret = true;
+	}
+
+	return ret;
+}
+
