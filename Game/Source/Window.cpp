@@ -103,10 +103,24 @@ uint Window::GetScale() const
 	return scale;
 }
 
+
 void Window::FullscreenMode() {
+
 	SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN_DESKTOP);
+	scale == 2;
+
+	SDL_DisplayMode dm;
+	SDL_GetCurrentDisplayMode(0, &dm);
+	width = dm.w;
+	height = dm.h;
 }
 
 void Window::UnFullscreenMode() {
 	SDL_SetWindowFullscreen(window, 0);
+	scale == 1;
+
+	SDL_DisplayMode dm;
+	SDL_GetCurrentDisplayMode(0, &dm);
+	width = dm.w;
+	height = dm.h;
 }

@@ -30,6 +30,8 @@ public:
 	// Retrieve window scale
 	uint GetScale() const;
 
+	
+
 	void FullscreenMode();
 
 	void UnFullscreenMode();
