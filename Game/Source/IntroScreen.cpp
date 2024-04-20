@@ -47,7 +47,7 @@ bool IntroScreen::Start()
 // Called each loop iteration
 bool IntroScreen::Update(float dt)
 {
-    if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN )
+    if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
     {
         app->audio->UnloadFx(introScreenFx);
         app->fadeToBlack->FadeToBlackTransition((Module*)app->introScreen, (Module*)app->titlescreen, 0.0f);

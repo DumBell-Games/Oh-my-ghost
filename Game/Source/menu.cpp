@@ -49,7 +49,7 @@ bool TitleScreen::Update(float dt)
 {   
     if (menuIndex == 1)
     {
-        if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+        if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
         {
             app->audio->UnloadFx(menuFx);
             app->fadeToBlack->FadeToBlackTransition((Module*)app->titlescreen, (Module*)app->scene, 0.0f);
@@ -69,7 +69,7 @@ bool TitleScreen::Update(float dt)
 
     if (menuIndex == 2)
     {
-        if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+        if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
         {
             app->audio->UnloadFx(menuFx);
             app->fadeToBlack->FadeToBlackTransition((Module*)app->titlescreen, (Module*)app->scene, 0.0f);
@@ -89,7 +89,7 @@ bool TitleScreen::Update(float dt)
 
     if (menuIndex == 3)
     {
-        if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+        if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
         {
             app->audio->UnloadFx(menuFx);
             app->fadeToBlack->FadeToBlackTransition((Module*)app->titlescreen, (Module*)app->scene, 0.0f);
@@ -109,7 +109,7 @@ bool TitleScreen::Update(float dt)
     
     if (menuIndex == 4)
     {
-        if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+        if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
         {
             SDL_Quit();
         }

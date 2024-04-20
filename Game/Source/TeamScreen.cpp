@@ -55,7 +55,7 @@ bool TeamScreen::Start()
 // Called each loop iteration
 bool TeamScreen::Update(float dt)
 {
-    if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+    if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
     {
         app->audio->UnloadFx(logoFX);
         app->fadeToBlack->FadeToBlackTransition((Module*)app->teamScreen, (Module*)app->introScreen, 0.0f);
