@@ -50,42 +50,6 @@ bool TitleScreen::Start()
 // Called each loop iteration
 bool TitleScreen::Update(float dt)
 {   
-    if (menuIndex == 1)
-    {
-        if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
-        {
-            
-            app->audio->PlayFx(app->scene->cityFx);
-        }
-    }
-
-    if (menuIndex == 2)
-    {
-        if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
-        {
-            app->fadeToBlack->FadeToBlackTransition((Module*)app->titlescreen, (Module*)app->scene, 0.0f);
-
-            app->audio->PlayFx(app->scene->cityFx);
-        }
-    }
-
-    if (menuIndex == 3)
-    {
-        if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
-        {
-            app->fadeToBlack->FadeToBlackTransition((Module*)app->titlescreen, (Module*)app->scene, 0.0f);
-
-            app->audio->PlayFx(app->scene->cityFx);
-        }
-    }   
-    
-    if (menuIndex == 4)
-    {
-        if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
-        {
-            app->Quit();
-        }
-    }
 
     if (app->input->GetButton(ControlID::UP) == KEY_REPEAT) //arriba
     {
@@ -105,11 +69,6 @@ bool TitleScreen::Update(float dt)
             timer.Start();
         }
     }
-    if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN && titleButtons.Count()>=menuIndex)
-    {
-        titleButtons[menuIndex - 1]->state = GuiControlState::PRESSED;
-        titleButtons[menuIndex - 1]->NotifyObserver();
-    }
 
     ListItem<GuiControlButton*>* controlListItem = nullptr;
     for (controlListItem = titleButtons.start; controlListItem != NULL; controlListItem = controlListItem->next)
@@ -122,6 +81,12 @@ bool TitleScreen::Update(float dt)
     if (titleButtons[menuIndex - 1] != nullptr)
     {
         titleButtons[menuIndex - 1]->state = GuiControlState::SELECTED;
+    }
+
+    if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN && titleButtons.Count() >= menuIndex)
+    {
+        titleButtons[menuIndex - 1]->state = GuiControlState::PRESSED;
+        titleButtons[menuIndex - 1]->NotifyObserver();
     }
 
   /*
@@ -230,7 +195,6 @@ void Continue(GuiControl* ctrl)
 
 void Options(GuiControl* ctrl)
 {
-    app->audio->PlayFx(app->scene->cityFx);
 }
 
 void Exit(GuiControl* ctrl)

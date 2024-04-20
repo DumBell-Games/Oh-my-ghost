@@ -91,6 +91,8 @@ bool Scene::Start()
 	// Texture to highligh mouse position 
 	mouseTileTex = app->tex->Load("Assets/Maps/tileSelection.png");
 		
+	app->audio->PlayFx(app->scene->cityFx);
+
 
 	return true;
 }
