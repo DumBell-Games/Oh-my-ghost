@@ -38,24 +38,24 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	// L3: DONE 1: Add the EntityManager Module to App
 
-	win = new Window();
-	input = new Input();
-	render = new Render();
-	tex = new Textures();
-	audio = new Audio();
+	win = new Window(true);
+	input = new Input(true);
+	render = new Render(true);
+	tex = new Textures(true);
+	audio = new Audio(true);
 	//L07 DONE 2: Add Physics module
-	physics = new Physics();
-	scene = new Scene();
-	titlescreen = new TitleScreen();
-	introScreen = new IntroScreen();
-	teamScreen = new TeamScreen();
-	pause = new PauseMenu();
-	map = new Map();
-	reload = new Reload();
-	entityManager = new EntityManager();
-	guiManager = new GuiManager();
-	dialogManager = new DialogManager();
-	fadeToBlack = new FadeToBlack();
+	physics = new Physics(false);
+	scene = new Scene(false);
+	titlescreen = new TitleScreen(false);
+	introScreen = new IntroScreen(false);
+	teamScreen = new TeamScreen(true);
+	pause = new PauseMenu(false);
+	map = new Map(false);
+	reload = new Reload(true);
+	entityManager = new EntityManager(false);
+	guiManager = new GuiManager(false);
+	dialogManager = new DialogManager(false);
+	fadeToBlack = new FadeToBlack(true);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -173,7 +173,8 @@ bool App::Start()
 
 	while(item != NULL && ret == true)
 	{
-		ret = item->data->Start();
+		if (item->data->active)
+			ret = item->data->Start();
 		item = item->next;
 	}
 

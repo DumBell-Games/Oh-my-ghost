@@ -122,7 +122,7 @@ class Input : public Module
 
 public:
 
-	Input();
+	Input(bool startEnabled = true);
 
 	// Destructor
 	virtual ~Input();
