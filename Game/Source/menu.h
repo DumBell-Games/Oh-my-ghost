@@ -43,7 +43,7 @@ public:
     int menuFx;
            
     //gui list
-    List<GuiControl*> titleButtons;
+    List<GuiControlButton*> titleButtons;
 
 private:
 

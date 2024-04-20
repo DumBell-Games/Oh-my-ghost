@@ -111,6 +111,16 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	return entity;
 }
 
+Entity* EntityManager::CreateFromMap(char typeId, pugi::xml_node& data)
+{
+	Entity* entity = nullptr;
+
+	EntityType type = static_cast<EntityType>(1);
+
+
+	return entity;
+}
+
 void EntityManager::DestroyEntity(Entity* entity)
 {
 	ListItem<Entity*>* item;

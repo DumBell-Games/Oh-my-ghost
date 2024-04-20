@@ -6,6 +6,7 @@
 #include "Audio.h"
 #include "Scene.h"
 #include "Map.h"
+#include "Reload.h"
 #include "Physics.h"
 #include "GuiManager.h"
 #include "Optick/include/optick.h"
@@ -50,6 +51,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	teamScreen = new TeamScreen();
 	pause = new PauseMenu();
 	map = new Map();
+	reload = new Reload();
 	entityManager = new EntityManager();
 	guiManager = new GuiManager();
 	dialogManager = new DialogManager();
@@ -74,6 +76,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(guiManager);
 	AddModule(dialogManager);
 	AddModule(fadeToBlack);
+
+	AddModule(reload);
 
 	// Render last to swap buffer
 	AddModule(render);
@@ -100,6 +104,24 @@ void App::AddModule(Module* module)
 {
 	module->Init();
 	modules.Add(module);
+}
+
+Module* App::GetModule(const char* name)
+{
+	Module* ret = nullptr;
+	for (ListItem<Module*>* item = modules.start; item; item = item->next)
+	{
+		if (item->data->name == name) {
+			ret = item->data;
+			break;
+		}
+	}
+	return ret;
+}
+
+pugi::xml_node App::GetConfig(const Module& module)
+{
+	return configFile.child("config").child(module.name.GetString());
 }
 
 // Called before render is available
@@ -166,7 +188,7 @@ bool App::Update()
 	//L16 TODO 2: Add the Optick macro to mark the beginning of the main loop
 	OPTICK_FRAME("Main Loop");
 
-	bool ret = true;
+	bool ret = !quit;
 	PrepareUpdate();
 
 	if(input->GetWindowEvent(WE_QUIT) == true)

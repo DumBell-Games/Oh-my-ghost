@@ -123,5 +123,31 @@
 	  </textures>
   </dialogmanager>
 
+	<map path="Assets/Maps/">
+		<map id="0" file="MapTemplate.tmx"/>
+		<map id="1" file="hello.tmx"/>
+	</map>
+
+	<reload>
+		<presets>
+			<preset name="loadMap" fadeOut="1" fadeIn="1">
+				<!--Hay que tener en cuenta todo lo que se cargue desde la informacion de mapa y reiniciarlo también-->
+				<!--<module type="r" name="textures"/>-->
+				<!--<module type="r" name="audio"/>-->
+				<!--<module type="r" name="physics"/>-->
+				<!--<module type="r" name="scene"/>-->
+				<module type="u" name="titlescreen"/> <!--Cuando cargas mapa no va a estar el menú principal cargado-->
+				<module type="r" name="map"/>
+				<!--<module type="r" name="entitymanager"/>-->
+			</preset>
+			<!--Los dos presets de mainMenuUnload son para su uso en menús fuera de partida-->
+			<preset name="mainMenuUnload" fadeOut="0" fadeIn="0">
+				<module type="u" name="titlescreen"/>
+			</preset>
+			<preset name="mainMenuLoad" fadeOut="0" fadeIn="0">
+				<module type="l" name="titlescreen"/>
+			</preset>
+		</presets>
+	</reload>
 
 </config>
