@@ -9,6 +9,8 @@
 #include "Item.h"
 #include "Optick/include/optick.h"
 #include "DialogTriggerEntity.h"
+#include "Npc.h"
+#include "Enemies.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -52,6 +54,17 @@ bool Scene::Awake(pugi::xml_node config)
 		DialogTrigger* dialogTrigger = (DialogTrigger*)app->entityManager->CreateEntity(EntityType::DIALOG_TRIGGER);
 		dialogTrigger->parameters = itemNode;
 	}
+	for (pugi::xml_node itemNode = config.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
+	{
+		Npc* npc = (Npc*)app->entityManager->CreateEntity(EntityType::NPC);
+		npc->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("enemy"); itemNode; itemNode = itemNode.next_sibling("enemy"))
+	{
+		Enemy* enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
+		enemy->parameters = itemNode;
+	}
+
 	return ret;
 }
 
@@ -124,6 +137,15 @@ bool Scene::Update(float dt)
 	// L14: DONE 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
 	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
+	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) fullscreen = true;
+	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) fullscreen = false;
+	if (fullscreen == true) {
+		app->win->FullscreenMode();
+	}
+	else {
+		app->win->UnFullscreenMode();
+	}
+
 
 	return true;
 }
