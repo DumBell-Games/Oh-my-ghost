@@ -111,5 +111,6 @@
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Output\config.xml" />
+    <Xml Include="..\Output\controls.xml" />
   </ItemGroup>
 </Project>
