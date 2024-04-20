@@ -1,4 +1,5 @@
 #pragma once
+#include <queue>
 #include "Module.h"
 #include "List.h"
 #include "Timer.h"
@@ -67,7 +68,8 @@ public:
     // Called before quitting
     bool CleanUp();
 
-    bool StartReload(SString presetName);
+	// Adds transition to the queue
+    bool QueueReload(SString presetName);
 
 private:
 
@@ -79,6 +81,7 @@ private:
 
 public:
 
+	std::queue<ReloadPreset*> queue;
     ReloadPreset* activePreset = nullptr;
     ReloadStep currentStep = ReloadStep::NONE;
 

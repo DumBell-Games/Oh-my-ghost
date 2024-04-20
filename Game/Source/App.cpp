@@ -178,7 +178,7 @@ bool App::Update()
 	//L16 TODO 2: Add the Optick macro to mark the beginning of the main loop
 	OPTICK_FRAME("Main Loop");
 
-	bool ret = true;
+	bool ret = !quit;
 	PrepareUpdate();
 
 	if(input->GetWindowEvent(WE_QUIT) == true)

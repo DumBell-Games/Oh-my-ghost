@@ -71,6 +71,9 @@ public:
 	// Request to load data from XML file 
 	bool SaveRequest();
 
+	// Close the game (for use with UI elements)
+	void Quit() { quit = true; }
+
 private:
 
 	// Load config file
@@ -155,6 +158,7 @@ private:
 	//
 	bool loadRequest = false;
 	bool saveRequest = false;
+	bool quit = false;
 
 };
 

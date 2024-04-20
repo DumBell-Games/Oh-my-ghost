@@ -41,7 +41,7 @@ public:
     int screenHeight;
            
     //gui list
-    List<GuiControl*> titleButtons;
+    List<GuiControlButton*> titleButtons;
 
 private:
 

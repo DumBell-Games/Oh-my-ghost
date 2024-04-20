@@ -232,6 +232,7 @@ bool Map::Unload()
 
     while (item != NULL)
     {
+        app->tex->UnLoad(item->data->texture);
         RELEASE(item->data);
         item = item->next;
     }
@@ -254,12 +255,12 @@ bool Map::Unload()
     return true;
 }
 
+// If parameter is -1 just reloads the current map
 bool Map::ChangeMap(int id)
 {
-    // If parameter is -1 don't change current map
     currentMap = ((id == -1) ? currentMap : id);
 
-    return app->reload->StartReload("loadMap");
+    return app->reload->QueueReload("loadMap");
 }
 
 bool Map::LoadMap(pugi::xml_node mapFile)

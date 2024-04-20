@@ -51,7 +51,10 @@ bool Reload::Start()
 
 bool Reload::PostUpdate()
 {
-
+	if (activePreset == nullptr && !queue.empty()) {
+		activePreset = queue.front(); queue.pop();
+		currentStep = ReloadStep::FADE_OUT;
+	}
 
 	if (activePreset != nullptr) {
 
@@ -94,19 +97,16 @@ bool Reload::CleanUp()
 	return true;
 }
 
-bool Reload::StartReload(SString presetName)
+bool Reload::QueueReload(SString presetName)
 {
 	bool ret = false;
-	if (activePreset == nullptr) {
-
-		for (size_t i = 0; i < presetList.Count(); i++)
-		{
-			ListItem<ReloadPreset*>* item = presetList.At(i);
-			if (item->data->name == presetName) {
-				ret = true;
-				activePreset = item->data;
-				currentStep = ReloadStep::FADE_OUT;
-			}
+	for (size_t i = 0; i < presetList.Count(); i++)
+	{
+		ListItem<ReloadPreset*>* item = presetList.At(i);
+		if (item->data->name == presetName) {
+			ret = true;
+			queue.push(item->data);
+			break;
 		}
 	}
 
@@ -120,7 +120,9 @@ void Reload::FadeOut()
 		timerActive = true;
 	}
 	else {
-		fadeRatio = (timer.ReadMSec() / 1000.0f) / activePreset->fadeOut;
+		if (activePreset->fadeOut != 0)
+			fadeRatio = (timer.ReadMSec() / 1000.0f) / activePreset->fadeOut;
+		else fadeRatio = 1;
 		fadeRatio = b2Clamp(fadeRatio, 0.0f, 255.0f);
 		if (fadeRatio >= 1.0f) {
 			activePreset->fadeOut;
@@ -163,7 +165,9 @@ void Reload::FadeIn()
 		timerActive = true;
 	}
 	else {
-		fadeRatio = 1 - ((timer.ReadMSec() / 1000.0f) / activePreset->fadeIn);
+		if (activePreset->fadeIn != 0)
+			fadeRatio = 1 - ((timer.ReadMSec() / 1000.0f) / activePreset->fadeIn);
+		else fadeRatio = 0;
 		fadeRatio = b2Clamp(fadeRatio, 0.0f, 255.0f);
 		if (fadeRatio <= b2_epsilon) {
 			activePreset = nullptr;
