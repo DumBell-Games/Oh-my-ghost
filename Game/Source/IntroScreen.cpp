@@ -13,8 +13,9 @@
 #include "TeamScreen.h"
 #include "menu.h"
 
-IntroScreen::IntroScreen(bool startEnabled) : Module()
+IntroScreen::IntroScreen(bool startEnabled) : Module(startEnabled)
 {
+    name.Create("introScreen");
 }
 
 // Destructor
@@ -40,6 +41,7 @@ bool IntroScreen::Start()
     //app->audio->PlayMusic("Assets/Music/titleScreen.ogg", 1.0f);
     SDL_GetWindowSize(app->win->window, &screenWidth, &screenHeight);
 
+    app->audio->PlayFx(introScreenFx);
 
     return true;
 }
@@ -49,16 +51,7 @@ bool IntroScreen::Update(float dt)
 {
     if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
     {
-        app->audio->UnloadFx(introScreenFx);
         app->fadeToBlack->FadeToBlackTransition((Module*)app->introScreen, (Module*)app->titlescreen, 0.0f);
-
-        app->introScreen->Disable();
-        app->introScreen->active = false;
-
-        app->titlescreen->Enable();
-        app->titlescreen->active = true;
-
-        app->audio->PlayFx(app->titlescreen->menuFx);
     }
 
     
@@ -75,6 +68,10 @@ bool IntroScreen::PostUpdate()
 // Called before quitting
 bool IntroScreen::CleanUp()
 {
+    if (introScreenFx != -1) {
+        app->audio->UnloadFx(introScreenFx);
+        introScreenFx = 0;
+    }
     if (introScreenTex != nullptr)
     {
         app->tex->UnLoad(introScreenTex);

@@ -10,7 +10,7 @@
 #include "Log.h"
 #include "SDL_ttf/include/SDL_ttf.h"
 
-DialogManager::DialogManager() : Module()
+DialogManager::DialogManager(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("dialogmanager");
 }

@@ -22,7 +22,7 @@
 #include "GuiManager.h"
 #include "GuiControlButton.h"
 
-Scene::Scene() : Module()
+Scene::Scene(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("scene");
 }
@@ -42,10 +42,6 @@ bool Scene::Awake(pugi::xml_node config)
 	player = (Player*) app->entityManager->CreateEntity(EntityType::PLAYER);
 	//Assigns the XML node to a member in player
 	player->config = config.child("player");
-
-	//Get the map name from the config file and assigns the value in the module
-	app->map->name = config.child("map").attribute("name").as_string();
-	app->map->path = config.child("map").attribute("path").as_string();
 
 	// iterate all items in the scene
 	// Check https://pugixml.org/docs/quickstart.html#access
@@ -164,12 +160,12 @@ bool Scene::PostUpdate()
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 	{
 		//Destroy all the buttons in the title screen
-		ListItem<GuiControl*>* controlListMenu = nullptr;
-		for (controlListMenu = app->titlescreen->titleButtons.start; controlListMenu != NULL; controlListMenu = controlListMenu->next)
-		{
-			app->guiManager->DestroyGuiControl(controlListMenu->data);
-		}
-		app->titlescreen->titleButtons.Clear();
+		//ListItem<GuiControl*>* controlListMenu = nullptr;
+		//for (controlListMenu = app->titlescreen->titleButtons.start; controlListMenu != NULL; controlListMenu = controlListMenu->next)
+		//{
+		//	app->guiManager->DestroyGuiControl(controlListMenu->data);
+		//}
+		//app->titlescreen->titleButtons.Clear();
 
 		app->guiManager->active = true;
 		app->guiManager->Enable();

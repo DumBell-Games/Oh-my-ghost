@@ -14,8 +14,9 @@
 #include "Scene.h"
 
 
-TeamScreen::TeamScreen(bool startEnabled) : Module()
+TeamScreen::TeamScreen(bool startEnabled) : Module(startEnabled)
 {
+    name.Create("teamScreen");
 }
 
 // Destructor
@@ -26,16 +27,6 @@ TeamScreen::~TeamScreen()
 bool TeamScreen::Start()
 {
     logoScreenTex = app->tex->Load("Assets/Screens/TeamLogo.png");
-
-    app->teamScreen->Enable();
-    app->teamScreen->active = true;
-
-    app->scene->active = false;
-    app->scene->Disable();
-    app->titlescreen->active = false;
-    app->titlescreen->Disable();
-    app->introScreen->active = false;
-    app->introScreen->Disable();
 
     app->render->camera.x = 0;
     app->render->camera.y = 0;
@@ -57,16 +48,7 @@ bool TeamScreen::Update(float dt)
 {
     if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
     {
-        app->audio->UnloadFx(logoFX);
         app->fadeToBlack->FadeToBlackTransition((Module*)app->teamScreen, (Module*)app->introScreen, 0.0f);
-       
-		app->teamScreen->Disable();
-        app->teamScreen->active = false;
-
-        app->introScreen->Enable();
-        app->introScreen->active = true;
-
-        app->audio->PlayFx(app->introScreen->introScreenFx);
 
 	}
 
@@ -85,6 +67,11 @@ bool TeamScreen::PostUpdate()
 // Called before quitting
 bool TeamScreen::CleanUp()
 {
+    if (logoFX > 0) {
+        app->audio->UnloadFx(logoFX);
+        logoFX = 0;
+    }
+
     if (logoScreenTex != nullptr)
     {
         app->tex->UnLoad(logoScreenTex);

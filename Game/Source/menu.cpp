@@ -15,7 +15,7 @@
 #include "IntroScreen.h"
 #include "TeamScreen.h"
 
-TitleScreen::TitleScreen(bool startEnabled) : Module()
+TitleScreen::TitleScreen(bool startEnabled) : Module(startEnabled)
 {
     name.Create("titlescreen");
 }
@@ -27,8 +27,6 @@ TitleScreen::~TitleScreen()
 // Called before render is available
 bool TitleScreen::Start()
 {
-    app->scene->active = false;
-    app->scene->Disable();
     
     menuFx = app->audio->LoadFx("Assets/Audio/Fx/menuFX.wav");
     
@@ -44,6 +42,8 @@ bool TitleScreen::Start()
 
     CreateTitleButtons();
 
+    app->audio->PlayFx(menuFx);
+
     return true;
 }
 
@@ -54,18 +54,7 @@ bool TitleScreen::Update(float dt)
     {
         if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
         {
-            app->audio->UnloadFx(menuFx);
-            app->fadeToBlack->FadeToBlackTransition((Module*)app->titlescreen, (Module*)app->scene, 0.0f);
-
-            app->titlescreen->Disable();
-            app->titlescreen->active = false;
-
-            app->scene->Enable();
-            app->scene->active = true;
-
-            app->guiManager->active = false;
-            app->guiManager->Disable();
-
+            
             app->audio->PlayFx(app->scene->cityFx);
         }
     }
@@ -74,17 +63,7 @@ bool TitleScreen::Update(float dt)
     {
         if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
         {
-            app->audio->UnloadFx(menuFx);
             app->fadeToBlack->FadeToBlackTransition((Module*)app->titlescreen, (Module*)app->scene, 0.0f);
-
-            app->titlescreen->Disable();
-            app->titlescreen->active = false;
-
-            app->scene->Enable();
-            app->scene->active = true;
-
-            app->guiManager->active = false;
-            app->guiManager->Disable();
 
             app->audio->PlayFx(app->scene->cityFx);
         }
@@ -94,17 +73,7 @@ bool TitleScreen::Update(float dt)
     {
         if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
         {
-            app->audio->UnloadFx(menuFx);
             app->fadeToBlack->FadeToBlackTransition((Module*)app->titlescreen, (Module*)app->scene, 0.0f);
-
-            app->titlescreen->Disable();
-            app->titlescreen->active = false;
-
-            app->scene->Enable();
-            app->scene->active = true;
-
-            app->guiManager->active = false;
-            app->guiManager->Disable();
 
             app->audio->PlayFx(app->scene->cityFx);
         }
@@ -114,11 +83,11 @@ bool TitleScreen::Update(float dt)
     {
         if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
         {
-            SDL_Quit();
+            app->Quit();
         }
     }
 
-    if (app->input->GetAxis(ControlID::MOVE_VERTICAL) <= -0.4f) //arriba
+    if (app->input->GetButton(ControlID::UP) == KEY_REPEAT) //arriba
     {
         if (timer.ReadMSec() >= 200)
         {
@@ -127,7 +96,7 @@ bool TitleScreen::Update(float dt)
             timer.Start();
         }
     }
-    if (app->input->GetAxis(ControlID::MOVE_VERTICAL) >= 0.4f) //abajo
+    if (app->input->GetAxis(ControlID::DOWN) == KEY_REPEAT) //abajo
     {
         if (timer.ReadMSec() >= 200)
         {
@@ -136,19 +105,11 @@ bool TitleScreen::Update(float dt)
             timer.Start();
         }
     }
-    if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
+    if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN && titleButtons.Count()>=menuIndex)
     {
         titleButtons[menuIndex - 1]->state = GuiControlState::PRESSED;
         titleButtons[menuIndex - 1]->NotifyObserver();
     }
-
-    //if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
-    //{
-    //    if (menuIndex == 1) App->network->optionsIndex = 1;
-    //    //else if (menuIndex == 2) App->network->optionsIndex = 2;
-    //    //else if (menuIndex == 3) App->network->optionsIndex = 3;
-    //    else if (menuIndex == 4) return UPDATE_STOP;
-    //}
 
     ListItem<GuiControlButton*>* controlListItem = nullptr;
     for (controlListItem = titleButtons.start; controlListItem != NULL; controlListItem = controlListItem->next)
@@ -162,11 +123,12 @@ bool TitleScreen::Update(float dt)
     {
         titleButtons[menuIndex - 1]->state = GuiControlState::SELECTED;
     }
-  
+
+  /*
     if (menuIndex == 1) app->render->DrawTexture(menu1, 0, 0, NULL);
     else if (menuIndex == 2) app->render->DrawTexture(menu2, 0, 0, NULL);
     else if (menuIndex == 3) app->render->DrawTexture(menu3, 0, 0, NULL);
-    else if (menuIndex == 4) app->render->DrawTexture(menu4, 0, 0, NULL);
+    else if (menuIndex == 4) app->render->DrawTexture(menu4, 0, 0, NULL);*/
 
     return true;
 }
@@ -208,7 +170,12 @@ bool TitleScreen::CleanUp()
         menu4 = nullptr;
     }
 
-    //TODO: cambiar cuando se cambie la funcionalidad de los botones
+    if (menuFx > 0) {
+        app->audio->UnloadFx(menuFx);
+        menuFx = 0;
+    }
+
+
     ListItem<GuiControlButton*>* controlListItem = nullptr;
     for (controlListItem = titleButtons.start; controlListItem != NULL; controlListItem = controlListItem->next)
     {
@@ -258,12 +225,12 @@ void NewGame(GuiControl* ctrl)
 
 void Continue(GuiControl* ctrl)
 {
-    app->map->ChangeMap(1); // TODO el id de mapa debe depender de lo que haya en la partida guardada en el caso de continuar partida
+    app->map->ChangeMap(1); // TODO el id de mapa debe depender de lo que haya en la partida guardada en el caso de continuar partida. Para ello esta llamada debe cambiarse por una al gestor de partidas (cuando exista)
 }
 
 void Options(GuiControl* ctrl)
 {
-
+    app->audio->PlayFx(app->scene->cityFx);
 }
 
 void Exit(GuiControl* ctrl)

@@ -5,7 +5,7 @@
 #include "GuiControlButton.h"
 #include "Audio.h"
 
-GuiManager::GuiManager() :Module()
+GuiManager::GuiManager(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("guiManager");
 }
@@ -86,18 +86,4 @@ bool GuiManager::CleanUp()
 	return true;
 
 	return false;
-}
-
-
-void GuiManager::DestroyGuiControl(GuiControl* toDestroy) {
-
-	ListItem<GuiControl*>* control;
-	for (control = guiControlsList.start; control != NULL; control = control->next)
-	{
-		if (control->data == toDestroy) {
-			guiControlsList.Del(control);
-			break;
-		}
-	}
-
 }

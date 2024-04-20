@@ -4,7 +4,7 @@
 #include "Box2D/Box2D/Box2D.h"
 #include "Log.h"
 
-Reload::Reload() : Module() {
+Reload::Reload(bool startEnabled) : Module(startEnabled) {
 	name.Create("reload");
 }
 
@@ -27,12 +27,17 @@ bool Reload::Awake(pugi::xml_node config)
 			SString type = moduleNode.attribute("type").as_string();
 			SString moduleName = moduleNode.attribute("name").as_string();
 			Module* mod = app->GetModule(moduleName.GetString());
-			if (type == "r")
-				preset->AddReload(mod);
-			else if (type == "l")
-				preset->AddLoad(mod);
-			else if (type == "u")
-				preset->AddUnload(mod);
+			if (mod) {
+				if (type == "r")
+					preset->AddReload(mod);
+				else if (type == "l")
+					preset->AddLoad(mod);
+				else if (type == "u")
+					preset->AddUnload(mod);
+			}
+			else {
+				LOG("Could not find module \"%s\"", moduleName.GetString());
+			}
 		}
 	}
 

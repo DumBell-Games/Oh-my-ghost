@@ -21,9 +21,9 @@ struct ReloadPreset {
 	{}
 
 	bool AddReload(Module* m) {
-		AddUnload(m);
-		AddLoad(m);
-		return true;
+		
+		
+		return AddUnload(m) && AddLoad(m);
 	}
 	bool AddUnload(Module* m) {
 		bool ret = true;
@@ -51,7 +51,7 @@ enum class ReloadStep {
 class Reload : public Module
 {
 public:
-    Reload();
+    Reload(bool startEnabled = true);
 
     // Destructor
     virtual ~Reload();

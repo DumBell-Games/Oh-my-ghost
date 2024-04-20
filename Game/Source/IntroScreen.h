@@ -28,13 +28,13 @@ public:
     
 public:
 
-    SDL_Texture* introScreenTex;
-    int introScreenFx;
+    SDL_Texture* introScreenTex = nullptr;
+    int introScreenFx = 0;
 
     Timer timer;
 
-    int screenWidth;
-    int screenHeight;
+    int screenWidth = 0;
+    int screenHeight = 0;
            
     //gui list
     List<GuiControl*> titleButtons;

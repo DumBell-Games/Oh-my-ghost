@@ -130,23 +130,38 @@
 
 	<reload>
 		<presets>
+			<!--Si el modulo ya esta activo, no se intenta reactivar a menos de que se marque como reload (y aun asi primero lo desactiva)-->
+			<!--l = activar (Load), u = desactivar (Unload), r = ambos (Reload)-->
+			<!--El orden de los módulos es importante, igual que para el bucle principal del juego-->
+			<!--Unload va de final a inicio, Load va de inicio a final-->
 			<preset name="loadMap" fadeOut="1" fadeIn="1">
 				<!--Hay que tener en cuenta todo lo que se cargue desde la informacion de mapa y reiniciarlo también-->
-				<!--<module type="r" name="textures"/>-->
+				<module type="r" name="textures"/>
 				<!--<module type="r" name="audio"/>-->
-				<!--<module type="r" name="physics"/>-->
-				<!--<module type="r" name="scene"/>-->
-				<module type="u" name="titlescreen"/> <!--Cuando cargas mapa no va a estar el menú principal cargado-->
+				<module type="r" name="physics"/>
+				<module type="r" name="scene"/>
 				<module type="r" name="map"/>
-				<!--<module type="r" name="entitymanager"/>-->
+				<module type="r" name="entitymanager"/>
+				<module type="r" name="dialogmanager"/>
+				<module type="u" name="titlescreen"/> <!--Cuando cargas mapa no va a estar el menú principal cargado-->
+				<module type="l" name="pause"/>
 			</preset>
-			<!--Los dos presets de mainMenuUnload son para su uso en menús fuera de partida-->
-			<preset name="mainMenuUnload" fadeOut="0" fadeIn="0">
-				<module type="u" name="titlescreen"/>
+			<preset name="teamLogoToIntro" fadeOut="0.5" fadeIn="0.5">
+				<module type="u" name="teamScreen"/>
+				<module type="l" name="introScreen"/>
 			</preset>
-			<preset name="mainMenuLoad" fadeOut="0" fadeIn="0">
+			<preset name="introToTitle" fadeOut="0.5" fadeIn="0.5">
+				<module type="u" name="introScreen"/>
+				<module type="l" name="guiManager"/>
 				<module type="l" name="titlescreen"/>
+				<module/>
 			</preset>
+			<preset name="titleToGame" fadeOut="1" fadeIn="1">
+				<module type="u" name="titlescreen"/>
+				<module type="l" name="map"/>
+				<module/>
+			</preset>
+			
 		</presets>
 	</reload>
 

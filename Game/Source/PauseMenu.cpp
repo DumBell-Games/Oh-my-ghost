@@ -13,8 +13,9 @@
 #include "menu.h"
 
 
-PauseMenu::PauseMenu(bool startEnabled) : Module()
+PauseMenu::PauseMenu(bool startEnabled) : Module(startEnabled)
 {
+    name.Create("pause");
 }
 
 PauseMenu::~PauseMenu()
