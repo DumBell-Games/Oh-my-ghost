@@ -114,23 +114,7 @@
 		  </sentences>
 		
 	  </dialogTrigger>
-	  <dialogTrigger x="500" y="272" texturepath="Assets/Textures/player2.png"  facetexturepath="Assets/Textures/player2_face.png" name="Sisebuto" repeat="true">
-		  <sentences>
-			  <sentence name="Fernando"	text="No pasa el filtro"/>
-		  </sentences>
-		  <repeat_sentences>
-			  <sentence name="Fernando"	text="QUE NO PASA EL FILTRO, QUIEN HA SIO QUIEN HA SIO, PEG"/>
-		  </repeat_sentences>
-	  </dialogTrigger>
-	  
-	  <dialogTrigger x="700" y="272" texturepath="Assets/Textures/player2.png"  facetexturepath="Assets/Textures/player2_face.png" name="Sisebuto" repeat="true">
-		  <sentences>
-			  <sentence name="Porcino"	text="He roto la puerta de mi coche de 60000€, *PAM* *PAM* *PAM*, vaya mal rato, higo"/>
-		</sentences>
-		  <repeat_sentences>
-			  <sentence name="Porcino"	text="He roto la puerta de mi coche de 60000€, *PAM* *PAM* *PAM*, vaya mal rato, higo"/>
-		  </repeat_sentences>
-	  </dialogTrigger>
+	 
   </scene>
 	
   <dialogmanager>

@@ -7,6 +7,11 @@
 #include "GuiControl.h"
 #include "GuiControlButton.h"
 #include "SDL/include/SDL.h"
+#include "FadeToBlack.h"
+#include "Input.h"
+#include "Scene.h"
+#include "IntroScreen.h"
+#include "TeamScreen.h"
 
 TitleScreen::TitleScreen(bool startEnabled) : Module()
 {
@@ -19,6 +24,11 @@ TitleScreen::~TitleScreen()
 // Called before render is available
 bool TitleScreen::Start()
 {
+    app->scene->active = false;
+    app->scene->Disable();
+    
+    menuFx = app->audio->LoadFx("Assets/Audio/Fx/menuFX.wav");
+    
     menu1 = app->tex->Load("Assets/Screens/mainMenu1.jpg");
     menu2 = app->tex->Load("Assets/Screens/mainMenu2.jpg");
     menu3 = app->tex->Load("Assets/Screens/mainMenu3.jpg");
@@ -26,10 +36,6 @@ bool TitleScreen::Start()
 
     app->render->camera.x = 0;
     app->render->camera.y = 0;
-
-    //TODO: cambiar musica
-    //app->audio->PlayMusic("Assets/Music/titleScreen.ogg", 1.0f);
-    titleSound = app->audio->LoadFx("Assets/Music/onlymp3.to-Bully-Soundtrack-Main-Theme-7RU7CohvsMU-192k-1704300284.wav");
 
     SDL_GetWindowSize(app->win->window, &screenWidth, &screenHeight);
 
@@ -40,7 +46,75 @@ bool TitleScreen::Start()
 
 // Called each loop iteration
 bool TitleScreen::Update(float dt)
-{
+{   
+    if (menuIndex == 1)
+    {
+        if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+        {
+            app->audio->UnloadFx(menuFx);
+            app->fadeToBlack->FadeToBlackTransition((Module*)app->titlescreen, (Module*)app->scene, 0.0f);
+
+            app->titlescreen->Disable();
+            app->titlescreen->active = false;
+
+            app->scene->Enable();
+            app->scene->active = true;
+
+            app->guiManager->active = false;
+            app->guiManager->Disable();
+
+            app->audio->PlayFx(app->scene->cityFx);
+        }
+    }
+
+    if (menuIndex == 2)
+    {
+        if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+        {
+            app->audio->UnloadFx(menuFx);
+            app->fadeToBlack->FadeToBlackTransition((Module*)app->titlescreen, (Module*)app->scene, 0.0f);
+
+            app->titlescreen->Disable();
+            app->titlescreen->active = false;
+
+            app->scene->Enable();
+            app->scene->active = true;
+
+            app->guiManager->active = false;
+            app->guiManager->Disable();
+
+            app->audio->PlayFx(app->scene->cityFx);
+        }
+    }
+
+    if (menuIndex == 3)
+    {
+        if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+        {
+            app->audio->UnloadFx(menuFx);
+            app->fadeToBlack->FadeToBlackTransition((Module*)app->titlescreen, (Module*)app->scene, 0.0f);
+
+            app->titlescreen->Disable();
+            app->titlescreen->active = false;
+
+            app->scene->Enable();
+            app->scene->active = true;
+
+            app->guiManager->active = false;
+            app->guiManager->Disable();
+
+            app->audio->PlayFx(app->scene->cityFx);
+        }
+    }   
+    
+    if (menuIndex == 4)
+    {
+        if (app->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+        {
+            SDL_Quit();
+        }
+    }
+
     if (app->input->GetAxis(ControlID::MOVE_VERTICAL) <= -0.4f) //arriba
     {
         if (timer.ReadMSec() >= 200)

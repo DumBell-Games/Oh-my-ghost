@@ -68,4 +68,15 @@ bool GuiManager::CleanUp()
 }
 
 
+void GuiManager::DestroyGuiControl(GuiControl* toDestroy) {
 
+	ListItem<GuiControl*>* control;
+	for (control = guiControlsList.start; control != NULL; control = control->next)
+	{
+		if (control->data == toDestroy) {
+			guiControlsList.Del(control);
+			break;
+		}
+	}
+
+}
