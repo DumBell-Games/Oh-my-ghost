@@ -37,5 +37,5 @@ public:
    
 
     //gui list
-    List<GuiControl*> titleButtons;
+    List<GuiControl*> PauseButtons;
 };

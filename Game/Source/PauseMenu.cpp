@@ -22,8 +22,6 @@ bool PauseMenu::Start() {
 
 	SDL_GetWindowSize(app->win->window, &screenWidth, &screenHeight);
 
-	CreatePauseButtons();
-
 
 	return true;
 }
@@ -33,29 +31,29 @@ bool PauseMenu::Update(float dt) {
 }
 bool PauseMenu::PostUpdate() {
 
-    ListItem<GuiControl*>* controlListItem = nullptr;
-    for (controlListItem = titleButtons.start; controlListItem != NULL; controlListItem = controlListItem->next)
+   /* ListItem<GuiControl*>* controlListItem = nullptr;
+    for (controlListItem = PauseButtons.start; controlListItem != NULL; controlListItem = controlListItem->next)
     {
         if (controlListItem->data != nullptr)
         {
             controlListItem->data->state = GuiControlState::NORMAL;
         }
     }
-    if (titleButtons[menuIndex - 1] != nullptr)
+    if (PauseButtons[menuIndex - 1] != nullptr)
     {
-        titleButtons[menuIndex - 1]->state = GuiControlState::SELECTED;
-    }
+        PauseButtons[menuIndex - 1]->state = GuiControlState::SELECTED;
+    }*/
 	
 	return true;
 }
 bool PauseMenu::CleanUp(){
 
     ListItem<GuiControl*>* controlListItem = nullptr;
-    for (controlListItem = titleButtons.start; controlListItem != NULL; controlListItem = controlListItem->next)
+    for (controlListItem = PauseButtons.start; controlListItem != NULL; controlListItem = controlListItem->next)
     {
         delete controlListItem->data;
     }
-    titleButtons.Clear();
+    PauseButtons.Clear();
 
 	return true;
 }
@@ -67,17 +65,17 @@ void PauseMenu::CreatePauseButtons() {
         int hBt = 40;
         int posBtX = screenWidth - 250;
         int posBtY = screenHeight - 650;
-        titleButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Continuar", { posBtX, posBtY, wBt, hBt }, this));
+        PauseButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Continuar", { posBtX, posBtY, wBt, hBt }, this));
         wBt = 190;
         hBt = 40;
         posBtX = screenWidth - 250;
         posBtY = screenHeight - 550;
-        titleButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Opciones", { posBtX, posBtY, wBt, hBt }, this));
+        PauseButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Opciones", { posBtX, posBtY, wBt, hBt }, this));
         wBt = 190;
         hBt = 40;
         posBtX = screenWidth - 250;
         posBtY = screenHeight - 450;
-        titleButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Salir", { posBtX, posBtY, wBt, hBt }, this));
+        PauseButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Salir", { posBtX, posBtY, wBt, hBt }, this));
         
     }
 }

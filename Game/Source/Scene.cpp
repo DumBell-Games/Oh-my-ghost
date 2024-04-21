@@ -11,6 +11,7 @@
 #include "DialogTriggerEntity.h"
 #include "Npc.h"
 #include "Enemies.h"
+#include "PauseMenu.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -139,6 +140,7 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) fullscreen = true;
 	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) fullscreen = false;
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) app->pause->CreatePauseButtons();
 	if (fullscreen == true) {
 		app->win->FullscreenMode();
 	}
