@@ -60,7 +60,7 @@ bool TitleScreen::Update(float dt)
             timer.Start();
         }
     }
-    if (app->input->GetAxis(ControlID::DOWN) == KEY_REPEAT) //abajo
+    if (app->input->GetButton(ControlID::DOWN) == KEY_REPEAT) //abajo
     {
         if (timer.ReadMSec() >= 200)
         {
