@@ -108,6 +108,7 @@
     <ClCompile Include="Source\ItemVelocidad.cpp" />
     <ClCompile Include="Source\ItemYogur.cpp" />
     <ClCompile Include="Source\PauseMenu.cpp" />
+    <ClCompile Include="Source\Combat.cpp" />
     <ClCompile Include="Source\menu.cpp" />
     <ClCompile Include="Source\DialogManager.cpp" />
     <ClCompile Include="Source\DialogTriggerEntity.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="Source\ItemVelocidad.h" />
     <ClInclude Include="Source\ItemYogur.h" />
     <ClInclude Include="Source\PauseMenu.h" />
+    <ClInclude Include="Source\Combat.h" />
     <ClInclude Include="Source\menu.h" />
     <ClInclude Include="Source\Dialog.h" />
     <ClInclude Include="Source\DialogManager.h" />
@@ -189,6 +191,9 @@
     <Xml Include="..\Output\config.xml" />
     <Xml Include="..\Output\controls.xml" />
     <Xml Include="..\Output\inventory.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
