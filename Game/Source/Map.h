@@ -137,6 +137,11 @@ private:
 
 	List<SString> mapNames;
 	int currentMap = 0;
+
+	struct TransitionData {
+		int doorId;
+		// Informacion a pasar entre mapas
+	} transitionData;
 };
 
 #endif // __MAP_H__
