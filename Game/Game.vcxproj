@@ -128,7 +128,6 @@
     <ClInclude Include="Source\IntroScreen.h" />
     <ClInclude Include="Source\PauseMenu.h" />
     <ClInclude Include="Source\menu.h" />
-    <ClInclude Include="Source\InputTest.h" />
     <ClInclude Include="Source\Dialog.h" />
     <ClInclude Include="Source\DialogManager.h" />
     <ClInclude Include="Source\DialogTriggerEntity.h" />
