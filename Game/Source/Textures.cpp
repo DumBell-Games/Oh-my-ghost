@@ -64,7 +64,10 @@ bool Textures::CleanUp()
 SDL_Texture* const Textures::Load(const char* path)
 {
 	SDL_Texture* texture = NULL;
-	SDL_Surface* surface = IMG_Load(path);
+	SDL_Surface* surface = NULL;
+
+	if (strcmp(path,"") != 0) // Strings vacias crashean
+		surface = IMG_Load(path);
 
 	if(surface == NULL)
 	{

@@ -25,6 +25,7 @@
 Scene::Scene(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("scene");
+	needsAwaking = true;
 }
 
 // Destructor
@@ -39,32 +40,34 @@ bool Scene::Awake(pugi::xml_node config)
 
 	//L03: DONE 3b: Instantiate the player using the entity manager
 	//L04 DONE 7: Get player paremeters
-	player = (Player*) app->entityManager->CreateEntity(EntityType::PLAYER);
+	player = (Player*) app->entityManager->CreateEntity(EntityType::PLAYER, config.child("player"));
 	//Assigns the XML node to a member in player
-	player->config = config.child("player");
+	//player->config = config.child("player");
 
 	// iterate all items in the scene
 	// Check https://pugixml.org/docs/quickstart.html#access
 	for (pugi::xml_node itemNode = config.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
 	{
-		Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM);
-		item->parameters = itemNode;
+		Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM, itemNode);
+		//item->parameters = itemNode;
 	}
 	for (pugi::xml_node itemNode = config.child("dialogTrigger"); itemNode; itemNode = itemNode.next_sibling("dialogTrigger"))
 	{
-		DialogTrigger* dialogTrigger = (DialogTrigger*)app->entityManager->CreateEntity(EntityType::DIALOG_TRIGGER);
-		dialogTrigger->parameters = itemNode;
+		DialogTrigger* dialogTrigger = (DialogTrigger*)app->entityManager->CreateEntity(EntityType::DIALOG_TRIGGER, itemNode);
+		//dialogTrigger->parameters = itemNode;
 	}
 	for (pugi::xml_node itemNode = config.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
 	{
-		Npc* npc = (Npc*)app->entityManager->CreateEntity(EntityType::NPC);
-		npc->parameters = itemNode;
+		Npc* npc = (Npc*)app->entityManager->CreateEntity(EntityType::NPC, itemNode);
+		//npc->parameters = itemNode;
 	}
 	for (pugi::xml_node itemNode = config.child("enemy"); itemNode; itemNode = itemNode.next_sibling("enemy"))
 	{
-		Enemy* enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY);
-		enemy->parameters = itemNode;
+		Enemy* enemy = (Enemy*)app->entityManager->CreateEntity(EntityType::ENEMY, itemNode);
+		//enemy->parameters = itemNode;
 	}
+
+	awoken = true;
 
 	return ret;
 }
@@ -72,6 +75,7 @@ bool Scene::Awake(pugi::xml_node config)
 // Called before the first frame
 bool Scene::Start()
 {
+
 	cityFx = app->audio->LoadFx("Assets/Audio/Fx/centralFauna.wav");
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	img = app->tex->Load("Assets/Textures/test.png");
@@ -142,6 +146,8 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) fullscreen = true;
 	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) fullscreen = false;
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) 
+		app->pause->Enable();
 	if (fullscreen == true) {
 		app->win->FullscreenMode();
 	}
@@ -169,13 +175,13 @@ bool Scene::PostUpdate()
 		//}
 		//app->titlescreen->titleButtons.Clear();
 
-		app->guiManager->active = true;
+		/*app->guiManager->active = true;
 		app->guiManager->Enable();
 		app->pause->Enable();
 		app->pause->active = true;
-		app->pause->CreatePauseButtons();
+		app->pause->CreatePauseButtons();*/
 
-		app->fadeToBlack->FadeToBlackTransition((Module*)app->scene, (Module*)app->pause, 0.0f);
+		//app->fadeToBlack->FadeToBlackTransition((Module*)app->scene, (Module*)app->pause, 0.0f);
 	}
 
 	return ret;
@@ -185,6 +191,18 @@ bool Scene::PostUpdate()
 bool Scene::CleanUp()
 {
 	LOG("Freeing scene");
+
+	if (player) {
+		app->entityManager->DestroyEntity(player);
+		player = nullptr;
+	}
+
+	if (cityFx > 0) {
+		app->audio->UnloadFx(cityFx);
+		cityFx = 0;
+	}
+
+	awoken = false; // TODO temporal, parche para que spawneen las entidades
 
 	return true;
 }

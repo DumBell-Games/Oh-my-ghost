@@ -34,9 +34,11 @@ public:
     
     int screenWidth;
     int screenHeight;
+    bool buttoncreated = false;
+
 
     Timer timer;
 
     //gui list
-    List<GuiControl*> pauseButtons;
+    List<GuiControl*> PauseButtons;
 };

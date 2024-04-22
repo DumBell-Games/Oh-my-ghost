@@ -27,7 +27,7 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	Entity* CreateEntity(EntityType type);
+	Entity* CreateEntity(EntityType type, pugi::xml_node& data);
 
 	Entity* CreateFromMap(char name, pugi::xml_node& data);
 
@@ -42,6 +42,8 @@ public:
 public:
 
 	List<Entity*> entities;
+
+	bool started = false;
 
 };
 

@@ -144,7 +144,6 @@
 				<module type="r" name="entitymanager"/>
 				<module type="r" name="dialogmanager"/>
 				<module type="u" name="titlescreen"/> <!--Cuando cargas mapa no va a estar el menú principal cargado-->
-				<module type="l" name="pause"/>
 			</preset>
 			<preset name="teamLogoToIntro" fadeOut="0.5" fadeIn="0.5">
 				<module type="u" name="teamScreen"/>

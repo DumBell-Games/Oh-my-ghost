@@ -53,7 +53,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	map = new Map(false);
 	reload = new Reload(true);
 	entityManager = new EntityManager(false);
-	guiManager = new GuiManager(false);
+	guiManager = new GuiManager(true);
 	dialogManager = new DialogManager(false);
 	fadeToBlack = new FadeToBlack(true);
 
@@ -65,6 +65,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(audio);
 	//L07 DONE 2: Add Physics module
 	AddModule(physics);
+	AddModule(entityManager);
+	AddModule(guiManager);
 
 	AddModule(map);
 	AddModule(scene);
@@ -72,8 +74,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(introScreen);
 	AddModule(teamScreen);
 	AddModule(pause);
-	AddModule(entityManager);
-	AddModule(guiManager);
 	AddModule(dialogManager);
 	AddModule(fadeToBlack);
 
@@ -387,7 +387,8 @@ bool App::CleanUp()
 
 	while(item != NULL && ret == true)
 	{
-		ret = item->data->CleanUp();
+		if (item->data->isEnabled)
+			ret = item->data->CleanUp();
 		item = item->prev;
 	}
 
