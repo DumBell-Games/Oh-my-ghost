@@ -29,11 +29,13 @@ bool PauseMenu::Start() {
 
 	SDL_GetWindowSize(app->win->window, &screenWidth, &screenHeight);
 
+    CreatePauseButtons();
 
 	return true;
 }
 bool PauseMenu::Update(float dt) {
     if (buttoncreated == true) {
+        // TODO: pasar esto a OnClick()
         if (PauseButtons.At(0)->data->state == GuiControlState::PRESSED)
         {
            app->fadeToBlack->FadeToBlackTransition((Module*)app->pause, (Module*)app->scene, 0.0f);
@@ -45,6 +47,7 @@ bool PauseMenu::Update(float dt) {
         }
         if (PauseButtons.At(2)->data->state == GuiControlState::PRESSED){
             app->fadeToBlack->FadeToBlackTransition((Module*)app->pause, (Module*)app->titlescreen, 0.0f);
+            app->scene->Disable();//En este caso no da problemas porque no es el mismo modulo desde el que se ejecuta la linea
             buttoncreated = false;
         }
 
@@ -53,8 +56,6 @@ bool PauseMenu::Update(float dt) {
 }
 bool PauseMenu::PostUpdate() {
 
-   
-	
 	return true;
 }
 bool PauseMenu::CleanUp(){

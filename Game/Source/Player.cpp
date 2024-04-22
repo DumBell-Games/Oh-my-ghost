@@ -21,21 +21,21 @@ Player::~Player() {
 bool Player::Awake() {
 
 	//L03: DONE 2: Initialize Player parameters
-	position = iPoint(config.attribute("x").as_int(), config.attribute("y").as_int());
+	position = iPoint(parameters.attribute("x").as_int(), parameters.attribute("y").as_int());
 
 	return true;
 }
 
 bool Player::Start() {
 
-	texture = app->tex->Load(config.attribute("texturePath").as_string());
+	texture = app->tex->Load(parameters.attribute("texturePath").as_string());
 
 	pBody = app->physics->CreateCircle(position.x + 32, position.y + 32, 16, bodyType::DYNAMIC);
 	pBody->listener = this;
 	pBody->ctype = ColliderType::PLAYER;
 
 	//initialize audio effect
-	pickCoinFxId = app->audio->LoadFx(config.attribute("coinfxpath").as_string());
+	pickCoinFxId = app->audio->LoadFx(parameters.attribute("coinfxpath").as_string());
 
 
 	return true;

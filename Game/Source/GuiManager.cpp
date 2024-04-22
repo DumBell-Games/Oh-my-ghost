@@ -80,8 +80,11 @@ bool GuiManager::CleanUp()
 
 	while (control != nullptr)
 	{
-		RELEASE(control);
+		
+		RELEASE(control->data);
+		control = control->next;
 	}
+	guiControlsList.Clear();
 
 	return true;
 
