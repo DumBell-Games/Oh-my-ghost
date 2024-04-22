@@ -7,9 +7,15 @@
 #include "GuiControl.h"
 #include "GuiControlButton.h"
 #include "SDL/include/SDL.h"
+#include "FadeToBlack.h"
+#include "Input.h"
+#include "Scene.h"
+#include "menu.h"
 
-PauseMenu::PauseMenu(bool startEnabled) : Module()
+
+PauseMenu::PauseMenu(bool startEnabled) : Module(startEnabled)
 {
+    name.Create("pause");
 }
 
 PauseMenu::~PauseMenu()
@@ -17,7 +23,8 @@ PauseMenu::~PauseMenu()
 }
 
 bool PauseMenu::Start() {
-	app->render->camera.x = 0;
+	   
+    app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
 	SDL_GetWindowSize(app->win->window, &screenWidth, &screenHeight);
@@ -29,7 +36,7 @@ bool PauseMenu::Update(float dt) {
     if (buttoncreated == true) {
         if (PauseButtons.At(0)->data->state == GuiControlState::PRESSED)
         {
-           /* app->fadeToBlack->FadeToBlackTransition((Module*)app->pause, (Module*)app->scene, 0.0f);*/
+           app->fadeToBlack->FadeToBlackTransition((Module*)app->pause, (Module*)app->scene, 0.0f);
             buttoncreated = false;
         }
         if (PauseButtons.At(1)->data->state == GuiControlState::PRESSED)
@@ -37,7 +44,7 @@ bool PauseMenu::Update(float dt) {
 
         }
         if (PauseButtons.At(2)->data->state == GuiControlState::PRESSED){
-            /*app->fadeToBlack->FadeToBlackTransition((Module*)app->pause, (Module*)app->titlescreen, 0.0f);*/
+            app->fadeToBlack->FadeToBlackTransition((Module*)app->pause, (Module*)app->titlescreen, 0.0f);
             buttoncreated = false;
         }
 
@@ -54,7 +61,7 @@ bool PauseMenu::CleanUp(){
 
     ListItem<GuiControl*>* controlListItem = nullptr;
     for (controlListItem = PauseButtons.start; controlListItem != NULL; controlListItem = controlListItem->next) {
-        /*app->guiManager->DestroyGuiControl(controlListItem->data);*/
+        app->guiManager->DestroyGuiControl(controlListItem->data);
     }
     PauseButtons.Clear();
 

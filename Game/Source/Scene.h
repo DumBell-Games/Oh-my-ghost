@@ -12,7 +12,7 @@ class Scene : public Module
 {
 public:
 
-	Scene();
+	Scene(bool startEnabled = true);
 
 	// Destructor
 	virtual ~Scene();
@@ -41,6 +41,8 @@ public:
 	// Handles multiple Gui Event methods
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
+public:
+	int cityFx;
 private:
 	SDL_Texture* img;
 	float textPosX, textPosY = 0;

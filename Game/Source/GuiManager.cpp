@@ -5,7 +5,7 @@
 #include "GuiControlButton.h"
 #include "Audio.h"
 
-GuiManager::GuiManager() :Module()
+GuiManager::GuiManager(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("guiManager");
 }
@@ -30,13 +30,34 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 		break;
 	}
 
-	//Set the observer
-	guiControl->observer = observer;
+	if (guiControl) {
+		//Set the observer
+		guiControl->observer = observer;
 
-	// Created GuiControls are add it to the list of controls
-	guiControlsList.Add(guiControl);
+		// Created GuiControls are add it to the list of controls
+		guiControlsList.Add(guiControl);
+	}
 
 	return guiControl;
+}
+
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, GuiOnClick_f observer, SDL_Rect sliderBounds)
+{
+	GuiControl* guiControl = CreateGuiControl(type,id,text,bounds,nullptr,sliderBounds);
+
+	if (guiControl) {
+		//Set the observer
+		guiControl->listener = observer;
+	}
+
+	return guiControl;
+}
+
+void GuiManager::DestroyGuiControl(GuiControl* ctrl)
+{
+	ListItem<GuiControl*>* item = guiControlsList.At(guiControlsList.Find(ctrl));
+	guiControlsList.Del(item);
+	RELEASE(ctrl);
 }
 
 bool GuiManager::Update(float dt)
@@ -66,6 +87,3 @@ bool GuiManager::CleanUp()
 
 	return false;
 }
-
-
-

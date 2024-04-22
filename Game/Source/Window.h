@@ -1,6 +1,10 @@
 #ifndef __WINDOW_H__
 #define __WINDOW_H__
 
+#define SCREEN_WIDTH 1280
+#define SCREEN_HEIGHT 720
+#define SCREEN_SIZE 0
+
 #include "Module.h"
 
 struct SDL_Window;
@@ -10,7 +14,7 @@ class Window : public Module
 {
 public:
 
-	Window();
+	Window(bool startEnabled = true);
 
 	// Destructor
 	virtual ~Window();

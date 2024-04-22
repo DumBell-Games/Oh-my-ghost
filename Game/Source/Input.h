@@ -31,6 +31,10 @@ enum ControlID {
 	PAUSE,
 	MOVE_HORIZONTAL,
 	MOVE_VERTICAL,
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT,
 	APP_EXIT,
 	ID_COUNT
 };
@@ -72,7 +76,7 @@ public:
 
 	void Update(Input* input);
 
-	void Map(SDL_Scancode& _pKey, SDL_Scancode& _nKey, SDL_GameControllerButton& _pBut, SDL_GameControllerButton& _nBut, bool _isAxis, SDL_GameControllerAxis _axis);
+	void Map(SDL_Scancode& _pKey, SDL_Scancode& _nKey, SDL_GameControllerButton& _pBut, SDL_GameControllerButton& _nBut, bool _isAxis, SDL_GameControllerAxis _axis, ControlID _bind);
 	ControlBinding& SetPKey(SDL_Scancode id) { posKey = id; return *this; }
 	ControlBinding& SetPButton(SDL_GameControllerButton id) { posButton = id; return *this; }
 	ControlBinding& SetNKey(SDL_Scancode id) { negKey = id; return *this; }
@@ -81,6 +85,8 @@ public:
 	ControlBinding& SetAxis(SDL_GameControllerAxis id) { axis = id; return *this; }
 	ControlBinding& SetMaxVal(float val) { maxVal = abs(val); axisVal = MAX(-maxVal, MIN(maxVal, axisVal)); return *this; }
 	ControlBinding& SetDeadZone(float val) { deadZone = MAX(DEAD_ZONE_INT_MIN, MIN(DEAD_ZONE_INT_MAX, abs(val)*JOYSTICK_MAX)); return *this; }
+	ControlBinding& SetBind(ControlID id) { bind = id; return *this; }
+	ControlBinding& SetIsPositive(bool val) { isPositive = val; return *this; }
 
 	// Devuelve el estado del control, combinando teclado y mando
 	KeyState State() const { return state; }
@@ -92,6 +98,8 @@ public:
 public:
 
 	bool isAxisControl = false;
+	ControlID bind = ControlID::NONE;
+	bool isPositive = false;
 
 	// Teclas y botones
 	SDL_Scancode posKey = SDL_Scancode::SDL_SCANCODE_UNKNOWN;
@@ -114,7 +122,7 @@ class Input : public Module
 
 public:
 
-	Input();
+	Input(bool startEnabled = true);
 
 	// Destructor
 	virtual ~Input();

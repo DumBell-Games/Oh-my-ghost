@@ -6,11 +6,16 @@
 #include "Audio.h"
 #include "Scene.h"
 #include "Map.h"
+#include "Reload.h"
 #include "Physics.h"
 #include "GuiManager.h"
 #include "Optick/include/optick.h"
 #include "menu.h"
 #include "PauseMenu.h"
+#include "EntityManager.h"
+#include "TeamScreen.h"
+#include "IntroScreen.h"
+#include "FadeToBlack.h"
 
 #include "DialogManager.h"
 
@@ -33,20 +38,24 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	// L3: DONE 1: Add the EntityManager Module to App
 
-	win = new Window();
-	input = new Input();
-	render = new Render();
-	tex = new Textures();
-	audio = new Audio();
+	win = new Window(true);
+	input = new Input(true);
+	render = new Render(true);
+	tex = new Textures(true);
+	audio = new Audio(true);
 	//L07 DONE 2: Add Physics module
-	physics = new Physics();
-	scene = new Scene();
-	titlescreen = new TitleScreen();
-	pause = new PauseMenu();
-	map = new Map();
-	entityManager = new EntityManager();
-	guiManager = new GuiManager();
-	dialogManager = new DialogManager();
+	physics = new Physics(false);
+	scene = new Scene(false);
+	titlescreen = new TitleScreen(false);
+	introScreen = new IntroScreen(false);
+	teamScreen = new TeamScreen(true);
+	pause = new PauseMenu(false);
+	map = new Map(false);
+	reload = new Reload(true);
+	entityManager = new EntityManager(false);
+	guiManager = new GuiManager(false);
+	dialogManager = new DialogManager(false);
+	fadeToBlack = new FadeToBlack(true);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -60,10 +69,15 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(map);
 	AddModule(scene);
 	AddModule(titlescreen);
+	AddModule(introScreen);
+	AddModule(teamScreen);
 	AddModule(pause);
 	AddModule(entityManager);
 	AddModule(guiManager);
 	AddModule(dialogManager);
+	AddModule(fadeToBlack);
+
+	AddModule(reload);
 
 	// Render last to swap buffer
 	AddModule(render);
@@ -90,6 +104,24 @@ void App::AddModule(Module* module)
 {
 	module->Init();
 	modules.Add(module);
+}
+
+Module* App::GetModule(const char* name)
+{
+	Module* ret = nullptr;
+	for (ListItem<Module*>* item = modules.start; item; item = item->next)
+	{
+		if (item->data->name == name) {
+			ret = item->data;
+			break;
+		}
+	}
+	return ret;
+}
+
+pugi::xml_node App::GetConfig(const Module& module)
+{
+	return configFile.child("config").child(module.name.GetString());
 }
 
 // Called before render is available
@@ -141,7 +173,8 @@ bool App::Start()
 
 	while(item != NULL && ret == true)
 	{
-		ret = item->data->Start();
+		if (item->data->active)
+			ret = item->data->Start();
 		item = item->next;
 	}
 
@@ -156,7 +189,7 @@ bool App::Update()
 	//L16 TODO 2: Add the Optick macro to mark the beginning of the main loop
 	OPTICK_FRAME("Main Loop");
 
-	bool ret = true;
+	bool ret = !quit;
 	PrepareUpdate();
 
 	if(input->GetWindowEvent(WE_QUIT) == true)

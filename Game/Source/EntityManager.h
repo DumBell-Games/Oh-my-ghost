@@ -9,7 +9,7 @@ class EntityManager : public Module
 {
 public:
 
-	EntityManager();
+	EntityManager(bool startEnabled = true);
 
 	// Destructor
 	virtual ~EntityManager();
@@ -28,6 +28,8 @@ public:
 
 	// Additional methods
 	Entity* CreateEntity(EntityType type);
+
+	Entity* CreateFromMap(char name, pugi::xml_node& data);
 
 	void DestroyEntity(Entity* entity);
 

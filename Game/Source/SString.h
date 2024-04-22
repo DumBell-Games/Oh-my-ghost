@@ -7,6 +7,9 @@
 #include <stdarg.h>
 #include <string.h>
 #include <assert.h>
+#include <vector>
+#include <sstream>
+#include <string>
 
 #define TMP_STRING_SIZE	4096
 
@@ -353,6 +356,22 @@ public:
 			return(end - start);
 		}
 		else return 0;
+	}
+
+	//Custom: split into a vector using character as separator
+	std::vector<SString> GetWords(char separator) {
+		std::vector<SString> ret;
+
+		if (str != NULL) {
+			std::stringstream ss(str);
+			std::string s;
+
+			while (getline(ss, s, separator)) {
+				ret.push_back(s.c_str());
+			}
+		}
+
+		return ret;
 	}
 
 private:

@@ -152,7 +152,7 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 		case ColliderType::PLAYER:
 			
-			if (!app->dialogManager->isPlaying && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+			if (!app->dialogManager->isPlaying && app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN) {
 				PlayDialog();
 			}
 			break;

@@ -11,7 +11,7 @@
 #include "Defs.h"
 #include "Log.h"
 
-EntityManager::EntityManager() : Module()
+EntityManager::EntityManager(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("entitymanager");
 }
@@ -107,6 +107,16 @@ Entity* EntityManager::CreateEntity(EntityType type)
 	}
 
 	entities.Add(entity);
+
+	return entity;
+}
+
+Entity* EntityManager::CreateFromMap(char typeId, pugi::xml_node& data)
+{
+	Entity* entity = nullptr;
+
+	EntityType type = static_cast<EntityType>(1);
+
 
 	return entity;
 }

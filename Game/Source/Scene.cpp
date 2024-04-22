@@ -11,14 +11,18 @@
 #include "DialogTriggerEntity.h"
 #include "Npc.h"
 #include "Enemies.h"
+#include "Physics.h"
+#include "FadeToBlack.h"
 #include "PauseMenu.h"
+#include "menu.h"
 
 #include "Defs.h"
 #include "Log.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
+#include "GuiControlButton.h"
 
-Scene::Scene() : Module()
+Scene::Scene(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("scene");
 }
@@ -38,10 +42,6 @@ bool Scene::Awake(pugi::xml_node config)
 	player = (Player*) app->entityManager->CreateEntity(EntityType::PLAYER);
 	//Assigns the XML node to a member in player
 	player->config = config.child("player");
-
-	//Get the map name from the config file and assigns the value in the module
-	app->map->name = config.child("map").attribute("name").as_string();
-	app->map->path = config.child("map").attribute("path").as_string();
 
 	// iterate all items in the scene
 	// Check https://pugixml.org/docs/quickstart.html#access
@@ -72,6 +72,7 @@ bool Scene::Awake(pugi::xml_node config)
 // Called before the first frame
 bool Scene::Start()
 {
+	cityFx = app->audio->LoadFx("Assets/Audio/Fx/centralFauna.wav");
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	img = app->tex->Load("Assets/Textures/test.png");
 	
@@ -89,11 +90,9 @@ bool Scene::Start()
 
 	// Texture to highligh mouse position 
 	mouseTileTex = app->tex->Load("Assets/Maps/tileSelection.png");
+		
+	app->audio->PlayFx(app->scene->cityFx);
 
-	// L15: DONE 2: Instantiate a new GuiControlButton in the Scene
-
-	SDL_Rect btPos = { windowW / 2 - 60,20, 120,20};
-	gcButtom = (GuiControlButton*) app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "MyButton", btPos, this);
 
 	return true;
 }
@@ -132,7 +131,10 @@ bool Scene::Update(float dt)
 	for (uint i = 0; i < path->Count(); ++i)
 	{
 		iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-		app->render->DrawTexture(mouseTileTex, pos.x, pos.y);
+		if (app->physics->debug)
+		{
+			app->render->DrawTexture(mouseTileTex, pos.x, pos.y);
+		}
 	}
 	
 	// L14: DONE 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
@@ -140,7 +142,7 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) fullscreen = true;
 	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) fullscreen = false;
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) app->pause->CreatePauseButtons();
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) app->pause->Enable();
 	if (fullscreen == true) {
 		app->win->FullscreenMode();
 	}
@@ -148,6 +150,7 @@ bool Scene::Update(float dt)
 		app->win->UnFullscreenMode();
 	}
 
+	
 
 	return true;
 }
@@ -157,9 +160,24 @@ bool Scene::PostUpdate()
 {
 	bool ret = true;
 
-	//if(app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-	if (app->input->GetButton(APP_EXIT) == KEY_DOWN)
-		ret = false;
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	{
+		//Destroy all the buttons in the title screen
+		//ListItem<GuiControl*>* controlListMenu = nullptr;
+		//for (controlListMenu = app->titlescreen->titleButtons.start; controlListMenu != NULL; controlListMenu = controlListMenu->next)
+		//{
+		//	app->guiManager->DestroyGuiControl(controlListMenu->data);
+		//}
+		//app->titlescreen->titleButtons.Clear();
+
+		app->guiManager->active = true;
+		app->guiManager->Enable();
+		app->pause->Enable();
+		app->pause->active = true;
+		app->pause->CreatePauseButtons();
+
+		app->fadeToBlack->FadeToBlackTransition((Module*)app->scene, (Module*)app->pause, 0.0f);
+	}
 
 	return ret;
 }
