@@ -26,32 +26,35 @@ bool PauseMenu::Start() {
 	return true;
 }
 bool PauseMenu::Update(float dt) {
+    if (buttoncreated == true) {
+        if (PauseButtons.At(0)->data->state == GuiControlState::PRESSED)
+        {
+           /* app->fadeToBlack->FadeToBlackTransition((Module*)app->pause, (Module*)app->scene, 0.0f);*/
+            buttoncreated = false;
+        }
+        if (PauseButtons.At(1)->data->state == GuiControlState::PRESSED)
+        {
 
+        }
+        if (PauseButtons.At(2)->data->state == GuiControlState::PRESSED){
+            /*app->fadeToBlack->FadeToBlackTransition((Module*)app->pause, (Module*)app->titlescreen, 0.0f);*/
+            buttoncreated = false;
+        }
+
+    }
 	return true;
 }
 bool PauseMenu::PostUpdate() {
 
-   /* ListItem<GuiControl*>* controlListItem = nullptr;
-    for (controlListItem = PauseButtons.start; controlListItem != NULL; controlListItem = controlListItem->next)
-    {
-        if (controlListItem->data != nullptr)
-        {
-            controlListItem->data->state = GuiControlState::NORMAL;
-        }
-    }
-    if (PauseButtons[menuIndex - 1] != nullptr)
-    {
-        PauseButtons[menuIndex - 1]->state = GuiControlState::SELECTED;
-    }*/
+   
 	
 	return true;
 }
 bool PauseMenu::CleanUp(){
 
     ListItem<GuiControl*>* controlListItem = nullptr;
-    for (controlListItem = PauseButtons.start; controlListItem != NULL; controlListItem = controlListItem->next)
-    {
-        delete controlListItem->data;
+    for (controlListItem = PauseButtons.start; controlListItem != NULL; controlListItem = controlListItem->next) {
+        /*app->guiManager->DestroyGuiControl(controlListItem->data);*/
     }
     PauseButtons.Clear();
 
@@ -59,8 +62,9 @@ bool PauseMenu::CleanUp(){
 }
 void PauseMenu::CreatePauseButtons() {
 
-    if (this->active)
+    if (PauseButtons.Count() == 0)
     {
+        buttoncreated = true;
         int wBt = 190;
         int hBt = 40;
         int posBtX = screenWidth - 250;
