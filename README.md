@@ -14,7 +14,7 @@
  - Music in each screen
  - Menus
  - Save / Load
- - Combat System (uncompleted)
+ - Combat System - changes on CombatSystem branch
  
 ## Controls
 
