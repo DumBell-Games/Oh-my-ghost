@@ -10,6 +10,7 @@
 #include "Physics.h"
 #include "Map.h"
 #include "TransitionTrigger.h"
+#include "Window.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -77,6 +78,11 @@ bool Player::Update(float dt)
 	position.y = METERS_TO_PIXELS(pBodyPos.p.y) - 32 / 2;
 
 	app->render->DrawTexture(texture,position.x,position.y);
+
+	uint w, h;
+	app->win->GetWindowSize(w, h);
+	app->render->camera.x = (-position.x * app->win->GetScale()) + w / 2;
+	app->render->camera.y = (-position.y * app->win->GetScale()) + h / 2;
 
 	return true;
 }

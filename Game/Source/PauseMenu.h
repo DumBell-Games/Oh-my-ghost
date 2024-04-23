@@ -35,6 +35,7 @@ public:
     int screenWidth;
     int screenHeight;
     bool buttoncreated = false;
+    int buttonFx;
 
 
     Timer timer;

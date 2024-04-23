@@ -23,7 +23,8 @@ PauseMenu::~PauseMenu()
 }
 
 bool PauseMenu::Start() {
-	   
+	
+    buttonFx = app->audio->LoadFx("Assets/Audio/Fx/buttonFX.wav");
     app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
@@ -40,6 +41,7 @@ bool PauseMenu::Update(float dt) {
         {
            app->fadeToBlack->FadeToBlackTransition((Module*)app->pause, (Module*)app->scene, 0.0f);
             buttoncreated = false;
+            app->audio->PlayFx(buttonFx);
         }
         if (PauseButtons.At(1)->data->state == GuiControlState::PRESSED)
         {
@@ -49,6 +51,7 @@ bool PauseMenu::Update(float dt) {
             app->fadeToBlack->FadeToBlackTransition((Module*)app->pause, (Module*)app->titlescreen, 0.0f);
             app->scene->Disable();//En este caso no da problemas porque no es el mismo modulo desde el que se ejecuta la linea
             buttoncreated = false;
+            app->audio->PlayFx(buttonFx);
         }
 
     }
