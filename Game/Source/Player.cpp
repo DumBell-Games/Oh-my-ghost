@@ -8,6 +8,8 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Map.h"
+#include "TransitionTrigger.h"
 #include "Window.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
@@ -38,6 +40,19 @@ bool Player::Start() {
 	//initialize audio effect
 	pickCoinFxId = app->audio->LoadFx(parameters.attribute("coinfxpath").as_string());
 
+	
+	TransitionData& tData = app->map->transitionData;
+	if (tData.targetDoorID >= 0) {
+		for (ListItem<Entity*>* item = app->entityManager->entities.start; item; item = item->next)
+		{
+			if (item->data && item->data->type == EntityType::TRANSITION) {
+				TransitionTrigger* tt = (TransitionTrigger*)item->data;
+				if (tt->id == tData.targetDoorID) {
+					SetPosition(tt->position);
+				}
+			}
+		}
+	}
 
 	return true;
 }
@@ -106,4 +121,12 @@ bool Player::SaveState(pugi::xml_node& node)
 {
 	
 	return true;
+}
+
+void Player::SetPosition(iPoint newPos)
+{
+	if (pBody) {
+		//pBody->body->SetTransform(b2Vec2(position.x, position.y), pBody->GetRotation()); // TODO descomentar esto una vez resuelto el problema de posicion de los triggers
+		position = newPos;
+	}
 }

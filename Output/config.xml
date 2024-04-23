@@ -125,7 +125,9 @@
 
 	<map path="Assets/Maps/">
 		<map id="0" file="MapTemplate.tmx"/>
-		<map id="1" file="hello.tmx"/>
+		<map id="1" file="taberna_plantilla.tmx"/>
+		<map id="2" file="disco_plantilla.tmx"/>
+		<map id="3" file="casino_plantilla.tmx"/>
 	</map>
 
 	<reload>

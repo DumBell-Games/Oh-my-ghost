@@ -10,6 +10,12 @@
 
 #include "PugiXml\src\pugixml.hpp"
 
+struct TransitionData {
+	int targetDoorID;
+	int mapId;
+	// Informacion a pasar entre mapas
+};
+
 // Ignore Terrain Types and Tile Types for now, but we want the image!
 struct TileSet
 {
@@ -104,6 +110,7 @@ public:
 
 	iPoint MapToWorld(int x, int y) const;
 	iPoint Map::WorldToMap(int x, int y);
+	bool LoadProperties(pugi::xml_node& node, Properties& properties);
 
 private:
 
@@ -112,7 +119,6 @@ private:
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadAllLayers(pugi::xml_node mapNode);
 	TileSet* GetTilesetFromTileId(int gid) const;
-	bool LoadProperties(pugi::xml_node& node, Properties& properties);
 	bool LoadAllObjects(pugi::xml_node mapNode);
 
 	bool LoadEntity(pugi::xml_node objGroupNode, pugi::xml_node objNode, char entityType);
@@ -129,6 +135,7 @@ public:
 	SString path;
 	PathFinding* pathfinding;
 	MapLayer* navigationLayer;
+	TransitionData transitionData = {-1,-1};
 
 private:
 
@@ -137,6 +144,7 @@ private:
 
 	List<SString> mapNames;
 	int currentMap = 0;
+
 };
 
 #endif // __MAP_H__

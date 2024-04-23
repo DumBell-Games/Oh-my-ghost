@@ -7,6 +7,7 @@
 #include "Scene.h"
 #include "Npc.h"
 #include "Enemies.h"
+#include "TransitionTrigger.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -109,6 +110,8 @@ Entity* EntityManager::CreateEntity(EntityType type, pugi::xml_node& data)
 	case EntityType::ENEMY:
 		entity = new Enemy();
 		break;
+	case EntityType::TRANSITION:
+		entity = new TransitionTrigger();
 		
 	default:
 		break;
@@ -124,16 +127,6 @@ Entity* EntityManager::CreateEntity(EntityType type, pugi::xml_node& data)
 	}
 
 	entities.Add(entity);
-
-	return entity;
-}
-
-Entity* EntityManager::CreateFromMap(char typeId, pugi::xml_node& data)
-{
-	Entity* entity = nullptr;
-
-	EntityType type = static_cast<EntityType>(1);
-
 
 	return entity;
 }

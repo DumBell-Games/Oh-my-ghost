@@ -13,6 +13,7 @@ enum class EntityType : char
 	DIALOG_TRIGGER,
 	NPC,
 	ENEMY,
+	TRANSITION,
 	UNKNOWN
 };
 
