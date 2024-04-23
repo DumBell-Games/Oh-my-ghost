@@ -146,7 +146,7 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) fullscreen = true;
 	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) fullscreen = false;
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) 
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) 
 		app->pause->Enable();
 	if (fullscreen == true) {
 		app->win->FullscreenMode();
