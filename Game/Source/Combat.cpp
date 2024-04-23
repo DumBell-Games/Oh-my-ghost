@@ -156,7 +156,7 @@ void Combat::renderitzarBotonsPreCombat(SDL_Renderer* renderer, TTF_Font* font)
 void Combat::renderitzarBotonsCombat(SDL_Renderer* renderer, TTF_Font* font)
 {
 	int posYRecuadre = -50;
-	int posYText = -65;
+	int posYText = -50;
 
 	SDL_Color color = { 255, 255, 255, 255 }; // Color blanc
 
