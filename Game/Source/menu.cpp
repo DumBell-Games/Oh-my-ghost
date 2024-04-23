@@ -14,6 +14,8 @@
 #include "Scene.h"
 #include "IntroScreen.h"
 #include "TeamScreen.h"
+#include <iostream>
+#include "Combat.h"
 
 TitleScreen::TitleScreen(bool startEnabled) : Module(startEnabled)
 {
@@ -95,6 +97,20 @@ bool TitleScreen::Update(float dt)
     else if (menuIndex == 2) app->render->DrawTexture(menu2, 0, 0, NULL);
     else if (menuIndex == 3) app->render->DrawTexture(menu3, 0, 0, NULL);
     else if (menuIndex == 4) app->render->DrawTexture(menu4, 0, 0, NULL);*/
+
+    if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+    {
+        std::cout << "Init combat" << std::endl;
+        std::vector<Enemic*> equipJugador;
+        std::vector<Enemic*> equipOponent;
+
+        Enemic enemic1("Enemic1", 10, 10, 10, 10);
+        Enemic enemic2("Enemic2", 100, 100, 100, 100);
+
+        equipJugador.push_back(enemic2);
+        equipOponent.push_back(enemic1);
+        
+    }
 
     return true;
 }

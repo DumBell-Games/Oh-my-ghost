@@ -110,9 +110,6 @@
     <ClCompile Include="Source\PauseMenu.cpp" />
     <ClCompile Include="Source\Enemic.cpp" />
     <ClCompile Include="Source\Combat.cpp" />
-    <ClCompile Include="Source\External\imgui.cpp" />
-    <ClCompile Include="Source\External\imgui_impl_sdl2.cpp" />
-    <ClCompile Include="Source\External\imgui_widgets.cpp" />
     <ClCompile Include="Source\menu.cpp" />
     <ClCompile Include="Source\DialogManager.cpp" />
     <ClCompile Include="Source\DialogTriggerEntity.cpp" />
@@ -151,8 +148,6 @@
     <ClInclude Include="Source\PauseMenu.h" />
     <ClInclude Include="Source\Enemic.h" />
     <ClInclude Include="Source\Combat.h" />
-    <ClInclude Include="Source\External\imgui.h" />
-    <ClInclude Include="Source\External\imgui_impl_sdl2.h" />
     <ClInclude Include="Source\menu.h" />
     <ClInclude Include="Source\Dialog.h" />
     <ClInclude Include="Source\DialogManager.h" />

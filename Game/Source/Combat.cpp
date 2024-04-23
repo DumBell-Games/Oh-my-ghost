@@ -2,37 +2,15 @@
 #include <iostream>
 #include <algorithm>
 #include "SDL/include/SDL.h"
-#include "External/imgui.h"
-#include "External/imgui_impl_sdl2.h"
+#include "App.h"
 
-void Combat::iniciar() {
-
-	// Inicialitza SDL i crea la finestra i el renderitzador
-	finestra = SDL_CreateWindow("Combat", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
-	renderitzador = SDL_CreateRenderer(finestra, -1, SDL_RENDERER_ACCELERATED);
-
-	// Inicialitza ImGui
-	ImGui::CreateContext();
-	ImGui_ImplSDL2_InitForOpenGL(finestra, nullptr);
-	ImGui::StyleColorsDark();
-
-	// Resta de la lògica d'inicialització del combat...
+void Combat::iniciar() {	
 	std::cout << "Comença el combat!" << std::endl;
 	while (!combatFinalitzat()) {
 		tornJugador();
 		if (combatFinalitzat()) break;
-		tornOponent();
 	}
 	determinarGuanyador();
-
-	// Tanca ImGui en finalitzar
-	ImGui_ImplSDL2_Shutdown();
-	ImGui::DestroyContext();
-
-	// Neteja SDL
-	SDL_DestroyRenderer(renderitzador);
-	SDL_DestroyWindow(finestra);
-	SDL_Quit();
 }
 
 bool Combat::combatFinalitzat() {
@@ -40,37 +18,25 @@ bool Combat::combatFinalitzat() {
 }
 
 void Combat::tornJugador() {
-	// Inicia un nou frame de ImGui
-	ImGui_ImplSDL2_NewFrame();
-	ImGui::NewFrame();
+	bool jugant = true;
+	while (jugant) {
+		SDL_Event event;
+		while (SDL_PollEvent(&event)) {
+			if (event.type == SDL_QUIT) {
+				jugant = false;
+			}
+		}
 
-	// Crea una finestra de ImGui
-	ImGui::Begin("Torn del jugador");
+		// Esborra la finestra
+		SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, 255);
+		SDL_RenderClear(app->render->renderer);
 
-	// Mostra opcions al jugador amb botons
-	if (ImGui::Button("Atacar")) {
-		int indexAtac = mostrarAtacs(jugadorActual);
-		realitzarAtac(jugadorActual, oponentActual);
+		// Renderitza els botons
+		renderitzarBotons(app->render->renderer, app->render->font);
+
+		// Mostra els canvis en la finestra
+		SDL_RenderPresent(app->render->renderer);
 	}
-	if (ImGui::Button("Revisar inventari")) {
-		// Implementació per revisar inventari
-	}
-	if (ImGui::Button("Veure equip")) {
-		// Implementació per veure equip
-	}
-	if (ImGui::Button("Intentar escapar")) {
-		// Implementació per intentar escapar
-	}
-
-	ImGui::End();
-
-	// Renderitza la finestra de ImGui
-	ImGui::Render();
-	//ImGui_ImplSDL2_RenderDrawData(ImGui::GetDrawData());
-}
-
-void Combat::tornOponent() {
-	realitzarAtac(oponentActual, jugadorActual);
 }
 
 void Combat::realitzarAtac(Enemic* atacant, Enemic* defensor) {
@@ -122,18 +88,46 @@ void Combat::determinarGuanyador() {
 
 int Combat::mostrarAtacs(Enemic* enemic)
 {
-	// Crea una nova finestra de ImGui per mostrar els atacs disponibles
-	ImGui::Begin("Selecciona un atac");
+	return 0;
+}
 
-	int indexAtacSeleccionat = -1;
-	// Mostra botons per a cada atac
-	for (int i = 0; i < enemic->atacs.size(); ++i) {
-		if (ImGui::Button(enemic->atacs[i].nom.c_str())) {
-			indexAtacSeleccionat = i;
-		}
-	}
+void Combat::renderitzarBotons(SDL_Renderer* renderer, TTF_Font* font)
+{
+	SDL_Color color = { 255, 255, 255, 255 }; // Color blanc
 
-	ImGui::End();
+	// Dibuixa el botó "Atacar"
+	SDL_Rect atacarRect = { 50, 50, 200, 50 };
+	SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255); // Color blau
+	SDL_RenderFillRect(renderer, &atacarRect);
+	renderitzarText(renderer, font, "Atacar", 80, 65, color);
 
-	return indexAtacSeleccionat;
+	// Dibuixa el botó "Inventari"
+	SDL_Rect inventariRect = { 50, 150, 200, 50 };
+	SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255); // Color blau
+	SDL_RenderFillRect(renderer, &inventariRect);
+	renderitzarText(renderer, font, "Inventari", 70, 165, color);
+
+	// Dibuixa el botó "Canviar"
+	SDL_Rect canviarRect = { 50, 250, 200, 50 };
+	SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255); // Color blau
+	SDL_RenderFillRect(renderer, &canviarRect);
+	renderitzarText(renderer, font, "Canviar", 80, 265, color);
+
+	// Dibuixa el botó "Fugir"
+	SDL_Rect fugirRect = { 50, 350, 200, 50 };
+	SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255); // Color blau
+	SDL_RenderFillRect(renderer, &fugirRect);
+	renderitzarText(renderer, font, "Fugir", 90, 365, color);
+}
+
+void Combat::renderitzarText(SDL_Renderer* renderer, TTF_Font* font, const std::string& text, int x, int y, SDL_Color color)
+{
+	SDL_Surface* surface = TTF_RenderText_Solid(font, text.c_str(), color);
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
+	int texW, texH;
+	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
+	SDL_Rect dstRect = { x, y, texW, texH };
+	SDL_RenderCopy(renderer, texture, NULL, &dstRect);
+	SDL_FreeSurface(surface);
+	SDL_DestroyTexture(texture);
 }

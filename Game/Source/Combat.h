@@ -20,13 +20,14 @@ public:
 private:
 	bool combatFinalitzat();
 	void tornJugador();
-	void tornOponent();
 	void realitzarAtac(Enemic* atacant, Enemic* defensor);
 	void canviarEnemic(std::vector<Enemic*>& equip, Enemic*& actual);
 	void eliminarEnemic(std::vector<Enemic*>& equip, Enemic* Enemic);
 	void mostrarEstat();
 	void determinarGuanyador();
-	int Combat::mostrarAtacs(Enemic* enemic);
+	int mostrarAtacs(Enemic* enemic);
+	void renderitzarBotons(SDL_Renderer* renderer, TTF_Font* font);
+	void renderitzarText(SDL_Renderer* renderer, TTF_Font* font, const std::string& text, int x, int y, SDL_Color color);
 
 private:
 	Enemic* jugadorActual;
