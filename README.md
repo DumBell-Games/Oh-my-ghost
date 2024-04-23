@@ -9,11 +9,12 @@
 ## Key Features
 
  - 4 dialogs
- - Map 
+ - Map with interiors
  - NPC's 
  - Music in each screen
  - Menus
  - Save / Load
+ - Combat System (uncompleted)
  
 ## Controls
 
