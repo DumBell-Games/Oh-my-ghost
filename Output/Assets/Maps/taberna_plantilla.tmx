@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="26" height="13" tilewidth="128" tileheight="128" infinite="0" nextlayerid="4" nextobjectid="1">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="26" height="13" tilewidth="128" tileheight="128" infinite="0" nextlayerid="5" nextobjectid="2">
  <tileset firstgid="1" name="taberna plantilla" tilewidth="128" tileheight="128" tilecount="3" columns="3">
   <image source="taberna_plantilla.png" width="384" height="128"/>
  </tileset>
@@ -40,4 +40,15 @@
 4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4
 </data>
  </layer>
+ <objectgroup id="4" name="Transiciones">
+  <properties>
+   <property name="entity" type="int" value="5"/>
+  </properties>
+  <object id="1" x="512" y="1536" width="256" height="128">
+   <properties>
+    <property name="mapID" type="int" value="0"/>
+    <property name="targetDoor" type="int" value="35"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>

@@ -378,9 +378,8 @@ bool Map::LoadAllObjects(pugi::xml_node mapNode) {
         {
             // If object is an entity and the entity type is defined, load as entity
             Properties::Property* p = prop.GetProperty("entity");
-            if (p != nullptr && p->strVal.Length() > 0) {
-                const char* str = p->strVal.GetString();
-                LoadEntity(objGroupNode, objNode, str[0]);
+            if (p != nullptr && p->intVal > 0) {
+                LoadEntity(objGroupNode, objNode, p->intVal);
             }
             else if (objNode.child("ellipse")) {
                 LoadCircle(objGroupNode, objNode);
@@ -399,7 +398,7 @@ bool Map::LoadAllObjects(pugi::xml_node mapNode) {
 
 bool Map::LoadEntity(pugi::xml_node objGroupNode, pugi::xml_node objNode, char entityType)
 {
-    Entity* entity = app->entityManager->CreateFromMap(entityType, objNode);
+    Entity* entity = app->entityManager->CreateEntity(static_cast<EntityType>(entityType), objNode);
     // TODO change all past this line until return to be in each of the entities instead (custom initialization)
     int x = objNode.attribute("x").as_int();
     int y = objNode.attribute("y").as_int();
@@ -499,7 +498,7 @@ bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
             else if (typeAttr == "bool") {
                 p->value = propertiesNode.attribute("value").as_bool();
             }
-            else if (typeAttr == "integer") {
+            else if (typeAttr == "int") {
                 p->intVal = propertiesNode.attribute("value").as_int();
             }
             else if (typeAttr == "float") {
