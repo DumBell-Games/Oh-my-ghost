@@ -25,8 +25,10 @@ private:
 	void eliminarEnemic(std::vector<Enemic*>& equip, Enemic* Enemic);
 	void mostrarEstat();
 	void determinarGuanyador();
-	int mostrarAtacs(Enemic* enemic);
-	void renderitzarBotons(SDL_Renderer* renderer, TTF_Font* font);
+	void renderitzarBotonsPreCombat(SDL_Renderer* renderer, TTF_Font* font);
+	void renderitzarBotonsCombat(SDL_Renderer* renderer, TTF_Font* font);
+	void renderitzarBotonsInventari(SDL_Renderer* renderer, TTF_Font* font);
+	void renderitzarBotonsCanviar(SDL_Renderer* renderer, TTF_Font* font);
 	void renderitzarText(SDL_Renderer* renderer, TTF_Font* font, const std::string& text, int x, int y, SDL_Color color);
 
 private:
@@ -37,4 +39,10 @@ private:
 
 	SDL_Window* finestra;
 	SDL_Renderer* renderitzador;
+
+	// Mini maquina d'estats
+	bool b_Idle = true;
+	bool b_Atacar = false;
+	bool b_Inventari = false;
+	bool b_Canviar = false;
 };

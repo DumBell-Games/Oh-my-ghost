@@ -16,6 +16,7 @@
 #include "TeamScreen.h"
 #include <iostream>
 #include "Combat.h"
+#include <vector>
 
 TitleScreen::TitleScreen(bool startEnabled) : Module(startEnabled)
 {
@@ -98,18 +99,40 @@ bool TitleScreen::Update(float dt)
     else if (menuIndex == 3) app->render->DrawTexture(menu3, 0, 0, NULL);
     else if (menuIndex == 4) app->render->DrawTexture(menu4, 0, 0, NULL);*/
 
+
+    // Combat de mostra -> Tecla C
     if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
     {
+        // Crear equips de un enemic o mes
         std::cout << "Init combat" << std::endl;
         std::vector<Enemic*> equipJugador;
         std::vector<Enemic*> equipOponent;
 
+        // Cada enemic
         Enemic enemic1("Enemic1", 10, 10, 10, 10);
-        Enemic enemic2("Enemic2", 100, 100, 100, 100);
+        // Els seus atacs
+        Atac atac1("Atac1", 50);
+        Atac atac2("Atac2", 50);
+        Atac atac3("Atac3", 50);
+        Atac atac4("Atac4", 50);
+        enemic1.atacs.push_back(atac1);
+        enemic1.atacs.push_back(atac2);
+        enemic1.atacs.push_back(atac3);
+        enemic1.atacs.push_back(atac4);
 
-        equipJugador.push_back(enemic2);
-        equipOponent.push_back(enemic1);
-        
+        Enemic enemic2("Enemic2", 100, 100, 100, 100);
+        enemic2.atacs.push_back(atac1);
+        enemic2.atacs.push_back(atac2);
+        enemic2.atacs.push_back(atac3);
+        enemic2.atacs.push_back(atac4);
+
+        equipJugador.push_back(&enemic2);
+        equipOponent.push_back(&enemic1);
+
+        // Començar el combat
+        Combat nouCombat(equipJugador, equipOponent);
+        nouCombat.iniciar();
+        std::cout << "End Combat" << std::endl;
     }
 
     return true;
