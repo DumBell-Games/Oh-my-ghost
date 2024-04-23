@@ -10,6 +10,12 @@
 
 #include "PugiXml\src\pugixml.hpp"
 
+struct TransitionData {
+	int doorId;
+	int mapId;
+	// Informacion a pasar entre mapas
+};
+
 // Ignore Terrain Types and Tile Types for now, but we want the image!
 struct TileSet
 {
@@ -138,10 +144,7 @@ private:
 	List<SString> mapNames;
 	int currentMap = 0;
 
-	struct TransitionData {
-		int doorId;
-		// Informacion a pasar entre mapas
-	} transitionData;
+	TransitionData transitionData;
 };
 
 #endif // __MAP_H__
