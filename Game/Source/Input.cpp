@@ -304,8 +304,6 @@ void Input::UpdateBindings()
 	for (size_t i = 0; i < bindings.size(); i++)
 	{
 		bindings[i].Update(this);
-		if ((ControlID)i == UP || (ControlID)i == DOWN || (ControlID)i == LEFT || (ControlID)i == RIGHT)
-			LOG("Control %i, state: %i", i, bindings[i].state);
 	}
 }
 

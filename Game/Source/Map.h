@@ -135,7 +135,7 @@ public:
 	SString path;
 	PathFinding* pathfinding;
 	MapLayer* navigationLayer;
-	TransitionData transitionData;
+	TransitionData transitionData = {-1,-1};
 
 private:
 

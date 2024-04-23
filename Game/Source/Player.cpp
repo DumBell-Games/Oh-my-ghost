@@ -116,3 +116,11 @@ bool Player::SaveState(pugi::xml_node& node)
 	
 	return true;
 }
+
+void Player::SetPosition(iPoint newPos)
+{
+	if (pBody) {
+		//pBody->body->SetTransform(b2Vec2(position.x, position.y), pBody->GetRotation()); // TODO descomentar esto una vez resuelto el problema de posicion de los triggers
+		position = newPos;
+	}
+}

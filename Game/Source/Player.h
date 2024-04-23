@@ -31,6 +31,8 @@ public:
 
 	bool SaveState(pugi::xml_node& node);
 
+	void SetPosition(iPoint newPos) override;
+
 public:
 
 	//L02: DONE 2: Declare player parameters
