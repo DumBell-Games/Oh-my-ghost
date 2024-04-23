@@ -8,7 +8,13 @@
 #include "Point.h"
 #include "SString.h"
 
+#include <functional>
+
 #include "SDL/include/SDL.h"
+
+class GuiControl;
+// Atajo para una función que toma un parametro GuiControl* y no devuelve nada
+using GuiOnClick_f = std::function<void(GuiControl*)>;
 
 enum class GuiControlType
 {
@@ -70,10 +76,18 @@ public:
 		observer = module;
 	}
 
+	void SetCallback(GuiOnClick_f& func)
+	{
+		listener = func;
+	}
+
 	// 
 	void NotifyObserver()
 	{
-		observer->OnGuiMouseClickEvent(this);
+		if (observer)
+			observer->OnGuiMouseClickEvent(this);
+		if (listener)
+			listener(this);
 	}
 
 public:
@@ -89,7 +103,8 @@ public:
 	SDL_Texture* texture;   // Texture atlas reference
 	SDL_Rect section;       // Texture atlas base section
 
-	Module* observer;        // Observer 
+	Module* observer = nullptr;        // Observer 
+	GuiOnClick_f listener; // Callback function
 };
 
 #endif // __GUICONTROL_H__

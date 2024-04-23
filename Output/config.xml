@@ -2,12 +2,17 @@
 <!-- L01: DONE 1: Create configuration file-->
 <config>
   <app>
-    <title>My video game</title>
+    <title>Oh my Ghost</title>
     <maxFrameDuration value="16"/>
   </app>
 
   <renderer>
-    <vsync value="false"/>
+	  <fonts>
+		  <primary_font fontPath="Assets/Fonts/Aladin-Regular.ttf" fontSize="25"/>
+		  <secondary_font fontPath="Assets/Fonts/Aladin-Regular.ttf" fontSize="25"/>
+
+	  </fonts>
+    <vsync value="true"/>
   </renderer>
 
   <window>
@@ -18,14 +23,145 @@
     <fullscreen_window value="false"/>
   </window>
 
+  <input bindingsFile="controls.xml">
+		
+  </input>
+
   <scene>
-    <player x="150" y="672" texturePath="Assets/Textures/player1.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg"/>
+    <player x="80" y="672" texturePath="Assets/Textures/player1.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg"/>
     <map path="Assets/Maps/" name="MapTemplate.tmx"/>
     <item x="256" y="515" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="416" y="512" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="384" y="352" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="200" y="672" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="500" y="672" texturepath="Assets/Textures/goldCoin.png"/>
+	  
+	<npc x="200" y="672" texturePath="Assets/Textures/dogNpc.png"/>
+	<npc x="300" y="672" texturePath="Assets/Textures/dogNpc.png"/>
+	<npc x="500" y="672" texturePath="Assets/Textures/dogNpc.png"/>
+	<npc x="700" y="672" texturePath="Assets/Textures/dogNpc.png"/>
+
+	<enemy x="300" y="272" texturePath="Assets/Textures/pigNpc.png"/>
+	<enemy x="500" y="272" texturePath="Assets/Textures/pigNpc.png"/>
+	<enemy x="700" y="272" texturePath="Assets/Textures/pigNpc.png"/>
+	
+		<dialogTrigger x="200" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true">
+		<sentences>
+			<sentence name="Springy"	facetexturepath="Assets/Textures/catNpc.png" text="Hola"/>
+			<sentence name="Sisebuto"	facetexturepath="Assets/Textures/mouseNpc.png" text="(Hablaría borracho) Déjame en paz *burp*, a no ser que me quieras pagar otra ronda, que entonces sí te haré caso"/>
+			<sentence name="Springy"	facetexturepath="Assets/Textures/catNpc.png" text="*…*"/>
+			
+		</sentences>
+		<repeat_sentences>
+			<sentence name="Sisebuto"	facetexturepath="Assets/Textures/mouseNpc.png" text="PESADOO, que te he dicho que no vuelvas sin un copazo"/>
+			<sentence name="Springy"	facetexturepath="Assets/Textures/catNpc.png" text="*Debería conseguir dinero quizás…*"/>	
+		</repeat_sentences>
+	</dialogTrigger>
+		<dialogTrigger x="300" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true">
+			<sentences>
+				<sentence name="Homeless"	facetexturepath="Assets/Textures/catNpc.png" text="zZzZzZZZzZZZ"/>
+				<sentence name ="Springy" type="choose" text="*Anda tiene 5 PawCoins, ¿le robo?*">
+					<option1 text="Sí">
+						<sentence text="Vale ya tengo 5 PawCoins pero me siento sucio, al menos puedo comprarle el copazo a Sisebuto" />
+					</option1>
+					<option2 text="No">
+						<sentence text="Voy a buscar otra forma más limpia de conseguir dinero"/>
+					</option2>
+				</sentence>	
+			</sentences>
+	</dialogTrigger>
+	<dialogTrigger x="500" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true">
+		  <sentences>
+			  <sentence name="Segismunda"	text="Aiiiiiiiiiii que mierda de vidaaaaaaaaaa, tengo un marido borracho y mi hijo se fue a descubrir mundo, que sola estoy, QUE SOLAAAAAAA"/>
+			  <sentence name ="Springy"		text="No serás la mujer de Sisebuto, ¿verdad?"/>
+			  <sentence name="Segismunda"	text=" Ai no, ¿Qué te ha hecho ya ese condenado?"/>
+			  <sentence name ="Springy"		text="Nono nada nada, le he pedido información pero me la ha dado incompleta. Me podrías indicar dónde…"/>
+			  <sentence name="Segismunda"	text="AAAAAAIIIIIII que sola estooooooooyyyyyy. ¿Qué dónde está el desgraciado de Sisebuto? No sé estoy muy solaaaaa"/>
+			  <sentence name ="Springy"		text="*Sola y loca al parecer…*"/>
+			  <sentence name ="Springy"		text="Nooo, me preguntaba si…"/>
+			  <sentence name="Segismunda"	text="AAAAAAAAIIII que ni para indicar sirvoooooo"/>
+			  <sentence name ="Springy"		text="CALLATE YA JODER, ¿¿¿¿me sabes indicar dónde están los secuaces de AstroBark????"/>
+			  <sentence name="Segismunda"	text="Tampoco hace falta ponerse así… que estoy muy sola…"/>
+			  <sentence name="Segismunda"	text="Antes los he visto entrar a la discoteca Wawka"/>
+			  <sentence name ="Springy"		text="Gracias, hasta luego"/>
+			  <sentence name="Segismunda"	text="¿Cómo que hasta luego bombón? ¿Haces algo esta noche? esta noche tengo casa sola… me preguntaba si… ya sabes jeje que Sisebuto nunca se pasa por casa jiji"/>
+			  <sentence name ="Springy"		text="*Madre mía cómo está el patio…*"/>  
+				 
+		  </sentences>
+		<repeat_sentences>
+			<sentence name="Segismunda"	    text="Aiiiiiiiiiii que mierda de vidaaaaaaaaaa, tengo un marido borracho y mi hijo se fue a descubrir mundo, que sola estoy, QUE SOLAAAAAAA"/>
+			<sentence name ="Springy"		text="No serás la mujer de Sisebuto, ¿verdad?"/>
+			<sentence name="Segismunda" 	text=" Ai no, ¿Qué te ha hecho ya ese condenado?"/>
+			<sentence name ="Springy"		text="Nono nada nada, le he pedido información pero me la ha dado incompleta. Me podrías indicar dónde…"/>
+			<sentence name="Segismunda"	    text="AAAAAAIIIIIII que sola estooooooooyyyyyy. ¿Qué dónde está el desgraciado de Sisebuto? No sé estoy muy solaaaaa"/>
+			<sentence name ="Springy"		text="*Sola y loca al parecer…*"/>
+			<sentence name ="Springy"		text="Nooo, me preguntaba si…"/>
+			<sentence name="Segismunda"	    text="AAAAAAAAIIII que ni para indicar sirvoooooo"/>
+			<sentence name ="Springy"		text="CALLATE YA JODER, ¿¿¿¿me sabes indicar dónde están los secuaces de AstroBark????"/>
+			<sentence name="Segismunda"	    text="Tampoco hace falta ponerse así… que estoy muy sola…"/>
+			<sentence name="Segismunda"	    text="Antes los he visto entrar a la discoteca Wawka"/>
+			<sentence name ="Springy"		text="Gracias, hasta luego"/>
+			<sentence name="Segismunda"	    text="¿Cómo que hasta luego bombón? ¿Haces algo esta noche? esta noche tengo casa sola… me preguntaba si… ya sabes jeje que Sisebuto nunca se pasa por casa jiji"/>
+			<sentence name ="Springy"		text="*Madre mía cómo está el patio…*"/>
+
+		</repeat_sentences>
+	 </dialogTrigger>
+	  <dialogTrigger x="700" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true">
+		  <sentences>
+			  <sentence name="Sr. Bestia"	text="Pasad putos pobres, que yo os doy dinero para que no déis tanto asco."/>
+			  <sentence name ="Springy"		text="*Recibe 20 PawCoins*"/>
+			 
+		  </sentences>
+		
+	  </dialogTrigger>
+	 
   </scene>
-  
+	
+  <dialogmanager>
+	  <textures>
+		  <background_dialog texturepath="Assets/Textures/background_textbox.png"/>
+	  </textures>
+  </dialogmanager>
+
+	<map path="Assets/Maps/">
+		<map id="0" file="MapTemplate.tmx"/>
+		<map id="1" file="hello.tmx"/>
+	</map>
+
+	<reload>
+		<presets>
+			<!--Si el modulo ya esta activo, no se intenta reactivar a menos de que se marque como reload (y aun asi primero lo desactiva)-->
+			<!--l = activar (Load), u = desactivar (Unload), r = ambos (Reload)-->
+			<!--El orden de los módulos es importante, igual que para el bucle principal del juego-->
+			<!--Unload va de final a inicio, Load va de inicio a final-->
+			<preset name="loadMap" fadeOut="1" fadeIn="1">
+				<!--Hay que tener en cuenta todo lo que se cargue desde la informacion de mapa y reiniciarlo también-->
+				<module type="r" name="textures"/>
+				<!--<module type="r" name="audio"/>-->
+				<module type="r" name="physics"/>
+				<module type="r" name="scene"/>
+				<module type="r" name="map"/>
+				<module type="r" name="entitymanager"/>
+				<module type="r" name="dialogmanager"/>
+				<module type="u" name="titlescreen"/> <!--Cuando cargas mapa no va a estar el menú principal cargado-->
+			</preset>
+			<preset name="teamLogoToIntro" fadeOut="0.5" fadeIn="0.5">
+				<module type="u" name="teamScreen"/>
+				<module type="l" name="introScreen"/>
+			</preset>
+			<preset name="introToTitle" fadeOut="0.5" fadeIn="0.5">
+				<module type="u" name="introScreen"/>
+				<module type="l" name="guiManager"/>
+				<module type="l" name="titlescreen"/>
+				<module/>
+			</preset>
+			<preset name="titleToGame" fadeOut="1" fadeIn="1">
+				<module type="u" name="titlescreen"/>
+				<module type="l" name="map"/>
+				<module/>
+			</preset>
+			
+		</presets>
+	</reload>
+
 </config>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<controls>
+	<binding id="0" pKey="44" pBut="0" />
+	<binding id="1" pKey="225" pBut="1" />
+	<binding id="2" pKey="19" pBut="6" />
+	<binding id="3" pKey="7" nKey="4" pBut="14" nBut="13" isAxis="true" axis="0" />
+	<binding id="4" pKey="22" nKey="26" pBut="12" nBut="11" isAxis="true" axis="1" />
+	<binding id="5" isAxisButton="true" isPositive="false" bind="4"/>
+	<binding id="6" isAxisButton="true" isPositive="true" bind="4"/>
+	<binding id="7" isAxisButton="true" isPositive="false" bind="3"/>
+	<binding id="8" isAxisButton="true" isPositive="true" bind="3"/>
+	<binding id="9" pKey="41" pBut="4"/>
+</controls>

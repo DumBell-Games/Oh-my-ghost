@@ -10,7 +10,7 @@
 #include "Log.h"
 #include "SDL_ttf/include/SDL_ttf.h"
 
-DialogManager::DialogManager() : Module()
+DialogManager::DialogManager(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("dialogmanager");
 }
@@ -252,18 +252,17 @@ bool DialogManager::Update(float dt) {
 
 
 		//Siguiente dialogo
-		if (dialogFinished && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && actualDialog->type != DialogType::CHOOSE) {
+		if (dialogFinished && app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN && actualDialog->type != DialogType::CHOOSE) {
 			
 			
 			indexText = 1;
-			dialogues.Del(dialogues.At(0));
-			
+			dialogues.Del(dialogues.At(0));			
 			
 
 
 		}
 		//Gestion de las opciones
-		else if (dialogFinished && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && optionSelected != 0 && actualDialog->type == DialogType::CHOOSE) {
+		else if (dialogFinished && app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN && optionSelected != 0 && actualDialog->type == DialogType::CHOOSE) {
 		
 			
 			if (optionSelected == 1) {
@@ -281,7 +280,7 @@ bool DialogManager::Update(float dt) {
 
 		}
 		//Terminar el dialogo empezado
-		else if (!dialogFinished && app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN && indexText > 2) {
+		else if (!dialogFinished && app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN && indexText > 2) {
 			indexText = 999;
 		}
 		

@@ -9,7 +9,7 @@ class EntityManager : public Module
 {
 public:
 
-	EntityManager();
+	EntityManager(bool startEnabled = true);
 
 	// Destructor
 	virtual ~EntityManager();
@@ -27,15 +27,23 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	Entity* CreateEntity(EntityType type);
+	Entity* CreateEntity(EntityType type, pugi::xml_node& data);
+
+	Entity* CreateFromMap(char name, pugi::xml_node& data);
 
 	void DestroyEntity(Entity* entity);
 
 	void AddEntity(Entity* entity);
+	
+	bool LoadState(pugi::xml_node node);
+
+	bool SaveState(pugi::xml_node node);
 
 public:
 
 	List<Entity*> entities;
+
+	bool started = false;
 
 };
 

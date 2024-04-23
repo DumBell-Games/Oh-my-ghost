@@ -6,11 +6,13 @@
 #include "Input.h"
 #include "Render.h"
 
-enum class EntityType
+enum class EntityType : char
 {
 	PLAYER,
 	ITEM,
 	DIALOG_TRIGGER,
+	NPC,
+	ENEMY,
 	UNKNOWN
 };
 
@@ -73,6 +75,11 @@ public:
 	virtual void OnCollision(PhysBody* physA, PhysBody* physB) {
 
 	};
+
+	virtual void SetPosition(iPoint newPos)
+	{
+		position = newPos;
+	}
 
 
 

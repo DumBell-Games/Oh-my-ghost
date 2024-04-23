@@ -1,11 +1,12 @@
-
 #include "App.h"
 #include "Render.h"
 #include "Textures.h"
 #include "Map.h"
 #include "Physics.h"
-#include "Scene.h"
-#include "Optick/include/optick.h"
+#include "Reload.h"
+
+#include <sstream>
+#include <string.h>
 
 #include "Defs.h"
 #include "Log.h"
@@ -13,7 +14,7 @@
 #include <math.h>
 #include "SDL_image/include/SDL_image.h"
 
-Map::Map() : Module(), mapLoaded(false)
+Map::Map(bool startEnabled) : Module(startEnabled), mapLoaded(false)
 {
     name.Create("map");
 }
@@ -28,83 +29,114 @@ bool Map::Awake(pugi::xml_node config)
     LOG("Loading Map Parser");
     bool ret = true;
 
-    return ret;
-}
+    path = config.attribute("path").as_string();
 
-bool Map::Start() {
-
-    //Calls the functon to load the map, make sure that the filename is assigned
-    SString mapPath = path;
-    mapPath += name;
-    Load(mapPath);
-
-    //Initialize pathfinding 
-    pathfinding = new PathFinding();
-    
-    //Initialize the navigation map
-    uchar* navigationMap = NULL;
-    CreateNavigationMap(mapData.width, mapData.height, &navigationMap);
-    pathfinding->SetNavigationMap((uint)mapData.width, (uint)mapData.height, navigationMap);
-    RELEASE_ARRAY(navigationMap);
-
-    return true;
-}
-
-bool Map::Update(float dt)
-{
-    OPTICK_CATEGORY("Map", Optick::Category::GameLogic)
-    bool ret = true;
-
-    if(mapLoaded == false)
-        return false;
-
-    ListItem<MapLayer*>* mapLayer; 
-    mapLayer = mapData.layers.start;
-
-    // L06: DONE 5: Prepare the loop to draw all tiles in a layer + DrawTexture()
-
-    // iterates the layers in the map
-    while (mapLayer != NULL) {
-        //Check if the property Draw exist get the value, if it's true draw the lawyer
-        if (mapLayer->data->properties.GetProperty("Draw") != NULL && mapLayer->data->properties.GetProperty("Draw")->value) {
-            //iterate all tiles in a layer
-            for (int i = 0; i < mapData.width; i++) {
-                for (int j = 0; j < mapData.height; j++) {
-                    //Get the gid from tile
-                    int gid = mapLayer->data->Get(i, j);
-
-                    //L08: DONE 3: Obtain the tile set using GetTilesetFromTileId
-                    //Get the Rect from the tileSetTexture;
-                    TileSet* tileSet = GetTilesetFromTileId(gid);
-                    SDL_Rect tileRect = tileSet->GetRect(gid);
-                    //SDL_Rect tileRect = mapData.tilesets.start->data->GetRect(gid); // (!!) we are using always the first tileset in the list
-
-                    //Get the screen coordinates from the tile coordinates
-                    iPoint mapCoord = MapToWorld(i, j);
-
-                    // L06: DONE 9: Complete the draw function
-                    app->render->DrawTexture(tileSet->texture, mapCoord.x, mapCoord.y, &tileRect);
-
-                }
-            }
-        }
-        mapLayer = mapLayer->next;
+    for (pugi::xml_node& item = config.child("map"); item != NULL; item = item.next_sibling("map"))
+    {
+        mapNames.Add(item.attribute("file").as_string("invalidMap"));
+    }
+    if (mapNames.Count() == 0) {
+        LOG("No maps in config. Make sure filepaths are in config");
+        ret = false;
     }
 
     return ret;
 }
 
-// L08: DONE 2: Implement function to the Tileset based on a tile id
+bool Map::Start() {
+    //Calls the functon to load the map, make sure that the filename is assigned
+
+    SString mapPath = path;
+    mapPath += mapNames[currentMap];
+    bool ret = Load(mapPath);
+
+    return ret;
+}
+
+bool Map::Update(float dt)
+{
+    if (mapLoaded == false)
+        return false;
+
+    ListItem<MapLayer*>* mapLayerItem;
+    mapLayerItem = mapData.maplayers.start;
+
+    while (mapLayerItem != NULL) {
+
+        if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) {
+
+            for (int x = 0; x < mapLayerItem->data->width; x++)
+            {
+                for (int y = 0; y < mapLayerItem->data->height; y++)
+                {
+                    int gid = mapLayerItem->data->Get(x, y);
+                    TileSet* tileset = GetTilesetFromTileId(gid);
+
+                    SDL_Rect r = tileset->GetTileRect(gid);
+                    iPoint pos = MapToWorld(x, y);
+
+                    app->render->DrawTexture(tileset->texture,
+                        pos.x,
+                        pos.y,
+                        &r);
+                }
+            }
+        }
+        mapLayerItem = mapLayerItem->next;
+
+    }
+
+
+    return true;
+}
+
+iPoint Map::MapToWorld(int x, int y) const
+{
+    iPoint ret;
+
+    ret.x = x * mapData.tileWidth;
+    ret.y = y * mapData.tileHeight;
+
+    return ret;
+}
+
+iPoint Map::WorldToMap(int x, int y)
+{
+    iPoint ret(0, 0);
+
+    ret.x = x / mapData.tileWidth;
+    ret.y = y / mapData.tileHeight;
+
+    return ret;
+}
+
+// Get relative Tile rectangle
+SDL_Rect TileSet::GetTileRect(int gid) const
+{
+    SDL_Rect rect = { 0 };
+    int relativeIndex = gid - firstgid;
+
+    rect.w = tileWidth;
+    rect.h = tileHeight;
+    rect.x = margin + (tileWidth + spacing) * (relativeIndex % columns);
+    rect.y = margin + (tileWidth + spacing) * (relativeIndex / columns);
+
+    return rect;
+}
+
 TileSet* Map::GetTilesetFromTileId(int gid) const
 {
+    ListItem<TileSet*>* item = mapData.tilesets.start;
     TileSet* set = NULL;
 
-    ListItem<TileSet*>* tileSet;
-    tileSet = mapData.tilesets.start;
-    while (tileSet != NULL) {
-        set = tileSet->data;
-        if (gid >= tileSet->data->firstgid && gid < (tileSet->data->firstgid + tileSet->data->tilecount)) break;
-        tileSet = tileSet->next;
+    while (item)
+    {
+        set = item->data;
+        if (gid < (item->data->firstgid + item->data->tilecount))
+        {
+            break;
+        }
+        item = item->next;
     }
 
     return set;
@@ -113,31 +145,7 @@ TileSet* Map::GetTilesetFromTileId(int gid) const
 // Called before quitting
 bool Map::CleanUp()
 {
-    LOG("Unloading map");
-
-    //Clean up pathfing class
-    pathfinding->CleanUp();
-
-    // L05: DONE 2: Make sure you clean up any memory allocated from tilesets/map
-    ListItem<TileSet*>* tileset;
-    tileset = mapData.tilesets.start;
-    
-    while (tileset != NULL) {
-        RELEASE(tileset->data);
-        tileset = tileset->next;
-    }
-
-    mapData.tilesets.Clear();
-
-    // L06: DONE 2: clean up all layer data
-    ListItem<MapLayer*>* layerItem;
-    layerItem = mapData.layers.start;
-
-    while (layerItem != NULL) {
-        RELEASE(layerItem->data->tiles);
-        RELEASE(layerItem->data);
-        layerItem = layerItem->next;
-    }
+    Unload();
 
     return true;
 }
@@ -147,264 +155,374 @@ bool Map::Load(SString mapFileName)
 {
     bool ret = true;
 
-    // L05: DONE 3: Implement LoadMap to load the map properties
-    // retrieve the paremeters of the <map> node and save it into map data
-
     pugi::xml_document mapFileXML;
     pugi::xml_parse_result result = mapFileXML.load_file(mapFileName.GetString());
 
-    if(result == NULL)
+    if (result == NULL)
     {
-        LOG("Could not load map xml file %s. pugi error: %s", mapFileName, result.description());
+        LOG("Could not load map xml file %s. pugi error: %s", mapFileName.GetString(), result.description());
         ret = false;
     }
-    else {
 
-        //Fill mapData variable
-        mapData.width = mapFileXML.child("map").attribute("width").as_int();
-        mapData.height = mapFileXML.child("map").attribute("height").as_int();
-        mapData.tilewidth = mapFileXML.child("map").attribute("tilewidth").as_int();
-        mapData.tileheight = mapFileXML.child("map").attribute("tileheight").as_int();
-
-        // L09: DONE 2: Define a property to store the MapType and Load it from the map
-        SString orientationStr = mapFileXML.child("map").attribute("orientation").as_string();
-        if (orientationStr == "orthogonal") {
-            mapData.orientation = MapOrientation::ORTOGRAPHIC;
-        }
-        else if (orientationStr == "isometric") {
-            mapData.orientation = MapOrientation::ISOMETRIC;
-        }
-        else {
-            LOG("Map orientation not found");
-            ret = false; 
-        }
-
-        // L05: DONE 4: Implement the LoadTileSet function to load the tileset properties
-       // Iterate the Tileset
-        for (pugi::xml_node tilesetNode = mapFileXML.child("map").child("tileset"); tilesetNode != NULL; tilesetNode = tilesetNode.next_sibling("tileset")) {
-
-            TileSet* tileset = new TileSet();
-
-            //Load Tileset attributes
-            tileset->name = tilesetNode.attribute("name").as_string();
-            tileset->firstgid = tilesetNode.attribute("firstgid").as_int();
-            tileset->margin = tilesetNode.attribute("margin").as_int();
-            tileset->spacing = tilesetNode.attribute("spacing").as_int();
-            tileset->tilewidth = tilesetNode.attribute("tilewidth").as_int();
-            tileset->tileheight = tilesetNode.attribute("tileheight").as_int();
-            tileset->columns = tilesetNode.attribute("columns").as_int();
-            tileset->tilecount = tilesetNode.attribute("tilecount").as_int();
-
-            //Load Tileset image
-            SString mapTex = path;
-            mapTex += tilesetNode.child("image").attribute("source").as_string();
-            tileset->texture = app->tex->Load(mapTex.GetString());
-
-            mapData.tilesets.Add(tileset);
-
-        }
-
-        // L06: DONE 3: Iterate all layers in the TMX and load each of them
-        for (pugi::xml_node layerNode = mapFileXML.child("map").child("layer"); layerNode != NULL; layerNode = layerNode.next_sibling("layer")) {
-
-            // L06: DONE 4: Implement a function that loads a single layer layer
-            //Load the attributes and saved in a new MapLayer
-            MapLayer* mapLayer = new MapLayer();
-            mapLayer->id = layerNode.attribute("id").as_int();
-            mapLayer->name = layerNode.attribute("name").as_string();
-            mapLayer->width = layerNode.attribute("width").as_int();
-            mapLayer->height = layerNode.attribute("height").as_int();
-
-            //L08: DONE 6 Call Load Layer Properties
-            LoadProperties(layerNode, mapLayer->properties);
-
-            //Reserve the memory for the data 
-            mapLayer->tiles = new uint[mapLayer->width * mapLayer->height];
-            memset(mapLayer->tiles, 0, mapLayer->width * mapLayer->height);
-
-            //Iterate over all the tiles and assign the values in the data array
-            int i = 0;
-            for (pugi::xml_node tileNode = layerNode.child("data").child("tile"); tileNode != NULL; tileNode = tileNode.next_sibling("tile")) {
-                mapLayer->tiles[i] = tileNode.attribute("gid").as_uint();
-                i++;
-            }
-
-            //add the layer to the map
-            mapData.layers.Add(mapLayer);
-        }
-
-
-        // L07 DONE 3: Create colliders      
-        // L07 DONE 7: Assign collider type
-        // Later you can create a function here to load and create the colliders from the map
-        
-        // CALL TO CREATE COLLIDERS FROM MAP
-
-          // L05: DONE 5: LOG all the data loaded iterate all tilesetsand LOG everything
-        if (ret == true)
-        {
-            LOG("Successfully parsed map XML file :%s", mapFileName.GetString());
-            LOG("width : %d height : %d", mapData.width, mapData.height);
-            LOG("tile_width : %d tile_height : %d", mapData.tilewidth, mapData.tileheight);
-
-            LOG("Tilesets----");
-
-            ListItem<TileSet*>* tileset;
-            tileset = mapData.tilesets.start;
-            while (tileset != NULL) {
-                //iterate the tilesets
-                LOG("name : %s firstgid : %d",tileset->data->name.GetString(), tileset->data->firstgid);
-                LOG("tile width : %d tile height : %d", tileset->data->tilewidth, tileset->data->tileheight);
-                LOG("spacing : %d margin : %d", tileset->data->spacing, tileset->data->margin);
-                tileset = tileset->next;
-            }
-
-            LOG("Layers----");
-
-            ListItem<MapLayer*>* mapLayer;
-            mapLayer = mapData.layers.start;
-
-            while (mapLayer != NULL) {
-                LOG("id : %d name : %s", mapLayer->data->id, mapLayer->data->name.GetString());
-                LOG("Layer width : %d Layer height : %d", mapLayer->data->width, mapLayer->data->height);
-                mapLayer = mapLayer->next;
-            }
-        }
-
-        // Find the navigation layer
-        ListItem<MapLayer*>* mapLayerItem;
-        mapLayerItem = mapData.layers.start;
-        navigationLayer = mapLayerItem->data;
-
-        //Search the layer in the map that contains information for navigation
-        while (mapLayerItem != NULL) {
-            if (mapLayerItem->data->properties.GetProperty("Navigation") != NULL && mapLayerItem->data->properties.GetProperty("Navigation")->value) {
-                navigationLayer = mapLayerItem->data;
-                break;
-            }
-            mapLayerItem = mapLayerItem->next;
-        }
-
-        //Resets the map
-        if (mapFileXML) mapFileXML.reset();
+    if (ret == true)
+    {
+        ret = LoadMap(mapFileXML);
     }
+
+    if (ret == true)
+    {
+        ret = LoadTileSet(mapFileXML);
+    }
+
+    if (ret == true)
+    {
+        pathfinding = new PathFinding();
+        ret = LoadAllLayers(mapFileXML.child("map"));
+    }
+
+    if (ret == true)
+    {
+        ret = LoadAllObjects(mapFileXML.child("map"));
+    }
+
+    if (ret == true)
+    {
+        LOG("Successfully parsed map XML file :%s", mapFileName.GetString());
+        LOG("width : %d height : %d", mapData.width, mapData.height);
+        LOG("tile_width : %d tile_height : %d", mapData.tileWidth, mapData.tileHeight);
+
+        LOG("Tilesets----");
+
+        ListItem<TileSet*>* tileset;
+        tileset = mapData.tilesets.start;
+
+        while (tileset != NULL) {
+            LOG("name : %s firstgid : %d", tileset->data->name.GetString(), tileset->data->firstgid);
+            LOG("tile width : %d tile height : %d", tileset->data->tileWidth, tileset->data->tileHeight);
+            LOG("spacing : %d margin : %d", tileset->data->spacing, tileset->data->margin);
+            tileset = tileset->next;
+        }
+
+        LOG("Layers----");
+
+        ListItem<MapLayer*>* mapLayer;
+        mapLayer = mapData.maplayers.start;
+
+        while (mapLayer != NULL) {
+            LOG("id : %d name : %s", mapLayer->data->id, mapLayer->data->name.GetString());
+            LOG("Layer width : %d Layer height : %d", mapLayer->data->width, mapLayer->data->height);
+            mapLayer = mapLayer->next;
+        }
+
+    }
+
+    if (mapFileXML) mapFileXML.reset();
 
     mapLoaded = ret;
+
     return ret;
 }
 
-// L06: DONE 8: Create a method that translates x,y coordinates from map positions to world positions
-iPoint Map::MapToWorld(int x, int y) const
+bool Map::Unload()
 {
-    iPoint ret;
+    LOG("Unloading map");
 
-    // L09: DONE 3: Get the screen coordinates of tile positions for isometric maps 
-    if (mapData.orientation == MapOrientation::ORTOGRAPHIC) {
-        ret.x = x * mapData.tilewidth;
-        ret.y = y * mapData.tileheight;
+    ListItem<TileSet*>* item;
+    item = mapData.tilesets.start;
+
+    while (item != NULL)
+    {
+        app->tex->UnLoad(item->data->texture);
+        RELEASE(item->data);
+        item = item->next;
+    }
+    mapData.tilesets.Clear();
+
+    // Remove all layers
+    ListItem<MapLayer*>* layerItem;
+    layerItem = mapData.maplayers.start;
+
+    while (layerItem != NULL)
+    {
+        RELEASE(layerItem->data);
+        layerItem = layerItem->next;
     }
 
-    if (mapData.orientation == MapOrientation::ISOMETRIC) {
-        ret.x = x * mapData.tilewidth / 2 - y * mapData.tilewidth / 2;
-        ret.y = x * mapData.tileheight / 2 + y * mapData.tileheight / 2;
+    mapData.maplayers.Clear();
+
+    RELEASE(pathfinding);
+
+    return true;
+}
+
+// If parameter is -1 just reloads the current map
+bool Map::ChangeMap(int id)
+{
+    currentMap = ((id == -1) ? currentMap : id);
+
+    return app->reload->QueueReload("loadMap");
+}
+
+bool Map::LoadMap(pugi::xml_node mapFile)
+{
+    bool ret = true;
+    pugi::xml_node map = mapFile.child("map");
+
+    if (map == NULL)
+    {
+        LOG("Error parsing map xml file: Cannot find 'map' tag.");
+        ret = false;
+    }
+    else
+    {
+        //Load map general properties
+        mapData.height = map.attribute("height").as_int();
+        mapData.width = map.attribute("width").as_int();
+        mapData.tileHeight = map.attribute("tileheight").as_int();
+        mapData.tileWidth = map.attribute("tilewidth").as_int();
+        mapData.type = MAPTYPE_UNKNOWN;
     }
 
     return ret;
 }
 
-// L08: DONE 6: Load a group of properties from a node and fill a list with it
+bool Map::LoadTileSet(pugi::xml_node mapFile) {
+
+    bool ret = true;
+
+    pugi::xml_node tileset;
+    for (tileset = mapFile.child("map").child("tileset"); tileset && ret; tileset = tileset.next_sibling("tileset"))
+    {
+        TileSet* set = new TileSet();
+
+        set->name = tileset.attribute("name").as_string();
+        set->firstgid = tileset.attribute("firstgid").as_int();
+        set->margin = tileset.attribute("margin").as_int();
+        set->spacing = tileset.attribute("spacing").as_int();
+        set->tileWidth = tileset.attribute("tilewidth").as_int();
+        set->tileHeight = tileset.attribute("tileheight").as_int();
+        set->columns = tileset.attribute("columns").as_int();
+        set->tilecount = tileset.attribute("tilecount").as_int();
+
+        SString texPath = path;
+        texPath += tileset.child("image").attribute("source").as_string();
+        set->texture = app->tex->Load(texPath.GetString());
+
+        mapData.tilesets.Add(set);
+    }
+
+    return ret;
+}
+
+bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
+{
+    bool ret = true;
+
+    //Load the attributes
+    layer->id = node.attribute("id").as_int();
+    layer->name = node.attribute("name").as_string();
+    layer->width = node.attribute("width").as_int();
+    layer->height = node.attribute("height").as_int();
+
+    LoadProperties(node, layer->properties);
+
+    //Reserve the memory for the data 
+    layer->data = new uchar[layer->width * layer->height];
+    memset(layer->data, 0, layer->width * layer->height);
+
+    //Iterate over all the tiles and assign the values
+    pugi::xml_node tile;
+    uint i = 0;
+    for (tile = node.child("data").child("tile"); tile && ret; tile = tile.next_sibling("tile"))
+    {
+        layer->data[i] = tile.attribute("gid").as_uint();
+        i++;
+    }
+
+    if (layer->name == "Navigation") {
+        navigationLayer = layer;
+        pathfinding->SetNavigationMap(layer->width, layer->height, layer->data);
+    }
+
+    return ret;
+}
+
+bool Map::LoadAllLayers(pugi::xml_node mapNode) {
+    bool ret = true;
+
+    for (pugi::xml_node layerNode = mapNode.child("layer"); layerNode && ret; layerNode = layerNode.next_sibling("layer"))
+    {
+        //Load the layer
+        MapLayer* mapLayer = new MapLayer();
+        ret = LoadLayer(layerNode, mapLayer);
+
+        //add the layer to the map
+        mapData.maplayers.Add(mapLayer);
+    }
+
+    return ret;
+}
+
+bool Map::LoadAllObjects(pugi::xml_node mapNode) {
+    bool ret = true;
+
+    for (pugi::xml_node objGroupNode = mapNode.child("objectgroup"); objGroupNode && ret; objGroupNode = objGroupNode.next_sibling("objectgroup"))
+    {
+        Properties prop;
+        LoadProperties(objGroupNode, prop);
+
+        for (pugi::xml_node objNode = objGroupNode.child("object"); objNode && ret; objNode = objNode.next_sibling("object"))
+        {
+            // If object is an entity and the entity type is defined, load as entity
+            Properties::Property* p = prop.GetProperty("entity");
+            if (p != nullptr && p->strVal.Length() > 0) {
+                const char* str = p->strVal.GetString();
+                LoadEntity(objGroupNode, objNode, str[0]);
+            }
+            else if (objNode.child("ellipse")) {
+                LoadCircle(objGroupNode, objNode);
+            }
+            else if (objNode.child("polygon")) {
+                LoadPolygon(objGroupNode, objNode);
+            }
+            else {
+                LoadRectangle(objGroupNode, objNode);
+            }
+        }
+    }
+
+    return ret;
+}
+
+bool Map::LoadEntity(pugi::xml_node objGroupNode, pugi::xml_node objNode, char entityType)
+{
+    Entity* entity = app->entityManager->CreateFromMap(entityType, objNode);
+    // TODO change all past this line until return to be in each of the entities instead (custom initialization)
+    int x = objNode.attribute("x").as_int();
+    int y = objNode.attribute("y").as_int();
+    if (entity == nullptr) {
+        LOG("Entity of type %c could not be created at (%i,%i)", entityType, x, y);
+        return true;
+    }
+    iPoint pos(x, y);
+    entity->SetPosition(pos);
+
+    return true;
+}
+
+bool Map::LoadRectangle(pugi::xml_node objGroupNode, pugi::xml_node objNode)
+{
+    bool ret = true;
+
+    int id = objNode.attribute("id").as_int();
+    float x = objNode.attribute("x").as_float();
+    float y = objNode.attribute("y").as_float();
+    float width = objNode.attribute("width").as_float();
+    float height = objNode.attribute("height").as_float();
+
+    PhysBody* object = app->physics->CreateRectangle(x + width / 2, y + height / 2, width, height, STATIC);
+    object->ctype = ColliderType::PLATFORM;
+    
+    return ret;
+}
+
+bool Map::LoadCircle(pugi::xml_node objGroupNode, pugi::xml_node objNode)
+{
+    bool ret = true;
+
+    int id = objNode.attribute("id").as_int();
+    float x = objNode.attribute("x").as_float();
+    float y = objNode.attribute("y").as_float();
+    float width = objNode.attribute("radius").as_float();
+    float height = objNode.attribute("height").as_float();
+
+    float radius = (width + height) / 2; // TODO cambiar esto para elipses no regulares (nueva función de creación de elipses en el entitymanager?)
+
+    PhysBody* object = app->physics->CreateCircle(x + radius, y + radius, radius, STATIC);
+    object->ctype = ColliderType::PLATFORM;
+
+    return true;
+}
+
+bool Map::LoadPolygon(pugi::xml_node objGroupNode, pugi::xml_node objNode)
+{
+    bool ret = true;
+
+    float x = objNode.attribute("x").as_float();
+    float y = objNode.attribute("y").as_float();
+
+    for (pugi::xml_node polyNode = objNode.child("polygon"); polyNode && ret; polyNode = polyNode.next_sibling("polygon"))
+    {
+        SString pStr = polyNode.attribute("points").as_string();
+        std::vector<SString> coords = pStr.GetWords(' ');
+        std::vector<int> intPoints;
+
+        for (SString item : coords)
+        {
+            std::vector<SString> coord = item.GetWords(',');
+            if (coord.size() >= 2) {
+                intPoints.push_back(std::stof(coord[0].GetString()));
+                intPoints.push_back(std::stof(coord[1].GetString()));
+            }
+        }
+
+        int* pointsArray = intPoints.data();
+        int numPoints = intPoints.size();
+
+        PhysBody* object = app->physics->CreateChain(x, y, pointsArray, numPoints, STATIC);
+        object->ctype = ColliderType::PLATFORM;
+    }
+    return true;
+}
+
 bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
 {
     bool ret = false;
-
-    for (pugi::xml_node propertieNode = node.child("properties").child("property"); propertieNode; propertieNode = propertieNode.next_sibling("property"))
+    pugi::xml_node propertiesNode = node.child("properties").child("property");
+    if (propertiesNode)
     {
-        Properties::Property* p = new Properties::Property();
-        p->name = propertieNode.attribute("name").as_string();
-        p->value = propertieNode.attribute("value").as_bool(); // (!!) I'm assuming that all values are bool !!
+        ret = true;
+        for (/*Initial state already set above*/; propertiesNode; propertiesNode = propertiesNode.next_sibling("property"))
+        {
+            Properties::Property* p = new Properties::Property();
 
-        properties.propertyList.Add(p);
+            SString nameAttr = propertiesNode.attribute("name").as_string();
+            SString typeAttr = propertiesNode.attribute("type").as_string("string"); // Default to string for malformed properties
+
+            p->name = nameAttr;
+            if (typeAttr == "string") {
+                p->strVal = propertiesNode.attribute("value").as_string();
+            }
+            else if (typeAttr == "bool") {
+                p->value = propertiesNode.attribute("value").as_bool();
+            }
+            else if (typeAttr == "integer") {
+                p->intVal = propertiesNode.attribute("value").as_int();
+            }
+            else if (typeAttr == "float") {
+                p->floatVal = propertiesNode.attribute("value").as_float();
+            }
+
+            properties.list.Add(p);
+        }
     }
-
     return ret;
 }
 
-// L08: DONE 7: Implement a method to get the value of a custom property
 Properties::Property* Properties::GetProperty(const char* name)
 {
-    ListItem<Property*>* property = propertyList.start;
+    if (list.Count() == 0) return nullptr; // If no properties have been set return nullptr
+    ListItem<Property*>* item = list.start;
     Property* p = NULL;
 
-    while (property)
+    while (item)
     {
-        if (property->data->name == name) {
-            p = property->data;
+        if (item->data->name == name) {
+            p = item->data;
             break;
         }
-        property = property->next;
+        item = item->next;
     }
 
     return p;
 }
-
-// L09: DONE 5: Add method WorldToMap to obtain  map coordinates from screen coordinates 
-iPoint Map::WorldToMap(int x, int y) {
-
-    iPoint ret(0, 0);
-
-    if (mapData.orientation == MapOrientation::ORTOGRAPHIC) {
-        ret.x = x / mapData.tilewidth;
-        ret.y = y / mapData.tileheight;
-    }
-
-    if (mapData.orientation == MapOrientation::ISOMETRIC) {
-        float half_width = mapData.tilewidth / 2;
-        float half_height = mapData.tileheight / 2;
-        ret.x = int((x / half_width + y / half_height) / 2);
-        ret.y = int((y / half_height - (x / half_width)) / 2);
-    }
-
-    return ret;
-}
-
-int Map::GetTileWidth() {
-    return mapData.tilewidth;
-}
-
-int Map::GetTileHeight() {
-    return mapData.tileheight;
-}
-
-// L13: Create navigationMap map for pathfinding
-void Map::CreateNavigationMap(int& width, int& height, uchar** buffer) const
-{
-    bool ret = false;
-
-    //Sets the size of the map. The navigation map is a unidimensional array 
-    uchar* navigationMap = new uchar[navigationLayer->width * navigationLayer->height];
-    //reserves the memory for the navigation map
-    memset(navigationMap, 1, navigationLayer->width * navigationLayer->height);
-
-    for (int x = 0; x < mapData.width; x++)
-    {
-        for (int y = 0; y < mapData.height; y++)
-        {
-            //i is the index of x,y coordinate in a unidimensional array that represents the navigation map
-            int i = (y * navigationLayer->width) + x;
-
-            //Gets the gid of the map in the navigation layer
-            int gid = navigationLayer->Get(x, y);
-            
-            //If the gid is a blockedGid is an area that I cannot navigate, so is set in the navigation map as 0, all the other areas can be navigated
-            //!!!! make sure that you assign blockedGid according to your map
-            if (gid == blockedGid) navigationMap[i] = 0;
-            else navigationMap[i] = 1;
-        }
-    }
-
-    *buffer = navigationMap;
-    width = mapData.width;
-    height = mapData.height;
-
-}
-

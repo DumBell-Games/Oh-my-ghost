@@ -8,7 +8,7 @@
 #include "SDL_image/include/SDL_image.h"
 //#pragma comment(lib, "../Game/Source/External/SDL_image/libx86/SDL2_image.lib")
 
-Textures::Textures() : Module()
+Textures::Textures(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("textures");
 }
@@ -64,7 +64,10 @@ bool Textures::CleanUp()
 SDL_Texture* const Textures::Load(const char* path)
 {
 	SDL_Texture* texture = NULL;
-	SDL_Surface* surface = IMG_Load(path);
+	SDL_Surface* surface = NULL;
+
+	if (strcmp(path,"") != 0) // Strings vacias crashean
+		surface = IMG_Load(path);
 
 	if(surface == NULL)
 	{

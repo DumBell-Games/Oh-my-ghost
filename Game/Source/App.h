@@ -20,11 +20,16 @@ class Audio;
 class Scene;
 class EntityManager;
 class Map;
+class Reload;
 class TitleScreen;
+class IntroScreen;
+class TeamScreen;
+class PauseMenu;
 //L07 DONE 2: Add Physics module
 class Physics;
 class GuiManager;
 class DialogManager;
+class FadeToBlack;
 
 class App
 {
@@ -51,6 +56,10 @@ public:
 	// Add a new module to handle
 	void AddModule(Module* module);
 
+	Module* GetModule(const char* name);
+
+	pugi::xml_node GetConfig(const Module& module);
+
 	// Exposing some properties for reading
 	int GetArgc() const;
 	const char* GetArgv(int index) const;
@@ -64,6 +73,9 @@ public:
 
 	// Request to load data from XML file 
 	bool SaveRequest();
+
+	// Close the game (for use with UI elements)
+	void Quit() { quit = true; }
 
 private:
 
@@ -105,11 +117,16 @@ public:
 	Scene* scene;
 	EntityManager* entityManager;
 	Map* map;
+	Reload* reload; // Module (un/re)loader
 	TitleScreen* titlescreen;
+	IntroScreen* introScreen;
+	TeamScreen* teamScreen;
+	PauseMenu* pause;
 	//L07 DONE 2: Add Physics module
 	Physics* physics;
 	GuiManager* guiManager;
 	DialogManager* dialogManager;
+	FadeToBlack* fadeToBlack;
 
 
 private:
@@ -147,6 +164,7 @@ private:
 	//
 	bool loadRequest = false;
 	bool saveRequest = false;
+	bool quit = false;
 
 };
 
