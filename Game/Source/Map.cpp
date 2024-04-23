@@ -72,6 +72,8 @@ bool Map::Update(float dt)
                     int gid = mapLayerItem->data->Get(x, y);
                     TileSet* tileset = GetTilesetFromTileId(gid);
 
+                    if (!tileset) continue;
+
                     SDL_Rect r = tileset->GetTileRect(gid);
                     iPoint pos = MapToWorld(x, y);
 
@@ -126,6 +128,7 @@ SDL_Rect TileSet::GetTileRect(int gid) const
 
 TileSet* Map::GetTilesetFromTileId(int gid) const
 {
+    if (gid == 0) return nullptr;
     ListItem<TileSet*>* item = mapData.tilesets.start;
     TileSet* set = NULL;
 
@@ -327,7 +330,7 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
     LoadProperties(node, layer->properties);
 
     //Reserve the memory for the data 
-    layer->data = new uchar[layer->width * layer->height];
+    layer->data = new uint[layer->width * layer->height];
     memset(layer->data, 0, layer->width * layer->height);
 
     //Iterate over all the tiles and assign the values

@@ -44,7 +44,7 @@ struct MapLayer
 	int y;
 	int width;
 	int height;
-	uchar* data;
+	uint* data;
 
 	Properties properties;
 
@@ -56,7 +56,7 @@ struct MapLayer
 		RELEASE(data);
 	}
 
-	inline uchar Get(int x, int y) const
+	inline uint Get(int x, int y) const
 	{
 		return data[(y * width) + x];
 	}
