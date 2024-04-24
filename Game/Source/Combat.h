@@ -4,6 +4,7 @@
 #include <vector>
 #include "Window.h"
 #include "Render.h"
+#include <random>
 
 // Declaración de la clase Combat
 class Combat {
@@ -15,23 +16,29 @@ public:
 		oponentActual = equipOponent[0];
 	}
 
-	void iniciar();
+	void Iniciar();
 
 private:
-	bool combatFinalitzat();
-	void tornJugador();
-	void realitzarAtac(Enemic* atacant, Enemic* defensor);
-	void canviarEnemic(std::vector<Enemic*>& equip, Enemic*& actual);
-	void eliminarEnemic(std::vector<Enemic*>& equip, Enemic* Enemic);
-	void mostrarEstat();
-	void determinarGuanyador();
-	void renderitzarBotonsPreCombat(SDL_Renderer* renderer, TTF_Font* font);
-	void renderitzarBotonsCombat(SDL_Renderer* renderer, TTF_Font* font);
-	void renderitzarBotonsInventari(SDL_Renderer* renderer, TTF_Font* font);
-	void renderitzarBotonsCanviar(SDL_Renderer* renderer, TTF_Font* font);
-	void renderitzarText(SDL_Renderer* renderer, TTF_Font* font, const std::string& text, int x, int y, SDL_Color color);
+	bool CombatFinalitzat();
+	void TornJugador();
+	void RealitzarAtac(int numAtacJugador);
+	bool JugadorEsMesRapid();
+
+	void CanviarEnemic();
+	void MostrarEstat();
+	
+	void RenderitzarBotonsPreCombat();
+	void RenderitzarBotonsCombat();
+	void RenderitzarBotonsInventari();
+	void RenderitzarBotonsCanviar();
+	void RenderitzarText(const std::string& text, int x, int y, SDL_Color color);
+
 
 private:
+	std::random_device rd;
+	std::mt19937 generador;
+	std::uniform_int_distribution<int> distribucion;
+
 	Enemic* jugadorActual;
 	Enemic* oponentActual;
 	std::vector<Enemic*> equipJugador;
@@ -39,10 +46,15 @@ private:
 
 	SDL_Window* finestra;
 	SDL_Renderer* renderitzador;
+	TTF_Font* font;
 
 	// Mini maquina d'estats
 	bool b_Idle = true;
 	bool b_Atacar = false;
 	bool b_Inventari = false;
 	bool b_Canviar = false;
+
+	// Personatge/enemic actiu
+	int jugadorActiu = 0; // Cos/poder actiu
+	int enemicActiu = 0;
 };

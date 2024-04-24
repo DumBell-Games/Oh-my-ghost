@@ -131,7 +131,7 @@ bool TitleScreen::Update(float dt)
 
         // Començar el combat
         Combat nouCombat(equipJugador, equipOponent);
-        nouCombat.iniciar();
+        nouCombat.Iniciar();
         std::cout << "End Combat" << std::endl;
     }
 
