@@ -6,6 +6,9 @@
 
 void Combat::Iniciar() {
 	std::cout << "Comença el combat!" << std::endl;
+	
+	font = app->render->font;
+	renderitzador = app->render->renderer;
 
 	// Inicialitzar el generador de números aleatoris amb una llavor
 	std::mt19937 generadorTemp(rd());
@@ -34,8 +37,8 @@ void Combat::TornJugador() {
 				jugant = false;
 			}
 			else if (event.type == SDL_KEYDOWN) {
-				if (b_Idle)
-				{
+				if (b_Idle) {
+					// Opcions precombat
 					switch (event.key.keysym.sym) {
 					case SDLK_1:
 						std::cout << "Has premut la tecla 1 - Atacar" << std::endl;
@@ -67,9 +70,8 @@ void Combat::TornJugador() {
 						break;
 					}
 				}
-				// Selecionar atac
-				else if (b_Atacar)
-				{
+				else if (b_Atacar) {
+					// Selecionar atac
 					switch (event.key.keysym.sym) {
 					case SDLK_1:
 						std::cout << "Ataca1" << std::endl;
@@ -95,9 +97,9 @@ void Combat::TornJugador() {
 						break;
 					}
 				}
-				// Selecionar item
 				else if (b_Inventari)
 				{
+					// Selecionar item
 					switch (event.key.keysym.sym) {
 					case SDLK_1:
 						std::cout << "Item1" << std::endl;
@@ -122,9 +124,7 @@ void Combat::TornJugador() {
 			}
 		}
 
-		// Esborra la finestra
-		SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, 255);
-		SDL_RenderClear(app->render->renderer);
+		NetejarFinestra();
 
 		// Diferents renders
 		if (b_Atacar) { RenderitzarBotonsCombat(); }
@@ -132,9 +132,7 @@ void Combat::TornJugador() {
 		else if (b_Canviar) { RenderitzarBotonsCanviar(); }
 		else { RenderitzarBotonsPreCombat(); }
 
-
-		// Mostra els canvis en la finestra
-		SDL_RenderPresent(app->render->renderer);
+		MostrarCanvis();
 	}
 }
 
@@ -183,14 +181,7 @@ bool Combat::JugadorEsMesRapid() {
 bool Combat::QuedenMesEnemics() {
 	int sizeEquipOponent = equipOponent.size();
 
-	if (sizeEquipOponent <= 1)
-		return false;
-	else {
-		for (int i = 0; i < sizeEquipOponent; i++)
-		{
 
-		}
-	}
 
 	return true;
 }
@@ -200,8 +191,19 @@ void Combat::CanviarEnemic() {
 }
 
 void Combat::MostrarEstat() {
-	std::cout << "El teu Enemic: " << jugadorActual->nom << " (Salut: " << jugadorActual->salut << ")" << std::endl;
-	std::cout << "Enemic de l'oponent: " << oponentActual->nom << " (Salut: " << oponentActual->salut << ")" << std::endl;
+	//std::cout << "El teu Enemic: " << jugadorActual->nom << " (Salut: " << jugadorActual->salut << ")" << std::endl;
+	//std::cout << "Enemic de l'oponent: " << oponentActual->nom << " (Salut: " << oponentActual->salut << ")" << std::endl;
+}
+
+void Combat::NetejarFinestra() {
+	// Esborra la finestra
+	SDL_SetRenderDrawColor(app->render->renderer, 0, 0, 0, 255);
+	SDL_RenderClear(app->render->renderer);
+}
+
+void Combat::MostrarCanvis() {
+	// Mostra els canvis en la finestra
+	SDL_RenderPresent(app->render->renderer);
 }
 
 void Combat::RenderitzarBotonsPreCombat() {
@@ -250,6 +252,32 @@ void Combat::RenderitzarBotonsCombat() {
 
 void Combat::RenderitzarBotonsInventari() {
 	// Llista items
+
+	SDL_Color color = { 255, 255, 255, 255 }; // Color blanc
+
+	// Dibuixa el botó "Atacar"
+	SDL_Rect atacarRect = { 50, 50, 200, 50 };
+	SDL_SetRenderDrawColor(renderitzador, 0, 255, 0, 255); // Color verd
+	SDL_RenderFillRect(renderitzador, &atacarRect);
+	RenderitzarText("Item1", 80, 65, color);
+
+	// Dibuixa el botó "Inventari"
+	SDL_Rect inventariRect = { 50, 150, 200, 50 };
+	SDL_SetRenderDrawColor(renderitzador, 0, 255, 0, 255); // Color verd
+	SDL_RenderFillRect(renderitzador, &inventariRect);
+	RenderitzarText("Item2", 70, 165, color);
+
+	// Dibuixa el botó "Canviar"
+	SDL_Rect canviarRect = { 50, 250, 200, 50 };
+	SDL_SetRenderDrawColor(renderitzador, 0, 255, 0, 255); // Color verd
+	SDL_RenderFillRect(renderitzador, &canviarRect);
+	RenderitzarText("Item3", 80, 265, color);
+
+	// Dibuixa el botó "Fugir"
+	SDL_Rect fugirRect = { 50, 350, 200, 50 };
+	SDL_SetRenderDrawColor(renderitzador, 0, 255, 0, 255); // Color verd
+	SDL_RenderFillRect(renderitzador, &fugirRect);
+	RenderitzarText("Item4", 90, 365, color);
 }
 
 void Combat::RenderitzarBotonsCanviar() {

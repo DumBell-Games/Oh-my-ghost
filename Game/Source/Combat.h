@@ -22,11 +22,14 @@ private:
 	bool CombatFinalitzat();
 	void TornJugador();
 	void RealitzarAtac(int numAtacJugador);
-	bool JugadorEsMesRapid();
 
+	bool JugadorEsMesRapid();
+	bool QuedenMesEnemics();
 	void CanviarEnemic();
 	void MostrarEstat();
-	
+
+	void NetejarFinestra();
+	void MostrarCanvis();
 	void RenderitzarBotonsPreCombat();
 	void RenderitzarBotonsCombat();
 	void RenderitzarBotonsInventari();
