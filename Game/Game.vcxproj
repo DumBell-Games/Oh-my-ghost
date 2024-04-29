@@ -98,6 +98,7 @@
     <ClCompile Include="Source\Enemies.cpp" />
     <ClCompile Include="Source\FadeToBlack.cpp" />
     <ClCompile Include="Source\IntroScreen.cpp" />
+    <ClCompile Include="Source\InventoryManager.cpp" />
     <ClCompile Include="Source\PauseMenu.cpp" />
     <ClCompile Include="Source\menu.cpp" />
     <ClCompile Include="Source\DialogManager.cpp" />
@@ -127,6 +128,8 @@
     <ClInclude Include="Source\Enemies.h" />
     <ClInclude Include="Source\FadeToBlack.h" />
     <ClInclude Include="Source\IntroScreen.h" />
+    <ClInclude Include="Source\Inventory.h" />
+    <ClInclude Include="Source\InventoryManager.h" />
     <ClInclude Include="Source\PauseMenu.h" />
     <ClInclude Include="Source\menu.h" />
     <ClInclude Include="Source\Dialog.h" />
