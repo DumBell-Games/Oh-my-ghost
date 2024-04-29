@@ -8,12 +8,7 @@
 
 enum class ItemType : char
 {
-	PLAYER,
-	ITEM,
-	DIALOG_TRIGGER,
-	NPC,
-	ENEMY,
-	TRANSITION,
+	COLA,
 	UNKNOWN
 };
 
@@ -90,6 +85,10 @@ public:
 	ItemType type;
 	bool active = true;
 	pugi::xml_node parameters; 
+	std::string descripcion;
+	std::string tipo;
+	int curacion;
+	int itemFx;
 
 	// Possible properties, it depends on how generic we
 	// want our Entity class, maybe it's not renderable...

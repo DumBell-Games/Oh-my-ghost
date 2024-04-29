@@ -1,18 +1,18 @@
-#ifndef __ITEM_H__
-#define __ITEM_H__
+#ifndef __ITEMCOLA_H__
+#define __ITEMCOLA_H__
 
-#include "Entity.h"
+#include "Inventory.h"
 #include "Point.h"
 #include "SDL/include/SDL.h"
 
 struct SDL_Texture;
 
-class Item : public Entity
+class Cola : public Inventory
 {
 public:
 
-	Item();
-	virtual ~Item();
+	Cola();
+	virtual ~Cola();
 
 	bool Awake();
 
@@ -33,4 +33,4 @@ private:
 	uint texW, texH;
 };
 
-#endif // __ITEM_H__
+#endif // __ITEMCOLA_H__

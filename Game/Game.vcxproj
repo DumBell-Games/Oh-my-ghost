@@ -99,6 +99,8 @@
     <ClCompile Include="Source\FadeToBlack.cpp" />
     <ClCompile Include="Source\IntroScreen.cpp" />
     <ClCompile Include="Source\InventoryManager.cpp" />
+    <ClCompile Include="Source\InventoryScreen.cpp" />
+    <ClCompile Include="Source\ItemCola.cpp" />
     <ClCompile Include="Source\PauseMenu.cpp" />
     <ClCompile Include="Source\menu.cpp" />
     <ClCompile Include="Source\DialogManager.cpp" />
@@ -106,7 +108,6 @@
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\GuiControlButton.cpp" />
     <ClCompile Include="Source\GuiManager.cpp" />
-    <ClCompile Include="Source\Item.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
     <ClCompile Include="Source\Audio.cpp" />
@@ -130,6 +131,8 @@
     <ClInclude Include="Source\IntroScreen.h" />
     <ClInclude Include="Source\Inventory.h" />
     <ClInclude Include="Source\InventoryManager.h" />
+    <ClInclude Include="Source\InventoryScreen.h" />
+    <ClInclude Include="Source\ItemCola.h" />
     <ClInclude Include="Source\PauseMenu.h" />
     <ClInclude Include="Source\menu.h" />
     <ClInclude Include="Source\Dialog.h" />
@@ -140,7 +143,6 @@
     <ClInclude Include="Source\GuiControl.h" />
     <ClInclude Include="Source\GuiControlButton.h" />
     <ClInclude Include="Source\GuiManager.h" />
-    <ClInclude Include="Source\Item.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\Npc.h" />
     <ClInclude Include="Source\Pathfinding.h" />

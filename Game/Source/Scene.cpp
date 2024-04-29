@@ -6,7 +6,6 @@
 #include "Window.h"
 #include "Scene.h"
 #include "Map.h"
-#include "Item.h"
 #include "Optick/include/optick.h"
 #include "DialogTriggerEntity.h"
 #include "Npc.h"
@@ -15,6 +14,7 @@
 #include "FadeToBlack.h"
 #include "PauseMenu.h"
 #include "menu.h"
+
 
 #include "Defs.h"
 #include "Log.h"
@@ -46,10 +46,10 @@ bool Scene::Awake(pugi::xml_node config)
 
 	// iterate all items in the scene
 	// Check https://pugixml.org/docs/quickstart.html#access
-	for (pugi::xml_node itemNode = config.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
+	for (pugi::xml_node itemNode = config.child("cola"); itemNode; itemNode = itemNode.next_sibling("cola"))
 	{
-		Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM, itemNode);
-		//item->parameters = itemNode;
+		Inventory* cola = (Inventory*)app->inventoryManager->CreateItem(ItemType::COLA, itemNode);
+		//dialogTrigger->parameters = itemNode;
 	}
 	for (pugi::xml_node itemNode = config.child("dialogTrigger"); itemNode; itemNode = itemNode.next_sibling("dialogTrigger"))
 	{

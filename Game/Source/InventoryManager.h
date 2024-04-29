@@ -42,7 +42,7 @@ public:
 	List<Inventory*> items;
 
 	bool started = false;
-
+	
 };
 
 #endif // __INVENTORYMANAGER_H__

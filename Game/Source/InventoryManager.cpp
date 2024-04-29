@@ -1,6 +1,5 @@
 #include "InventoryManager.h"
 #include "Player.h"
-#include "Item.h"
 #include "DialogTriggerEntity.h"
 #include "App.h"
 #include "Textures.h"
@@ -8,6 +7,7 @@
 #include "Npc.h"
 #include "Enemies.h"
 #include "TransitionTrigger.h"
+#include "ItemCola.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -95,7 +95,9 @@ Inventory* InventoryManager::CreateItem(ItemType type, pugi::xml_node& data)
 	//L03: DONE 3a: Instantiate entity according to the type and add the new entity to the list of Entities
 	switch (type)
 	{
-	
+		case ItemType::COLA:
+		item = new Cola();
+		break;	
 	default:
 		break;
 	}

@@ -1,6 +1,5 @@
 #include "EntityManager.h"
 #include "Player.h"
-#include "Item.h"
 #include "DialogTriggerEntity.h"
 #include "App.h"
 #include "Textures.h"
@@ -97,9 +96,6 @@ Entity* EntityManager::CreateEntity(EntityType type, pugi::xml_node& data)
 	{
 	case EntityType::PLAYER:
 		entity = new Player();
-		break;
-	case EntityType::ITEM:
-		entity = new Item();
 		break;
 	case EntityType::DIALOG_TRIGGER:
 		entity = new DialogTrigger();
