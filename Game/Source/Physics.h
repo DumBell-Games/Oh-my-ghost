@@ -26,7 +26,7 @@ enum bodyType {
 enum class ColliderType {
 	PLAYER,
 	GHOST,
-	ITEM,
+	COLA,
 	PLATFORM, 
 	DIALOG_TRIGGER,
 	NPC,

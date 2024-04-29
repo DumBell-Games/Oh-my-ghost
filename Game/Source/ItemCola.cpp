@@ -21,8 +21,6 @@ bool Cola::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	
-
-
 	//cargar las caraterísticas que tiene el objeto en cuestion (cola) 
 	curacion = 10;
 	//cargariamos descripción desde el documento xml
@@ -32,7 +30,7 @@ bool Cola::Awake() {
 	//cargar sonido del objeto
 	itemFx = app->audio->LoadFx("Assets/Audio/Fx/cola.wav");
 	//cargar la textura desde el xml
-		texturePath = parameters.attribute("texturePath").as_string();
+	texturePath = parameters.attribute("texturePath").as_string();
 
 	return true;
 }
@@ -42,6 +40,7 @@ bool Cola::Start() {
 	//initilize textures
 	texture = app->tex->Load(texturePath);
 
+	
 	return true;
 }
 
