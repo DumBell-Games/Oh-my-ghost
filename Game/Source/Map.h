@@ -21,11 +21,11 @@ struct TileSet
 {
 	SString	name;
 	int	firstgid;
-	int margin;
-	int	spacing;
-	int	tileWidth;
-	int	tileHeight;
-	int columns;
+	char margin;
+	char spacing;
+	char tileWidth;
+	char tileHeight;
+	char columns;
 	int tilecount;
 
 	SDL_Texture* texture;

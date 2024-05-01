@@ -14,6 +14,8 @@
 #include <math.h>
 #include "SDL_image/include/SDL_image.h"
 
+#include "tmxTileidAdjustment.h"
+
 Map::Map(bool startEnabled) : Module(startEnabled), mapLoaded(false)
 {
     name.Create("map");
@@ -48,6 +50,7 @@ bool Map::Start() {
 
     SString mapPath = path;
     mapPath += mapNames[currentMap];
+    //AdjustMapFileIDs(mapPath);
     bool ret = Load(mapPath);
 
     return ret;
@@ -356,13 +359,14 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
     LoadProperties(node, layer->properties);
 
     //Reserve the memory for the data 
-    layer->data = new uint[layer->width * layer->height];
-    memset(layer->data, 0, layer->width * layer->height);
+    uint size = layer->width * layer->height;
+    layer->data = new uint[size];
+    memset(layer->data, 0, size);
 
     //Iterate over all the tiles and assign the values
     pugi::xml_node tile;
     uint i = 0;
-    for (tile = node.child("data").child("tile"); tile && ret; tile = tile.next_sibling("tile"))
+    for (tile = node.child("data").child("tile"); tile && ret && i < size; tile = tile.next_sibling("tile"))
     {
         layer->data[i] = tile.attribute("gid").as_uint();
         i++;
