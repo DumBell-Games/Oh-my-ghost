@@ -14,8 +14,6 @@
 #include <math.h>
 #include "SDL_image/include/SDL_image.h"
 
-#include "tmxTileidAdjustment.h"
-
 Map::Map(bool startEnabled) : Module(startEnabled), mapLoaded(false)
 {
     name.Create("map");
@@ -50,7 +48,6 @@ bool Map::Start() {
 
     SString mapPath = path;
     mapPath += mapNames[currentMap];
-    //AdjustMapFileIDs(mapPath);
     bool ret = Load(mapPath);
 
     return ret;
