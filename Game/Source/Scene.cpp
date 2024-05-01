@@ -168,12 +168,12 @@ bool Scene::PostUpdate()
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 	{
 		//Destroy all the buttons in the title screen
-		//ListItem<GuiControl*>* controlListMenu = nullptr;
-		//for (controlListMenu = app->titlescreen->titleButtons.start; controlListMenu != NULL; controlListMenu = controlListMenu->next)
-		//{
-		//	app->guiManager->DestroyGuiControl(controlListMenu->data);
-		//}
-		//app->titlescreen->titleButtons.Clear();
+		/*ListItem<GuiControl*>* controlListMenu = nullptr;
+		for (controlListMenu = app->titlescreen->titleButtons.start; controlListMenu != NULL; controlListMenu = controlListMenu->next)
+		{
+			app->guiManager->DestroyGuiControl(controlListMenu->data);
+		}
+		app->titlescreen->titleButtons.Clear();*/
 
 		/*app->guiManager->active = true;
 		app->guiManager->Enable();
@@ -181,7 +181,7 @@ bool Scene::PostUpdate()
 		app->pause->active = true;
 		app->pause->CreatePauseButtons();*/
 
-		//app->fadeToBlack->FadeToBlackTransition((Module*)app->scene, (Module*)app->pause, 0.0f);
+		app->fadeToBlack->FadeToBlackTransition((Module*)app->scene, (Module*)app->pause, 0.0f);
 	}
 
 	return ret;

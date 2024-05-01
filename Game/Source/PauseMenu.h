@@ -35,10 +35,13 @@ public:
     int screenWidth;
     int screenHeight;
     bool buttoncreated = false;
-
+    bool ajustcreated = false;
+    bool inpause = false;
+    bool inajustes = false;
 
     Timer timer;
 
     //gui list
     List<GuiControl*> PauseButtons;
+    List<GuiControl*> AjustesButtons;
 };
