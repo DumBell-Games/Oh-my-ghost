@@ -14,6 +14,8 @@ public:
     PauseMenu(bool startEnabled = true);
     virtual ~PauseMenu();
 
+    bool Awake();
+
     bool Start();
 
     bool Update(float dt);
@@ -38,10 +40,14 @@ public:
     bool ajustcreated = false;
     bool inpause = false;
     bool inajustes = false;
+    bool fullscreen = true;
+    bool vsycn = true;
 
     Timer timer;
 
     //gui list
     List<GuiControl*> PauseButtons;
     List<GuiControl*> AjustesButtons;
+
+    pugi::xml_node parameters;
 };
