@@ -8,8 +8,8 @@
 
   <renderer>
 	  <fonts>
-		  <primary_font fontPath="Assets/Fonts/Aladin-Regular.ttf" fontSize="25"/>
-		  <secondary_font fontPath="Assets/Fonts/Aladin-Regular.ttf" fontSize="25"/>
+		  <primary_font fontPath="Assets/Fonts/Heyam.ttf" fontSize="25"/>
+		  <secondary_font fontPath="Assets/Fonts/Heyam.ttf" fontSize="25"/>
 
 	  </fonts>
     <vsync value="true"/>
