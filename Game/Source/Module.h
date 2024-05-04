@@ -12,12 +12,36 @@ class Module
 {
 public:
 
-	Module() : active(false)
+	Module(bool startEnabled = true) : active(startEnabled), awoken(false), needsAwaking(false)
 	{}
 
 	void Init()
 	{
-		active = true;
+		isEnabled = active;
+	}
+
+  // Switches isEnabled and calls Start() method
+	bool Enable()
+	{
+		bool ret = false;
+		if (!isEnabled) {
+			active = isEnabled = true;
+			paused = false;
+			ret = Start();
+		}
+		return ret;
+	}
+
+  // Switches isEnabled and calls CleanUp() method
+	bool Disable()
+	{
+		bool ret = false;
+		if (isEnabled) {
+			active = isEnabled = false;
+			paused = false;
+			ret = CleanUp();
+		}
+		return ret;
 	}
 
 	// Called before render is available
@@ -75,10 +99,30 @@ public:
 		return true;
 	}
 
+	inline bool IsEnabled() const { return isEnabled; }
+
+	// Pauses or unpauses the module, and returns the new pause state
+	bool Pause()
+	{
+		active = paused;
+		paused = !active;
+		return paused;
+	}
+
 public:
 
 	SString name;
-	bool active;
+	bool active;	
+  
+	// variable para FadeToBlack. También usado para denotar si el módulo está inicializado o no
+	bool isEnabled = true;
+
+	// variables para modulo Reload
+	bool awoken;
+	bool needsAwaking; // Algunos módulos necesitan volver a ejecutar Awake() cuando se activan (Ejemplo: EntityManager si se ha creado alguna entidad antes de iniciarlo)
+
+	// Indica si el modulo esta pausado o no
+	bool paused = false;
 
 };
 

@@ -28,7 +28,7 @@
   </input>
 
   <scene>
-    <player x="150" y="672" texturePath="Assets/Textures/player1.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg"/>
+    <player x="80" y="672" texturePath="Assets/Textures/player1.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg"/>
     <map path="Assets/Maps/" name="MapTemplate.tmx"/>
     <item x="256" y="515" texturepath="Assets/Textures/goldCoin.png"/>
     <item x="416" y="512" texturepath="Assets/Textures/goldCoin.png"/>
@@ -45,21 +45,21 @@
 	<enemy x="500" y="272" texturePath="Assets/Textures/pigNpc.png"/>
 	<enemy x="700" y="272" texturePath="Assets/Textures/pigNpc.png"/>
 	
-		<dialogTrigger x="200" y="672" texturepath="Assets/Textures/player2.png"  facetexturepath="Assets/Textures/player2_face.png" name="Sisebuto" repeat="true">
+		<dialogTrigger x="200" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true">
 		<sentences>
-			<sentence name="Springy"	facetexturepath="Assets/Textures/cats_face1.png" text="Hola"/>
-			<sentence name="Sisebuto"	facetexturepath="Assets/Textures/cats_face2.png" text="(Hablaría borracho) Déjame en paz *burp*, a no ser que me quieras pagar otra ronda, que entonces sí te haré caso"/>
-			<sentence name="Springy"	facetexturepath="Assets/Textures/cats_face1.png" text="*…*"/>
+			<sentence name="Springy"	facetexturepath="Assets/Textures/catNpc.png" text="Hola"/>
+			<sentence name="Sisebuto"	facetexturepath="Assets/Textures/mouseNpc.png" text="(Hablaría borracho) Déjame en paz *burp*, a no ser que me quieras pagar otra ronda, que entonces sí te haré caso"/>
+			<sentence name="Springy"	facetexturepath="Assets/Textures/catNpc.png" text="*…*"/>
 			
 		</sentences>
 		<repeat_sentences>
-			<sentence name="Sisebuto"	facetexturepath="Assets/Textures/cats_face2.png" text="PESADOO, que te he dicho que no vuelvas sin un copazo"/>
-			<sentence name="Springy"	facetexturepath="Assets/Textures/cats_face1.png" text="*Debería conseguir dinero quizás…*"/>	
+			<sentence name="Sisebuto"	facetexturepath="Assets/Textures/mouseNpc.png" text="PESADOO, que te he dicho que no vuelvas sin un copazo"/>
+			<sentence name="Springy"	facetexturepath="Assets/Textures/catNpc.png" text="*Debería conseguir dinero quizás…*"/>	
 		</repeat_sentences>
 	</dialogTrigger>
-		<dialogTrigger x="300" y="672" texturepath="Assets/Textures/player2.png"  facetexturepath="Assets/Textures/player2_face.png" name="Sisebuto" repeat="true">
+		<dialogTrigger x="300" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true">
 			<sentences>
-				<sentence name="Homeless"	facetexturepath="Assets/Textures/cats_face1.png" text="zZzZzZZZzZZZ"/>
+				<sentence name="Homeless"	facetexturepath="Assets/Textures/catNpc.png" text="zZzZzZZZzZZZ"/>
 				<sentence name ="Springy" type="choose" text="*Anda tiene 5 PawCoins, ¿le robo?*">
 					<option1 text="Sí">
 						<sentence text="Vale ya tengo 5 PawCoins pero me siento sucio, al menos puedo comprarle el copazo a Sisebuto" />
@@ -70,7 +70,7 @@
 				</sentence>	
 			</sentences>
 	</dialogTrigger>
-	<dialogTrigger x="500" y="672" texturepath="Assets/Textures/player2.png"  facetexturepath="Assets/Textures/player2_face.png" name="Sisebuto" repeat="true">
+	<dialogTrigger x="500" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true">
 		  <sentences>
 			  <sentence name="Segismunda"	text="Aiiiiiiiiiii que mierda de vidaaaaaaaaaa, tengo un marido borracho y mi hijo se fue a descubrir mundo, que sola estoy, QUE SOLAAAAAAA"/>
 			  <sentence name ="Springy"		text="No serás la mujer de Sisebuto, ¿verdad?"/>
@@ -106,7 +106,7 @@
 
 		</repeat_sentences>
 	 </dialogTrigger>
-	  <dialogTrigger x="700" y="672" texturepath="Assets/Textures/player2.png"  facetexturepath="Assets/Textures/player2_face.png" name="Sisebuto" repeat="true">
+	  <dialogTrigger x="700" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true">
 		  <sentences>
 			  <sentence name="Sr. Bestia"	text="Pasad putos pobres, que yo os doy dinero para que no déis tanto asco."/>
 			  <sentence name ="Springy"		text="*Recibe 20 PawCoins*"/>
@@ -114,23 +114,7 @@
 		  </sentences>
 		
 	  </dialogTrigger>
-	  <dialogTrigger x="500" y="272" texturepath="Assets/Textures/player2.png"  facetexturepath="Assets/Textures/player2_face.png" name="Sisebuto" repeat="true">
-		  <sentences>
-			  <sentence name="Fernando"	text="No pasa el filtro"/>
-		  </sentences>
-		  <repeat_sentences>
-			  <sentence name="Fernando"	text="QUE NO PASA EL FILTRO, QUIEN HA SIO QUIEN HA SIO, PEG"/>
-		  </repeat_sentences>
-	  </dialogTrigger>
-	  
-	  <dialogTrigger x="700" y="272" texturepath="Assets/Textures/player2.png"  facetexturepath="Assets/Textures/player2_face.png" name="Sisebuto" repeat="true">
-		  <sentences>
-			  <sentence name="Porcino"	text="He roto la puerta de mi coche de 60000€, *PAM* *PAM* *PAM*, vaya mal rato, higo"/>
-		</sentences>
-		  <repeat_sentences>
-			  <sentence name="Porcino"	text="He roto la puerta de mi coche de 60000€, *PAM* *PAM* *PAM*, vaya mal rato, higo"/>
-		  </repeat_sentences>
-	  </dialogTrigger>
+	 
   </scene>
 	
   <dialogmanager>
@@ -139,5 +123,45 @@
 	  </textures>
   </dialogmanager>
 
+	<map path="Assets/Maps/">
+		<map id="0" file="MapTemplate.tmx"/>
+		<map id="1" file="hello.tmx"/>
+	</map>
+
+	<reload>
+		<presets>
+			<!--Si el modulo ya esta activo, no se intenta reactivar a menos de que se marque como reload (y aun asi primero lo desactiva)-->
+			<!--l = activar (Load), u = desactivar (Unload), r = ambos (Reload)-->
+			<!--El orden de los módulos es importante, igual que para el bucle principal del juego-->
+			<!--Unload va de final a inicio, Load va de inicio a final-->
+			<preset name="loadMap" fadeOut="1" fadeIn="1">
+				<!--Hay que tener en cuenta todo lo que se cargue desde la informacion de mapa y reiniciarlo también-->
+				<module type="r" name="textures"/>
+				<!--<module type="r" name="audio"/>-->
+				<module type="r" name="physics"/>
+				<module type="r" name="scene"/>
+				<module type="r" name="map"/>
+				<module type="r" name="entitymanager"/>
+				<module type="r" name="dialogmanager"/>
+				<module type="u" name="titlescreen"/> <!--Cuando cargas mapa no va a estar el menú principal cargado-->
+			</preset>
+			<preset name="teamLogoToIntro" fadeOut="0.5" fadeIn="0.5">
+				<module type="u" name="teamScreen"/>
+				<module type="l" name="introScreen"/>
+			</preset>
+			<preset name="introToTitle" fadeOut="0.5" fadeIn="0.5">
+				<module type="u" name="introScreen"/>
+				<module type="l" name="guiManager"/>
+				<module type="l" name="titlescreen"/>
+				<module/>
+			</preset>
+			<preset name="titleToGame" fadeOut="1" fadeIn="1">
+				<module type="u" name="titlescreen"/>
+				<module type="l" name="map"/>
+				<module/>
+			</preset>
+			
+		</presets>
+	</reload>
 
 </config>

@@ -11,9 +11,10 @@
 #include "Defs.h"
 #include "Log.h"
 
-EntityManager::EntityManager() : Module()
+EntityManager::EntityManager(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("entitymanager");
+	needsAwaking = true;
 }
 
 // Destructor
@@ -38,6 +39,8 @@ bool EntityManager::Awake(pugi::xml_node config)
 		ret = item->data->Awake();
 	}
 
+	awoken = true;
+
 	return ret;
 
 }
@@ -58,6 +61,8 @@ bool EntityManager::Start() {
 		ret = item->data->Start();
 	}
 
+	started = true;
+
 	return ret;
 }
 
@@ -71,15 +76,18 @@ bool EntityManager::CleanUp()
 	while (item != NULL && ret == true)
 	{
 		ret = item->data->CleanUp();
+		RELEASE(item->data);
 		item = item->prev;
 	}
 
 	entities.Clear();
 
+	awoken = started = false;
+
 	return ret;
 }
 
-Entity* EntityManager::CreateEntity(EntityType type)
+Entity* EntityManager::CreateEntity(EntityType type, pugi::xml_node& data)
 {
 	Entity* entity = nullptr; 
 
@@ -106,7 +114,26 @@ Entity* EntityManager::CreateEntity(EntityType type)
 		break;
 	}
 
+	if (entity) {
+		entity->parameters = data;
+		if (entity->active) {
+			// Si EntityManager ya está activo, activa la entidad directamente a menos de que esté explicitamente desactivada en su constructor
+			if (awoken) entity->Awake();
+			if (started) entity->Start();
+		}
+	}
+
 	entities.Add(entity);
+
+	return entity;
+}
+
+Entity* EntityManager::CreateFromMap(char typeId, pugi::xml_node& data)
+{
+	Entity* entity = nullptr;
+
+	EntityType type = static_cast<EntityType>(1);
+
 
 	return entity;
 }

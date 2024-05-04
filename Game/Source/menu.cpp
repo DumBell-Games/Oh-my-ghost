@@ -3,13 +3,21 @@
 #include "Render.h"
 #include "Textures.h"
 #include "Audio.h"
+#include "Map.h"
+#include "Reload.h"
 #include "GuiManager.h"
 #include "GuiControl.h"
 #include "GuiControlButton.h"
 #include "SDL/include/SDL.h"
+#include "FadeToBlack.h"
+#include "Input.h"
+#include "Scene.h"
+#include "IntroScreen.h"
+#include "TeamScreen.h"
 
-TitleScreen::TitleScreen(bool startEnabled) : Module()
+TitleScreen::TitleScreen(bool startEnabled) : Module(startEnabled)
 {
+    name.Create("titlescreen");
 }
 
 // Destructor
@@ -19,6 +27,9 @@ TitleScreen::~TitleScreen()
 // Called before render is available
 bool TitleScreen::Start()
 {
+    
+    menuFx = app->audio->LoadFx("Assets/Audio/Fx/menuFX.wav");
+    
     menu1 = app->tex->Load("Assets/Screens/mainMenu1.jpg");
     menu2 = app->tex->Load("Assets/Screens/mainMenu2.jpg");
     menu3 = app->tex->Load("Assets/Screens/mainMenu3.jpg");
@@ -27,21 +38,20 @@ bool TitleScreen::Start()
     app->render->camera.x = 0;
     app->render->camera.y = 0;
 
-    //TODO: cambiar musica
-    //app->audio->PlayMusic("Assets/Music/titleScreen.ogg", 1.0f);
-    titleSound = app->audio->LoadFx("Assets/Music/onlymp3.to-Bully-Soundtrack-Main-Theme-7RU7CohvsMU-192k-1704300284.wav");
-
     SDL_GetWindowSize(app->win->window, &screenWidth, &screenHeight);
 
     CreateTitleButtons();
+
+    app->audio->PlayFx(menuFx);
 
     return true;
 }
 
 // Called each loop iteration
 bool TitleScreen::Update(float dt)
-{
-    if (app->input->GetAxis(ControlID::MOVE_VERTICAL) <= -0.4f) //arriba
+{   
+
+    if (app->input->GetButton(ControlID::UP) == KEY_REPEAT) //arriba
     {
         if (timer.ReadMSec() >= 200)
         {
@@ -50,7 +60,7 @@ bool TitleScreen::Update(float dt)
             timer.Start();
         }
     }
-    if (app->input->GetAxis(ControlID::MOVE_VERTICAL) >= 0.4f) //abajo
+    if (app->input->GetButton(ControlID::DOWN) == KEY_REPEAT) //abajo
     {
         if (timer.ReadMSec() >= 200)
         {
@@ -60,15 +70,7 @@ bool TitleScreen::Update(float dt)
         }
     }
 
-    //if (App->input->GetKey(SDL_SCANCODE_RETURN) == KEY_DOWN)
-    //{
-    //    if (menuIndex == 1) App->network->optionsIndex = 1;
-    //    //else if (menuIndex == 2) App->network->optionsIndex = 2;
-    //    //else if (menuIndex == 3) App->network->optionsIndex = 3;
-    //    else if (menuIndex == 4) return UPDATE_STOP;
-    //}
-
-    ListItem<GuiControl*>* controlListItem = nullptr;
+    ListItem<GuiControlButton*>* controlListItem = nullptr;
     for (controlListItem = titleButtons.start; controlListItem != NULL; controlListItem = controlListItem->next)
     {
         if (controlListItem->data != nullptr)
@@ -80,11 +82,18 @@ bool TitleScreen::Update(float dt)
     {
         titleButtons[menuIndex - 1]->state = GuiControlState::SELECTED;
     }
-  
+
+    if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN && titleButtons.Count() >= menuIndex)
+    {
+        titleButtons[menuIndex - 1]->state = GuiControlState::PRESSED;
+        titleButtons[menuIndex - 1]->NotifyObserver();
+    }
+
+  /*
     if (menuIndex == 1) app->render->DrawTexture(menu1, 0, 0, NULL);
     else if (menuIndex == 2) app->render->DrawTexture(menu2, 0, 0, NULL);
     else if (menuIndex == 3) app->render->DrawTexture(menu3, 0, 0, NULL);
-    else if (menuIndex == 4) app->render->DrawTexture(menu4, 0, 0, NULL);
+    else if (menuIndex == 4) app->render->DrawTexture(menu4, 0, 0, NULL);*/
 
     return true;
 }
@@ -126,16 +135,26 @@ bool TitleScreen::CleanUp()
         menu4 = nullptr;
     }
 
-    //TODO: cambiar cuando se cambie la funcionalidad de los botones
-    ListItem<GuiControl*>* controlListItem = nullptr;
+    if (menuFx > 0) {
+        app->audio->UnloadFx(menuFx);
+        menuFx = 0;
+    }
+
+
+    ListItem<GuiControlButton*>* controlListItem = nullptr;
     for (controlListItem = titleButtons.start; controlListItem != NULL; controlListItem = controlListItem->next)
     {
-        delete controlListItem->data;
+        app->guiManager->DestroyGuiControl(controlListItem->data);
     }
     titleButtons.Clear();
 
     return true;
 }
+
+void NewGame(GuiControl* ctrl);
+void Continue(GuiControl* ctrl);
+void Options(GuiControl* ctrl);
+void Exit(GuiControl* ctrl);
 
 void TitleScreen::CreateTitleButtons()
 {
@@ -145,23 +164,40 @@ void TitleScreen::CreateTitleButtons()
         int hBt = 40;
         int posBtX = screenWidth / 2 - 220;
         int posBtY = screenHeight / 2 - 10;
-        titleButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Start", { posBtX, posBtY, wBt, hBt }, this));
+        titleButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Start", { posBtX, posBtY, wBt, hBt }, NewGame));
         wBt = 190;
         hBt = 40;
         posBtX = screenWidth / 2 - 220;
         posBtY = screenHeight / 2 + 100;
-        titleButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Continue", { posBtX, posBtY, wBt, hBt }, this));
-        //resume buton
+        titleButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Continue", { posBtX, posBtY, wBt, hBt }, Continue));
         wBt = 190;
         hBt = 40;
         posBtX = screenWidth / 2 - 220;
         posBtY = screenHeight / 2 + 210;
-        titleButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Optiones", { posBtX, posBtY, wBt, hBt }, this));
-        //fullscreen buton
+        titleButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Optiones", { posBtX, posBtY, wBt, hBt }, Options));
         wBt = 30;
         hBt = 30;
         posBtX = screenWidth / 2 + 450;
         posBtY = screenHeight / 2 - 330;
-        titleButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "Exit", { posBtX, posBtY, wBt, hBt }, this));
+        titleButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "Exit", { posBtX, posBtY, wBt, hBt }, Exit));
     }
+}
+
+void NewGame(GuiControl* ctrl)
+{
+    app->map->ChangeMap(0);
+}
+
+void Continue(GuiControl* ctrl)
+{
+    app->map->ChangeMap(1); // TODO el id de mapa debe depender de lo que haya en la partida guardada en el caso de continuar partida. Para ello esta llamada debe cambiarse por una al gestor de partidas (cuando exista)
+}
+
+void Options(GuiControl* ctrl)
+{
+}
+
+void Exit(GuiControl* ctrl)
+{
+    app->Quit();
 }

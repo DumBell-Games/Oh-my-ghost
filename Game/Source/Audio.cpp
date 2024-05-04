@@ -12,7 +12,7 @@
 // NOTE: Library linkage is configured in Linker Options
 //#pragma comment(lib, "../Game/Source/External/SDL_mixer/libx86/SDL2_mixer.lib")
 
-Audio::Audio() : Module()
+Audio::Audio(bool startEnabled) : Module(startEnabled)
 {
 	music = NULL;
 	name.Create("audio");
@@ -176,3 +176,23 @@ bool Audio::PlayFx(unsigned int id, int repeat)
 
 	return ret;
 }
+
+// Unload WAV
+bool Audio::UnloadFx(unsigned int id)
+{
+	bool ret = false;
+
+	if (!active)
+		return false;
+
+	if (id > 0 && id <= fx.Count())
+	{
+		ListItem<Mix_Chunk*>* item = fx.At(id - 1);
+		Mix_FreeChunk(item->data);
+		fx.Del(item);
+		ret = true;
+	}
+
+	return ret;
+}
+
