@@ -80,6 +80,14 @@ bool PauseMenu::Update(float dt) {
                 fullscreen = true;
             }
         }
+        if (inajustes == true && AjustesButtons.At(2)->data->state == GuiControlState::PRESSED) {
+            if (vsycn == true) {
+                vsycn = false;
+            }
+            else if (vsycn == false) {
+                vsycn = true;
+            }
+        }
     }
 
 	return true;
@@ -136,23 +144,34 @@ void PauseMenu::CreatePauseButtons() {
                 wBt = 190;
                 hBt = 40;
                 posBtX = screenWidth - 750;
-                posBtY = screenHeight - 250;
+                posBtY = screenHeight - 550;
                 AjustesButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Fullscreen", { posBtX, posBtY, wBt, hBt }, this));
                 wBt = 190;
                 hBt = 40;
                 posBtX = screenWidth - 750;
-                posBtY = screenHeight - 350;
-                AjustesButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Vsycn", { posBtX, posBtY, wBt, hBt }, this));
-                wBt = 190;
-                hBt = 40;
-                posBtX = screenWidth - 750;
                 posBtY = screenHeight - 450;
-                AjustesButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "Volum", { posBtX, posBtY, wBt, hBt }, this));
-                wBt = 190;
+                AjustesButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Vsycn", { posBtX, posBtY, wBt, hBt }, this));
+                wBt = 70;
                 hBt = 40;
                 posBtX = screenWidth - 750;
-                posBtY = screenHeight - 550;
-                AjustesButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "Fbx", { posBtX, posBtY, wBt, hBt }, this));
+                posBtY = screenHeight - 350;
+                AjustesButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "Volum -", { posBtX, posBtY, wBt, hBt }, this));
+                wBt = 70;
+                hBt = 40;
+                posBtX = screenWidth - 630;
+                posBtY = screenHeight - 350;
+                AjustesButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "Volum +", { posBtX, posBtY, wBt, hBt }, this));
+                wBt = 70;
+                hBt = 40;
+                posBtX = screenWidth - 750;
+                posBtY = screenHeight - 250;
+                AjustesButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, "Fbx -", { posBtX, posBtY, wBt, hBt }, this));
+                wBt = 70;
+                hBt = 40;
+                posBtX = screenWidth - 630;
+                posBtY = screenHeight - 250;
+                AjustesButtons.Add(app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "Fbx +", { posBtX, posBtY, wBt, hBt }, this));
+
             }
         }
         
