@@ -178,6 +178,7 @@
   <ItemGroup>
     <Xml Include="..\Output\config.xml" />
     <Xml Include="..\Output\controls.xml" />
+    <Xml Include="..\Output\inventory.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

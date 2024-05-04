@@ -62,6 +62,8 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
+	
+
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN && currentTexture == texturePlayer)
 	{
 			currentTexture = textureGhost;
@@ -97,6 +99,7 @@ bool Player::Update(float dt)
 	app->render->camera.x = (-position.x * app->win->GetScale()) + w / 2;
 	app->render->camera.y = (-position.y * app->win->GetScale()) + h / 2;
 
+	
 	return true;
 }
 

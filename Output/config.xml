@@ -23,6 +23,10 @@
     <fullscreen_window value="false"/>
   </window>
 
+  <inventory inventoryFile ="inventory.xml">
+	        	
+  </inventory>
+	
   <input bindingsFile="controls.xml">
 		
   </input>
@@ -41,7 +45,8 @@
 	<enemy x="500" y="272" texturePath="Assets/Textures/pigNpc.png"/>
 	<enemy x="700" y="272" texturePath="Assets/Textures/pigNpc.png"/>
 
-	<cola x="200" y="472" texturePath="Assets/Textures/itemCola.png"/>  
+	  <cola x="200" y="472" texturePath="Assets/Textures/itemCola.png"/>
+	  <birra x="250" y="460" texturePath="Assets/Textures/itemCerveza.png"/>
 	  
 	  
 		<dialogTrigger x="200" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true">

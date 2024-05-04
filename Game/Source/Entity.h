@@ -14,6 +14,12 @@ enum class EntityType : char
 	NPC,
 	ENEMY,
 	TRANSITION,
+	COLA,
+	YOGUR,
+	BIRRA,
+	PATATAS,
+	CARAMELOS,
+	VELOCIDAD,
 	UNKNOWN
 };
 

@@ -27,7 +27,7 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	Inventory* CreateItem(ItemType type, pugi::xml_node& data);
+	Inventory* CreateItem(EntityType type, pugi::xml_node& data);
 
 	void DestroyItem(Inventory* item);
 
@@ -40,6 +40,8 @@ public:
 public:
 
 	List<Inventory*> items;
+
+	SString inventoryPath;
 
 	bool started = false;
 	

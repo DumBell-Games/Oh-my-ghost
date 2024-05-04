@@ -5,6 +5,7 @@
 #include "Point.h"
 #include "SDL/include/SDL.h"
 #include "Box2D/Box2D/Box2D.h"
+#include "ItemCola.h"
 
 struct SDL_Texture;
 
@@ -32,6 +33,8 @@ public:
 	bool SaveState(pugi::xml_node& node);
 
 	void SetPosition(iPoint newPos) override;
+
+	
 
 public:
 

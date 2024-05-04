@@ -48,7 +48,7 @@ bool Scene::Awake(pugi::xml_node config)
 	// Check https://pugixml.org/docs/quickstart.html#access
 	for (pugi::xml_node itemNode = config.child("cola"); itemNode; itemNode = itemNode.next_sibling("cola"))
 	{
-		Inventory* cola = (Inventory*)app->inventoryManager->CreateItem(ItemType::COLA, itemNode);
+		Inventory* cola = (Inventory*)app->inventoryManager->CreateItem(EntityType::COLA, itemNode);
 		//dialogTrigger->parameters = itemNode;
 	}
 	for (pugi::xml_node itemNode = config.child("dialogTrigger"); itemNode; itemNode = itemNode.next_sibling("dialogTrigger"))
@@ -221,3 +221,4 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 
 	return true;
 }
+

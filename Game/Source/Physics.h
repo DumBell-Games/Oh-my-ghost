@@ -1,6 +1,7 @@
 #pragma once
 #include "Module.h"
 #include "Entity.h"
+#include "Inventory.h"
 
 #include "Box2D/Box2D/Box2D.h"
 
@@ -75,7 +76,8 @@ public:
 	PhysBody* CreateRectangle(int x, int y, int width, int height, bodyType type);
 	PhysBody* CreateCircle(int x, int y, int radious, bodyType type);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, bodyType type);
-	PhysBody* CreateChain(int x, int y, int* points, int size, bodyType type);
+	PhysBody* CreateChain(int x, int y, int* points, int size, bodyType type); 
+	PhysBody* DestroyCircle(PhysBody* pbody);
 	
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);

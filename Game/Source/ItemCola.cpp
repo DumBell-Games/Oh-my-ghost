@@ -9,7 +9,7 @@
 #include "Point.h"
 #include "Physics.h"
 
-Cola::Cola() : Inventory(ItemType::COLA)
+Cola::Cola() : Inventory(EntityType::COLA)
 {
 	name.Create("cola");
 }
@@ -38,6 +38,11 @@ bool Cola::Awake() {
 bool Cola::Start() {
 
 	//initilize textures
+
+	//haz que el ibody se asigne al objeto
+	ibody = app->physics->CreateCircle(position.x + 32, position.y + 32, 24, bodyType::STATIC);
+	ibody->ctype = ColliderType::COLA;
+	ibody->listener = this;
 	texture = app->tex->Load(texturePath);
 
 	
@@ -48,10 +53,29 @@ bool Cola::Update(float dt)
 {
 	app->render->DrawTexture(texture, position.x, position.y);
 
+
 	return true;
 }
 
 bool Cola::CleanUp()
 {
 	return true;
+}
+
+//on collision with player
+void Cola::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
+{
+	//SWITCH CASE PARA LOS DIFERENTES TIPOS DE COLISIONES
+	switch (bodyB->ctype)
+	{
+		case ColliderType::PLAYER:
+			//LOG COLA PLAYER
+			LOG("COLA PLAYER");
+			app->physics->DestroyCircle(ibody);
+			//destroy cola texture
+			app->tex->UnLoad(texture);
+		break;
+
+	}
+
 }

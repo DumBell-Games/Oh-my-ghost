@@ -5,12 +5,7 @@
 #include "SString.h"
 #include "Input.h"
 #include "Render.h"
-
-enum class ItemType : char
-{
-	COLA,
-	UNKNOWN
-};
+#include "Entity.h"
 
 class PhysBody;
 
@@ -18,7 +13,7 @@ class Inventory
 {
 public:
 
-	Inventory(ItemType type) : type(type), active(true) {}
+	Inventory(EntityType type) : type(type), active(true) {}
 
 	virtual bool Awake()
 	{
@@ -82,7 +77,7 @@ public:
 public:
 
 	SString name;
-	ItemType type;
+	EntityType type;
 	bool active = true;
 	pugi::xml_node parameters; 
 	std::string descripcion;

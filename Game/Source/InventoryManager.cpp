@@ -8,6 +8,8 @@
 #include "Enemies.h"
 #include "TransitionTrigger.h"
 #include "ItemCola.h"
+#include "Entity.h"
+#include "EntityManager.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -27,6 +29,8 @@ bool InventoryManager::Awake(pugi::xml_node config)
 {
 	LOG("Loading Inventory Manager");
 	bool ret = true;
+
+	inventoryPath = config.attribute("inventoryFile").as_string("inventory.xml");
 
 	//Iterates over the entities and calls the Awake
 	ListItem<Inventory*>* item;
@@ -88,14 +92,14 @@ bool InventoryManager::CleanUp()
 	return ret;
 }
 
-Inventory* InventoryManager::CreateItem(ItemType type, pugi::xml_node& data)
+Inventory* InventoryManager::CreateItem(EntityType type, pugi::xml_node& data)
 {
 	Inventory* item = nullptr;
 
 	//L03: DONE 3a: Instantiate entity according to the type and add the new entity to the list of Entities
 	switch (type)
 	{
-		case ItemType::COLA:
+		case EntityType::COLA:
 		item = new Cola();
 		break;	
 	default:
