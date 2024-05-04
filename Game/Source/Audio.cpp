@@ -85,16 +85,18 @@ bool Audio::CleanUp()
 }
 
 // Play a music file
-bool Audio::PlayMusic(const char* path, float fadeTime)
+bool Audio::PlayMusic(const char* path, float fadeTime, int volume)
 {
 	bool ret = true;
 
-	if(!active)
+	volume = volumen;
+
+	if (!active)
 		return false;
 
-	if(music != NULL)
+	if (music != NULL)
 	{
-		if(fadeTime > 0.0f)
+		if (fadeTime > 0.0f)
 		{
 			Mix_FadeOutMusic(int(fadeTime * 1000.0f));
 		}
@@ -109,16 +111,19 @@ bool Audio::PlayMusic(const char* path, float fadeTime)
 
 	music = Mix_LoadMUS(path);
 
-	if(music == NULL)
+	if (music == NULL)
 	{
 		LOG("Cannot load music %s. Mix_GetError(): %s\n", path, Mix_GetError());
 		ret = false;
 	}
 	else
 	{
-		if(fadeTime > 0.0f)
+		// Set the volume of the music
+		Mix_VolumeMusic(volume);
+
+		if (fadeTime > 0.0f)
 		{
-			if(Mix_FadeInMusic(music, -1, (int) (fadeTime * 1000.0f)) < 0)
+			if (Mix_FadeInMusic(music, -1, (int)(fadeTime * 1000.0f)) < 0)
 			{
 				LOG("Cannot fade in music %s. Mix_GetError(): %s", path, Mix_GetError());
 				ret = false;
@@ -126,7 +131,7 @@ bool Audio::PlayMusic(const char* path, float fadeTime)
 		}
 		else
 		{
-			if(Mix_PlayMusic(music, -1) < 0)
+			if (Mix_PlayMusic(music, -1) < 0)
 			{
 				LOG("Cannot play in music %s. Mix_GetError(): %s", path, Mix_GetError());
 				ret = false;
@@ -137,6 +142,7 @@ bool Audio::PlayMusic(const char* path, float fadeTime)
 	LOG("Successfully playing %s", path);
 	return ret;
 }
+
 
 // Load WAV
 unsigned int Audio::LoadFx(const char* path)
@@ -162,16 +168,19 @@ unsigned int Audio::LoadFx(const char* path)
 }
 
 // Play WAV
-bool Audio::PlayFx(unsigned int id, int repeat)
+bool Audio::PlayFx(unsigned int id, int repeat, int volume)
 {
 	bool ret = false;
+	volume = fx1;
 
-	if(!active)
+	if (!active)
 		return false;
 
-	if(id > 0 && id <= fx.Count())
+	if (id > 0 && id <= fx.Count())
 	{
+		Mix_Volume(-1, volume); // Establecer el volumen de todos los canales a la vez
 		Mix_PlayChannel(-1, fx[id - 1], repeat);
+		ret = true;
 	}
 
 	return ret;
@@ -196,3 +205,32 @@ bool Audio::UnloadFx(unsigned int id)
 	return ret;
 }
 
+bool Audio::MusicUp() {
+	bool ret = false;
+	if (volumen <= 110) {
+		volumen += 10;
+	}
+	return ret;
+}
+bool Audio::MusicDown() {
+	bool ret = false;
+	if (volumen >= 10) {
+		volumen -= 10;
+	}
+	return ret;
+}
+bool Audio::FxUp() {
+	bool ret = false;
+	if (fx1 <= 110) {
+		fx1 += 10;
+	}
+	return ret;
+}
+bool Audio::FxDown() {
+	bool ret = false;
+	if (fx1 >= 10) {
+		fx1 -= 10;
+		ret = true; // Establecer ret a true si se realiza la operación
+	}
+	return ret;
+}

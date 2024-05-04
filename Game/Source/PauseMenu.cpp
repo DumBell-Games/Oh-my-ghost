@@ -88,6 +88,18 @@ bool PauseMenu::Update(float dt) {
                 vsycn = true;
             }
         }
+        if (inajustes == true && AjustesButtons.At(3)->data->state == GuiControlState::PRESSED) {
+            app->audio->MusicDown();
+        }
+        if (inajustes == true && AjustesButtons.At(4)->data->state == GuiControlState::PRESSED) {
+            app->audio->MusicUp();
+        }
+        if (inajustes == true && AjustesButtons.At(5)->data->state == GuiControlState::PRESSED) {
+            app->audio->FxDown();
+        }
+        if (inajustes == true && AjustesButtons.At(6)->data->state == GuiControlState::PRESSED) {
+            app->audio->FxUp();
+        }
     }
 
 	return true;
