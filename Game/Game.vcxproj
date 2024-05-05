@@ -98,6 +98,13 @@
     <ClCompile Include="Source\Enemies.cpp" />
     <ClCompile Include="Source\FadeToBlack.cpp" />
     <ClCompile Include="Source\IntroScreen.cpp" />
+    <ClCompile Include="Source\InventoryScreen.cpp" />
+    <ClCompile Include="Source\ItemBirra.cpp" />
+    <ClCompile Include="Source\ItemCaramelos.cpp" />
+    <ClCompile Include="Source\ItemCola.cpp" />
+    <ClCompile Include="Source\ItemPatatas.cpp" />
+    <ClCompile Include="Source\ItemVelocidad.cpp" />
+    <ClCompile Include="Source\ItemYogur.cpp" />
     <ClCompile Include="Source\PauseMenu.cpp" />
     <ClCompile Include="Source\menu.cpp" />
     <ClCompile Include="Source\DialogManager.cpp" />
@@ -105,7 +112,6 @@
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\GuiControlButton.cpp" />
     <ClCompile Include="Source\GuiManager.cpp" />
-    <ClCompile Include="Source\Item.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
     <ClCompile Include="Source\Audio.cpp" />
@@ -127,6 +133,13 @@
     <ClInclude Include="Source\Enemies.h" />
     <ClInclude Include="Source\FadeToBlack.h" />
     <ClInclude Include="Source\IntroScreen.h" />
+    <ClInclude Include="Source\InventoryScreen.h" />
+    <ClInclude Include="Source\ItemBirra.h" />
+    <ClInclude Include="Source\ItemCaramelos.h" />
+    <ClInclude Include="Source\ItemCola.h" />
+    <ClInclude Include="Source\ItemPatatas.h" />
+    <ClInclude Include="Source\ItemVelocidad.h" />
+    <ClInclude Include="Source\ItemYogur.h" />
     <ClInclude Include="Source\PauseMenu.h" />
     <ClInclude Include="Source\menu.h" />
     <ClInclude Include="Source\Dialog.h" />
@@ -137,7 +150,6 @@
     <ClInclude Include="Source\GuiControl.h" />
     <ClInclude Include="Source\GuiControlButton.h" />
     <ClInclude Include="Source\GuiManager.h" />
-    <ClInclude Include="Source\Item.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\Npc.h" />
     <ClInclude Include="Source\Pathfinding.h" />
@@ -173,6 +185,7 @@
   <ItemGroup>
     <Xml Include="..\Output\config.xml" />
     <Xml Include="..\Output\controls.xml" />
+    <Xml Include="..\Output\inventory.xml" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

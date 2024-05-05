@@ -31,9 +31,12 @@ bool Player::Awake() {
 
 bool Player::Start() {
 
-	texture = app->tex->Load(parameters.attribute("texturePath").as_string());
+	texturePlayer = app->tex->Load(parameters.attribute("texturePath").as_string());
+	textureGhost = app->tex->Load(parameters.attribute("ghostTexPath").as_string());
+	
+	currentTexture = texturePlayer;
 
-	pBody = app->physics->CreateCircle(position.x + 32, position.y + 32, 16, bodyType::DYNAMIC);
+	pBody = app->physics->CreateCircle(position.x + 128, position.y + 128, 128, bodyType::DYNAMIC);
 	pBody->listener = this;
 	pBody->ctype = ColliderType::PLAYER;
 
@@ -59,8 +62,20 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
-	//L03: DONE 4: render the player texture and modify the position of the player using WSAD keys and render the texture
+	
 
+	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN && currentTexture == texturePlayer)
+	{
+			currentTexture = textureGhost;
+			pBody->ctype = ColliderType::GHOST;
+	}
+	else if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN && currentTexture == textureGhost)
+	{
+			currentTexture = texturePlayer;
+			pBody->ctype = ColliderType::PLAYER;
+	}
+	//L03: DONE 4: render the player texture and modify the position of the player using WSAD keys and render the texture
+	
 	fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
 	KeyState sprint = app->input->GetButton(BACK);
 	float speed = (sprint == KEY_REPEAT) ? 0.5f : 0.2f;
@@ -77,13 +92,14 @@ bool Player::Update(float dt)
 	position.x = METERS_TO_PIXELS(pBodyPos.p.x) - 32 / 2;     
 	position.y = METERS_TO_PIXELS(pBodyPos.p.y) - 32 / 2;
 
-	app->render->DrawTexture(texture,position.x,position.y);
+	app->render->DrawTexture(currentTexture,position.x - 48 ,position.y - 114);
 
 	uint w, h;
 	app->win->GetWindowSize(w, h);
 	app->render->camera.x = (-position.x * app->win->GetScale()) + w / 2;
 	app->render->camera.y = (-position.y * app->win->GetScale()) + h / 2;
 
+	
 	return true;
 }
 
@@ -98,10 +114,6 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
-		break;
-	case ColliderType::ITEM:
-		LOG("Collision ITEM");
-		app->audio->PlayFx(pickCoinFxId);
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");

@@ -1,35 +1,19 @@
-#ifndef __ENTITY_H__
-#define __ENTITY_H__
+#ifndef __INVENTORY_H__
+#define __INVENTORY_H__
 
 #include "Point.h"
 #include "SString.h"
 #include "Input.h"
 #include "Render.h"
-
-enum class EntityType : char
-{
-	PLAYER,
-	ITEM,
-	DIALOG_TRIGGER,
-	NPC,
-	ENEMY,
-	TRANSITION,
-	COLA,
-	YOGUR,
-	BIRRA,
-	PATATAS,
-	CARAMELOS,
-	VELOCIDAD,
-	UNKNOWN
-};
+#include "Entity.h"
 
 class PhysBody;
 
-class Entity
+class Inventory
 {
 public:
 
-	Entity(EntityType type) : type(type), active(true) {}
+	Inventory(EntityType type) : type(type), active(true) {}
 
 	virtual bool Awake()
 	{
@@ -61,7 +45,7 @@ public:
 		return true;
 	}
 
-	void Entity::Enable()
+	void Inventory::Enable()
 	{
 		if (!active)
 		{
@@ -70,7 +54,7 @@ public:
 		}
 	}
 
-	void Entity::Disable()
+	void Inventory::Disable()
 	{
 		if (active)
 		{
@@ -108,4 +92,4 @@ public:
 	bool renderable = true;
 };
 
-#endif // __ENTITY_H__
+#endif // __INVENTORY_H__

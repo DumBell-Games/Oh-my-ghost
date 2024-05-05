@@ -37,9 +37,6 @@
     <ClCompile Include="Source\Input.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Item.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Main.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -91,6 +88,14 @@
     <ClCompile Include="Source\PauseMenu.cpp">
       <Filter>Menus</Filter>
     </ClCompile>
+    <ClCompile Include="Source\TransitionTrigger.cpp" />
+    <ClCompile Include="Source\InventoryScreen.cpp" />
+    <ClCompile Include="Source\ItemCola.cpp" />
+    <ClCompile Include="Source\ItemBirra.cpp" />
+    <ClCompile Include="Source\ItemCaramelos.cpp" />
+    <ClCompile Include="Source\ItemPatatas.cpp" />
+    <ClCompile Include="Source\ItemVelocidad.cpp" />
+    <ClCompile Include="Source\ItemYogur.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -162,9 +167,6 @@
     <ClInclude Include="Source\Input.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Item.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Map.h">
       <Filter>Modules</Filter>
     </ClInclude>
@@ -219,6 +221,14 @@
     <ClInclude Include="Source\IntroScreen.h">
       <Filter>Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="Source\TransitionTrigger.h" />
+    <ClInclude Include="Source\InventoryScreen.h" />
+    <ClInclude Include="Source\ItemCola.h" />
+    <ClInclude Include="Source\ItemBirra.h" />
+    <ClInclude Include="Source\ItemCaramelos.h" />
+    <ClInclude Include="Source\ItemPatatas.h" />
+    <ClInclude Include="Source\ItemVelocidad.h" />
+    <ClInclude Include="Source\ItemYogur.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -255,5 +265,6 @@
   <ItemGroup>
     <Xml Include="..\Output\config.xml" />
     <Xml Include="..\Output\controls.xml" />
+    <Xml Include="..\Output\inventory.xml" />
   </ItemGroup>
 </Project>

@@ -141,6 +141,16 @@ PhysBody* Physics::CreateCircle(int x, int y, int radious, bodyType type)
 	return pbody;
 }
 
+void Physics::DestroyBody(PhysBody* body)
+{
+	if (body)
+	{
+		world->DestroyBody(body->body);
+		delete body;
+	}
+}
+
+
 PhysBody* Physics::CreateRectangleSensor(int x, int y, int width, int height, bodyType type)
 {
 	// Create BODY at position x,y

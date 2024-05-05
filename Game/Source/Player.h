@@ -5,6 +5,7 @@
 #include "Point.h"
 #include "SDL/include/SDL.h"
 #include "Box2D/Box2D/Box2D.h"
+#include "ItemCola.h"
 
 struct SDL_Texture;
 
@@ -33,11 +34,16 @@ public:
 
 	void SetPosition(iPoint newPos) override;
 
+	
+
 public:
 
 	//L02: DONE 2: Declare player parameters
 	float speed = 0.2f;
-	SDL_Texture* texture = NULL;
+	SDL_Texture* texturePlayer = NULL;
+	SDL_Texture* textureGhost = NULL;
+	SDL_Texture* currentTexture = NULL;
+	
 	uint texW, texH;
 
 	float acceleration = 0.2f;
