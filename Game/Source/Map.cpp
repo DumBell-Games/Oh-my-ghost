@@ -261,7 +261,7 @@ bool Map::Unload()
 // If parameter is -1 just reloads the current map
 bool Map::ChangeMap(int id)
 {
-    currentMap = ((id == -1) ? currentMap : id);
+    currentMap = ((id <= -1) ? currentMap : id);
 
     return app->reload->QueueReload("loadMap");
 }
