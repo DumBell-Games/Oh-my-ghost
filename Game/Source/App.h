@@ -25,6 +25,7 @@ class TitleScreen;
 class IntroScreen;
 class TeamScreen;
 class PauseMenu;
+class DebugConsole;
 //L07 DONE 2: Add Physics module
 class Physics;
 class GuiManager;
@@ -126,6 +127,7 @@ public:
 	IntroScreen* introScreen;
 	TeamScreen* teamScreen;
 	PauseMenu* pause;
+	DebugConsole* console;
 	//L07 DONE 2: Add Physics module
 	Physics* physics;
 	GuiManager* guiManager;

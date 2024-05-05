@@ -3,8 +3,12 @@
 
 #include "App.h"
 #include "Input.h"
-#include <algorithm>
+#include "Render.h"
+#include "PauseMenu.h"
+
 #include "Log.h"
+#include <algorithm>
+#include <Optick/include/optick.h>
 
 DebugConsole::DebugConsole(bool startEnabled) : Module(startEnabled)
 {
@@ -29,6 +33,8 @@ bool DebugConsole::Start()
 
 bool DebugConsole::Update(float dt)
 {
+	OPTICK_EVENT()
+
 	if (app->input->GetButton(DEBUG_CONSOLE) == KEY_DOWN) {
 		ToggleConsole();
 	}
@@ -45,6 +51,7 @@ bool DebugConsole::Update(float dt)
 			catch (std::invalid_argument e) {
 				LOG("Argumento invalido: %s", e.what());
 			}
+			//TODO añadir handling de otras clases de excepcion
 		}
 	}
 
@@ -54,6 +61,13 @@ bool DebugConsole::Update(float dt)
 
 bool DebugConsole::PostUpdate()
 {
+	if (show) {
+		//Input box
+		app->render->DrawRectangle({ 0,0,app->render->camera.w,64 }, 0, 0, 0, 192, true, false);
+		app->render->DrawText(input.c_str(), 10, 8, 0, 48, {255,255,255,255});
+
+	}
+
 	return true;
 }
 
@@ -62,14 +76,14 @@ bool DebugConsole::CleanUp()
 	return true;
 }
 
-bool DebugConsole::AddCommand(SString cmd, ParamFunc_f listener)
+bool DebugConsole::AddCommand(SString cmd, const char* description, const char* format, ParamFunc_f listener)
 {
 	for (size_t i = 0; i < commandList.size(); i++)
 	{
 		if (cmd == commandList[i].command)
 			return false;
 	}
-	commandList.push_back({ cmd.GetString(),listener});
+	commandList.push_back({ cmd.GetString(), description, format,listener});
 	return true;
 }
 
@@ -86,6 +100,11 @@ void DebugConsole::ToggleConsole()
 {
 	show = !show;
 	app->input->ResetText();
+	//app->entityManager->Pause();
+	if (show)
+		SDL_StartTextInput();
+	else
+		SDL_StopTextInput();
 }
 
 void DebugConsole::HandleCommand()
@@ -101,6 +120,7 @@ void DebugConsole::HandleCommand()
 		{
 			if (commandList[i].command == command) {
 				commandList[i](args);
+				ToggleConsole(); // Cierra la consola una vez ejecutado el comando (si se ha cerrado desde el propio comando, vuelve a abrir la consola)
 			}
 		}
 	}

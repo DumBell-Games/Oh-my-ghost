@@ -9407,7 +9407,7 @@
   <object id="34" x="2994" y="4536" width="190" height="256">
    <properties>
     <property name="mapID" type="int" value="2"/>
-    <property name="targetDoor" type="int" value="0"/>
+    <property name="targetDoor" type="int" value="1"/>
    </properties>
   </object>
  </objectgroup>

@@ -48,7 +48,10 @@ bool Player::Start() {
 			if (item->data && item->data->type == EntityType::TRANSITION) {
 				TransitionTrigger* tt = (TransitionTrigger*)item->data;
 				if (tt->id == tData.targetDoorID) {
-					SetPosition(tt->position);
+					iPoint targetPos = tt->position;
+					targetPos.x += tt->rect.w / 2;
+					targetPos.y += tt->rect.h / 2;
+					SetPosition(targetPos);
 				}
 			}
 		}
@@ -126,7 +129,7 @@ bool Player::SaveState(pugi::xml_node& node)
 void Player::SetPosition(iPoint newPos)
 {
 	if (pBody) {
-		//pBody->body->SetTransform(b2Vec2(position.x, position.y), pBody->GetRotation()); // TODO descomentar esto una vez resuelto el problema de posicion de los triggers
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(newPos.x), PIXEL_TO_METERS(newPos.y)), pBody->GetRotation());
 		position = newPos;
 	}
 }

@@ -1,6 +1,7 @@
 #pragma once
 #include "Module.h"
 #include <functional>
+#include "SDL/include/SDL_pixels.h"
 
 using ParamFunc_f = std::function<void(std::vector<std::string>)>;
 class DebugCmd
@@ -37,7 +38,7 @@ public:
 
 	bool CleanUp() override;
 
-	bool AddCommand(SString cmd, ParamFunc_f listener);
+	bool AddCommand(SString cmd, const char* description, const char* format, ParamFunc_f listener);
 
 	void RemoveCommand(const char* cmd);
 
@@ -50,6 +51,9 @@ private:
 	std::vector<std::string> GetArguments(std::string str, char separator);
 
 private:
+
+	SDL_Color textColor;
+	SDL_Color bgColor;
 
 	std::vector<DebugCmd> commandList;
 

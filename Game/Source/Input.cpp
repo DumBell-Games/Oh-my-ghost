@@ -4,6 +4,7 @@
 
 #include "Defs.h"
 #include "Log.h"
+#include <Optick/include/optick.h>
 
 #define MAX_KEYS 300
 
@@ -145,6 +146,8 @@ bool Input::Start()
 // Called each loop iteration
 bool Input::PreUpdate()
 {
+	OPTICK_EVENT()
+
 	static SDL_Event event;
 
 	const Uint8* keys = keyboardRaw = SDL_GetKeyboardState(NULL);
@@ -241,13 +244,13 @@ bool Input::PreUpdate()
 			break;
 
 			case SDL_TEXTINPUT:
-				if (strlen(event.text.text) == 1) {
+				if (strlen(event.text.text) >= 1) {
 					textInput += event.text.text;
 				}
 				break;
 
 			case SDL_KEYDOWN:
-				if (event.key.keysym.sym == SDLK_BACKSPACE && !textInput.empty()) {
+				if (event.key.keysym.scancode == SDL_Scancode::SDL_SCANCODE_BACKSPACE && !textInput.empty()) {
 					textInput.pop_back();
 				}
 				break;
