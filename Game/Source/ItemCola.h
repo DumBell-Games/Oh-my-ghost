@@ -29,6 +29,7 @@ public:
 public:
 
 	bool isPicked = false;
+	int quantityCola = 0;
 
 private:
 

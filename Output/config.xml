@@ -53,8 +53,14 @@
 	  <caramelos x="500" y="2000" texturePath="Assets/Textures/itemCaramelos.png"/>
 	  <velocidad x="600" y="2500" texturePath="Assets/Textures/itemVelocidad.png"/>
 	  <patatas x="700" y="3000" texturePath="Assets/Textures/itemPatatas.png"/>
-	  
-	  
+
+	  <dialogTrigger x="200" y="472">
+		  <sentences>
+			  <sentence text="¡Has obtenido 1 CatCola!"/>
+			   
+
+		  </sentences>
+	</dialogTrigger> 
 		<dialogTrigger x="200" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true">
 		<sentences>
 			<sentence name="Springy"	facetexturepath="Assets/Textures/catNpc.png" text="Hola"/>

@@ -60,7 +60,7 @@ bool Cola::Update(float dt)
 			app->physics->DestroyBody(ibody);
 			app->tex->UnLoad(texture);
 			app->entityManager->DestroyEntity(this);
-
+			quantityCola++;
 		}
 	}	
 

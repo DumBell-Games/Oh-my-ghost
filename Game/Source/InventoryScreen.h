@@ -22,7 +22,7 @@ public:
 
     bool CleanUp();
 
-    void CreatePauseButtons();
+    void CreateInventoryButtons();
 
 public:
 
@@ -41,5 +41,5 @@ public:
     Timer timer;
 
     //gui list
-    List<GuiControl*> PauseButtons;
+    List<GuiControl*> inventoryButtons;
 };
