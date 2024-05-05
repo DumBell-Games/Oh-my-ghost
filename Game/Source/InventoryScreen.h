@@ -37,9 +37,24 @@ public:
     bool buttoncreated = false;
     int buttonFx;
 
+    SDL_Texture* inventory1;
+    SDL_Texture* inventory2;
+    SDL_Texture* inventory3;
+    SDL_Texture* inventory4;
+    SDL_Texture* inventory5;
+    SDL_Texture* inventory6;
+    SDL_Texture* inventory7;
+    SDL_Texture* inventory8;
+    SDL_Texture* inventory9;
+    SDL_Texture* inventory10;
+    SDL_Texture* inventory11;
+    SDL_Texture* inventory12;
+    SDL_Texture* inventory13;
+    SDL_Texture* inventory14;
+
 
     Timer timer;
 
     //gui list
-    List<GuiControl*> inventoryButtons;
+    List<GuiControlButton*> inventoryButtons;
 };

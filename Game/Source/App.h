@@ -21,6 +21,7 @@ class Scene;
 class EntityManager;
 class Map;
 class Reload;
+class InventoryScreen;
 class TitleScreen;
 class IntroScreen;
 class TeamScreen;
@@ -118,6 +119,7 @@ public:
 	EntityManager* entityManager;
 	Map* map;
 	Reload* reload; // Module (un/re)loader
+	InventoryScreen* inventoryScreen;
 	TitleScreen* titlescreen;
 	IntroScreen* introScreen;
 	TeamScreen* teamScreen;
