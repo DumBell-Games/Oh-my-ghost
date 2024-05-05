@@ -1,4 +1,4 @@
-#include "ItemCola.h"
+#include "ItemCaramelos.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -9,14 +9,14 @@
 #include "Point.h"
 #include "Physics.h"
 
-Cola::Cola() : Entity(EntityType::COLA)
+Caramelos::Caramelos() : Entity(EntityType::CARAMELOS)
 {
-	name.Create("cola");
+	name.Create("caramelos");
 }
 
-Cola::~Cola() {}
+Caramelos::~Caramelos() {}
 
-bool Cola::Awake() {
+bool Caramelos::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -24,7 +24,7 @@ bool Cola::Awake() {
 	//cargar las caraterísticas que tiene el objeto en cuestion (cola) 
 	curacion = 10;
 	//cargariamos descripción desde el documento xml
-	descripcion = "Cola: Bebida rica con sabor dulce que restaura 10 puntos de salud";
+	descripcion = "Caramelos: Bebida rica con sabor dulce que restaura 10 puntos de salud";
 	//cargariamos el tipo de objeto desde el documento xml
 	tipo = "Cura";
 	//cargar sonido del objeto
@@ -35,13 +35,13 @@ bool Cola::Awake() {
 	return true;
 }
 
-bool Cola::Start() {
+bool Caramelos::Start() {
 
 	//initilize textures
 
 	//haz que el ibody se asigne al objeto
 	ibody = app->physics->CreateCircle(position.x + 32, position.y + 32, 24, bodyType::STATIC);
-	ibody->ctype = ColliderType::COLA;
+	ibody->ctype = ColliderType::CARAMELOS;
 	ibody->listener = this;
 	texture = app->tex->Load(texturePath);
 
@@ -49,32 +49,30 @@ bool Cola::Start() {
 	return true;
 }
 
-bool Cola::Update(float dt)
+bool Caramelos::Update(float dt)
 {
 	app->render->DrawTexture(texture, position.x, position.y);
-
-	if (playerContactCo)
+	if (playerContactC)
 	{
 		if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
 		{
 			app->physics->DestroyBody(ibody);
 			app->tex->UnLoad(texture);
 			app->entityManager->DestroyEntity(this);
-
 		}
-	}	
-
+	}
 
 	return true;
 }
 
-bool Cola::CleanUp()
+bool Caramelos::CleanUp()
 {
 	return true;
 }
 
+
 //on collision with player
-void Cola::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
+void Caramelos::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	//SWITCH CASE PARA LOS DIFERENTES TIPOS DE COLISIONES
 	switch (bodyB->ctype)
@@ -82,8 +80,7 @@ void Cola::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		case ColliderType::PLAYER:
 			//LOG COLA PLAYER
 			LOG("COLA PLAYER");
-			playerContactCo = true;
-	
+			playerContactC = true;
 		break;
 
 	}

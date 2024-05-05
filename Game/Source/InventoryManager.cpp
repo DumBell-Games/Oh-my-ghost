@@ -97,14 +97,6 @@ Inventory* InventoryManager::CreateItem(EntityType type, pugi::xml_node& data)
 	Inventory* item = nullptr;
 
 	//L03: DONE 3a: Instantiate entity according to the type and add the new entity to the list of Entities
-	switch (type)
-	{
-		case EntityType::COLA:
-		item = new Cola();
-		break;	
-	default:
-		break;
-	}
 
 	if (item) {
 		item->parameters = data;

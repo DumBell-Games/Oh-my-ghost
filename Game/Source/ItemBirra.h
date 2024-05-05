@@ -1,5 +1,5 @@
-#ifndef __ITEMCOLA_H__
-#define __ITEMCOLA_H__
+#ifndef __ITEMBIRRA_H__
+#define __ITEMBIRRA_H__
 
 #include "Inventory.h"
 #include "Point.h"
@@ -8,13 +8,13 @@
 
 struct SDL_Texture;
 
-class Cola : public Entity
+class Birra : public Entity
 {
 public:
 
-	Cola();
+	Birra();
 
-	virtual ~Cola();
+	virtual ~Birra();
 
 	bool Awake();
 
@@ -32,10 +32,10 @@ public:
 
 private:
 
-	bool playerContactCo;
+	bool playerContactB;
 	SDL_Texture* texture;
 	const char* texturePath;
 	uint texW, texH;
 };
 
-#endif // __ITEMCOLA_H__
+#endif // __ITEMBIRRA_H__

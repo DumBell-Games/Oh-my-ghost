@@ -1,4 +1,4 @@
-#include "ItemCola.h"
+#include "ItemPatatas.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -9,14 +9,14 @@
 #include "Point.h"
 #include "Physics.h"
 
-Cola::Cola() : Entity(EntityType::COLA)
+Patatas::Patatas() : Entity(EntityType::PATATAS)
 {
-	name.Create("cola");
+	name.Create("patatas");
 }
 
-Cola::~Cola() {}
+Patatas::~Patatas() {}
 
-bool Cola::Awake() {
+bool Patatas::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -35,13 +35,13 @@ bool Cola::Awake() {
 	return true;
 }
 
-bool Cola::Start() {
+bool Patatas::Start() {
 
 	//initilize textures
 
 	//haz que el ibody se asigne al objeto
 	ibody = app->physics->CreateCircle(position.x + 32, position.y + 32, 24, bodyType::STATIC);
-	ibody->ctype = ColliderType::COLA;
+	ibody->ctype = ColliderType::PATATAS;
 	ibody->listener = this;
 	texture = app->tex->Load(texturePath);
 
@@ -49,41 +49,39 @@ bool Cola::Start() {
 	return true;
 }
 
-bool Cola::Update(float dt)
+bool Patatas::Update(float dt)
 {
 	app->render->DrawTexture(texture, position.x, position.y);
 
-	if (playerContactCo)
+	if (playerContactP)
 	{
 		if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
 		{
 			app->physics->DestroyBody(ibody);
 			app->tex->UnLoad(texture);
 			app->entityManager->DestroyEntity(this);
-
 		}
-	}	
-
+	}
 
 	return true;
 }
 
-bool Cola::CleanUp()
+bool Patatas::CleanUp()
 {
 	return true;
 }
 
+
 //on collision with player
-void Cola::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
+void Patatas::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	//SWITCH CASE PARA LOS DIFERENTES TIPOS DE COLISIONES
 	switch (bodyB->ctype)
 	{
 		case ColliderType::PLAYER:
 			//LOG COLA PLAYER
-			LOG("COLA PLAYER");
-			playerContactCo = true;
-	
+			LOG("PATATAS PLAYER");
+			playerContactP = true;
 		break;
 
 	}

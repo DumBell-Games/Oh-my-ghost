@@ -16,7 +16,6 @@
 #include "TeamScreen.h"
 #include "IntroScreen.h"
 #include "FadeToBlack.h"
-#include "InventoryManager.h"
 
 #include "DialogManager.h"
 
@@ -54,7 +53,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	map = new Map(false);
 	reload = new Reload(true);
 	entityManager = new EntityManager(false);
-	inventoryManager = new InventoryManager(false);
 	guiManager = new GuiManager(true);
 	dialogManager = new DialogManager(false);
 	fadeToBlack = new FadeToBlack(true);
@@ -69,7 +67,6 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(physics);
 	AddModule(map);
 	AddModule(entityManager);
-	AddModule(inventoryManager);
 	AddModule(guiManager);
 
 	AddModule(scene);

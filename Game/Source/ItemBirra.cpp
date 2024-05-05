@@ -1,4 +1,4 @@
-#include "ItemCola.h"
+#include "ItemBirra.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -9,14 +9,14 @@
 #include "Point.h"
 #include "Physics.h"
 
-Cola::Cola() : Entity(EntityType::COLA)
+Birra::Birra() : Entity(EntityType::BIRRA)
 {
-	name.Create("cola");
+	name.Create("birra");
 }
 
-Cola::~Cola() {}
+Birra::~Birra() {}
 
-bool Cola::Awake() {
+bool Birra::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -24,7 +24,7 @@ bool Cola::Awake() {
 	//cargar las caraterísticas que tiene el objeto en cuestion (cola) 
 	curacion = 10;
 	//cargariamos descripción desde el documento xml
-	descripcion = "Cola: Bebida rica con sabor dulce que restaura 10 puntos de salud";
+	descripcion = "Birra: Bebida rica con sabor dulce que restaura 10 puntos de salud";
 	//cargariamos el tipo de objeto desde el documento xml
 	tipo = "Cura";
 	//cargar sonido del objeto
@@ -35,13 +35,13 @@ bool Cola::Awake() {
 	return true;
 }
 
-bool Cola::Start() {
+bool Birra::Start() {
 
 	//initilize textures
 
 	//haz que el ibody se asigne al objeto
 	ibody = app->physics->CreateCircle(position.x + 32, position.y + 32, 24, bodyType::STATIC);
-	ibody->ctype = ColliderType::COLA;
+	ibody->ctype = ColliderType::BIRRA;
 	ibody->listener = this;
 	texture = app->tex->Load(texturePath);
 
@@ -49,41 +49,38 @@ bool Cola::Start() {
 	return true;
 }
 
-bool Cola::Update(float dt)
+bool Birra::Update(float dt)
 {
 	app->render->DrawTexture(texture, position.x, position.y);
 
-	if (playerContactCo)
+
+	if (playerContactB)
 	{
 		if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
 		{
 			app->physics->DestroyBody(ibody);
 			app->tex->UnLoad(texture);
 			app->entityManager->DestroyEntity(this);
-
 		}
-	}	
-
+	}
 
 	return true;
 }
 
-bool Cola::CleanUp()
+bool Birra::CleanUp()
 {
 	return true;
 }
 
 //on collision with player
-void Cola::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
+void Birra::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	//SWITCH CASE PARA LOS DIFERENTES TIPOS DE COLISIONES
 	switch (bodyB->ctype)
 	{
 		case ColliderType::PLAYER:
-			//LOG COLA PLAYER
-			LOG("COLA PLAYER");
-			playerContactCo = true;
-	
+			LOG("BIRRA PLAYER");
+			playerContactB = true;
 		break;
 
 	}

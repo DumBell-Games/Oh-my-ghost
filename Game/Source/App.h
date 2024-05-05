@@ -6,7 +6,6 @@
 #include "PerfTimer.h"
 #include "Timer.h"
 #include "EntityManager.h"
-#include "InventoryManager.h"
 
 #include "PugiXml/src/pugixml.hpp"
 
@@ -20,7 +19,6 @@ class Textures;
 class Audio;
 class Scene;
 class EntityManager;
-class InventoryManager;
 class Map;
 class Reload;
 class TitleScreen;
@@ -118,7 +116,6 @@ public:
 	Audio* audio;
 	Scene* scene;
 	EntityManager* entityManager;
-	InventoryManager* inventoryManager;
 	Map* map;
 	Reload* reload; // Module (un/re)loader
 	TitleScreen* titlescreen;

@@ -14,6 +14,12 @@
 #include "FadeToBlack.h"
 #include "PauseMenu.h"
 #include "menu.h"
+#include "ItemCola.h"
+#include "ItemYogur.h"
+#include "ItemCaramelos.h"
+#include "ItemPatatas.h"
+#include "ItemBirra.h"
+#include "ItemVelocidad.h"
 
 
 #include "Defs.h"
@@ -46,10 +52,36 @@ bool Scene::Awake(pugi::xml_node config)
 
 	// iterate all items in the scene
 	// Check https://pugixml.org/docs/quickstart.html#access
+	
 	for (pugi::xml_node itemNode = config.child("cola"); itemNode; itemNode = itemNode.next_sibling("cola"))
 	{
-		Inventory* cola = (Inventory*)app->inventoryManager->CreateItem(EntityType::COLA, itemNode);
-		//dialogTrigger->parameters = itemNode;
+		Cola* cola = (Cola*)app->entityManager->CreateEntity(EntityType::COLA, itemNode);
+		//item->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("yogur"); itemNode; itemNode = itemNode.next_sibling("yogur"))
+	{
+		Yogur* yogur = (Yogur*)app->entityManager->CreateEntity(EntityType::YOGUR, itemNode);
+		//item->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("caramelos"); itemNode; itemNode = itemNode.next_sibling("caramelos"))
+	{
+		Caramelos* caramelos = (Caramelos*)app->entityManager->CreateEntity(EntityType::CARAMELOS, itemNode);
+		//item->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("patatas"); itemNode; itemNode = itemNode.next_sibling("patatas"))
+	{
+		Patatas* patatas = (Patatas*)app->entityManager->CreateEntity(EntityType::PATATAS, itemNode);
+		//item->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("birra"); itemNode; itemNode = itemNode.next_sibling("birra"))
+	{
+		Birra* birra = (Birra*)app->entityManager->CreateEntity(EntityType::BIRRA, itemNode);
+		//item->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("velocidad"); itemNode; itemNode = itemNode.next_sibling("velocidad"))
+	{
+		Velocidad* velocidad = (Velocidad*)app->entityManager->CreateEntity(EntityType::VELOCIDAD, itemNode);
+		//item->parameters = itemNode;
 	}
 	for (pugi::xml_node itemNode = config.child("dialogTrigger"); itemNode; itemNode = itemNode.next_sibling("dialogTrigger"))
 	{
@@ -75,9 +107,6 @@ bool Scene::Awake(pugi::xml_node config)
 // Called before the first frame
 bool Scene::Start()
 {
-	//TO CHANGE (method LPA by pau and edgar)
-	app->inventoryManager->active = true;
-	app->inventoryManager->Enable();
 
 	cityFx = app->audio->LoadFx("Assets/Audio/Fx/centralFauna.wav");
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file

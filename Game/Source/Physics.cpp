@@ -141,24 +141,15 @@ PhysBody* Physics::CreateCircle(int x, int y, int radious, bodyType type)
 	return pbody;
 }
 
-PhysBody* Physics::DestroyCircle(PhysBody* pbody)
+void Physics::DestroyBody(PhysBody* body)
 {
-	if (pbody)
+	if (body)
 	{
-		b2Body* body = pbody->body;
-
-		if (body)
-		{
-			// Elimina el cuerpo físico del mundo
-			world->DestroyBody(body);
-		}
-
-		// Libera la memoria de la instancia de PhysBody
-		delete pbody;
-		pbody = nullptr; // Set pbody to nullptr after deletion
+		world->DestroyBody(body->body);
+		delete body;
 	}
-	return pbody;
 }
+
 
 PhysBody* Physics::CreateRectangleSensor(int x, int y, int width, int height, bodyType type)
 {

@@ -1,4 +1,4 @@
-#include "ItemCola.h"
+#include "ItemYogur.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -9,14 +9,14 @@
 #include "Point.h"
 #include "Physics.h"
 
-Cola::Cola() : Entity(EntityType::COLA)
+Yogur::Yogur() : Entity(EntityType::YOGUR)
 {
-	name.Create("cola");
+	name.Create("yogur");
 }
 
-Cola::~Cola() {}
+Yogur::~Yogur() {}
 
-bool Cola::Awake() {
+bool Yogur::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -35,13 +35,13 @@ bool Cola::Awake() {
 	return true;
 }
 
-bool Cola::Start() {
+bool Yogur::Start() {
 
 	//initilize textures
 
 	//haz que el ibody se asigne al objeto
 	ibody = app->physics->CreateCircle(position.x + 32, position.y + 32, 24, bodyType::STATIC);
-	ibody->ctype = ColliderType::COLA;
+	ibody->ctype = ColliderType::YOGUR;
 	ibody->listener = this;
 	texture = app->tex->Load(texturePath);
 
@@ -49,43 +49,42 @@ bool Cola::Start() {
 	return true;
 }
 
-bool Cola::Update(float dt)
+bool Yogur::Update(float dt)
 {
 	app->render->DrawTexture(texture, position.x, position.y);
 
-	if (playerContactCo)
+	
+	if (playerContactY)
 	{
 		if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
 		{
 			app->physics->DestroyBody(ibody);
 			app->tex->UnLoad(texture);
 			app->entityManager->DestroyEntity(this);
-
 		}
-	}	
+	}
 
 
 	return true;
 }
 
-bool Cola::CleanUp()
+bool Yogur::CleanUp()
 {
 	return true;
 }
 
 //on collision with player
-void Cola::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
+void Yogur::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	//SWITCH CASE PARA LOS DIFERENTES TIPOS DE COLISIONES
 	switch (bodyB->ctype)
 	{
 		case ColliderType::PLAYER:
 			//LOG COLA PLAYER
-			LOG("COLA PLAYER");
-			playerContactCo = true;
-	
+			LOG("YOGUR PLAYER");
+			playerContactY = true;
 		break;
-
+		
 	}
 
 }

@@ -32,7 +32,7 @@
   </input>
 
   <scene>
-    <player x="80" y="672" texturePath="Assets/Textures/kangaroNpc.png" ghostTexPath="Assets/Textures/ghostNpc.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg"/>
+    <player x="30" y="750" texturePath="Assets/Textures/kangaroNpc.png" ghostTexPath="Assets/Textures/ghostNpc.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg"/>
     <map path="Assets/Maps/" name="MapTemplate.tmx"/>
 	
 	  
@@ -46,7 +46,13 @@
 	<enemy x="700" y="272" texturePath="Assets/Textures/pigNpc.png"/>
 
 	  <cola x="200" y="472" texturePath="Assets/Textures/itemCola.png"/>
-	  <birra x="250" y="460" texturePath="Assets/Textures/itemCerveza.png"/>
+	  <cola x="300" y="472" texturePath="Assets/Textures/itemCola.png"/>
+	  <cola x="400" y="472" texturePath="Assets/Textures/itemCola.png"/>
+	  <birra x="300" y="1000" texturePath="Assets/Textures/itemCerveza.png"/>
+	  <yogur x="400" y="1500" texturePath="Assets/Textures/itemYogur.png"/>
+	  <caramelos x="500" y="2000" texturePath="Assets/Textures/itemCaramelos.png"/>
+	  <velocidad x="600" y="2500" texturePath="Assets/Textures/itemVelocidad.png"/>
+	  <patatas x="700" y="3000" texturePath="Assets/Textures/itemPatatas.png"/>
 	  
 	  
 		<dialogTrigger x="200" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true">

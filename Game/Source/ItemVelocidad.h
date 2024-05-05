@@ -1,5 +1,5 @@
-#ifndef __ITEMCOLA_H__
-#define __ITEMCOLA_H__
+#ifndef __ITEMVELOCIDAD_H__
+#define __ITEMVELOCIDAD_H__
 
 #include "Inventory.h"
 #include "Point.h"
@@ -8,13 +8,13 @@
 
 struct SDL_Texture;
 
-class Cola : public Entity
+class Velocidad : public Entity
 {
 public:
 
-	Cola();
+	Velocidad();
 
-	virtual ~Cola();
+	virtual ~Velocidad();
 
 	bool Awake();
 
@@ -32,10 +32,10 @@ public:
 
 private:
 
-	bool playerContactCo;
+	bool playerContactV;
 	SDL_Texture* texture;
 	const char* texturePath;
 	uint texW, texH;
 };
 
-#endif // __ITEMCOLA_H__
+#endif // __ITEMVELOCIDAD_H__
