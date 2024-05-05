@@ -1,14 +1,14 @@
 #include "Enemic.h"
 
 void Enemic::rebreDanys(int danys) {
-    salut -= danys;
-    if (salut < 0) salut = 0;
+    salutActual -= danys;
+    if (salutActual < 0) salutActual = 0;
 }
 
 void Enemic::aplicarEfecteEstat() {
     if (estat == CREMADA || estat == ENVENENADA) {
-        salut -= salut * 0.05; // Aplicar daños por efecto de estado
-        if (salut < 0) salut = 0;
+        salutActual -= salutActual * 0.05; // Aplicar daños por efecto de estado
+        if (salutActual < 0) salutActual = 0;
     }
 }
 

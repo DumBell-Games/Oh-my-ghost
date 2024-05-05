@@ -111,10 +111,10 @@ bool TitleScreen::Update(float dt)
         // Cada enemic
         Enemic enemic1("Enemic1", 10, 10, 10, 10);
         // Els seus atacs
-        Atac atac1("Atac1", 50);
-        Atac atac2("Atac2", 50);
-        Atac atac3("Atac3", 50);
-        Atac atac4("Atac4", 50);
+        Atac atac1("Atac1", 10);
+        Atac atac2("Atac2", 20);
+        Atac atac3("Atac3", 30);
+        Atac atac4("Atac4", 40);
         enemic1.atacs.push_back(atac1);
         enemic1.atacs.push_back(atac2);
         enemic1.atacs.push_back(atac3);
@@ -130,8 +130,8 @@ bool TitleScreen::Update(float dt)
         equipOponent.push_back(&enemic1);
 
         // Començar el combat
-        Combat nouCombat(equipJugador, equipOponent);
-        nouCombat.Iniciar();
+        Combat combatNum40(equipJugador, equipOponent);
+        combatNum40.Iniciar();
         std::cout << "End Combat" << std::endl;
     }
 

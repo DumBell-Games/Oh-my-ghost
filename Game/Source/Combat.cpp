@@ -3,10 +3,12 @@
 #include <algorithm>
 #include "SDL/include/SDL.h"
 #include "App.h"
+#include "Textures.h"
+#include "Window.h"
 
 void Combat::Iniciar() {
 	std::cout << "Comença el combat!" << std::endl;
-	
+
 	font = app->render->font;
 	renderitzador = app->render->renderer;
 
@@ -18,20 +20,33 @@ void Combat::Iniciar() {
 	std::uniform_int_distribution<int> distribucionTemp(1, 4);
 	distribucion = distribucionTemp;
 
+	// Temp -> referencia de textura per parametre	
+	text_pika = app->tex->Load("../Output/Assets/Textures/Pika.png");	
+	text_dia = app->tex->Load("../Output/Assets/Textures/Dia.png");
+	text_background = app->tex->Load("../Output/Assets/Textures/BackgroundCombat2.png");
+
+	rectWin = { 0,0, (int)app->win->width, (int)app->win->height };
+	rectPika = { 200,400, 200,200 };
+	rectDia = { 600,200, 300,300 };
+
 	while (!CombatFinalitzat()) {
 		TornJugador();
 		if (CombatFinalitzat()) break;
 	}
+
 }
 
 bool Combat::CombatFinalitzat() {
-	return equipJugador[0]->salut <= 0 || equipOponent[0]->salut <= 0;
+	return equipJugador[0]->salutActual <= 0 || equipOponent[0]->salutActual <= 0;
 }
 
 void Combat::TornJugador() {
 	bool jugant = true;
 	while (jugant) {
 		SDL_Event event;
+
+
+
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_QUIT) {
 				jugant = false;
@@ -57,6 +72,16 @@ void Combat::TornJugador() {
 						break;
 					case SDLK_4:
 						std::cout << "Has premut la tecla 4 - Fugir" << std::endl;
+						jugant = false;
+						break;
+					case SDLK_5:
+						std::cout << "Has premut la tecla 5 - Proves filtre red" << std::endl;
+						jugant = false;
+						break;
+					case SDLK_6:
+						std::cout << "Has premut la tecla 6 - Proves vida" << std::endl;
+						equipJugador[jugadorActiu]->salutActual -= 020;
+						app->render->aplicarFiltreVermell(text_pika, &rectPika);
 						jugant = false;
 						break;
 					case SDLK_b:
@@ -127,10 +152,23 @@ void Combat::TornJugador() {
 		NetejarFinestra();
 
 		// Diferents renders
+
+		// Background		
+		SDL_RenderCopy(app->render->renderer, text_background, nullptr, &rectWin);
+
+		// Entitats combat		
+		SDL_RenderCopy(app->render->renderer, text_pika, nullptr, &rectPika);
+		SDL_RenderCopy(app->render->renderer, text_dia, nullptr, &rectDia);
+
+		//Botons
 		if (b_Atacar) { RenderitzarBotonsCombat(); }
 		else if (b_Inventari) { RenderitzarBotonsInventari(); }
 		else if (b_Canviar) { RenderitzarBotonsCanviar(); }
 		else { RenderitzarBotonsPreCombat(); }
+
+		// Jugador i enemic
+		renderitzarBarraDeVida(posVidaPlayer.x, posVidaPlayer.y, ampladaBarraVida, alcadaBarraVida, equipJugador[jugadorActiu]->salutActual, equipJugador[jugadorActiu]->salutTotal);
+		renderitzarBarraDeVida(posVidaEnemic.x, posVidaEnemic.y, ampladaBarraVida, alcadaBarraVida, equipOponent[enemicActiu]->salutActual, equipOponent[enemicActiu]->salutTotal);
 
 		MostrarCanvis();
 	}
@@ -147,25 +185,25 @@ void Combat::RealitzarAtac(int numAtacJugador) {
 	if (JugadorEsMesRapid()) {
 		// Ataca jugador primer
 		if (equipJugador[jugadorActiu]->atacs[numAtacJugador].potencia > equipOponent[enemicActiu]->defensa)
-			equipOponent[enemicActiu]->salut -=
+			equipOponent[enemicActiu]->salutActual -=
 			equipJugador[jugadorActiu]->atacs[numAtacJugador].potencia - equipOponent[enemicActiu]->defensa;
 
 		// Si enemic esta viu ataca 
-		if (equipOponent[enemicActiu]->salut > 0) {
+		if (equipOponent[enemicActiu]->salutActual > 0) {
 			if (equipOponent[enemicActiu]->atacs[atacAleatoriEnemic].potencia > equipJugador[jugadorActiu]->defensa)
-				equipJugador[jugadorActiu]->salut -=
+				equipJugador[jugadorActiu]->salutActual -=
 				equipOponent[enemicActiu]->atacs[atacAleatoriEnemic].potencia - equipJugador[jugadorActiu]->defensa;
 		}
 	}
 	else {
 		// Per tant ataca enemic primer				
 		if (equipOponent[enemicActiu]->atacs[atacAleatoriEnemic].potencia > equipJugador[jugadorActiu]->defensa)
-			equipJugador[jugadorActiu]->salut -=
+			equipJugador[jugadorActiu]->salutActual -=
 			equipOponent[enemicActiu]->atacs[atacAleatoriEnemic].potencia - equipJugador[jugadorActiu]->defensa;
 
-		if (equipJugador[jugadorActiu]->salut > 0) {
+		if (equipJugador[jugadorActiu]->salutActual > 0) {
 			if (equipJugador[jugadorActiu]->atacs[numAtacJugador].potencia > equipOponent[enemicActiu]->defensa)
-				equipOponent[enemicActiu]->salut -=
+				equipOponent[enemicActiu]->salutActual -=
 				equipJugador[jugadorActiu]->atacs[numAtacJugador].potencia - equipOponent[enemicActiu]->defensa;
 		}
 	}
@@ -293,4 +331,26 @@ void Combat::RenderitzarText(const std::string& text, int x, int y, SDL_Color co
 	SDL_RenderCopy(renderitzador, texture, NULL, &dstRect);
 	SDL_FreeSurface(surface);
 	SDL_DestroyTexture(texture);
+}
+
+void Combat::renderitzarBarraDeVida(int x, int y, int amplada, int alcada, float vidaActual, float vidaTotal)
+{
+	// Calcular el percentatge de vida actual
+	float percentatgeVida = (vidaActual / vidaTotal) * 100.0f;
+
+	// Calcular la longitud de la barra de vida en funció del percentatge
+	int longitudBarra = (percentatgeVida / 100.0f) * amplada;
+
+	// Definir el color de la barra de vida (verd per a la vida restant i vermell per a la vida perduda)
+	SDL_Color colorVidaRestant = { 0, 255, 0, 255 }; // Verd
+	SDL_Color colorVidaPerduda = { 255, 0, 0, 255 }; // Vermell
+
+	// Renderitzar la barra de vida
+	SDL_Rect rectangleVidaRestant = { x, y, longitudBarra, alcada };
+	SDL_SetRenderDrawColor(renderitzador, colorVidaRestant.r, colorVidaRestant.g, colorVidaRestant.b, colorVidaRestant.a);
+	SDL_RenderFillRect(renderitzador, &rectangleVidaRestant);
+
+	SDL_Rect rectangleVidaPerduda = { x + longitudBarra, y, amplada - longitudBarra, alcada };
+	SDL_SetRenderDrawColor(renderitzador, colorVidaPerduda.r, colorVidaPerduda.g, colorVidaPerduda.b, colorVidaPerduda.a);
+	SDL_RenderFillRect(renderitzador, &rectangleVidaPerduda);
 }

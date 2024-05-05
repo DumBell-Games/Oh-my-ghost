@@ -2,9 +2,16 @@
 
 #include "Enemic.h"
 #include <vector>
+#include "App.h"
 #include "Window.h"
 #include "Render.h"
 #include <random>
+
+struct Posicio
+{
+	int x;
+	int y;
+};
 
 // Declaración de la clase Combat
 class Combat {
@@ -35,6 +42,7 @@ private:
 	void RenderitzarBotonsInventari();
 	void RenderitzarBotonsCanviar();
 	void RenderitzarText(const std::string& text, int x, int y, SDL_Color color);
+	void renderitzarBarraDeVida(int x, int y, int amplada, int alcada, float vidaActual, float vidaTotal);
 
 
 private:
@@ -60,4 +68,18 @@ private:
 	// Personatge/enemic actiu
 	int jugadorActiu = 0; // Cos/poder actiu
 	int enemicActiu = 0;
+
+	SDL_Texture* text_pika;
+	SDL_Texture* text_dia;
+	SDL_Texture* text_background;
+
+	Posicio posVidaPlayer{100,100};
+	Posicio posVidaEnemic{600,100};
+
+	int ampladaBarraVida = 200;
+	int alcadaBarraVida = 20;
+
+	SDL_Rect rectWin;
+	SDL_Rect rectPika;
+	SDL_Rect rectDia;
 };
