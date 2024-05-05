@@ -79,9 +79,6 @@ public:
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
 
-	// Debug mode
-	bool debug;
-
 private:
 
 

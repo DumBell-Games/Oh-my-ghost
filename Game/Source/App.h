@@ -77,6 +77,10 @@ public:
 	// Close the game (for use with UI elements)
 	void Quit() { quit = true; }
 
+	void ToggleDebug() { debug = !debug; }
+
+	bool DebugEnabled() { return debug; }
+
 private:
 
 	// Load config file
@@ -165,6 +169,8 @@ private:
 	bool loadRequest = false;
 	bool saveRequest = false;
 	bool quit = false;
+
+	bool debug = true;
 
 };
 

@@ -22,7 +22,6 @@ Physics::Physics(bool startEnabled) : Module(startEnabled)
 {
 	// Initialise all the internal class variables, at least to NULL pointer
 	world = NULL;
-	debug = true;
 	name.Create("physics");
 }
 
@@ -226,10 +225,10 @@ bool Physics::PostUpdate()
 
 	// Activate or deactivate debug mode
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
-		debug = !debug;
+		app->ToggleDebug();
 	
 	//  Iterate all objects in the world and draw the bodies
-	if (debug)
+	if (app->DebugEnabled())
 	{
 		for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
 		{
