@@ -27,7 +27,7 @@ TitleScreen::~TitleScreen()
 // Called before render is available
 bool TitleScreen::Start()
 {
-    
+    buttonFx = app->audio->LoadFx("Assets/Audio/Fx/buttonFX.wav");
     menuFx = app->audio->LoadFx("Assets/Audio/Fx/menuFX.wav");
     
     menu1 = app->tex->Load("Assets/Screens/mainMenu1.jpg");
@@ -85,6 +85,7 @@ bool TitleScreen::Update(float dt)
 
     if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN && titleButtons.Count() >= menuIndex)
     {
+        app->audio->PlayFx(buttonFx);
         titleButtons[menuIndex - 1]->state = GuiControlState::PRESSED;
         titleButtons[menuIndex - 1]->NotifyObserver();
     }

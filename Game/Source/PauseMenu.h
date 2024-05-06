@@ -37,11 +37,16 @@ public:
     int screenWidth;
     int screenHeight;
     bool buttoncreated = false;
+
     bool ajustcreated = false;
     bool inpause = false;
     bool inajustes = false;
     bool fullscreen = true;
     bool vsycn = true;
+
+    int buttonFx;
+
+
 
     Timer timer;
 

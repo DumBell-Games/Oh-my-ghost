@@ -61,7 +61,6 @@ bool Map::Update(float dt)
     ListItem<MapLayer*>* mapLayerItem;
     mapLayerItem = mapData.maplayers.start;
 
-    if (false)
     while (mapLayerItem != NULL) {
 
         if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) {
@@ -72,6 +71,8 @@ bool Map::Update(float dt)
                 {
                     int gid = mapLayerItem->data->Get(x, y);
                     TileSet* tileset = GetTilesetFromTileId(gid);
+
+                    if (!tileset) continue;
 
                     SDL_Rect r = tileset->GetTileRect(gid);
                     iPoint pos = MapToWorld(x, y);
@@ -127,6 +128,7 @@ SDL_Rect TileSet::GetTileRect(int gid) const
 
 TileSet* Map::GetTilesetFromTileId(int gid) const
 {
+    if (gid == 0) return nullptr;
     ListItem<TileSet*>* item = mapData.tilesets.start;
     TileSet* set = NULL;
 
@@ -259,7 +261,7 @@ bool Map::Unload()
 // If parameter is -1 just reloads the current map
 bool Map::ChangeMap(int id)
 {
-    currentMap = ((id == -1) ? currentMap : id);
+    currentMap = ((id <= -1) ? currentMap : id);
 
     return app->reload->QueueReload("loadMap");
 }
@@ -328,7 +330,7 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
     LoadProperties(node, layer->properties);
 
     //Reserve the memory for the data 
-    layer->data = new uchar[layer->width * layer->height];
+    layer->data = new uint[layer->width * layer->height];
     memset(layer->data, 0, layer->width * layer->height);
 
     //Iterate over all the tiles and assign the values
@@ -376,9 +378,8 @@ bool Map::LoadAllObjects(pugi::xml_node mapNode) {
         {
             // If object is an entity and the entity type is defined, load as entity
             Properties::Property* p = prop.GetProperty("entity");
-            if (p != nullptr && p->strVal.Length() > 0) {
-                const char* str = p->strVal.GetString();
-                LoadEntity(objGroupNode, objNode, str[0]);
+            if (p != nullptr && p->intVal > 0) {
+                LoadEntity(objGroupNode, objNode, p->intVal);
             }
             else if (objNode.child("ellipse")) {
                 LoadCircle(objGroupNode, objNode);
@@ -397,7 +398,7 @@ bool Map::LoadAllObjects(pugi::xml_node mapNode) {
 
 bool Map::LoadEntity(pugi::xml_node objGroupNode, pugi::xml_node objNode, char entityType)
 {
-    Entity* entity = app->entityManager->CreateFromMap(entityType, objNode);
+    Entity* entity = app->entityManager->CreateEntity(static_cast<EntityType>(entityType), objNode);
     // TODO change all past this line until return to be in each of the entities instead (custom initialization)
     int x = objNode.attribute("x").as_int();
     int y = objNode.attribute("y").as_int();
@@ -497,7 +498,7 @@ bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
             else if (typeAttr == "bool") {
                 p->value = propertiesNode.attribute("value").as_bool();
             }
-            else if (typeAttr == "integer") {
+            else if (typeAttr == "int") {
                 p->intVal = propertiesNode.attribute("value").as_int();
             }
             else if (typeAttr == "float") {

@@ -29,10 +29,10 @@ bool PauseMenu::Awake() {
 }
 
 bool PauseMenu::Start() {
-	   
-    
 
-    app->render->camera.x = 0;
+  buttonFx = app->audio->LoadFx("Assets/Audio/Fx/buttonFX.wav");
+
+  app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
 	SDL_GetWindowSize(app->win->window, &screenWidth, &screenHeight);
@@ -48,6 +48,7 @@ bool PauseMenu::Update(float dt) {
         {
            app->fadeToBlack->FadeToBlackTransition((Module*)app->pause, (Module*)app->scene, 0.0f);
             buttoncreated = false;
+            app->audio->PlayFx(buttonFx);
         }
         if (inpause == true && PauseButtons.At(1)->data->state == GuiControlState::PRESSED)
         {
@@ -60,6 +61,7 @@ bool PauseMenu::Update(float dt) {
             app->fadeToBlack->FadeToBlackTransition((Module*)app->pause, (Module*)app->titlescreen, 0.0f);
             app->scene->Disable();
             buttoncreated = false;
+            app->audio->PlayFx(buttonFx);
         }
 
     }

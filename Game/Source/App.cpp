@@ -12,6 +12,7 @@
 #include "Optick/include/optick.h"
 #include "menu.h"
 #include "PauseMenu.h"
+#include "DebugConsole.h"
 #include "EntityManager.h"
 #include "TeamScreen.h"
 #include "IntroScreen.h"
@@ -50,6 +51,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	introScreen = new IntroScreen(false);
 	teamScreen = new TeamScreen(true);
 	pause = new PauseMenu(false);
+	console = new DebugConsole(true);
 	map = new Map(false);
 	reload = new Reload(true);
 	entityManager = new EntityManager(false);
@@ -65,15 +67,16 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(audio);
 	//L07 DONE 2: Add Physics module
 	AddModule(physics);
+	AddModule(map);
 	AddModule(entityManager);
 	AddModule(guiManager);
 
-	AddModule(map);
 	AddModule(scene);
 	AddModule(titlescreen);
 	AddModule(introScreen);
 	AddModule(teamScreen);
 	AddModule(pause);
+	AddModule(console);
 	AddModule(dialogManager);
 	AddModule(fadeToBlack);
 
