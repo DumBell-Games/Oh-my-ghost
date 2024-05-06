@@ -36,6 +36,7 @@ enum ControlID {
 	LEFT,
 	RIGHT,
 	APP_EXIT,
+	DEBUG_CONSOLE,
 	ID_COUNT
 };
 
@@ -170,6 +171,9 @@ public:
 
 	bool SaveBindings();
 
+	std::string GetText() const { return textInput; }
+	void ResetText() { textInput = ""; }
+
 private:
 
 	bool GetKeyRaw(int id) const
@@ -203,6 +207,10 @@ private:
 	int mouseX;
 	int mouseY;
 
+	// Entrada de texto
+	std::string textInput;
+
+	// Input universal (teclado + gamepad)
 	std::vector<ControlBinding> bindings;
 
 	friend ControlBinding;

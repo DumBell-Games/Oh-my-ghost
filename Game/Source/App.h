@@ -25,6 +25,7 @@ class TitleScreen;
 class IntroScreen;
 class TeamScreen;
 class PauseMenu;
+class DebugConsole;
 //L07 DONE 2: Add Physics module
 class Physics;
 class GuiManager;
@@ -77,6 +78,10 @@ public:
 	// Close the game (for use with UI elements)
 	void Quit() { quit = true; }
 
+	void ToggleDebug() { debug = !debug; }
+
+	bool DebugEnabled() { return debug; }
+
 private:
 
 	// Load config file
@@ -122,6 +127,7 @@ public:
 	IntroScreen* introScreen;
 	TeamScreen* teamScreen;
 	PauseMenu* pause;
+	DebugConsole* console;
 	//L07 DONE 2: Add Physics module
 	Physics* physics;
 	GuiManager* guiManager;
@@ -165,6 +171,8 @@ private:
 	bool loadRequest = false;
 	bool saveRequest = false;
 	bool quit = false;
+
+	bool debug = true;
 
 };
 

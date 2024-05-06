@@ -34,7 +34,5 @@ public:
 	SDL_Rect rect;
 
 	char contact = 0;
-
-	SDL_Texture* texture = nullptr;
 };
 

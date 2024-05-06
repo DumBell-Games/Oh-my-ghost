@@ -167,7 +167,7 @@ bool Scene::Update(float dt)
 	for (uint i = 0; i < path->Count(); ++i)
 	{
 		iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-		if (app->physics->debug)
+		if (app->DebugEnabled())
 		{
 			app->render->DrawTexture(mouseTileTex, pos.x, pos.y);
 		}
