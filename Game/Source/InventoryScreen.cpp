@@ -55,12 +55,18 @@ bool InventoryScreen::Start() {
 
 	return true;
 }
+bool InventoryScreen::PreUpdate() {
+
+    if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
+    {
+        app->fadeToBlack->FadeToBlackTransition(this, (Module*)app->scene, 0);
+    }
+
+	return true;
+}
 bool InventoryScreen::Update(float dt) {
     
-    if(app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN)
-	{
-		app->fadeToBlack->FadeToBlackTransition(this, (Module*)app->scene, 0);
-	}
+    
 
     if (app->input->GetButton(ControlID::UP) == KEY_REPEAT) //arriba
     {
