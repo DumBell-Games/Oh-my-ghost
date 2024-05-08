@@ -1,4 +1,6 @@
 #pragma once
+#include "StatusEffect.h"
+#include <memory>
 
 #include <string>
 #include <vector>
@@ -13,6 +15,7 @@ public:
     std::string nom;
     int potencia;
     Estat estat = NORMAL;
+    std::unique_ptr<StatusEffect> status;
     int probEstat = 0; // % de probabilitat
     Objectiu objectiu = RIVAL;
 
@@ -30,6 +33,7 @@ public:
     int defensa;
     int velocitat;
     Estat estat;
+    std::unique_ptr<StatusEffect> activeStatus;
     std::vector<Atac> atacs;
 
     Personatge(std::string _nom, int _nivell, int _atac, int _defensa, int _velocitat)

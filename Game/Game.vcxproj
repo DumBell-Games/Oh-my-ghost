@@ -95,6 +95,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Poison.cpp" />
     <ClCompile Include="Source\DebugCommands.h" />
     <ClCompile Include="Source\DebugConsole.cpp" />
     <ClCompile Include="Source\Enemies.cpp" />
@@ -135,6 +136,7 @@
     <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\Window.cpp" />
     <ClCompile Include="Source\TransitionTrigger.cpp" />
+    <ClInclude Include="Source\Poison.h" />
     <ClInclude Include="Source\DebugConsole.h" />
     <ClInclude Include="Source\Enemies.h" />
     <ClInclude Include="Source\FadeToBlack.h" />
