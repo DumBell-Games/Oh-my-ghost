@@ -50,6 +50,8 @@ private:
 
 	std::vector<std::string> GetArguments(std::string str, char separator);
 
+	friend static void DisplayHelp(DebugConsole* console, std::vector<std::string> args);
+
 private:
 
 	SDL_Color textColor;

@@ -26,7 +26,7 @@ bool DebugConsole::Awake(pugi::xml_node config)
 
 bool DebugConsole::Start()
 {
-	commandList.push_back(DebugCmd("warpto", "Teletransporta al jugador al mapa (y opcionalmente entrada) especificados", "warpto mapId [doorId]", WarpTo));
+	AddCommand("help", "Muestra la lista de comandos disponibles", "help", [this](std::vector<std::string> args) {DisplayHelp(this, args); });
 
 	return true;
 }
@@ -139,4 +139,9 @@ std::vector<std::string> DebugConsole::GetArguments(std::string str, char separa
 		args.push_back(s);
 	}
 	return args;
+}
+
+void DisplayHelp(DebugConsole* console, std::vector<std::string> args)
+{
+	LOG("WIP");
 }
