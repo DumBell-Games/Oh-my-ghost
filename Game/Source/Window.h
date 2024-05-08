@@ -1,9 +1,9 @@
 #ifndef __WINDOW_H__
 #define __WINDOW_H__
 
-#define SCREEN_WIDTH 1280
-#define SCREEN_HEIGHT 720
-#define SCREEN_SIZE 0
+#define SCREEN_WIDTH 1920
+#define SCREEN_HEIGHT 1080
+#define SCREEN_SIZE 1
 
 #include "Module.h"
 

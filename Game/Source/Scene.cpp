@@ -166,7 +166,7 @@ bool Scene::Update(float dt)
 	// L13: Get the latest calculated path and draw
 	const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
 	for (uint i = 0; i < path->Count(); ++i)
-	{
+	{		
 		iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
 		if (app->DebugEnabled())
 		{
