@@ -110,7 +110,6 @@ public:
 
 	iPoint MapToWorld(int x, int y) const;
 	iPoint Map::WorldToMap(int x, int y);
-	bool LoadProperties(pugi::xml_node& node, Properties& properties);
 
 private:
 
