@@ -147,9 +147,27 @@
 	</map>
 
 	<combat>
-		<buttons>
-			<button id="" x="0" y ="0" w="0" h="0" />
-		</buttons>
+		<menus>
+			<!--En la implementacion los botones van de abajo hacia arriba-->
+			<main>
+				<button id="0" text="Atacar" x="0" y ="0" w="0" h="0" />
+				<button id="1" text="Objetos" x="0" y ="0" w="0" h="0" />
+				<button id="2" text="Cambiar" x="0" y ="0" w="0" h="0" />
+				<button id="3" text="Huir" x="0" y ="0" w="0" h="0" />
+			</main>
+			<!--
+			<menu name="abilities">
+				Autogenerado con datos de personaje
+			</menu>
+			<menu name="items">
+				Autogenerado con los datos de inventario
+			</menu>
+			-->
+			<team>
+				<button id="0" text="Volver" x="0" y ="0" w="0" h="0" />
+				<!--Otros botones autogenerados por equipo-->
+			</team>
+		</menus>
 	</combat>
 
 	<reload>

@@ -17,5 +17,5 @@ bool Poison::Tick(Personatge* p)
 
 bool Poison::ApplyToAttack(float& defMultiplier, float& atkMultiplier)
 {
-    return true;
+    return false;
 }

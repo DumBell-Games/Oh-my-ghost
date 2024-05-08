@@ -16,7 +16,7 @@ public:
 	// Aplica el estado alterado en ese turno
 	virtual bool Tick(Personatge* p) = 0;
 
-	// Aumenta o reduce el ataque/defensa para el ataque que se esta calculando
+	// Aumenta o reduce el ataque/defensa para el ataque que se esta calculando. Devuelve true si el ataque es interrumpido por el estado alterado
 	virtual bool ApplyToAttack(float& defMultiplier, float& atkMultiplier) = 0;
 
 	std::string name;
