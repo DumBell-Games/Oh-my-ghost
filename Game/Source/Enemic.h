@@ -5,18 +5,22 @@
 #include <iostream>
 
 enum Estat { NORMAL, CREMADA, ENVENENADA };
+enum Objectiu { RIVAL, PROPI, TOTS };
 
 // Declaración de la clase Atac
 class Atac {
 public:
     std::string nom;
     int potencia;
+    Estat estat = NORMAL;
+    int probEstat = 0; // % de probabilitat
+    Objectiu objectiu = RIVAL;
 
     Atac(std::string _nom, int _potencia) : nom(_nom), potencia(_potencia){}
 };
 
 
-class Enemic {
+class Personatge {
 public:
     std::string nom;
     int nivell;
@@ -28,7 +32,7 @@ public:
     Estat estat;
     std::vector<Atac> atacs;
 
-    Enemic(std::string _nom, int _nivell, int _atac, int _defensa, int _velocitat)
+    Personatge(std::string _nom, int _nivell, int _atac, int _defensa, int _velocitat)
         : nom(_nom), nivell(_nivell), estat(NORMAL), atac(_atac), defensa(_defensa), velocitat(_velocitat) {
         salutTotal = 100; // Inicializamos la salud en 100 por defecto
         salutActual = 100;
@@ -38,5 +42,5 @@ public:
 
     void aplicarEfecteEstat();
 
-    void atacar(Enemic& oponent, int indexAtac);
+    void atacar(Personatge& oponent, int indexAtac);
 };

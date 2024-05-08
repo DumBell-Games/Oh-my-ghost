@@ -17,7 +17,7 @@ struct Posicio
 class Combat {
 
 public:
-	Combat(std::vector<Enemic*> _equipJugador, std::vector<Enemic*> _equipOponent)
+	Combat(std::vector<Personatge*> _equipJugador, std::vector<Personatge*> _equipOponent)
 		: equipJugador(_equipJugador), equipOponent(_equipOponent) {
 		jugadorActual = equipJugador[0];
 		oponentActual = equipOponent[0];
@@ -50,10 +50,10 @@ private:
 	std::mt19937 generador;
 	std::uniform_int_distribution<int> distribucion;
 
-	Enemic* jugadorActual;
-	Enemic* oponentActual;
-	std::vector<Enemic*> equipJugador;
-	std::vector<Enemic*> equipOponent;
+	Personatge* jugadorActual;
+	Personatge* oponentActual;
+	std::vector<Personatge*> equipJugador;
+	std::vector<Personatge*> equipOponent;
 
 	SDL_Window* finestra;
 	SDL_Renderer* renderitzador;

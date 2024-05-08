@@ -105,11 +105,11 @@ bool TitleScreen::Update(float dt)
     {
         // Crear equips de un enemic o mes
         std::cout << "Init combat" << std::endl;
-        std::vector<Enemic*> equipJugador;
-        std::vector<Enemic*> equipOponent;
+        std::vector<Personatge*> equipJugador;
+        std::vector<Personatge*> equipOponent;
 
         // Cada enemic
-        Enemic enemic1("Enemic1", 10, 10, 10, 10);
+        Personatge enemic1("Enemic1", 10, 10, 10, 10);
         // Els seus atacs
         Atac atac1("Atac1", 10);
         Atac atac2("Atac2", 20);
@@ -120,7 +120,7 @@ bool TitleScreen::Update(float dt)
         enemic1.atacs.push_back(atac3);
         enemic1.atacs.push_back(atac4);
 
-        Enemic enemic2("Enemic2", 100, 100, 100, 100);
+        Personatge enemic2("Enemic2", 100, 100, 100, 100);
         enemic2.atacs.push_back(atac1);
         enemic2.atacs.push_back(atac2);
         enemic2.atacs.push_back(atac3);

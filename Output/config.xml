@@ -16,7 +16,7 @@
   </renderer>
 
   <window>
-    <resolution width="1280" height="720" scale="1"/>
+    <resolution width="1920" height="1080" scale="1"/>
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="false"/>
@@ -145,6 +145,12 @@
 		<map id="2" file="disco_plantilla.tmx"/>
 		<map id="3" file="casino_plantilla.tmx"/>
 	</map>
+
+	<combat>
+		<buttons>
+			<button id="" x="0" y ="0" w="0" h="0" />
+		</buttons>
+	</combat>
 
 	<reload>
 		<presets>

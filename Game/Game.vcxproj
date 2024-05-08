@@ -108,6 +108,7 @@
     <ClCompile Include="Source\ItemVelocidad.cpp" />
     <ClCompile Include="Source\ItemYogur.cpp" />
     <ClCompile Include="Source\PauseMenu.cpp" />
+    <ClCompile Include="Source\CombatManager.cpp" />
     <ClCompile Include="Source\Enemic.cpp" />
     <ClCompile Include="Source\Combat.cpp" />
     <ClCompile Include="Source\menu.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="Source\ItemVelocidad.h" />
     <ClInclude Include="Source\ItemYogur.h" />
     <ClInclude Include="Source\PauseMenu.h" />
+    <ClInclude Include="Source\CombatManager.h" />
     <ClInclude Include="Source\Enemic.h" />
     <ClInclude Include="Source\Combat.h" />
     <ClInclude Include="Source\menu.h" />
@@ -193,6 +195,7 @@
     <Xml Include="..\Output\config.xml" />
     <Xml Include="..\Output\controls.xml" />
     <Xml Include="..\Output\inventory.xml" />
+    <ClInclude Include="Source\StatusEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
