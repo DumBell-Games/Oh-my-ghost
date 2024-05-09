@@ -144,6 +144,7 @@ private:
 	List<SString> mapNames;
 	int currentMap = 0;
 
+	// Debug command
 	friend static void WarpTo(Map* map, std::vector<std::string> args);
 };
 

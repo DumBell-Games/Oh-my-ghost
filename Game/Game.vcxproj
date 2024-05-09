@@ -95,6 +95,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\PropertiesStruct.cpp" />
     <ClCompile Include="Source\Poison.cpp" />
     <ClCompile Include="Source\DebugCommands.h" />
     <ClCompile Include="Source\DebugConsole.cpp" />
