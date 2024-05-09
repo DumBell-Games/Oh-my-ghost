@@ -2,6 +2,7 @@
 #include "GuiControl.h"
 #include "GuiManager.h"
 #include "InventoryScreen.h"
+#include "FadeToBlack.h"
 
 #include "Log.h"
 #include "App.h"
@@ -29,6 +30,9 @@ bool CombatManager::Awake(pugi::xml_node config)
 
 bool CombatManager::Start()
 {
+	// Se asegura de que el modulo de entidades este pausado para que el jugador no se mueva por el mapa durante el combate
+	if (!app->entityManager->paused)
+		app->entityManager->Pause();
 	currentMenu = 0;
 	currentElement = 0;
 	LOG("Combat Start!");
@@ -94,6 +98,8 @@ bool CombatManager::CleanUp()
 		menu->clear();
 	}
 	//No hace falta vaciar menuList ya que es simplemente una agrupación de 4 variables dentro del mismo modulo
+
+	app->fadeToBlack->FadeToBlackTransition(this, (Module*)app->entityManager);
 	return true;
 }
 
@@ -115,8 +121,8 @@ void CombatManager::CreateButtons(pugi::xml_node config)
 		SDL_Rect bounds;
 		bounds.x = buttonItem.attribute("x").as_int(0);
 		bounds.y = buttonItem.attribute("y").as_int(0);
-		bounds.w = buttonItem.attribute("w").as_int(0);
-		bounds.h = buttonItem.attribute("h").as_int(0);
+		bounds.w = buttonItem.attribute("w").as_int(128);
+		bounds.h = buttonItem.attribute("h").as_int(128);
 		GuiOnClick_f func;
 		if (id >= 0 && id < functions.size())
 			func = functions[id];

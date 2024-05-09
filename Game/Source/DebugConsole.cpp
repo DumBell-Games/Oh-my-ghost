@@ -80,10 +80,13 @@ bool DebugConsole::AddCommand(SString cmd, const char* description, const char* 
 {
 	for (size_t i = 0; i < commandList.size(); i++)
 	{
-		if (cmd == commandList[i].command)
+		if (cmd == commandList[i].command) {
+			LOG("Command \"%s\" already exists!", cmd.GetString());
 			return false;
+		}
 	}
 	commandList.push_back({ cmd.GetString(), description, format,listener});
+	LOG("Added command \"%s\"", cmd.GetString());
 	return true;
 }
 
@@ -91,8 +94,10 @@ void DebugConsole::RemoveCommand(const char* cmd)
 {
 	for (size_t i = 0; i < commandList.size(); i++)
 	{
-		if (cmd == commandList[i].command)
+		if (commandList[i].command == cmd) {
 			commandList.erase(commandList.begin() + i);
+			LOG("Removed command \"%s\"", cmd);
+		}
 	}
 }
 
@@ -119,6 +124,7 @@ void DebugConsole::HandleCommand()
 		for (size_t i = 0; i < commandList.size(); i++)
 		{
 			if (commandList[i].command == command) {
+				LOG("Executing command\"%s\"", input.c_str());
 				commandList[i](args);
 				ToggleConsole(); // Cierra la consola una vez ejecutado el comando (si se ha cerrado desde el propio comando, vuelve a abrir la consola)
 			}

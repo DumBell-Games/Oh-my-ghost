@@ -15,7 +15,7 @@ public:
     std::string nom;
     int potencia;
     Estat estat = NORMAL;
-    std::unique_ptr<StatusEffect> status;
+    StatusEffect* status = nullptr;
     int probEstat = 0; // % de probabilitat
     Objectiu objectiu = RIVAL;
 

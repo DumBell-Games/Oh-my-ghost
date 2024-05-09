@@ -150,10 +150,10 @@
 		<menus>
 			<!--En la implementacion los botones van de abajo hacia arriba-->
 			<main>
-				<button id="0" text="Atacar" x="0" y ="0" w="0" h="0" />
-				<button id="1" text="Objetos" x="0" y ="0" w="0" h="0" />
-				<button id="2" text="Cambiar" x="0" y ="0" w="0" h="0" />
-				<button id="3" text="Huir" x="0" y ="0" w="0" h="0" />
+				<button id="0" text="Atacar" x="0" y ="16" w="128" h="64" />
+				<button id="1" text="Objetos" x="0" y ="96" w="128" h="64" />
+				<button id="2" text="Cambiar" x="0" y ="176" w="128" h="64" />
+				<button id="3" text="Huir" x="0" y ="256" w="128" h="64" />
 			</main>
 			<!--
 			<menu name="abilities">

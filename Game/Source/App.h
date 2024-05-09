@@ -20,6 +20,7 @@ class Audio;
 class Scene;
 class EntityManager;
 class Map;
+class CombatManager;
 class Reload;
 class InventoryScreen;
 class TitleScreen;
@@ -123,6 +124,7 @@ public:
 	Scene* scene;
 	EntityManager* entityManager;
 	Map* map;
+	CombatManager* combat;
 	Reload* reload; // Module (un/re)loader
 	InventoryScreen* inventoryScreen;
 	TitleScreen* titlescreen;

@@ -2,6 +2,8 @@
 #include "Module.h"
 #include "Enemic.h"
 
+#include "Point.h"
+
 #include <random>
 #include <vector>
 
@@ -53,6 +55,8 @@ public:
 
 	bool CleanUp() override;
 
+private:
+
 	void CreateButtons(pugi::xml_node config);
 
 	void CreateAbilityButtons(Personatge* p);
@@ -69,14 +73,18 @@ public:
 
 	void HandleStartDialog();
 
+	// Seleccion de accion
 	void HandleMenu();
 
+	// Accion elegida
 	void HandleCombat();
 
 	void EnemyChoice();
 
+	// Texto de final de combate (dialogo del enemigo, EXP acumulada, etc.)
 	void HandleEndDialog();
 
+	// Final de combate, inicio de transicion a mapa (desactivar este modulo y despausar entitymanager)
 	void HandleEnd();
 
 	// Realizacion de acciones
@@ -97,8 +105,8 @@ private:
 
 	// Gestion de menu
 	std::vector<std::vector<GuiControl*>*> menuList;
-	int currentMenu = 0;
-	int currentElement = 0;
+	char currentMenu = 0;
+	char currentElement = 0;
 
 	//Menu principal
 	std::vector<GuiControl*> bMain;
@@ -126,7 +134,7 @@ private:
 
 	int turn = 0;
 
-	//Funciones para ser usadas por los botones
+	//Funciones para ser usadas por los botones (menu inicial, las tres primeras abren submenu, la cuarta intenta terminar el combate como accion directa)
 
 	friend void AttackMenu(CombatManager* manager, GuiControl* ctrl);
 

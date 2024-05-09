@@ -7,13 +7,17 @@ class Personatge;
 class StatusEffect
 {
 public:
+	
+	StatusEffect() : name("PH"), duration(0)
+	{}
+
 	StatusEffect(const char* _name, int _duration) : name(_name), duration(_duration)
 	{}
 
 	~StatusEffect()
 	{}
 
-	// Aplica el estado alterado en ese turno
+	// Aplica el estado alterado en ese turno. Devuelve false si el estado alterado ha expirado y debe quitarse del personaje
 	virtual bool Tick(Personatge* p) = 0;
 
 	// Aumenta o reduce el ataque/defensa para el ataque que se esta calculando. Devuelve true si el ataque es interrumpido por el estado alterado
@@ -21,6 +25,6 @@ public:
 
 	std::string name;
 	int duration;
-	int timePassed;
+	int timePassed = 0;
 };
 
