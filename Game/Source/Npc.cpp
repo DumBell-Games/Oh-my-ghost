@@ -35,7 +35,9 @@ bool Npc::Start() {
 
 	texture = app->tex->Load(texturePath.GetString()); 
 		
-	nBody = app->physics->CreateCircle(position.x + 16, position.y + 16, 16, bodyType::KINEMATIC);
+	nBody = app->physics->CreateRectangle(position.x + 128, position.y + 128, 128, 256, bodyType::KINEMATIC);
+	//haz que el rectangulo no rote
+	nBody->body->SetFixedRotation(true);	
 	nBody->listener = this;
 	nBody->ctype = ColliderType::NPC;
 
@@ -45,7 +47,7 @@ bool Npc::Start() {
 bool Npc::Update(float dt)
 {
 			
-	app->render->DrawTexture(texture, position.x, position.y);
+	app->render->DrawTexture(texture, position.x - 48, position.y - 114);
 
 	b2Transform nBodyPos = nBody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;

@@ -264,7 +264,6 @@ bool Render::LoadState(pugi::xml_node node) {
 
 	return true;
 }
-
 // L14: TODO 8: Create a method to save the state of the renderer
 // using append_child and append_attribute
 bool Render::SaveState(pugi::xml_node node) {

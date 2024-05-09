@@ -6,6 +6,7 @@
 #include "GuiManager.h"
 #include "GuiControl.h"
 #include "Timer.h"
+#include "SString.h"
 
 class InventoryScreen : public Module
 {
@@ -54,6 +55,12 @@ public:
     SDL_Texture* inventory13;
     SDL_Texture* inventory14;
 
+    SString valorCoca;
+	SString valorBirra;
+	SString valorCaramelos;
+	SString valorPatatas;
+    SString valorVelocidad;
+    SString valorYogur;
 
     Timer timer;
 

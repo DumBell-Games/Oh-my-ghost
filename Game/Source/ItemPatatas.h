@@ -29,7 +29,7 @@ public:
     void OnEndCollision(PhysBody* bodyA, PhysBody* bodyB);
 
 public:
-
+	int cantidadPatatas = 0;
 	bool isPicked = false;
 
 private:

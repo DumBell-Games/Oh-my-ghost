@@ -29,7 +29,7 @@ public:
 	void OnEndCollision(PhysBody* bodyA, PhysBody* bodyB);
 
 public:
-
+	int cantidadBirra = 0;
 	bool isPicked = false;
 
 private:

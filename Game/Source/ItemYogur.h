@@ -29,7 +29,7 @@ public:
     void OnEndCollision(PhysBody* bodyA, PhysBody* bodyB);
 
 public:
-
+	int cantidadYogur = 0;
 	bool isPicked = false;
 
 private:
@@ -39,7 +39,7 @@ private:
 private:
 	bool playerContactY;
 	SDL_Texture* texture;
-	const char* texturePath;
+	SString texturePath;
 	uint texW, texH;
 };
 

@@ -5,6 +5,7 @@
 #include "SString.h"
 #include "Input.h"
 #include "Render.h"
+#include "PropertiesStruct.h"
 
 enum class EntityType : char
 {

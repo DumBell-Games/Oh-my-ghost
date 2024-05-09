@@ -36,7 +36,9 @@ bool Player::Start() {
 	
 	currentTexture = texturePlayer;
 
-	pBody = app->physics->CreateCircle(position.x + 128, position.y + 128, 128, bodyType::DYNAMIC);
+	pBody = app->physics->CreateRectangle(position.x + 128, position.y + 128, 128, 256, bodyType::DYNAMIC);
+	//haz que el rectangulo no rote
+	pBody->body->SetFixedRotation(true);
 	pBody->listener = this;
 	pBody->ctype = ColliderType::PLAYER;
 

@@ -30,8 +30,10 @@ public:
 
 
 public:
+	int cantidadCaramelos = 0;
 
 	bool isPicked = false;
+
 
 private:
 

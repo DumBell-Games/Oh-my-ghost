@@ -60,6 +60,7 @@ bool Patatas::Update(float dt)
 			app->physics->DestroyBody(ibody);
 			app->tex->UnLoad(texture);
 			app->entityManager->DestroyEntity(this);
+			app->scene->PatatasPicked();
 		}
 	}
 
