@@ -30,7 +30,7 @@ bool PauseMenu::Awake() {
 
 bool PauseMenu::Start() {
 
-  buttonFx = app->audio->LoadFx("Assets/Audio/Fx/buttonFX.wav");
+  buttonFx = app->audio->LoadFx("Assets/Audio/Fx/basic_click.wav");
 
   app->render->camera.x = 0;
 	app->render->camera.y = 0;

@@ -27,7 +27,7 @@ TitleScreen::~TitleScreen()
 // Called before render is available
 bool TitleScreen::Start()
 {
-    buttonFx = app->audio->LoadFx("Assets/Audio/Fx/buttonFX.wav");
+    buttonFx = app->audio->LoadFx("Assets/Audio/Fx/basic_click.wav");
     menuFx = app->audio->LoadFx("Assets/Audio/Fx/menuFX.wav");
     
     menu1 = app->tex->Load("Assets/Screens/mainMenu1.jpg");
