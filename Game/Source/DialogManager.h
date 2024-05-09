@@ -30,10 +30,12 @@ public:
 	bool CleanUp();
 
 	//Funcion para crear dialogos
-	Dialog* CreateDialog(pugi::xml_node itemNode, std::string name = "", const char* faceTexturePath = "", const char* font = "primary");
+	Dialog* CreateDialog(pugi::xml_node itemNode, std::string name = "", const char* faceTexturePath = "", const char* font = "primary", int id = 0);
 	
 	//Funcion para añadir a la lista de dialogos
 	bool AddDialog(Dialog* dialog);
+
+	void EventManager(DialogEvent actualEvent, DialogEvent eventToActivate);
 	
 private:
 	//Funcion que se encarga de mostrar los dialogos
@@ -84,6 +86,15 @@ private:
 	int indexText;
 	Timer charTimer;
 	int optionSelected = 0;
+
+	DialogEvent actualEvent;
+
+	bool dineroObtenido;
+	bool pagarBirra;
+	bool birraObtenida;
+	bool sisebutoHablado;
+
+
 
 };
 

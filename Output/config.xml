@@ -36,10 +36,7 @@
     <map path="Assets/Maps/" name="MapTemplate.tmx"/>
 	
 	  
-	<npc x="200" y="672" texturePath="Assets/Textures/dogNpc.png"/>
-	<npc x="300" y="672" texturePath="Assets/Textures/dogNpc.png"/>
-	<npc x="500" y="672" texturePath="Assets/Textures/dogNpc.png"/>
-	<npc x="700" y="672" texturePath="Assets/Textures/dogNpc.png"/>
+	
 
 	<enemy x="300" y="272" texturePath="Assets/Textures/pigNpc.png"/>
 	<enemy x="500" y="272" texturePath="Assets/Textures/pigNpc.png"/>

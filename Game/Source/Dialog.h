@@ -13,6 +13,27 @@ enum class DialogType
 	CHOOSE
 };
 
+enum class DialogEvent : bool
+{
+	NO_EVENT,
+	TIENESDINERO,
+	PAGARBIRRA,
+	BIRRAOBTENIDA,
+	HASHABLADOCONSISEBUTO,
+	ARCADEDESBLOQUEADO,
+	TARGETAOBTENIDA,
+	VIPCOMPLETADO,
+	SUPERVIPCOMPLETADO,
+	CASINODESBLOQUEADO,
+	CRUPIER2DESBLOQUEADA,
+	MANSIONDESBLOQUEADA,
+	ENCOMBATE,
+	HASGANADO,
+	HASPERDIDO,
+	HASMUERTO
+
+};
+
 class Dialog
 {
 public:
@@ -49,12 +70,16 @@ public:
 
 	//Definir el tipo del dialogo, si es normal o de elecciones
 	DialogType type;
+
+	DialogEvent dEvent;
 	
 	//Frase del dialogo
 	std::string sentence;
 
 	//Nombre de quien realiza el dialogo
 	std::string name;
+
+	int id;
 
 	//Texturas
 	SDL_Texture* face_tex = nullptr;

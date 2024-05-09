@@ -29,11 +29,10 @@ bool DialogTrigger::Start() {
 	texturePath = parameters.attribute("texturepath").as_string();
 	faceTexturePath = parameters.attribute("facetexturepath").as_string("");
 	repeatDialog = parameters.attribute("repeat").as_bool(false);
-
-	std::string fontTarget = parameters.attribute("font").as_string("primary");
-
 	
 
+	std::string fontTarget = parameters.attribute("font").as_string("primary");
+	
 
 	played = false;
 

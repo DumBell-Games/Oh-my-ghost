@@ -2,12 +2,15 @@
 
 #include "Entity.h"
 #include "Point.h"
+#include "PropertiesStruct.h"
 
 #include "SDL/include/SDL.h"
 #include "Box2D/Box2D/Box2D.h"
 
 
 struct SDL_Texture;
+
+
 
 class Npc : public Entity
 {
@@ -35,7 +38,7 @@ public:
 	SDL_Texture* texture = NULL;
 	pugi::xml_node config;
 	uint texW, texH;
-	const char* texturePath;
+	SString texturePath;
 
 	PhysBody* nBody;
 
