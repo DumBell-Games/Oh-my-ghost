@@ -86,3 +86,17 @@ void Birra::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	}
 
 }
+
+void Birra::OnEndCollision(PhysBody* bodyA, PhysBody* bodyB)
+{
+	//SWITCH CASE PARA LOS DIFERENTES TIPOS DE COLISIONES
+	switch (bodyB->ctype)
+	{
+	case ColliderType::PLAYER:
+			LOG("BIRRA OUT PLAYER");
+			playerContactB = false;
+		break;
+
+	}
+
+}

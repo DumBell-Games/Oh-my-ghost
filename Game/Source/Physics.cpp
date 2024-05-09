@@ -343,6 +343,21 @@ void Physics::BeginContact(b2Contact* contact)
 		physB->listener->OnCollision(physB, physA);
 }
 
+void Physics::EndContact(b2Contact* contact)
+{
+	PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
+	PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
+
+	// Check if PhysBody objects have listeners
+	if (physA && physA->listener != NULL) {
+		physA->listener->OnEndCollision(physA, physB); // Call custom function
+	}
+
+	if (physB && physB->listener != NULL) {
+		physB->listener->OnEndCollision(physB, physA); // Call custom function with swapped order
+	}
+}
+
 //--------------- PhysBody
 
 void PhysBody::GetPosition(int& x, int& y) const

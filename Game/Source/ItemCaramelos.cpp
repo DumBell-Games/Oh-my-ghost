@@ -86,3 +86,18 @@ void Caramelos::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	}
 
 }
+
+void Caramelos::OnEndCollision(PhysBody* bodyA, PhysBody* bodyB)
+{
+	//SWITCH CASE PARA LOS DIFERENTES TIPOS DE COLISIONES
+	switch (bodyB->ctype)
+	{
+	case ColliderType::PLAYER:
+		//LOG COLA PLAYER
+		LOG("COLA PLAYER");
+		playerContactC = false;
+		break;
+
+	}
+
+}

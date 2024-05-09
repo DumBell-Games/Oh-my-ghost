@@ -87,3 +87,18 @@ void Patatas::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	}
 
 }
+
+void Patatas::OnEndCollision(PhysBody* bodyA, PhysBody* bodyB)
+{
+	//SWITCH CASE PARA LOS DIFERENTES TIPOS DE COLISIONES
+	switch (bodyB->ctype)
+	{
+	case ColliderType::PLAYER:
+		//LOG COLA PLAYER
+		LOG("PATATAS PLAYER");
+		playerContactP = false;
+		break;
+
+	}
+
+}

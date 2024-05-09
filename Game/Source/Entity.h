@@ -83,6 +83,10 @@ public:
 
 	};
 
+	virtual void OnEndCollision(PhysBody* bodyA, PhysBody* bodyB) {
+
+	};
+
 	virtual void SetPosition(iPoint newPos)
 	{
 		position = newPos;
