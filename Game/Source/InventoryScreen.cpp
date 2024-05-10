@@ -28,8 +28,7 @@ InventoryScreen::~InventoryScreen()
 {
 }
 
-bool InventoryScreen::Start() {
-
+bool InventoryScreen::Start() {   
 
     inventory1 = app->tex->Load("Assets/Textures/InventarioCatCola.png");
     inventory2 = app->tex->Load("Assets/Textures/InventarioCatnip.png");
@@ -66,7 +65,13 @@ bool InventoryScreen::PreUpdate() {
 }
 bool InventoryScreen::Update(float dt) {
     
-    
+	valorCoca.Create("x%d", app->scene->GetColaQuantity());
+    valorBirra.Create("x%d", app->scene->GetBirraQuantity());
+    valorPatatas.Create("x%d", app->scene->GetPatatasQuantity());
+    valorCaramelos.Create("x%d", app->scene->GetCaramelosQuantity());
+    valorVelocidad.Create("x%d", app->scene->GetVelocidadQuantity());
+    valorYogur.Create("x%d", app->scene->GetYogurQuantity());
+
 
     if (app->input->GetButton(ControlID::UP) == KEY_REPEAT) //arriba
     {
@@ -123,29 +128,39 @@ bool InventoryScreen::Update(float dt) {
         inventoryButtons[menuIndex - 1]->state = GuiControlState::PRESSED;
         inventoryButtons[menuIndex - 1]->NotifyObserver();
     }
-     
+
+    if (menuIndex == 1) app->render->DrawTexture(inventory1, 0, 0, 0, NULL);
+    else if (menuIndex == 2) app->render->DrawTexture(inventory2, 0, 0, 0, NULL);
+    else if (menuIndex == 3) app->render->DrawTexture(inventory3, 0, 0, 0, NULL);
+    else if (menuIndex == 4) app->render->DrawTexture(inventory4, 0, 0, 0, NULL);
+    else if (menuIndex == 5) app->render->DrawTexture(inventory5, 0, 0, 0, NULL);
+    else if (menuIndex == 6) app->render->DrawTexture(inventory6, 0, 0, 0, NULL);
+    else if (menuIndex == 7) app->render->DrawTexture(inventory7, 0, 0, 0, NULL);
+    else if (menuIndex == 8) app->render->DrawTexture(inventory8, 0, 0, 0, NULL);
+    else if (menuIndex == 9) app->render->DrawTexture(inventory9, 0, 0, 0, NULL);
+    else if (menuIndex == 10) app->render->DrawTexture(inventory10, 0, 0, 0, NULL);
+    else if (menuIndex == 11) app->render->DrawTexture(inventory11, 0, 0, 0, NULL);
+    else if (menuIndex == 12) app->render->DrawTexture(inventory12, 0, 0, 0, NULL);
+    else if (menuIndex == 13) app->render->DrawTexture(inventory13, 0, 0, 0, NULL);
+    else if (menuIndex == 14) app->render->DrawTexture(inventory14, 0, 0, 0, NULL);
+    
     return true;
 }
+
 bool InventoryScreen::PostUpdate() {
 
-	if (menuIndex == 1) app->render->DrawTexture(inventory1, 0, 0, 0, NULL);
-	else if (menuIndex == 2) app->render->DrawTexture(inventory2, 0, 0, 0, NULL);
-	else if (menuIndex == 3) app->render->DrawTexture(inventory3, 0, 0, 0, NULL);
-	else if (menuIndex == 4) app->render->DrawTexture(inventory4, 0, 0, 0, NULL);
-	else if (menuIndex == 5) app->render->DrawTexture(inventory5, 0, 0, 0, NULL);
-	else if (menuIndex == 6) app->render->DrawTexture(inventory6, 0, 0, 0, NULL);
-	else if (menuIndex == 7) app->render->DrawTexture(inventory7, 0, 0, 0, NULL);
-    else if (menuIndex == 8) app->render->DrawTexture(inventory8, 0, 0, 0, NULL);
-	else if (menuIndex == 9) app->render->DrawTexture(inventory9, 0, 0, 0, NULL);
-    else if (menuIndex == 10) app->render->DrawTexture(inventory10, 0, 0, 0, NULL);
-	else if (menuIndex == 11) app->render->DrawTexture(inventory11, 0, 0, 0, NULL);
-    else if (menuIndex == 12) app->render->DrawTexture(inventory12, 0, 0, 0, NULL);
-	else if (menuIndex == 13) app->render->DrawTexture(inventory13, 0, 0, 0, NULL);
-	else if (menuIndex == 14) app->render->DrawTexture(inventory14, 0, 0, 0,  NULL);
-
-
+    //draw item quantity
+    app->render->DrawText(valorCoca.GetString(), 100, 365, 64, 64);
+	app->render->DrawText(valorBirra.GetString(), 325, 650, 64, 64);
+	app->render->DrawText(valorYogur.GetString(), 775, 365, 64, 64);
+    app->render->DrawText(valorCaramelos.GetString(), 100, 650, 64, 64);
+	app->render->DrawText(valorVelocidad.GetString(), 1000, 650, 64, 64);
+	app->render->DrawText(valorPatatas.GetString(), 550, 365, 64, 64);
+	
 	return true;
 }
+
+
 bool InventoryScreen::CleanUp(){
 
 

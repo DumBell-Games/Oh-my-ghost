@@ -61,6 +61,7 @@ bool Birra::Update(float dt)
 			app->physics->DestroyBody(ibody);
 			app->tex->UnLoad(texture);
 			app->entityManager->DestroyEntity(this);
+			app->scene->BirraPicked();
 		}
 	}
 
@@ -81,6 +82,20 @@ void Birra::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		case ColliderType::PLAYER:
 			LOG("BIRRA PLAYER");
 			playerContactB = true;
+		break;
+
+	}
+
+}
+
+void Birra::OnEndCollision(PhysBody* bodyA, PhysBody* bodyB)
+{
+	//SWITCH CASE PARA LOS DIFERENTES TIPOS DE COLISIONES
+	switch (bodyB->ctype)
+	{
+	case ColliderType::PLAYER:
+			LOG("BIRRA OUT PLAYER");
+			playerContactB = false;
 		break;
 
 	}

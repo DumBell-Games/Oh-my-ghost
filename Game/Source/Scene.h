@@ -5,6 +5,13 @@
 #include "Player.h"
 #include "GuiControl.h"
 #include "GuiControlButton.h"
+#include "ItemCola.h"
+#include "ItemBirra.h"
+#include "ItemCaramelos.h"
+#include "ItemPatatas.h"
+#include "ItemVelocidad.h"
+#include "ItemYogur.h"
+
 
 struct SDL_Texture;
 class Physbody;
@@ -44,13 +51,61 @@ public:
 
 	PhysBody* GetPlayerPbody()
 	{
-		return cola->ibody;
+		return player->pBody;
 	}
+
+	int GetColaQuantity(){
+		return cola.cantidadCola;
+	}
+
+	int ColaPicked() {
+		return cola.cantidadCola++;
+	}
+
+	int YogurPicked() {
+		return yogur.cantidadYogur++;
+	}
+
+	int GetYogurQuantity(){
+		return yogur.cantidadYogur;
+	}
+
+	int BirraPicked() {
+		return birra.cantidadBirra++;
+	}
+
+	int GetBirraQuantity(){
+		return birra.cantidadBirra;
+	}
+
+	int CaramelosPicked() {
+		return caramelos.cantidadCaramelos++;
+	}
+
+	int GetCaramelosQuantity(){
+		return caramelos.cantidadCaramelos;
+	}
+
+	int PatatasPicked() {
+		return patatas.cantidadPatatas++;
+	}
+
+	int GetPatatasQuantity(){
+		return patatas.cantidadPatatas;
+	}
+
+	int VelocidadPicked() {
+		return velocidad.cantidadVelocidad++;
+	}
+
+	int GetVelocidadQuantity(){
+		return velocidad.cantidadVelocidad;
+	}
+
 
 public:
 	int cityFx;
 
-	Cola* cola;
 
 private:
 	SDL_Texture* img;
@@ -61,6 +116,13 @@ private:
 
 	//L03: DONE 3b: Declare a Player attribute
 	Player* player;
+	Cola cola;
+	Yogur yogur;
+	Patatas patatas;
+	Caramelos caramelos;
+	Birra birra;
+	Velocidad velocidad;
+
 
 	// L15: TODO 2: Declare a GUI Control Button 
 	GuiControlButton* gcButtom;

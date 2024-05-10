@@ -108,7 +108,6 @@ bool Scene::Awake(pugi::xml_node config)
 // Called before the first frame
 bool Scene::Start()
 {
-
 	cityFx = app->audio->LoadFx("Assets/Audio/Fx/centralFauna.wav");
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	img = app->tex->Load("Assets/Textures/test.png");
@@ -166,7 +165,7 @@ bool Scene::Update(float dt)
 	// L13: Get the latest calculated path and draw
 	const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
 	for (uint i = 0; i < path->Count(); ++i)
-	{
+	{		
 		iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
 		if (app->DebugEnabled())
 		{

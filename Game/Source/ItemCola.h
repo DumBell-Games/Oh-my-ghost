@@ -26,8 +26,10 @@ public:
 
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
-public:
+    void OnEndCollision(PhysBody* bodyA, PhysBody* bodyB);
 
+public:
+	int cantidadCola = 0;
 	bool isPicked = false;
 	int quantityCola = 0;
 

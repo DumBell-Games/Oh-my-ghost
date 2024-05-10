@@ -16,7 +16,7 @@
   </renderer>
 
   <window>
-    <resolution width="1280" height="720" scale="1"/>
+    <resolution width="1920" height="1080" scale="1"/>
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="false"/>
@@ -36,10 +36,7 @@
     <map path="Assets/Maps/" name="MapTemplate.tmx"/>
 	
 	  
-	<npc x="200" y="672" texturePath="Assets/Textures/dogNpc.png"/>
-	<npc x="300" y="672" texturePath="Assets/Textures/dogNpc.png"/>
-	<npc x="500" y="672" texturePath="Assets/Textures/dogNpc.png"/>
-	<npc x="700" y="672" texturePath="Assets/Textures/dogNpc.png"/>
+	
 
 	<enemy x="300" y="272" texturePath="Assets/Textures/pigNpc.png"/>
 	<enemy x="500" y="272" texturePath="Assets/Textures/pigNpc.png"/>
@@ -49,19 +46,11 @@
 	  <cola x="300" y="472" texturePath="Assets/Textures/itemCola.png"/>
 	  <cola x="400" y="472" texturePath="Assets/Textures/itemCola.png"/>
 	  <birra x="300" y="1000" texturePath="Assets/Textures/itemCerveza.png"/>
-	  <yogur x="400" y="1500" texturePath="Assets/Textures/itemYogur.png"/>
 	  <caramelos x="500" y="2000" texturePath="Assets/Textures/itemCaramelos.png"/>
 	  <velocidad x="600" y="2500" texturePath="Assets/Textures/itemVelocidad.png"/>
 	  <patatas x="700" y="3000" texturePath="Assets/Textures/itemPatatas.png"/>
 
-	  <dialogTrigger x="200" y="472">
-		  <sentences>
-			  <sentence text="¡Has obtenido 1 CatCola!"/>
-			   
-
-		  </sentences>
-	</dialogTrigger> 
-		<dialogTrigger x="200" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true">
+	<dialogTrigger x="200" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true">
 		<sentences>
 			<sentence name="Springy"	facetexturepath="Assets/Textures/catNpc.png" text="Hola"/>
 			<sentence name="Sisebuto"	facetexturepath="Assets/Textures/mouseNpc.png" text="(Hablaría borracho) Déjame en paz *burp*, a no ser que me quieras pagar otra ronda, que entonces sí te haré caso"/>

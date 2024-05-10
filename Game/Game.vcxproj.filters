@@ -96,6 +96,8 @@
     <ClCompile Include="Source\ItemPatatas.cpp" />
     <ClCompile Include="Source\ItemVelocidad.cpp" />
     <ClCompile Include="Source\ItemYogur.cpp" />
+    <ClCompile Include="Source\DebugCommands.h" />
+    <ClCompile Include="Source\DebugConsole.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -229,6 +231,7 @@
     <ClInclude Include="Source\ItemPatatas.h" />
     <ClInclude Include="Source\ItemVelocidad.h" />
     <ClInclude Include="Source\ItemYogur.h" />
+    <ClInclude Include="Source\DebugConsole.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

@@ -24,18 +24,15 @@ bool DialogTrigger::Awake() {
 
 bool DialogTrigger::Start() {
 
-
-
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturepath").as_string();
 	faceTexturePath = parameters.attribute("facetexturepath").as_string("");
 	repeatDialog = parameters.attribute("repeat").as_bool(false);
-
-	std::string fontTarget = parameters.attribute("font").as_string("primary");
-
 	
 
+	std::string fontTarget = parameters.attribute("font").as_string("primary");
+	
 
 	played = false;
 
