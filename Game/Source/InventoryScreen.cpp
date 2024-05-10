@@ -121,7 +121,7 @@ bool InventoryScreen::Update(float dt) {
     if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN && inventoryButtons.Count() >= menuIndex)
     {
         inventoryButtons[menuIndex - 1]->state = GuiControlState::PRESSED;
-        inventoryButtons[menuIndex - 1]->NotifyObserver();
+        inventoryButtons[menuIndex - 1]->NotifyMouseClick();
     }
      
     return true;

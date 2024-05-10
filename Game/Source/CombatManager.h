@@ -3,11 +3,13 @@
 #include "Enemic.h"
 
 #include "Point.h"
+#include "GuiControl.h"
+
+#include "SDL/include/SDL_rect.h"
 
 #include <random>
 #include <vector>
 
-class GuiControl;
 class InventoryScreen;
 struct SDL_Texture;
 
@@ -36,7 +38,7 @@ struct CombatData
 	Personatge* enemy = nullptr;
 };
 
-
+// Clase de gestion de combate. Para iniciar un combate, rellena los campos de la variable "data"
 class CombatManager : public Module
 {
 public:
@@ -57,15 +59,17 @@ public:
 
 private:
 
+	GuiControl* NewButton(char menuID, char elementID, const char* text, SDL_Rect bounds, GuiCallback_f onClick, SDL_Rect sliderBounds = {0,0,0,0});
+
 	void CreateButtons(pugi::xml_node config);
 
 	void CreateAbilityButtons(Personatge* p);
 
 	void CreateItemButtons(InventoryScreen* inv);
 
-	bool CombatFinished();
+	void CreateTeamSwapButtons();
 
-	bool TriggerCombat();
+	bool CombatFinished();
 
 	// Control por mando/teclado (raton va por GUI)
 
@@ -91,6 +95,17 @@ private:
 
 	void DoAttack(Personatge* attacker, Personatge* defender, Atac* move);
 
+	void SwapCharacter(int id);
+
+	//Funciones para ser usadas por los botones (menu inicial, las tres primeras abren submenu, la cuarta intenta terminar el combate como accion directa)
+
+	void AttackMenu(GuiControl* ctrl);
+
+	void ItemMenu(GuiControl* ctrl);
+
+	void SwapBody(GuiControl* ctrl);
+
+	void Flee(GuiControl* ctrl);
 
 public:
 
@@ -119,6 +134,7 @@ private:
 	//Posicion de los menus
 	iPoint posMain;
 	iPoint posSub;
+	iPoint buttonSize;
 
 	// Accion del combate
 
@@ -134,14 +150,5 @@ private:
 
 	int turn = 0;
 
-	//Funciones para ser usadas por los botones (menu inicial, las tres primeras abren submenu, la cuarta intenta terminar el combate como accion directa)
-
-	friend void AttackMenu(CombatManager* manager, GuiControl* ctrl);
-
-	friend void ItemMenu(CombatManager* manager, GuiControl* ctrl);
-
-	friend void SwapBody(CombatManager* manager, GuiControl* ctrl);
-
-	friend void Flee(CombatManager* manager, GuiControl* ctrl);
 };
 

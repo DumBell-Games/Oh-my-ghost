@@ -34,7 +34,7 @@ bool GuiControlButton::Update(float dt)
 			}
 			
 			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {
-				NotifyObserver();
+				NotifyMouseClick();
 			}
 		}
 		else {

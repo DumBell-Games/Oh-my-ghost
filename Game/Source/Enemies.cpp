@@ -8,8 +8,9 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "CombatManager.h"
 
-Enemy::Enemy() : Entity(EntityType::ENEMY)
+Enemy::Enemy() : Entity(EntityType::ENEMY) , enemyData("PH",0,0,0,0)
 {
 	name.Create("Enemy");
 }
@@ -24,6 +25,8 @@ bool Enemy::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturePath").as_string();
+
+	//Carga de datos de enemigo para combate
 
 	return true;
 }
@@ -41,6 +44,8 @@ bool Enemy::Start() {
 
 bool Enemy::Update(float dt)
 {
+	if (enemyData.salutActual <= 0)
+		active = false;
 
 	app->render->DrawTexture(texture, position.x, position.y);
 
@@ -53,6 +58,8 @@ bool Enemy::Update(float dt)
 
 bool Enemy::CleanUp()
 {
+	if (app->combat->data.enemy == &enemyData)
+		app->combat->data.enemy = nullptr;
 	return true;
 }
 
@@ -63,6 +70,12 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
 		break;
+	case ColliderType::PLAYER:
+	{
+		app->combat->data.enemy = &enemyData;
+
+		break;
+	}
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;

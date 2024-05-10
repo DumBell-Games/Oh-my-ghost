@@ -90,7 +90,7 @@ bool TitleScreen::Update(float dt)
     {
         app->audio->PlayFx(buttonFx);
         titleButtons[menuIndex - 1]->state = GuiControlState::PRESSED;
-        titleButtons[menuIndex - 1]->NotifyObserver();
+        titleButtons[menuIndex - 1]->NotifyMouseClick();
     }
 
   /*
