@@ -39,4 +39,4 @@ struct Properties
 	List<Property*> list;
 };
 
-bool LoadProperties(pugi::xml_node& node, Properties& properties);
+	bool LoadProperties(pugi::xml_node& node, Properties& properties);
