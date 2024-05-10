@@ -4,6 +4,7 @@
 
 #include "Defs.h"
 #include "Log.h"
+#include <thread>
 
 #define VSYNC true
 
@@ -274,3 +275,24 @@ bool Render::SaveState(pugi::xml_node node) {
 
 	return true;
 }
+
+void Render::aplicarFiltreVermell(SDL_Texture* texturaOriginal, SDL_Rect* pos)
+{
+	// Per quan rep dany
+
+	// Aplicar el filtre de color vermell
+	SDL_SetTextureColorMod(texturaOriginal, 255, 0, 0);
+
+	// Renderitzar la imatge amb el filtre de color vermell
+	SDL_RenderCopy(renderer, texturaOriginal, pos, nullptr);
+	SDL_RenderPresent(renderer);
+
+	// Esperar 1 segon
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+
+	// Renderitzar la imatge original de nou per eliminar el filtre de color vermell
+	SDL_SetTextureColorMod(texturaOriginal, 255, 255, 255);
+	SDL_RenderCopy(renderer, texturaOriginal, pos, nullptr);
+	SDL_RenderPresent(renderer);
+}
+

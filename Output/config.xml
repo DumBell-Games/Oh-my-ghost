@@ -135,6 +135,30 @@
 		<map id="3" file="casino_plantilla.tmx"/>
 	</map>
 
+	<combat mainX="16" mainY="16" subX="208" subY="16" buttonW="128" buttonH="64">
+		<menus>
+			<!--En la implementacion los botones van de abajo hacia arriba-->
+			<main>
+				<button id="0" text="Atacar"/>
+				<button id="1" text="Objetos"/>
+				<button id="2" text="Cambiar"/>
+				<button id="3" text="Huir"/>
+			</main>
+			<!--
+			<menu name="abilities">
+				Autogenerado con datos de personaje
+			</menu>
+			<menu name="items">
+				Autogenerado con los datos de inventario
+			</menu>
+			-->
+			<team>
+				<button id="0" text="Volver"/>
+				<!--Otros botones autogenerados por equipo-->
+			</team>
+		</menus>
+	</combat>
+
 	<reload>
 		<presets>
 			<!--Si el modulo ya esta activo, no se intenta reactivar a menos de que se marque como reload (y aun asi primero lo desactiva)-->

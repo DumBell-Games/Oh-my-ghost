@@ -3,6 +3,8 @@
 #include "Entity.h"
 #include "Point.h"
 
+#include "Enemic.h"
+
 #include "SDL/include/SDL.h"
 #include "Box2D/Box2D/Box2D.h"
 
@@ -38,6 +40,8 @@ public:
 	const char* texturePath;
 
 	PhysBody* eBody;
+
+	Personatge enemyData;
 
 
 };

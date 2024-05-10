@@ -6,6 +6,7 @@
 #include "Audio.h"
 #include "Scene.h"
 #include "Map.h"
+#include "CombatManager.h"
 #include "Reload.h"
 #include "Physics.h"
 #include "GuiManager.h"
@@ -55,6 +56,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	pause = new PauseMenu(false);
 	console = new DebugConsole(true);
 	map = new Map(false);
+	combat = new CombatManager(false);
 	reload = new Reload(true);
 	entityManager = new EntityManager(false);
 	guiManager = new GuiManager(true);

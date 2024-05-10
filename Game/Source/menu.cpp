@@ -14,6 +14,9 @@
 #include "Scene.h"
 #include "IntroScreen.h"
 #include "TeamScreen.h"
+#include <iostream>
+#include "Combat.h"
+#include <vector>
 
 TitleScreen::TitleScreen(bool startEnabled) : Module(startEnabled)
 {
@@ -87,7 +90,7 @@ bool TitleScreen::Update(float dt)
     {
         app->audio->PlayFx(buttonFx);
         titleButtons[menuIndex - 1]->state = GuiControlState::PRESSED;
-        titleButtons[menuIndex - 1]->NotifyObserver();
+        titleButtons[menuIndex - 1]->NotifyMouseClick();
     }
 
   /*
@@ -95,6 +98,42 @@ bool TitleScreen::Update(float dt)
     else if (menuIndex == 2) app->render->DrawTexture(menu2, 0, 0, NULL);
     else if (menuIndex == 3) app->render->DrawTexture(menu3, 0, 0, NULL);
     else if (menuIndex == 4) app->render->DrawTexture(menu4, 0, 0, NULL);*/
+
+
+    // Combat de mostra -> Tecla C
+    if (app->input->GetKey(SDL_SCANCODE_C) == KEY_DOWN)
+    {
+        // Crear equips de un enemic o mes
+        std::cout << "Init combat" << std::endl;
+        std::vector<Personatge*> equipJugador;
+        std::vector<Personatge*> equipOponent;
+
+        // Cada enemic
+        Personatge enemic1("Enemic1", 10, 10, 10, 10);
+        // Els seus atacs
+        Atac atac1("Atac1", 10);
+        Atac atac2("Atac2", 20);
+        Atac atac3("Atac3", 30);
+        Atac atac4("Atac4", 40);
+        enemic1.atacs.push_back(atac1);
+        enemic1.atacs.push_back(atac2);
+        enemic1.atacs.push_back(atac3);
+        enemic1.atacs.push_back(atac4);
+
+        Personatge enemic2("Enemic2", 100, 100, 100, 100);
+        enemic2.atacs.push_back(atac1);
+        enemic2.atacs.push_back(atac2);
+        enemic2.atacs.push_back(atac3);
+        enemic2.atacs.push_back(atac4);
+
+        equipJugador.push_back(&enemic2);
+        equipOponent.push_back(&enemic1);
+
+        // Començar el combat
+        Combat combatNum40(equipJugador, equipOponent);
+        combatNum40.Iniciar();
+        std::cout << "End Combat" << std::endl;
+    }
 
     return true;
 }
