@@ -21,6 +21,7 @@
 #include "ItemBirra.h"
 #include "ItemVelocidad.h"
 #include "InventoryScreen.h"
+#include "Character_Menu.h"
 
 
 #include "Defs.h"
@@ -180,8 +181,12 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) fullscreen = false;
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) 
 		app->pause->Enable();
-	if(app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN) 
 		app->inventoryScreen->Enable();
+	
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) 
+		app->characterMenu->Enable();
+	
 	if (fullscreen == true) {
 		app->win->FullscreenMode();
 	}
