@@ -3556,7 +3556,7 @@
   <properties>
    <property name="entity" type="int" value="5"/>
   </properties>
-  <object id="1" x="1664" y="2432" width="256" height="128">
+  <object id="1" x="1792" y="2560" width="256" height="128">
    <properties>
     <property name="mapID" type="int" value="0"/>
     <property name="targetDoor" type="int" value="32"/>
