@@ -5,7 +5,7 @@
 #include "Point.h"
 #include "SDL/include/SDL.h"
 #include "Box2D/Box2D/Box2D.h"
-#include "ItemCola.h"
+#include "Animation.h"
 
 struct SDL_Texture;
 
@@ -34,6 +34,10 @@ public:
 
 	void SetPosition(iPoint newPos) override;
 
+	void PlayerStartAnims();
+
+	Animation* GetAnimation(SString name);
+
 	
 
 public:
@@ -52,6 +56,25 @@ public:
 	int pickCoinFxId;
 
 	PhysBody* pBody;
+
+	List<Animation*> springyPalomaAnimatoinList;
+
+	Animation* currentAnim;
+
+	Animation* walkFrontal;
+	Animation* walkEspalda;
+	Animation* walkR;
+	Animation* walkL;
+	Animation* runR;
+	Animation* runL;
+	Animation* runFrontal;
+	Animation* runEspalda;
+	Animation* die;
+	Animation* manoDivina;
+	Animation* torbellino;
+	Animation* cambioCuerpo;
+	Animation* idleFrontal;
+	
 };
 
 #endif // __PLAYER_H__

@@ -23,7 +23,7 @@ bool Npc::Awake() {
 
 	//L03: DONE 2: Initialize Player parameters
 	Properties p;
-	app->map->LoadProperties(parameters, p);
+	LoadProperties(parameters, p);
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = p.GetProperty("texturePath")->strVal;

@@ -9,6 +9,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "Map.h"
+#include "PropertiesStruct.h"
 
 Yogur::Yogur() : Entity(EntityType::YOGUR)
 {
@@ -20,7 +21,7 @@ Yogur::~Yogur() {}
 bool Yogur::Awake() {
 
 	Properties p;
-	app->map->LoadProperties(parameters, p);
+	LoadProperties(parameters, p);
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
