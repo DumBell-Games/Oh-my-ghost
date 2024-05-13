@@ -60,6 +60,26 @@ bool Map::Update(float dt)
     if (mapLoaded == false)
         return false;
 
+    const SDL_Rect& camRect = app->render->camera;
+    SDL_Rect bounds;
+    bounds.x = -camRect.x;// +camRect.w / 2;
+    bounds.y = -camRect.y;// +camRect.h / 2;
+    bounds.w = camRect.w;
+    bounds.h = camRect.h;
+    LOG("rawcamX:%i\nrawcamY:%i", camRect.x, camRect.y);
+    LOG("boundsX:%i\nboundsY:%i", bounds.x, bounds.y);
+
+    {
+        iPoint tmp = WorldToMap(bounds.x, bounds.y);
+        bounds.x = tmp.x;
+        bounds.y = tmp.y;
+        tmp = WorldToMap(bounds.w, bounds.h);
+        bounds.w = tmp.x;
+        bounds.h = tmp.y;
+        LOG("mapX:%i\nmapY:%i", bounds.x, bounds.y);
+    }
+
+
     ListItem<MapLayer*>* mapLayerItem;
     mapLayerItem = mapData.maplayers.start;
 
@@ -67,10 +87,16 @@ bool Map::Update(float dt)
 
         if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) {
 
-            for (int x = 0; x < mapLayerItem->data->width; x++)
+            for (int x = 0; x < mapLayerItem->data->width && x-2 < bounds.x + bounds.w; x++)
             {
-                for (int y = 0; y < mapLayerItem->data->height; y++)
+                if (x < bounds.x)
+                    continue;
+
+                for (int y = 0; y < mapLayerItem->data->height && y-2 < bounds.y + bounds.h; y++)
                 {
+                    if (y < bounds.y)
+                        continue;
+
                     int gid = mapLayerItem->data->Get(x, y);
                     TileSet* tileset = GetTilesetFromTileId(gid);
 
@@ -334,13 +360,14 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
     LoadProperties(node, layer->properties);
 
     //Reserve the memory for the data 
-    layer->data = new uint[layer->width * layer->height];
-    memset(layer->data, 0, layer->width * layer->height);
+    uint size = layer->width * layer->height;
+    layer->data = new uint[size];
+    memset(layer->data, 0, size);
 
     //Iterate over all the tiles and assign the values
     pugi::xml_node tile;
     uint i = 0;
-    for (tile = node.child("data").child("tile"); tile && ret; tile = tile.next_sibling("tile"))
+    for (tile = node.child("data").child("tile"); tile && ret && i < size; tile = tile.next_sibling("tile"))
     {
         layer->data[i] = tile.attribute("gid").as_uint();
         i++;
