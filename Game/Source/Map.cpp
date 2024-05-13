@@ -13,6 +13,7 @@
 
 #include <math.h>
 #include "SDL_image/include/SDL_image.h"
+#include "DebugConsole.h"
 
 Map::Map(bool startEnabled) : Module(startEnabled), mapLoaded(false)
 {
@@ -44,6 +45,7 @@ bool Map::Awake(pugi::xml_node config)
 }
 
 bool Map::Start() {
+    app->console->AddCommand("warpto", "Teletransporta al jugador al mapa (y opcionalmente entrada) especificados", "warpto mapId [doorId]", [this](std::vector<std::string> args) {WarpTo(this, args); });
     //Calls the functon to load the map, make sure that the filename is assigned
 
     SString mapPath = path;
@@ -281,13 +283,15 @@ bool Map::Unload()
 
     RELEASE(pathfinding);
 
+    app->console->RemoveCommand("warpto");
+
     return true;
 }
 
 // If parameter is -1 just reloads the current map
 bool Map::ChangeMap(int id)
 {
-    currentMap = ((id == -1) ? currentMap : id);
+    currentMap = ((id <= -1) ? currentMap : id);
 
     return app->reload->QueueReload("loadMap");
 }
@@ -504,54 +508,10 @@ bool Map::LoadPolygon(pugi::xml_node objGroupNode, pugi::xml_node objNode)
     return true;
 }
 
-bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
-{
-    bool ret = false;
-    pugi::xml_node propertiesNode = node.child("properties").child("property");
-    if (propertiesNode)
-    {
-        ret = true;
-        for (/*Initial state already set above*/; propertiesNode; propertiesNode = propertiesNode.next_sibling("property"))
-        {
-            Properties::Property* p = new Properties::Property();
-
-            SString nameAttr = propertiesNode.attribute("name").as_string();
-            SString typeAttr = propertiesNode.attribute("type").as_string("string"); // Default to string for malformed properties
-
-            p->name = nameAttr;
-            if (typeAttr == "string") {
-                p->strVal = propertiesNode.attribute("value").as_string();
-            }
-            else if (typeAttr == "bool") {
-                p->value = propertiesNode.attribute("value").as_bool();
-            }
-            else if (typeAttr == "int") {
-                p->intVal = propertiesNode.attribute("value").as_int();
-            }
-            else if (typeAttr == "float") {
-                p->floatVal = propertiesNode.attribute("value").as_float();
-            }
-
-            properties.list.Add(p);
-        }
-    }
-    return ret;
-}
-
-Properties::Property* Properties::GetProperty(const char* name)
-{
-    if (list.Count() == 0) return nullptr; // If no properties have been set return nullptr
-    ListItem<Property*>* item = list.start;
-    Property* p = NULL;
-
-    while (item)
-    {
-        if (item->data->name == name) {
-            p = item->data;
-            break;
-        }
-        item = item->next;
-    }
-
-    return p;
+static void WarpTo(Map* map, std::vector<std::string> args) {
+    if (args.size() <= 1) throw std::invalid_argument("Se esperaba un id de mapa");
+    if (args.size() >= 3)
+        map->transitionData.targetDoorID = std::stoi(args[2]);
+    map->transitionData.mapId = std::stoi(args[1]);
+    map->ChangeMap(map->transitionData.mapId);
 }

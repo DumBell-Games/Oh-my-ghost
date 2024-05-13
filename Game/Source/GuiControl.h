@@ -14,7 +14,7 @@
 
 class GuiControl;
 // Atajo para una función que toma un parametro GuiControl* y no devuelve nada
-using GuiOnClick_f = std::function<void(GuiControl*)>;
+using GuiCallback_f = std::function<void(GuiControl*)>;
 
 enum class GuiControlType
 {
@@ -76,18 +76,30 @@ public:
 		observer = module;
 	}
 
-	void SetCallback(GuiOnClick_f& func)
+	void SetOnClick(GuiCallback_f func)
 	{
-		listener = func;
+		onClick = func;
 	}
 
-	// 
-	void NotifyObserver()
+	void SetOnHover(GuiCallback_f func)
+	{
+		onHover = func;
+	}
+
+	// Executes the OnGuiMouseClick() function(s)
+	void NotifyMouseClick()
 	{
 		if (observer)
 			observer->OnGuiMouseClickEvent(this);
-		if (listener)
-			listener(this);
+		if (onClick)
+			onClick(this);
+	}
+
+	// Executes the OnHover() function
+	void NotifyOnHover()
+	{
+		if (onHover)
+			onHover(this);
 	}
 
 public:
@@ -104,7 +116,9 @@ public:
 	SDL_Rect section;       // Texture atlas base section
 
 	Module* observer = nullptr;        // Observer 
-	GuiOnClick_f listener; // Callback function
+	GuiCallback_f onClick; // Callback function for when element is clicked
+	GuiCallback_f onHover; // Callback function for when mouse is hovering over element
+
 };
 
 #endif // __GUICONTROL_H__

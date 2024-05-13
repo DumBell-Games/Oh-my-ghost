@@ -4,6 +4,7 @@
 
 #include "Defs.h"
 #include "Log.h"
+#include <Optick/include/optick.h>
 
 #define MAX_KEYS 300
 
@@ -47,7 +48,7 @@ bool Input::Awake(pugi::xml_node config)
 		bindings.push_back(ControlBinding());
 	}
 
-	//Default (por si hay errores en el archivo de configuracion)
+	//Default (por si faltan valores en el archivo de configuracion)
 	bindings[CONFIRM]
 		.SetPButton(SDL_CONTROLLER_BUTTON_A)
 		.SetPKey(SDL_SCANCODE_SPACE);
@@ -76,9 +77,29 @@ bool Input::Awake(pugi::xml_node config)
 		.SetPKey(SDL_SCANCODE_S)
 		.SetNKey(SDL_SCANCODE_W);
 
+	bindings[UP]
+		.SetBind(MOVE_VERTICAL)
+		.SetIsPositive(false);
+
+	bindings[DOWN]
+		.SetBind(MOVE_VERTICAL)
+		.SetIsPositive(true);
+
+	bindings[LEFT]
+		.SetBind(MOVE_HORIZONTAL)
+		.SetIsPositive(false);
+
+	bindings[RIGHT]
+		.SetBind(MOVE_HORIZONTAL)
+		.SetIsPositive(true);
+
 	bindings[APP_EXIT]
 		.SetPButton(SDL_CONTROLLER_BUTTON_BACK)
 		.SetPKey(SDL_SCANCODE_ESCAPE);
+
+	bindings[DEBUG_CONSOLE]
+		.SetPKey(SDL_SCANCODE_F1);
+
 
 	pugi::xml_document controlsDoc;
 	pugi::xml_parse_result result = controlsDoc.load_file(filePath.GetString());
@@ -125,6 +146,8 @@ bool Input::Start()
 // Called each loop iteration
 bool Input::PreUpdate()
 {
+	OPTICK_EVENT()
+
 	static SDL_Event event;
 
 	const Uint8* keys = keyboardRaw = SDL_GetKeyboardState(NULL);
@@ -219,6 +242,18 @@ bool Input::PreUpdate()
 				}
 				FindControllers();
 			break;
+
+			case SDL_TEXTINPUT:
+				if (strlen(event.text.text) >= 1) {
+					textInput += event.text.text;
+				}
+				break;
+
+			case SDL_KEYDOWN:
+				if (event.key.keysym.scancode == SDL_Scancode::SDL_SCANCODE_BACKSPACE && !textInput.empty()) {
+					textInput.pop_back();
+				}
+				break;
 		}
 	}
 

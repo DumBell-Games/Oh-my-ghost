@@ -110,7 +110,6 @@ public:
 
 	iPoint MapToWorld(int x, int y) const;
 	iPoint Map::WorldToMap(int x, int y);
-	bool LoadProperties(pugi::xml_node& node, Properties& properties);
 
 private:
 
@@ -145,6 +144,8 @@ private:
 	List<SString> mapNames;
 	int currentMap = 0;
 
+	// Debug command
+	friend static void WarpTo(Map* map, std::vector<std::string> args);
 };
 
 #endif // __MAP_H__

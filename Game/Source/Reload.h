@@ -13,16 +13,15 @@ struct ReloadPreset {
 	float fadeOut;
 	//Fade in time in seconds
 	float fadeIn;
+	bool temporary;
 
 	ReloadPreset() : name("nameless"), fadeOut(0.0f), fadeIn(0.0f)
 	{}
 
-	ReloadPreset(const SString& _name, const float _fadeOut, float _fadeIn) : name(_name), fadeOut(_fadeOut), fadeIn(_fadeIn)
+	ReloadPreset(const SString& _name, const float _fadeOut, float _fadeIn, bool temp = false) : name(_name), fadeOut(_fadeOut), fadeIn(_fadeIn), temporary(temp)
 	{}
 
 	bool AddReload(Module* m) {
-		
-		
 		return AddUnload(m) && AddLoad(m);
 	}
 	bool AddUnload(Module* m) {
@@ -45,7 +44,8 @@ enum class ReloadStep {
     NONE,
     FADE_OUT,
     RELOAD,
-    FADE_IN
+    FADE_IN,
+	DONE
 };
 
 class Reload : public Module
@@ -68,8 +68,11 @@ public:
     // Called before quitting
     bool CleanUp();
 
-	// Adds transition to the queue
+	// Adds transition to the queue. Returns true if the transition is in the queue
     bool QueueReload(SString presetName);
+
+	// Adds temporary transition, which is deleted upon completion
+	void QueueTemporaryPreset(std::vector<std::string> args);
 
 private:
 

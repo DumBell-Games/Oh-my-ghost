@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="86" height="54" tilewidth="128" tileheight="128" infinite="0" nextlayerid="7" nextobjectid="27">
+
  <tileset firstgid="1" name="_srw_exterior_A2" tilewidth="128" tileheight="128" tilecount="432" columns="24">
   <image source="_srw_exterior_A2.png" width="3072" height="2304"/>
  </tileset>
@@ -212,5 +214,19 @@
   <object id="24" x="8088" y="1000" width="1128" height="680"/>
   <object id="25" x="7696" y="-32" width="1520" height="664"/>
   <object id="26" x="9600" y="-24" width="1360" height="648"/>
+ </objectgroup>
+ <objectgroup id="5" name="NPCs">
+  <properties>
+   <property name="entity" type="int" value="3"/>
+  </properties>
+  <object id="28" x="5763.64" y="1857.58">
+   <properties>
+    <property name="texturePath" value="&quot;Assets/Textures/dogNpc.png&quot;"/>
+   </properties>
+   <point/>
+  </object>
+  <object id="35" x="6190.91" y="1909.09">
+   <point/>
+  </object>
  </objectgroup>
 </map>

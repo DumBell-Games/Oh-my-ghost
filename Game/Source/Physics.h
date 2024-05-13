@@ -1,6 +1,7 @@
 #pragma once
 #include "Module.h"
 #include "Entity.h"
+#include "Inventory.h"
 
 #include "Box2D/Box2D/Box2D.h"
 
@@ -24,8 +25,14 @@ enum bodyType {
 };
 
 enum class ColliderType {
-	PLAYER, 
-	ITEM,
+	PLAYER,
+	GHOST,
+	COLA,
+	YOGUR,
+	BIRRA,
+	PATATAS,
+	CARAMELOS,
+	VELOCIDAD,
 	PLATFORM, 
 	DIALOG_TRIGGER,
 	NPC,
@@ -75,12 +82,10 @@ public:
 	PhysBody* CreateCircle(int x, int y, int radious, bodyType type);
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height, bodyType type);
 	PhysBody* CreateChain(int x, int y, int* points, int size, bodyType type);
-	
+	void DestroyBody(PhysBody* body);
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
-
-	// Debug mode
-	bool debug;
+	void EndContact(b2Contact* contact);
 
 private:
 

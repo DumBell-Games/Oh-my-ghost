@@ -4,6 +4,7 @@
 
 #include "Defs.h"
 #include "Log.h"
+#include <thread>
 
 #define VSYNC true
 
@@ -237,16 +238,15 @@ bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uin
 	return ret;
 }
 
-bool Render::DrawText(const char* text, int posx, int posy, int w, int h) {
+bool Render::DrawText(const char* text, int posx, int posy, int w, int h, SDL_Color color, TTF_Font* font) {
 
-	SDL_Color color = { 255, 255, 255 };
-	SDL_Surface* surface = TTF_RenderText_Solid(primary_font, text, color);
+	SDL_Surface* surface = TTF_RenderText_Solid(font == nullptr ? primary_font : font, text, color);
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 
 	int texW = 0;
 	int texH = 0;
 	SDL_QueryTexture(texture, NULL, NULL, &texW, &texH);
-	SDL_Rect dstrect = { posx, posy, w, h };
+	SDL_Rect dstrect = { posx, posy, w == 0 ? texW : w, h == 0 ? texH : h };
 
 	SDL_RenderCopy(renderer, texture, NULL, &dstrect);
 
@@ -265,7 +265,6 @@ bool Render::LoadState(pugi::xml_node node) {
 
 	return true;
 }
-
 // L14: TODO 8: Create a method to save the state of the renderer
 // using append_child and append_attribute
 bool Render::SaveState(pugi::xml_node node) {
@@ -276,3 +275,24 @@ bool Render::SaveState(pugi::xml_node node) {
 
 	return true;
 }
+
+void Render::aplicarFiltreVermell(SDL_Texture* texturaOriginal, SDL_Rect* pos)
+{
+	// Per quan rep dany
+
+	// Aplicar el filtre de color vermell
+	SDL_SetTextureColorMod(texturaOriginal, 255, 0, 0);
+
+	// Renderitzar la imatge amb el filtre de color vermell
+	SDL_RenderCopy(renderer, texturaOriginal, pos, nullptr);
+	SDL_RenderPresent(renderer);
+
+	// Esperar 1 segon
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+
+	// Renderitzar la imatge original de nou per eliminar el filtre de color vermell
+	SDL_SetTextureColorMod(texturaOriginal, 255, 255, 255);
+	SDL_RenderCopy(renderer, texturaOriginal, pos, nullptr);
+	SDL_RenderPresent(renderer);
+}
+
