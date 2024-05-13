@@ -454,12 +454,13 @@
 				<module type="u" name="introScreen"/>
 				<module type="l" name="guiManager"/>
 				<module type="l" name="titlescreen"/>
-				<module/>
 			</preset>
 			<preset name="titleToGame" fadeOut="1" fadeIn="1">
 				<module type="u" name="titlescreen"/>
 				<module type="l" name="map"/>
-				<module/>
+			</preset>
+			<preset name="combatStart" fadeOut="1" fadeIn="1">
+				<module type="r" name="combat"/>
 			</preset>
 
 		</presets>

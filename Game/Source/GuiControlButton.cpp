@@ -25,26 +25,28 @@ bool GuiControlButton::Update(float dt)
 		app->input->GetMousePosition(mouseX, mouseY);
 
 		//If the position of the mouse if inside the bounds of the button 
-		if (mouseX > bounds.x && mouseX < bounds.x + bounds.w && mouseY > bounds.y && mouseY < bounds.y + bounds.h) {
-		
-			state = GuiControlState::FOCUSED;
-
-			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) {
-				state = GuiControlState::PRESSED;
-			}
+		if (state != GuiControlState::NON_CLICKABLE) {
+			if (mouseX > bounds.x && mouseX < bounds.x + bounds.w && mouseY > bounds.y && mouseY < bounds.y + bounds.h) {
 			
-			if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {
-				NotifyMouseClick();
+				state = GuiControlState::FOCUSED;
+
+				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_REPEAT) {
+					state = GuiControlState::PRESSED;
+				}
+				
+				if (app->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_UP) {
+					NotifyMouseClick();
+				}
 			}
-		}
-		else {
-			state = GuiControlState::NORMAL;
+			else {
+				state = GuiControlState::NORMAL;
+			}
 		}
 
 		//L15: DONE 4: Draw the button according the GuiControl State
 		switch (state)
 		{
-		case GuiControlState::DISABLED:
+		case GuiControlState::NON_CLICKABLE:
 			app->render->DrawRectangle(bounds, 200, 200, 200, 255, true, false);
 			break;
 		case GuiControlState::NORMAL:

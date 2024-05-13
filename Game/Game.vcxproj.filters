@@ -244,6 +244,7 @@
     <ClInclude Include="Source\Combat.h" />
     <ClInclude Include="Source\StatusEffect.h" />
     <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\EnumUtils.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

@@ -139,6 +139,7 @@
     <ClCompile Include="Source\TransitionTrigger.cpp" />
     <ClCompile Include="Source\tmxTileidAdjustment.h" />
     <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\EnumUtils.h" />
     <ClInclude Include="Source\Poison.h" />
     <ClInclude Include="Source\DebugConsole.h" />
     <ClInclude Include="Source\Enemies.h" />

@@ -3,18 +3,19 @@
 #include "GuiManager.h"
 #include "InventoryScreen.h"
 #include "FadeToBlack.h"
+#include "App.h"
 
 #include "Log.h"
-#include "App.h"
+#include "EnumUtils.h"
 
 CombatManager::CombatManager(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("combat");
 	needsAwaking = true;
-	menuList.push_back(&bMain);
-	menuList.push_back(&bHabilidades);
-	menuList.push_back(&bObjetos);
-	menuList.push_back(&bEquipo);
+	menuList.push_back(std::vector<GuiControl*>());
+	menuList.push_back(std::vector<GuiControl*>());
+	menuList.push_back(std::vector<GuiControl*>());
+	menuList.push_back(std::vector<GuiControl*>());
 }
 
 CombatManager::~CombatManager()
@@ -47,17 +48,23 @@ bool CombatManager::Awake(pugi::xml_node config)
 
 	// FIN CODIGO PARA DEBUG
 
-	CreateButtons(config.child("buttons"));
+	CreateButtons(config.child("menus"));
+
+	awoken = true;
 
 	return true;
 }
 
 bool CombatManager::Start()
 {
+	// Medidas contra el uso de FadeToBlack()
+	if (!awoken)
+		Awake(app->GetConfig(this));
+
 	// Se asegura de que el modulo de entidades este pausado para que el jugador no se mueva por el mapa durante el combate
 	if (!app->entityManager->paused)
 		app->entityManager->Pause();
-	currentMenu = 0;
+	currentMenu = Menus::MAIN;
 	currentElement = 0;
 	LOG("Combat Start!");
 	rng = std::mt19937{ std::random_device{}() }; // Resetea el RNG antes de comenzar el combate
@@ -113,13 +120,13 @@ bool CombatManager::PostUpdate()
 
 bool CombatManager::CleanUp()
 {
-	for (std::vector<GuiControl*>* menu : menuList)
+	for (std::vector<GuiControl*>& menu : menuList)
 	{
-		for (GuiControl* g : *menu)
+		for (GuiControl* g : menu)
 		{
 			app->guiManager->DestroyGuiControl(g);
 		}
-		menu->clear();
+		menu.clear();
 	}
 	//No hace falta vaciar menuList ya que es simplemente una agrupación de 4 variables dentro del mismo modulo
 
@@ -129,12 +136,12 @@ bool CombatManager::CleanUp()
 GuiControl* CombatManager::NewButton(char menuID, char elementID, const char* text, SDL_Rect bounds, GuiCallback_f onClick, SDL_Rect sliderBounds)
 {
 	GuiControlButton* ret = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, elementID, text, bounds, onClick, sliderBounds);
-	ret->SetOnHover([this, &menuID, &elementID](GuiControl* g) {currentMenu = menuID; currentElement = elementID; });
+	ret->SetOnHover([this, menuID, elementID](GuiControl* g) {currentMenu = (Menus)menuID; currentElement = elementID; });
 
 	return ret;
 }
 
-void CombatManager::CreateButtons(pugi::xml_node config)
+void CombatManager::CreateButtons(pugi::xml_node menuListNode)
 {
 	//Monta el menu de arriba a abajo
 	std::vector<GuiCallback_f> functions;
@@ -144,7 +151,7 @@ void CombatManager::CreateButtons(pugi::xml_node config)
 	functions.push_back([this](GuiControl* g) {Flee(g); });
 
 	//MainMenu
-	pugi::xml_node menuItem = config.child("main");
+	pugi::xml_node menuItem = menuListNode.child("main");
 	SDL_Rect bounds{0,0,0,0};
 	bounds.x = posMain.x;
 	bounds.w = buttonSize.x;
@@ -158,28 +165,30 @@ void CombatManager::CreateButtons(pugi::xml_node config)
 		GuiCallback_f func;
 		if (id >= 0 && id < functions.size())
 			func = functions[id];
-		bMain.push_back(NewButton(0, id, text.GetString(), bounds, func));
+		menuList[enum2val(Menus::MAIN)].push_back(NewButton(0, id, text.GetString(), bounds, func));
 	}
 
 	CreateAbilityButtons(data.allies[data.activeAlly]);
 	CreateItemButtons(nullptr);
+	CreateTeamSwapButtons(menuListNode.child("team"));
 
 }
 
 void CombatManager::CreateAbilityButtons(Personatge* p)
 {
 	SDL_Rect bounds{posSub.x,0,buttonSize.x,buttonSize.y};
-	int i = 0;
-	for (Atac& a : p->atacs)
+	
+	for (int i = 0; i < p->atacs.size(); i++)
 	{
 		bounds.y = posSub.y + i * (bounds.h + 16);
-		GuiCallback_f func = [this,&a](GuiControl* g) {
-			LOG("WIP habilidad %s",a.nom);
-			ataqueAliado = &a;
+		Atac* a = &p->atacs[i];
+		GuiCallback_f func = [this,a](GuiControl* g) {
+			LOG("WIP habilidad %s",a->nom.c_str());
+			ataqueAliado = a;
 			combatState = CombatState::COMBAT; // Al seleccionar el boton de ataque se pasa a ejecutar acciones
 			};
 		// Crea el boton en la posicion del submenu, la posicion 'y' depende del indice de este boton
-		bHabilidades.push_back(NewButton(1, i++, a.nom.c_str(), bounds, func));
+		menuList[enum2val(Menus::ATTACK)].push_back(NewButton(1, i++, a->nom.c_str(), bounds, func));
 	}
 }
 
@@ -189,7 +198,7 @@ void CombatManager::CreateItemButtons(InventoryScreen* inv)
 	LOG("WIP itemButtons");
 }
 
-void CombatManager::CreateTeamSwapButtons()
+void CombatManager::CreateTeamSwapButtons(pugi::xml_node menuItem)
 {
 	SDL_Rect bounds{ posSub.x,posSub.y,buttonSize.x,buttonSize.y };
 	for (size_t i = 0; i < data.allies.size(); i++)
@@ -197,11 +206,11 @@ void CombatManager::CreateTeamSwapButtons()
 		Personatge* p = data.allies[i];
 		if (p) {
 			bounds.y = posSub.y + i * (bounds.h + 16);
-			GuiCallback_f func = [this, &i](GuiControl* g) {
+			GuiCallback_f func = [this, i](GuiControl* g) {
 				SwapCharacter(i);
 				combatState = CombatState::COMBAT;
 			};
-			bEquipo.push_back(NewButton(3, i, p->nom.c_str(), bounds, func));
+			menuList[enum2val(Menus::TEAM)].push_back(NewButton(3, i, p->nom.c_str(), bounds, func));
 		}
 	}
 }
@@ -236,16 +245,22 @@ void CombatManager::HandleStartDialog()
 void CombatManager::HandleMenu()
 {
 	// Control de botones con mando y teclado
-	int i = 0, j = 0;
-	for (std::vector<GuiControl*>* menu : menuList)
+	char i = 0, j = 0;
+	for (std::vector<GuiControl*>& menu : menuList)
 	{
-		for (GuiControl* g : *menu)
+		for (GuiControl* g : menu)
 		{
-			if (i == currentMenu && j == currentElement) {
+			// Si es el elemento seleccionado, lo marca como tal, los otros elementos del mismo menu se quedan en su estado actual
+			if ((Menus)i == currentMenu) {
+				if (j == currentElement) {
+					g->state = GuiControlState::FOCUSED;
 
-			}
-			else
+				}
 				g->state = GuiControlState::NORMAL;
+			}
+			// Los otros menus se vuelven invisibles, menos el principal que simplemente se impide hacer clic
+			else
+				g->state = (i == 0) ? GuiControlState::NON_CLICKABLE : GuiControlState::DISABLED;
 			j++;
 		}
 		i++;
@@ -339,16 +354,32 @@ void CombatManager::SwapCharacter(int id)
 
 void CombatManager::AttackMenu(GuiControl* ctrl)
 {
+	currentMenu = Menus::ATTACK;
+	currentElement = 0;
+	ResetButtonsState();
 }
 
 void CombatManager::ItemMenu(GuiControl* ctrl)
 {
+	currentMenu = Menus::ITEM;
+	currentElement = 0;
+	ResetButtonsState();
 }
 
 void CombatManager::SwapBody(GuiControl* ctrl)
 {
+	currentMenu = Menus::TEAM;
+	currentElement = 0;
+	ResetButtonsState();
 }
 
 void CombatManager::Flee(GuiControl* ctrl)
 {
+}
+
+void CombatManager::ResetButtonsState()
+{
+	for (std::vector<GuiControl*>& menu : menuList)
+		for (GuiControl* g : menu)
+			g->state = GuiControlState::NORMAL;
 }

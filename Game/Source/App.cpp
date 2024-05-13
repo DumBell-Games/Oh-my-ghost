@@ -73,6 +73,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(physics);
 	AddModule(map);
 	AddModule(entityManager);
+	AddModule(combat);
 	AddModule(guiManager);
 
 	AddModule(scene);
@@ -158,8 +159,8 @@ bool App::Awake()
 			// If the section with the module name exists in config.xml, fill the pointer with the valid xml_node
 			// that can be used to read all variables for that module.
 			// Send nullptr if the node does not exist in config.xml
-
-			ret = item->data->Awake(configFile.child("config").child(item->data->name.GetString()));
+			if (item->data->active || !item->data->needsAwaking)
+				ret = item->data->Awake(configFile.child("config").child(item->data->name.GetString()));
 			item = item->next;
 		}
 	}

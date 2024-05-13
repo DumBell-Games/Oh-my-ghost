@@ -13,6 +13,14 @@
 class InventoryScreen;
 struct SDL_Texture;
 
+enum class Menus : char {
+	MAIN,
+	ATTACK,
+	ITEM,
+	TEAM,
+	MENU_COUNT
+};
+
 enum class CombatState {
 	START,
 	DIALOG_START,
@@ -61,13 +69,13 @@ private:
 
 	GuiControl* NewButton(char menuID, char elementID, const char* text, SDL_Rect bounds, GuiCallback_f onClick, SDL_Rect sliderBounds = {0,0,0,0});
 
-	void CreateButtons(pugi::xml_node config);
+	void CreateButtons(pugi::xml_node menuListNode);
 
 	void CreateAbilityButtons(Personatge* p);
 
 	void CreateItemButtons(InventoryScreen* inv);
 
-	void CreateTeamSwapButtons();
+	void CreateTeamSwapButtons(pugi::xml_node menuItem);
 
 	bool CombatFinished();
 
@@ -107,6 +115,8 @@ private:
 
 	void Flee(GuiControl* ctrl);
 
+	void ResetButtonsState();
+
 public:
 
 	// Datos a usar para el combate. Hace falta rellenar este campo antes de activar el modulo
@@ -119,17 +129,9 @@ private:
 	std::mt19937 rng;
 
 	// Gestion de menu
-	std::vector<std::vector<GuiControl*>*> menuList;
-	char currentMenu = 0;
+	std::vector<std::vector<GuiControl*>> menuList;
+	Menus currentMenu = Menus::MAIN;
 	char currentElement = 0;
-
-	//Menu principal
-	std::vector<GuiControl*> bMain;
-
-	//Submenus
-	std::vector<GuiControl*> bHabilidades;
-	std::vector<GuiControl*> bObjetos;
-	std::vector<GuiControl*> bEquipo;
 
 	//Posicion de los menus
 	iPoint posMain;

@@ -43,7 +43,7 @@ bool PauseMenu::Start() {
 }
 bool PauseMenu::Update(float dt) {
     if (buttoncreated == true) {
-        // TODO: pasar esto a OnClick()
+        // TODO: pasar esto a OnClick() (activando el evento de forma manual con el teclado/mando desde aqui)
         if (inpause == true && PauseButtons.At(0)->data->state == GuiControlState::PRESSED)
         {
            app->fadeToBlack->FadeToBlackTransition((Module*)app->pause, (Module*)app->scene, 0.0f);

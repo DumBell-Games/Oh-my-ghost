@@ -39,6 +39,8 @@ public:
 		if (isEnabled) {
 			active = isEnabled = false;
 			paused = false;
+			if (needsAwaking)
+				awoken = false;
 			ret = CleanUp();
 		}
 		return ret;
