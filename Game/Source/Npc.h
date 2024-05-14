@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "Point.h"
 #include "PropertiesStruct.h"
+#include "Animation.h"
 
 #include "SDL/include/SDL.h"
 #include "Box2D/Box2D/Box2D.h"
@@ -41,6 +42,14 @@ public:
 	SString texturePath;
 
 	PhysBody* nBody;
+
+	Animation* currentAnim;
+
+	Animation* palomaIdle;
+	Animation* aprendizIdle;
+	Animation* veteranaIdle;
+	Animation* conserjeIdle;
+	Animation* astroBarkIdle;
 
 
 };

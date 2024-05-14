@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="27" height="22" tilewidth="128" tileheight="128" infinite="0" nextlayerid="9" nextobjectid="2">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="27" height="22" tilewidth="128" tileheight="128" infinite="0" nextlayerid="9" nextobjectid="2">
  <tileset firstgid="1" name="disco-plantilla" tilewidth="128" tileheight="128" tilecount="9" columns="3">
   <image source="disco-plantilla.png" width="384" height="384"/>
  </tileset>
@@ -611,6 +611,9 @@
   </data>
  </layer>
  <layer id="4" name="Bordes paredes" width="27" height="22">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile gid="437"/>
    <tile gid="438"/>
@@ -1209,6 +1212,9 @@
   </data>
  </layer>
  <layer id="6" name="assets" width="27" height="22">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -1807,6 +1813,9 @@
   </data>
  </layer>
  <layer id="7" name="assets 2" width="27" height="22">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -2405,6 +2414,9 @@
   </data>
  </layer>
  <layer id="8" name="techo" width="27" height="22">
+  <properties>
+   <property name="Draw" type="bool" value="true"/>
+  </properties>
   <data>
    <tile/>
    <tile/>
@@ -3607,7 +3619,7 @@
   <object id="1" x="2048" y="2560" width="256" height="128">
    <properties>
     <property name="mapID" type="int" value="0"/>
-    <property name="targetDoor" type="int" value="34"/>
+    <property name="targetDoor" type="int" value="30"/>
    </properties>
   </object>
  </objectgroup>

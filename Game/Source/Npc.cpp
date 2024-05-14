@@ -45,8 +45,7 @@ bool Npc::Start() {
 }
 
 bool Npc::Update(float dt)
-{
-			
+{			
 	app->render->DrawTexture(texture, position.x - 48, position.y - 114);
 
 	b2Transform nBodyPos = nBody->body->GetTransform();

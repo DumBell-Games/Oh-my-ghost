@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="86" height="54" tilewidth="128" tileheight="128" infinite="0" nextlayerid="7" nextobjectid="27">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="86" height="54" tilewidth="128" tileheight="128" infinite="0" nextlayerid="9" nextobjectid="34">
  <tileset firstgid="1" name="_srw_exterior_A2" tilewidth="128" tileheight="128" tilecount="432" columns="24">
   <image source="_srw_exterior_A2.png" width="3072" height="2304"/>
  </tileset>
@@ -13987,14 +13987,40 @@
   <properties>
    <property name="entity" type="int" value="3"/>
   </properties>
-  <object id="28" x="5763.64" y="1857.58">
+  <object id="28" x="4748.49" y="1763.64">
    <properties>
-    <property name="texturePath" value="&quot;Assets/Textures/dogNpc.png&quot;"/>
+    <property name="texturePath" value="Assets/Textures/kangaroNpc.png"/>
    </properties>
    <point/>
   </object>
   <object id="35" x="6190.91" y="1909.09">
+   <properties>
+    <property name="texturePath" value="Assets/Textures/kangaroNpc.png"/>
+   </properties>
    <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="8" name="Transiciones">
+  <properties>
+   <property name="entity" type="int" value="5"/>
+  </properties>
+  <object id="27" x="4294.67" y="1481.33" width="184" height="222.667">
+   <properties>
+    <property name="mapID" type="int" value="1"/>
+    <property name="targetDoor" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="30" x="3016" y="4546" width="182" height="214">
+   <properties>
+    <property name="mapID" type="int" value="2"/>
+    <property name="targetDoor" type="int" value="1"/>
+   </properties>
+  </object>
+  <object id="31" x="6344" y="74" width="178" height="218">
+   <properties>
+    <property name="mapID" type="int" value="3"/>
+    <property name="targetDoor" type="int" value="1"/>
+   </properties>
   </object>
  </objectgroup>
 </map>

@@ -48,6 +48,21 @@
 			  <frame x="1408" y="1138" w="127" h="141" />
 		  </animation>
 
+		  <animation name="walkRF" loop="true" speed="0.2f">
+			  <frame x="8" y="1135" w="123" h="145" />
+			  <frame x="136" y="1135" w="122" h="145" />
+			  <frame x="262" y="1135" w="125" h="145" />
+			  <frame x="398" y="1139" w="124" h="141" />
+			  <frame x="530" y="1136" w="111" h="142" />
+			  <frame x="658" y="1137" w="111" h="140" />
+			  <frame x="785" y="1135" w="113" h="144" />
+			  <frame x="912" y="1135" w="114" h="145" />
+			  <frame x="1034" y="1135" w="120" h="145" />
+			  <frame x="1162" y="1137" w="119" h="140" />
+			  <frame x="1282" y="1137" w="127" h="141" />
+			  <frame x="1410" y="1137" w="127" h="141" />
+		  </animation>
+
 		  <animation name="walkL" loop="true" speed="0.2f">
 			  <frame x="4" y="881" w="127" h="141" />
 			  <frame x="132" y="881" w="127" h="141" />
@@ -63,6 +78,21 @@
 			  <frame x="1413" y="880" w="111" h="144" />
 		  </animation>
 
+		  <animation name="walkLF" loop="true" speed="0.2f">
+			  <frame x="3" y="880" w="127" h="142" />
+			  <frame x="131" y="880" w="127" h="141" />
+			  <frame x="259" y="880" w="120" h="141" />
+			  <frame x="386" y="879" w="120" h="145" />
+			  <frame x="514" y="879" w="114" h="145" />
+			  <frame x="642" y="879" w="114" h="145" />
+			  <frame x="771" y="881" w="111" h="141" />
+			  <frame x="899" y="881" w="111" h="140" />
+			  <frame x="1027" y="881" w="124" h="141" />
+			  <frame x="1154" y="879" w="125" h="144" />
+			  <frame x="1282" y="879" w="122" h="144" />
+			  <frame x="1410" y="879" w="122" h="144" />
+		  </animation>
+
 		  <animation name="walkFrontal" loop="true" speed="0.2f">
 			  <frame x="2" y="623" w="127" h="141" />
 			  <frame x="129" y="623" w="128" h="141" />
@@ -74,6 +104,19 @@
 			  <frame x="906" y="623" w="115" h="144" />
 			  <frame x="1030" y="623" w="120" h="145" />
 			  <frame x="1159" y="623" w="119" h="145" />
+		  </animation>
+		  
+		  <animation name="walkFrontalF" loop="true" speed="0.2f">
+			  <frame x="3" y="623" w="126" h="141" />
+			  <frame x="131" y="623" w="126" h="141" />
+			  <frame x="265" y="623" w="120" h="141" />
+			  <frame x="393" y="625" w="117" h="143" />
+			  <frame x="526" y="625" w="112" h="143" />
+			  <frame x="662" y="623" w="108" h="141" />
+			  <frame x="780" y="623" w="118" h="141" />
+			  <frame x="908" y="623" w="118" h="141" />
+			  <frame x="1032" y="625" w="119" h="144" />
+			  <frame x="1160" y="625" w="118" h="144" />
 		  </animation>
 
 		  <animation name="walkEspalda" loop="true" speed="0.2f">
@@ -91,6 +134,19 @@
 			  <frame x="1408" y="1403" w="124" h="132" />
 			  <frame x="1536" y="1403" w="134" h="132" />
 		  </animation>
+
+		  <animation name="walkEspaldaF" loop="true" speed="0.2f">
+			  <frame x="4" y="1394" w="126" h="137" />
+			  <frame x="132" y="1394" w="126" h="137" />
+			  <frame x="260" y="1394" w="120" h="137" />
+			  <frame x="391" y="1395" w="117" h="141" />
+			  <frame x="519" y="1395" w="113" h="141" />
+			  <frame x="644" y="1394" w="105" h="138" />
+			  <frame x="772" y="1394" w="116" h="138" />
+			  <frame x="901" y="1394" w="115" h="138" />
+			  <frame x="1030" y="1395" w="120" h="144" />
+			  <frame x="1157" y="1395" w="121" h="141" />
+		  </animation>
 		  
 		  <animation name="runR" loop="true" speed="0.2f">
 			  <frame x="4" y="2163" w="124" h="141" />
@@ -100,12 +156,30 @@
 			  <frame x="513" y="2161" w="127" h="141" />
 		  </animation>
 		  
+		  <animation name="runRF" loop="true" speed="0.2f">
+			  <frame x="4" y="2419" w="124" h="140" />
+			  <frame x="144" y="2416" w="112" h="143" />
+			  <frame x="271" y="2417" w="112" h="140" />
+			  <frame x="392" y="2422" w="120" h="137" />
+			  <frame x="520" y="2416" w="120" h="143" />
+			  <frame x="640" y="2417" w="127" h="140" />
+		  </animation>
+		  
 		  <animation name="runL" loop="true" speed="0.2f">
 			  <frame x="1" y="1905" w="127" h="141" />
 			  <frame x="129" y="1904" w="119" h="144" />
 			  <frame x="257" y="1905" w="119" h="143" />
 			  <frame x="385" y="1904" w="111" h="144" />
 			  <frame x="513" y="1907" w="124" h="140" />
+		  </animation>
+		  
+		  <animation name="runLF" loop="true" speed="0.2f">
+			  <frame x="1" y="2161" w="127" h="140" />
+			  <frame x="128" y="2160" w="120" h="144" />
+			  <frame x="256" y="2165" w="120" h="139" />
+			  <frame x="385" y="2161" w="112" h="141" />
+			  <frame x="512" y="2160" w="112" h="144" />
+			  <frame x="640" y="2163" w="125" h="141" />
 		  </animation>
 		  
 		  <animation name="runEspalda" loop="true" speed="0.2f">
@@ -117,6 +191,15 @@
 			  <frame x="641" y="2427" w="124" h="132" />
 		  </animation>
 
+		  <animation name="runEspaldaF" loop="true" speed="0.2f">
+			  <frame x="2" y="2673" w="120" h="138" />
+			  <frame x="133" y="2674" w="117" h="141" />
+			  <frame x="264" y="2680" w="110" h="135" />
+			  <frame x="386" y="2673" w="104" h="137" />
+			  <frame x="516" y="2674" w="114" h="141" />
+			  <frame x="647" y="2682" w="116" h="132" />
+		  </animation>
+		  
 		  <animation name="runFrontal" loop="true" speed="0.2f">
 			  <frame x="3" y="1651" w="124" h="138" />
 			  <frame x="137" y="1651" w="115" h="142" />
@@ -124,6 +207,15 @@
 			  <frame x="406" y="1651" w="105" h="138" />
 			  <frame x="524" y="1651" w="112" h="142" />
 			  <frame x="648" y="1659" w="116" h="131" />
+		  </animation>
+		  
+		  <animation name="runFrontalF" loop="true" speed="0.2f">
+			  <frame x="3" y="1906" w="125" h="138" />
+			  <frame x="136" y="1906" w="115" h="142" />
+			  <frame x="268" y="1913" w="108" h="131" />
+			  <frame x="403" y="1906" w="106" h="138" />
+			  <frame x="520" y="1906" w="113" h="142" />
+			  <frame x="644" y="1913" w="112" h="141" />
 		  </animation>
 		  
 		  <animation name="idleFrontal" loop="true" speed="0.2f">
@@ -213,10 +305,6 @@
 	  
 	  </player>
 		
-	<map path="Assets/Maps/" name="MapTemplate.tmx"/>
-	
-	  
-	
 
 	<enemy x="300" y="272" texturePath="Assets/Textures/pigNpc.png"/>
 	<enemy x="500" y="272" texturePath="Assets/Textures/pigNpc.png"/>
@@ -309,7 +397,7 @@
   </dialogmanager>
 
 	<map path="Assets/Maps/">
-		<map id="0" file="MapTemplate.tmx"/>
+		<map id="0" file="mapa.tmx"/>
 		<map id="1" file="taberna_plantilla.tmx"/>
 		<map id="2" file="disco_plantilla.tmx"/>
 		<map id="3" file="casino_plantilla.tmx"/>

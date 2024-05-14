@@ -65,8 +65,6 @@ void Player::PlayerStartAnims()
 	runFrontalF = GetAnimation("runFrontalF");
 	cambioCuerpoF = GetAnimation("cambioCuerpoF");
 
-
-
 }
 
 bool Player::Awake() {
@@ -151,45 +149,97 @@ bool Player::Update(float dt)
 
 	if (app->input->GetButton(ControlID::UP) == KEY_REPEAT)
 	{
-		currentAnim = walkEspalda;
-		currentAnim->Update();
-		if (app->input->GetButton(ControlID::BACK) == KEY_REPEAT)
+		if (currentTexture == texturePlayer)
 		{
-			currentAnim = runEspalda;
+			currentAnim = walkEspalda;
 			currentAnim->Update();
+			if (app->input->GetButton(ControlID::BACK) == KEY_REPEAT)
+			{
+				currentAnim = runEspalda;
+				currentAnim->Update();
+			}
+		}
+		if (currentTexture == textureGhost)
+		{
+			currentAnim = walkEspaldaF;
+			currentAnim->Update();
+			if (app->input->GetButton(ControlID::BACK) == KEY_REPEAT)
+			{
+				currentAnim = runEspaldaF;
+				currentAnim->Update();
+			}
 		}
 	}
 
 	if (app->input->GetButton(ControlID::DOWN) == KEY_REPEAT)
 	{
-		currentAnim = walkFrontal;
-		currentAnim->Update();
-		if (app->input->GetButton(ControlID::BACK) == KEY_REPEAT)
+		if (currentTexture == texturePlayer)
 		{
-			currentAnim = runFrontal;
+			currentAnim = walkFrontal;
 			currentAnim->Update();
+			if (app->input->GetButton(ControlID::BACK) == KEY_REPEAT)
+			{
+				currentAnim = runFrontal;
+				currentAnim->Update();
+			}
+		}
+		if (currentTexture == textureGhost)
+		{
+			currentAnim = walkFrontalF;
+			currentAnim->Update();
+			if (app->input->GetButton(ControlID::BACK) == KEY_REPEAT)
+			{
+				currentAnim = runFrontalF;
+				currentAnim->Update();
+			}
 		}
 	}
 
 	if (app->input->GetButton(ControlID::LEFT) == KEY_REPEAT)
 	{
-		currentAnim = walkL;
-		currentAnim->Update();
-		if (app->input->GetButton(ControlID::BACK) == KEY_REPEAT)
+		if (currentTexture == texturePlayer)
 		{
-			currentAnim = runL;
+			currentAnim = walkL;
 			currentAnim->Update();
+			if (app->input->GetButton(ControlID::BACK) == KEY_REPEAT)
+			{
+				currentAnim = runL;
+				currentAnim->Update();
+			}
+		}
+		if (currentTexture == textureGhost)
+		{
+			currentAnim = walkLF;
+			currentAnim->Update();
+			if (app->input->GetButton(ControlID::BACK) == KEY_REPEAT)
+			{
+				currentAnim = runLF;
+				currentAnim->Update();
+			}
 		}
 	}
 
 	if (app->input->GetButton(ControlID::RIGHT) == KEY_REPEAT)
 	{
-		currentAnim = walkR;
-		currentAnim->Update();
-		if (app->input->GetButton(ControlID::BACK) == KEY_REPEAT)
+		if (currentTexture == texturePlayer)
 		{
-			currentAnim = runR;
+			currentAnim = walkR;
 			currentAnim->Update();
+			if (app->input->GetButton(ControlID::BACK) == KEY_REPEAT)
+			{
+				currentAnim = runR;
+				currentAnim->Update();
+			}
+		}
+		if (currentTexture == textureGhost)
+		{
+			currentAnim = walkRF;
+			currentAnim->Update();
+			if (app->input->GetButton(ControlID::BACK) == KEY_REPEAT)
+			{
+				currentAnim = runRF;
+				currentAnim->Update();
+			}
 		}
 	}
 	
