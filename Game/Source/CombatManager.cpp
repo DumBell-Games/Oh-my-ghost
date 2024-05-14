@@ -185,6 +185,7 @@ void CombatManager::CreateAbilityButtons(Personatge* p)
 		GuiCallback_f func = [this,a](GuiControl* g) {
 			LOG("WIP habilidad %s",a->nom.c_str());
 			ataqueAliado = a;
+			accion = PlayerAction::ATTACK;
 			combatState = CombatState::COMBAT; // Al seleccionar el boton de ataque se pasa a ejecutar acciones
 			};
 		// Crea el boton en la posicion del submenu, la posicion 'y' depende del indice de este boton
@@ -195,6 +196,21 @@ void CombatManager::CreateAbilityButtons(Personatge* p)
 void CombatManager::CreateItemButtons(InventoryScreen* inv)
 {
 	// Crea los botones para el uso de objetos, el codigo es similar al de los botones de habilidades
+	SDL_Rect bounds{ posSub.x,posSub.y,buttonSize.x,buttonSize.y };
+	// Copia-pega de la creacion de botones para aliados. De donde se supone que tengo que sacar los objetos? haciendo el mismo codigo 20 veces para acceder a las variables individualmente? Eso es completamente insostenible, aunque esto sea una demo no hay un sistema de inventario funcional
+	/*for (size_t i = 0; i < data.allies.size(); i++)
+	{
+		Personatge* p = data.allies[i];
+		if (p) {
+			bounds.y = posSub.y + i * (bounds.h + 16);
+			GuiCallback_f func = [this, i](GuiControl* g) {
+				SwapCharacter(i);
+				accion = PlayerAction::CHANGE;
+				combatState = CombatState::COMBAT;
+				};
+			menuList[enum2val(Menus::TEAM)].push_back(NewButton(3, i, p->nom.c_str(), bounds, func));
+		}
+	}*/
 	LOG("WIP itemButtons");
 }
 
@@ -208,6 +224,7 @@ void CombatManager::CreateTeamSwapButtons(pugi::xml_node menuItem)
 			bounds.y = posSub.y + i * (bounds.h + 16);
 			GuiCallback_f func = [this, i](GuiControl* g) {
 				SwapCharacter(i);
+				accion = PlayerAction::CHANGE;
 				combatState = CombatState::COMBAT;
 			};
 			menuList[enum2val(Menus::TEAM)].push_back(NewButton(3, i, p->nom.c_str(), bounds, func));
@@ -344,6 +361,11 @@ void CombatManager::DoAttack(Personatge* attacker, Personatge* defender, Atac* m
 		defender->rebreDanys(finalAtk);
 	}
 
+}
+
+void CombatManager::UseItem(Personatge* target, ItemData* item)
+{
+	item->UseOn(target);
 }
 
 void CombatManager::SwapCharacter(int id)

@@ -4,6 +4,7 @@
 
 #include "Point.h"
 #include "GuiControl.h"
+#include "ItemData.h"
 
 #include "SDL/include/SDL_rect.h"
 
@@ -79,10 +80,13 @@ private:
 
 	bool CombatFinished();
 
+
 	// Control por mando/teclado (raton va por GUI)
 
+	// Crea los elementos de UI que proporcionan informacion de los personajes en pantalla e inicia el dialogo de inicio de combate
 	void HandleStart();
 
+	// Espera a que se termine el dialogo para pasar a la siguiente parte del combate
 	void HandleStartDialog();
 
 	// Seleccion de accion
@@ -91,6 +95,7 @@ private:
 	// Accion elegida
 	void HandleCombat();
 
+	// Genera la acción del enemigo
 	void EnemyChoice();
 
 	// Texto de final de combate (dialogo del enemigo, EXP acumulada, etc.)
@@ -99,9 +104,12 @@ private:
 	// Final de combate, inicio de transicion a mapa (desactivar este modulo y despausar entitymanager)
 	void HandleEnd();
 
+
 	// Realizacion de acciones
 
 	void DoAttack(Personatge* attacker, Personatge* defender, Atac* move);
+
+	void UseItem(Personatge* target, ItemData* item);
 
 	void SwapCharacter(int id);
 
@@ -142,8 +150,9 @@ private:
 
 	PlayerAction accion = PlayerAction::NO_ACTION;
 
-	Atac* ataqueAliado;
-	Atac* ataqueEnemigo;
+	Atac* ataqueAliado = nullptr;
+	ItemData* objetoAliado = nullptr;
+	Atac* ataqueEnemigo = nullptr;
 
 
 

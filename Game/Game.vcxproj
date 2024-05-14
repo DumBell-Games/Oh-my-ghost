@@ -95,6 +95,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\ItemData.cpp" />
     <ClCompile Include="Source\Poison.cpp" />
     <ClCompile Include="Source\DebugCommands.h" />
     <ClCompile Include="Source\DebugConsole.cpp" />
@@ -138,6 +139,7 @@
     <ClCompile Include="Source\Window.cpp" />
     <ClCompile Include="Source\TransitionTrigger.cpp" />
     <ClCompile Include="Source\tmxTileidAdjustment.h" />
+    <ClInclude Include="Source\ItemData.h" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\EnumUtils.h" />
     <ClInclude Include="Source\Poison.h" />
