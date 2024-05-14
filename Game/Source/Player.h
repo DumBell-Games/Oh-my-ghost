@@ -57,7 +57,7 @@ public:
 
 	PhysBody* pBody;
 
-	List<Animation*> springyPalomaAnimatoinList;
+	List<Animation*> springyAnimationList;
 
 	Animation* currentAnim;
 
@@ -74,6 +74,21 @@ public:
 	Animation* torbellino;
 	Animation* cambioCuerpo;
 	Animation* idleFrontal;
+
+
+	Animation* walkFrontalF;
+	Animation* walkEspaldaF;
+	Animation* walkRF;
+	Animation* walkLF;
+	Animation* runRF;
+	Animation* runLF;
+	Animation* runFrontalF;
+	Animation* runEspaldaF;
+	Animation* dieF;
+	Animation* manoDivinaF;
+	Animation* torbellinoF;
+	Animation* cambioCuerpoF;
+	Animation* idleFrontalF;
 	
 };
 

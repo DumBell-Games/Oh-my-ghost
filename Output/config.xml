@@ -32,7 +32,7 @@
   </input>
 
   <scene>
-	  <player x="30" y="750" texturePath="Assets/Textures/springyPaloma.png" ghostTexPath="Assets/Textures/ghostNpc.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg">
+	  <player x="30" y="750" texturePath="Assets/Textures/springyPaloma.png" ghostTexPath="Assets/Textures/springyFantasma.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg">
 		  <animation name="walkR" loop="true" speed="0.2f">
 			  <frame x="15" y="1137" w="111" h="144" />
 			  <frame x="143" y="1138" w="111" h="143" />
@@ -109,20 +109,23 @@
 		  </animation>
 		  
 		  <animation name="runEspalda" loop="true" speed="0.2f">
-			  <frame x="4" y="2163" w="124" h="141" />
-			  <frame x="145" y="2160" w="111" h="143" />
-			  <frame x="265" y="2161" w="119" h="143" />
-			  <frame x="393" y="2160" w="119" h="144" />
-			  <frame x="513" y="2161" w="127" h="141" />
+			  <frame x="3" y="2418" w="126" h="139" />
+			  <frame x="134" y="2419" w="117" h="141" />
+			  <frame x="258" y="2426" w="117" h="134" />
+			  <frame x="387" y="2418" w="105" h="139" />
+			  <frame x="517" y="2419" w="114" h="141" />
+			  <frame x="641" y="2427" w="124" h="132" />
 		  </animation>
 
 		  <animation name="runFrontal" loop="true" speed="0.2f">
-			  <frame x="1" y="1905" w="127" h="141" />
-			  <frame x="129" y="1904" w="119" h="144" />
-			  <frame x="257" y="1905" w="119" h="143" />
-			  <frame x="385" y="1904" w="111" h="144" />
-			  <frame x="513" y="1907" w="124" h="140" />
+			  <frame x="3" y="1651" w="124" h="138" />
+			  <frame x="137" y="1651" w="115" h="142" />
+			  <frame x="270" y="1658" w="110" h="131" />
+			  <frame x="406" y="1651" w="105" h="138" />
+			  <frame x="524" y="1651" w="112" h="142" />
+			  <frame x="648" y="1659" w="116" h="131" />
 		  </animation>
+		  
 		  <animation name="idleFrontal" loop="true" speed="0.2f">
 			  <frame x="1" y="111" w="127" h="141" />
 			  <frame x="129" y="111" w="127" h="141" />
@@ -152,6 +155,62 @@
 			  <frame x="3206" y="111" w="122" h="145" />
 		 </animation>
 
+		  <animation name="idleFrontalF" loop="true" speed="0.2f">
+			  <frame x="3" y="114" w="124" h="138" />
+			  <frame x="130" y="111" w="124" h="138" />
+			  <frame x="257" y="113" w="124" h="138" />
+			  <frame x="390" y="114" w="118" h="138" />
+			  <frame x="517" y="114" w="119" h="142" />
+			  <frame x="649" y="114" w="114" h="141" />
+			  <frame x="776" y="114" w="114" h="141" />
+			  <frame x="916" y="116" w="105" h="138" />
+			  <frame x="1038" y="114" w="105" h="138" />
+			  <frame x="1161" y="113" w="115" h="138" />
+			  <frame x="1288" y="110" w="115" h="141" />
+			  <frame x="1420" y="114" w="115" h="141" />
+			  <frame x="1544" y="114" w="120" h="141" />
+			  <frame x="1667" y="114" w="124" h="138" />
+			  <frame x="1795" y="114" w="125" h="138" />
+			  <frame x="1923" y="114" w="124" h="138" />
+			  <frame x="2057" y="114" w="118" h="138" />
+			  <frame x="2185" y="114" w="119" h="141" />
+			  <frame x="2318" y="114" w="114" h="141" />
+			  <frame x="2446" y="114" w="114" h="141" />
+			  <frame x="2582" y="114" w="105" h="138" />
+			  <frame x="2710" y="114" w="105" h="138" />
+			  <frame x="2828" y="114" w="115" h="138" />
+			  <frame x="2956" y="114" w="116" h="141" />
+			  <frame x="3084" y="114" w="115" h="141" />
+			  <frame x="3208" y="114" w="119" h="141" />
+		  </animation>
+
+
+		  <animation name="cambioCuerpo" loop="false" speed="0.2f">
+			  <frame x="2" y="3684" w="127" h="156" />
+			  <frame x="134" y="3696" w="123" h="144" />
+			  <frame x="262" y="3694" w="122" h="143" />
+			  <frame x="390" y="3696" w="123" h="144" />
+			  <frame x="514" y="3684" w="127" h="156" />
+			  <frame x="646" y="3696" w="123" h="144" />
+			  <frame x="774" y="3694" w="122" h="143" />
+			  <frame x="910" y="3741" w="106" h="93" />
+			  <frame x="1038" y="3741" w="106" h="93" />
+			  <frame x="1161" y="3749" w="114" h="83" />
+		 </animation>
+		  
+		 <animation name="cambioCuerpoF" loop="false" speed="0.2f">
+			  <frame x="1" y="4196" w="126" h="156" />
+			  <frame x="133" y="4208" w="122" h="144" />
+			  <frame x="260" y="4206" w="122" h="143" />
+			  <frame x="389" y="4208" w="122" h="144" />
+			  <frame x="512" y="4196" w="127" h="156" />
+			  <frame x="646" y="4208" w="121" h="144" />
+			  <frame x="772" y="4206" w="122" h="143" />
+			  <frame x="909" y="4252" w="106" h="93" />
+			  <frame x="1037" y="4252" w="106" h="93" />
+			  <frame x="1159" y="4260" w="114" h="83" />
+		 </animation>
+	  
 	  </player>
 		
 	<map path="Assets/Maps/" name="MapTemplate.tmx"/>

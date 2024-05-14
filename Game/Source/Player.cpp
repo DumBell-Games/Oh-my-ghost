@@ -40,7 +40,7 @@ void Player::PlayerStartAnims()
 			int h = frameNode.attribute("h").as_int();
 			anim->PushBack({ x,y,w,h });
 		}
-		springyPalomaAnimatoinList.Add(anim);
+		springyAnimationList.Add(anim);
 	}
 
 	walkR = GetAnimation("walkR");
@@ -52,6 +52,19 @@ void Player::PlayerStartAnims()
 	runL = GetAnimation("runL");
 	runEspalda = GetAnimation("runEspalda");
 	runFrontal = GetAnimation("runFrontal");
+	cambioCuerpo = GetAnimation("cambioCuerpo");
+
+	walkRF = GetAnimation("walkRF");
+	walkLF = GetAnimation("walkLF");
+	walkEspaldaF = GetAnimation("walkEspaldaF");
+	walkFrontalF = GetAnimation("walkFrontalF");
+	idleFrontalF = GetAnimation("idleFrontalF");
+	runRF = GetAnimation("runRF");
+	runLF = GetAnimation("runLF");
+	runEspaldaF = GetAnimation("runEspaldaF");
+	runFrontalF = GetAnimation("runFrontalF");
+	cambioCuerpoF = GetAnimation("cambioCuerpoF");
+
 
 
 }
@@ -74,7 +87,7 @@ bool Player::Start() {
 	currentTexture = texturePlayer;
 	currentAnim = idleFrontal;
 
-	pBody = app->physics->CreateRectangle(position.x + 128, position.y + 128, 128, 256, bodyType::DYNAMIC);
+	pBody = app->physics->CreateRectangle(position.x + 128, position.y, 128, 150, bodyType::DYNAMIC);
 	//haz que el rectangulo no rote
 	pBody->body->SetFixedRotation(true);
 	pBody->listener = this;
@@ -104,19 +117,31 @@ bool Player::Start() {
 }
 
 bool Player::Update(float dt)
-{
-	currentAnim = idleFrontal;
+{	
 	currentAnim->Update();
 
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN && currentTexture == texturePlayer)
 	{
+		currentAnim = cambioCuerpo;
+		currentAnim->Update();
+		if (currentAnim->HasFinished())
+		{
 			currentTexture = textureGhost;
+			currentAnim = idleFrontalF;
+			currentAnim->Update();
 			pBody->ctype = ColliderType::GHOST;
+		}
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN && currentTexture == textureGhost)
 	{
+		currentAnim = cambioCuerpoF;
+		currentAnim->Update();
+		if (currentAnim->HasFinished() )
+		{
 			currentTexture = texturePlayer;
+			currentAnim = idleFrontal;
 			pBody->ctype = ColliderType::PLAYER;
+		}
 	}
 	//L03: DONE 4: render the player texture and modify the position of the player using WSAD keys and render the texture
 	
@@ -180,7 +205,7 @@ bool Player::Update(float dt)
 	position.x = METERS_TO_PIXELS(pBodyPos.p.x) - 32 / 2;     
 	position.y = METERS_TO_PIXELS(pBodyPos.p.y) - 32 / 2;
 
-	app->render->DrawTexture(currentTexture,position.x - 48 ,position.y - 114, &currentAnim->GetCurrentFrame());
+	app->render->DrawTexture(currentTexture,position.x - 48 ,position.y - 64, &currentAnim->GetCurrentFrame());
 
 	uint w, h;
 	app->win->GetWindowSize(w, h);
@@ -233,7 +258,7 @@ void Player::SetPosition(iPoint newPos)
 
 Animation* Player::GetAnimation(SString name)
 {
-	for (ListItem<Animation*>* item = springyPalomaAnimatoinList.start; item != nullptr; item = item->next)
+	for (ListItem<Animation*>* item = springyAnimationList.start; item != nullptr; item = item->next)
 	{
 		if (item->data != nullptr) {
 			if (item->data->name == name) return item->data;
