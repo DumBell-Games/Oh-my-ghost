@@ -78,7 +78,6 @@ bool Player::Awake() {
 bool Player::Start() {
 
 	PlayerStartAnims();
-
 	
 	texturePlayer = app->tex->Load(parameters.attribute("texturePath").as_string());
 	textureGhost = app->tex->Load(parameters.attribute("ghostTexPath").as_string());
@@ -117,11 +116,11 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {	
-	if (timeToIdle.ReadSec() >= 3 && currentTexture == texturePlayer && currentAnim != cambioCuerpo && currentAnim != cambioCuerpoF)
+	if (currentTexture == texturePlayer && currentAnim != cambioCuerpo && currentAnim != cambioCuerpoF)
 	{
 		currentAnim = idleFrontal;
 	}
-	else if (timeToIdle.ReadSec() >= 3 && currentTexture == textureGhost && currentAnim != cambioCuerpo && currentAnim != cambioCuerpoF)
+	else if (currentTexture == textureGhost && currentAnim != cambioCuerpo && currentAnim != cambioCuerpoF)
 	{
 		currentAnim = idleFrontalF;
 	}

@@ -33,7 +33,7 @@
 
 	<scene>
 		<player x="30" y="750" texturePath="Assets/Textures/springyPaloma.png" ghostTexPath="Assets/Textures/springyFantasma.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg">
-			<animation name="walkR" loop="true" speed="0.2f">
+			<animation name="walkR" loop="true" speed="0.15f">
 				<frame x="15" y="1137" w="111" h="144" />
 				<frame x="143" y="1138" w="111" h="143" />
 				<frame x="271" y="1137" w="111" h="144" />
@@ -48,7 +48,7 @@
 				<frame x="1408" y="1138" w="127" h="141" />
 			</animation>
 
-			<animation name="walkRF" loop="true" speed="0.2f">
+			<animation name="walkRF" loop="true" speed="0.15f">
 				<frame x="8" y="1135" w="123" h="145" />
 				<frame x="136" y="1135" w="122" h="145" />
 				<frame x="262" y="1135" w="125" h="145" />
@@ -63,7 +63,7 @@
 				<frame x="1410" y="1137" w="127" h="141" />
 			</animation>
 
-			<animation name="walkL" loop="true" speed="0.2f">
+			<animation name="walkL" loop="true" speed="0.15f">
 				<frame x="4" y="881" w="127" h="141" />
 				<frame x="132" y="881" w="127" h="141" />
 				<frame x="260" y="881" w="127" h="141" />
@@ -78,7 +78,7 @@
 				<frame x="1413" y="880" w="111" h="144" />
 			</animation>
 
-			<animation name="walkLF" loop="true" speed="0.2f">
+			<animation name="walkLF" loop="true" speed="0.15f">
 				<frame x="3" y="880" w="127" h="142" />
 				<frame x="131" y="880" w="127" h="141" />
 				<frame x="259" y="880" w="120" h="141" />
@@ -93,7 +93,7 @@
 				<frame x="1410" y="879" w="122" h="144" />
 			</animation>
 
-			<animation name="walkFrontal" loop="true" speed="0.2f">
+			<animation name="walkFrontal" loop="true" speed="0.15f">
 				<frame x="2" y="623" w="127" h="141" />
 				<frame x="129" y="623" w="128" h="141" />
 				<frame x="263" y="623" w="121" h="141" />
@@ -106,7 +106,7 @@
 				<frame x="1159" y="623" w="119" h="145" />
 			</animation>
 
-			<animation name="walkFrontalF" loop="true" speed="0.2f">
+			<animation name="walkFrontalF" loop="true" speed="0.15f">
 				<frame x="3" y="623" w="126" h="141" />
 				<frame x="131" y="623" w="126" h="141" />
 				<frame x="265" y="623" w="120" h="141" />
@@ -119,7 +119,7 @@
 				<frame x="1160" y="625" w="118" h="144" />
 			</animation>
 
-			<animation name="walkEspalda" loop="true" speed="0.2f">
+			<animation name="walkEspalda" loop="true" speed="0.15f">
 				<frame x="1" y="1394" w="127" h="139" />
 				<frame x="129" y="1394" w="127" h="140" />
 				<frame x="257" y="1394" w="127" h="139" />
@@ -135,7 +135,7 @@
 				<frame x="1536" y="1403" w="134" h="132" />
 			</animation>
 
-			<animation name="walkEspaldaF" loop="true" speed="0.2f">
+			<animation name="walkEspaldaF" loop="true" speed="0.15f">
 				<frame x="4" y="1394" w="126" h="137" />
 				<frame x="132" y="1394" w="126" h="137" />
 				<frame x="260" y="1394" w="120" h="137" />
@@ -148,7 +148,7 @@
 				<frame x="1157" y="1395" w="121" h="141" />
 			</animation>
 
-			<animation name="runR" loop="true" speed="0.2f">
+			<animation name="runR" loop="true" speed="0.15f">
 				<frame x="4" y="2163" w="124" h="141" />
 				<frame x="145" y="2160" w="111" h="143" />
 				<frame x="265" y="2161" w="119" h="143" />
@@ -156,7 +156,7 @@
 				<frame x="513" y="2161" w="127" h="141" />
 			</animation>
 
-			<animation name="runRF" loop="true" speed="0.2f">
+			<animation name="runRF" loop="true" speed="0.15f">
 				<frame x="4" y="2419" w="124" h="140" />
 				<frame x="144" y="2416" w="112" h="143" />
 				<frame x="271" y="2417" w="112" h="140" />
@@ -165,7 +165,7 @@
 				<frame x="640" y="2417" w="127" h="140" />
 			</animation>
 
-			<animation name="runL" loop="true" speed="0.2f">
+			<animation name="runL" loop="true" speed="0.15f">
 				<frame x="1" y="1905" w="127" h="141" />
 				<frame x="129" y="1904" w="119" h="144" />
 				<frame x="257" y="1905" w="119" h="143" />
@@ -173,7 +173,7 @@
 				<frame x="513" y="1907" w="124" h="140" />
 			</animation>
 
-			<animation name="runLF" loop="true" speed="0.2f">
+			<animation name="runLF" loop="true" speed="0.15f">
 				<frame x="1" y="2161" w="127" h="140" />
 				<frame x="128" y="2160" w="120" h="144" />
 				<frame x="256" y="2165" w="120" h="139" />
@@ -182,7 +182,7 @@
 				<frame x="640" y="2163" w="125" h="141" />
 			</animation>
 
-			<animation name="runEspalda" loop="true" speed="0.2f">
+			<animation name="runEspalda" loop="true" speed="0.15f">
 				<frame x="3" y="2418" w="126" h="139" />
 				<frame x="134" y="2419" w="117" h="141" />
 				<frame x="258" y="2426" w="117" h="134" />
@@ -191,7 +191,7 @@
 				<frame x="641" y="2427" w="124" h="132" />
 			</animation>
 
-			<animation name="runEspaldaF" loop="true" speed="0.2f">
+			<animation name="runEspaldaF" loop="true" speed="0.15f">
 				<frame x="2" y="2673" w="120" h="138" />
 				<frame x="133" y="2674" w="117" h="141" />
 				<frame x="264" y="2680" w="110" h="135" />
@@ -200,7 +200,7 @@
 				<frame x="647" y="2682" w="116" h="132" />
 			</animation>
 
-			<animation name="runFrontal" loop="true" speed="0.2f">
+			<animation name="runFrontal" loop="true" speed="0.15f">
 				<frame x="3" y="1651" w="124" h="138" />
 				<frame x="137" y="1651" w="115" h="142" />
 				<frame x="270" y="1658" w="110" h="131" />
@@ -209,7 +209,7 @@
 				<frame x="648" y="1659" w="116" h="131" />
 			</animation>
 
-			<animation name="runFrontalF" loop="true" speed="0.2f">
+			<animation name="runFrontalF" loop="true" speed="0.15f">
 				<frame x="3" y="1906" w="125" h="138" />
 				<frame x="136" y="1906" w="115" h="142" />
 				<frame x="268" y="1913" w="108" h="131" />
@@ -218,7 +218,7 @@
 				<frame x="644" y="1913" w="112" h="141" />
 			</animation>
 
-			<animation name="idleFrontal" loop="true" speed="0.2f">
+			<animation name="idleFrontal" loop="true" speed="0.15f">
 				<frame x="1" y="111" w="127" h="141" />
 				<frame x="129" y="111" w="127" h="141" />
 				<frame x="257" y="111" w="127" h="141" />
@@ -247,7 +247,7 @@
 				<frame x="3206" y="111" w="122" h="145" />
 			</animation>
 
-			<animation name="idleFrontalF" loop="true" speed="0.2f">
+			<animation name="idleFrontalF" loop="true" speed="0.15f">
 				<frame x="3" y="114" w="124" h="138" />
 				<frame x="130" y="111" w="124" h="138" />
 				<frame x="257" y="113" w="124" h="138" />
@@ -277,7 +277,7 @@
 			</animation>
 
 
-			<animation name="cambioCuerpo" loop="false" speed="0.2f">
+			<animation name="cambioCuerpo" loop="false" speed="0.15f">
 				<frame x="2" y="3684" w="127" h="156" />
 				<frame x="134" y="3696" w="123" h="144" />
 				<frame x="262" y="3694" w="122" h="143" />
@@ -290,7 +290,7 @@
 				<frame x="1161" y="3749" w="114" h="83" />
 			</animation>
 
-			<animation name="cambioCuerpoF" loop="false" speed="0.2f">
+			<animation name="cambioCuerpoF" loop="false" speed="0.15f">
 				<frame x="1" y="4196" w="126" h="156" />
 				<frame x="133" y="4208" w="122" h="144" />
 				<frame x="260" y="4206" w="122" h="143" />
