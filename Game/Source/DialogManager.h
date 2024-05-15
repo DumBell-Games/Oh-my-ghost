@@ -9,6 +9,7 @@
 #include "SDL_ttf/include/SDL_ttf.h"
 #include "Textures.h"
 
+
 class DialogManager : public Module
 {
 public:
@@ -35,7 +36,11 @@ public:
 	//Funcion para añadir a la lista de dialogos
 	bool AddDialog(Dialog* dialog);
 
+	void PlayDialog(DialogGroup* dg);
+
 	void EventManager(DialogEvent actualEvent, DialogEvent eventToActivate);
+
+	DialogGroup* GetDialogs(int id);
 	
 private:
 	//Funcion que se encarga de mostrar los dialogos
@@ -51,6 +56,8 @@ public:
 	List<Dialog*> dialogues;
 
 	bool isPlaying;
+	
+	List<DialogGroup*> dialogGroups;
 
 
 private:
@@ -74,7 +81,6 @@ private:
 	int optionsBoundWidth = 350;
 	iPoint faceTextureSize = { 250, 250 }; //texto central
 	
-
 	//Config
 	int charTimeMS = 10;
 

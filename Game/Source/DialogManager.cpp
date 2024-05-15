@@ -77,7 +77,6 @@ Dialog* DialogManager::CreateDialogs(pugi::xml_node itemNode, std::string name, 
 	dialog->face_tex = app->tex->LoadSP(itemNode.attribute("facetexturepath").as_string(faceTexturePath), true);
 	dialog->font = FontSelector(itemNode.attribute("font").as_string(font));
 	dialog->id = itemNode.attribute("id").as_int(0);
-	dialog->mapId = mapID;
 
 	const char* type = itemNode.attribute("type").as_string("");
 

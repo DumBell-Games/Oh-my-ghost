@@ -46,10 +46,10 @@ public:
 private:
 
 	//El path de la textura de la entidad
-	const char* texturePath;
+	SString texturePath;
 
 	//El path de la textura de la cara general
-	const char* faceTexturePath;
+	SString faceTexturePath;
 
 	//Cuerpo de fisicas, para detectar cuando el jugador esta cerca
 	//y activar el dialogo en caso de que el jugador asi lo quiera
@@ -63,8 +63,14 @@ private:
 	bool repeatDialog = false;
 	bool played = false;
 
+	int id;
+
 	//Lista de dialogos a repetir
 	List<Dialog*> dialoguesRepeat;
+
+	std::vector<int> orderedDialogs;
+	uint currentDialog = 0;
+	
 
 };
 

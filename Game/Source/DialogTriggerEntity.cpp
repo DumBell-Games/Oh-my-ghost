@@ -9,6 +9,12 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Map.h"
+#include "PropertiesStruct.h"
+
+#include <vector>
+#include <string>
+
 
 DialogTrigger::DialogTrigger() : Entity(EntityType::DIALOG_TRIGGER)
 {
@@ -18,6 +24,29 @@ DialogTrigger::DialogTrigger() : Entity(EntityType::DIALOG_TRIGGER)
 DialogTrigger::~DialogTrigger() {}
 
 bool DialogTrigger::Awake() {
+
+	Properties p;
+	LoadProperties(parameters, p);
+	position.x = parameters.attribute("x").as_int();
+	position.y = parameters.attribute("y").as_int();
+
+	if (p.list.start) {
+
+		/*texturePath = p.GetProperty("texturepath")->strVal;*/
+
+		SString idString = p.GetProperty("ids")->strVal;
+
+		std::vector<SString> idvec = idString.GetWords(',');
+
+		for (SString& id : idvec) {
+			orderedDialogs.push_back(std::stoi(id.GetString()));
+		}
+	}
+
+
+	iPoint size;
+	size.x = parameters.attribute("w").as_int(128);
+	size.y = parameters.attribute("h").as_int(128);
 
 	return true;
 }
@@ -31,6 +60,9 @@ bool DialogTrigger::Start() {
 	repeatDialog = parameters.attribute("repeat").as_bool(false);
 	
 
+	// texturePath = parameters.attribute("texturepath").as_string();
+	// faceTexturePath = parameters.attribute("facetexturepath").as_string("");
+	// repeatDialog = parameters.attribute("repeat").as_bool(false);
 	std::string fontTarget = parameters.attribute("font").as_string("primary");
 	
 
@@ -111,38 +143,39 @@ bool DialogTrigger::CleanUp()
 
 void DialogTrigger::PlayDialog()
 {
-
-
 	//Play el dialogo normal
-	if ((played && !repeatDialog) || !played) {
-	
-	
-		ListItem<Dialog*>* item;
-		Dialog* pDialog = nullptr;
 
-		for (item = dialogues.start; item != NULL; item = item->next)
-		{
-			pDialog = item->data;
-			app->dialogManager->AddDialog(pDialog);
-		}
+
+	ListItem<Dialog*>* item;
+	Dialog* pDialog = nullptr;
+
+	if (orderedDialogs.size() > 0) {
+		//DialogGroup* dg = app->dialogManager->GetDialogs(orderedDialogs[currentDialog]);
+		//
+		////Guard clause
+		//if (dg == nullptr) return;
+
+		//app->dialogManager->PlayDialog(dg);
+
+		// for (item = dg->dialogs.start; item != NULL; item = item->next)
+		// {
+		// 	pDialog = item->data;
+		// 	app->dialogManager->AddDialog(pDialog);
+		// }
 		played = true;
-
-
-	//Play el dialogo repetido
-	}else if (played && repeatDialog) {
-
-		
-		ListItem<Dialog*>* item;
-		Dialog* pDialog = nullptr;
-
-		for (item = dialoguesRepeat.start; item != NULL; item = item->next)
+		currentDialog++;
+		if (currentDialog >= orderedDialogs.size())
 		{
-			pDialog = item->data;
-			app->dialogManager->AddDialog(pDialog);
+			currentDialog = orderedDialogs.size() - 1;
 		}
 	}
 
 }
+	
+	
+	
+
+
 
 void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)

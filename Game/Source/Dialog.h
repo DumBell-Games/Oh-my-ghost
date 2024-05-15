@@ -7,6 +7,14 @@
 #include "List.h"
 #include "Textures.h"
 
+class Dialog;
+
+struct DialogGroup {
+	List<Dialog*> dialogs;
+	List<SString> texturePaths;
+	int id;
+	DialogGroup(int id) : id(id) {};
+};
 
 enum class DialogType
 {
@@ -14,7 +22,7 @@ enum class DialogType
 	CHOOSE
 };
 
-enum class DialogEvent : bool
+enum DialogEvent
 {
 	NO_EVENT,
 	TIENESDINERO,

@@ -28083,4 +28083,14 @@
    </properties>
   </object>
  </objectgroup>
+ <objectgroup id="9" name="Dialogos">
+  <properties>
+   <property name="entity" type="int" value="2"/>
+  </properties>
+  <object id="43" x="1032.36" y="649.091" width="128" height="128">
+   <properties>
+    <property name="ids" value="0,1,2"/>
+   </properties>
+  </object>
+ </objectgroup>
 </map>
