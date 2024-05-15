@@ -14,6 +14,7 @@
 
 Character_Menu::Character_Menu(bool startEnabled) : Module(startEnabled)
 {
+
 }
 
 Character_Menu::~Character_Menu()
@@ -38,12 +39,35 @@ bool Character_Menu::PreUpdate() {
 	return true;
 }
 bool Character_Menu::Update(float dt) {
+	app->render->DrawTexture(character_Menu, 0, 0, 0, NULL);
+
+	nivel.Create("%d", nive);
+	ataque.Create("%d", ataqu);
+	defensa.Create("%d", defens);
+	velocidad.Create("%d", velocida);
+	vida_actual.Create("%d/", vidaA);
+	vida_maxima.Create("%d", vidaM);
+	mana_maxima.Create("%d", manaM);
+	mana_actual.Create("%d/", manaA);
+	experiencia_siguiente.Create("%d", experienciaS);
+	experiencia_total.Create("%d", experienciaT);
 	
 	return true;
 }
 bool Character_Menu::PostUpdate() {
 
-	app->render->DrawTexture(character_Menu, 0, 0, 0, NULL);
+	
+
+	app->render->DrawText(nivel.GetString(), 1200, 90, 32, 64);
+	app->render->DrawText(ataque.GetString(), 350, 120, 64, 64);
+	app->render->DrawText(defensa.GetString(), 350, 280, 64, 64);
+	app->render->DrawText(velocidad.GetString(), 350, 400, 64, 64);
+	app->render->DrawText(vida_actual.GetString(), 975, 240, 128, 64);
+	app->render->DrawText(vida_maxima.GetString(), 1100, 240, 96, 64);
+	app->render->DrawText(mana_actual.GetString(), 1000, 410, 96, 64);
+	app->render->DrawText(mana_maxima.GetString(), 1100, 410, 96, 64);
+	app->render->DrawText(experiencia_siguiente.GetString(), 650, 770, 150, 64);
+	app->render->DrawText(experiencia_total.GetString(), 650, 660, 150, 64);
 	
 	return true;
 }
