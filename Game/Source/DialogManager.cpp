@@ -68,7 +68,7 @@ bool DialogManager::CleanUp()
 	return ret;
 }
 
-Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, const char* faceTexturePath, const char* font, int id)
+Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, const char* faceTexturePath, const char* font, int id, int mapID)
 {
 	//Dialogo a crear
 	Dialog* dialog = new Dialog(itemNode.attribute("text").as_string());
@@ -77,7 +77,7 @@ Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, c
 	dialog->face_tex = app->tex->Load(itemNode.attribute("facetexturepath").as_string(faceTexturePath));
 	dialog->font = FontSelector(itemNode.attribute("font").as_string(font));
 	dialog->id = itemNode.attribute("id").as_int(0);
-	
+	dialog->mapId = mapID;
 
 	const char* type = itemNode.attribute("type").as_string("");
 

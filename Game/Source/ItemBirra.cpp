@@ -62,6 +62,7 @@ bool Birra::Update(float dt)
 			app->tex->UnLoad(texture);
 			app->entityManager->DestroyEntity(this);
 			app->scene->BirraPicked();
+			app->scene->GetPlayer()->cervezaPicked = true;
 		}
 	}
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="86" height="54" tilewidth="128" tileheight="128" infinite="0" nextlayerid="9" nextobjectid="34">
+<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="86" height="54" tilewidth="128" tileheight="128" infinite="0" nextlayerid="9" nextobjectid="34">
  <tileset firstgid="1" name="_srw_exterior_A2" tilewidth="128" tileheight="128" tilecount="432" columns="24">
   <image source="_srw_exterior_A2.png" width="3072" height="2304"/>
  </tileset>
@@ -13987,7 +13987,7 @@
   <properties>
    <property name="entity" type="int" value="3"/>
   </properties>
-  <object id="28" x="4748.49" y="1763.64">
+  <object id="28" x="4668.49" y="1747.64">
    <properties>
     <property name="texturePath" value="Assets/Textures/kangaroNpc.png"/>
    </properties>

@@ -30,8 +30,7 @@ public:
 	bool CleanUp();
 
 	//Funcion para crear dialogos
-	Dialog* CreateDialog(pugi::xml_node itemNode, std::string name = "", const char* faceTexturePath = "", const char* font = "primary", int id = 0);
-	
+	Dialog* CreateDialog(pugi::xml_node itemNode, std::string name = "", const char* faceTexturePath = "", const char* font = "primary", int id = 0, int mapID = 0);
 	//Funcion para añadir a la lista de dialogos
 	bool AddDialog(Dialog* dialog);
 

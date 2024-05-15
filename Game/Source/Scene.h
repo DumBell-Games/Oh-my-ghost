@@ -49,6 +49,10 @@ public:
 	// Handles multiple Gui Event methods
 	bool OnGuiMouseClickEvent(GuiControl* control);
 
+	Player* GetPlayer() {
+		return player;
+	}
+
 	PhysBody* GetPlayerPbody()
 	{
 		return player->pBody;

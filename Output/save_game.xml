@@ -9,14 +9,16 @@
 	<entitymanager />
 	<guiManager />
 	<scene />
+	<inventory />
 	<titlescreen />
 	<introScreen />
 	<teamScreen />
-	<pause />
+	<vsync />
+	<debugconsole />
 	<dialogmanager />
 	<:anonymous />
 	<reload />
 	<renderer>
-		<camera x="-101" y="-399" />
+		<camera x="323" y="-287" />
 	</renderer>
 </game_state>

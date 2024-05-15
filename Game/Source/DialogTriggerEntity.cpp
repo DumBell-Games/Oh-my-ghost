@@ -39,7 +39,7 @@ bool DialogTrigger::Start() {
 	//Cargar dialogos
 	for (pugi::xml_node itemNode = parameters.child("sentences").child("sentence"); itemNode; itemNode = itemNode.next_sibling("sentence"))
 	{
-		dialogues.Add(app->dialogManager->CreateDialog(itemNode, parameters.attribute("name").as_string(), faceTexturePath, fontTarget.c_str()));
+		dialogues.Add(app->dialogManager->CreateDialog(itemNode, parameters.attribute("name").as_string(), faceTexturePath, fontTarget.c_str(),0, parameters.attribute("mapid").as_int()));
 	}
 
 	//Si el dialogo se reite, cargar las lineas que se repite
@@ -148,8 +148,8 @@ void DialogTrigger::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 		case ColliderType::PLAYER:
-			
-			if (!app->dialogManager->isPlaying && app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN) {
+			//If currentMapId == diaogog->mapID 
+			if (!app->dialogManager->isPlaying) {
 				PlayDialog();
 			}
 			break;

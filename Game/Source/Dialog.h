@@ -80,6 +80,7 @@ public:
 	std::string name;
 
 	int id;
+	int mapId;
 
 	//Texturas
 	SDL_Texture* face_tex = nullptr;

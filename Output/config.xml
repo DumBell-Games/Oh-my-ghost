@@ -1,400 +1,401 @@
 <!-- Config file for the game -->
 <!-- L01: DONE 1: Create configuration file-->
 <config>
-  <app>
-    <title>Oh my Ghost</title>
-    <maxFrameDuration value="16"/>
-  </app>
+	<app>
+		<title>Oh my Ghost</title>
+		<maxFrameDuration value="16"/>
+	</app>
 
-  <renderer>
-	  <fonts>
-		  <primary_font fontPath="Assets/Fonts/Aladin-Regular.ttf" fontSize="25"/>
-		  <secondary_font fontPath="Assets/Fonts/Aladin-Regular.ttf" fontSize="25"/>
+	<renderer>
+		<fonts>
+			<primary_font fontPath="Assets/Fonts/Aladin-Regular.ttf" fontSize="25"/>
+			<secondary_font fontPath="Assets/Fonts/Aladin-Regular.ttf" fontSize="25"/>
 
-	  </fonts>
-    <vsync value="true"/>
-  </renderer>
+		</fonts>
+		<vsync value="true"/>
+	</renderer>
 
-  <window>
-    <resolution width="1920" height="1080" scale="1"/>
-    <fullscreen value="false"/>
-    <borderless value="false"/>
-    <resizable value="false"/>
-    <fullscreen_window value="false"/>
-  </window>
+	<window>
+		<resolution width="1920" height="1080" scale="1"/>
+		<fullscreen value="false"/>
+		<borderless value="false"/>
+		<resizable value="false"/>
+		<fullscreen_window value="false"/>
+	</window>
 
-  <inventory inventoryFile ="inventory.xml">
-	        	
-  </inventory>
-	
-  <input bindingsFile="controls.xml">
-		
-  </input>
+	<inventory inventoryFile ="inventory.xml">
 
-  <scene>
-	  <player x="30" y="750" texturePath="Assets/Textures/springyPaloma.png" ghostTexPath="Assets/Textures/springyFantasma.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg">
-		  <animation name="walkR" loop="true" speed="0.2f">
-			  <frame x="15" y="1137" w="111" h="144" />
-			  <frame x="143" y="1138" w="111" h="143" />
-			  <frame x="271" y="1137" w="111" h="144" />
-			  <frame x="397" y="1138" w="113" h="141" />
-			  <frame x="525" y="1138" w="113" h="141" />
-			  <frame x="653" y="1138" w="114" h="141" />
-			  <frame x="774" y="1137" w="121" h="144" />
-			  <frame x="902" y="1137" w="121" h="144" />
-			  <frame x="1030" y="1137" w="121" h="144" />
-			  <frame x="1152" y="1138" w="127" h="141" />
-			  <frame x="1280" y="1138" w="127" h="141" />
-			  <frame x="1408" y="1138" w="127" h="141" />
-		  </animation>
+	</inventory>
 
-		  <animation name="walkRF" loop="true" speed="0.2f">
-			  <frame x="8" y="1135" w="123" h="145" />
-			  <frame x="136" y="1135" w="122" h="145" />
-			  <frame x="262" y="1135" w="125" h="145" />
-			  <frame x="398" y="1139" w="124" h="141" />
-			  <frame x="530" y="1136" w="111" h="142" />
-			  <frame x="658" y="1137" w="111" h="140" />
-			  <frame x="785" y="1135" w="113" h="144" />
-			  <frame x="912" y="1135" w="114" h="145" />
-			  <frame x="1034" y="1135" w="120" h="145" />
-			  <frame x="1162" y="1137" w="119" h="140" />
-			  <frame x="1282" y="1137" w="127" h="141" />
-			  <frame x="1410" y="1137" w="127" h="141" />
-		  </animation>
+	<input bindingsFile="controls.xml">
 
-		  <animation name="walkL" loop="true" speed="0.2f">
-			  <frame x="4" y="881" w="127" h="141" />
-			  <frame x="132" y="881" w="127" h="141" />
-			  <frame x="260" y="881" w="127" h="141" />
-			  <frame x="388" y="880" w="120" h="144" />
-			  <frame x="516" y="880" w="121" h="141" />
-			  <frame x="644" y="880" w="120" h="144" />
-			  <frame x="772" y="881" w="114" h="141" />
-			  <frame x="901" y="881" w="113" h="141" />
-			  <frame x="1029" y="881" w="113" h="141" />
-			  <frame x="1157" y="880" w="111" h="144" />
-			  <frame x="1285" y="880" w="111" h="144" />
-			  <frame x="1413" y="880" w="111" h="144" />
-		  </animation>
+	</input>
 
-		  <animation name="walkLF" loop="true" speed="0.2f">
-			  <frame x="3" y="880" w="127" h="142" />
-			  <frame x="131" y="880" w="127" h="141" />
-			  <frame x="259" y="880" w="120" h="141" />
-			  <frame x="386" y="879" w="120" h="145" />
-			  <frame x="514" y="879" w="114" h="145" />
-			  <frame x="642" y="879" w="114" h="145" />
-			  <frame x="771" y="881" w="111" h="141" />
-			  <frame x="899" y="881" w="111" h="140" />
-			  <frame x="1027" y="881" w="124" h="141" />
-			  <frame x="1154" y="879" w="125" h="144" />
-			  <frame x="1282" y="879" w="122" h="144" />
-			  <frame x="1410" y="879" w="122" h="144" />
-		  </animation>
+	<scene>
+		<player x="30" y="750" texturePath="Assets/Textures/springyPaloma.png" ghostTexPath="Assets/Textures/springyFantasma.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg">
+			<animation name="walkR" loop="true" speed="0.2f">
+				<frame x="15" y="1137" w="111" h="144" />
+				<frame x="143" y="1138" w="111" h="143" />
+				<frame x="271" y="1137" w="111" h="144" />
+				<frame x="397" y="1138" w="113" h="141" />
+				<frame x="525" y="1138" w="113" h="141" />
+				<frame x="653" y="1138" w="114" h="141" />
+				<frame x="774" y="1137" w="121" h="144" />
+				<frame x="902" y="1137" w="121" h="144" />
+				<frame x="1030" y="1137" w="121" h="144" />
+				<frame x="1152" y="1138" w="127" h="141" />
+				<frame x="1280" y="1138" w="127" h="141" />
+				<frame x="1408" y="1138" w="127" h="141" />
+			</animation>
 
-		  <animation name="walkFrontal" loop="true" speed="0.2f">
-			  <frame x="2" y="623" w="127" h="141" />
-			  <frame x="129" y="623" w="128" h="141" />
-			  <frame x="263" y="623" w="121" h="141" />
-			  <frame x="391" y="623" w="117" h="145" />
-			  <frame x="524" y="623" w="112" h="144" />
-			  <frame x="660" y="623" w="108" h="141" />
-			  <frame x="778" y="623" w="118" h="141" />
-			  <frame x="906" y="623" w="115" h="144" />
-			  <frame x="1030" y="623" w="120" h="145" />
-			  <frame x="1159" y="623" w="119" h="145" />
-		  </animation>
-		  
-		  <animation name="walkFrontalF" loop="true" speed="0.2f">
-			  <frame x="3" y="623" w="126" h="141" />
-			  <frame x="131" y="623" w="126" h="141" />
-			  <frame x="265" y="623" w="120" h="141" />
-			  <frame x="393" y="625" w="117" h="143" />
-			  <frame x="526" y="625" w="112" h="143" />
-			  <frame x="662" y="623" w="108" h="141" />
-			  <frame x="780" y="623" w="118" h="141" />
-			  <frame x="908" y="623" w="118" h="141" />
-			  <frame x="1032" y="625" w="119" h="144" />
-			  <frame x="1160" y="625" w="118" h="144" />
-		  </animation>
+			<animation name="walkRF" loop="true" speed="0.2f">
+				<frame x="8" y="1135" w="123" h="145" />
+				<frame x="136" y="1135" w="122" h="145" />
+				<frame x="262" y="1135" w="125" h="145" />
+				<frame x="398" y="1139" w="124" h="141" />
+				<frame x="530" y="1136" w="111" h="142" />
+				<frame x="658" y="1137" w="111" h="140" />
+				<frame x="785" y="1135" w="113" h="144" />
+				<frame x="912" y="1135" w="114" h="145" />
+				<frame x="1034" y="1135" w="120" h="145" />
+				<frame x="1162" y="1137" w="119" h="140" />
+				<frame x="1282" y="1137" w="127" h="141" />
+				<frame x="1410" y="1137" w="127" h="141" />
+			</animation>
 
-		  <animation name="walkEspalda" loop="true" speed="0.2f">
-			  <frame x="1" y="1394" w="127" h="139" />
-			  <frame x="129" y="1394" w="127" h="140" />
-			  <frame x="257" y="1394" w="127" h="139" />
-			  <frame x="389" y="1395" w="118" h="141" />
-			  <frame x="517" y="1395" w="118" h="141" />
-			  <frame x="640" y="1401" w="119" h="135" />
-			  <frame x="770" y="1394" w="105" h="139" />
-			  <frame x="897" y="1393" w="107" h="140" />
-			  <frame x="1025" y="1394" w="106" h="139" />
-			  <frame x="1155" y="1395" w="116" h="141" />
-			  <frame x="1283" y="1395" w="116" h="141" />
-			  <frame x="1408" y="1403" w="124" h="132" />
-			  <frame x="1536" y="1403" w="134" h="132" />
-		  </animation>
+			<animation name="walkL" loop="true" speed="0.2f">
+				<frame x="4" y="881" w="127" h="141" />
+				<frame x="132" y="881" w="127" h="141" />
+				<frame x="260" y="881" w="127" h="141" />
+				<frame x="388" y="880" w="120" h="144" />
+				<frame x="516" y="880" w="121" h="141" />
+				<frame x="644" y="880" w="120" h="144" />
+				<frame x="772" y="881" w="114" h="141" />
+				<frame x="901" y="881" w="113" h="141" />
+				<frame x="1029" y="881" w="113" h="141" />
+				<frame x="1157" y="880" w="111" h="144" />
+				<frame x="1285" y="880" w="111" h="144" />
+				<frame x="1413" y="880" w="111" h="144" />
+			</animation>
 
-		  <animation name="walkEspaldaF" loop="true" speed="0.2f">
-			  <frame x="4" y="1394" w="126" h="137" />
-			  <frame x="132" y="1394" w="126" h="137" />
-			  <frame x="260" y="1394" w="120" h="137" />
-			  <frame x="391" y="1395" w="117" h="141" />
-			  <frame x="519" y="1395" w="113" h="141" />
-			  <frame x="644" y="1394" w="105" h="138" />
-			  <frame x="772" y="1394" w="116" h="138" />
-			  <frame x="901" y="1394" w="115" h="138" />
-			  <frame x="1030" y="1395" w="120" h="144" />
-			  <frame x="1157" y="1395" w="121" h="141" />
-		  </animation>
-		  
-		  <animation name="runR" loop="true" speed="0.2f">
-			  <frame x="4" y="2163" w="124" h="141" />
-			  <frame x="145" y="2160" w="111" h="143" />
-			  <frame x="265" y="2161" w="119" h="143" />
-			  <frame x="393" y="2160" w="119" h="144" />
-			  <frame x="513" y="2161" w="127" h="141" />
-		  </animation>
-		  
-		  <animation name="runRF" loop="true" speed="0.2f">
-			  <frame x="4" y="2419" w="124" h="140" />
-			  <frame x="144" y="2416" w="112" h="143" />
-			  <frame x="271" y="2417" w="112" h="140" />
-			  <frame x="392" y="2422" w="120" h="137" />
-			  <frame x="520" y="2416" w="120" h="143" />
-			  <frame x="640" y="2417" w="127" h="140" />
-		  </animation>
-		  
-		  <animation name="runL" loop="true" speed="0.2f">
-			  <frame x="1" y="1905" w="127" h="141" />
-			  <frame x="129" y="1904" w="119" h="144" />
-			  <frame x="257" y="1905" w="119" h="143" />
-			  <frame x="385" y="1904" w="111" h="144" />
-			  <frame x="513" y="1907" w="124" h="140" />
-		  </animation>
-		  
-		  <animation name="runLF" loop="true" speed="0.2f">
-			  <frame x="1" y="2161" w="127" h="140" />
-			  <frame x="128" y="2160" w="120" h="144" />
-			  <frame x="256" y="2165" w="120" h="139" />
-			  <frame x="385" y="2161" w="112" h="141" />
-			  <frame x="512" y="2160" w="112" h="144" />
-			  <frame x="640" y="2163" w="125" h="141" />
-		  </animation>
-		  
-		  <animation name="runEspalda" loop="true" speed="0.2f">
-			  <frame x="3" y="2418" w="126" h="139" />
-			  <frame x="134" y="2419" w="117" h="141" />
-			  <frame x="258" y="2426" w="117" h="134" />
-			  <frame x="387" y="2418" w="105" h="139" />
-			  <frame x="517" y="2419" w="114" h="141" />
-			  <frame x="641" y="2427" w="124" h="132" />
-		  </animation>
+			<animation name="walkLF" loop="true" speed="0.2f">
+				<frame x="3" y="880" w="127" h="142" />
+				<frame x="131" y="880" w="127" h="141" />
+				<frame x="259" y="880" w="120" h="141" />
+				<frame x="386" y="879" w="120" h="145" />
+				<frame x="514" y="879" w="114" h="145" />
+				<frame x="642" y="879" w="114" h="145" />
+				<frame x="771" y="881" w="111" h="141" />
+				<frame x="899" y="881" w="111" h="140" />
+				<frame x="1027" y="881" w="124" h="141" />
+				<frame x="1154" y="879" w="125" h="144" />
+				<frame x="1282" y="879" w="122" h="144" />
+				<frame x="1410" y="879" w="122" h="144" />
+			</animation>
 
-		  <animation name="runEspaldaF" loop="true" speed="0.2f">
-			  <frame x="2" y="2673" w="120" h="138" />
-			  <frame x="133" y="2674" w="117" h="141" />
-			  <frame x="264" y="2680" w="110" h="135" />
-			  <frame x="386" y="2673" w="104" h="137" />
-			  <frame x="516" y="2674" w="114" h="141" />
-			  <frame x="647" y="2682" w="116" h="132" />
-		  </animation>
-		  
-		  <animation name="runFrontal" loop="true" speed="0.2f">
-			  <frame x="3" y="1651" w="124" h="138" />
-			  <frame x="137" y="1651" w="115" h="142" />
-			  <frame x="270" y="1658" w="110" h="131" />
-			  <frame x="406" y="1651" w="105" h="138" />
-			  <frame x="524" y="1651" w="112" h="142" />
-			  <frame x="648" y="1659" w="116" h="131" />
-		  </animation>
-		  
-		  <animation name="runFrontalF" loop="true" speed="0.2f">
-			  <frame x="3" y="1906" w="125" h="138" />
-			  <frame x="136" y="1906" w="115" h="142" />
-			  <frame x="268" y="1913" w="108" h="131" />
-			  <frame x="403" y="1906" w="106" h="138" />
-			  <frame x="520" y="1906" w="113" h="142" />
-			  <frame x="644" y="1913" w="112" h="141" />
-		  </animation>
-		  
-		  <animation name="idleFrontal" loop="true" speed="0.2f">
-			  <frame x="1" y="111" w="127" h="141" />
-			  <frame x="129" y="111" w="127" h="141" />
-			  <frame x="257" y="111" w="127" h="141" />
-			  <frame x="391" y="111" w="127" h="141" />
-			  <frame x="519" y="111" w="121" h="144" />
-			  <frame x="652" y="111" w="116" h="144" />
-			  <frame x="780" y="111" w="116" h="141" />
-			  <frame x="916" y="111" w="108" h="141" />
-			  <frame x="1044" y="111" w="108" h="141" />
-			  <frame x="1161" y="111" w="119" h="144" />
-			  <frame x="1290" y="111" w="118" h="144" />
-			  <frame x="1417" y="111" w="119" h="145" />
-			  <frame x="1542" y="111" w="122" h="144" />
-			  <frame x="1664" y="111" w="128" h="141" />
-			  <frame x="1793" y="111" w="127" h="141" />
-			  <frame x="1920" y="111" w="128" h="141" />
-			  <frame x="2054" y="111" w="122" h="141" />
-			  <frame x="2182" y="111" w="122" h="145" />
-			  <frame x="2315" y="111" w="117" h="145" />
-			  <frame x="2443" y="111" w="117" h="145" />
-			  <frame x="2579" y="111" w="109" h="141" />
-			  <frame x="2707" y="111" w="109" h="141" />
-			  <frame x="2825" y="111" w="119" h="141" />
-			  <frame x="2953" y="111" w="119" h="145" />
-			  <frame x="3081" y="111" w="119" h="145" />
-			  <frame x="3206" y="111" w="122" h="145" />
-		 </animation>
+			<animation name="walkFrontal" loop="true" speed="0.2f">
+				<frame x="2" y="623" w="127" h="141" />
+				<frame x="129" y="623" w="128" h="141" />
+				<frame x="263" y="623" w="121" h="141" />
+				<frame x="391" y="623" w="117" h="145" />
+				<frame x="524" y="623" w="112" h="144" />
+				<frame x="660" y="623" w="108" h="141" />
+				<frame x="778" y="623" w="118" h="141" />
+				<frame x="906" y="623" w="115" h="144" />
+				<frame x="1030" y="623" w="120" h="145" />
+				<frame x="1159" y="623" w="119" h="145" />
+			</animation>
 
-		  <animation name="idleFrontalF" loop="true" speed="0.2f">
-			  <frame x="3" y="114" w="124" h="138" />
-			  <frame x="130" y="111" w="124" h="138" />
-			  <frame x="257" y="113" w="124" h="138" />
-			  <frame x="390" y="114" w="118" h="138" />
-			  <frame x="517" y="114" w="119" h="142" />
-			  <frame x="649" y="114" w="114" h="141" />
-			  <frame x="776" y="114" w="114" h="141" />
-			  <frame x="916" y="116" w="105" h="138" />
-			  <frame x="1038" y="114" w="105" h="138" />
-			  <frame x="1161" y="113" w="115" h="138" />
-			  <frame x="1288" y="110" w="115" h="141" />
-			  <frame x="1420" y="114" w="115" h="141" />
-			  <frame x="1544" y="114" w="120" h="141" />
-			  <frame x="1667" y="114" w="124" h="138" />
-			  <frame x="1795" y="114" w="125" h="138" />
-			  <frame x="1923" y="114" w="124" h="138" />
-			  <frame x="2057" y="114" w="118" h="138" />
-			  <frame x="2185" y="114" w="119" h="141" />
-			  <frame x="2318" y="114" w="114" h="141" />
-			  <frame x="2446" y="114" w="114" h="141" />
-			  <frame x="2582" y="114" w="105" h="138" />
-			  <frame x="2710" y="114" w="105" h="138" />
-			  <frame x="2828" y="114" w="115" h="138" />
-			  <frame x="2956" y="114" w="116" h="141" />
-			  <frame x="3084" y="114" w="115" h="141" />
-			  <frame x="3208" y="114" w="119" h="141" />
-		  </animation>
+			<animation name="walkFrontalF" loop="true" speed="0.2f">
+				<frame x="3" y="623" w="126" h="141" />
+				<frame x="131" y="623" w="126" h="141" />
+				<frame x="265" y="623" w="120" h="141" />
+				<frame x="393" y="625" w="117" h="143" />
+				<frame x="526" y="625" w="112" h="143" />
+				<frame x="662" y="623" w="108" h="141" />
+				<frame x="780" y="623" w="118" h="141" />
+				<frame x="908" y="623" w="118" h="141" />
+				<frame x="1032" y="625" w="119" h="144" />
+				<frame x="1160" y="625" w="118" h="144" />
+			</animation>
+
+			<animation name="walkEspalda" loop="true" speed="0.2f">
+				<frame x="1" y="1394" w="127" h="139" />
+				<frame x="129" y="1394" w="127" h="140" />
+				<frame x="257" y="1394" w="127" h="139" />
+				<frame x="389" y="1395" w="118" h="141" />
+				<frame x="517" y="1395" w="118" h="141" />
+				<frame x="640" y="1401" w="119" h="135" />
+				<frame x="770" y="1394" w="105" h="139" />
+				<frame x="897" y="1393" w="107" h="140" />
+				<frame x="1025" y="1394" w="106" h="139" />
+				<frame x="1155" y="1395" w="116" h="141" />
+				<frame x="1283" y="1395" w="116" h="141" />
+				<frame x="1408" y="1403" w="124" h="132" />
+				<frame x="1536" y="1403" w="134" h="132" />
+			</animation>
+
+			<animation name="walkEspaldaF" loop="true" speed="0.2f">
+				<frame x="4" y="1394" w="126" h="137" />
+				<frame x="132" y="1394" w="126" h="137" />
+				<frame x="260" y="1394" w="120" h="137" />
+				<frame x="391" y="1395" w="117" h="141" />
+				<frame x="519" y="1395" w="113" h="141" />
+				<frame x="644" y="1394" w="105" h="138" />
+				<frame x="772" y="1394" w="116" h="138" />
+				<frame x="901" y="1394" w="115" h="138" />
+				<frame x="1030" y="1395" w="120" h="144" />
+				<frame x="1157" y="1395" w="121" h="141" />
+			</animation>
+
+			<animation name="runR" loop="true" speed="0.2f">
+				<frame x="4" y="2163" w="124" h="141" />
+				<frame x="145" y="2160" w="111" h="143" />
+				<frame x="265" y="2161" w="119" h="143" />
+				<frame x="393" y="2160" w="119" h="144" />
+				<frame x="513" y="2161" w="127" h="141" />
+			</animation>
+
+			<animation name="runRF" loop="true" speed="0.2f">
+				<frame x="4" y="2419" w="124" h="140" />
+				<frame x="144" y="2416" w="112" h="143" />
+				<frame x="271" y="2417" w="112" h="140" />
+				<frame x="392" y="2422" w="120" h="137" />
+				<frame x="520" y="2416" w="120" h="143" />
+				<frame x="640" y="2417" w="127" h="140" />
+			</animation>
+
+			<animation name="runL" loop="true" speed="0.2f">
+				<frame x="1" y="1905" w="127" h="141" />
+				<frame x="129" y="1904" w="119" h="144" />
+				<frame x="257" y="1905" w="119" h="143" />
+				<frame x="385" y="1904" w="111" h="144" />
+				<frame x="513" y="1907" w="124" h="140" />
+			</animation>
+
+			<animation name="runLF" loop="true" speed="0.2f">
+				<frame x="1" y="2161" w="127" h="140" />
+				<frame x="128" y="2160" w="120" h="144" />
+				<frame x="256" y="2165" w="120" h="139" />
+				<frame x="385" y="2161" w="112" h="141" />
+				<frame x="512" y="2160" w="112" h="144" />
+				<frame x="640" y="2163" w="125" h="141" />
+			</animation>
+
+			<animation name="runEspalda" loop="true" speed="0.2f">
+				<frame x="3" y="2418" w="126" h="139" />
+				<frame x="134" y="2419" w="117" h="141" />
+				<frame x="258" y="2426" w="117" h="134" />
+				<frame x="387" y="2418" w="105" h="139" />
+				<frame x="517" y="2419" w="114" h="141" />
+				<frame x="641" y="2427" w="124" h="132" />
+			</animation>
+
+			<animation name="runEspaldaF" loop="true" speed="0.2f">
+				<frame x="2" y="2673" w="120" h="138" />
+				<frame x="133" y="2674" w="117" h="141" />
+				<frame x="264" y="2680" w="110" h="135" />
+				<frame x="386" y="2673" w="104" h="137" />
+				<frame x="516" y="2674" w="114" h="141" />
+				<frame x="647" y="2682" w="116" h="132" />
+			</animation>
+
+			<animation name="runFrontal" loop="true" speed="0.2f">
+				<frame x="3" y="1651" w="124" h="138" />
+				<frame x="137" y="1651" w="115" h="142" />
+				<frame x="270" y="1658" w="110" h="131" />
+				<frame x="406" y="1651" w="105" h="138" />
+				<frame x="524" y="1651" w="112" h="142" />
+				<frame x="648" y="1659" w="116" h="131" />
+			</animation>
+
+			<animation name="runFrontalF" loop="true" speed="0.2f">
+				<frame x="3" y="1906" w="125" h="138" />
+				<frame x="136" y="1906" w="115" h="142" />
+				<frame x="268" y="1913" w="108" h="131" />
+				<frame x="403" y="1906" w="106" h="138" />
+				<frame x="520" y="1906" w="113" h="142" />
+				<frame x="644" y="1913" w="112" h="141" />
+			</animation>
+
+			<animation name="idleFrontal" loop="true" speed="0.2f">
+				<frame x="1" y="111" w="127" h="141" />
+				<frame x="129" y="111" w="127" h="141" />
+				<frame x="257" y="111" w="127" h="141" />
+				<frame x="391" y="111" w="127" h="141" />
+				<frame x="519" y="111" w="121" h="144" />
+				<frame x="652" y="111" w="116" h="144" />
+				<frame x="780" y="111" w="116" h="141" />
+				<frame x="916" y="111" w="108" h="141" />
+				<frame x="1044" y="111" w="108" h="141" />
+				<frame x="1161" y="111" w="119" h="144" />
+				<frame x="1290" y="111" w="118" h="144" />
+				<frame x="1417" y="111" w="119" h="145" />
+				<frame x="1542" y="111" w="122" h="144" />
+				<frame x="1664" y="111" w="128" h="141" />
+				<frame x="1793" y="111" w="127" h="141" />
+				<frame x="1920" y="111" w="128" h="141" />
+				<frame x="2054" y="111" w="122" h="141" />
+				<frame x="2182" y="111" w="122" h="145" />
+				<frame x="2315" y="111" w="117" h="145" />
+				<frame x="2443" y="111" w="117" h="145" />
+				<frame x="2579" y="111" w="109" h="141" />
+				<frame x="2707" y="111" w="109" h="141" />
+				<frame x="2825" y="111" w="119" h="141" />
+				<frame x="2953" y="111" w="119" h="145" />
+				<frame x="3081" y="111" w="119" h="145" />
+				<frame x="3206" y="111" w="122" h="145" />
+			</animation>
+
+			<animation name="idleFrontalF" loop="true" speed="0.2f">
+				<frame x="3" y="114" w="124" h="138" />
+				<frame x="130" y="111" w="124" h="138" />
+				<frame x="257" y="113" w="124" h="138" />
+				<frame x="390" y="114" w="118" h="138" />
+				<frame x="517" y="114" w="119" h="142" />
+				<frame x="649" y="114" w="114" h="141" />
+				<frame x="776" y="114" w="114" h="141" />
+				<frame x="916" y="116" w="105" h="138" />
+				<frame x="1038" y="114" w="105" h="138" />
+				<frame x="1161" y="113" w="115" h="138" />
+				<frame x="1288" y="110" w="115" h="141" />
+				<frame x="1420" y="114" w="115" h="141" />
+				<frame x="1544" y="114" w="120" h="141" />
+				<frame x="1667" y="114" w="124" h="138" />
+				<frame x="1795" y="114" w="125" h="138" />
+				<frame x="1923" y="114" w="124" h="138" />
+				<frame x="2057" y="114" w="118" h="138" />
+				<frame x="2185" y="114" w="119" h="141" />
+				<frame x="2318" y="114" w="114" h="141" />
+				<frame x="2446" y="114" w="114" h="141" />
+				<frame x="2582" y="114" w="105" h="138" />
+				<frame x="2710" y="114" w="105" h="138" />
+				<frame x="2828" y="114" w="115" h="138" />
+				<frame x="2956" y="114" w="116" h="141" />
+				<frame x="3084" y="114" w="115" h="141" />
+				<frame x="3208" y="114" w="119" h="141" />
+			</animation>
 
 
-		  <animation name="cambioCuerpo" loop="false" speed="0.2f">
-			  <frame x="2" y="3684" w="127" h="156" />
-			  <frame x="134" y="3696" w="123" h="144" />
-			  <frame x="262" y="3694" w="122" h="143" />
-			  <frame x="390" y="3696" w="123" h="144" />
-			  <frame x="514" y="3684" w="127" h="156" />
-			  <frame x="646" y="3696" w="123" h="144" />
-			  <frame x="774" y="3694" w="122" h="143" />
-			  <frame x="910" y="3741" w="106" h="93" />
-			  <frame x="1038" y="3741" w="106" h="93" />
-			  <frame x="1161" y="3749" w="114" h="83" />
-		 </animation>
-		  
-		 <animation name="cambioCuerpoF" loop="false" speed="0.2f">
-			  <frame x="1" y="4196" w="126" h="156" />
-			  <frame x="133" y="4208" w="122" h="144" />
-			  <frame x="260" y="4206" w="122" h="143" />
-			  <frame x="389" y="4208" w="122" h="144" />
-			  <frame x="512" y="4196" w="127" h="156" />
-			  <frame x="646" y="4208" w="121" h="144" />
-			  <frame x="772" y="4206" w="122" h="143" />
-			  <frame x="909" y="4252" w="106" h="93" />
-			  <frame x="1037" y="4252" w="106" h="93" />
-			  <frame x="1159" y="4260" w="114" h="83" />
-		 </animation>
-	  
-	  </player>
-		
+			<animation name="cambioCuerpo" loop="false" speed="0.2f">
+				<frame x="2" y="3684" w="127" h="156" />
+				<frame x="134" y="3696" w="123" h="144" />
+				<frame x="262" y="3694" w="122" h="143" />
+				<frame x="390" y="3696" w="123" h="144" />
+				<frame x="514" y="3684" w="127" h="156" />
+				<frame x="646" y="3696" w="123" h="144" />
+				<frame x="774" y="3694" w="122" h="143" />
+				<frame x="910" y="3741" w="106" h="93" />
+				<frame x="1038" y="3741" w="106" h="93" />
+				<frame x="1161" y="3749" w="114" h="83" />
+			</animation>
 
-	  <cola x="200" y="472" texturePath="Assets/Textures/itemCola.png"/>
-	  <cola x="300" y="472" texturePath="Assets/Textures/itemCola.png"/>
-	  <cola x="400" y="472" texturePath="Assets/Textures/itemCola.png"/>
-	  <birra x="500" y="472" texturePath="Assets/Textures/itemCerveza.png"/>
-	  <caramelos x="600" y="472" texturePath="Assets/Textures/itemCaramelos.png"/>
-	  <velocidad x="700" y="472" texturePath="Assets/Textures/itemVelocidad.png"/>
-	  <patatas x="800" y="472" texturePath="Assets/Textures/itemPatatas.png"/>
-	  
-	  <!--
-	
-	<dialogTrigger x="200" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true">
-		<sentences>
-			<sentence name="Springy"	facetexturepath="Assets/Textures/catNpc.png" text="Hola"/>
-			<sentence name="Sisebuto"	facetexturepath="Assets/Textures/mouseNpc.png" text="(Hablaría borracho) Déjame en paz *burp*, a no ser que me quieras pagar otra ronda, que entonces sí te haré caso"/>
-			<sentence name="Springy"	facetexturepath="Assets/Textures/catNpc.png" text="*…*"/>
+			<animation name="cambioCuerpoF" loop="false" speed="0.2f">
+				<frame x="1" y="4196" w="126" h="156" />
+				<frame x="133" y="4208" w="122" h="144" />
+				<frame x="260" y="4206" w="122" h="143" />
+				<frame x="389" y="4208" w="122" h="144" />
+				<frame x="512" y="4196" w="127" h="156" />
+				<frame x="646" y="4208" w="121" h="144" />
+				<frame x="772" y="4206" w="122" h="143" />
+				<frame x="909" y="4252" w="106" h="93" />
+				<frame x="1037" y="4252" w="106" h="93" />
+				<frame x="1159" y="4260" w="114" h="83" />
+			</animation>
 
-		</sentences>
-		<repeat_sentences>
-			<sentence name="Sisebuto"	facetexturepath="Assets/Textures/mouseNpc.png" text="PESADOO, que te he dicho que no vuelvas sin un copazo"/>
-			<sentence name="Springy"	facetexturepath="Assets/Textures/catNpc.png" text="*Debería conseguir dinero quizás…*"/>
-		</repeat_sentences>
-	</dialogTrigger>
-	<dialogTrigger x="300" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true">
-		<sentences>
-			<sentence name="Homeless"	facetexturepath="Assets/Textures/catNpc.png" text="zZzZzZZZzZZZ"/>
-			<sentence name ="Springy" type="choose" text="*Anda tiene 5 PawCoins, ¿le robo?*">
-				<option1 text="Sí">
-					<sentence text="Vale ya tengo 5 PawCoins pero me siento sucio, al menos puedo comprarle el copazo a Sisebuto" />
-				</option1>
-				<option2 text="No">
-					<sentence text="Voy a buscar otra forma más limpia de conseguir dinero"/>
-				</option2>
-			</sentence>
-		</sentences>
-	</dialogTrigger>
-	<dialogTrigger x="500" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true">
-		<sentences>
-			<sentence name="Segismunda"	text="Aiiiiiiiiiii que mierda de vidaaaaaaaaaa, tengo un marido borracho y mi hijo se fue a descubrir mundo, que sola estoy, QUE SOLAAAAAAA"/>
-			<sentence name ="Springy"		text="No serás la mujer de Sisebuto, ¿verdad?"/>
-			<sentence name="Segismunda"	text=" Ai no, ¿Qué te ha hecho ya ese condenado?"/>
-			<sentence name ="Springy"		text="Nono nada nada, le he pedido información pero me la ha dado incompleta. Me podrías indicar dónde…"/>
-			<sentence name="Segismunda"	text="AAAAAAIIIIIII que sola estooooooooyyyyyy. ¿Qué dónde está el desgraciado de Sisebuto? No sé estoy muy solaaaaa"/>
-			<sentence name ="Springy"		text="*Sola y loca al parecer…*"/>
-			<sentence name ="Springy"		text="Nooo, me preguntaba si…"/>
-			<sentence name="Segismunda"	text="AAAAAAAAIIII que ni para indicar sirvoooooo"/>
-			<sentence name ="Springy"		text="CALLATE YA JODER, ¿¿¿¿me sabes indicar dónde están los secuaces de AstroBark????"/>
-			<sentence name="Segismunda"	text="Tampoco hace falta ponerse así… que estoy muy sola…"/>
-			<sentence name="Segismunda"	text="Antes los he visto entrar a la discoteca Wawka"/>
-			<sentence name ="Springy"		text="Gracias, hasta luego"/>
-			<sentence name="Segismunda"	text="¿Cómo que hasta luego bombón? ¿Haces algo esta noche? esta noche tengo casa sola… me preguntaba si… ya sabes jeje que Sisebuto nunca se pasa por casa jiji"/>
-			<sentence name ="Springy"		text="*Madre mía cómo está el patio…*"/>
+		</player>
 
-		</sentences>
-		<repeat_sentences>
-			<sentence name="Segismunda"	    text="Aiiiiiiiiiii que mierda de vidaaaaaaaaaa, tengo un marido borracho y mi hijo se fue a descubrir mundo, que sola estoy, QUE SOLAAAAAAA"/>
-			<sentence name ="Springy"		text="No serás la mujer de Sisebuto, ¿verdad?"/>
-			<sentence name="Segismunda" 	text=" Ai no, ¿Qué te ha hecho ya ese condenado?"/>
-			<sentence name ="Springy"		text="Nono nada nada, le he pedido información pero me la ha dado incompleta. Me podrías indicar dónde…"/>
-			<sentence name="Segismunda"	    text="AAAAAAIIIIIII que sola estooooooooyyyyyy. ¿Qué dónde está el desgraciado de Sisebuto? No sé estoy muy solaaaaa"/>
-			<sentence name ="Springy"		text="*Sola y loca al parecer…*"/>
-			<sentence name ="Springy"		text="Nooo, me preguntaba si…"/>
-			<sentence name="Segismunda"	    text="AAAAAAAAIIII que ni para indicar sirvoooooo"/>
-			<sentence name ="Springy"		text="CALLATE YA JODER, ¿¿¿¿me sabes indicar dónde están los secuaces de AstroBark????"/>
-			<sentence name="Segismunda"	    text="Tampoco hace falta ponerse así… que estoy muy sola…"/>
-			<sentence name="Segismunda"	    text="Antes los he visto entrar a la discoteca Wawka"/>
-			<sentence name ="Springy"		text="Gracias, hasta luego"/>
-			<sentence name="Segismunda"	    text="¿Cómo que hasta luego bombón? ¿Haces algo esta noche? esta noche tengo casa sola… me preguntaba si… ya sabes jeje que Sisebuto nunca se pasa por casa jiji"/>
-			<sentence name ="Springy"		text="*Madre mía cómo está el patio…*"/>
 
-		</repeat_sentences>
-	</dialogTrigger>
-	<dialogTrigger x="700" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true">
-		<sentences>
-			<sentence name="Sr. Bestia"	text="Pasad putos pobres, que yo os doy dinero para que no déis tanto asco."/>
-			<sentence name ="Springy"		text="*Recibe 20 PawCoins*"/>
+		<cola x="200" y="472" texturePath="Assets/Textures/itemCola.png"/>
+		<cola x="300" y="472" texturePath="Assets/Textures/itemCola.png"/>
+		<cola x="400" y="472" texturePath="Assets/Textures/itemCola.png"/>
+		<birra x="500" y="472" texturePath="Assets/Textures/itemCerveza.png"/>
+		<caramelos x="600" y="472" texturePath="Assets/Textures/itemCaramelos.png"/>
+		<velocidad x="700" y="472" texturePath="Assets/Textures/itemVelocidad.png"/>
+		<patatas x="800" y="472" texturePath="Assets/Textures/itemPatatas.png"/>
 
-		</sentences>
+		<enemy x="900" y="472" texturePath="Assets/Textures/pigNpc.png"/>
 
-	</dialogTrigger>
-	
-	-->
-	 
-  </scene>
-	
-  <dialogmanager>
-	  <textures>
-		  <background_dialog texturepath="Assets/Textures/background_textbox.png"/>
-	  </textures>
-  </dialogmanager>
+
+		<dialogTrigger x="200" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true" mapid="1">
+			<sentences>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/catNpc.png" text="Hola"/>
+				<sentence name="Sisebuto"	facetexturepath="Assets/Textures/mouseNpc.png" text="(Hablaría borracho) Déjame en paz *burp*, a no ser que me quieras pagar otra ronda, que entonces sí te haré caso"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/catNpc.png" text="*…*"/>
+
+			</sentences>
+			<repeat_sentences>
+				<sentence name="Sisebuto"	facetexturepath="Assets/Textures/mouseNpc.png" text="PESADOO, que te he dicho que no vuelvas sin un copazo"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/catNpc.png" text="*Debería conseguir dinero quizás…*"/>
+			</repeat_sentences>
+		</dialogTrigger>
+		<dialogTrigger x="300" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true">
+			<sentences>
+				<sentence name="Homeless"	facetexturepath="Assets/Textures/catNpc.png" text="zZzZzZZZzZZZ"/>
+				<sentence name ="Springy" type="choose" text="*Anda tiene 5 PawCoins, ¿le robo?*">
+					<option1 text="Sí">
+						<sentence text="Vale ya tengo 5 PawCoins pero me siento sucio, al menos puedo comprarle el copazo a Sisebuto" />
+					</option1>
+					<option2 text="No">
+						<sentence text="Voy a buscar otra forma más limpia de conseguir dinero"/>
+					</option2>
+				</sentence>
+			</sentences>
+		</dialogTrigger>
+		<dialogTrigger x="500" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true">
+			<sentences>
+				<sentence name="Segismunda"	text="Aiiiiiiiiiii que mierda de vidaaaaaaaaaa, tengo un marido borracho y mi hijo se fue a descubrir mundo, que sola estoy, QUE SOLAAAAAAA"/>
+				<sentence name ="Springy"		text="No serás la mujer de Sisebuto, ¿verdad?"/>
+				<sentence name="Segismunda"	text=" Ai no, ¿Qué te ha hecho ya ese condenado?"/>
+				<sentence name ="Springy"		text="Nono nada nada, le he pedido información pero me la ha dado incompleta. Me podrías indicar dónde…"/>
+				<sentence name="Segismunda"	text="AAAAAAIIIIIII que sola estooooooooyyyyyy. ¿Qué dónde está el desgraciado de Sisebuto? No sé estoy muy solaaaaa"/>
+				<sentence name ="Springy"		text="*Sola y loca al parecer…*"/>
+				<sentence name ="Springy"		text="Nooo, me preguntaba si…"/>
+				<sentence name="Segismunda"	text="AAAAAAAAIIII que ni para indicar sirvoooooo"/>
+				<sentence name ="Springy"		text="CALLATE YA JODER, ¿¿¿¿me sabes indicar dónde están los secuaces de AstroBark????"/>
+				<sentence name="Segismunda"	text="Tampoco hace falta ponerse así… que estoy muy sola…"/>
+				<sentence name="Segismunda"	text="Antes los he visto entrar a la discoteca Wawka"/>
+				<sentence name ="Springy"		text="Gracias, hasta luego"/>
+				<sentence name="Segismunda"	text="¿Cómo que hasta luego bombón? ¿Haces algo esta noche? esta noche tengo casa sola… me preguntaba si… ya sabes jeje que Sisebuto nunca se pasa por casa jiji"/>
+				<sentence name ="Springy"		text="*Madre mía cómo está el patio…*"/>
+
+			</sentences>
+			<repeat_sentences>
+				<sentence name="Segismunda"	    text="Aiiiiiiiiiii que mierda de vidaaaaaaaaaa, tengo un marido borracho y mi hijo se fue a descubrir mundo, que sola estoy, QUE SOLAAAAAAA"/>
+				<sentence name ="Springy"		text="No serás la mujer de Sisebuto, ¿verdad?"/>
+				<sentence name="Segismunda" 	text=" Ai no, ¿Qué te ha hecho ya ese condenado?"/>
+				<sentence name ="Springy"		text="Nono nada nada, le he pedido información pero me la ha dado incompleta. Me podrías indicar dónde…"/>
+				<sentence name="Segismunda"	    text="AAAAAAIIIIIII que sola estooooooooyyyyyy. ¿Qué dónde está el desgraciado de Sisebuto? No sé estoy muy solaaaaa"/>
+				<sentence name ="Springy"		text="*Sola y loca al parecer…*"/>
+				<sentence name ="Springy"		text="Nooo, me preguntaba si…"/>
+				<sentence name="Segismunda"	    text="AAAAAAAAIIII que ni para indicar sirvoooooo"/>
+				<sentence name ="Springy"		text="CALLATE YA JODER, ¿¿¿¿me sabes indicar dónde están los secuaces de AstroBark????"/>
+				<sentence name="Segismunda"	    text="Tampoco hace falta ponerse así… que estoy muy sola…"/>
+				<sentence name="Segismunda"	    text="Antes los he visto entrar a la discoteca Wawka"/>
+				<sentence name ="Springy"		text="Gracias, hasta luego"/>
+				<sentence name="Segismunda"	    text="¿Cómo que hasta luego bombón? ¿Haces algo esta noche? esta noche tengo casa sola… me preguntaba si… ya sabes jeje que Sisebuto nunca se pasa por casa jiji"/>
+				<sentence name ="Springy"		text="*Madre mía cómo está el patio…*"/>
+
+			</repeat_sentences>
+		</dialogTrigger>
+		<dialogTrigger x="700" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true">
+			<sentences>
+				<sentence name="Sr. Bestia"	text="Pasad putos pobres, que yo os doy dinero para que no déis tanto asco."/>
+				<sentence name ="Springy"		text="*Recibe 20 PawCoins*"/>
+
+			</sentences>
+
+		</dialogTrigger>
+
+
+
+	</scene>
+
+	<dialogmanager>
+		<textures>
+			<background_dialog texturepath="Assets/Textures/background_textbox.png"/>
+		</textures>
+	</dialogmanager>
 
 	<map path="Assets/Maps/">
 		<map id="0" file="mapa.tmx"/>
@@ -442,7 +443,8 @@
 				<module type="r" name="map"/>
 				<module type="r" name="entitymanager"/>
 				<module type="r" name="dialogmanager"/>
-				<module type="u" name="titlescreen"/> <!--Cuando cargas mapa no va a estar el menú principal cargado-->
+				<module type="u" name="titlescreen"/>
+				<!--Cuando cargas mapa no va a estar el menú principal cargado-->
 			</preset>
 			<preset name="teamLogoToIntro" fadeOut="0.5" fadeIn="0.5">
 				<module type="u" name="teamScreen"/>
@@ -459,7 +461,7 @@
 				<module type="l" name="map"/>
 				<module/>
 			</preset>
-			
+
 		</presets>
 	</reload>
 

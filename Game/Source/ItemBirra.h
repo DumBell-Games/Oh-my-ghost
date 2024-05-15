@@ -38,6 +38,7 @@ private:
 	SDL_Texture* texture;
 	const char* texturePath;
 	uint texW, texH;
+
 };
 
 #endif // __ITEMBIRRA_H__

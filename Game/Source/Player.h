@@ -92,6 +92,8 @@ public:
 	Animation* idleFrontalF;
 
 	Timer timeToIdle;
+
+	bool cervezaPicked = false;
 	
 };
 
