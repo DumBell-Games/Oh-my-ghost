@@ -346,10 +346,7 @@ void InventoryScreen::CreateInventoryButtons() {
 		posBtX = screenWidth - 500;
 		posBtY = screenHeight - 250;
 		inventoryButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 14, "Ubicacion", { posBtX, posBtY, wBt, hBt }, this));
-
-		
-
-
+        
         
     }
 }

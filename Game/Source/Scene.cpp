@@ -108,7 +108,6 @@ bool Scene::Awake(pugi::xml_node config)
 // Called before the first frame
 bool Scene::Start()
 {
-	cityFx = app->audio->LoadFx("Assets/Audio/Fx/centralFauna.wav");
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	img = app->tex->Load("Assets/Textures/test.png");
 	
@@ -127,8 +126,7 @@ bool Scene::Start()
 	// Texture to highligh mouse position 
 	mouseTileTex = app->tex->Load("Assets/Maps/tileSelection.png");
 		
-	app->audio->PlayFx(app->scene->cityFx);
-
+	app->audio->PlayMusic("Assets/Audio/Fx/centralFauna.wav");
 
 	return true;
 }

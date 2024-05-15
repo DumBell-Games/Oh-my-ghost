@@ -79,6 +79,7 @@ bool Player::Start() {
 
 	PlayerStartAnims();
 
+	
 	texturePlayer = app->tex->Load(parameters.attribute("texturePath").as_string());
 	textureGhost = app->tex->Load(parameters.attribute("ghostTexPath").as_string());
 	
@@ -116,36 +117,53 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {	
+	if (timeToIdle.ReadSec() >= 3 && currentTexture == texturePlayer && currentAnim != cambioCuerpo && currentAnim != cambioCuerpoF)
+	{
+		currentAnim = idleFrontal;
+	}
+	else if (timeToIdle.ReadSec() >= 3 && currentTexture == textureGhost && currentAnim != cambioCuerpo && currentAnim != cambioCuerpoF)
+	{
+		currentAnim = idleFrontalF;
+	}
+
 	currentAnim->Update();
+	if (currentAnim->HasFinished() && currentAnim == cambioCuerpo && currentTexture == texturePlayer)
+	{
+		currentTexture = textureGhost;
+		currentAnim = idleFrontalF;
+		pBody->ctype = ColliderType::GHOST;
+	}
+	if (currentAnim->HasFinished() && currentAnim == cambioCuerpoF && currentTexture == textureGhost)
+	{
+		currentTexture = texturePlayer;
+		currentAnim = idleFrontal;
+		pBody->ctype = ColliderType::PLAYER;
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN && currentTexture == texturePlayer)
 	{
 		currentAnim = cambioCuerpo;
+		currentAnim->Reset();
 		currentAnim->Update();
-		if (currentAnim->HasFinished())
-		{
-			currentTexture = textureGhost;
-			currentAnim = idleFrontalF;
-			currentAnim->Update();
-			pBody->ctype = ColliderType::GHOST;
-		}
+	
 	}
 	else if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN && currentTexture == textureGhost)
 	{
 		currentAnim = cambioCuerpoF;
+		currentAnim->Reset();
 		currentAnim->Update();
-		if (currentAnim->HasFinished() )
-		{
-			currentTexture = texturePlayer;
-			currentAnim = idleFrontal;
-			pBody->ctype = ColliderType::PLAYER;
-		}
+		
 	}
 	//L03: DONE 4: render the player texture and modify the position of the player using WSAD keys and render the texture
 	
 	fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
 	KeyState sprint = app->input->GetButton(BACK);
 	float speed = (sprint == KEY_REPEAT) ? 0.5f : 0.2f;
+
+	if (joystick.x != 0 || joystick.y != 0)
+	{
+		timeToIdle.Start();
+	}
 
 	if (app->input->GetButton(ControlID::UP) == KEY_REPEAT)
 	{

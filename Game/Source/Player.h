@@ -6,6 +6,7 @@
 #include "SDL/include/SDL.h"
 #include "Box2D/Box2D/Box2D.h"
 #include "Animation.h"
+#include "Timer.h"
 
 struct SDL_Texture;
 
@@ -89,6 +90,8 @@ public:
 	Animation* torbellinoF;
 	Animation* cambioCuerpoF;
 	Animation* idleFrontalF;
+
+	Timer timeToIdle;
 	
 };
 
