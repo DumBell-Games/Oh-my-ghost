@@ -27,6 +27,7 @@ enum class CombatState {
 	DIALOG_START,
 	MENU,
 	COMBAT,
+	COMBAT_ANIM,
 	DIALOG_END,
 	END
 };
@@ -152,6 +153,7 @@ private:
 
 	Atac* ataqueAliado = nullptr;
 	ItemData* objetoAliado = nullptr;
+	int nuevoAliadoActivo = -1;
 	Atac* ataqueEnemigo = nullptr;
 
 

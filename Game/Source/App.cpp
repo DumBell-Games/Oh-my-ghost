@@ -18,6 +18,7 @@
 #include "TeamScreen.h"
 #include "IntroScreen.h"
 #include "FadeToBlack.h"
+#include "InventoryManager.h"
 #include "InventoryScreen.h"
 
 #include "DialogManager.h"
@@ -49,6 +50,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	//L07 DONE 2: Add Physics module
 	physics = new Physics(false);
 	scene = new Scene(false);
+	inventory = new InventoryManager(false);
 	inventoryScreen = new InventoryScreen(false);
 	titlescreen = new TitleScreen(false);
 	introScreen = new IntroScreen(false);
@@ -75,6 +77,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(entityManager);
 	AddModule(combat);
 	AddModule(guiManager);
+	AddModule(inventory);
 
 	AddModule(scene);
 	AddModule(inventoryScreen);

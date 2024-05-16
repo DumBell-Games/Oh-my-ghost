@@ -22,6 +22,7 @@ class EntityManager;
 class Map;
 class CombatManager;
 class Reload;
+class InventoryManager;
 class InventoryScreen;
 class TitleScreen;
 class IntroScreen;
@@ -126,6 +127,7 @@ public:
 	Map* map;
 	CombatManager* combat;
 	Reload* reload; // Module (un/re)loader
+	InventoryManager* inventory;
 	InventoryScreen* inventoryScreen;
 	TitleScreen* titlescreen;
 	IntroScreen* introScreen;

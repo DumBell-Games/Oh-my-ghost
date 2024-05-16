@@ -13,6 +13,7 @@
 
 #include "Defs.h"
 #include "Log.h"
+#include "EnumUtils.h"
 
 InventoryManager::InventoryManager(bool startEnabled) : Module(startEnabled)
 {
@@ -32,17 +33,19 @@ bool InventoryManager::Awake(pugi::xml_node config)
 
 	inventoryPath = config.attribute("inventoryFile").as_string("inventory.xml");
 
-	//Iterates over the entities and calls the Awake
-	ListItem<Inventory*>* item;
-	Inventory* pItem = NULL;
+	//CreateItem(ItemType::PATATA)
+
+	/*
+	* //There's no Awake() method for items
+	//Iterates over the entities and calls the Init
+	ListItem<ItemData*>* item;
+	ItemData* pItem = NULL;
 
 	for (item = items.start; item != NULL && ret == true; item = item->next)
 	{
 		pItem = item->data;
-
-		if (pItem->active == false) continue;
-		ret = item->data->Awake();
 	}
+	*/
 
 	awoken = true;
 
@@ -54,16 +57,16 @@ bool InventoryManager::Start() {
 
 	bool ret = true; 
 
-	//Iterates over the entities and calls Start
-	ListItem<Inventory*>* item;
-	Inventory* pItem = NULL;
+	//Iterates over the entities and calls Init
+	ListItem<ItemData*>* item;
+	ItemData* pItem = NULL;
 
 	for (item = items.start; item != NULL && ret == true; item = item->next)
 	{
 		pItem = item->data;
 
 		if (pItem->active == false) continue;
-		ret = item->data->Start();
+		ret = item->data->Init();
 	}
 
 	started = true;
@@ -75,7 +78,7 @@ bool InventoryManager::Start() {
 bool InventoryManager::CleanUp()
 {
 	bool ret = true;
-	ListItem<Inventory*>* item;
+	ListItem<ItemData*>* item;
 	item = items.end;
 
 	while (item != NULL && ret == true)
@@ -92,9 +95,9 @@ bool InventoryManager::CleanUp()
 	return ret;
 }
 
-Inventory* InventoryManager::CreateItem(EntityType type, pugi::xml_node& data)
+ItemData* InventoryManager::CreateItem(ItemType type, pugi::xml_node& data)
 {
-	Inventory* item = nullptr;
+	ItemData* item = nullptr;
 
 	//L03: DONE 3a: Instantiate entity according to the type and add the new entity to the list of Entities
 
@@ -102,8 +105,7 @@ Inventory* InventoryManager::CreateItem(EntityType type, pugi::xml_node& data)
 		item->parameters = data;
 		if (item->active) {
 			// Si EntityManager ya está activo, activa la entidad directamente a menos de que esté explicitamente desactivada en su constructor
-			if (awoken) item->Awake();
-			if (started) item->Start();
+			if (started) item->Init();
 		}
 	}
 
@@ -112,9 +114,16 @@ Inventory* InventoryManager::CreateItem(EntityType type, pugi::xml_node& data)
 	return item;
 }
 
-void InventoryManager::DestroyItem(Inventory* item)
+// Returns the item with the name provided, nullptr if not found
+ItemData* InventoryManager::GetItem(const char* name)
 {
-	ListItem<Inventory*>* iTem;
+	//SIN PROBAR: SI CRASHEA ITERA LA LISTA COMO SIEMPRE EN VEZ DE USAR ESTO
+	return items.Find([&name](ItemData* i) { return i->name == name; })->data;
+}
+
+void InventoryManager::DestroyItem(ItemData* item)
+{
+	ListItem<ItemData*>* iTem;
 
 	for (iTem = items.start; iTem != NULL; iTem = iTem->next)
 	{
@@ -122,34 +131,33 @@ void InventoryManager::DestroyItem(Inventory* item)
 	}
 }
 
-void InventoryManager::AddItem(Inventory* item)
+void InventoryManager::AddItem(ItemData* item)
 {
-	if ( item != nullptr) items.Add(item);
+	if ( item != nullptr) 
+	{
+		items.Add(item);
+	}
 }
 
 bool InventoryManager::Update(float dt)
 {
-	bool ret = true;
-	ListItem<Inventory*>* item;
-	Inventory* pItem = NULL;
-
-	for (item = items.start; item != NULL && ret == true; item = item->next)
-	{
-		pItem = item->data;
-
-		if (pItem->active == false) continue;
-		ret = item->data->Update(dt);
-	}
-
-	return ret;
+	return true;
 }
 
 bool InventoryManager::LoadState(pugi::xml_node node) {
-
+	LOG("INVENTORY LOADING NOT FINISHED");
+	for (pugi::xml_node item = node.child("item"); item != NULL; item = item.next_sibling("item"))
+	{
+		CreateItem((ItemType)item.attribute("type").as_int(enum2val(ItemType::UNKNOWN)),item);
+	}
 	return true;
 }
 
 bool InventoryManager::SaveState(pugi::xml_node node) {
-	
+	LOG("INVENTORY SAVING NOT FINISHED");
+	for (ListItem<ItemData*>* item = 0; item != NULL; item = item->next)
+	{
+		item->data->SaveState(node.append_child("item"));
+	}
 	return true;
 }

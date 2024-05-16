@@ -2,7 +2,7 @@
 #define __INVENTORYMANAGER_H__
 
 #include "Module.h"
-#include "Inventory.h"
+#include "ItemData.h"
 #include "List.h"
 
 class InventoryManager : public Module
@@ -27,11 +27,13 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	Inventory* CreateItem(EntityType type, pugi::xml_node& data);
+	ItemData* CreateItem(ItemType type, pugi::xml_node& data);
 
-	void DestroyItem(Inventory* item);
+	ItemData* GetItem(const char* name);
 
-	void AddItem(Inventory* item);
+	void DestroyItem(ItemData* item);
+
+	void AddItem(ItemData* item);
 	
 	bool LoadState(pugi::xml_node node);
 
@@ -39,7 +41,7 @@ public:
 
 public:
 
-	List<Inventory*> items;
+	List<ItemData*> items;
 
 	SString inventoryPath;
 

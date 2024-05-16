@@ -1,7 +1,7 @@
 #pragma once
 #include "Module.h"
 #include "Entity.h"
-#include "Inventory.h"
+#include "ItemData.h"
 
 #include "Box2D/Box2D/Box2D.h"
 

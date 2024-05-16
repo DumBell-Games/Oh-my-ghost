@@ -1,12 +1,14 @@
 #include "CombatManager.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
-#include "InventoryScreen.h"
+#include "InventoryManager.h"
 #include "FadeToBlack.h"
 #include "App.h"
 
 #include "Log.h"
 #include "EnumUtils.h"
+#include "ItemData.h"
+#include "GuiControlButton.h"
 
 CombatManager::CombatManager(bool startEnabled) : Module(startEnabled)
 {
@@ -95,6 +97,11 @@ bool CombatManager::Update(float dt)
 		HandleCombat();
 		break;
 	}
+	case CombatState::COMBAT_ANIM:
+	{
+		// reproduce y comprueba que han acabado las animaciones de combate antes de continuar
+		break;
+	}
 	case CombatState::DIALOG_END:
 	{
 		HandleEndDialog();
@@ -122,13 +129,13 @@ bool CombatManager::CleanUp()
 {
 	for (std::vector<GuiControl*>& menu : menuList)
 	{
+		if (app->guiManager->guiControlsList.Count()>0)
 		for (GuiControl* g : menu)
 		{
 			app->guiManager->DestroyGuiControl(g);
 		}
 		menu.clear();
 	}
-	//No hace falta vaciar menuList ya que es simplemente una agrupación de 4 variables dentro del mismo modulo
 
 	return true;
 }
@@ -178,9 +185,10 @@ void CombatManager::CreateAbilityButtons(Personatge* p)
 {
 	SDL_Rect bounds{posSub.x,0,buttonSize.x,buttonSize.y};
 	
+	//AttackMenu
 	for (int i = 0; i < p->atacs.size(); i++)
 	{
-		bounds.y = posSub.y + i * (bounds.h + 16);
+		bounds.y = posSub.y + (i * (bounds.h + 16));
 		Atac* a = &p->atacs[i];
 		GuiCallback_f func = [this,a](GuiControl* g) {
 			LOG("WIP habilidad %s",a->nom.c_str());
@@ -189,47 +197,54 @@ void CombatManager::CreateAbilityButtons(Personatge* p)
 			combatState = CombatState::COMBAT; // Al seleccionar el boton de ataque se pasa a ejecutar acciones
 			};
 		// Crea el boton en la posicion del submenu, la posicion 'y' depende del indice de este boton
-		menuList[enum2val(Menus::ATTACK)].push_back(NewButton(1, i++, a->nom.c_str(), bounds, func));
+		menuList[enum2val(Menus::ATTACK)].push_back(NewButton(1, i, a->nom.c_str(), bounds, func));
 	}
+	//TODO añadir boton para volver atras
 }
 
 void CombatManager::CreateItemButtons(InventoryScreen* inv)
 {
-	// Crea los botones para el uso de objetos, el codigo es similar al de los botones de habilidades
+	// Crea los botones para el uso de objetos, el codigo es similar al de los botones de habilidades y cambio de personaje
 	SDL_Rect bounds{ posSub.x,posSub.y,buttonSize.x,buttonSize.y };
-	// Copia-pega de la creacion de botones para aliados. De donde se supone que tengo que sacar los objetos? haciendo el mismo codigo 20 veces para acceder a las variables individualmente? Eso es completamente insostenible, aunque esto sea una demo no hay un sistema de inventario funcional
-	/*for (size_t i = 0; i < data.allies.size(); i++)
+
+	//ItemMenu
+	int i = 0;
+	for (ListItem<ItemData*>* listItem = app->inventory->items.start; listItem; listItem = listItem->next)
 	{
-		Personatge* p = data.allies[i];
-		if (p) {
+		if (listItem->data) {
+			ItemData* item = listItem->data;
 			bounds.y = posSub.y + i * (bounds.h + 16);
-			GuiCallback_f func = [this, i](GuiControl* g) {
-				SwapCharacter(i);
-				accion = PlayerAction::CHANGE;
+			GuiCallback_f func = [this, item](GuiControl* g) {
+				objetoAliado = item;
+				accion = PlayerAction::ITEM;
 				combatState = CombatState::COMBAT;
 				};
-			menuList[enum2val(Menus::TEAM)].push_back(NewButton(3, i, p->nom.c_str(), bounds, func));
+			menuList[enum2val(Menus::ITEM)].push_back(NewButton(3, i, item->name.GetString(), bounds, func));
+			i++;
 		}
-	}*/
-	LOG("WIP itemButtons");
+	}
+	//TODO añadir boton para volver atras
 }
 
 void CombatManager::CreateTeamSwapButtons(pugi::xml_node menuItem)
 {
 	SDL_Rect bounds{ posSub.x,posSub.y,buttonSize.x,buttonSize.y };
+
+	//BodyChangeMenu
 	for (size_t i = 0; i < data.allies.size(); i++)
 	{
 		Personatge* p = data.allies[i];
 		if (p) {
 			bounds.y = posSub.y + i * (bounds.h + 16);
 			GuiCallback_f func = [this, i](GuiControl* g) {
-				SwapCharacter(i);
+				nuevoAliadoActivo = i;
 				accion = PlayerAction::CHANGE;
 				combatState = CombatState::COMBAT;
 			};
 			menuList[enum2val(Menus::TEAM)].push_back(NewButton(3, i, p->nom.c_str(), bounds, func));
 		}
 	}
+	//TODO añadir boton para volver atras
 }
 
 bool CombatManager::CombatFinished()
@@ -287,6 +302,13 @@ void CombatManager::HandleMenu()
 
 void CombatManager::HandleCombat()
 {
+	//Esconde los menus
+	ResetButtonsState();
+	currentMenu = Menus::MAIN;
+	currentElement = 0;
+	HandleMenu();
+
+
 	// TODO eleccion de accion enemiga, uso de objetos, etc.
 	EnemyChoice();
 	Personatge* ally = data.allies[data.activeAlly];
