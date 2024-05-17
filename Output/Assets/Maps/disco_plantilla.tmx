@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="27" height="22" tilewidth="128" tileheight="128" infinite="0" nextlayerid="9" nextobjectid="2">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="27" height="22" tilewidth="128" tileheight="128" infinite="0" nextlayerid="9" nextobjectid="2">
  <tileset firstgid="1" name="disco-plantilla" tilewidth="128" tileheight="128" tilecount="9" columns="3">
   <image source="disco-plantilla.png" width="384" height="384"/>
  </tileset>
@@ -8,6 +8,9 @@
  </tileset>
  <tileset firstgid="12" name="spritesfondo" tilewidth="128" tileheight="128" tilecount="500" columns="25">
   <image source="spritesfondo.png" width="3200" height="2560"/>
+ </tileset>
+ <tileset firstgid="512" name="sprites_taberna" tilewidth="128" tileheight="128" tilecount="100" columns="10">
+  <image source="sprites_taberna.png" width="1280" height="1280"/>
  </tileset>
  <layer id="1" name="disco" width="27" height="22">
   <properties>
@@ -104,7 +107,7 @@
    <tile gid="288"/>
    <tile gid="288"/>
    <tile gid="289"/>
-   <tile gid="2"/>
+   <tile gid="539"/>
    <tile gid="287"/>
    <tile gid="288"/>
    <tile gid="288"/>
@@ -131,7 +134,7 @@
    <tile gid="313"/>
    <tile gid="313"/>
    <tile gid="314"/>
-   <tile gid="2"/>
+   <tile gid="539"/>
    <tile gid="312"/>
    <tile gid="313"/>
    <tile gid="313"/>
@@ -158,7 +161,7 @@
    <tile gid="313"/>
    <tile gid="313"/>
    <tile gid="314"/>
-   <tile gid="2"/>
+   <tile gid="539"/>
    <tile gid="312"/>
    <tile gid="313"/>
    <tile gid="362"/>
@@ -185,7 +188,7 @@
    <tile gid="313"/>
    <tile gid="313"/>
    <tile gid="314"/>
-   <tile gid="2"/>
+   <tile gid="539"/>
    <tile gid="312"/>
    <tile gid="313"/>
    <tile gid="387"/>
@@ -212,7 +215,7 @@
    <tile gid="338"/>
    <tile gid="338"/>
    <tile gid="339"/>
-   <tile gid="2"/>
+   <tile gid="539"/>
    <tile gid="312"/>
    <tile gid="313"/>
    <tile gid="387"/>
@@ -239,7 +242,7 @@
    <tile gid="417"/>
    <tile gid="417"/>
    <tile gid="417"/>
-   <tile gid="2"/>
+   <tile gid="539"/>
    <tile gid="312"/>
    <tile gid="313"/>
    <tile gid="412"/>
@@ -266,7 +269,7 @@
    <tile gid="288"/>
    <tile gid="288"/>
    <tile gid="289"/>
-   <tile gid="2"/>
+   <tile gid="539"/>
    <tile gid="337"/>
    <tile gid="338"/>
    <tile gid="338"/>
@@ -293,7 +296,7 @@
    <tile gid="313"/>
    <tile gid="313"/>
    <tile gid="314"/>
-   <tile gid="2"/>
+   <tile gid="539"/>
    <tile gid="417"/>
    <tile gid="417"/>
    <tile gid="417"/>
@@ -320,7 +323,7 @@
    <tile gid="313"/>
    <tile gid="313"/>
    <tile gid="314"/>
-   <tile gid="2"/>
+   <tile gid="539"/>
    <tile gid="417"/>
    <tile gid="417"/>
    <tile gid="417"/>
@@ -347,7 +350,7 @@
    <tile gid="313"/>
    <tile gid="313"/>
    <tile gid="314"/>
-   <tile gid="2"/>
+   <tile gid="539"/>
    <tile gid="287"/>
    <tile gid="288"/>
    <tile gid="288"/>
@@ -374,7 +377,7 @@
    <tile gid="338"/>
    <tile gid="338"/>
    <tile gid="339"/>
-   <tile gid="2"/>
+   <tile gid="539"/>
    <tile gid="312"/>
    <tile gid="313"/>
    <tile gid="313"/>
@@ -401,7 +404,7 @@
    <tile gid="417"/>
    <tile gid="417"/>
    <tile gid="417"/>
-   <tile gid="2"/>
+   <tile gid="539"/>
    <tile gid="312"/>
    <tile gid="313"/>
    <tile gid="313"/>
@@ -428,7 +431,7 @@
    <tile gid="288"/>
    <tile gid="288"/>
    <tile gid="289"/>
-   <tile gid="2"/>
+   <tile gid="539"/>
    <tile gid="312"/>
    <tile gid="313"/>
    <tile gid="313"/>
@@ -509,7 +512,7 @@
    <tile gid="313"/>
    <tile gid="313"/>
    <tile gid="314"/>
-   <tile gid="2"/>
+   <tile gid="539"/>
    <tile gid="312"/>
    <tile gid="313"/>
    <tile gid="313"/>
@@ -536,7 +539,7 @@
    <tile gid="313"/>
    <tile gid="313"/>
    <tile gid="314"/>
-   <tile gid="2"/>
+   <tile gid="539"/>
    <tile gid="312"/>
    <tile gid="313"/>
    <tile gid="313"/>
@@ -563,7 +566,7 @@
    <tile gid="338"/>
    <tile gid="338"/>
    <tile gid="339"/>
-   <tile gid="2"/>
+   <tile gid="539"/>
    <tile gid="337"/>
    <tile gid="338"/>
    <tile gid="338"/>

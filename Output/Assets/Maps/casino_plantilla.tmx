@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.1" orientation="orthogonal" renderorder="right-down" width="32" height="22" tilewidth="128" tileheight="128" infinite="0" nextlayerid="8" nextobjectid="46">
+<map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="32" height="22" tilewidth="128" tileheight="128" infinite="0" nextlayerid="8" nextobjectid="46">
  <tileset firstgid="1" name="casino_plantilla" tilewidth="128" tileheight="128" tilecount="6" columns="3">
   <image source="casino_plantilla.png" width="384" height="256"/>
  </tileset>
@@ -8,6 +8,9 @@
  </tileset>
  <tileset firstgid="9" name="spritesfondo" tilewidth="128" tileheight="128" tilecount="500" columns="25">
   <image source="spritesfondo.png" width="3200" height="2560"/>
+ </tileset>
+ <tileset firstgid="509" name="sprites_taberna" tilewidth="128" tileheight="128" tilecount="100" columns="10">
+  <image source="sprites_taberna.png" width="1280" height="1280"/>
  </tileset>
  <layer id="1" name="casino" width="32" height="22">
   <properties>
@@ -68,7 +71,7 @@
    <tile gid="441"/>
    <tile gid="441"/>
    <tile gid="441"/>
-   <tile gid="2"/>
+   <tile gid="536"/>
    <tile gid="441"/>
    <tile gid="441"/>
    <tile gid="441"/>
@@ -100,7 +103,7 @@
    <tile gid="441"/>
    <tile gid="441"/>
    <tile gid="441"/>
-   <tile gid="2"/>
+   <tile gid="536"/>
    <tile gid="441"/>
    <tile gid="441"/>
    <tile gid="441"/>
@@ -228,7 +231,7 @@
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
-   <tile gid="2"/>
+   <tile gid="536"/>
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
@@ -260,7 +263,7 @@
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
-   <tile gid="2"/>
+   <tile gid="536"/>
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
@@ -292,7 +295,7 @@
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
-   <tile gid="2"/>
+   <tile gid="536"/>
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
@@ -324,7 +327,7 @@
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
-   <tile gid="2"/>
+   <tile gid="536"/>
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
@@ -356,7 +359,7 @@
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
-   <tile gid="2"/>
+   <tile gid="536"/>
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
@@ -388,7 +391,7 @@
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
-   <tile gid="2"/>
+   <tile gid="536"/>
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
@@ -420,7 +423,7 @@
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
-   <tile gid="2"/>
+   <tile gid="536"/>
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
@@ -452,7 +455,7 @@
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
-   <tile gid="2"/>
+   <tile gid="536"/>
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
@@ -484,7 +487,7 @@
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
-   <tile gid="2"/>
+   <tile gid="536"/>
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
@@ -516,7 +519,7 @@
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
-   <tile gid="2"/>
+   <tile gid="536"/>
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
@@ -548,7 +551,7 @@
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
-   <tile gid="2"/>
+   <tile gid="536"/>
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
@@ -580,7 +583,7 @@
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
-   <tile gid="2"/>
+   <tile gid="536"/>
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
@@ -612,7 +615,7 @@
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
-   <tile gid="2"/>
+   <tile gid="536"/>
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
@@ -644,7 +647,7 @@
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
-   <tile gid="2"/>
+   <tile gid="536"/>
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
@@ -676,7 +679,7 @@
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
-   <tile gid="2"/>
+   <tile gid="536"/>
    <tile gid="466"/>
    <tile gid="466"/>
    <tile gid="466"/>
@@ -2864,7 +2867,7 @@
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="7" name="Colliders">
+ <objectgroup id="7" name="Colliders" visible="0">
   <object id="3" x="112.121" y="282.788" width="9.09091" height="2414.18"/>
   <object id="4" x="121.212" y="2696.97" width="1681.82" height="6.06061"/>
   <object id="5" x="124.242" y="253.697" width="3857.58" height="27.1515"/>
