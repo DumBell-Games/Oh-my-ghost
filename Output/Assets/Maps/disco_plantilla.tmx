@@ -1940,6 +1940,8 @@
    <tile/>
    <tile/>
    <tile/>
+   <tile gid="515"/>
+   <tile gid="516"/>
    <tile/>
    <tile/>
    <tile/>
@@ -1948,9 +1950,7 @@
    <tile/>
    <tile/>
    <tile/>
-   <tile/>
-   <tile/>
-   <tile/>
+   <tile gid="516"/>
    <tile/>
    <tile/>
    <tile/>
