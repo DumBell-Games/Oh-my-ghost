@@ -10,21 +10,28 @@ class Animation
 public:
 	SString name;
 	float speed = 1.0f;
+	SDL_Texture* texture;
 	SDL_Rect frames[MAX_FRAMES];
+	int durations[MAX_FRAMES];
 	bool loop = true;
 	// Allows the animation to keep going back and forth
 	bool pingpong = false;
+	float currentFrame = 0.0f;
+	int currentFrameInt = 0;
+	int totalFrames = 0;
 
 private:
-	float currentFrame = 0.0f;
-	int totalFrames = 0;
 	int loopCount = 0;
-	int pingpongDirection = 1;
+	int pingpongDirection = 1; 
+	float timeStep = 1000 / 60; //tiempo que se le resta a la duracion
+	float timeLeft = 0.0f;
 
 public:
 
-	void PushBack(const SDL_Rect& rect)
+	void PushBack(const SDL_Rect& rect, int duration)
 	{
+		durations[totalFrames] = duration;
+		if (totalFrames == 0) timeLeft = duration; //first time
 		frames[totalFrames++] = rect;
 	}
 
@@ -41,15 +48,21 @@ public:
 
 	void Update()
 	{
-		currentFrame += speed;
-		if (currentFrame >= totalFrames)
-		{
-			currentFrame = (loop || pingpong) ? 0.0f : totalFrames - 1;
-			++loopCount;
-
-			if (pingpong)
-				pingpongDirection = -pingpongDirection;
+		//cuando baja de 0 pasamos a dibujar el siguiente frame 
+		if (timeLeft <= 0) {
+			currentFrame++;
+			if (currentFrame >= totalFrames)
+			{
+				currentFrame = (loop || pingpong) ? 0 : totalFrames - 1;
+				++loopCount;
+				if (pingpong)
+					pingpongDirection = -pingpongDirection;
+			}
+			//le asignamos a la variable timeLeft la duraci?n del nuevo frame
+			timeLeft += durations[currentFrameInt];
 		}
+		//vamos restando a la duraci?n del frame
+		timeLeft -= timeStep * speed;
 	}
 
 	SDL_Rect& GetCurrentFrame()

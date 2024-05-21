@@ -38,7 +38,7 @@ void Player::PlayerStartAnims()
 			int y = frameNode.attribute("y").as_int();
 			int w = frameNode.attribute("w").as_int();
 			int h = frameNode.attribute("h").as_int();
-			anim->PushBack({ x,y,w,h });
+			anim->PushBack({ x,y,w,h }, 4);
 		}
 		springyAnimationList.Add(anim);
 	}

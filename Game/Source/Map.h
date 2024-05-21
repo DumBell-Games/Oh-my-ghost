@@ -7,6 +7,7 @@
 #include "Point.h"
 #include "PropertiesStruct.h"
 #include "Pathfinding.h"
+#include "Animation.h"
 
 #include "PugiXml\src\pugixml.hpp"
 
@@ -78,6 +79,7 @@ struct MapData
 	MapTypes type;
 
 	List<MapLayer*> maplayers;
+	List<Animation*> animations;
 
 	iPoint GetMapSize() const { return { width * tileWidth,height * tileHeight }; }
 };
@@ -117,6 +119,7 @@ private:
 	bool LoadTileSet(pugi::xml_node mapFile);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadAllLayers(pugi::xml_node mapNode);
+	bool LoadAnimation(pugi::xml_node node, TileSet* tileset);
 	TileSet* GetTilesetFromTileId(int gid) const;
 	bool LoadAllObjects(pugi::xml_node mapNode);
 

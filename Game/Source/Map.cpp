@@ -341,8 +341,37 @@ bool Map::LoadTileSet(pugi::xml_node mapFile) {
         texPath += tileset.child("image").attribute("source").as_string();
         set->texture = app->tex->Load(texPath.GetString());
 
-        mapData.tilesets.Add(set);
+        if (tileset.child("tile").child("animation")) {
+			LoadAnimation(tileset.child("tile"), set);
+		}
+        else
+        {
+            mapData.tilesets.Add(set);
+        }
     }
+
+    return ret;
+}
+
+bool Map::LoadAnimation(pugi::xml_node node, TileSet* tileset)
+{
+    bool ret = true;
+    Animation* anim = new Animation();
+
+    anim->name = tileset->name;
+    anim->texture = tileset->texture;
+
+    for (pugi::xml_node frame = node.child("animation").child("frame"); frame && ret; frame = frame.next_sibling("frame"))
+    {
+		int id = frame.attribute("tileid").as_int();
+        int duration = frame.attribute("duration").as_int();
+        int tilesPerRow = tileset->columns;
+        int x = (id % tilesPerRow) * tileset->tileWidth;
+        int y = (id / tilesPerRow) * tileset->tileHeight;
+        anim->PushBack({ x, y, tileset->tileWidth, tileset->tileHeight }, 0);
+	}
+
+    mapData.animations.Add(anim);
 
     return ret;
 }
