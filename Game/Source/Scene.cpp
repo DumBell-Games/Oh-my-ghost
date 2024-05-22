@@ -90,9 +90,9 @@ bool Scene::Awake(pugi::xml_node config)
 		DialogTrigger* dialogTrigger = (DialogTrigger*)app->entityManager->CreateEntity(EntityType::DIALOG_TRIGGER, itemNode);
 		//dialogTrigger->parameters = itemNode;
 	}
-	for (pugi::xml_node itemNode = config.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
+	for (pugi::xml_node itemNode = config.child("paloma"); itemNode; itemNode = itemNode.next_sibling("paloma"))
 	{
-		Npc* npc = (Npc*)app->entityManager->CreateEntity(EntityType::NPC, itemNode);
+		Paloma* paloma = (Paloma*)app->entityManager->CreateEntity(EntityType::PALOMA, itemNode);
 		//npc->parameters = itemNode;
 	}
 	for (pugi::xml_node itemNode = config.child("enemy"); itemNode; itemNode = itemNode.next_sibling("enemy"))

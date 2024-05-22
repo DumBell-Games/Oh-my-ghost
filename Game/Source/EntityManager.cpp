@@ -106,8 +106,8 @@ Entity* EntityManager::CreateEntity(EntityType type, pugi::xml_node& data)
 	case EntityType::DIALOG_TRIGGER:
 		entity = new DialogTrigger();
 		break;
-	case EntityType::NPC:
-		entity = new Npc();
+	case EntityType::PALOMA:
+		entity = new Paloma();
 		break;
 	case EntityType::ENEMY:
 		entity = new Enemy();

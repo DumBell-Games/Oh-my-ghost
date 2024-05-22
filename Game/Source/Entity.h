@@ -21,6 +21,7 @@ enum class EntityType : char
 	PATATAS,
 	CARAMELOS,
 	VELOCIDAD,
+	PALOMA,
 	UNKNOWN
 };
 

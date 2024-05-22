@@ -13,13 +13,13 @@ struct SDL_Texture;
 
 
 
-class Npc : public Entity
+class Paloma : public Entity
 {
 public:
 
-	Npc();
+	Paloma();
 
-	virtual ~Npc();
+	virtual ~Paloma();
 
 	bool Awake();
 
@@ -32,6 +32,10 @@ public:
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
+	void PalomaStartAnims();
+
+	Animation* GetAnimation(SString name);
+
 public:
 
 	//L02: DONE 2: Declare player parameters
@@ -42,14 +46,9 @@ public:
 	SString texturePath;
 
 	PhysBody* nBody;
-
-	Animation* currentAnim;
-
+	
+	List<Animation*> palomaAnims;
 	Animation* palomaIdle;
-	Animation* aprendizIdle;
-	Animation* veteranaIdle;
-	Animation* conserjeIdle;
-	Animation* astroBarkIdle;
 
 
 };
