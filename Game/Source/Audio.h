@@ -46,8 +46,8 @@ public:
 
 public:
 
-	int volumen = 64;
-	int fx1 = 64;
+	int volumen = 4;
+	int fx1 = 4;
 
 private:
 

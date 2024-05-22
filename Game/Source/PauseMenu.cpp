@@ -43,43 +43,87 @@ bool PauseMenu::Start() {
 }
 bool PauseMenu::Update(float dt) {
 
-    if (app->input->GetButton(ControlID::UP) == KEY_REPEAT) //arriba
-    {
-        if (timer.ReadMSec() >= 200)
+    if (PauseButtons.Count() != 0) {
+        if (app->input->GetButton(ControlID::UP) == KEY_REPEAT) //arriba
         {
-            if (PauseIndex > 1) PauseIndex--;
-            else PauseIndex = 3;
+            if (timer.ReadMSec() >= 200)
+            {
+                if (PauseIndex > 1) PauseIndex--;
+                else PauseIndex = 3;
+                timer.Start();
+            }
+        }
+        if (app->input->GetButton(ControlID::DOWN) == KEY_REPEAT) //abajo
+        {
+            if (timer.ReadMSec() >= 200)
+            {
+                if (PauseIndex < 3) PauseIndex++;
+                else PauseIndex = 1;
+                timer.Start();
+            }
+        }
+
+        ListItem<GuiControlButton*>* controlListItem = nullptr;
+        for (controlListItem = PauseButtons.start; controlListItem != NULL; controlListItem = controlListItem->next)
+        {
+            if (controlListItem->data != nullptr)
+            {
+                controlListItem->data->state = GuiControlState::NORMAL;
+            }
+        }
+        if (PauseButtons[PauseIndex - 1] != nullptr)
+        {
+            PauseButtons[PauseIndex - 1]->state = GuiControlState::SELECTED;
+        }
+
+        if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN && PauseButtons.Count() >= PauseIndex && timer.ReadMSec() >= 200)
+        {
+            app->audio->PlayFx(buttonFx);
+            PauseButtons[PauseIndex - 1]->state = GuiControlState::PRESSED;
+            PauseButtons[PauseIndex - 1]->NotifyObserver();
             timer.Start();
         }
     }
-    if (app->input->GetButton(ControlID::DOWN) == KEY_REPEAT) //abajo
-    {
-        if (timer.ReadMSec() >= 200)
+    if (AjustesButtons.Count() != 0) {
+        if (app->input->GetButton(ControlID::UP) == KEY_REPEAT) //arriba
         {
-            if (PauseIndex < 3) PauseIndex++;
-            else PauseIndex = 1;
+            if (timer.ReadMSec() >= 200)
+            {
+                if (AjustesIndex > 1) AjustesIndex--;
+                else AjustesIndex = 7;
+                timer.Start();
+            }
+        }
+        if (app->input->GetButton(ControlID::DOWN) == KEY_REPEAT) //abajo
+        {
+           if (timer.ReadMSec() >= 200)
+            {
+                if (AjustesIndex < 7) AjustesIndex++;
+                else AjustesIndex = 1;
+                timer.Start();
+            }
+        }
+
+        ListItem<GuiControlButton*>* controlListItem = nullptr;
+        for (controlListItem = AjustesButtons.start; controlListItem != NULL; controlListItem = controlListItem->next)
+        {
+            if (controlListItem->data != nullptr)
+            {
+                controlListItem->data->state = GuiControlState::NORMAL;
+            }
+        }
+        if (AjustesButtons[AjustesIndex - 1] != nullptr)
+        {
+            AjustesButtons[AjustesIndex - 1]->state = GuiControlState::SELECTED;
+        }
+
+        if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN && AjustesButtons.Count() >= AjustesIndex && timer.ReadMSec() >= 200)
+        {
+            app->audio->PlayFx(buttonFx);
+            AjustesButtons[AjustesIndex - 1]->state = GuiControlState::PRESSED;
+            AjustesButtons[AjustesIndex - 1]->NotifyObserver();
             timer.Start();
         }
-    }
-
-    ListItem<GuiControlButton*>* controlListItem = nullptr;
-    for (controlListItem = PauseButtons.start; controlListItem != NULL; controlListItem = controlListItem->next)
-    {
-        if (controlListItem->data != nullptr)
-        {
-            controlListItem->data->state = GuiControlState::NORMAL;
-        }
-    }
-    if (PauseButtons[PauseIndex - 1] != nullptr)
-    {
-        PauseButtons[PauseIndex - 1]->state = GuiControlState::SELECTED;
-    }
-
-    if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN && PauseButtons.Count() >= PauseIndex)
-    {
-        app->audio->PlayFx(buttonFx);
-        PauseButtons[PauseIndex - 1]->state = GuiControlState::PRESSED;
-        PauseButtons[PauseIndex - 1]->NotifyObserver();
     }
 
 
@@ -88,67 +132,67 @@ bool PauseMenu::Update(float dt) {
 	return true;
 }
 bool PauseMenu::PostUpdate() {
-    if (buttoncreated == true) {
-        // TODO: pasar esto a OnClick()
-        if (inpause == true && PauseButtons.At(0)->data->state == GuiControlState::PRESSED)
-        {
-            app->fadeToBlack->FadeToBlackTransition((Module*)app->pause, (Module*)app->scene, 0.0f);
-            buttoncreated = false;
-            app->audio->PlayFx(buttonFx);
-        }
-        if (inpause == true && PauseButtons.At(1)->data->state == GuiControlState::PRESSED)
-        {
-            CleanUp();
-            inpause = false;
-            inajustes = true;
-            CreatePauseButtons();
-        }
-        if (inpause == true && PauseButtons.At(2)->data->state == GuiControlState::PRESSED) {
-            app->fadeToBlack->FadeToBlackTransition((Module*)app->pause, (Module*)app->titlescreen, 0.0f);
-            app->scene->Disable();
-            buttoncreated = false;
-            app->audio->PlayFx(buttonFx);
-        }
+    //if (buttoncreated == true) {
+    //    // TODO: pasar esto a OnClick()
+    //    if (inpause == true && PauseButtons.At(0)->data->state == GuiControlState::PRESSED)
+    //    {
+    //        app->fadeToBlack->FadeToBlackTransition((Module*)app->pause, (Module*)app->scene, 0.0f);
+    //        buttoncreated = false;
+    //        app->audio->PlayFx(buttonFx);
+    //    }
+    //    if (inpause == true && PauseButtons.At(1)->data->state == GuiControlState::PRESSED)
+    //    {
+    //        CleanUp();
+    //        inpause = false;
+    //        inajustes = true;
+    //        CreatePauseButtons();
+    //    }
+    //    if (inpause == true && PauseButtons.At(2)->data->state == GuiControlState::PRESSED) {
+    //        app->fadeToBlack->FadeToBlackTransition((Module*)app->pause, (Module*)app->titlescreen, 0.0f);
+    //        app->scene->Disable();
+    //        buttoncreated = false;
+    //        app->audio->PlayFx(buttonFx);
+    //    }
 
-    }
-    if (ajustcreated == true) {
-        if (inajustes == true && AjustesButtons.At(0)->data->state == GuiControlState::PRESSED) {
-            CleanUp();
-            inpause = true;
-            inajustes = false;
-            CreatePauseButtons();
-        }
-        if (inajustes == true && AjustesButtons.At(1)->data->state == GuiControlState::PRESSED) {
-            if (fullscreen == true) {
-                app->win->FullscreenMode();
-                fullscreen = false;
-            }
-            else {
-                app->win->UnFullscreenMode();
-                fullscreen = true;
-            }
-        }
-        if (inajustes == true && AjustesButtons.At(2)->data->state == GuiControlState::PRESSED) {
-            if (vsycn == true) {
-                vsycn = false;
-            }
-            else if (vsycn == false) {
-                vsycn = true;
-            }
-        }
-        if (inajustes == true && AjustesButtons.At(3)->data->state == GuiControlState::PRESSED) {
-            app->audio->MusicDown();
-        }
-        if (inajustes == true && AjustesButtons.At(4)->data->state == GuiControlState::PRESSED) {
-            app->audio->MusicUp();
-        }
-        if (inajustes == true && AjustesButtons.At(5)->data->state == GuiControlState::PRESSED) {
-            app->audio->FxDown();
-        }
-        if (inajustes == true && AjustesButtons.At(6)->data->state == GuiControlState::PRESSED) {
-            app->audio->FxUp();
-        }
-    }
+    //}
+    //if (ajustcreated == true) {
+    //    if (inajustes == true && AjustesButtons.At(0)->data->state == GuiControlState::PRESSED) {
+    //        CleanUp();
+    //        inpause = true;
+    //        inajustes = false;
+    //        CreatePauseButtons();
+    //    }
+    //    if (inajustes == true && AjustesButtons.At(1)->data->state == GuiControlState::PRESSED) {
+    //        if (fullscreen == true) {
+    //            app->win->FullscreenMode();
+    //            fullscreen = false;
+    //        }
+    //        else {
+    //            app->win->UnFullscreenMode();
+    //            fullscreen = true;
+    //        }
+    //    }
+    //    if (inajustes == true && AjustesButtons.At(2)->data->state == GuiControlState::PRESSED) {
+    //        if (vsycn == true) {
+    //            vsycn = false;
+    //        }
+    //        else if (vsycn == false) {
+    //            vsycn = true;
+    //        }
+    //    }
+    //    if (inajustes == true && AjustesButtons.At(3)->data->state == GuiControlState::PRESSED) {
+    //        app->audio->MusicDown();
+    //    }
+    //    if (inajustes == true && AjustesButtons.At(4)->data->state == GuiControlState::PRESSED) {
+    //        app->audio->MusicUp();
+    //    }
+    //    if (inajustes == true && AjustesButtons.At(5)->data->state == GuiControlState::PRESSED) {
+    //        app->audio->FxDown();
+    //    }
+    //    if (inajustes == true && AjustesButtons.At(6)->data->state == GuiControlState::PRESSED) {
+    //        app->audio->FxUp();
+    //    }
+    //}
 
 	return true;
 }
@@ -169,9 +213,9 @@ bool PauseMenu::CleanUp(){
 }
 void PauseMenu::CreatePauseButtons() {
 
-    if (PauseButtons.Count() == 0)
+    if (PauseButtons.Count() == 0 && AjustesButtons.Count() == 0)
     {
-        if (AjustesButtons.Count() == 0) {
+        
             if (inpause == true) {
                 buttoncreated = true;
                 int wBt = 190;
@@ -183,53 +227,58 @@ void PauseMenu::CreatePauseButtons() {
                 hBt = 40;
                 posBtX = screenWidth - 250;
                 posBtY = screenHeight - 550;
-                PauseButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Opciones", { posBtX, posBtY, wBt, hBt }, this));
+                PauseButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Opciones", { posBtX, posBtY, wBt, hBt }, [this](GuiControl* g) {opciones(g); }));
                 wBt = 190;
                 hBt = 40;
                 posBtX = screenWidth - 250;
                 posBtY = screenHeight - 450;
-                PauseButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Salir", { posBtX, posBtY, wBt, hBt }, this));
+                PauseButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Salir", { posBtX, posBtY, wBt, hBt }, [this](GuiControl* g) {salir(g); }));
             }
             else if (inajustes == true) {
                 ajustcreated = true;
-                int wBt = 190;
-                int hBt = 40;
-                int posBtX = screenWidth - 750;
-                int posBtY = screenHeight - 150;
-                AjustesButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Volver", { posBtX, posBtY, wBt, hBt }, this));
+                int wBt ;
+                int hBt;
+                int posBtX ;
+                int posBtY ;
+                
                 wBt = 190;
                 hBt = 40;
                 posBtX = screenWidth - 750;
                 posBtY = screenHeight - 550;
-                AjustesButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Fullscreen", { posBtX, posBtY, wBt, hBt }, this));
+                AjustesButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Fullscreen", { posBtX, posBtY, wBt, hBt }, [this](GuiControl* g) {fullscreen1(g); }));
                 wBt = 190;
                 hBt = 40;
                 posBtX = screenWidth - 750;
                 posBtY = screenHeight - 450;
-                AjustesButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Vsycn", { posBtX, posBtY, wBt, hBt }, this));
+                AjustesButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Vsycn", { posBtX, posBtY, wBt, hBt }, [this](GuiControl* g) {vyscn(g); }));
                 wBt = 70;
                 hBt = 40;
                 posBtX = screenWidth - 750;
                 posBtY = screenHeight - 350;
-                AjustesButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "Volum -", { posBtX, posBtY, wBt, hBt }, this));
+                AjustesButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Volum -", { posBtX, posBtY, wBt, hBt }, [this](GuiControl* g) {volumen1(g); }));
                 wBt = 70;
                 hBt = 40;
                 posBtX = screenWidth - 630;
                 posBtY = screenHeight - 350;
-                AjustesButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "Volum +", { posBtX, posBtY, wBt, hBt }, this));
+                AjustesButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 4, "Volum +", { posBtX, posBtY, wBt, hBt }, [this](GuiControl* g) {volumen2(g); }));
                 wBt = 70;
                 hBt = 40;
                 posBtX = screenWidth - 750;
                 posBtY = screenHeight - 250;
-                AjustesButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, "Fbx -", { posBtX, posBtY, wBt, hBt }, this));
+                AjustesButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "Fbx -", { posBtX, posBtY, wBt, hBt }, [this](GuiControl* g) {fx1(g); }));
                 wBt = 70;
                 hBt = 40;
                 posBtX = screenWidth - 630;
                 posBtY = screenHeight - 250;
-                AjustesButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "Fbx +", { posBtX, posBtY, wBt, hBt }, this));
+                AjustesButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, "Fbx +", { posBtX, posBtY, wBt, hBt }, [this](GuiControl* g) {fx2(g); }));
+                wBt = 190;
+                hBt = 40;
+                posBtX = screenWidth - 750;
+                posBtY = screenHeight - 150;
+                AjustesButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 7, "Volver", { posBtX, posBtY, wBt, hBt }, [this](GuiControl* g) {volver(g); }));
 
             }
-        }
+        
         
     }
     
@@ -254,4 +303,40 @@ void PauseMenu::CreatePauseButtons() {
         app->scene->Disable();
         buttoncreated = false;
         app->audio->PlayFx(buttonFx);
+    }
+    void PauseMenu::volver(GuiControl* ctrl) {
+        CleanUp();
+        inpause = true;
+        inajustes = false;
+        CreatePauseButtons();
+    }
+    void PauseMenu::fullscreen1(GuiControl* ctrl) {
+        if (fullscreen == true) {
+            app->win->FullscreenMode();
+            fullscreen = false;
+        }
+        else {
+            app->win->UnFullscreenMode();
+            fullscreen = true;
+        }
+    }
+    void PauseMenu::vyscn(GuiControl* ctrl) {
+        if (vsycn == true) {
+            vsycn = false;
+        }
+        else if (vsycn == false) {
+            vsycn = true;
+        }
+    }
+    void PauseMenu::volumen1(GuiControl* ctrl) {
+        app->audio->MusicDown();
+    }
+    void PauseMenu::volumen2(GuiControl* ctrl) {
+        app->audio->MusicUp();
+    }
+    void PauseMenu::fx1(GuiControl* ctrl) {
+        app->audio->FxDown();
+    }
+    void PauseMenu::fx2(GuiControl* ctrl) {
+        app->audio->FxUp();
     }

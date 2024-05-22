@@ -29,7 +29,13 @@ public:
     void continuar(GuiControl* ctrl);
     void opciones(GuiControl* ctrl);
     void salir(GuiControl* ctrl);
-
+    void volver(GuiControl* ctrl);
+    void fullscreen1(GuiControl* ctrl);
+    void vyscn(GuiControl* ctrl);
+    void volumen1(GuiControl* ctrl);
+    void volumen2(GuiControl* ctrl);
+    void fx1(GuiControl* ctrl);
+    void fx2(GuiControl* ctrl);
 
 public:
 
@@ -50,6 +56,7 @@ public:
 
     int buttonFx;
     int PauseIndex = 1;
+    int AjustesIndex = 1;
 
 
     Timer timer;
