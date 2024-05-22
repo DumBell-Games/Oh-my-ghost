@@ -32,7 +32,7 @@
 	</input>
 
 	<scene>
-		<player x="8131" y="6083" texturePath="Assets/Textures/springyPaloma.png" ghostTexPath="Assets/Textures/springyFantasma.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg">
+		<player x="8025" y="6164" texturePath="Assets/Textures/springyPaloma.png" ghostTexPath="Assets/Textures/springyFantasma.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg">
 			<animation name="walkR" loop="true" speed="0.08f">
 				<frame x="15" y="1137" w="111" h="144" />
 				<frame x="143" y="1138" w="111" h="143" />
@@ -398,7 +398,7 @@
 	</dialogmanager>
 
 	<map path="Assets/Maps/">
-		<map id="0" file="mapa.tmx"/>
+		<map id="0" file="mapaLPA.tmx"/>
 		<map id="1" file="taberna_plantilla.tmx"/>
 		<map id="2" file="disco_plantilla.tmx"/>
 		<map id="3" file="casino_plantilla.tmx"/>

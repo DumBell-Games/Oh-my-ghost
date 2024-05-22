@@ -86,6 +86,23 @@ bool Player::Start() {
 	currentAnim = idleFrontal;
 
 	pBody = app->physics->CreateRectangle(position.x + 128, position.y, 128, 30, bodyType::DYNAMIC);
+	casinoIn = app->physics->CreateRectangleSensor(6337 + 128, 166 + 64, 192, 126, bodyType::KINEMATIC);
+	casinoIn->ctype = ColliderType::CASINOIN;
+	casinoOut = app->physics->CreateRectangleSensor(1793 + 128, 12542 + 64, 256, 128, bodyType::KINEMATIC);
+	casinoOut->ctype = ColliderType::CASINOOUT;
+
+	tabernaIn = app->physics->CreateRectangleSensor(4289 + 128, 1588 + 64, 192, 126, bodyType::KINEMATIC);
+	tabernaIn->ctype = ColliderType::TABERNAIN;
+	tabernaOut = app->physics->CreateRectangleSensor(7939 + 128, 12159 + 64, 256, 128, bodyType::KINEMATIC);
+	tabernaOut->ctype = ColliderType::TABERNAOUT;
+
+	arcadeIn = app->physics->CreateRectangleSensor(3009 + 128, 4645 + 64, 192, 126, bodyType::KINEMATIC);
+	arcadeIn->ctype = ColliderType::ARCADEIN;
+	arcadeOut = app->physics->CreateRectangleSensor(14849 + 128, 9600 + 64, 256, 128, bodyType::KINEMATIC);
+	arcadeOut->ctype = ColliderType::ARCADEOUT;
+
+
+
 	//haz que el rectangulo no rote
 	pBody->body->SetFixedRotation(true);
 	pBody->listener = this;
@@ -278,7 +295,37 @@ bool Player::Update(float dt)
 	app->win->GetWindowSize(w, h);
 	app->render->camera.x = (-position.x * app->win->GetScale()) + w / 2;
 	app->render->camera.y = (-position.y * app->win->GetScale()) + h / 2;
-
+	
+	if (casinoIN)
+	{
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(1900), PIXEL_TO_METERS(12488)), NULL);
+		casinoIN = false;
+	}
+	if (casinoOUT)
+	{
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(6420), PIXEL_TO_METERS(374)), NULL);
+		casinoOUT = false;
+	}
+	if (arcadeIN)
+	{
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(14972), PIXEL_TO_METERS(9512)), NULL);
+		arcadeIN = false;
+	}
+	if (arcadeOUT)
+	{
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(3104), PIXEL_TO_METERS(4934)), NULL);
+		arcadeOUT = false;
+	}
+	if (tabernaIN)
+	{
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(8060), PIXEL_TO_METERS(12104)), NULL);
+		tabernaIN = false;
+	}
+	if (tabernaOUT)
+	{
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(4393), PIXEL_TO_METERS(1878)), NULL);
+		tabernaOUT = false;
+	}
 	
 	return true;
 }
@@ -294,6 +341,37 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	{
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
+		break;
+	case ColliderType::CASINOIN:
+		LOG("Collision CASINOIN");
+		casinoIN = true;
+		casinoOUT = false;
+		break;
+	case ColliderType::CASINOOUT:
+		LOG("Collision CASINOOUT");
+		casinoOUT = true;
+		casinoIN = false;
+		
+		break;
+	case ColliderType::ARCADEIN:
+		LOG("Collision ARCADEIN");
+		arcadeIN = true;
+		arcadeOUT = false;
+		break;
+	case ColliderType::ARCADEOUT:
+		LOG("Collision ARCADEOUT");
+		arcadeOUT = true;
+		arcadeIN = false;
+		break;
+	case ColliderType::TABERNAIN:
+		LOG("Collision TABERNAIN");
+		tabernaIN = true;
+		tabernaOUT = false;
+		break;
+	case ColliderType::TABERNAOUT:
+		LOG("Collision TABERNAOUT");
+		tabernaOUT = true;
+		tabernaIN = false;
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
@@ -333,3 +411,4 @@ Animation* Player::GetAnimation(SString name)
 	}
 	return nullptr;
 }
+

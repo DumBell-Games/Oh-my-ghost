@@ -57,6 +57,19 @@ public:
 	int pickCoinFxId;
 
 	PhysBody* pBody;
+	PhysBody* casinoIn;
+	PhysBody* casinoOut;
+	PhysBody* tabernaIn;
+	PhysBody* tabernaOut;
+	PhysBody* arcadeIn;
+	PhysBody* arcadeOut;
+
+	bool casinoIN = false;
+	bool casinoOUT = false;
+	bool tabernaIN = false;
+	bool tabernaOUT = false;
+	bool arcadeIN = false;
+	bool arcadeOUT = false;
 
 	List<Animation*> springyAnimationList;
 
