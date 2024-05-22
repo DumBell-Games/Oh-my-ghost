@@ -32,7 +32,7 @@
 	</input>
 
 	<scene>
-		<player x="30" y="950" texturePath="Assets/Textures/springyPaloma.png" ghostTexPath="Assets/Textures/springyFantasma.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg">
+		<player x="8131" y="6083" texturePath="Assets/Textures/springyPaloma.png" ghostTexPath="Assets/Textures/springyFantasma.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg">
 			<animation name="walkR" loop="true" speed="0.08f">
 				<frame x="15" y="1137" w="111" h="144" />
 				<frame x="143" y="1138" w="111" h="143" />

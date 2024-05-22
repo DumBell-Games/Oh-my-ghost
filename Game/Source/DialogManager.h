@@ -68,7 +68,7 @@ private:
 	int optionsDistanceBetween = 50;
 
 	//Dimensiones
-	int textBoundWidth = 100;
+	int textBoundWidth;
 	int textNameBoundWidth = 200;
 	int optionsBoundWidth = 350;
 	iPoint faceTextureSize = { 250, 250 }; //texto central

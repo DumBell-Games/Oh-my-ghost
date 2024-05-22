@@ -544,3 +544,18 @@ static void WarpTo(Map* map, std::vector<std::string> args) {
     map->transitionData.mapId = std::stoi(args[1]);
     map->ChangeMap(map->transitionData.mapId);
 }
+
+Animation* Map::GetAnimByName(SString name) {
+    ListItem<Animation*>* item = mapData.animations.start;
+    Animation* set = NULL;
+
+    while (item) {
+        set = item->data;
+        if (item->data->name == name)
+        {
+            return set;
+        }
+        item = item->next;
+    }
+    return set;
+}

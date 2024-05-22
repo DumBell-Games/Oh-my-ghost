@@ -112,6 +112,7 @@ public:
 
 	iPoint MapToWorld(int x, int y) const;
 	iPoint Map::WorldToMap(int x, int y);
+	Animation* GetAnimByName(SString name);
 
 private:
 
