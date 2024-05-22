@@ -4,11 +4,15 @@
 #include "InventoryManager.h"
 #include "FadeToBlack.h"
 #include "App.h"
+#include "DebugConsole.h"
 
 #include "Log.h"
 #include "EnumUtils.h"
 #include "ItemData.h"
 #include "GuiControlButton.h"
+
+#include <string>
+#include <vector>
 
 CombatManager::CombatManager(bool startEnabled) : Module(startEnabled)
 {
@@ -70,6 +74,9 @@ bool CombatManager::Start()
 	currentElement = 0;
 	LOG("Combat Start!");
 	rng = std::mt19937{ std::random_device{}() }; // Resetea el RNG antes de comenzar el combate
+
+	app->console->AddCommand("endcombat", "Termina el combate instantaneamente, como si se hubiera cumplido la condicion de victoria", "endcombat", [this](std::vector<std::string> args) {combatState = CombatState::DIALOG_END; });
+
 	return true;
 }
 
@@ -127,6 +134,8 @@ bool CombatManager::PostUpdate()
 
 bool CombatManager::CleanUp()
 {
+	app->console->RemoveCommand("");
+
 	for (std::vector<GuiControl*>& menu : menuList)
 	{
 		if (app->guiManager->guiControlsList.Count()>0)
@@ -250,12 +259,28 @@ void CombatManager::CreateTeamSwapButtons(pugi::xml_node menuItem)
 bool CombatManager::CombatFinished()
 {
 	bool ret = false;
+	// Gameover si todo el equipo aliado ha sido derrotado
 	for (Personatge* p : data.allies)
 	{
 		ret = ret && p->salutActual <= 0;
 	}
-	ret = data.enemy->salutActual <= 0;
-	return ret;
+	//victoria si enemigo ha sido derrotado
+	ret |= data.enemy->salutActual <= 0;
+	return ret || fled;
+}
+
+char CombatManager::CombatResult()
+{
+	bool alliesDefeated = true;
+	bool enemiesDefeated = true;
+
+	for (Personatge* p : data.allies)
+	{
+		alliesDefeated &= p->salutActual <= 0;
+	}
+	enemiesDefeated &= data.enemy->salutActual <= 0;
+
+	return -((char)alliesDefeated)+((char)enemiesDefeated);
 }
 
 void CombatManager::HandleStart()
@@ -319,18 +344,29 @@ void CombatManager::HandleCombat()
 	{
 	case PlayerAction::ATTACK:
 	{
-		if (ataqueAliado) {
+		if (ataqueAliado)
+		{
 			DoAttack(ally, enemy, ataqueAliado);
+			// Activar animacion de ataque aqui
 		}
 		ataqueAliado = nullptr;
 		break;
 	}
 	case PlayerAction::ITEM:
 	{
+		if (objetoAliado)
+		{
+			UseItem(data.allies[data.activeAlly], objetoAliado);
+			// Activar animacion de objeto aqui
+		}
 		break;
 	}
 	case PlayerAction::CHANGE:
 	{
+		if (nuevoAliadoActivo > -1)
+		{
+			SwapCharacter(nuevoAliadoActivo);
+		}
 		break;
 	}
 	case PlayerAction::NO_ACTION:
@@ -348,17 +384,23 @@ void CombatManager::HandleCombat()
 	// Accion completada, resetea las variables para nuevo turno
 	ataqueAliado = ataqueEnemigo = nullptr;
 
-	if (CombatFinished())
-		combatState = CombatState::DIALOG_END;
-	else combatState = CombatState::MENU;
+	combatState = CombatState::COMBAT_ANIM;
 }
 
 void CombatManager::EnemyChoice()
 {
 }
 
+void CombatManager::HandleCombatAnimation()
+{
+	if (CombatFinished())
+		combatState = CombatState::DIALOG_END;
+	else combatState = CombatState::MENU;
+}
+
 void CombatManager::HandleEndDialog()
 {
+	combatState = CombatState::END;
 }
 
 void CombatManager::HandleEnd()
@@ -419,6 +461,7 @@ void CombatManager::SwapBody(GuiControl* ctrl)
 
 void CombatManager::Flee(GuiControl* ctrl)
 {
+	fled = true; // NOTE % posibilidad de huir?
 }
 
 void CombatManager::ResetButtonsState()

@@ -9,22 +9,27 @@
 
 class PhysBody;
 
+// Limite de objetos actual: 127 (char)
 enum class ItemType : char
 {
+	UNKNOWN = -1,
 	COLA,
 	YOGUR,
 	BIRRA,
 	PATATAS,
 	CARAMELOS,
 	VELOCIDAD,
-	UNKNOWN
+	TOTAL_ITEMS
 };
 
+// Clase generica para objetos. Por defecto es un objeto curativo pero se pueden hacer derivados con otros efectos
 class ItemData
 {
 public:
 
 	ItemData(ItemType type) : type(type), active(true) {}
+
+	virtual ~ItemData() {}
 
 	virtual bool Init()
 	{
@@ -62,6 +67,7 @@ public:
 	pugi::xml_node parameters; 
 	std::string descripcion;
 	std::string tipo;
+	int cantidad;
 	int curacion;
 
 

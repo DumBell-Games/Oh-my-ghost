@@ -28,8 +28,13 @@ public:
 
 	// Additional methods
 	ItemData* CreateItem(ItemType type, pugi::xml_node& data);
+	
+	// Busca un objeto que cumpla con la condicion
+	template <typename Comp>
+	ItemData* GetItem(Comp condicion);
 
-	ItemData* GetItem(const char* name);
+	// Busca un objeto segun su tipo (devuelve el primero que se encuentre)
+	ItemData* GetItemByType(ItemType type);
 
 	void DestroyItem(ItemData* item);
 
@@ -42,8 +47,6 @@ public:
 public:
 
 	List<ItemData*> items;
-
-	SString inventoryPath;
 
 	bool started = false;
 	

@@ -31,9 +31,11 @@ bool InventoryManager::Awake(pugi::xml_node config)
 	LOG("Loading Inventory Manager");
 	bool ret = true;
 
-	inventoryPath = config.attribute("inventoryFile").as_string("inventory.xml");
-
-	//CreateItem(ItemType::PATATA)
+	// Carga "items vacios" de cada tipo para gestionar el inventario
+	for (pugi::xml_node itemNode = config.child("item"); itemNode < NULL; itemNode = itemNode.next_sibling("item"))
+	{
+		CreateItem((ItemType)itemNode.attribute("type").as_int(enum2val(ItemType::UNKNOWN)), itemNode);
+	}
 
 	/*
 	* //There's no Awake() method for items
@@ -100,6 +102,27 @@ ItemData* InventoryManager::CreateItem(ItemType type, pugi::xml_node& data)
 	ItemData* item = nullptr;
 
 	//L03: DONE 3a: Instantiate entity according to the type and add the new entity to the list of Entities
+	switch (type)
+	{
+	case ItemType::COLA:
+		break;
+	case ItemType::YOGUR:
+		break;
+	case ItemType::BIRRA:
+		break;
+	case ItemType::PATATAS:
+		break;
+	case ItemType::CARAMELOS:
+		break;
+	case ItemType::VELOCIDAD:
+		// Crear derivado de ItemData para el efecto de velocidad
+		// item = new ItemDVelocidad();
+		break;
+	case ItemType::UNKNOWN:
+	default:
+		item = new ItemData(type);
+		break;
+	}
 
 	if (item) {
 		item->parameters = data;
@@ -114,11 +137,20 @@ ItemData* InventoryManager::CreateItem(ItemType type, pugi::xml_node& data)
 	return item;
 }
 
-// Returns the item with the name provided, nullptr if not found
-ItemData* InventoryManager::GetItem(const char* name)
+// Devuelve el primer objeto que cumpla la condición, nullptr en caso de no encontrar ninguno. Este método acepta un "functor", que es cualquier cosa que pueda ser llamada como una función.
+// En este caso acepta cualquier functor que tenga el siguiente formato de función: bool FuncName(ItemData*)
+template <typename Comp>
+ItemData* InventoryManager::GetItem(Comp condicion)
 {
 	//SIN PROBAR: SI CRASHEA ITERA LA LISTA COMO SIEMPRE EN VEZ DE USAR ESTO
-	return items.Find([&name](ItemData* i) { return i->name == name; })->data;
+	return items.Find(condicion)->data;
+}
+
+ItemData* InventoryManager::GetItemByType(ItemType type) {
+	ListItem<ItemData*>* listItem = items.Find([type](const ItemData* i) { return i->type == type; });
+	if (listItem)
+		return listItem->data;
+	else return nullptr;
 }
 
 void InventoryManager::DestroyItem(ItemData* item)
@@ -146,18 +178,22 @@ bool InventoryManager::Update(float dt)
 
 bool InventoryManager::LoadState(pugi::xml_node node) {
 	LOG("INVENTORY LOADING NOT FINISHED");
-	for (pugi::xml_node item = node.child("item"); item != NULL; item = item.next_sibling("item"))
+	bool ret = true;
+	for (pugi::xml_node itemNode = node.child("item"); itemNode != NULL; itemNode = itemNode.next_sibling("item"))
 	{
-		CreateItem((ItemType)item.attribute("type").as_int(enum2val(ItemType::UNKNOWN)),item);
+		ItemType type = (ItemType)itemNode.attribute("type").as_int(enum2val(ItemType::UNKNOWN));
+		ItemData* i = GetItem([&type](ItemData* i) {return i->type == type; });
+		ret = i->LoadState(itemNode);
 	}
 	return true;
 }
 
 bool InventoryManager::SaveState(pugi::xml_node node) {
 	LOG("INVENTORY SAVING NOT FINISHED");
-	for (ListItem<ItemData*>* item = 0; item != NULL; item = item->next)
+	bool ret = true;
+	for (ListItem<ItemData*>* item = items.start; item; item = item->next)
 	{
-		item->data->SaveState(node.append_child("item"));
+		ret = item->data->SaveState(node.append_child("item"));
 	}
 	return true;
 }

@@ -81,6 +81,9 @@ private:
 
 	bool CombatFinished();
 
+	// Devuelve el balance entre enemigos y aliados derrotados. 0 = empate, 1 = victoria, -1 = derrota
+	char CombatResult();
+
 
 	// Control por mando/teclado (raton va por GUI)
 
@@ -98,6 +101,9 @@ private:
 
 	// Genera la acción del enemigo
 	void EnemyChoice();
+
+	// Reproduce las animaciones de los ataques ejecutados y vuelve al menu o acaba el combate dependiendo de la condicion de victoria/derrota
+	void HandleCombatAnimation();
 
 	// Texto de final de combate (dialogo del enemigo, EXP acumulada, etc.)
 	void HandleEndDialog();
@@ -162,6 +168,8 @@ private:
 	SDL_Texture* tEnemigo = nullptr;
 
 	int turn = 0;
+
+	bool fled = false;
 
 };
 

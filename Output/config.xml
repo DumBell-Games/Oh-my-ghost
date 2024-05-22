@@ -23,13 +23,18 @@
 		<fullscreen_window value="false"/>
 	</window>
 
-	<inventory inventoryFile ="inventory.xml">
-
-	</inventory>
-
-	<input bindingsFile="controls.xml">
-
-	</input>
+  <inventory>
+	  <item type="0" name="Cola" description="TBD" healing="10" texturePath="Assets/Textures/itemCola.PNG"/>	
+	  <item type="1" name="Yogur" description="TBD" healing="10" texturePath="Assets/Textures/itemYogur.PNG"/>	
+	  <item type="2" name="Birra" description="TBD" healing="10" texturePath="Assets/Textures/itemBirra.PNG"/>	
+	  <item type="3" name="Patatas" description="TBD" healing="10" texturePath="Assets/Textures/itemPatatas.PNG"/>	
+	  <item type="4" name="Caramelo" description="TBD" healing="10" texturePath="Assets/Textures/itemCaramelo.PNG"/>	
+	  <item type="5" name="Velocidad" description="TBD" healing="10" texturePath="Assets/Textures/itemVelocidad.PNG"/>	
+  </inventory>
+	
+  <input bindingsFile="controls.xml">
+		
+  </input>
 
 	<scene>
 		<player x="30" y="950" texturePath="Assets/Textures/springyPaloma.png" ghostTexPath="Assets/Textures/springyFantasma.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg">
