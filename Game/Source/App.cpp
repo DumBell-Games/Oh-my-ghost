@@ -141,8 +141,15 @@ bool App::Awake()
 {
 	// L1: DONE 3: Measure the amount of ms that takes to execute the Awake and LOG the result
 	Timer timer = Timer();
+	
+	bool ret = true;
 
-	bool ret = LoadConfig();
+	for (ListItem<Module*>* item = modules.start; item != NULL && ret == true; item = item->next)
+	{
+		ret = item->data->PostInit();
+	}
+
+	ret = LoadConfig();
 
 	if(ret == true)
 	{

@@ -23,14 +23,14 @@
 		<fullscreen_window value="false"/>
 	</window>
 
-  <inventory>
+	<inventorymanager>
 	  <item type="0" name="Cola" description="TBD" healing="10" texturePath="Assets/Textures/itemCola.PNG"/>	
 	  <item type="1" name="Yogur" description="TBD" healing="10" texturePath="Assets/Textures/itemYogur.PNG"/>	
 	  <item type="2" name="Birra" description="TBD" healing="10" texturePath="Assets/Textures/itemBirra.PNG"/>	
 	  <item type="3" name="Patatas" description="TBD" healing="10" texturePath="Assets/Textures/itemPatatas.PNG"/>	
 	  <item type="4" name="Caramelo" description="TBD" healing="10" texturePath="Assets/Textures/itemCaramelo.PNG"/>	
 	  <item type="5" name="Velocidad" description="TBD" healing="10" texturePath="Assets/Textures/itemVelocidad.PNG"/>	
-  </inventory>
+  </inventorymanager>
 	
   <input bindingsFile="controls.xml">
 		
@@ -449,6 +449,7 @@
 				<module type="r" name="entitymanager"/>
 				<module type="r" name="dialogmanager"/>
 				<module type="u" name="titlescreen"/>
+				<module type="l" name="inventorymanager"/>
 				<!--Cuando cargas mapa no va a estar el menú principal cargado-->
 			</preset>
 			<preset name="teamLogoToIntro" fadeOut="0.5" fadeIn="0.5">

@@ -11,7 +11,7 @@
 #include <random>
 #include <vector>
 
-class InventoryScreen;
+class InventoryManager;
 struct SDL_Texture;
 
 enum class Menus : char {
@@ -29,7 +29,8 @@ enum class CombatState {
 	COMBAT,
 	COMBAT_ANIM,
 	DIALOG_END,
-	END
+	END,
+	DO_NOTHING
 };
 
 enum class PlayerAction {
@@ -57,6 +58,8 @@ public:
 
 	~CombatManager();
 
+	void Init() override;
+
 	bool Awake(pugi::xml_node config) override;
 
 	bool Start() override;
@@ -75,7 +78,7 @@ private:
 
 	void CreateAbilityButtons(Personatge* p);
 
-	void CreateItemButtons(InventoryScreen* inv);
+	void CreateItemButtons(InventoryManager* inv);
 
 	void CreateTeamSwapButtons(pugi::xml_node menuItem);
 
@@ -170,6 +173,9 @@ private:
 	int turn = 0;
 
 	bool fled = false;
+
+	// DEBUG VARS
+	Personatge* dummyEnemy = nullptr;
 
 };
 

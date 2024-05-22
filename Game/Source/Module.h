@@ -15,7 +15,7 @@ public:
 	Module(bool startEnabled = true) : active(startEnabled), awoken(false), needsAwaking(false)
 	{}
 
-	void Init()
+	virtual void Init()
 	{
 		isEnabled = active;
 	}
@@ -45,6 +45,10 @@ public:
 		}
 		return ret;
 	}
+
+	//Called before Awake(). All modules execute this regardless of initial state
+	virtual bool PostInit()
+	{}
 
 	// Called before render is available
 	virtual bool Awake(pugi::xml_node config)

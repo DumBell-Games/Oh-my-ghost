@@ -32,7 +32,7 @@ bool InventoryManager::Awake(pugi::xml_node config)
 	bool ret = true;
 
 	// Carga "items vacios" de cada tipo para gestionar el inventario
-	for (pugi::xml_node itemNode = config.child("item"); itemNode < NULL; itemNode = itemNode.next_sibling("item"))
+	for (pugi::xml_node itemNode = config.child("item"); itemNode != NULL; itemNode = itemNode.next_sibling("item"))
 	{
 		CreateItem((ItemType)itemNode.attribute("type").as_int(enum2val(ItemType::UNKNOWN)), itemNode);
 	}
@@ -105,23 +105,43 @@ ItemData* InventoryManager::CreateItem(ItemType type, pugi::xml_node& data)
 	switch (type)
 	{
 	case ItemType::COLA:
+	{
+		item = new ItemData(type);
 		break;
+	}
 	case ItemType::YOGUR:
+	{
+		item = new ItemData(type);
 		break;
+	}
 	case ItemType::BIRRA:
+	{
+		item = new ItemData(type);
 		break;
+	}
 	case ItemType::PATATAS:
+	{
+		item = new ItemData(type);
 		break;
+	}
 	case ItemType::CARAMELOS:
+	{
+		item = new ItemData(type);
 		break;
+	}
 	case ItemType::VELOCIDAD:
+	{
+		item = new ItemData(type);
 		// Crear derivado de ItemData para el efecto de velocidad
 		// item = new ItemDVelocidad();
 		break;
+	}
 	case ItemType::UNKNOWN:
 	default:
+	{
 		item = new ItemData(type);
 		break;
+	}
 	}
 
 	if (item) {
@@ -182,8 +202,16 @@ bool InventoryManager::LoadState(pugi::xml_node node) {
 	for (pugi::xml_node itemNode = node.child("item"); itemNode != NULL; itemNode = itemNode.next_sibling("item"))
 	{
 		ItemType type = (ItemType)itemNode.attribute("type").as_int(enum2val(ItemType::UNKNOWN));
-		ItemData* i = GetItem([&type](ItemData* i) {return i->type == type; });
-		ret = i->LoadState(itemNode);
+		ItemData* i = GetItem([&type](ItemData* i) { return i->type == type; });
+		if (i)
+			ret = i->LoadState(itemNode);
+		else
+		{
+			LOG("ERROR: OBJETO GUARDADO NO TIENE TIPO CORRESPONDIENTE EN LA LISTA DE OBJETOS POSIBLES");
+			CreateItem(ItemType::UNKNOWN, pugi::xml_node())
+				->LoadState(itemNode);
+
+		}
 	}
 	return true;
 }

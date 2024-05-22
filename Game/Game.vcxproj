@@ -96,6 +96,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\InventoryManager.cpp" />
+    <ClCompile Include="Source\ItemData.cpp" />
     <ClCompile Include="Source\Poison.cpp" />
     <ClCompile Include="Source\DebugCommands.h" />
     <ClCompile Include="Source\DebugConsole.cpp" />

@@ -5,6 +5,7 @@
 #include "FadeToBlack.h"
 #include "App.h"
 #include "DebugConsole.h"
+#include "Reload.h"
 
 #include "Log.h"
 #include "EnumUtils.h"
@@ -22,20 +23,6 @@ CombatManager::CombatManager(bool startEnabled) : Module(startEnabled)
 	menuList.push_back(std::vector<GuiControl*>());
 	menuList.push_back(std::vector<GuiControl*>());
 	menuList.push_back(std::vector<GuiControl*>());
-}
-
-CombatManager::~CombatManager()
-{
-}
-
-bool CombatManager::Awake(pugi::xml_node config)
-{
-	posMain.x = config.attribute("mainX").as_int(0);
-	posMain.y = config.attribute("mainY").as_int(0);
-	posSub.x = config.attribute("subX").as_int(0);
-	posSub.y = config.attribute("subY").as_int(0);
-	buttonSize.x = config.attribute("buttonW").as_int(0);
-	buttonSize.y = config.attribute("buttonH").as_int(0);
 
 	// CODIGO PARA DEBUG, NO DEFINITIVO
 
@@ -53,8 +40,34 @@ bool CombatManager::Awake(pugi::xml_node config)
 	data.allies.push_back(p2);
 
 	// FIN CODIGO PARA DEBUG
+}
+
+CombatManager::~CombatManager()
+{
+	app->console->RemoveCommand("debugcombat");
+}
+
+void CombatManager::Init()
+{
+	Module::Init();
+	app->console->AddCommand("debugcombat", "Inicia un combate con un enemigo de prueba", "debugcombat", [this](std::vector<std::string> args) {
+		data.enemy = dummyEnemy = new Personatge("dummy", 1, 10, 10, 10);
+		app->reload->QueueReload("combatStart");
+		});
+}
+
+bool CombatManager::Awake(pugi::xml_node config)
+{
+	posMain.x = config.attribute("mainX").as_int(0);
+	posMain.y = config.attribute("mainY").as_int(0);
+	posSub.x = config.attribute("subX").as_int(0);
+	posSub.y = config.attribute("subY").as_int(0);
+	buttonSize.x = config.attribute("buttonW").as_int(0);
+	buttonSize.y = config.attribute("buttonH").as_int(0);
 
 	CreateButtons(config.child("menus"));
+	ResetButtonsState();
+	combatState = CombatState::START;
 
 	awoken = true;
 
@@ -76,6 +89,7 @@ bool CombatManager::Start()
 	rng = std::mt19937{ std::random_device{}() }; // Resetea el RNG antes de comenzar el combate
 
 	app->console->AddCommand("endcombat", "Termina el combate instantaneamente, como si se hubiera cumplido la condicion de victoria", "endcombat", [this](std::vector<std::string> args) {combatState = CombatState::DIALOG_END; });
+	
 
 	return true;
 }
@@ -107,6 +121,7 @@ bool CombatManager::Update(float dt)
 	case CombatState::COMBAT_ANIM:
 	{
 		// reproduce y comprueba que han acabado las animaciones de combate antes de continuar
+		HandleCombatAnimation();
 		break;
 	}
 	case CombatState::DIALOG_END:
@@ -119,6 +134,7 @@ bool CombatManager::Update(float dt)
 		HandleEnd();
 		break;
 	}
+	case CombatState::DO_NOTHING:
 	default:
 		break;
 	}
@@ -136,6 +152,11 @@ bool CombatManager::CleanUp()
 {
 	app->console->RemoveCommand("");
 
+	data.enemy = nullptr;
+	RELEASE(dummyEnemy); // Datos usados con el comando "debugcombat"
+
+	currentMenu = Menus::MAIN;
+	currentElement = 0;
 	for (std::vector<GuiControl*>& menu : menuList)
 	{
 		if (app->guiManager->guiControlsList.Count()>0)
@@ -145,6 +166,8 @@ bool CombatManager::CleanUp()
 		}
 		menu.clear();
 	}
+
+	app->entityManager->Pause(); // Unpauses the entityManager and allows player movement
 
 	return true;
 }
@@ -185,7 +208,7 @@ void CombatManager::CreateButtons(pugi::xml_node menuListNode)
 	}
 
 	CreateAbilityButtons(data.allies[data.activeAlly]);
-	CreateItemButtons(nullptr);
+	CreateItemButtons(app->inventory);
 	CreateTeamSwapButtons(menuListNode.child("team"));
 
 }
@@ -211,16 +234,16 @@ void CombatManager::CreateAbilityButtons(Personatge* p)
 	//TODO añadir boton para volver atras
 }
 
-void CombatManager::CreateItemButtons(InventoryScreen* inv)
+void CombatManager::CreateItemButtons(InventoryManager* inv)
 {
 	// Crea los botones para el uso de objetos, el codigo es similar al de los botones de habilidades y cambio de personaje
 	SDL_Rect bounds{ posSub.x,posSub.y,buttonSize.x,buttonSize.y };
 
 	//ItemMenu
 	int i = 0;
-	for (ListItem<ItemData*>* listItem = app->inventory->items.start; listItem; listItem = listItem->next)
+	for (ListItem<ItemData*>* listItem = inv->items.start; listItem; listItem = listItem->next)
 	{
-		if (listItem->data) {
+		if (listItem->data && listItem->data->cantidad > 0) {
 			ItemData* item = listItem->data;
 			bounds.y = posSub.y + i * (bounds.h + 16);
 			GuiCallback_f func = [this, item](GuiControl* g) {
@@ -302,18 +325,37 @@ void CombatManager::HandleStartDialog()
 void CombatManager::HandleMenu()
 {
 	// Control de botones con mando y teclado
+	int currentMenuInt = enum2val(currentMenu);
+	if (app->input->GetButton(ControlID::UP) == KeyState::KEY_DOWN)
+	{
+		// Si intenta subir desde el primer elemento, va hasta el ultimo sumando la cantidad de elementos
+		if (--currentElement < 0) currentElement += menuList[currentMenuInt].size();
+	}
+	else if (app->input->GetButton(ControlID::DOWN) == KEY_DOWN)
+	{
+		// Si intenta bajar desde el ultimo elemento, vuelve al inicio restando la cantidad de elementos
+		if (++currentElement >= menuList[currentMenuInt].size()) currentElement -= menuList[currentMenuInt].size();
+	}
+
+	bool notified = false;
 	char i = 0, j = 0;
 	for (std::vector<GuiControl*>& menu : menuList)
 	{
+		j = 0;
 		for (GuiControl* g : menu)
 		{
 			// Si es el elemento seleccionado, lo marca como tal, los otros elementos del mismo menu se quedan en su estado actual
 			if ((Menus)i == currentMenu) {
 				if (j == currentElement) {
-					g->state = GuiControlState::FOCUSED;
-
+					g->state = (app->input->GetButton(ControlID::CONFIRM) == KEY_REPEAT) ? GuiControlState::PRESSED : GuiControlState::FOCUSED;
+					if (!notified && app->input->GetButton(ControlID::CONFIRM) == KEY_UP)
+					{
+						g->NotifyMouseClick();
+						notified = true;
+					}
 				}
-				g->state = GuiControlState::NORMAL;
+				else
+					g->state = GuiControlState::NORMAL;
 			}
 			// Los otros menus se vuelven invisibles, menos el principal que simplemente se impide hacer clic
 			else
@@ -407,6 +449,7 @@ void CombatManager::HandleEnd()
 {
 	data.enemy = nullptr;
 	app->fadeToBlack->FadeToBlackTransition(this, (Module*)app->entityManager);
+	combatState = CombatState::DO_NOTHING;
 }
 
 void CombatManager::DoAttack(Personatge* attacker, Personatge* defender, Atac* move)

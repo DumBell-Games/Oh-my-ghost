@@ -6,6 +6,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "Enemic.h"
+#include "EnumUtils.h"
 
 class PhysBody;
 
@@ -31,23 +32,23 @@ public:
 
 	virtual ~ItemData() {}
 
-	virtual bool Init()
-	{
-		return true;
-	}
+	virtual bool Init();
 
 	virtual bool CleanUp()
 	{
 		return true;
 	}
 
-	virtual bool LoadState(pugi::xml_node&)
+	virtual bool LoadState(pugi::xml_node& node)
 	{
+		cantidad = node.attribute("amount").as_int(0);
 		return true;
 	}
 
-	virtual bool SaveState(pugi::xml_node&)
+	virtual bool SaveState(pugi::xml_node& node)
 	{
+		node.append_attribute("type").set_value(enum2val(type));
+		node.append_attribute("amount").set_value(cantidad);
 		return true;
 	}
 
@@ -55,21 +56,23 @@ public:
 	{
 		p->salutActual += curacion;
 		if (p->salutActual > p->salutTotal) p->salutActual = p->salutTotal;
+		cantidad--;
 	}
 
 
 
 public:
 
+	bool active = true;
+	
 	SString name;
 	ItemType type;
-	bool active = true;
 	pugi::xml_node parameters; 
-	std::string descripcion;
-	std::string tipo;
+	SString descripcion;
 	int cantidad;
 	int curacion;
 
+	SDL_Texture* texture;
 
 	int itemFx;
 };
