@@ -55,23 +55,23 @@ public:
 private:
 
 	//Colores
-	SDL_Color textColor = { 255,255,255,255 };
+	SDL_Color textColor = { 0,0,0,0 };
 	SDL_Color optionSelectedColor = { 200, 200, 200, 255 };
 	SDL_Color optionColor = { 23, 23, 23, 255 };
 	
 
 	//Posiciones
-	std::vector<int> dialogMargin = { 130, 50, 0, 50 };
-	iPoint dialogPosition = { 130 , 415 }; //{ 0 , 375 }
-	iPoint namePosition = { 40 , -75 };
+	std::vector<int> dialogMargin = { 700, 500, 0, 0};
+	iPoint dialogPosition = { 50 ,	50 }; //{ 0 , 375 }
+	iPoint namePosition = { 275 , -125 };
 	iPoint optionsPosition = { 900 , 300 };
 	int optionsDistanceBetween = 50;
 
 	//Dimensiones
-	int textBoundWidth;
+	int textBoundWidth = 100;
 	int textNameBoundWidth = 200;
 	int optionsBoundWidth = 350;
-	iPoint faceTextureSize = { 250, 250 };
+	iPoint faceTextureSize = { 250, 250 }; //texto central
 	
 
 	//Config

@@ -148,7 +148,8 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 	
 	//Imagen del personaje
 	if (dialog->face_tex != nullptr) {
-		app->render->DrawTexture(dialog->face_tex, dialogMargin[3] + dialogPosition.x, dialogMargin[0] + dialogPosition.y, 0, 0);
+		                                                               //               y
+		app->render->DrawTexture(dialog->face_tex, 110, 420, 0, 0);
 	}
 
 
