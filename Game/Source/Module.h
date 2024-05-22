@@ -48,7 +48,9 @@ public:
 
 	//Called before Awake(). All modules execute this regardless of initial state
 	virtual bool PostInit()
-	{}
+	{
+		return true;
+	}
 
 	// Called before render is available
 	virtual bool Awake(pugi::xml_node config)

@@ -58,7 +58,7 @@ public:
 
 	~CombatManager();
 
-	void Init() override;
+	bool PostInit() override;
 
 	bool Awake(pugi::xml_node config) override;
 

@@ -26,13 +26,13 @@ CombatManager::CombatManager(bool startEnabled) : Module(startEnabled)
 
 	// CODIGO PARA DEBUG, NO DEFINITIVO
 
-	Personatge* p1 = new Personatge("personatge1", 10, 1, 5, 2);
+	Personatge* p1 = new Personatge("personatge1", 10, 10, 5, 2);
 	p1->atacs.push_back(Atac("Cop de puny1", 10));
 	p1->atacs.push_back(Atac("Cop de puny2", 10));
 	p1->atacs.push_back(Atac("Cop de puny3", 10));
 	p1->atacs.push_back(Atac("Cop de puny4", 10));
 	data.allies.push_back(p1);
-	Personatge* p2 = new Personatge("personatge2", 5, 3, 2, 1);
+	Personatge* p2 = new Personatge("personatge2", 5, 30, 2, 1);
 	p2->atacs.push_back(Atac("Puntada de peu1", 15));
 	p2->atacs.push_back(Atac("Puntada de peu2", 15));
 	p2->atacs.push_back(Atac("Puntada de peu3", 15));
@@ -47,13 +47,13 @@ CombatManager::~CombatManager()
 	app->console->RemoveCommand("debugcombat");
 }
 
-void CombatManager::Init()
+bool CombatManager::PostInit()
 {
-	Module::Init();
 	app->console->AddCommand("debugcombat", "Inicia un combate con un enemigo de prueba", "debugcombat", [this](std::vector<std::string> args) {
-		data.enemy = dummyEnemy = new Personatge("dummy", 1, 10, 10, 10);
+		data.enemy = dummyEnemy = new Personatge("dummy", 1, 10, 1, 10);
 		app->reload->QueueReload("combatStart");
 		});
+	return true;
 }
 
 bool CombatManager::Awake(pugi::xml_node config)

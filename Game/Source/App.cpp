@@ -149,7 +149,8 @@ bool App::Awake()
 		ret = item->data->PostInit();
 	}
 
-	ret = LoadConfig();
+	if (ret)
+		ret = LoadConfig();
 
 	if(ret == true)
 	{
