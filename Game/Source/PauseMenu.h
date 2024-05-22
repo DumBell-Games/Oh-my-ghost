@@ -26,13 +26,17 @@ public:
 
     void CreatePauseButtons();
 
+    void continuar(GuiControl* ctrl);
+    void opciones(GuiControl* ctrl);
+    void salir(GuiControl* ctrl);
+
+
 public:
 
-    SDL_Texture* continuar;
+    /*SDL_Texture* continuar;
     SDL_Texture* ajustes;
-    SDL_Texture* salir;
+    SDL_Texture* salir;*/
     int titleSound;
-    int menuIndex = 1;
     
     int screenWidth;
     int screenHeight;
@@ -45,14 +49,15 @@ public:
     bool vsycn = true;
 
     int buttonFx;
-
+    int PauseIndex = 1;
 
 
     Timer timer;
 
     //gui list
-    List<GuiControl*> PauseButtons;
-    List<GuiControl*> AjustesButtons;
+    List<GuiControlButton*> PauseButtons;
+    List<GuiControlButton*> AjustesButtons;
 
     pugi::xml_node parameters;
 };
+
