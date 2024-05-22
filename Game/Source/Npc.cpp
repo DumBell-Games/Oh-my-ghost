@@ -51,7 +51,7 @@ bool Npc::Start() {
 	return true;
 }
 
-bool Npc::Update(float dt)
+bool Npc::Update()
 {			
 	app->render->DrawTexture(palomaIdle->texture, position.x - 48, position.y - 114, &palomaIdle->GetCurrentFrame(), 1.0f, SDL_FLIP_NONE);
 	palomaIdle->Update();
