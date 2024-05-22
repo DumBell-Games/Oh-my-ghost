@@ -85,7 +85,7 @@ bool Player::Start() {
 	currentTexture = texturePlayer;
 	currentAnim = idleFrontal;
 
-	pBody = app->physics->CreateRectangle(position.x + 128, position.y, 128, 30, bodyType::DYNAMIC);
+	pBody = app->physics->CreateRectangle(position.x + 128, position.y, 128, 150, bodyType::DYNAMIC);
 	casinoIn = app->physics->CreateRectangleSensor(6337 + 128, 166 + 64, 192, 126, bodyType::KINEMATIC);
 	casinoIn->ctype = ColliderType::CASINOIN;
 	casinoOut = app->physics->CreateRectangleSensor(1793 + 128, 12542 + 64, 256, 128, bodyType::KINEMATIC);
@@ -289,14 +289,14 @@ bool Player::Update(float dt)
 	position.x = METERS_TO_PIXELS(pBodyPos.p.x) - 32 / 2;     
 	position.y = METERS_TO_PIXELS(pBodyPos.p.y) - 32 / 2;
 
-	app->render->DrawTexture(currentTexture,position.x - 48 ,position.y - 110, &currentAnim->GetCurrentFrame());
+	app->render->DrawTexture(currentTexture,position.x - 48 ,position.y - 64, &currentAnim->GetCurrentFrame());
 
 	uint w, h;
 	app->win->GetWindowSize(w, h);
 	app->render->camera.x = (-position.x * app->win->GetScale()) + w / 2;
 	app->render->camera.y = (-position.y * app->win->GetScale()) + h / 2;
 	
-	if (casinoIN)
+	if (casinoIN || app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
 	{
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(1900), PIXEL_TO_METERS(12488)), NULL);
 		casinoIN = false;
@@ -306,7 +306,7 @@ bool Player::Update(float dt)
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(6420), PIXEL_TO_METERS(374)), NULL);
 		casinoOUT = false;
 	}
-	if (arcadeIN)
+	if (arcadeIN || app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
 	{
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(14972), PIXEL_TO_METERS(9512)), NULL);
 		arcadeIN = false;
@@ -316,7 +316,7 @@ bool Player::Update(float dt)
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(3104), PIXEL_TO_METERS(4934)), NULL);
 		arcadeOUT = false;
 	}
-	if (tabernaIN)
+	if (tabernaIN || app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 	{
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(8060), PIXEL_TO_METERS(12104)), NULL);
 		tabernaIN = false;
@@ -329,6 +329,7 @@ bool Player::Update(float dt)
 	
 	return true;
 }
+
 
 bool Player::CleanUp()
 {

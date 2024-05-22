@@ -13,6 +13,8 @@
 #include "ItemPatatas.h"
 #include "ItemBirra.h"
 #include "ItemVelocidad.h"
+#include "Aprendiz.h"
+#include "Veterana.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -108,6 +110,12 @@ Entity* EntityManager::CreateEntity(EntityType type, pugi::xml_node& data)
 		break;
 	case EntityType::PALOMA:
 		entity = new Paloma();
+		break;
+	case EntityType::APRENDIZ:
+		entity = new Aprendiz();
+		break;
+	case EntityType::VETERANA:
+		entity = new Veterana();
 		break;
 	case EntityType::ENEMY:
 		entity = new Enemy();

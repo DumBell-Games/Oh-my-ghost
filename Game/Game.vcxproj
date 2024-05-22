@@ -95,6 +95,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Aprendiz.cpp" />
     <ClCompile Include="Source\Poison.cpp" />
     <ClCompile Include="Source\Character_Menu.cpp" />
     <ClCompile Include="Source\DebugCommands.h" />
@@ -136,10 +137,12 @@
     <ClCompile Include="Source\TeamScreen.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
+    <ClCompile Include="Source\Veterana.cpp" />
     <ClCompile Include="Source\Window.cpp" />
     <ClCompile Include="Source\TransitionTrigger.cpp" />
     <ClCompile Include="Source\tmxTileidAdjustment.h" />
     <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\Aprendiz.h" />
     <ClInclude Include="Source\Poison.h" />
     <ClInclude Include="Source\Character_Menu.h" />
     <ClInclude Include="Source\DebugConsole.h" />
@@ -185,6 +188,7 @@
     <ClInclude Include="Source\TeamScreen.h" />
     <ClInclude Include="Source\Textures.h" />
     <ClInclude Include="Source\Timer.h" />
+    <ClInclude Include="Source\Veterana.h" />
     <ClInclude Include="Source\Window.h" />
     <ClInclude Include="Source\Defs.h" />
     <ClInclude Include="Source\List.h" />

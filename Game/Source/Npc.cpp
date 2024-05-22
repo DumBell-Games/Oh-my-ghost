@@ -22,12 +22,8 @@ Paloma::~Paloma() {
 
 bool Paloma::Awake() {
 
-	//L03: DONE 2: Initialize Player parameters
-	Properties p;
-	LoadProperties(parameters, p);
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
-	texturePath = p.GetProperty("texturePath")->strVal;
 
 	//animations
 	
@@ -38,10 +34,10 @@ bool Paloma::Awake() {
 bool Paloma::Start() {
 
 	PalomaStartAnims();
-
-	texture = app->tex->Load(texturePath.GetString()); 
+ 
+	texture = app->tex->Load(parameters.attribute("texturePath").as_string());
 		
-	nBody = app->physics->CreateRectangle(position.x + 128, position.y + 128, 128, 256, bodyType::KINEMATIC);
+	nBody = app->physics->CreateRectangle(position.x + 128, position.y, 81, 144, bodyType::KINEMATIC);
 	//haz que el rectangulo no rote
 	nBody->body->SetFixedRotation(true);	
 	nBody->listener = this;
@@ -50,9 +46,10 @@ bool Paloma::Start() {
 	return true;
 }
 
-bool Paloma::Update()
-{			
-	app->render->DrawTexture(texture, position.x - 48, position.y - 114, &palomaIdle->GetCurrentFrame());
+bool Paloma::Update(float dt) 
+{	
+	palomaIdle->Update();
+	app->render->DrawTexture(texture, position.x - 24, position.y - 56, &palomaIdle->GetCurrentFrame());
 	
 	b2Transform nBodyPos = nBody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;

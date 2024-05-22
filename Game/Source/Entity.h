@@ -12,7 +12,6 @@ enum class EntityType : char
 	PLAYER,
 	ITEM,
 	DIALOG_TRIGGER,
-	NPC,
 	ENEMY,
 	TRANSITION,
 	COLA,
@@ -22,6 +21,8 @@ enum class EntityType : char
 	CARAMELOS,
 	VELOCIDAD,
 	PALOMA,
+	APRENDIZ,
+	VETERANA,
 	UNKNOWN
 };
 

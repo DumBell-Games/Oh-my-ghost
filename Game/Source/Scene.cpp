@@ -22,6 +22,8 @@
 #include "ItemVelocidad.h"
 #include "InventoryScreen.h"
 #include "Character_Menu.h"
+#include "Aprendiz.h"
+#include "Veterana.h"
 
 
 #include "Defs.h"
@@ -93,6 +95,16 @@ bool Scene::Awake(pugi::xml_node config)
 	for (pugi::xml_node itemNode = config.child("paloma"); itemNode; itemNode = itemNode.next_sibling("paloma"))
 	{
 		Paloma* paloma = (Paloma*)app->entityManager->CreateEntity(EntityType::PALOMA, itemNode);
+		//npc->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("aprendiz"); itemNode; itemNode = itemNode.next_sibling("aprendiz"))
+	{
+		Aprendiz* aprendiz = (Aprendiz*)app->entityManager->CreateEntity(EntityType::APRENDIZ, itemNode);
+		//npc->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("veterana"); itemNode; itemNode = itemNode.next_sibling("veterana"))
+	{
+		Veterana* veterana = (Veterana*)app->entityManager->CreateEntity(EntityType::VETERANA, itemNode);
 		//npc->parameters = itemNode;
 	}
 	for (pugi::xml_node itemNode = config.child("enemy"); itemNode; itemNode = itemNode.next_sibling("enemy"))

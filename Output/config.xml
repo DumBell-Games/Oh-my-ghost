@@ -323,6 +323,73 @@
 
 		</paloma>
 
+
+		<aprendiz x="13442" y="9218" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="aprendizIdle" loop="true" speed="0.08f">
+				<frame x="5	" y="35" w="117" h="186" />
+				<frame x="138" y="36" w="108" h="185" />
+				<frame x="270" y="40" w="101" h="182" />
+				<frame x="401" y="42" w="96" h="178" />
+				<frame x="528" y="44" w="96" h="178" />
+				<frame x="655" y="42" w="97" h="179" />
+				<frame x="782" y="40" w="102" h="181" />
+				<frame x="906" y="38" w="108" h="184" />
+				<frame x="1031" y="35" w="116" h="185" />
+
+			</animation>
+
+		</aprendiz>
+		<aprendiz x="13700" y="8326" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="aprendizIdle" loop="true" speed="0.08f">
+				<frame x="5	" y="35" w="117" h="186" />
+				<frame x="138" y="36" w="108" h="185" />
+				<frame x="270" y="40" w="101" h="182" />
+				<frame x="401" y="42" w="96" h="178" />
+				<frame x="528" y="44" w="96" h="178" />
+				<frame x="655" y="42" w="97" h="179" />
+				<frame x="782" y="40" w="102" h="181" />
+				<frame x="906" y="38" w="108" h="184" />
+				<frame x="1031" y="35" w="116" h="185" />
+
+			</animation>
+
+		</aprendiz>
+		<aprendiz x="13444" y="7556" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="aprendizIdle" loop="true" speed="0.08f">
+				<frame x="5	" y="35" w="117" h="186" />
+				<frame x="138" y="36" w="108" h="185" />
+				<frame x="270" y="40" w="101" h="182" />
+				<frame x="401" y="42" w="96" h="178" />
+				<frame x="528" y="44" w="96" h="178" />
+				<frame x="655" y="42" w="97" h="179" />
+				<frame x="782" y="40" w="102" h="181" />
+				<frame x="906" y="38" w="108" h="184" />
+				<frame x="1031" y="35" w="116" h="185" />
+			</animation>
+
+		</aprendiz>
+
+		<veterana x="13444" y="7556" texturePath="Assets/Textures/VeteranaAstrobark.png">
+			<animation name="veteranaIdle" loop="true" speed="0.08f">
+				<frame x="13" y="50" w="111" h="204" />
+				<frame x="139" y="48" w="111" h="204" />
+				<frame x="268" y="46" w="113" h="208" />
+				<frame x="395" y="59" w="115" h="193" />
+				<frame x="524" y="65" w="116" h="188" />
+				<frame x="648" y="69" w="120" h="183" />
+				<frame x="772" y="71" w="124" h="182" />
+				<frame x="898" y="75" w="126" h="178" />
+				<frame x="1031" y="35" w="116" h="185" />
+				<frame x="1031" y="35" w="116" h="185" />
+				<frame x="1031" y="35" w="116" h="185" />
+				<frame x="1031" y="35" w="116" h="185" />
+				
+
+			</animation>
+
+		</veterana>
+
+
 		<cola x="200" y="472" texturePath="Assets/Textures/itemCola.png"/>
 		<cola x="300" y="472" texturePath="Assets/Textures/itemCola.png"/>
 		<cola x="400" y="472" texturePath="Assets/Textures/itemCola.png"/>
