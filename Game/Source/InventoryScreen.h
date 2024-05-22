@@ -31,7 +31,7 @@ public:
 
     SDL_Texture* continuar;
     SDL_Texture* ajustes;
-    SDL_Texture* salir;
+    SDL_Texture* salir;                                                                                         
     int titleSound;
     int menuIndex = 1;
     

@@ -19,6 +19,7 @@
 #include "IntroScreen.h"
 #include "FadeToBlack.h"
 #include "InventoryScreen.h"
+#include "Character_Menu.h"
 
 #include "DialogManager.h"
 
@@ -50,6 +51,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	physics = new Physics(false);
 	scene = new Scene(false);
 	inventoryScreen = new InventoryScreen(false);
+	characterMenu = new Character_Menu(false);
 	titlescreen = new TitleScreen(false);
 	introScreen = new IntroScreen(false);
 	teamScreen = new TeamScreen(true);
@@ -61,6 +63,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	entityManager = new EntityManager(false);
 	guiManager = new GuiManager(true);
 	dialogManager = new DialogManager(false);
+
 	fadeToBlack = new FadeToBlack(true);
 
 	// Ordered for awake / Start / Update
@@ -77,6 +80,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	AddModule(scene);
 	AddModule(inventoryScreen);
+	AddModule(characterMenu);
 	AddModule(titlescreen);
 	AddModule(introScreen);
 	AddModule(teamScreen);

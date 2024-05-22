@@ -23,6 +23,7 @@ class Map;
 class CombatManager;
 class Reload;
 class InventoryScreen;
+class Character_Menu;
 class TitleScreen;
 class IntroScreen;
 class TeamScreen;
@@ -127,6 +128,7 @@ public:
 	CombatManager* combat;
 	Reload* reload; // Module (un/re)loader
 	InventoryScreen* inventoryScreen;
+	Character_Menu* characterMenu;
 	TitleScreen* titlescreen;
 	IntroScreen* introScreen;
 	TeamScreen* teamScreen;

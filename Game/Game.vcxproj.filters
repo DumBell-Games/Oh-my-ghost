@@ -104,6 +104,8 @@
     <ClCompile Include="Source\Combat.cpp" />
     <ClCompile Include="Source\PropertiesStruct.cpp" />
     <ClCompile Include="Source\tmxTileidAdjustment.h" />
+    
+    <ClCompile Include="Source\Character_Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -244,6 +246,7 @@
     <ClInclude Include="Source\Combat.h" />
     <ClInclude Include="Source\StatusEffect.h" />
     <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\Character_Menu.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
