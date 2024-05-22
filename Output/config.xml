@@ -369,7 +369,7 @@
 
 		</aprendiz>
 
-		<veterana x="13444" y="7556" texturePath="Assets/Textures/VeteranaAstrobark.png">
+		<veterana x="3328" y="11904" texturePath="Assets/Textures/VeteranaAstroBark_SpritesSheet.png">
 			<animation name="veteranaIdle" loop="true" speed="0.08f">
 				<frame x="13" y="50" w="111" h="204" />
 				<frame x="139" y="48" w="111" h="204" />
@@ -379,11 +379,31 @@
 				<frame x="648" y="69" w="120" h="183" />
 				<frame x="772" y="71" w="124" h="182" />
 				<frame x="898" y="75" w="126" h="178" />
-				<frame x="1031" y="35" w="116" h="185" />
-				<frame x="1031" y="35" w="116" h="185" />
-				<frame x="1031" y="35" w="116" h="185" />
-				<frame x="1031" y="35" w="116" h="185" />
+				<frame x="1026" y="81" w="124" h="174" />
+				<frame x="1153" y="69" w="127" h="183" />
+				<frame x="1282" y="69" w="126" h="183" />
+				<frame x="1413" y="58" w="124" h="194" />
 				
+
+			</animation>
+
+		</veterana>
+
+		<veterana x="1855" y="10750" texturePath="Assets/Textures/VeteranaAstroBark_SpritesSheet.png">
+			<animation name="veteranaIdle" loop="true" speed="0.08f">
+				<frame x="13" y="50" w="111" h="204" />
+				<frame x="139" y="48" w="111" h="204" />
+				<frame x="268" y="46" w="113" h="208" />
+				<frame x="395" y="59" w="115" h="193" />
+				<frame x="524" y="65" w="116" h="188" />
+				<frame x="648" y="69" w="120" h="183" />
+				<frame x="772" y="71" w="124" h="182" />
+				<frame x="898" y="75" w="126" h="178" />
+				<frame x="1026" y="81" w="124" h="174" />
+				<frame x="1153" y="69" w="127" h="183" />
+				<frame x="1282" y="69" w="126" h="183" />
+				<frame x="1413" y="58" w="124" h="194" />
+
 
 			</animation>
 

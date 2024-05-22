@@ -82,13 +82,13 @@ bool Player::Start() {
 	texturePlayer = app->tex->Load(parameters.attribute("texturePath").as_string());
 	textureGhost = app->tex->Load(parameters.attribute("ghostTexPath").as_string());
 	
-	currentTexture = texturePlayer;
+	currentTexture = textureGhost;
 	currentAnim = idleFrontal;
 
-	pBody = app->physics->CreateRectangle(position.x + 128, position.y, 128, 150, bodyType::DYNAMIC);
-	casinoIn = app->physics->CreateRectangleSensor(6337 + 128, 166 + 64, 192, 126, bodyType::KINEMATIC);
+	pBody = app->physics->CreateRectangle(position.x + 128, position.y, 128, 30, bodyType::DYNAMIC);
+	casinoIn = app->physics->CreateRectangleSensor(6332 + 128, 754 + 64, 192, 126, bodyType::KINEMATIC);
 	casinoIn->ctype = ColliderType::CASINOIN;
-	casinoOut = app->physics->CreateRectangleSensor(1793 + 128, 12542 + 64, 256, 128, bodyType::KINEMATIC);
+	casinoOut = app->physics->CreateRectangleSensor(1793 + 128, 12542 + 64, 256, 64, bodyType::KINEMATIC);
 	casinoOut->ctype = ColliderType::CASINOOUT;
 
 	tabernaIn = app->physics->CreateRectangleSensor(4289 + 128, 1588 + 64, 192, 126, bodyType::KINEMATIC);
@@ -289,7 +289,7 @@ bool Player::Update(float dt)
 	position.x = METERS_TO_PIXELS(pBodyPos.p.x) - 32 / 2;     
 	position.y = METERS_TO_PIXELS(pBodyPos.p.y) - 32 / 2;
 
-	app->render->DrawTexture(currentTexture,position.x - 48 ,position.y - 64, &currentAnim->GetCurrentFrame());
+	app->render->DrawTexture(currentTexture,position.x - 48 ,position.y - 110, &currentAnim->GetCurrentFrame());
 
 	uint w, h;
 	app->win->GetWindowSize(w, h);
