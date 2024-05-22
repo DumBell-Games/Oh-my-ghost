@@ -85,7 +85,7 @@ bool Player::Start() {
 	currentTexture = texturePlayer;
 	currentAnim = idleFrontal;
 
-	pBody = app->physics->CreateRectangle(position.x + 128, position.y, 128, 150, bodyType::DYNAMIC);
+	pBody = app->physics->CreateRectangle(position.x + 128, position.y, 128, 30, bodyType::DYNAMIC);
 	//haz que el rectangulo no rote
 	pBody->body->SetFixedRotation(true);
 	pBody->listener = this;
@@ -272,7 +272,7 @@ bool Player::Update(float dt)
 	position.x = METERS_TO_PIXELS(pBodyPos.p.x) - 32 / 2;     
 	position.y = METERS_TO_PIXELS(pBodyPos.p.y) - 32 / 2;
 
-	app->render->DrawTexture(currentTexture,position.x - 48 ,position.y - 64, &currentAnim->GetCurrentFrame());
+	app->render->DrawTexture(currentTexture,position.x - 48 ,position.y - 110, &currentAnim->GetCurrentFrame());
 
 	uint w, h;
 	app->win->GetWindowSize(w, h);
