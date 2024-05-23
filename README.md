@@ -33,6 +33,10 @@
 	- WASD + Shift to run
 	- SPACE to interact and select option
 	- ESC to open pause menu
+ - F2 Change body
+ - F3 Goto casino
+ - F4 Goto arcade
+ - F5 Goto Tabern
 
 - Gamepad
 	- L Joystick to movement
