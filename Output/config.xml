@@ -37,7 +37,7 @@
   </input>
 
 	<scene>
-		<player x="8131" y="6083" texturePath="Assets/Textures/springyPaloma.png" ghostTexPath="Assets/Textures/springyFantasma.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg">
+		<player x="8025" y="6164" texturePath="Assets/Textures/springyPaloma.png" ghostTexPath="Assets/Textures/springyFantasma.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg">
 			<animation name="walkR" loop="true" speed="0.08f">
 				<frame x="15" y="1137" w="111" h="144" />
 				<frame x="143" y="1138" w="111" h="143" />
@@ -309,87 +309,230 @@
 			</animation>
 
 		</player>
+		<silverWings x="7468" y="5726" texturePath="Assets/Textures/silverWings.png">
+			<animation name="silverIdle" loop="true" speed="0.08f">
+				<frame x="1" y="1" w="78" h="144" />
+				<frame x="129" y="1" w="78" h="144" />
+				<frame x="258" y="1" w="81" h="144" />
+				<frame x="385" y="1" w="81" h="144" />
+				<frame x="513" y="1" w="81" h="144" />
+				<frame x="641" y="1" w="81" h="144" />
+				<frame x="769" y="1" w="78" h="144" />
+				<frame x="896" y="1" w="78" h="144" />
+				<frame x="1022" y="1" w="82" h="144" />
+				<frame x="1150" y="1" w="81" h="144" />
+				<frame x="1278" y="1" w="81" h="144" />
+				<frame x="1406" y="1" w="81" h="144" />
+				<frame x="1537" y="1" w="78" h="144" />
+			
+			</animation>
+			
+
+		</silverWings>
 
 
-		<cola x="200" y="472" texturePath="Assets/Textures/itemCola.png"/>
-		<cola x="300" y="472" texturePath="Assets/Textures/itemCola.png"/>
-		<cola x="400" y="472" texturePath="Assets/Textures/itemCola.png"/>
-		<birra x="500" y="472" texturePath="Assets/Textures/itemCerveza.png"/>
-		<caramelos x="600" y="472" texturePath="Assets/Textures/itemCaramelos.png"/>
-		<velocidad x="700" y="472" texturePath="Assets/Textures/itemVelocidad.png"/>
-		<patatas x="800" y="472" texturePath="Assets/Textures/itemPatatas.png"/>
+		<aprendiz x="13442" y="9218" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="aprendizIdle" loop="true" speed="0.08f">
+				<frame x="5	" y="35" w="117" h="186" />
+				<frame x="138" y="36" w="108" h="185" />
+				<frame x="270" y="40" w="101" h="182" />
+				<frame x="401" y="42" w="96" h="178" />
+				<frame x="528" y="44" w="96" h="178" />
+				<frame x="655" y="42" w="97" h="179" />
+				<frame x="782" y="40" w="102" h="181" />
+				<frame x="906" y="38" w="108" h="184" />
+				<frame x="1031" y="35" w="116" h="185" />
+
+			</animation>
+
+		</aprendiz>
+		<aprendiz x="13301" y="8416" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="aprendizIdle" loop="true" speed="0.08f">
+				<frame x="5	" y="35" w="117" h="186" />
+				<frame x="138" y="36" w="108" h="185" />
+				<frame x="270" y="40" w="101" h="182" />
+				<frame x="401" y="42" w="96" h="178" />
+				<frame x="528" y="44" w="96" h="178" />
+				<frame x="655" y="42" w="97" h="179" />
+				<frame x="782" y="40" w="102" h="181" />
+				<frame x="906" y="38" w="108" h="184" />
+				<frame x="1031" y="35" w="116" h="185" />
+
+			</animation>
+
+		</aprendiz>
+		
+		<aprendiz x="13213" y="7664" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="aprendizIdle" loop="true" speed="0.08f">
+				<frame x="5	" y="35" w="117" h="186" />
+				<frame x="138" y="36" w="108" h="185" />
+				<frame x="270" y="40" w="101" h="182" />
+				<frame x="401" y="42" w="96" h="178" />
+				<frame x="528" y="44" w="96" h="178" />
+				<frame x="655" y="42" w="97" h="179" />
+				<frame x="782" y="40" w="102" h="181" />
+				<frame x="906" y="38" w="108" h="184" />
+				<frame x="1031" y="35" w="116" h="185" />
+			</animation>
+
+		</aprendiz>
+
+		<veterana x="3542" y="10821" texturePath="Assets/Textures/VeteranaAstroBark_SpritesSheet.png">
+			<animation name="veteranaIdle" loop="true" speed="0.08f">
+				<frame x="13" y="50" w="111" h="204" />
+				<frame x="139" y="48" w="111" h="204" />
+				<frame x="268" y="46" w="113" h="208" />
+				<frame x="395" y="59" w="115" h="193" />
+				<frame x="524" y="65" w="116" h="188" />
+				<frame x="648" y="69" w="120" h="183" />
+				<frame x="772" y="71" w="124" h="182" />
+				<frame x="898" y="75" w="126" h="178" />
+				<frame x="1026" y="81" w="124" h="174" />
+				<frame x="1153" y="69" w="127" h="183" />
+				<frame x="1282" y="69" w="126" h="183" />
+				<frame x="1413" y="58" w="124" h="194" />
+				
+
+			</animation>
+
+		</veterana>
+
+		<veterana x="1855" y="10750" texturePath="Assets/Textures/VeteranaAstroBark_SpritesSheet.png">
+			<animation name="veteranaIdle" loop="true" speed="0.08f">
+				<frame x="13" y="50" w="111" h="204" />
+				<frame x="139" y="48" w="111" h="204" />
+				<frame x="268" y="46" w="113" h="208" />
+				<frame x="395" y="59" w="115" h="193" />
+				<frame x="524" y="65" w="116" h="188" />
+				<frame x="648" y="69" w="120" h="183" />
+				<frame x="772" y="71" w="124" h="182" />
+				<frame x="898" y="75" w="126" h="178" />
+				<frame x="1026" y="81" w="124" h="174" />
+				<frame x="1153" y="69" w="127" h="183" />
+				<frame x="1282" y="69" w="126" h="183" />
+				<frame x="1413" y="58" w="124" h="194" />
+
+
+			</animation>
+
+		</veterana>
+
+
+		<caramelos x="8098" y="6434" texturePath="Assets/Textures/itemCaramelos.png"/>
+		<caramelos x="2723" y="806" texturePath="Assets/Textures/itemCaramelos.png"/>
+		<caramelos x="6565" y="2337" texturePath="Assets/Textures/itemCaramelos.png"/>
+		<yogur x="3332" y="6220" texturePath="Assets/Textures/itemYogur.png"/>
+		<yogur x="793" y="3553" texturePath="Assets/Textures/itemYogur.png"/>
+		<yogur x="5409" y="1312" texturePath="Assets/Textures/itemYogur.png"/>
+		<patatas x="5409" y="4772" texturePath="Assets/Textures/itemPatatas.png"/>
+		<patatas x="3487" y="3107" texturePath="Assets/Textures/itemPatatas.png"/>
+		<patatas x="5278" y="2343" texturePath="Assets/Textures/itemPatatas.png"/>
 
 		<enemy x="900" y="472" texturePath="Assets/Textures/pigNpc.png"/>
 
-
-		<dialogTrigger x="200" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true" mapid="1">
+		<dialogTrigger x="7600" y="5726" repeat ="true">
 			<sentences>
-				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="Hola"/>
-				<sentence name="Sisebuto"	facetexturepath="Assets/Textures/Chibi_vagabundo.png" text="(Hablaría borracho) Déjame en paz *burp*, a no ser que me quieras pagar otra ronda, que entonces sí te haré caso"/>
-				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="*…*"/>
-
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="*Anda parece que he poseido a esta Paloma a ver si ahora puedo hablar con la gente*"/>
 			</sentences>
 			<repeat_sentences>
-				<sentence name="Sisebuto"	facetexturepath="Assets/Textures/Chibi_vagabundo.png" text="PESADOO, que te he dicho que no vuelvas sin un copazo"/>
-				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="*Debería conseguir dinero quizás…*"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="*Anda parece que he poseido a esta Paloma a ver si ahora puedo hablar con la gente*"/>
 			</repeat_sentences>
 		</dialogTrigger>
-		<dialogTrigger x="300" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true">
+
+		<dialogTrigger x="13572" y="9218" repeat ="true">
 			<sentences>
-				<sentence name="Homeless"	facetexturepath="Assets/Textures/catNpc.png" text="zZzZzZZZzZZZ"/>
-				<sentence name ="Springy"   facetexturepath="Assets/Textures/ChibiSpringy.png" type="choose" text="*Anda tiene 5 PawCoins, ¿le robo?*">
-					<option1 text="Sí">
-						<sentence text="Vale ya tengo 5 PawCoins pero me siento sucio, al menos puedo comprarle el copazo a Sisebuto" />
-					</option1>
-					<option2 text="No">
-						<sentence text="Voy a buscar otra forma más limpia de conseguir dinero"/>
-					</option2>
-				</sentence>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="¡¡¡Holaaa!!! ¿Sabrías decirme dónde está AstroBark?"/>
+				<sentence name="Aprendiz 1"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Pues esa información no te la voy a dar por la cara palomón"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="Uyyy perdón no quería ofender, ¿Que tendría que hacer para saber eso?"/>
+				<sentence name="Aprendiz 1"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Pues tendrás que pelearte conmigo"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="No hay otra maner…. uyyy vale parece que no"/>	
 			</sentences>
 		</dialogTrigger>
-		<dialogTrigger x="500" y="672" texturepath="Assets/Textures/player1.png" repeat="true">
+
+		<dialogTrigger x="15112" y="8286" repeat ="true">
 			<sentences>
-				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="Aiiiiiiiiiii que mierda de vidaaaaaaaaaa, tengo un marido borracho y mi hijo se fue a descubrir mundo, que sola estoy, QUE SOLAAAAAAA"/>
-				<sentence name ="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png"	text="No serás la mujer de Sisebuto, ¿verdad?"/>
-				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text=" Ai no, ¿Qué te ha hecho ya ese condenado?"/>
-				<sentence name ="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png"	text="Nono nada nada, le he pedido información pero me la ha dado incompleta. Me podrías indicar dónde…"/>
-				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="AAAAAAIIIIIII que sola estooooooooyyyyyy. ¿Qué dónde está el desgraciado de Sisebuto? No sé estoy muy solaaaaa"/>
-				<sentence name ="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png"	text="*Sola y loca al parecer…*"/>
-				<sentence name ="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png"	text="Nooo, me preguntaba si…"/>
-				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="AAAAAAAAIIII que ni para indicar sirvoooooo"/>
-				<sentence name ="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png"	text="CALLATE YA JODER, ¿¿¿¿me sabes indicar dónde están los secuaces de AstroBark????"/>
-				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png"  text="Tampoco hace falta ponerse así… que estoy muy sola…"/>
-				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="Antes los he visto entrar a la discoteca Wawka"/>
-				<sentence name ="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png"	text="Gracias, hasta luego"/>
-				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="¿Cómo que hasta luego bombón? ¿Haces algo esta noche? esta noche tengo casa sola… me preguntaba si… ya sabes jeje que Sisebuto nunca se pasa por casa jiji"/>
-				<sentence name ="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png"	text="*Madre mía cómo está el patio…*"/>
-
+				<sentence name="Dj Bunny"	facetexturepath="Assets/Textures/Chibi_DjBunny.png" text="¿COMO ESTÁN ESAS PERRAS? QUE NO PARE ESE PERREOOO"/>
+				<sentence name="Perras"		facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="*GUAU GUAU GUAU GUAU*"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="*A ver donde encuentro a los secuaces de AstroBark.*"/>
 			</sentences>
-			<repeat_sentences>
-				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="Aiiiiiiiiiii que mierda de vidaaaaaaaaaa, tengo un marido borracho y mi hijo se fue a descubrir mundo, que sola estoy, QUE SOLAAAAAAA"/>
-				<sentence name ="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png"	text="No serás la mujer de Sisebuto, ¿verdad?"/>
-				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text=" Ai no, ¿Qué te ha hecho ya ese condenado?"/>
-				<sentence name ="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png"	text="Nono nada nada, le he pedido información pero me la ha dado incompleta. Me podrías indicar dónde…"/>
-				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="AAAAAAIIIIIII que sola estooooooooyyyyyy. ¿Qué dónde está el desgraciado de Sisebuto? No sé estoy muy solaaaaa"/>
-				<sentence name ="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png"	text="*Sola y loca al parecer…*"/>
-				<sentence name ="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png"	text="Nooo, me preguntaba si…"/>
-				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="AAAAAAAAIIII que ni para indicar sirvoooooo"/>
-				<sentence name ="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png"	text="CALLATE YA JODER, ¿¿¿¿me sabes indicar dónde están los secuaces de AstroBark????"/>
-				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png"  text="Tampoco hace falta ponerse así… que estoy muy sola…"/>
-				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="Antes los he visto entrar a la discoteca Wawka"/>
-				<sentence name ="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png"	text="Gracias, hasta luego"/>
-				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="¿Cómo que hasta luego bombón? ¿Haces algo esta noche? esta noche tengo casa sola… me preguntaba si… ya sabes jeje que Sisebuto nunca se pasa por casa jiji"/>
-				<sentence name ="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png"	text="*Madre mía cómo está el patio…*"/>
-
-			</repeat_sentences>
 		</dialogTrigger>
-		<dialogTrigger x="700" y="672" texturepath="Assets/Textures/player1.png"  facetexturepath="Assets/Textures/penguinNpc.png" name="Sisebuto" repeat="true">
+
+		<dialogTrigger x="13431" y="8406" repeat ="true">
 			<sentences>
-				<sentence name="Sr. Bestia"	facetexturepath="Assets/Textures/Chibi_SenorBestia.png" text="Pasad putos pobres, que yo os doy dinero para que no déis tanto asco."/>
-				<sentence name ="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png"	text="*Recibe 20 PawCoins*"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="*A ver si este es más majo que el de abajo* ¡Hola! Tu también debes de ser aprendiz de AstroBark ¿verdad?"/>
+				<sentence name="Aprendiz 2"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Si, ¿por qué quieres saberlo?"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="Me gustaría saber donde puedo encontrar a *PAAAM*"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="(se tropezaría con una mesa y del propio impacto le golpearía al segundo aprendiz y éste de la propia rabia empezaría un combate)"/>
+				<sentence name="Aprendiz 2"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Maldito condenadoooo que mi ropa es de Guaucci"/>
+			</sentences>
+		</dialogTrigger>
+
+		<dialogTrigger x="13343" y="7664" repeat ="true">
+			<sentences>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="¡Hola! Dice el Sócrates de abajo que tienes más información de AstroBark, ¿me la vas a dar o también hará falta una prueba?"/>
+				<sentence name="Aprendiz 3"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Eh… pues… no se… quizás tendrás que superar la prueba de mis garras"/>
+			</sentences>
+		</dialogTrigger>
+
+		<dialogTrigger x="1900" y="12292" repeat ="true">	
+			<sentences>
+				<sentence name="Jefe del Casino"	facetexturepath="Assets/Textures/Chibi_JefeCasino.png" text="3000 PawCoins al verde, ¡QUE AHORA ME TOCA!"/>
+				<sentence name="Springy"		facetexturepath="Assets/Textures/ChibiSpringy.png" text="*A ver dónde están estos… anda que el lugar este es pequeño…*"/>
+			</sentences>
+		</dialogTrigger>
+
+		<dialogTrigger x="1985" y="10750" repeat ="true">
+			<sentences>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="Me han dicho los bailongos del Wawka que sabes donde esta AstroBark."/>
+				<sentence name="Veterana 1"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Esa información es confidencial, AstroBark está protegido"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="Pues jope, si que me está costando llegar hacia el..."/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="¿Hay algo que pueda hacer para obtener información?"/>
+				<sentence name="Veterana 1"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Siempre hay opciones... *se afila las garras*"/>
+				
+			</sentences>
+		</dialogTrigger>
+
+		<dialogTrigger x="3665" y="10821" repeat ="true">
+			<sentences>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="Holaaa. ¿Uy ese coche te quedaría muy grande?."/>
+				<sentence name="Veterana 2"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="¡¿CÓMO OSAS?!"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="*Vaya, creo que he vuelto a meter la pata...*"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="Creo que me has mal interpretado, me refería a que..."/>
+				<sentence name="Veterana 2"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="*empezaría a rugir malhumorada* Ven aquííí"/>
 
 			</sentences>
+		</dialogTrigger>
+		
+		<dialogTrigger x="5583" y="2136"  texturepath ="Chibi_Segismunda.png" repeat ="true">
+			<sentences>
+				<sentence name="Dolly 1"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="Se rumorea que si consigues 3 bolsas de patatas que estan por Fauna Central consegurias una recompensa"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="¿¡EN SERIO!? Pues ahora mismo voy a buscarlas. ¿Pero que recompensa obtendre?"/>
+				<sentence name="Dolly 1"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="Cuando lo consigas mira tu mochila y tendras tu recompensa"/>
+				<sentence name="Springy 2"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="¡Que guay! Estoy ansioso por saber que conseguiré"/>
 
+			</sentences>
+		</dialogTrigger>
+
+		<dialogTrigger x="6239" y="2142" texturepath ="Chibi_Segismunda.png" repeat ="true">
+			<sentences>
+				<sentence name="Dolly 2"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text=" ¿Oye sabes que si consigues 3 bolsas de caramelos que estan por Fauna Central a parte de caries consegurias una recompensa?"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="Ui, pues no quiero caries pero si quiero la recompensa... me pondré a buscar "/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="Y recuerda mirar tu mochila cuando lo tengas todo"/>
+				<sentence name="Veterana 2"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Valep"/>
+
+			</sentences>
+		</dialogTrigger>	
+		
+		
+
+		<dialogTrigger x="5589" y="1488" texturepath ="Chibi_Segismunda.png" repeat ="true">
+			<sentences>
+				<sentence name="Dolly"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="Qué lástima que dejaran de fabricar Petisuises... eso sí, parece ser que alguien escondió algunos por el mapa y que detrás de ello hay un gran tesoro..."/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="ALA que ricos que estaban... ¡¡¡voy a buscarlos!!! "/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="EHHH cretino! ¡Que los quería yo! Tendré que ir yo primero..."/>
+				<sentence name="Veterana 2"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="*tendré que correr*"/>
+
+			</sentences>
 		</dialogTrigger>
 
 
@@ -403,7 +546,7 @@
 	</dialogmanager>
 
 	<map path="Assets/Maps/">
-		<map id="0" file="mapa.tmx"/>
+		<map id="0" file="mapaLPA.tmx"/>
 		<map id="1" file="taberna_plantilla.tmx"/>
 		<map id="2" file="disco_plantilla.tmx"/>
 		<map id="3" file="casino_plantilla.tmx"/>

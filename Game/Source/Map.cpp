@@ -359,7 +359,7 @@ bool Map::LoadAnimation(pugi::xml_node node, TileSet* tileset)
     Animation* anim = new Animation();
 
     anim->name = tileset->name;
-    anim->texture = tileset->texture;
+   
 
     for (pugi::xml_node frame = node.child("animation").child("frame"); frame && ret; frame = frame.next_sibling("frame"))
     {

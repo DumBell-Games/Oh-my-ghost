@@ -61,12 +61,12 @@ bool DebugConsole::Update(float dt)
 
 bool DebugConsole::PostUpdate()
 {
-	if (show) {
-		//Input box
-		app->render->DrawRectangle({ 0,0,app->render->camera.w,64 }, 0, 0, 0, 192, true, false);
-		app->render->DrawText(input.c_str(), 10, 8, 0, 48, {255,255,255,255});
+	//if (show) {
+	//	//Input box
+	//	app->render->DrawRectangle({ 0,0,app->render->camera.w,64 }, 0, 0, 0, 192, true, false);
+	//	app->render->DrawText(input.c_str(), 10, 8, 0, 48, {255,255,255,255});
 
-	}
+	//}
 
 	return true;
 }

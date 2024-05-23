@@ -10,7 +10,6 @@ class Animation
 public:
 	SString name;
 	float speed = 1.0f;
-	SDL_Texture* texture;
 	SDL_Rect frames[MAX_FRAMES];
 	int durations[MAX_FRAMES];
 	bool loop = true;

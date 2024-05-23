@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -95,8 +95,13 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+
+    <ClCompile Include="Source\Aprendiz.cpp" />
+    <ClCompile Include="Source\Path.cpp" />
+
     <ClCompile Include="Source\InventoryManager.cpp" />
     <ClCompile Include="Source\ItemData.cpp" />
+
     <ClCompile Include="Source\Poison.cpp" />
     <ClCompile Include="Source\Character_Menu.cpp" />
     <ClCompile Include="Source\DebugCommands.h" />
@@ -126,7 +131,6 @@
     <ClCompile Include="Source\Audio.cpp" />
     <ClCompile Include="Source\Input.cpp" />
     <ClCompile Include="Source\Map.cpp" />
-    <ClCompile Include="Source\Npc.cpp" />
     <ClCompile Include="Source\Pathfinding.cpp" />
     <ClCompile Include="Source\PerfTimer.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
@@ -135,16 +139,23 @@
     <ClCompile Include="Source\Reload.cpp" />
     <ClCompile Include="Source\Scene.cpp" />
     <ClCompile Include="Source\Render.cpp" />
+    <ClCompile Include="Source\SilverWings.cpp" />
     <ClCompile Include="Source\TeamScreen.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
+    <ClCompile Include="Source\Veterana.cpp" />
     <ClCompile Include="Source\Window.cpp" />
     <ClCompile Include="Source\TransitionTrigger.cpp" />
     <ClCompile Include="Source\tmxTileidAdjustment.h" />
     <ClInclude Include="Source\Animation.h" />
+
+    <ClInclude Include="Source\Aprendiz.h" />
+    <ClInclude Include="Source\Path.h" />
+
     <ClInclude Include="Source\EnumUtils.h" />
     <ClInclude Include="Source\InventoryManager.h" />
     <ClInclude Include="Source\ItemData.h" />
+
     <ClInclude Include="Source\Poison.h" />
     <ClInclude Include="Source\Character_Menu.h" />
     <ClInclude Include="Source\DebugConsole.h" />
@@ -172,7 +183,6 @@
     <ClInclude Include="Source\GuiControlButton.h" />
     <ClInclude Include="Source\GuiManager.h" />
     <ClInclude Include="Source\Map.h" />
-    <ClInclude Include="Source\Npc.h" />
     <ClInclude Include="Source\Pathfinding.h" />
     <ClInclude Include="Source\PerfTimer.h" />
     <ClInclude Include="Source\Physics.h" />
@@ -187,9 +197,11 @@
     <ClInclude Include="Source\App.h" />
     <ClInclude Include="Source\Module.h" />
     <ClInclude Include="Source\Render.h" />
+    <ClInclude Include="Source\SilverWings.h" />
     <ClInclude Include="Source\TeamScreen.h" />
     <ClInclude Include="Source\Textures.h" />
     <ClInclude Include="Source\Timer.h" />
+    <ClInclude Include="Source\Veterana.h" />
     <ClInclude Include="Source\Window.h" />
     <ClInclude Include="Source\Defs.h" />
     <ClInclude Include="Source\List.h" />

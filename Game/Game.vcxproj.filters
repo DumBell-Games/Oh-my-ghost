@@ -43,9 +43,6 @@
     <ClCompile Include="Source\Map.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Npc.cpp">
-      <Filter>Entities</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Pathfinding.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
@@ -104,8 +101,14 @@
     <ClCompile Include="Source\Combat.cpp" />
     <ClCompile Include="Source\PropertiesStruct.cpp" />
     <ClCompile Include="Source\tmxTileidAdjustment.h" />
+
     <ClCompile Include="Source\InventoryManager.cpp" />
+
     <ClCompile Include="Source\Character_Menu.cpp" />
+    <ClCompile Include="Source\Aprendiz.cpp" />
+    <ClCompile Include="Source\Veterana.cpp" />
+    <ClCompile Include="Source\SilverWings.cpp" />
+    <ClCompile Include="Source\Path.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -183,9 +186,6 @@
     <ClInclude Include="Source\Module.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Npc.h">
-      <Filter>Entities</Filter>
-    </ClInclude>
     <ClInclude Include="Source\Pathfinding.h">
       <Filter>Modules</Filter>
     </ClInclude>
@@ -250,6 +250,10 @@
     <ClInclude Include="Source\ItemData.h" />
     <ClInclude Include="Source\InventoryManager.h" />
     <ClInclude Include="Source\Character_Menu.h" />
+    <ClInclude Include="Source\Aprendiz.h" />
+    <ClInclude Include="Source\Veterana.h" />
+    <ClInclude Include="Source\SilverWings.h" />
+    <ClInclude Include="Source\Path.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

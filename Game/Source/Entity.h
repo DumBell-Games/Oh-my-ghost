@@ -12,7 +12,6 @@ enum class EntityType : char
 	PLAYER,
 	ITEM,
 	DIALOG_TRIGGER,
-	NPC,
 	ENEMY,
 	TRANSITION,
 	COLA,
@@ -21,6 +20,9 @@ enum class EntityType : char
 	PATATAS,
 	CARAMELOS,
 	VELOCIDAD,
+	SILVERWINGS,
+	APRENDIZ,
+	VETERANA,
 	UNKNOWN
 };
 
@@ -43,6 +45,11 @@ public:
 	}
 
 	virtual bool Update(float dt)
+	{
+		return true;
+	}
+
+	virtual bool PostUpdate()
 	{
 		return true;
 	}

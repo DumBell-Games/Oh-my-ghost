@@ -82,10 +82,27 @@ bool Player::Start() {
 	texturePlayer = app->tex->Load(parameters.attribute("texturePath").as_string());
 	textureGhost = app->tex->Load(parameters.attribute("ghostTexPath").as_string());
 	
-	currentTexture = texturePlayer;
+	currentTexture = textureGhost;
 	currentAnim = idleFrontal;
 
-	pBody = app->physics->CreateRectangle(position.x + 128, position.y, 128, 150, bodyType::DYNAMIC);
+	pBody = app->physics->CreateRectangle(position.x + 128, position.y, 128, 30, bodyType::DYNAMIC);
+	casinoIn = app->physics->CreateRectangleSensor(6332 + 128, 754, 192, 126, bodyType::KINEMATIC);
+	casinoIn->ctype = ColliderType::CASINOIN;
+	casinoOut = app->physics->CreateRectangleSensor(1793 + 128, 12542 + 64, 256, 64, bodyType::KINEMATIC);
+	casinoOut->ctype = ColliderType::CASINOOUT;
+
+	tabernaIn = app->physics->CreateRectangleSensor(4289 + 128, 1588 + 64, 192, 126, bodyType::KINEMATIC);
+	tabernaIn->ctype = ColliderType::TABERNAIN;
+	tabernaOut = app->physics->CreateRectangleSensor(7939 + 128, 12159 + 64, 256, 128, bodyType::KINEMATIC);
+	tabernaOut->ctype = ColliderType::TABERNAOUT;
+
+	arcadeIn = app->physics->CreateRectangleSensor(3009 + 128, 4645 + 64, 192, 126, bodyType::KINEMATIC);
+	arcadeIn->ctype = ColliderType::ARCADEIN;
+	arcadeOut = app->physics->CreateRectangleSensor(14849 + 128, 9600 + 64, 256, 128, bodyType::KINEMATIC);
+	arcadeOut->ctype = ColliderType::ARCADEOUT;
+
+
+
 	//haz que el rectangulo no rote
 	pBody->body->SetFixedRotation(true);
 	pBody->listener = this;
@@ -146,7 +163,7 @@ bool Player::Update(float dt)
 		currentAnim->Update();
 	
 	}
-	else if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN && currentTexture == textureGhost)
+	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN && currentTexture == textureGhost)
 	{
 		currentAnim = cambioCuerpoF;
 		currentAnim->Reset();
@@ -272,14 +289,65 @@ bool Player::Update(float dt)
 	position.x = METERS_TO_PIXELS(pBodyPos.p.x) - 32 / 2;     
 	position.y = METERS_TO_PIXELS(pBodyPos.p.y) - 32 / 2;
 
-	app->render->DrawTexture(currentTexture,position.x - 48 ,position.y - 64, &currentAnim->GetCurrentFrame());
-
+	
 	uint w, h;
 	app->win->GetWindowSize(w, h);
 	app->render->camera.x = (-position.x * app->win->GetScale()) + w / 2;
 	app->render->camera.y = (-position.y * app->win->GetScale()) + h / 2;
-
 	
+	if (casinoIN || app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
+	{
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(1900), PIXEL_TO_METERS(12488)), NULL);
+		casinoIN = false;
+	}
+	if (casinoOUT)
+	{
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(6420), PIXEL_TO_METERS(894)), NULL);
+		casinoOUT = false;
+	}
+	if (arcadeIN || app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
+	{
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(14972), PIXEL_TO_METERS(9512)), NULL);
+		arcadeIN = false;
+	}
+	if (arcadeOUT)
+	{
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(3104), PIXEL_TO_METERS(4934)), NULL);
+		arcadeOUT = false;
+	}
+	if (tabernaIN || app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
+	{
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(8060), PIXEL_TO_METERS(12104)), NULL);
+		tabernaIN = false;
+	}
+	if (tabernaOUT)
+	{
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(4393), PIXEL_TO_METERS(1878)), NULL);
+		tabernaOUT = false;
+	}
+	if (palomaTouched)
+	{
+		currentAnim = cambioCuerpoF;
+		currentAnim->Update();
+		
+		if (currentAnim->HasFinished())
+		{
+			currentTexture = texturePlayer;
+			currentAnim = idleFrontal;
+			currentAnim->Update();
+			palomaTouched = false;
+		}
+	}
+	
+	
+
+	return true;
+}
+
+bool Player::PostUpdate()
+{
+	app->render->DrawTexture(currentTexture, position.x - 48, position.y - 110, &currentAnim->GetCurrentFrame());
+
 	return true;
 }
 
@@ -295,8 +363,43 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::PLATFORM:
 		LOG("Collision PLATFORM");
 		break;
+	case ColliderType::CASINOIN:
+		LOG("Collision CASINOIN");
+		casinoIN = true;
+		casinoOUT = false;
+		break;
+	case ColliderType::CASINOOUT:
+		LOG("Collision CASINOOUT");
+		casinoOUT = true;
+		casinoIN = false;
+		
+		break;
+	case ColliderType::ARCADEIN:
+		LOG("Collision ARCADEIN");
+		arcadeIN = true;
+		arcadeOUT = false;
+		break;
+	case ColliderType::ARCADEOUT:
+		LOG("Collision ARCADEOUT");
+		arcadeOUT = true;
+		arcadeIN = false;
+		break;
+	case ColliderType::TABERNAIN:
+		LOG("Collision TABERNAIN");
+		tabernaIN = true;
+		tabernaOUT = false;
+		break;
+	case ColliderType::TABERNAOUT:
+		LOG("Collision TABERNAOUT");
+		tabernaOUT = true;
+		tabernaIN = false;
+		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
+		break;
+	case ColliderType::PALOMA:
+		LOG("Collision PALOMA");
+		palomaTouched = true;
 		break;
 	default:
 		break;
@@ -333,3 +436,4 @@ Animation* Player::GetAnimation(SString name)
 	}
 	return nullptr;
 }
+

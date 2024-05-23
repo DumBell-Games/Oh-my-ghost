@@ -20,12 +20,9 @@ Yogur::~Yogur() {}
 
 bool Yogur::Awake() {
 
-	Properties p;
-	LoadProperties(parameters, p);
-
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
-	
+
 	//cargar las caraterísticas que tiene el objeto en cuestion (cola) 
 	curacion = 10;
 	//cargariamos descripción desde el documento xml
@@ -35,7 +32,7 @@ bool Yogur::Awake() {
 	//cargar sonido del objeto
 	itemFx = app->audio->LoadFx("Assets/Audio/Fx/cola.wav");
 	//cargar la textura desde el xml
-	texturePath = p.GetProperty("texturePath")->strVal;
+	texturePath = parameters.attribute("texturePath").as_string();
 
 	return true;
 }

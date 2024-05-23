@@ -8,7 +8,7 @@
 #include "Map.h"
 #include "Optick/include/optick.h"
 #include "DialogTriggerEntity.h"
-#include "Npc.h"
+#include "SilverWings.h"
 #include "Enemies.h"
 #include "Physics.h"
 #include "FadeToBlack.h"
@@ -22,6 +22,9 @@
 #include "ItemVelocidad.h"
 #include "InventoryScreen.h"
 #include "Character_Menu.h"
+#include "Aprendiz.h"
+#include "Veterana.h"
+#include "QuestPatatasScreen.h"
 
 
 #include "Defs.h"
@@ -90,9 +93,19 @@ bool Scene::Awake(pugi::xml_node config)
 		DialogTrigger* dialogTrigger = (DialogTrigger*)app->entityManager->CreateEntity(EntityType::DIALOG_TRIGGER, itemNode);
 		//dialogTrigger->parameters = itemNode;
 	}
-	for (pugi::xml_node itemNode = config.child("npc"); itemNode; itemNode = itemNode.next_sibling("npc"))
+	for (pugi::xml_node itemNode = config.child("silverWings"); itemNode; itemNode = itemNode.next_sibling("silverWings"))
 	{
-		Npc* npc = (Npc*)app->entityManager->CreateEntity(EntityType::NPC, itemNode);
+		SilverWings* silverWings = (SilverWings*)app->entityManager->CreateEntity(EntityType::SILVERWINGS, itemNode);
+		//npc->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("aprendiz"); itemNode; itemNode = itemNode.next_sibling("aprendiz"))
+	{
+		Aprendiz* aprendiz = (Aprendiz*)app->entityManager->CreateEntity(EntityType::APRENDIZ, itemNode);
+		//npc->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("veterana"); itemNode; itemNode = itemNode.next_sibling("veterana"))
+	{
+		Veterana* veterana = (Veterana*)app->entityManager->CreateEntity(EntityType::VETERANA, itemNode);
 		//npc->parameters = itemNode;
 	}
 	for (pugi::xml_node itemNode = config.child("enemy"); itemNode; itemNode = itemNode.next_sibling("enemy"))
@@ -110,7 +123,7 @@ bool Scene::Awake(pugi::xml_node config)
 bool Scene::Start()
 {
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
-	img = app->tex->Load("Assets/Textures/test.png");
+	img = app->tex->Load("Assets/Textures/test.png"); 
 	
 	//Music is commented so that you can add your own music
 	//app->audio->PlayMusic("Assets/Audio/Music/music_spy.ogg");
@@ -159,7 +172,7 @@ bool Scene::Update(float dt)
 
 	// L09 DONE 6: Implement a method that repositions the player in the map with a mouse click
 	iPoint origin = iPoint(2, 21);
-	app->map->pathfinding->CreatePath(origin, app->map->WorldToMap(player->position.x,player->position.y));
+	//app->map->pathfinding->CreatePath(origin, app->map->WorldToMap(player->position.x,player->position.y));
 
 	// L13: Get the latest calculated path and draw
 	const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
@@ -192,6 +205,36 @@ bool Scene::Update(float dt)
 		app->win->UnFullscreenMode();
 	}
 
+	if (app->scene->GetPatatasQuantity() == 3) {
+		app->scene->ColaPicked();
+		app->scene->ColaPicked();
+		app->scene->ColaPicked();
+		app->scene->ColaPicked();
+		app->scene->ColaPicked();
+		if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN) {
+			app->scene->PatatasPicked();
+		}
+	}
+	if (app->scene->GetCaramelosQuantity() == 3) {
+		app->scene->VelocidadPicked();
+		app->scene->VelocidadPicked();
+		app->scene->VelocidadPicked();
+		app->scene->VelocidadPicked();
+		app->scene->VelocidadPicked();
+		if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN) {
+			app->scene->CaramelosPicked();
+		}
+	}
+	if (app->scene->GetYogurQuantity() == 3) {
+		app->scene->BirraPicked();
+		app->scene->BirraPicked();
+		app->scene->BirraPicked();
+		app->scene->BirraPicked();
+		app->scene->BirraPicked();
+		if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN) {
+			app->scene->YogurPicked();
+		}
+	}
 	
 
 	return true;
@@ -202,7 +245,27 @@ bool Scene::PostUpdate()
 {
 	bool ret = true;
 
-	
+
+
+	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
+	{
+		//Destroy all the buttons in the title screen
+		/*ListItem<GuiControl*>* controlListMenu = nullptr;
+		for (controlListMenu = app->titlescreen->titleButtons.start; controlListMenu != NULL; controlListMenu = controlListMenu->next)
+		{
+			app->guiManager->DestroyGuiControl(controlListMenu->data);
+		}
+		app->titlescreen->titleButtons.Clear();*/
+
+		/*app->guiManager->active = true;
+		app->guiManager->Enable();
+		app->pause->Enable();
+		app->pause->active = true;
+		app->pause->CreatePauseButtons();*/
+
+		app->fadeToBlack->FadeToBlackTransition((Module*)app->scene, (Module*)app->pause, 0.0f);
+	}
+
 
 	return ret;
 }
