@@ -20,7 +20,7 @@ enum class EntityType : char
 	PATATAS,
 	CARAMELOS,
 	VELOCIDAD,
-	PALOMA,
+	SILVERWINGS,
 	APRENDIZ,
 	VETERANA,
 	UNKNOWN
@@ -45,6 +45,11 @@ public:
 	}
 
 	virtual bool Update(float dt)
+	{
+		return true;
+	}
+
+	virtual bool PostUpdate()
 	{
 		return true;
 	}

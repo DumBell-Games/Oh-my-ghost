@@ -4,7 +4,7 @@
 #include "App.h"
 #include "Textures.h"
 #include "Scene.h"
-#include "Npc.h"
+#include "SilverWings.h"
 #include "Enemies.h"
 #include "TransitionTrigger.h"
 #include "ItemCola.h"
@@ -105,11 +105,8 @@ Entity* EntityManager::CreateEntity(EntityType type, pugi::xml_node& data)
 	case EntityType::PLAYER:
 		entity = new Player();
 		break;
-	case EntityType::DIALOG_TRIGGER:
-		entity = new DialogTrigger();
-		break;
-	case EntityType::PALOMA:
-		entity = new Paloma();
+	case EntityType::SILVERWINGS:
+		entity = new SilverWings();
 		break;
 	case EntityType::APRENDIZ:
 		entity = new Aprendiz();
@@ -140,6 +137,9 @@ Entity* EntityManager::CreateEntity(EntityType type, pugi::xml_node& data)
 		break;
 	case EntityType::VELOCIDAD:
 		entity = new Velocidad();
+		break;
+	case EntityType::DIALOG_TRIGGER:
+		entity = new DialogTrigger();
 		break;
 					
 
@@ -189,6 +189,24 @@ bool EntityManager::Update(float dt)
 
 		if (pEntity->active == false) continue;
 		ret = item->data->Update(dt);
+	}
+
+	return ret;
+}
+
+//post update
+bool EntityManager::PostUpdate()
+{
+	bool ret = true;
+	ListItem<Entity*>* item;
+	Entity* pEntity = NULL;
+
+	for (item = entities.start; item != NULL && ret == true; item = item->next)
+	{
+		pEntity = item->data;
+
+		if (pEntity->active == false) continue;
+		ret = item->data->PostUpdate();
 	}
 
 	return ret;

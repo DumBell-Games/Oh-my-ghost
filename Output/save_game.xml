@@ -10,6 +10,7 @@
 	<guiManager />
 	<scene />
 	<inventory />
+	<:anonymous />
 	<titlescreen />
 	<introScreen />
 	<teamScreen />
@@ -19,6 +20,6 @@
 	<:anonymous />
 	<reload />
 	<renderer>
-		<camera x="323" y="-287" />
+		<camera x="-13996" y="-8956" />
 	</renderer>
 </game_state>

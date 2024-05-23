@@ -86,7 +86,7 @@ bool Player::Start() {
 	currentAnim = idleFrontal;
 
 	pBody = app->physics->CreateRectangle(position.x + 128, position.y, 128, 30, bodyType::DYNAMIC);
-	casinoIn = app->physics->CreateRectangleSensor(6332 + 128, 754 + 64, 192, 126, bodyType::KINEMATIC);
+	casinoIn = app->physics->CreateRectangleSensor(6332 + 128, 754, 192, 126, bodyType::KINEMATIC);
 	casinoIn->ctype = ColliderType::CASINOIN;
 	casinoOut = app->physics->CreateRectangleSensor(1793 + 128, 12542 + 64, 256, 64, bodyType::KINEMATIC);
 	casinoOut->ctype = ColliderType::CASINOOUT;
@@ -163,7 +163,7 @@ bool Player::Update(float dt)
 		currentAnim->Update();
 	
 	}
-	else if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN && currentTexture == textureGhost)
+	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN && currentTexture == textureGhost)
 	{
 		currentAnim = cambioCuerpoF;
 		currentAnim->Reset();
@@ -289,8 +289,7 @@ bool Player::Update(float dt)
 	position.x = METERS_TO_PIXELS(pBodyPos.p.x) - 32 / 2;     
 	position.y = METERS_TO_PIXELS(pBodyPos.p.y) - 32 / 2;
 
-	app->render->DrawTexture(currentTexture,position.x - 48 ,position.y - 110, &currentAnim->GetCurrentFrame());
-
+	
 	uint w, h;
 	app->win->GetWindowSize(w, h);
 	app->render->camera.x = (-position.x * app->win->GetScale()) + w / 2;
@@ -303,7 +302,7 @@ bool Player::Update(float dt)
 	}
 	if (casinoOUT)
 	{
-		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(6420), PIXEL_TO_METERS(374)), NULL);
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(6420), PIXEL_TO_METERS(894)), NULL);
 		casinoOUT = false;
 	}
 	if (arcadeIN || app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
@@ -326,10 +325,31 @@ bool Player::Update(float dt)
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(4393), PIXEL_TO_METERS(1878)), NULL);
 		tabernaOUT = false;
 	}
+	if (palomaTouched)
+	{
+		currentAnim = cambioCuerpoF;
+		currentAnim->Update();
+		
+		if (currentAnim->HasFinished())
+		{
+			currentTexture = texturePlayer;
+			currentAnim = idleFrontal;
+			currentAnim->Update();
+			palomaTouched = false;
+		}
+	}
 	
+	
+
 	return true;
 }
 
+bool Player::PostUpdate()
+{
+	app->render->DrawTexture(currentTexture, position.x - 48, position.y - 110, &currentAnim->GetCurrentFrame());
+
+	return true;
+}
 
 bool Player::CleanUp()
 {
@@ -376,6 +396,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
+		break;
+	case ColliderType::PALOMA:
+		LOG("Collision PALOMA");
+		palomaTouched = true;
 		break;
 	default:
 		break;

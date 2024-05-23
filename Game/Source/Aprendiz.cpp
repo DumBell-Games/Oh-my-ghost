@@ -37,7 +37,7 @@ bool Aprendiz::Start() {
  
 	texture = app->tex->Load(parameters.attribute("texturePath").as_string());
 		
-	nBody = app->physics->CreateRectangle(position.x + 128, position.y, 140, 240, bodyType::KINEMATIC);
+	nBody = app->physics->CreateRectangle(position.x + 128, position.y, 140, 200, bodyType::KINEMATIC);
 	//haz que el rectangulo no rote
 	nBody->body->SetFixedRotation(true);	
 	nBody->listener = this;

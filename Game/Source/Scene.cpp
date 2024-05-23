@@ -8,7 +8,7 @@
 #include "Map.h"
 #include "Optick/include/optick.h"
 #include "DialogTriggerEntity.h"
-#include "Npc.h"
+#include "SilverWings.h"
 #include "Enemies.h"
 #include "Physics.h"
 #include "FadeToBlack.h"
@@ -92,9 +92,9 @@ bool Scene::Awake(pugi::xml_node config)
 		DialogTrigger* dialogTrigger = (DialogTrigger*)app->entityManager->CreateEntity(EntityType::DIALOG_TRIGGER, itemNode);
 		//dialogTrigger->parameters = itemNode;
 	}
-	for (pugi::xml_node itemNode = config.child("paloma"); itemNode; itemNode = itemNode.next_sibling("paloma"))
+	for (pugi::xml_node itemNode = config.child("silverWings"); itemNode; itemNode = itemNode.next_sibling("silverWings"))
 	{
-		Paloma* paloma = (Paloma*)app->entityManager->CreateEntity(EntityType::PALOMA, itemNode);
+		SilverWings* silverWings = (SilverWings*)app->entityManager->CreateEntity(EntityType::SILVERWINGS, itemNode);
 		//npc->parameters = itemNode;
 	}
 	for (pugi::xml_node itemNode = config.child("aprendiz"); itemNode; itemNode = itemNode.next_sibling("aprendiz"))

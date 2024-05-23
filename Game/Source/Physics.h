@@ -36,6 +36,7 @@ enum class ColliderType {
 	PLATFORM, 
 	DIALOG_TRIGGER,
 	NPC,
+	PALOMA,
 	ENEMY,
 	CASINOIN,
 	CASINOOUT,
