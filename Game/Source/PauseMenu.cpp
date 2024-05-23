@@ -32,6 +32,10 @@ bool PauseMenu::Start() {
 
   buttonFx = app->audio->LoadFx("Assets/Audio/Fx/basic_click.wav");
 
+  pause1 = app->tex->Load("Assets/Screens/ContinuarSelect_Pausa.png");
+  pause2 = app->tex->Load("Assets/Screens/OpcionesSelect_Pausa.png");
+  pause3 = app->tex->Load("Assets/Screens/SalirSelect_Pausa.png");
+
   app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
@@ -42,6 +46,9 @@ bool PauseMenu::Start() {
 	return true;
 }
 bool PauseMenu::Update(float dt) {
+
+
+    
 
     if (PauseButtons.Count() != 0) {
         if (app->input->GetButton(ControlID::UP) == KEY_REPEAT) //arriba
@@ -132,71 +139,40 @@ bool PauseMenu::Update(float dt) {
 	return true;
 }
 bool PauseMenu::PostUpdate() {
-    //if (buttoncreated == true) {
-    //    // TODO: pasar esto a OnClick()
-    //    if (inpause == true && PauseButtons.At(0)->data->state == GuiControlState::PRESSED)
-    //    {
-    //        app->fadeToBlack->FadeToBlackTransition((Module*)app->pause, (Module*)app->scene, 0.0f);
-    //        buttoncreated = false;
-    //        app->audio->PlayFx(buttonFx);
-    //    }
-    //    if (inpause == true && PauseButtons.At(1)->data->state == GuiControlState::PRESSED)
-    //    {
-    //        CleanUp();
-    //        inpause = false;
-    //        inajustes = true;
-    //        CreatePauseButtons();
-    //    }
-    //    if (inpause == true && PauseButtons.At(2)->data->state == GuiControlState::PRESSED) {
-    //        app->fadeToBlack->FadeToBlackTransition((Module*)app->pause, (Module*)app->titlescreen, 0.0f);
-    //        app->scene->Disable();
-    //        buttoncreated = false;
-    //        app->audio->PlayFx(buttonFx);
-    //    }
-
-    //}
-    //if (ajustcreated == true) {
-    //    if (inajustes == true && AjustesButtons.At(0)->data->state == GuiControlState::PRESSED) {
-    //        CleanUp();
-    //        inpause = true;
-    //        inajustes = false;
-    //        CreatePauseButtons();
-    //    }
-    //    if (inajustes == true && AjustesButtons.At(1)->data->state == GuiControlState::PRESSED) {
-    //        if (fullscreen == true) {
-    //            app->win->FullscreenMode();
-    //            fullscreen = false;
-    //        }
-    //        else {
-    //            app->win->UnFullscreenMode();
-    //            fullscreen = true;
-    //        }
-    //    }
-    //    if (inajustes == true && AjustesButtons.At(2)->data->state == GuiControlState::PRESSED) {
-    //        if (vsycn == true) {
-    //            vsycn = false;
-    //        }
-    //        else if (vsycn == false) {
-    //            vsycn = true;
-    //        }
-    //    }
-    //    if (inajustes == true && AjustesButtons.At(3)->data->state == GuiControlState::PRESSED) {
-    //        app->audio->MusicDown();
-    //    }
-    //    if (inajustes == true && AjustesButtons.At(4)->data->state == GuiControlState::PRESSED) {
-    //        app->audio->MusicUp();
-    //    }
-    //    if (inajustes == true && AjustesButtons.At(5)->data->state == GuiControlState::PRESSED) {
-    //        app->audio->FxDown();
-    //    }
-    //    if (inajustes == true && AjustesButtons.At(6)->data->state == GuiControlState::PRESSED) {
-    //        app->audio->FxUp();
-    //    }
-    //}
+    if (inpause == true) {
+        weigth = screenWidth - 100;
+        heigth = screenHeight - 100;
+        if (PauseIndex == 1) app->render->DrawTexture(pause1, 0, 0, NULL);
+        else if (PauseIndex == 2) app->render->DrawTexture(pause2, 0, 0, NULL);
+        else if (PauseIndex == 3) app->render->DrawTexture(pause3, 0, 0, NULL);
+    }
 
 	return true;
 }
+
 bool PauseMenu::CleanUp(){
+    if (inpause == true) {
+
+
+        if (pause1 != nullptr)
+        {
+            app->tex->UnLoad(pause1);
+            pause1 = nullptr;
+        }
+
+        if (pause2 != nullptr)
+        {
+            app->tex->UnLoad(pause2);
+            pause2 = nullptr;
+        }
+
+        if (pause3 != nullptr)
+        {
+            app->tex->UnLoad(pause3);
+            pause3 = nullptr;
+        }
+    }
+
 
     ListItem<GuiControlButton*>* controlListItem = nullptr;
     for (controlListItem = PauseButtons.start; controlListItem != NULL; controlListItem = controlListItem->next) {
@@ -233,6 +209,9 @@ void PauseMenu::CreatePauseButtons() {
                 posBtX = screenWidth - 250;
                 posBtY = screenHeight - 450;
                 PauseButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Salir", { posBtX, posBtY, wBt, hBt }, [this](GuiControl* g) {salir(g); }));
+                weigth = screenWidth - 100;
+                heigth = screenHeight - 100;
+              
             }
             else if (inajustes == true) {
                 ajustcreated = true;
@@ -292,9 +271,10 @@ void PauseMenu::CreatePauseButtons() {
     }
     void PauseMenu::opciones(GuiControl * ctrl)
     {
-        CleanUp();
         inpause = false;
         inajustes = true;
+        CleanUp();
+        
         CreatePauseButtons();
     }
     void PauseMenu::salir(GuiControl * ctrl)

@@ -58,6 +58,12 @@ public:
     int PauseIndex = 1;
     int AjustesIndex = 1;
 
+    SDL_Texture* pause1;
+    SDL_Texture* pause2;
+    SDL_Texture* pause3;
+
+    int weigth;
+    int heigth;
 
     Timer timer;
 
