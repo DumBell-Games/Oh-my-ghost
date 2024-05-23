@@ -20,7 +20,10 @@ class Audio;
 class Scene;
 class EntityManager;
 class Map;
+class CombatManager;
 class Reload;
+class InventoryScreen;
+class Character_Menu;
 class TitleScreen;
 class IntroScreen;
 class TeamScreen;
@@ -122,7 +125,10 @@ public:
 	Scene* scene;
 	EntityManager* entityManager;
 	Map* map;
+	CombatManager* combat;
 	Reload* reload; // Module (un/re)loader
+	InventoryScreen* inventoryScreen;
+	Character_Menu* characterMenu;
 	TitleScreen* titlescreen;
 	IntroScreen* introScreen;
 	TeamScreen* teamScreen;

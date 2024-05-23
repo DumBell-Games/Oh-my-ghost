@@ -4,6 +4,8 @@
 #include <SDL/include/SDL_pixels.h>
 #include "List.h"
 
+#include "PugiXml/src/pugixml.hpp"
+
 struct Properties
 {
 	struct Property
@@ -36,3 +38,5 @@ struct Properties
 
 	List<Property*> list;
 };
+
+	bool LoadProperties(pugi::xml_node& node, Properties& properties);

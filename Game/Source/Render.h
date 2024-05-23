@@ -50,6 +50,10 @@ public:
 	//
 	bool SaveState(pugi::xml_node node);
 
+
+	// Funció per aplicar un filtre de color vermell durant 1 segon a una imatge
+	void aplicarFiltreVermell(SDL_Texture* texturaOriginal, SDL_Rect* pos);
+
 public:
 
 	SDL_Renderer* renderer;

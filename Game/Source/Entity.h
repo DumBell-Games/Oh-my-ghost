@@ -5,6 +5,7 @@
 #include "SString.h"
 #include "Input.h"
 #include "Render.h"
+#include "PropertiesStruct.h"
 
 enum class EntityType : char
 {
@@ -80,6 +81,10 @@ public:
 	}
 
 	virtual void OnCollision(PhysBody* physA, PhysBody* physB) {
+
+	};
+
+	virtual void OnEndCollision(PhysBody* bodyA, PhysBody* bodyB) {
 
 	};
 

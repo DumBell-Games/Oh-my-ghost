@@ -7,6 +7,7 @@
 #include "Point.h"
 #include "PropertiesStruct.h"
 #include "Pathfinding.h"
+#include "Animation.h"
 
 #include "PugiXml\src\pugixml.hpp"
 
@@ -22,9 +23,9 @@ struct TileSet
 	SString	name;
 	int	firstgid;
 	int margin;
-	int	spacing;
-	int	tileWidth;
-	int	tileHeight;
+	int spacing;
+	int tileWidth;
+	int tileHeight;
 	int columns;
 	int tilecount;
 
@@ -78,6 +79,7 @@ struct MapData
 	MapTypes type;
 
 	List<MapLayer*> maplayers;
+	List<Animation*> animations;
 
 	iPoint GetMapSize() const { return { width * tileWidth,height * tileHeight }; }
 };
@@ -110,7 +112,7 @@ public:
 
 	iPoint MapToWorld(int x, int y) const;
 	iPoint Map::WorldToMap(int x, int y);
-	bool LoadProperties(pugi::xml_node& node, Properties& properties);
+	Animation* GetAnimByName(SString name);
 
 private:
 
@@ -118,6 +120,7 @@ private:
 	bool LoadTileSet(pugi::xml_node mapFile);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadAllLayers(pugi::xml_node mapNode);
+	bool LoadAnimation(pugi::xml_node node, TileSet* tileset);
 	TileSet* GetTilesetFromTileId(int gid) const;
 	bool LoadAllObjects(pugi::xml_node mapNode);
 
@@ -145,6 +148,8 @@ private:
 	List<SString> mapNames;
 	int currentMap = 0;
 
+	// Debug command
+	friend static void WarpTo(Map* map, std::vector<std::string> args);
 };
 
 #endif // __MAP_H__

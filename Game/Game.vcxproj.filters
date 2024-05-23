@@ -96,6 +96,16 @@
     <ClCompile Include="Source\ItemPatatas.cpp" />
     <ClCompile Include="Source\ItemVelocidad.cpp" />
     <ClCompile Include="Source\ItemYogur.cpp" />
+    <ClCompile Include="Source\DebugCommands.h" />
+    <ClCompile Include="Source\DebugConsole.cpp" />
+    <ClCompile Include="Source\Poison.cpp" />
+    <ClCompile Include="Source\CombatManager.cpp" />
+    <ClCompile Include="Source\Enemic.cpp" />
+    <ClCompile Include="Source\Combat.cpp" />
+    <ClCompile Include="Source\PropertiesStruct.cpp" />
+    <ClCompile Include="Source\tmxTileidAdjustment.h" />
+    
+    <ClCompile Include="Source\Character_Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -229,6 +239,14 @@
     <ClInclude Include="Source\ItemPatatas.h" />
     <ClInclude Include="Source\ItemVelocidad.h" />
     <ClInclude Include="Source\ItemYogur.h" />
+    <ClInclude Include="Source\DebugConsole.h" />
+    <ClInclude Include="Source\Poison.h" />
+    <ClInclude Include="Source\CombatManager.h" />
+    <ClInclude Include="Source\Enemic.h" />
+    <ClInclude Include="Source\Combat.h" />
+    <ClInclude Include="Source\StatusEffect.h" />
+    <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\Character_Menu.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -266,5 +284,8 @@
     <Xml Include="..\Output\config.xml" />
     <Xml Include="..\Output\controls.xml" />
     <Xml Include="..\Output\inventory.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

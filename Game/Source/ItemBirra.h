@@ -26,8 +26,10 @@ public:
 
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
-public:
+	void OnEndCollision(PhysBody* bodyA, PhysBody* bodyB);
 
+public:
+	int cantidadBirra = 0;
 	bool isPicked = false;
 
 private:
@@ -36,6 +38,7 @@ private:
 	SDL_Texture* texture;
 	const char* texturePath;
 	uint texW, texH;
+
 };
 
 #endif // __ITEMBIRRA_H__

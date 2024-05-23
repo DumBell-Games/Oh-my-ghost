@@ -26,9 +26,14 @@ public:
 
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
+	void OnEndCollision(PhysBody* bodyA, PhysBody* bodyB);
+
+
 public:
+	int cantidadCaramelos = 0;
 
 	bool isPicked = false;
+
 
 private:
 

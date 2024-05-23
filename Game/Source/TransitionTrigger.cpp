@@ -20,7 +20,7 @@ TransitionTrigger::~TransitionTrigger()
 bool TransitionTrigger::Awake()
 {
     Properties p;
-    app->map->LoadProperties(parameters,p);
+    LoadProperties(parameters,p);
     transition.targetDoorID = p.GetProperty("targetDoor")->intVal;
     transition.mapId = p.GetProperty("mapID")->intVal;
     id = parameters.attribute("id").as_int();

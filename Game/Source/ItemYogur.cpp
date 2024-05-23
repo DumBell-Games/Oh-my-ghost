@@ -8,6 +8,8 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Map.h"
+#include "PropertiesStruct.h"
 
 Yogur::Yogur() : Entity(EntityType::YOGUR)
 {
@@ -17,6 +19,9 @@ Yogur::Yogur() : Entity(EntityType::YOGUR)
 Yogur::~Yogur() {}
 
 bool Yogur::Awake() {
+
+	Properties p;
+	LoadProperties(parameters, p);
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -30,7 +35,7 @@ bool Yogur::Awake() {
 	//cargar sonido del objeto
 	itemFx = app->audio->LoadFx("Assets/Audio/Fx/cola.wav");
 	//cargar la textura desde el xml
-	texturePath = parameters.attribute("texturePath").as_string();
+	texturePath = p.GetProperty("texturePath")->strVal;
 
 	return true;
 }
@@ -43,7 +48,7 @@ bool Yogur::Start() {
 	ibody = app->physics->CreateCircle(position.x + 32, position.y + 32, 24, bodyType::STATIC);
 	ibody->ctype = ColliderType::YOGUR;
 	ibody->listener = this;
-	texture = app->tex->Load(texturePath);
+	texture = app->tex->Load(texturePath.GetString());
 
 	
 	return true;
@@ -61,6 +66,7 @@ bool Yogur::Update(float dt)
 			app->physics->DestroyBody(ibody);
 			app->tex->UnLoad(texture);
 			app->entityManager->DestroyEntity(this);
+            app->scene->YogurPicked();
 		}
 	}
 
@@ -85,6 +91,21 @@ void Yogur::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			playerContactY = true;
 		break;
 		
+	}
+
+}
+
+void Yogur::OnEndCollision(PhysBody* bodyA, PhysBody* bodyB)
+{
+	//SWITCH CASE PARA LOS DIFERENTES TIPOS DE COLISIONES
+	switch (bodyB->ctype)
+	{
+	case ColliderType::PLAYER:
+		//LOG COLA PLAYER
+		LOG("YOGUR PLAYER");
+		playerContactY = false;
+		break;
+
 	}
 
 }

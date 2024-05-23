@@ -59,6 +59,7 @@ bool Caramelos::Update(float dt)
 			app->physics->DestroyBody(ibody);
 			app->tex->UnLoad(texture);
 			app->entityManager->DestroyEntity(this);
+            app->scene->CaramelosPicked();
 		}
 	}
 
@@ -81,6 +82,21 @@ void Caramelos::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 			//LOG COLA PLAYER
 			LOG("COLA PLAYER");
 			playerContactC = true;
+		break;
+
+	}
+
+}
+
+void Caramelos::OnEndCollision(PhysBody* bodyA, PhysBody* bodyB)
+{
+	//SWITCH CASE PARA LOS DIFERENTES TIPOS DE COLISIONES
+	switch (bodyB->ctype)
+	{
+	case ColliderType::PLAYER:
+		//LOG COLA PLAYER
+		LOG("COLA PLAYER");
+		playerContactC = false;
 		break;
 
 	}

@@ -41,13 +41,13 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	return guiControl;
 }
 
-GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, GuiOnClick_f observer, SDL_Rect sliderBounds)
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, GuiCallback_f observer, SDL_Rect sliderBounds)
 {
 	GuiControl* guiControl = CreateGuiControl(type,id,text,bounds,nullptr,sliderBounds);
 
 	if (guiControl) {
 		//Set the observer
-		guiControl->listener = observer;
+		guiControl->onClick = observer;
 	}
 
 	return guiControl;

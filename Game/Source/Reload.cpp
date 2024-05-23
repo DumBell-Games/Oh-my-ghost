@@ -1,6 +1,8 @@
 #include "Reload.h"
 #include "App.h"
 
+#include "DebugConsole.h"
+
 #include "Box2D/Box2D/Box2D.h"
 #include "Log.h"
 
@@ -51,6 +53,8 @@ bool Reload::Start()
 	screenRect = app->render->camera;
 	screenRect.x = screenRect.y = 0;
 
+	app->console->AddCommand("module", "Crea y ejecuta manualmente una transición. Deben usarse los nombres de los módulos como fue definido en su variable\"name\". Se acepta una lista de modulos con los parametros adecuados, y la transicion sera ejecutada en el orden proporcionado (USAR CON CAUTELA, SI PETA COMPRUEBA QUE EL ORDEN SEA CORRECTO)", "module fadeOut fadeIn [r|u|l modulename ...]", [&](std::vector<std::string> args) {QueueTemporaryPreset(args); });
+
 	return true;
 }
 
@@ -76,6 +80,15 @@ bool Reload::PostUpdate()
 		}
 		case ReloadStep::FADE_IN: {
 			FadeIn();
+			break;
+		}
+		case ReloadStep::DONE: {
+			if (activePreset->temporary) {
+				
+				delete activePreset;
+			}
+			activePreset = nullptr;
+			currentStep = ReloadStep::NONE;
 			break;
 		}
 		default:
@@ -105,17 +118,57 @@ bool Reload::CleanUp()
 bool Reload::QueueReload(SString presetName)
 {
 	bool ret = false;
-	for (size_t i = 0; i < presetList.Count(); i++)
+	if (activePreset && activePreset->name == presetName)
+		ret = true;
+
+	// Busca si la transición esta ya en espera, evitando asi transiciones duplicadas
+	std::deque<ReloadPreset*> list = queue._Get_container();
+	for (size_t i = 0; !ret && i < list.size(); i++)
 	{
-		ListItem<ReloadPreset*>* item = presetList.At(i);
-		if (item->data->name == presetName) {
+		if (list[i]->name == presetName) {
 			ret = true;
-			queue.push(item->data);
-			break;
 		}
 	}
 
-	return true;
+	// Si no ha encontrado el preset en la cola lo busca y añade
+	if (ret == false) {
+		for (size_t i = 0; i < presetList.Count(); i++)
+		{
+			ListItem<ReloadPreset*>* item = presetList.At(i);
+			if (item->data->name == presetName) {
+				ret = true;
+				queue.push(item->data);
+				break;
+			}
+		}
+	}
+
+	return ret;
+}
+
+void Reload::QueueTemporaryPreset(std::vector<std::string> args)
+{
+	if (args.size() < 3) throw std::invalid_argument("Se esperaban minimo 3 argumentos");
+	float fadeOut = stoi(args[1]);
+	float fadeIn = stoi(args[2]);
+	ReloadPreset* rp = new ReloadPreset("temporaryPreset", 0, 0, true);
+	Module* m = nullptr;
+	for (int i = 3; i < args.size()-1; i+=2)
+	{
+		m = app->GetModule(args[i + 1].c_str());
+		if (m != nullptr) {
+			if (args[i] == "r") {
+				rp->AddReload(m);
+			}
+			else if (args[i] == "u") {
+				rp->AddUnload(m);
+			}
+			else if (args[i] == "l") {
+				rp->AddLoad(m);
+			}
+		}
+	}
+	queue.push(rp);
 }
 
 void Reload::FadeOut()
@@ -175,9 +228,8 @@ void Reload::FadeIn()
 		else fadeRatio = 0;
 		fadeRatio = b2Clamp(fadeRatio, 0.0f, 255.0f);
 		if (fadeRatio <= b2_epsilon) {
-			activePreset = nullptr;
 			timerActive = false;
-			currentStep = ReloadStep::NONE;
+			currentStep = ReloadStep::DONE;
 			fadeRatio = 0.0f;
 		}
 	}

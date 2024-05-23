@@ -13,6 +13,7 @@
 
 #include <math.h>
 #include "SDL_image/include/SDL_image.h"
+#include "DebugConsole.h"
 
 Map::Map(bool startEnabled) : Module(startEnabled), mapLoaded(false)
 {
@@ -44,6 +45,7 @@ bool Map::Awake(pugi::xml_node config)
 }
 
 bool Map::Start() {
+    app->console->AddCommand("warpto", "Teletransporta al jugador al mapa (y opcionalmente entrada) especificados", "warpto mapId [doorId]", [this](std::vector<std::string> args) {WarpTo(this, args); });
     //Calls the functon to load the map, make sure that the filename is assigned
 
     SString mapPath = path;
@@ -58,6 +60,26 @@ bool Map::Update(float dt)
     if (mapLoaded == false)
         return false;
 
+    const SDL_Rect& camRect = app->render->camera;
+    SDL_Rect bounds;
+    bounds.x = -camRect.x;// +camRect.w / 2;
+    bounds.y = -camRect.y;// +camRect.h / 2;
+    bounds.w = camRect.w;
+    bounds.h = camRect.h;
+    LOG("rawcamX:%i\nrawcamY:%i", camRect.x, camRect.y);
+    LOG("boundsX:%i\nboundsY:%i", bounds.x, bounds.y);
+
+    {
+        iPoint tmp = WorldToMap(bounds.x, bounds.y);
+        bounds.x = tmp.x;
+        bounds.y = tmp.y;
+        tmp = WorldToMap(bounds.w, bounds.h);
+        bounds.w = tmp.x;
+        bounds.h = tmp.y;
+        LOG("mapX:%i\nmapY:%i", bounds.x, bounds.y);
+    }
+
+
     ListItem<MapLayer*>* mapLayerItem;
     mapLayerItem = mapData.maplayers.start;
 
@@ -65,10 +87,16 @@ bool Map::Update(float dt)
 
         if (mapLayerItem->data->properties.GetProperty("Draw") != NULL && mapLayerItem->data->properties.GetProperty("Draw")->value) {
 
-            for (int x = 0; x < mapLayerItem->data->width; x++)
+            for (int x = 0; x < mapLayerItem->data->width && x-2 < bounds.x + bounds.w; x++)
             {
-                for (int y = 0; y < mapLayerItem->data->height; y++)
+                if (x < bounds.x)
+                    continue;
+
+                for (int y = 0; y < mapLayerItem->data->height && y-2 < bounds.y + bounds.h; y++)
                 {
+                    if (y < bounds.y)
+                        continue;
+
                     int gid = mapLayerItem->data->Get(x, y);
                     TileSet* tileset = GetTilesetFromTileId(gid);
 
@@ -255,6 +283,8 @@ bool Map::Unload()
 
     RELEASE(pathfinding);
 
+    app->console->RemoveCommand("warpto");
+
     return true;
 }
 
@@ -311,8 +341,37 @@ bool Map::LoadTileSet(pugi::xml_node mapFile) {
         texPath += tileset.child("image").attribute("source").as_string();
         set->texture = app->tex->Load(texPath.GetString());
 
-        mapData.tilesets.Add(set);
+        if (tileset.child("tile").child("animation")) {
+			LoadAnimation(tileset.child("tile"), set);
+		}
+        else
+        {
+            mapData.tilesets.Add(set);
+        }
     }
+
+    return ret;
+}
+
+bool Map::LoadAnimation(pugi::xml_node node, TileSet* tileset)
+{
+    bool ret = true;
+    Animation* anim = new Animation();
+
+    anim->name = tileset->name;
+    anim->texture = tileset->texture;
+
+    for (pugi::xml_node frame = node.child("animation").child("frame"); frame && ret; frame = frame.next_sibling("frame"))
+    {
+		int id = frame.attribute("tileid").as_int();
+        int duration = frame.attribute("duration").as_int();
+        int tilesPerRow = tileset->columns;
+        int x = (id % tilesPerRow) * tileset->tileWidth;
+        int y = (id / tilesPerRow) * tileset->tileHeight;
+        anim->PushBack({ x, y, tileset->tileWidth, tileset->tileHeight }, 0);
+	}
+
+    mapData.animations.Add(anim);
 
     return ret;
 }
@@ -330,13 +389,14 @@ bool Map::LoadLayer(pugi::xml_node& node, MapLayer* layer)
     LoadProperties(node, layer->properties);
 
     //Reserve the memory for the data 
-    layer->data = new uint[layer->width * layer->height];
-    memset(layer->data, 0, layer->width * layer->height);
+    uint size = layer->width * layer->height;
+    layer->data = new uint[size];
+    memset(layer->data, 0, size);
 
     //Iterate over all the tiles and assign the values
     pugi::xml_node tile;
     uint i = 0;
-    for (tile = node.child("data").child("tile"); tile && ret; tile = tile.next_sibling("tile"))
+    for (tile = node.child("data").child("tile"); tile && ret && i < size; tile = tile.next_sibling("tile"))
     {
         layer->data[i] = tile.attribute("gid").as_uint();
         i++;
@@ -477,54 +537,25 @@ bool Map::LoadPolygon(pugi::xml_node objGroupNode, pugi::xml_node objNode)
     return true;
 }
 
-bool Map::LoadProperties(pugi::xml_node& node, Properties& properties)
-{
-    bool ret = false;
-    pugi::xml_node propertiesNode = node.child("properties").child("property");
-    if (propertiesNode)
-    {
-        ret = true;
-        for (/*Initial state already set above*/; propertiesNode; propertiesNode = propertiesNode.next_sibling("property"))
-        {
-            Properties::Property* p = new Properties::Property();
-
-            SString nameAttr = propertiesNode.attribute("name").as_string();
-            SString typeAttr = propertiesNode.attribute("type").as_string("string"); // Default to string for malformed properties
-
-            p->name = nameAttr;
-            if (typeAttr == "string") {
-                p->strVal = propertiesNode.attribute("value").as_string();
-            }
-            else if (typeAttr == "bool") {
-                p->value = propertiesNode.attribute("value").as_bool();
-            }
-            else if (typeAttr == "int") {
-                p->intVal = propertiesNode.attribute("value").as_int();
-            }
-            else if (typeAttr == "float") {
-                p->floatVal = propertiesNode.attribute("value").as_float();
-            }
-
-            properties.list.Add(p);
-        }
-    }
-    return ret;
+static void WarpTo(Map* map, std::vector<std::string> args) {
+    if (args.size() <= 1) throw std::invalid_argument("Se esperaba un id de mapa");
+    if (args.size() >= 3)
+        map->transitionData.targetDoorID = std::stoi(args[2]);
+    map->transitionData.mapId = std::stoi(args[1]);
+    map->ChangeMap(map->transitionData.mapId);
 }
 
-Properties::Property* Properties::GetProperty(const char* name)
-{
-    if (list.Count() == 0) return nullptr; // If no properties have been set return nullptr
-    ListItem<Property*>* item = list.start;
-    Property* p = NULL;
+Animation* Map::GetAnimByName(SString name) {
+    ListItem<Animation*>* item = mapData.animations.start;
+    Animation* set = NULL;
 
-    while (item)
-    {
-        if (item->data->name == name) {
-            p = item->data;
-            break;
+    while (item) {
+        set = item->data;
+        if (item->data->name == name)
+        {
+            return set;
         }
         item = item->next;
     }
-
-    return p;
+    return set;
 }

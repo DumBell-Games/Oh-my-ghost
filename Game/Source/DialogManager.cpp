@@ -68,7 +68,7 @@ bool DialogManager::CleanUp()
 	return ret;
 }
 
-Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, const char* faceTexturePath, const char* font)
+Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, const char* faceTexturePath, const char* font, int id, int mapID)
 {
 	//Dialogo a crear
 	Dialog* dialog = new Dialog(itemNode.attribute("text").as_string());
@@ -76,7 +76,8 @@ Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, c
 	dialog->name = itemNode.attribute("name").as_string(dialog->name.c_str());
 	dialog->face_tex = app->tex->Load(itemNode.attribute("facetexturepath").as_string(faceTexturePath));
 	dialog->font = FontSelector(itemNode.attribute("font").as_string(font));
-	
+	dialog->id = itemNode.attribute("id").as_int(0);
+	dialog->mapId = mapID;
 
 	const char* type = itemNode.attribute("type").as_string("");
 
@@ -87,14 +88,14 @@ Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, c
 		//Options1
 		dialog->option1 = itemNode.child("option1").attribute("text").as_string();
 		for (pugi::xml_node optionNode = itemNode.child("option1").child("sentence"); optionNode; optionNode = optionNode.next_sibling("sentence")) {
-			Dialog* dialogOp1 = CreateDialog(optionNode, name, faceTexturePath, font);
+			Dialog* dialogOp1 = CreateDialog(optionNode, name, faceTexturePath, font, id);
 			dialog->options1.Add(dialogOp1);
 		}
 
 		//Options2
 		dialog->option2 = itemNode.child("option2").attribute("text").as_string();
 		for (pugi::xml_node optionNode = itemNode.child("option2").child("sentence"); optionNode; optionNode = optionNode.next_sibling("sentence")) {
-			Dialog* dialogOp2 = CreateDialog(optionNode, name, faceTexturePath, font);
+			Dialog* dialogOp2 = CreateDialog(optionNode, name, faceTexturePath, font, id);
 			dialog->options2.Add(dialogOp2);
 		}
 	}
@@ -147,7 +148,8 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 	
 	//Imagen del personaje
 	if (dialog->face_tex != nullptr) {
-		app->render->DrawTexture(dialog->face_tex, dialogMargin[3] + dialogPosition.x, dialogMargin[0] + dialogPosition.y, 0, 0);
+		                                                               //               y
+		app->render->DrawTexture(dialog->face_tex, 110, 420, 0, 0);
 	}
 
 
@@ -292,7 +294,81 @@ bool DialogManager::Update(float dt) {
 		optionSelected = 0;
 	}
 
+	if(dineroObtenido)
+	{
+		if (/* condicional si tienes dinero */NULL)
+		{
+			actualEvent = DialogEvent::TIENESDINERO;
+		}
+		else
+		{
+			actualEvent = DialogEvent::NO_EVENT;
+		}
+
+	}
+
 	return ret;
+
+
 
 }
 
+void DialogManager::EventManager(DialogEvent actualEvent, DialogEvent eventToActivate)
+{
+	//switch para gestionar eventos
+	switch (actualEvent)
+	{
+		case DialogEvent::NO_EVENT:
+
+		break;
+
+		case DialogEvent::TIENESDINERO:
+			dineroObtenido = true;
+
+			
+		break;
+
+		case DialogEvent::PAGARBIRRA:
+			if (/* condicional si pagas birra */NULL)
+			{
+				eventToActivate = DialogEvent::BIRRAOBTENIDA;
+			}
+			else
+			{
+				eventToActivate = DialogEvent::NO_EVENT;
+			}
+		break;
+
+		case DialogEvent::BIRRAOBTENIDA:
+			if (/* condicional si obtienes birra */NULL)
+			{
+				eventToActivate = DialogEvent::HASHABLADOCONSISEBUTO;
+			}
+			else
+			{
+				eventToActivate = DialogEvent::NO_EVENT;
+			}
+		break;
+
+		case DialogEvent::HASHABLADOCONSISEBUTO:
+			if (/* condicional si hablas con sisebuto */NULL)
+			{
+				eventToActivate = DialogEvent::ARCADEDESBLOQUEADO;
+			}
+			else
+			{
+				eventToActivate = DialogEvent::NO_EVENT;
+			}
+		break;
+
+		case DialogEvent::ARCADEDESBLOQUEADO:
+			if (/* condicional si hablas con la niña y haces el puzzle*/NULL)
+			{
+				eventToActivate = DialogEvent::TARGETAOBTENIDA;
+			}
+			else
+			{
+				eventToActivate = DialogEvent::NO_EVENT;
+			}
+	}
+}

@@ -5,7 +5,8 @@
 #include "Point.h"
 #include "SDL/include/SDL.h"
 #include "Box2D/Box2D/Box2D.h"
-#include "ItemCola.h"
+#include "Animation.h"
+#include "Timer.h"
 
 struct SDL_Texture;
 
@@ -34,6 +35,10 @@ public:
 
 	void SetPosition(iPoint newPos) override;
 
+	void PlayerStartAnims();
+
+	Animation* GetAnimation(SString name);
+
 	
 
 public:
@@ -52,6 +57,44 @@ public:
 	int pickCoinFxId;
 
 	PhysBody* pBody;
+
+	List<Animation*> springyAnimationList;
+
+	Animation* currentAnim;
+
+	Animation* walkFrontal;
+	Animation* walkEspalda;
+	Animation* walkR;
+	Animation* walkL;
+	Animation* runR;
+	Animation* runL;
+	Animation* runFrontal;
+	Animation* runEspalda;
+	Animation* die;
+	Animation* manoDivina;
+	Animation* torbellino;
+	Animation* cambioCuerpo;
+	Animation* idleFrontal;
+
+
+	Animation* walkFrontalF;
+	Animation* walkEspaldaF;
+	Animation* walkRF;
+	Animation* walkLF;
+	Animation* runRF;
+	Animation* runLF;
+	Animation* runFrontalF;
+	Animation* runEspaldaF;
+	Animation* dieF;
+	Animation* manoDivinaF;
+	Animation* torbellinoF;
+	Animation* cambioCuerpoF;
+	Animation* idleFrontalF;
+
+	Timer timeToIdle;
+
+	bool cervezaPicked = false;
+	
 };
 
 #endif // __PLAYER_H__

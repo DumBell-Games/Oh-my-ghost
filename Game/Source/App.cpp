@@ -6,6 +6,7 @@
 #include "Audio.h"
 #include "Scene.h"
 #include "Map.h"
+#include "CombatManager.h"
 #include "Reload.h"
 #include "Physics.h"
 #include "GuiManager.h"
@@ -17,6 +18,8 @@
 #include "TeamScreen.h"
 #include "IntroScreen.h"
 #include "FadeToBlack.h"
+#include "InventoryScreen.h"
+#include "Character_Menu.h"
 
 #include "DialogManager.h"
 
@@ -47,16 +50,20 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	//L07 DONE 2: Add Physics module
 	physics = new Physics(false);
 	scene = new Scene(false);
+	inventoryScreen = new InventoryScreen(false);
+	characterMenu = new Character_Menu(false);
 	titlescreen = new TitleScreen(false);
 	introScreen = new IntroScreen(false);
 	teamScreen = new TeamScreen(true);
 	pause = new PauseMenu(false);
 	console = new DebugConsole(true);
 	map = new Map(false);
+	combat = new CombatManager(false);
 	reload = new Reload(true);
 	entityManager = new EntityManager(false);
 	guiManager = new GuiManager(true);
 	dialogManager = new DialogManager(false);
+
 	fadeToBlack = new FadeToBlack(true);
 
 	// Ordered for awake / Start / Update
@@ -72,6 +79,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(guiManager);
 
 	AddModule(scene);
+	AddModule(inventoryScreen);
+	AddModule(characterMenu);
 	AddModule(titlescreen);
 	AddModule(introScreen);
 	AddModule(teamScreen);

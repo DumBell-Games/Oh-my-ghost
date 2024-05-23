@@ -3,7 +3,7 @@
 	
 	<cola x="200" y="472" texturePath="Assets/Textures/itemCola.png"/>
 	<birra x="200" y="460" texturePath="Assets/Textures/itemCerveza.png"/>
-	
 
+	
 
 </inventory>
