@@ -36,7 +36,7 @@ bool PauseMenu::Start() {
   pause2 = app->tex->Load("Assets/Screens/OpcionesSelect_Pausa.png");
   pause3 = app->tex->Load("Assets/Screens/SalirSelect_Pausa.png");
 
-  app->render->camera.x = 0;
+    app->render->camera.x = 0;
 	app->render->camera.y = 0;
 
 	SDL_GetWindowSize(app->win->window, &screenWidth, &screenHeight);
@@ -87,7 +87,7 @@ bool PauseMenu::Update(float dt) {
         {
             app->audio->PlayFx(buttonFx);
             PauseButtons[PauseIndex - 1]->state = GuiControlState::PRESSED;
-            PauseButtons[PauseIndex - 1]->NotifyObserver();
+            PauseButtons[PauseIndex - 1]->NotifyMouseClick();
             timer.Start();
         }
     }
@@ -128,7 +128,7 @@ bool PauseMenu::Update(float dt) {
         {
             app->audio->PlayFx(buttonFx);
             AjustesButtons[AjustesIndex - 1]->state = GuiControlState::PRESSED;
-            AjustesButtons[AjustesIndex - 1]->NotifyObserver();
+            AjustesButtons[AjustesIndex - 1]->NotifyMouseClick();
             timer.Start();
         }
     }
@@ -140,11 +140,11 @@ bool PauseMenu::Update(float dt) {
 }
 bool PauseMenu::PostUpdate() {
     if (inpause == true) {
-        weigth = screenWidth - 100;
-        heigth = screenHeight - 100;
-        if (PauseIndex == 1) app->render->DrawTexture(pause1, 0, 0, NULL);
-        else if (PauseIndex == 2) app->render->DrawTexture(pause2, 0, 0, NULL);
-        else if (PauseIndex == 3) app->render->DrawTexture(pause3, 0, 0, NULL);
+        weigth = screenWidth - 700;
+      
+        if (PauseIndex == 1) app->render->DrawTexture(pause1, weigth, 0, 0, NULL);
+        else if (PauseIndex == 2) app->render->DrawTexture(pause2, weigth, 0, 0, NULL);
+        else if (PauseIndex == 3) app->render->DrawTexture(pause3, weigth, 0, 0, NULL);
     }
 
 	return true;
@@ -194,23 +194,22 @@ void PauseMenu::CreatePauseButtons() {
         
             if (inpause == true) {
                 buttoncreated = true;
-                int wBt = 190;
-                int hBt = 40;
-                int posBtX = screenWidth - 250;
-                int posBtY = screenHeight - 650;
+                int wBt = 390;
+                int hBt = 140;
+                int posBtX = screenWidth - 550;
+                int posBtY = screenHeight - 850;
                 PauseButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Continuar", { posBtX, posBtY, wBt, hBt }, [this](GuiControl* g) {continuar(g); }));
-                wBt = 190;
-                hBt = 40;
-                posBtX = screenWidth - 250;
-                posBtY = screenHeight - 550;
+                wBt = 370;
+                hBt = 100;
+                posBtX = screenWidth - 535;
+                posBtY = screenHeight - 700;
                 PauseButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Opciones", { posBtX, posBtY, wBt, hBt }, [this](GuiControl* g) {opciones(g); }));
                 wBt = 190;
-                hBt = 40;
-                posBtX = screenWidth - 250;
-                posBtY = screenHeight - 450;
+                hBt = 80;
+                posBtX = screenWidth - 400;
+                posBtY = screenHeight - 300;
                 PauseButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Salir", { posBtX, posBtY, wBt, hBt }, [this](GuiControl* g) {salir(g); }));
-                weigth = screenWidth - 100;
-                heigth = screenHeight - 100;
+                
               
             }
             else if (inajustes == true) {
