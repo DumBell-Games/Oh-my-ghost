@@ -1,7 +1,7 @@
 #ifndef __ITEMCOLA_H__
 #define __ITEMCOLA_H__
 
-#include "Inventory.h"
+#include "ItemData.h"
 #include "Point.h"
 #include "SDL/include/SDL.h"
 #include "Entity.h"

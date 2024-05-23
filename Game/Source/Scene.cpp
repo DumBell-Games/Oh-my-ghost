@@ -245,9 +245,6 @@ bool Scene::PostUpdate()
 {
 	bool ret = true;
 
-	//draw patatas tex 3 times
-	
-	
 
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
@@ -268,6 +265,7 @@ bool Scene::PostUpdate()
 
 		app->fadeToBlack->FadeToBlackTransition((Module*)app->scene, (Module*)app->pause, 0.0f);
 	}
+
 
 	return ret;
 }

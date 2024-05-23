@@ -11,6 +11,8 @@
 #include "ItemPatatas.h"
 #include "ItemVelocidad.h"
 #include "ItemYogur.h"
+#include "InventoryManager.h"
+#include "ItemData.h"
 
 
 struct SDL_Texture;
@@ -59,51 +61,76 @@ public:
 	}
 
 	int GetColaQuantity(){
-		return cola.cantidadCola;
+		ItemData* i = app->inventory->GetItemByType(ItemType::COLA);
+		if (i)	return i->cantidad;
+		else	return cola.cantidadCola;
 	}
 
 	int ColaPicked() {
-		return cola.cantidadCola++;
+		ItemData* i = app->inventory->GetItemByType(ItemType::COLA);
+		if (i) i->cantidad++;
+		cola.cantidadCola++;
+		return GetColaQuantity();
 	}
 
 	int YogurPicked() {
+		ItemData* i = app->inventory->GetItemByType(ItemType::YOGUR);
+		if (i) i->cantidad++;
 		return yogur.cantidadYogur++;
 	}
 
 	int GetYogurQuantity(){
-		return yogur.cantidadYogur;
+		ItemData* i = app->inventory->GetItemByType(ItemType::YOGUR);
+		if (i)	return i->cantidad;
+		else	return yogur.cantidadYogur;
 	}
 
 	int BirraPicked() {
+		ItemData* i = app->inventory->GetItemByType(ItemType::BIRRA);
+		if (i) i->cantidad++;
 		return birra.cantidadBirra++;
 	}
 
 	int GetBirraQuantity(){
-		return birra.cantidadBirra;
+		ItemData* i = app->inventory->GetItemByType(ItemType::BIRRA);
+		if (i)	return i->cantidad;
+		else	return birra.cantidadBirra;
 	}
 
 	int CaramelosPicked() {
+		ItemData* i = app->inventory->GetItemByType(ItemType::CARAMELOS);
+		if (i) i->cantidad++;
 		return caramelos.cantidadCaramelos++;
 	}
 
 	int GetCaramelosQuantity(){
-		return caramelos.cantidadCaramelos;
+		ItemData* i = app->inventory->GetItemByType(ItemType::CARAMELOS);
+		if (i)	return i->cantidad;
+		else	return caramelos.cantidadCaramelos;
 	}
 
 	int PatatasPicked() {
+		ItemData* i = app->inventory->GetItemByType(ItemType::PATATAS);
+		if (i) i->cantidad++;
 		return patatas.cantidadPatatas++;
 	}
 
 	int GetPatatasQuantity(){
-		return patatas.cantidadPatatas;
+		ItemData* i = app->inventory->GetItemByType(ItemType::PATATAS);
+		if (i)	return i->cantidad;
+		else	return patatas.cantidadPatatas;
 	}
 
 	int VelocidadPicked() {
+		ItemData* i = app->inventory->GetItemByType(ItemType::VELOCIDAD);
+		if (i) i->cantidad++;
 		return velocidad.cantidadVelocidad++;
 	}
 
 	int GetVelocidadQuantity(){
-		return velocidad.cantidadVelocidad;
+		ItemData* i = app->inventory->GetItemByType(ItemType::VELOCIDAD);
+		if (i)	return i->cantidad;
+		else	return velocidad.cantidadVelocidad;
 	}
 
 

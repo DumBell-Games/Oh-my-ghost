@@ -1,24 +1,59 @@
 #include "CombatManager.h"
 #include "GuiControl.h"
 #include "GuiManager.h"
-#include "InventoryScreen.h"
+#include "InventoryManager.h"
 #include "FadeToBlack.h"
+#include "App.h"
+#include "DebugConsole.h"
+#include "Reload.h"
 
 #include "Log.h"
-#include "App.h"
+#include "EnumUtils.h"
+#include "ItemData.h"
+#include "GuiControlButton.h"
+
+#include <string>
+#include <vector>
 
 CombatManager::CombatManager(bool startEnabled) : Module(startEnabled)
 {
 	name.Create("combat");
 	needsAwaking = true;
-	menuList.push_back(&bMain);
-	menuList.push_back(&bHabilidades);
-	menuList.push_back(&bObjetos);
-	menuList.push_back(&bEquipo);
+	menuList.push_back(std::vector<GuiControl*>());
+	menuList.push_back(std::vector<GuiControl*>());
+	menuList.push_back(std::vector<GuiControl*>());
+	menuList.push_back(std::vector<GuiControl*>());
+
+	// CODIGO PARA DEBUG, NO DEFINITIVO
+
+	Personatge* p1 = new Personatge("personatge1", 10, 10, 5, 2);
+	p1->atacs.push_back(Atac("Cop de puny1", 10));
+	p1->atacs.push_back(Atac("Cop de puny2", 10));
+	p1->atacs.push_back(Atac("Cop de puny3", 10));
+	p1->atacs.push_back(Atac("Cop de puny4", 10));
+	data.allies.push_back(p1);
+	Personatge* p2 = new Personatge("personatge2", 5, 30, 2, 1);
+	p2->atacs.push_back(Atac("Puntada de peu1", 15));
+	p2->atacs.push_back(Atac("Puntada de peu2", 15));
+	p2->atacs.push_back(Atac("Puntada de peu3", 15));
+	p2->atacs.push_back(Atac("Puntada de peu4", 15));
+	data.allies.push_back(p2);
+
+	// FIN CODIGO PARA DEBUG
 }
 
 CombatManager::~CombatManager()
 {
+	app->console->RemoveCommand("debugcombat");
+}
+
+bool CombatManager::PostInit()
+{
+	app->console->AddCommand("debugcombat", "Inicia un combate con un enemigo de prueba", "debugcombat", [this](std::vector<std::string> args) {
+		data.enemy = dummyEnemy = new Personatge("dummy", 1, 10, 1, 10);
+		app->reload->QueueReload("combatStart");
+		});
+	return true;
 }
 
 bool CombatManager::Awake(pugi::xml_node config)
@@ -30,37 +65,32 @@ bool CombatManager::Awake(pugi::xml_node config)
 	buttonSize.x = config.attribute("buttonW").as_int(0);
 	buttonSize.y = config.attribute("buttonH").as_int(0);
 
-	// CODIGO PARA DEBUG, NO DEFINITIVO
+	CreateButtons(config.child("menus"));
+	ResetButtonsState();
+	combatState = CombatState::START;
 
-	Personatge* p1 = new Personatge("personatge1", 10, 1, 5, 2);
-	p1->atacs.push_back(Atac("Cop de puny1", 10));
-	p1->atacs.push_back(Atac("Cop de puny2", 10));
-	p1->atacs.push_back(Atac("Cop de puny3", 10));
-	p1->atacs.push_back(Atac("Cop de puny4", 10));
-	data.allies.push_back(p1);
-	Personatge* p2 = new Personatge("personatge2", 5, 3, 2, 1);
-	p2->atacs.push_back(Atac("Puntada de peu1", 15));
-	p2->atacs.push_back(Atac("Puntada de peu2", 15));
-	p2->atacs.push_back(Atac("Puntada de peu3", 15));
-	p2->atacs.push_back(Atac("Puntada de peu4", 15));
-	data.allies.push_back(p2);
-
-	// FIN CODIGO PARA DEBUG
-
-	CreateButtons(config.child("buttons"));
+	awoken = true;
 
 	return true;
 }
 
 bool CombatManager::Start()
 {
+	// Medidas contra el uso de FadeToBlack()
+	if (!awoken)
+		Awake(app->GetConfig(this));
+
 	// Se asegura de que el modulo de entidades este pausado para que el jugador no se mueva por el mapa durante el combate
 	if (!app->entityManager->paused)
 		app->entityManager->Pause();
-	currentMenu = 0;
+	currentMenu = Menus::MAIN;
 	currentElement = 0;
 	LOG("Combat Start!");
 	rng = std::mt19937{ std::random_device{}() }; // Resetea el RNG antes de comenzar el combate
+
+	app->console->AddCommand("endcombat", "Termina el combate instantaneamente, como si se hubiera cumplido la condicion de victoria", "endcombat", [this](std::vector<std::string> args) {combatState = CombatState::DIALOG_END; });
+	
+
 	return true;
 }
 
@@ -88,6 +118,12 @@ bool CombatManager::Update(float dt)
 		HandleCombat();
 		break;
 	}
+	case CombatState::COMBAT_ANIM:
+	{
+		// reproduce y comprueba que han acabado las animaciones de combate antes de continuar
+		HandleCombatAnimation();
+		break;
+	}
 	case CombatState::DIALOG_END:
 	{
 		HandleEndDialog();
@@ -98,6 +134,7 @@ bool CombatManager::Update(float dt)
 		HandleEnd();
 		break;
 	}
+	case CombatState::DO_NOTHING:
 	default:
 		break;
 	}
@@ -113,15 +150,24 @@ bool CombatManager::PostUpdate()
 
 bool CombatManager::CleanUp()
 {
-	for (std::vector<GuiControl*>* menu : menuList)
+	app->console->RemoveCommand("");
+
+	data.enemy = nullptr;
+	RELEASE(dummyEnemy); // Datos usados con el comando "debugcombat"
+
+	currentMenu = Menus::MAIN;
+	currentElement = 0;
+	for (std::vector<GuiControl*>& menu : menuList)
 	{
-		for (GuiControl* g : *menu)
+		if (app->guiManager->guiControlsList.Count()>0)
+		for (GuiControl* g : menu)
 		{
 			app->guiManager->DestroyGuiControl(g);
 		}
-		menu->clear();
+		menu.clear();
 	}
-	//No hace falta vaciar menuList ya que es simplemente una agrupación de 4 variables dentro del mismo modulo
+
+	app->entityManager->Pause(); // Unpauses the entityManager and allows player movement
 
 	return true;
 }
@@ -129,12 +175,12 @@ bool CombatManager::CleanUp()
 GuiControl* CombatManager::NewButton(char menuID, char elementID, const char* text, SDL_Rect bounds, GuiCallback_f onClick, SDL_Rect sliderBounds)
 {
 	GuiControlButton* ret = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, elementID, text, bounds, onClick, sliderBounds);
-	ret->SetOnHover([this, &menuID, &elementID](GuiControl* g) {currentMenu = menuID; currentElement = elementID; });
+	ret->SetOnHover([this, menuID, elementID](GuiControl* g) {currentMenu = (Menus)menuID; currentElement = elementID; });
 
 	return ret;
 }
 
-void CombatManager::CreateButtons(pugi::xml_node config)
+void CombatManager::CreateButtons(pugi::xml_node menuListNode)
 {
 	//Monta el menu de arriba a abajo
 	std::vector<GuiCallback_f> functions;
@@ -144,7 +190,7 @@ void CombatManager::CreateButtons(pugi::xml_node config)
 	functions.push_back([this](GuiControl* g) {Flee(g); });
 
 	//MainMenu
-	pugi::xml_node menuItem = config.child("main");
+	pugi::xml_node menuItem = menuListNode.child("main");
 	SDL_Rect bounds{0,0,0,0};
 	bounds.x = posMain.x;
 	bounds.w = buttonSize.x;
@@ -158,63 +204,106 @@ void CombatManager::CreateButtons(pugi::xml_node config)
 		GuiCallback_f func;
 		if (id >= 0 && id < functions.size())
 			func = functions[id];
-		bMain.push_back(NewButton(0, id, text.GetString(), bounds, func));
+		menuList[enum2val(Menus::MAIN)].push_back(NewButton(0, id, text.GetString(), bounds, func));
 	}
 
 	CreateAbilityButtons(data.allies[data.activeAlly]);
-	CreateItemButtons(nullptr);
+	CreateItemButtons(app->inventory);
+	CreateTeamSwapButtons(menuListNode.child("team"));
 
 }
 
 void CombatManager::CreateAbilityButtons(Personatge* p)
 {
 	SDL_Rect bounds{posSub.x,0,buttonSize.x,buttonSize.y};
-	int i = 0;
-	for (Atac& a : p->atacs)
+	
+	//AttackMenu
+	for (int i = 0; i < p->atacs.size(); i++)
 	{
-		bounds.y = posSub.y + i * (bounds.h + 16);
-		GuiCallback_f func = [this,&a](GuiControl* g) {
-			LOG("WIP habilidad %s",a.nom);
-			ataqueAliado = &a;
+		bounds.y = posSub.y + (i * (bounds.h + 16));
+		Atac* a = &p->atacs[i];
+		GuiCallback_f func = [this,a](GuiControl* g) {
+			LOG("WIP habilidad %s",a->nom.c_str());
+			ataqueAliado = a;
+			accion = PlayerAction::ATTACK;
 			combatState = CombatState::COMBAT; // Al seleccionar el boton de ataque se pasa a ejecutar acciones
 			};
 		// Crea el boton en la posicion del submenu, la posicion 'y' depende del indice de este boton
-		bHabilidades.push_back(NewButton(1, i++, a.nom.c_str(), bounds, func));
+		menuList[enum2val(Menus::ATTACK)].push_back(NewButton(1, i, a->nom.c_str(), bounds, func));
 	}
+	//TODO añadir boton para volver atras
 }
 
-void CombatManager::CreateItemButtons(InventoryScreen* inv)
+void CombatManager::CreateItemButtons(InventoryManager* inv)
 {
-	// Crea los botones para el uso de objetos, el codigo es similar al de los botones de habilidades
-	LOG("WIP itemButtons");
+	// Crea los botones para el uso de objetos, el codigo es similar al de los botones de habilidades y cambio de personaje
+	SDL_Rect bounds{ posSub.x,posSub.y,buttonSize.x,buttonSize.y };
+
+	//ItemMenu
+	int i = 0;
+	for (ListItem<ItemData*>* listItem = inv->items.start; listItem; listItem = listItem->next)
+	{
+		if (listItem->data && listItem->data->cantidad > 0) {
+			ItemData* item = listItem->data;
+			bounds.y = posSub.y + i * (bounds.h + 16);
+			GuiCallback_f func = [this, item](GuiControl* g) {
+				objetoAliado = item;
+				accion = PlayerAction::ITEM;
+				combatState = CombatState::COMBAT;
+				};
+			menuList[enum2val(Menus::ITEM)].push_back(NewButton(3, i, item->name.GetString(), bounds, func));
+			i++;
+		}
+	}
+	//TODO añadir boton para volver atras
 }
 
-void CombatManager::CreateTeamSwapButtons()
+void CombatManager::CreateTeamSwapButtons(pugi::xml_node menuItem)
 {
 	SDL_Rect bounds{ posSub.x,posSub.y,buttonSize.x,buttonSize.y };
+
+	//BodyChangeMenu
 	for (size_t i = 0; i < data.allies.size(); i++)
 	{
 		Personatge* p = data.allies[i];
 		if (p) {
 			bounds.y = posSub.y + i * (bounds.h + 16);
-			GuiCallback_f func = [this, &i](GuiControl* g) {
-				SwapCharacter(i);
+			GuiCallback_f func = [this, i](GuiControl* g) {
+				nuevoAliadoActivo = i;
+				accion = PlayerAction::CHANGE;
 				combatState = CombatState::COMBAT;
 			};
-			bEquipo.push_back(NewButton(3, i, p->nom.c_str(), bounds, func));
+			menuList[enum2val(Menus::TEAM)].push_back(NewButton(3, i, p->nom.c_str(), bounds, func));
 		}
 	}
+	//TODO añadir boton para volver atras
 }
 
 bool CombatManager::CombatFinished()
 {
 	bool ret = false;
+	// Gameover si todo el equipo aliado ha sido derrotado
 	for (Personatge* p : data.allies)
 	{
 		ret = ret && p->salutActual <= 0;
 	}
-	ret = data.enemy->salutActual <= 0;
-	return ret;
+	//victoria si enemigo ha sido derrotado
+	ret |= data.enemy->salutActual <= 0;
+	return ret || fled;
+}
+
+char CombatManager::CombatResult()
+{
+	bool alliesDefeated = true;
+	bool enemiesDefeated = true;
+
+	for (Personatge* p : data.allies)
+	{
+		alliesDefeated &= p->salutActual <= 0;
+	}
+	enemiesDefeated &= data.enemy->salutActual <= 0;
+
+	return -((char)alliesDefeated)+((char)enemiesDefeated);
 }
 
 void CombatManager::HandleStart()
@@ -236,16 +325,41 @@ void CombatManager::HandleStartDialog()
 void CombatManager::HandleMenu()
 {
 	// Control de botones con mando y teclado
-	int i = 0, j = 0;
-	for (std::vector<GuiControl*>* menu : menuList)
+	int currentMenuInt = enum2val(currentMenu);
+	if (app->input->GetButton(ControlID::UP) == KeyState::KEY_DOWN)
 	{
-		for (GuiControl* g : *menu)
-		{
-			if (i == currentMenu && j == currentElement) {
+		// Si intenta subir desde el primer elemento, va hasta el ultimo sumando la cantidad de elementos
+		if (--currentElement < 0) currentElement += menuList[currentMenuInt].size();
+	}
+	else if (app->input->GetButton(ControlID::DOWN) == KEY_DOWN)
+	{
+		// Si intenta bajar desde el ultimo elemento, vuelve al inicio restando la cantidad de elementos
+		if (++currentElement >= menuList[currentMenuInt].size()) currentElement -= menuList[currentMenuInt].size();
+	}
 
+	bool notified = false;
+	char i = 0, j = 0;
+	for (std::vector<GuiControl*>& menu : menuList)
+	{
+		j = 0;
+		for (GuiControl* g : menu)
+		{
+			// Si es el elemento seleccionado, lo marca como tal, los otros elementos del mismo menu se quedan en su estado actual
+			if ((Menus)i == currentMenu) {
+				if (j == currentElement) {
+					g->state = (app->input->GetButton(ControlID::CONFIRM) == KEY_REPEAT) ? GuiControlState::PRESSED : GuiControlState::FOCUSED;
+					if (!notified && app->input->GetButton(ControlID::CONFIRM) == KEY_UP)
+					{
+						g->NotifyMouseClick();
+						notified = true;
+					}
+				}
+				else
+					g->state = GuiControlState::NORMAL;
 			}
+			// Los otros menus se vuelven invisibles, menos el principal que simplemente se impide hacer clic
 			else
-				g->state = GuiControlState::NORMAL;
+				g->state = (i == 0) ? GuiControlState::NON_CLICKABLE : GuiControlState::DISABLED;
 			j++;
 		}
 		i++;
@@ -255,6 +369,13 @@ void CombatManager::HandleMenu()
 
 void CombatManager::HandleCombat()
 {
+	//Esconde los menus
+	ResetButtonsState();
+	currentMenu = Menus::MAIN;
+	currentElement = 0;
+	HandleMenu();
+
+
 	// TODO eleccion de accion enemiga, uso de objetos, etc.
 	EnemyChoice();
 	Personatge* ally = data.allies[data.activeAlly];
@@ -265,18 +386,29 @@ void CombatManager::HandleCombat()
 	{
 	case PlayerAction::ATTACK:
 	{
-		if (ataqueAliado) {
+		if (ataqueAliado)
+		{
 			DoAttack(ally, enemy, ataqueAliado);
+			// Activar animacion de ataque aqui
 		}
 		ataqueAliado = nullptr;
 		break;
 	}
 	case PlayerAction::ITEM:
 	{
+		if (objetoAliado)
+		{
+			UseItem(data.allies[data.activeAlly], objetoAliado);
+			// Activar animacion de objeto aqui
+		}
 		break;
 	}
 	case PlayerAction::CHANGE:
 	{
+		if (nuevoAliadoActivo > -1)
+		{
+			SwapCharacter(nuevoAliadoActivo);
+		}
 		break;
 	}
 	case PlayerAction::NO_ACTION:
@@ -294,23 +426,30 @@ void CombatManager::HandleCombat()
 	// Accion completada, resetea las variables para nuevo turno
 	ataqueAliado = ataqueEnemigo = nullptr;
 
-	if (CombatFinished())
-		combatState = CombatState::DIALOG_END;
-	else combatState = CombatState::MENU;
+	combatState = CombatState::COMBAT_ANIM;
 }
 
 void CombatManager::EnemyChoice()
 {
 }
 
+void CombatManager::HandleCombatAnimation()
+{
+	if (CombatFinished())
+		combatState = CombatState::DIALOG_END;
+	else combatState = CombatState::MENU;
+}
+
 void CombatManager::HandleEndDialog()
 {
+	combatState = CombatState::END;
 }
 
 void CombatManager::HandleEnd()
 {
 	data.enemy = nullptr;
 	app->fadeToBlack->FadeToBlackTransition(this, (Module*)app->entityManager);
+	combatState = CombatState::DO_NOTHING;
 }
 
 void CombatManager::DoAttack(Personatge* attacker, Personatge* defender, Atac* move)
@@ -331,6 +470,11 @@ void CombatManager::DoAttack(Personatge* attacker, Personatge* defender, Atac* m
 
 }
 
+void CombatManager::UseItem(Personatge* target, ItemData* item)
+{
+	item->UseOn(target);
+}
+
 void CombatManager::SwapCharacter(int id)
 {
 	if (id >=0 && id < data.allies.size())
@@ -339,16 +483,33 @@ void CombatManager::SwapCharacter(int id)
 
 void CombatManager::AttackMenu(GuiControl* ctrl)
 {
+	currentMenu = Menus::ATTACK;
+	currentElement = 0;
+	ResetButtonsState();
 }
 
 void CombatManager::ItemMenu(GuiControl* ctrl)
 {
+	currentMenu = Menus::ITEM;
+	currentElement = 0;
+	ResetButtonsState();
 }
 
 void CombatManager::SwapBody(GuiControl* ctrl)
 {
+	currentMenu = Menus::TEAM;
+	currentElement = 0;
+	ResetButtonsState();
 }
 
 void CombatManager::Flee(GuiControl* ctrl)
 {
+	fled = true; // NOTE % posibilidad de huir?
+}
+
+void CombatManager::ResetButtonsState()
+{
+	for (std::vector<GuiControl*>& menu : menuList)
+		for (GuiControl* g : menu)
+			g->state = GuiControlState::NORMAL;
 }

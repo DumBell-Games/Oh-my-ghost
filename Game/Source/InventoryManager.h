@@ -2,7 +2,7 @@
 #define __INVENTORYMANAGER_H__
 
 #include "Module.h"
-#include "Inventory.h"
+#include "ItemData.h"
 #include "List.h"
 
 class InventoryManager : public Module
@@ -27,11 +27,18 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	Inventory* CreateItem(EntityType type, pugi::xml_node& data);
+	ItemData* CreateItem(ItemType type, pugi::xml_node& data);
+	
+	// Busca un objeto que cumpla con la condicion
+	template <typename Comp>
+	ItemData* GetItem(Comp condicion);
 
-	void DestroyItem(Inventory* item);
+	// Busca un objeto segun su tipo (devuelve el primero que se encuentre)
+	ItemData* GetItemByType(ItemType type);
 
-	void AddItem(Inventory* item);
+	void DestroyItem(ItemData* item);
+
+	void AddItem(ItemData* item);
 	
 	bool LoadState(pugi::xml_node node);
 
@@ -39,9 +46,7 @@ public:
 
 public:
 
-	List<Inventory*> items;
-
-	SString inventoryPath;
+	List<ItemData*> items;
 
 	bool started = false;
 	

@@ -15,7 +15,7 @@ public:
 	Module(bool startEnabled = true) : active(startEnabled), awoken(false), needsAwaking(false)
 	{}
 
-	void Init()
+	virtual void Init()
 	{
 		isEnabled = active;
 	}
@@ -39,9 +39,17 @@ public:
 		if (isEnabled) {
 			active = isEnabled = false;
 			paused = false;
+			if (needsAwaking)
+				awoken = false;
 			ret = CleanUp();
 		}
 		return ret;
+	}
+
+	//Called before Awake(). All modules execute this regardless of initial state
+	virtual bool PostInit()
+	{
+		return true;
 	}
 
 	// Called before render is available

@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -95,8 +95,13 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+
     <ClCompile Include="Source\Aprendiz.cpp" />
     <ClCompile Include="Source\Path.cpp" />
+
+    <ClCompile Include="Source\InventoryManager.cpp" />
+    <ClCompile Include="Source\ItemData.cpp" />
+
     <ClCompile Include="Source\Poison.cpp" />
     <ClCompile Include="Source\Character_Menu.cpp" />
     <ClCompile Include="Source\DebugCommands.h" />
@@ -143,8 +148,14 @@
     <ClCompile Include="Source\TransitionTrigger.cpp" />
     <ClCompile Include="Source\tmxTileidAdjustment.h" />
     <ClInclude Include="Source\Animation.h" />
+
     <ClInclude Include="Source\Aprendiz.h" />
     <ClInclude Include="Source\Path.h" />
+
+    <ClInclude Include="Source\EnumUtils.h" />
+    <ClInclude Include="Source\InventoryManager.h" />
+    <ClInclude Include="Source\ItemData.h" />
+
     <ClInclude Include="Source\Poison.h" />
     <ClInclude Include="Source\Character_Menu.h" />
     <ClInclude Include="Source\DebugConsole.h" />

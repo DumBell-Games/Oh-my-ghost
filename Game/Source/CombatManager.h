@@ -4,22 +4,33 @@
 
 #include "Point.h"
 #include "GuiControl.h"
+#include "ItemData.h"
 
 #include "SDL/include/SDL_rect.h"
 
 #include <random>
 #include <vector>
 
-class InventoryScreen;
+class InventoryManager;
 struct SDL_Texture;
+
+enum class Menus : char {
+	MAIN,
+	ATTACK,
+	ITEM,
+	TEAM,
+	MENU_COUNT
+};
 
 enum class CombatState {
 	START,
 	DIALOG_START,
 	MENU,
 	COMBAT,
+	COMBAT_ANIM,
 	DIALOG_END,
-	END
+	END,
+	DO_NOTHING
 };
 
 enum class PlayerAction {
@@ -47,6 +58,8 @@ public:
 
 	~CombatManager();
 
+	bool PostInit() override;
+
 	bool Awake(pugi::xml_node config) override;
 
 	bool Start() override;
@@ -61,20 +74,26 @@ private:
 
 	GuiControl* NewButton(char menuID, char elementID, const char* text, SDL_Rect bounds, GuiCallback_f onClick, SDL_Rect sliderBounds = {0,0,0,0});
 
-	void CreateButtons(pugi::xml_node config);
+	void CreateButtons(pugi::xml_node menuListNode);
 
 	void CreateAbilityButtons(Personatge* p);
 
-	void CreateItemButtons(InventoryScreen* inv);
+	void CreateItemButtons(InventoryManager* inv);
 
-	void CreateTeamSwapButtons();
+	void CreateTeamSwapButtons(pugi::xml_node menuItem);
 
 	bool CombatFinished();
 
+	// Devuelve el balance entre enemigos y aliados derrotados. 0 = empate, 1 = victoria, -1 = derrota
+	char CombatResult();
+
+
 	// Control por mando/teclado (raton va por GUI)
 
+	// Crea los elementos de UI que proporcionan informacion de los personajes en pantalla e inicia el dialogo de inicio de combate
 	void HandleStart();
 
+	// Espera a que se termine el dialogo para pasar a la siguiente parte del combate
 	void HandleStartDialog();
 
 	// Seleccion de accion
@@ -83,7 +102,11 @@ private:
 	// Accion elegida
 	void HandleCombat();
 
+	// Genera la acción del enemigo
 	void EnemyChoice();
+
+	// Reproduce las animaciones de los ataques ejecutados y vuelve al menu o acaba el combate dependiendo de la condicion de victoria/derrota
+	void HandleCombatAnimation();
 
 	// Texto de final de combate (dialogo del enemigo, EXP acumulada, etc.)
 	void HandleEndDialog();
@@ -91,9 +114,12 @@ private:
 	// Final de combate, inicio de transicion a mapa (desactivar este modulo y despausar entitymanager)
 	void HandleEnd();
 
+
 	// Realizacion de acciones
 
 	void DoAttack(Personatge* attacker, Personatge* defender, Atac* move);
+
+	void UseItem(Personatge* target, ItemData* item);
 
 	void SwapCharacter(int id);
 
@@ -107,6 +133,8 @@ private:
 
 	void Flee(GuiControl* ctrl);
 
+	void ResetButtonsState();
+
 public:
 
 	// Datos a usar para el combate. Hace falta rellenar este campo antes de activar el modulo
@@ -119,17 +147,9 @@ private:
 	std::mt19937 rng;
 
 	// Gestion de menu
-	std::vector<std::vector<GuiControl*>*> menuList;
-	char currentMenu = 0;
+	std::vector<std::vector<GuiControl*>> menuList;
+	Menus currentMenu = Menus::MAIN;
 	char currentElement = 0;
-
-	//Menu principal
-	std::vector<GuiControl*> bMain;
-
-	//Submenus
-	std::vector<GuiControl*> bHabilidades;
-	std::vector<GuiControl*> bObjetos;
-	std::vector<GuiControl*> bEquipo;
 
 	//Posicion de los menus
 	iPoint posMain;
@@ -140,8 +160,10 @@ private:
 
 	PlayerAction accion = PlayerAction::NO_ACTION;
 
-	Atac* ataqueAliado;
-	Atac* ataqueEnemigo;
+	Atac* ataqueAliado = nullptr;
+	ItemData* objetoAliado = nullptr;
+	int nuevoAliadoActivo = -1;
+	Atac* ataqueEnemigo = nullptr;
 
 
 
@@ -149,6 +171,11 @@ private:
 	SDL_Texture* tEnemigo = nullptr;
 
 	int turn = 0;
+
+	bool fled = false;
+
+	// DEBUG VARS
+	Personatge* dummyEnemy = nullptr;
 
 };
 

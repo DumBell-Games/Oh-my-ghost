@@ -33,6 +33,7 @@ enum class GuiControlType
 enum class GuiControlState
 {
 	DISABLED,
+	NON_CLICKABLE,
 	NORMAL,
 	FOCUSED,
 	PRESSED,

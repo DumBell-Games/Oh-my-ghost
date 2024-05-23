@@ -18,6 +18,7 @@
 #include "TeamScreen.h"
 #include "IntroScreen.h"
 #include "FadeToBlack.h"
+#include "InventoryManager.h"
 #include "InventoryScreen.h"
 #include "Character_Menu.h"
 
@@ -50,6 +51,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	//L07 DONE 2: Add Physics module
 	physics = new Physics(false);
 	scene = new Scene(false);
+	inventory = new InventoryManager(false);
 	inventoryScreen = new InventoryScreen(false);
 	characterMenu = new Character_Menu(false);
 	titlescreen = new TitleScreen(false);
@@ -76,7 +78,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(physics);
 	AddModule(map);
 	AddModule(entityManager);
+	AddModule(combat);
 	AddModule(guiManager);
+	AddModule(inventory);
 
 	AddModule(scene);
 	AddModule(inventoryScreen);
@@ -141,8 +145,16 @@ bool App::Awake()
 {
 	// L1: DONE 3: Measure the amount of ms that takes to execute the Awake and LOG the result
 	Timer timer = Timer();
+	
+	bool ret = true;
 
-	bool ret = LoadConfig();
+	for (ListItem<Module*>* item = modules.start; item != NULL && ret == true; item = item->next)
+	{
+		ret = item->data->PostInit();
+	}
+
+	if (ret)
+		ret = LoadConfig();
 
 	if(ret == true)
 	{
@@ -162,8 +174,8 @@ bool App::Awake()
 			// If the section with the module name exists in config.xml, fill the pointer with the valid xml_node
 			// that can be used to read all variables for that module.
 			// Send nullptr if the node does not exist in config.xml
-
-			ret = item->data->Awake(configFile.child("config").child(item->data->name.GetString()));
+			if (item->data->active || !item->data->needsAwaking)
+				ret = item->data->Awake(configFile.child("config").child(item->data->name.GetString()));
 			item = item->next;
 		}
 	}
