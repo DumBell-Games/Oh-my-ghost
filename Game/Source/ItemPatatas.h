@@ -1,7 +1,7 @@
 #ifndef __ITEMPATATAS_H__
 #define __ITEMPATATAS_H__
 
-#include "Inventory.h"
+#include "ItemData.h"
 #include "Point.h"
 #include "SDL/include/SDL.h"
 #include "Entity.h"

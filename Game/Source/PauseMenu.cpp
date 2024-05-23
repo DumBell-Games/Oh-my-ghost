@@ -46,6 +46,9 @@ bool PauseMenu::Start() {
 	return true;
 }
 bool PauseMenu::Update(float dt) {
+    if (buttoncreated == true) {
+        // TODO: pasar esto a OnClick() (activando el evento de forma manual con el teclado/mando desde aqui)
+        if (inpause == true && PauseButtons.At(0)->data->state == GuiControlState::PRESSED)
 
 
     

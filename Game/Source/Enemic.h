@@ -36,6 +36,9 @@ public:
     std::unique_ptr<StatusEffect> activeStatus;
     std::vector<Atac> atacs;
 
+    int exp = 1;
+    int expProximNivell = 100;
+
     Personatge(std::string _nom, int _nivell, int _atac, int _defensa, int _velocitat)
         : nom(_nom), nivell(_nivell), estat(NORMAL), atac(_atac), defensa(_defensa), velocitat(_velocitat) {
         salutTotal = 100; // Inicializamos la salud en 100 por defecto

@@ -87,6 +87,4 @@ bool GuiManager::CleanUp()
 	guiControlsList.Clear();
 
 	return true;
-
-	return false;
 }

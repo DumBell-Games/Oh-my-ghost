@@ -199,7 +199,7 @@ void Reload::ReloadModules()
 		if (item->data != nullptr) item->data->Disable();
 	}
 
-	// Algunos modulos requieren recargar la configuración al reiniciarse
+	// Algunos modulos requieren recargar la configuración al reiniciarse, y debido a la importancia del orden de carga, no se puede poner en el Enable()
 	for (ListItem<Module*>* item = activePreset->load.start; item != nullptr; item = item->next)
 	{
 		if (item->data != nullptr && item->data->needsAwaking && !item->data->awoken) {

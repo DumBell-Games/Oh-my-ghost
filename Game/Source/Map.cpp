@@ -66,8 +66,8 @@ bool Map::Update(float dt)
     bounds.y = -camRect.y;// +camRect.h / 2;
     bounds.w = camRect.w;
     bounds.h = camRect.h;
-    LOG("rawcamX:%i\nrawcamY:%i", camRect.x, camRect.y);
-    LOG("boundsX:%i\nboundsY:%i", bounds.x, bounds.y);
+    //LOG("rawcamX:%i\nrawcamY:%i", camRect.x, camRect.y);
+    //LOG("boundsX:%i\nboundsY:%i", bounds.x, bounds.y);
 
     {
         iPoint tmp = WorldToMap(bounds.x, bounds.y);
@@ -76,7 +76,7 @@ bool Map::Update(float dt)
         tmp = WorldToMap(bounds.w, bounds.h);
         bounds.w = tmp.x;
         bounds.h = tmp.y;
-        LOG("mapX:%i\nmapY:%i", bounds.x, bounds.y);
+        //LOG("mapX:%i\nmapY:%i", bounds.x, bounds.y);
     }
 
 

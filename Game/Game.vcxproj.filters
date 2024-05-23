@@ -104,7 +104,7 @@
     <ClCompile Include="Source\Combat.cpp" />
     <ClCompile Include="Source\PropertiesStruct.cpp" />
     <ClCompile Include="Source\tmxTileidAdjustment.h" />
-    
+    <ClCompile Include="Source\InventoryManager.cpp" />
     <ClCompile Include="Source\Character_Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -245,7 +245,10 @@
     <ClInclude Include="Source\Enemic.h" />
     <ClInclude Include="Source\Combat.h" />
     <ClInclude Include="Source\StatusEffect.h" />
+    <ClInclude Include="Source\EnumUtils.h" />
     <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\ItemData.h" />
+    <ClInclude Include="Source\InventoryManager.h" />
     <ClInclude Include="Source\Character_Menu.h" />
   </ItemGroup>
   <ItemGroup>

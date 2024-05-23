@@ -270,6 +270,20 @@ public:
 		}
 		return (-1);
 	}
+	template <typename Comp>
+	ListItem<tdata>* Find(Comp comparator)
+	{
+		ListItem<tdata>* tmp = start;
+
+		while (tmp != NULL)
+		{
+			if (comparator(tmp->data))
+				return tmp;
+
+			tmp = tmp->next;
+		}
+		return nullptr;
+	}
 
 	void InsertAfter(uint position, const List<tdata>& list)
 	{

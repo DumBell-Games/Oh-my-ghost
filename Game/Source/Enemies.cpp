@@ -9,6 +9,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "CombatManager.h"
+#include "Reload.h"
 
 Enemy::Enemy() : Entity(EntityType::ENEMY) , enemyData("PH",0,0,0,0)
 {
@@ -72,8 +73,10 @@ void Enemy::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER:
 	{
-		app->combat->data.enemy = &enemyData;
-
+		if (enemyData.salutActual > 0 && !app->reload->activePreset) {
+			app->combat->data.enemy = &enemyData;
+			app->reload->QueueReload("combatStart");
+		}
 		break;
 	}
 	case ColliderType::UNKNOWN:
