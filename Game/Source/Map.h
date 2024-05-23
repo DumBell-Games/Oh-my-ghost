@@ -7,8 +7,15 @@
 #include "Point.h"
 #include "PropertiesStruct.h"
 #include "Pathfinding.h"
+#include "Animation.h"
 
 #include "PugiXml\src\pugixml.hpp"
+
+struct TransitionData {
+	int targetDoorID;
+	int mapId;
+	// Informacion a pasar entre mapas
+};
 
 // Ignore Terrain Types and Tile Types for now, but we want the image!
 struct TileSet
@@ -16,9 +23,9 @@ struct TileSet
 	SString	name;
 	int	firstgid;
 	int margin;
-	int	spacing;
-	int	tileWidth;
-	int	tileHeight;
+	int spacing;
+	int tileWidth;
+	int tileHeight;
 	int columns;
 	int tilecount;
 
@@ -44,7 +51,7 @@ struct MapLayer
 	int y;
 	int width;
 	int height;
-	uchar* data;
+	uint* data;
 
 	Properties properties;
 
@@ -56,7 +63,7 @@ struct MapLayer
 		RELEASE(data);
 	}
 
-	inline uchar Get(int x, int y) const
+	inline uint Get(int x, int y) const
 	{
 		return data[(y * width) + x];
 	}
@@ -72,6 +79,7 @@ struct MapData
 	MapTypes type;
 
 	List<MapLayer*> maplayers;
+	List<Animation*> animations;
 
 	iPoint GetMapSize() const { return { width * tileWidth,height * tileHeight }; }
 };
@@ -104,6 +112,7 @@ public:
 
 	iPoint MapToWorld(int x, int y) const;
 	iPoint Map::WorldToMap(int x, int y);
+	Animation* GetAnimByName(SString name);
 
 private:
 
@@ -111,8 +120,8 @@ private:
 	bool LoadTileSet(pugi::xml_node mapFile);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
 	bool LoadAllLayers(pugi::xml_node mapNode);
+	bool LoadAnimation(pugi::xml_node node, TileSet* tileset);
 	TileSet* GetTilesetFromTileId(int gid) const;
-	bool LoadProperties(pugi::xml_node& node, Properties& properties);
 	bool LoadAllObjects(pugi::xml_node mapNode);
 
 	bool LoadEntity(pugi::xml_node objGroupNode, pugi::xml_node objNode, char entityType);
@@ -129,6 +138,7 @@ public:
 	SString path;
 	PathFinding* pathfinding;
 	MapLayer* navigationLayer;
+	TransitionData transitionData = {-1,-1};
 
 private:
 
@@ -137,6 +147,9 @@ private:
 
 	List<SString> mapNames;
 	int currentMap = 0;
+
+	// Debug command
+	friend static void WarpTo(Map* map, std::vector<std::string> args);
 };
 
 #endif // __MAP_H__

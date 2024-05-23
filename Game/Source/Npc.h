@@ -2,12 +2,16 @@
 
 #include "Entity.h"
 #include "Point.h"
+#include "PropertiesStruct.h"
+#include "Animation.h"
 
 #include "SDL/include/SDL.h"
 #include "Box2D/Box2D/Box2D.h"
 
 
 struct SDL_Texture;
+
+
 
 class Npc : public Entity
 {
@@ -21,7 +25,7 @@ public:
 
 	bool Start();
 
-	bool Update(float dt);
+	bool Update();
 
 	bool CleanUp();
 
@@ -35,9 +39,17 @@ public:
 	SDL_Texture* texture = NULL;
 	pugi::xml_node config;
 	uint texW, texH;
-	const char* texturePath;
+	SString texturePath;
 
 	PhysBody* nBody;
+
+	Animation* currentAnim;
+
+	Animation* palomaIdle;
+	Animation* aprendizIdle;
+	Animation* veteranaIdle;
+	Animation* conserjeIdle;
+	Animation* astroBarkIdle;
 
 
 };

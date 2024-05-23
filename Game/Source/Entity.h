@@ -5,6 +5,7 @@
 #include "SString.h"
 #include "Input.h"
 #include "Render.h"
+#include "PropertiesStruct.h"
 
 enum class EntityType : char
 {
@@ -13,6 +14,13 @@ enum class EntityType : char
 	DIALOG_TRIGGER,
 	NPC,
 	ENEMY,
+	TRANSITION,
+	COLA,
+	YOGUR,
+	BIRRA,
+	PATATAS,
+	CARAMELOS,
+	VELOCIDAD,
 	UNKNOWN
 };
 
@@ -76,6 +84,10 @@ public:
 
 	};
 
+	virtual void OnEndCollision(PhysBody* bodyA, PhysBody* bodyB) {
+
+	};
+
 	virtual void SetPosition(iPoint newPos)
 	{
 		position = newPos;
@@ -89,6 +101,11 @@ public:
 	EntityType type;
 	bool active = true;
 	pugi::xml_node parameters; 
+	std::string descripcion;
+	std::string tipo;
+	int curacion;
+	int itemFx;
+	PhysBody* ibody;
 
 	// Possible properties, it depends on how generic we
 	// want our Entity class, maybe it's not renderable...

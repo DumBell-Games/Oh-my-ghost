@@ -21,7 +21,7 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>MultiByte</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -95,17 +95,30 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Poison.cpp" />
+    <ClCompile Include="Source\Character_Menu.cpp" />
+    <ClCompile Include="Source\DebugCommands.h" />
+    <ClCompile Include="Source\DebugConsole.cpp" />
     <ClCompile Include="Source\Enemies.cpp" />
     <ClCompile Include="Source\FadeToBlack.cpp" />
     <ClCompile Include="Source\IntroScreen.cpp" />
+    <ClCompile Include="Source\InventoryScreen.cpp" />
+    <ClCompile Include="Source\ItemBirra.cpp" />
+    <ClCompile Include="Source\ItemCaramelos.cpp" />
+    <ClCompile Include="Source\ItemCola.cpp" />
+    <ClCompile Include="Source\ItemPatatas.cpp" />
+    <ClCompile Include="Source\ItemVelocidad.cpp" />
+    <ClCompile Include="Source\ItemYogur.cpp" />
     <ClCompile Include="Source\PauseMenu.cpp" />
+    <ClCompile Include="Source\CombatManager.cpp" />
+    <ClCompile Include="Source\Enemic.cpp" />
+    <ClCompile Include="Source\Combat.cpp" />
     <ClCompile Include="Source\menu.cpp" />
     <ClCompile Include="Source\DialogManager.cpp" />
     <ClCompile Include="Source\DialogTriggerEntity.cpp" />
     <ClCompile Include="Source\EntityManager.cpp" />
     <ClCompile Include="Source\GuiControlButton.cpp" />
     <ClCompile Include="Source\GuiManager.cpp" />
-    <ClCompile Include="Source\Item.cpp" />
     <ClCompile Include="Source\Main.cpp" />
     <ClCompile Include="Source\App.cpp" />
     <ClCompile Include="Source\Audio.cpp" />
@@ -116,6 +129,7 @@
     <ClCompile Include="Source\PerfTimer.cpp" />
     <ClCompile Include="Source\Physics.cpp" />
     <ClCompile Include="Source\Player.cpp" />
+    <ClCompile Include="Source\PropertiesStruct.cpp" />
     <ClCompile Include="Source\Reload.cpp" />
     <ClCompile Include="Source\Scene.cpp" />
     <ClCompile Include="Source\Render.cpp" />
@@ -123,12 +137,27 @@
     <ClCompile Include="Source\Textures.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\Window.cpp" />
+    <ClCompile Include="Source\TransitionTrigger.cpp" />
+    <ClCompile Include="Source\tmxTileidAdjustment.h" />
+    <ClInclude Include="Source\Animation.h" />
+    <ClInclude Include="Source\Poison.h" />
+    <ClInclude Include="Source\Character_Menu.h" />
+    <ClInclude Include="Source\DebugConsole.h" />
     <ClInclude Include="Source\Enemies.h" />
     <ClInclude Include="Source\FadeToBlack.h" />
     <ClInclude Include="Source\IntroScreen.h" />
+    <ClInclude Include="Source\InventoryScreen.h" />
+    <ClInclude Include="Source\ItemBirra.h" />
+    <ClInclude Include="Source\ItemCaramelos.h" />
+    <ClInclude Include="Source\ItemCola.h" />
+    <ClInclude Include="Source\ItemPatatas.h" />
+    <ClInclude Include="Source\ItemVelocidad.h" />
+    <ClInclude Include="Source\ItemYogur.h" />
     <ClInclude Include="Source\PauseMenu.h" />
+    <ClInclude Include="Source\CombatManager.h" />
+    <ClInclude Include="Source\Enemic.h" />
+    <ClInclude Include="Source\Combat.h" />
     <ClInclude Include="Source\menu.h" />
-    <ClInclude Include="Source\InputTest.h" />
     <ClInclude Include="Source\Dialog.h" />
     <ClInclude Include="Source\DialogManager.h" />
     <ClInclude Include="Source\DialogTriggerEntity.h" />
@@ -137,7 +166,6 @@
     <ClInclude Include="Source\GuiControl.h" />
     <ClInclude Include="Source\GuiControlButton.h" />
     <ClInclude Include="Source\GuiManager.h" />
-    <ClInclude Include="Source\Item.h" />
     <ClInclude Include="Source\Map.h" />
     <ClInclude Include="Source\Npc.h" />
     <ClInclude Include="Source\Pathfinding.h" />
@@ -168,10 +196,16 @@
     <ClInclude Include="Source\External\PugiXml\src\pugiconfig.hpp" />
     <ClInclude Include="Source\External\PugiXml\src\pugixml.hpp" />
     <ClCompile Include="Source\External\PugiXml\src\pugixml.cpp" />
+    <ClInclude Include="Source\TransitionTrigger.h" />
   </ItemGroup>
   <ItemGroup>
     <Xml Include="..\Output\config.xml" />
     <Xml Include="..\Output\controls.xml" />
+    <Xml Include="..\Output\inventory.xml" />
+    <ClInclude Include="Source\StatusEffect.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

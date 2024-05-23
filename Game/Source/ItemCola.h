@@ -1,0 +1,44 @@
+#ifndef __ITEMCOLA_H__
+#define __ITEMCOLA_H__
+
+#include "Inventory.h"
+#include "Point.h"
+#include "SDL/include/SDL.h"
+#include "Entity.h"
+
+struct SDL_Texture;
+
+class Cola : public Entity
+{
+public:
+
+	Cola();
+
+	virtual ~Cola();
+
+	bool Awake();
+
+	bool Start();
+
+	bool Update(float dt);
+
+	bool CleanUp();
+
+	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
+
+    void OnEndCollision(PhysBody* bodyA, PhysBody* bodyB);
+
+public:
+	int cantidadCola = 0;
+	bool isPicked = false;
+	int quantityCola = 0;
+
+private:
+
+	bool playerContactCo;
+	SDL_Texture* texture;
+	const char* texturePath;
+	uint texW, texH;
+};
+
+#endif // __ITEMCOLA_H__

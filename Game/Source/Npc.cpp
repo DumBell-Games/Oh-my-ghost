@@ -8,6 +8,8 @@
 #include "Log.h"
 #include "Point.h"
 #include "Physics.h"
+#include "Map.h"
+
 
 Npc::Npc() : Entity(EntityType::NPC)
 {
@@ -21,28 +23,38 @@ Npc::~Npc() {
 bool Npc::Awake() {
 
 	//L03: DONE 2: Initialize Player parameters
+	Properties p;
+	LoadProperties(parameters, p);
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
-	texturePath = parameters.attribute("texturePath").as_string();
+	texturePath = p.GetProperty("texturePath")->strVal;
+
+	//animations
+	
 
 	return true;
 }
 
 bool Npc::Start() {
 
-	texture = app->tex->Load(texturePath); 
+	palomaIdle = app->map->GetAnimByName("Paloma_SpriteSheet");
+	palomaIdle->PushBack({7806, 5761, 128, 256}, 4);
+
+	texture = app->tex->Load(texturePath.GetString()); 
 		
-	nBody = app->physics->CreateCircle(position.x + 16, position.y + 16, 16, bodyType::KINEMATIC);
+	nBody = app->physics->CreateRectangle(position.x + 128, position.y + 128, 128, 256, bodyType::KINEMATIC);
+	//haz que el rectangulo no rote
+	nBody->body->SetFixedRotation(true);	
 	nBody->listener = this;
 	nBody->ctype = ColliderType::NPC;
 
 	return true;
 }
 
-bool Npc::Update(float dt)
-{
-			
-	app->render->DrawTexture(texture, position.x, position.y);
+bool Npc::Update()
+{			
+	app->render->DrawTexture(palomaIdle->texture, position.x - 48, position.y - 114, &palomaIdle->GetCurrentFrame(), 1.0f, SDL_FLIP_NONE);
+	palomaIdle->Update();
 
 	b2Transform nBodyPos = nBody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;

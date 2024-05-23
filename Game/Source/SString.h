@@ -73,6 +73,9 @@ public:
 		}
 	}
 
+	SString(std::string str) : SString(str.c_str())
+	{}
+
 	// Destructor
 	virtual ~SString()
 	{

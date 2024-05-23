@@ -5,6 +5,8 @@
 #include "Point.h"
 #include "SDL/include/SDL.h"
 #include "Box2D/Box2D/Box2D.h"
+#include "Animation.h"
+#include "Timer.h"
 
 struct SDL_Texture;
 
@@ -31,11 +33,22 @@ public:
 
 	bool SaveState(pugi::xml_node& node);
 
+	void SetPosition(iPoint newPos) override;
+
+	void PlayerStartAnims();
+
+	Animation* GetAnimation(SString name);
+
+	
+
 public:
 
 	//L02: DONE 2: Declare player parameters
 	float speed = 0.2f;
-	SDL_Texture* texture = NULL;
+	SDL_Texture* texturePlayer = NULL;
+	SDL_Texture* textureGhost = NULL;
+	SDL_Texture* currentTexture = NULL;
+	
 	uint texW, texH;
 
 	float acceleration = 0.2f;
@@ -44,6 +57,44 @@ public:
 	int pickCoinFxId;
 
 	PhysBody* pBody;
+
+	List<Animation*> springyAnimationList;
+
+	Animation* currentAnim;
+
+	Animation* walkFrontal;
+	Animation* walkEspalda;
+	Animation* walkR;
+	Animation* walkL;
+	Animation* runR;
+	Animation* runL;
+	Animation* runFrontal;
+	Animation* runEspalda;
+	Animation* die;
+	Animation* manoDivina;
+	Animation* torbellino;
+	Animation* cambioCuerpo;
+	Animation* idleFrontal;
+
+
+	Animation* walkFrontalF;
+	Animation* walkEspaldaF;
+	Animation* walkRF;
+	Animation* walkLF;
+	Animation* runRF;
+	Animation* runLF;
+	Animation* runFrontalF;
+	Animation* runEspaldaF;
+	Animation* dieF;
+	Animation* manoDivinaF;
+	Animation* torbellinoF;
+	Animation* cambioCuerpoF;
+	Animation* idleFrontalF;
+
+	Timer timeToIdle;
+
+	bool cervezaPicked = false;
+	
 };
 
 #endif // __PLAYER_H__

@@ -6,7 +6,6 @@
 #include "Window.h"
 #include "Scene.h"
 #include "Map.h"
-#include "Item.h"
 #include "Optick/include/optick.h"
 #include "DialogTriggerEntity.h"
 #include "Npc.h"
@@ -15,6 +14,15 @@
 #include "FadeToBlack.h"
 #include "PauseMenu.h"
 #include "menu.h"
+#include "ItemCola.h"
+#include "ItemYogur.h"
+#include "ItemCaramelos.h"
+#include "ItemPatatas.h"
+#include "ItemBirra.h"
+#include "ItemVelocidad.h"
+#include "InventoryScreen.h"
+#include "Character_Menu.h"
+
 
 #include "Defs.h"
 #include "Log.h"
@@ -46,9 +54,35 @@ bool Scene::Awake(pugi::xml_node config)
 
 	// iterate all items in the scene
 	// Check https://pugixml.org/docs/quickstart.html#access
-	for (pugi::xml_node itemNode = config.child("item"); itemNode; itemNode = itemNode.next_sibling("item"))
+	
+	for (pugi::xml_node itemNode = config.child("cola"); itemNode; itemNode = itemNode.next_sibling("cola"))
 	{
-		Item* item = (Item*)app->entityManager->CreateEntity(EntityType::ITEM, itemNode);
+		Cola* cola = (Cola*)app->entityManager->CreateEntity(EntityType::COLA, itemNode);
+		//item->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("yogur"); itemNode; itemNode = itemNode.next_sibling("yogur"))
+	{
+		Yogur* yogur = (Yogur*)app->entityManager->CreateEntity(EntityType::YOGUR, itemNode);
+		//item->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("caramelos"); itemNode; itemNode = itemNode.next_sibling("caramelos"))
+	{
+		Caramelos* caramelos = (Caramelos*)app->entityManager->CreateEntity(EntityType::CARAMELOS, itemNode);
+		//item->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("patatas"); itemNode; itemNode = itemNode.next_sibling("patatas"))
+	{
+		Patatas* patatas = (Patatas*)app->entityManager->CreateEntity(EntityType::PATATAS, itemNode);
+		//item->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("birra"); itemNode; itemNode = itemNode.next_sibling("birra"))
+	{
+		Birra* birra = (Birra*)app->entityManager->CreateEntity(EntityType::BIRRA, itemNode);
+		//item->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("velocidad"); itemNode; itemNode = itemNode.next_sibling("velocidad"))
+	{
+		Velocidad* velocidad = (Velocidad*)app->entityManager->CreateEntity(EntityType::VELOCIDAD, itemNode);
 		//item->parameters = itemNode;
 	}
 	for (pugi::xml_node itemNode = config.child("dialogTrigger"); itemNode; itemNode = itemNode.next_sibling("dialogTrigger"))
@@ -75,8 +109,6 @@ bool Scene::Awake(pugi::xml_node config)
 // Called before the first frame
 bool Scene::Start()
 {
-
-	cityFx = app->audio->LoadFx("Assets/Audio/Fx/centralFauna.wav");
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
 	img = app->tex->Load("Assets/Textures/test.png");
 	
@@ -95,8 +127,7 @@ bool Scene::Start()
 	// Texture to highligh mouse position 
 	mouseTileTex = app->tex->Load("Assets/Maps/tileSelection.png");
 		
-	app->audio->PlayFx(app->scene->cityFx);
-
+	app->audio->PlayMusic("Assets/Audio/Fx/centralFauna.wav");
 
 	return true;
 }
@@ -133,9 +164,9 @@ bool Scene::Update(float dt)
 	// L13: Get the latest calculated path and draw
 	const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
 	for (uint i = 0; i < path->Count(); ++i)
-	{
+	{		
 		iPoint pos = app->map->MapToWorld(path->At(i)->x, path->At(i)->y);
-		if (app->physics->debug)
+		if (app->DebugEnabled())
 		{
 			app->render->DrawTexture(mouseTileTex, pos.x, pos.y);
 		}
@@ -148,6 +179,12 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) fullscreen = false;
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) 
 		app->pause->Enable();
+	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN) 
+		app->inventoryScreen->Enable();
+	
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) 
+		app->characterMenu->Enable();
+	
 	if (fullscreen == true) {
 		app->win->FullscreenMode();
 	}
@@ -165,24 +202,7 @@ bool Scene::PostUpdate()
 {
 	bool ret = true;
 
-	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-	{
-		//Destroy all the buttons in the title screen
-		//ListItem<GuiControl*>* controlListMenu = nullptr;
-		//for (controlListMenu = app->titlescreen->titleButtons.start; controlListMenu != NULL; controlListMenu = controlListMenu->next)
-		//{
-		//	app->guiManager->DestroyGuiControl(controlListMenu->data);
-		//}
-		//app->titlescreen->titleButtons.Clear();
-
-		/*app->guiManager->active = true;
-		app->guiManager->Enable();
-		app->pause->Enable();
-		app->pause->active = true;
-		app->pause->CreatePauseButtons();*/
-
-		//app->fadeToBlack->FadeToBlackTransition((Module*)app->scene, (Module*)app->pause, 0.0f);
-	}
+	
 
 	return ret;
 }
@@ -218,3 +238,4 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 
 	return true;
 }
+

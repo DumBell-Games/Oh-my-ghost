@@ -1,12 +1,18 @@
 #include "EntityManager.h"
 #include "Player.h"
-#include "Item.h"
 #include "DialogTriggerEntity.h"
 #include "App.h"
 #include "Textures.h"
 #include "Scene.h"
 #include "Npc.h"
 #include "Enemies.h"
+#include "TransitionTrigger.h"
+#include "ItemCola.h"
+#include "ItemYogur.h"
+#include "ItemCaramelos.h"
+#include "ItemPatatas.h"
+#include "ItemBirra.h"
+#include "ItemVelocidad.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -97,9 +103,6 @@ Entity* EntityManager::CreateEntity(EntityType type, pugi::xml_node& data)
 	case EntityType::PLAYER:
 		entity = new Player();
 		break;
-	case EntityType::ITEM:
-		entity = new Item();
-		break;
 	case EntityType::DIALOG_TRIGGER:
 		entity = new DialogTrigger();
 		break;
@@ -109,6 +112,29 @@ Entity* EntityManager::CreateEntity(EntityType type, pugi::xml_node& data)
 	case EntityType::ENEMY:
 		entity = new Enemy();
 		break;
+	case EntityType::TRANSITION:
+		entity = new TransitionTrigger();
+		break;
+	case EntityType::COLA:
+		entity = new Cola();
+		break;
+	case EntityType::YOGUR:
+		entity = new Yogur();
+		break;
+	case EntityType::PATATAS:
+		entity = new Patatas();
+		break;
+	case EntityType::CARAMELOS:
+		entity = new Caramelos();
+		break;
+	case EntityType::BIRRA:
+		entity = new Birra();
+		break;
+	case EntityType::VELOCIDAD:
+		entity = new Velocidad();
+		break;
+					
+
 		
 	default:
 		break;
@@ -124,16 +150,6 @@ Entity* EntityManager::CreateEntity(EntityType type, pugi::xml_node& data)
 	}
 
 	entities.Add(entity);
-
-	return entity;
-}
-
-Entity* EntityManager::CreateFromMap(char typeId, pugi::xml_node& data)
-{
-	Entity* entity = nullptr;
-
-	EntityType type = static_cast<EntityType>(1);
-
 
 	return entity;
 }

@@ -22,7 +22,6 @@ Physics::Physics(bool startEnabled) : Module(startEnabled)
 {
 	// Initialise all the internal class variables, at least to NULL pointer
 	world = NULL;
-	debug = true;
 	name.Create("physics");
 }
 
@@ -141,6 +140,16 @@ PhysBody* Physics::CreateCircle(int x, int y, int radious, bodyType type)
 	return pbody;
 }
 
+void Physics::DestroyBody(PhysBody* body)
+{
+	if (body)
+	{
+		world->DestroyBody(body->body);
+		delete body;
+	}
+}
+
+
 PhysBody* Physics::CreateRectangleSensor(int x, int y, int width, int height, bodyType type)
 {
 	// Create BODY at position x,y
@@ -226,10 +235,10 @@ bool Physics::PostUpdate()
 
 	// Activate or deactivate debug mode
 	if (app->input->GetKey(SDL_SCANCODE_F1) == KEY_DOWN)
-		debug = !debug;
+		app->ToggleDebug();
 	
 	//  Iterate all objects in the world and draw the bodies
-	if (debug)
+	if (app->DebugEnabled())
 	{
 		for (b2Body* b = world->GetBodyList(); b; b = b->GetNext())
 		{
@@ -332,6 +341,21 @@ void Physics::BeginContact(b2Contact* contact)
 
 	if (physB && physB->listener != NULL)
 		physB->listener->OnCollision(physB, physA);
+}
+
+void Physics::EndContact(b2Contact* contact)
+{
+	PhysBody* physA = (PhysBody*)contact->GetFixtureA()->GetBody()->GetUserData();
+	PhysBody* physB = (PhysBody*)contact->GetFixtureB()->GetBody()->GetUserData();
+
+	// Check if PhysBody objects have listeners
+	if (physA && physA->listener != NULL) {
+		physA->listener->OnEndCollision(physA, physB); // Call custom function
+	}
+
+	if (physB && physB->listener != NULL) {
+		physB->listener->OnEndCollision(physB, physA); // Call custom function with swapped order
+	}
 }
 
 //--------------- PhysBody
