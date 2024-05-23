@@ -6,6 +6,9 @@
 #include "GuiManager.h"
 #include "GuiControl.h"
 #include "Timer.h"
+#include "Pathfinding.h"
+#include "Animation.h"
+#include "Path.h"
 
 struct SDL_Texture;
 
@@ -40,6 +43,9 @@ public:
     int introScreenFx;
     //gui list
     List<GuiControl*> titleButtons;
+    Animation dumbellAnim;
+
+    Path IAnimationPath;
 
 private:
 

@@ -96,6 +96,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Aprendiz.cpp" />
+    <ClCompile Include="Source\Path.cpp" />
     <ClCompile Include="Source\Poison.cpp" />
     <ClCompile Include="Source\Character_Menu.cpp" />
     <ClCompile Include="Source\DebugCommands.h" />
@@ -143,6 +144,7 @@
     <ClCompile Include="Source\tmxTileidAdjustment.h" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\Aprendiz.h" />
+    <ClInclude Include="Source\Path.h" />
     <ClInclude Include="Source\Poison.h" />
     <ClInclude Include="Source\Character_Menu.h" />
     <ClInclude Include="Source\DebugConsole.h" />

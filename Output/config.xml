@@ -356,6 +356,7 @@
 			</animation>
 
 		</aprendiz>
+		
 		<aprendiz x="13213" y="7664" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
 			<animation name="aprendizIdle" loop="true" speed="0.08f">
 				<frame x="5	" y="35" w="117" h="186" />

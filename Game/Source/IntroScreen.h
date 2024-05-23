@@ -6,6 +6,8 @@
 #include "GuiManager.h"
 #include "GuiControl.h"
 #include "Timer.h"
+#include "Animation.h"
+#include "Path.h"
 
 struct SDL_Texture;
 
@@ -38,6 +40,9 @@ public:
            
     //gui list
     List<GuiControl*> titleButtons;
+
+    Path IAnimationPath;
+    Animation omgAnim;
 
 private:
 

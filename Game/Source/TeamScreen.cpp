@@ -16,6 +16,20 @@
 
 TeamScreen::TeamScreen(bool startEnabled) : Module(startEnabled)
 {
+	/*for (int fila = 0; fila < 7; fila++)
+	{
+	    for (int columna = 0; columna < 9; columna++)
+		{
+			int frameX = columna * SCREEN_WIDTH;
+			int frameY = fila * SCREEN_HEIGHT;
+			dumbellAnim.PushBack({ frameX, frameY, SCREEN_WIDTH, SCREEN_HEIGHT },  3);
+		}
+	}
+
+	dumbellAnim.speed = 0.02f;
+	dumbellAnim.loop = false;
+	IAnimationPath.PushBack({ 0.0f, 0.0f }, 200, &dumbellAnim);*/
+
     name.Create("teamScreen");
 }
 
@@ -46,6 +60,10 @@ bool TeamScreen::Start()
 // Called each loop iteration
 bool TeamScreen::Update(float dt)
 {
+
+	// dumbellAnim.Update();
+	// IAnimationPath.Update();
+
     if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
     {
         app->fadeToBlack->FadeToBlackTransition((Module*)app->teamScreen, (Module*)app->introScreen, 0.0f);
@@ -59,7 +77,10 @@ bool TeamScreen::Update(float dt)
 bool TeamScreen::PostUpdate()
 {
     
-    app->render->DrawTexture(logoScreenTex, 0, 0, NULL);    
+    // app->render->DrawTexture(logoScreenTex, 0, 0,  &IAnimationPath.GetCurrentAnimation()->GetCurrentFrame(), 1.0f);   
+    app->render->DrawTexture(logoScreenTex, 0, 0);
+	
+
 
     return true;
 }
