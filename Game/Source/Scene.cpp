@@ -24,6 +24,7 @@
 #include "Character_Menu.h"
 #include "Aprendiz.h"
 #include "Veterana.h"
+#include "QuestPatatasScreen.h"
 
 
 #include "Defs.h"
@@ -122,7 +123,7 @@ bool Scene::Awake(pugi::xml_node config)
 bool Scene::Start()
 {
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
-	img = app->tex->Load("Assets/Textures/test.png");
+	img = app->tex->Load("Assets/Textures/test.png"); 
 	
 	//Music is commented so that you can add your own music
 	//app->audio->PlayMusic("Assets/Audio/Music/music_spy.ogg");
@@ -171,7 +172,7 @@ bool Scene::Update(float dt)
 
 	// L09 DONE 6: Implement a method that repositions the player in the map with a mouse click
 	iPoint origin = iPoint(2, 21);
-	app->map->pathfinding->CreatePath(origin, app->map->WorldToMap(player->position.x,player->position.y));
+	//app->map->pathfinding->CreatePath(origin, app->map->WorldToMap(player->position.x,player->position.y));
 
 	// L13: Get the latest calculated path and draw
 	const DynArray<iPoint>* path = app->map->pathfinding->GetLastPath();
@@ -204,6 +205,36 @@ bool Scene::Update(float dt)
 		app->win->UnFullscreenMode();
 	}
 
+	if (app->scene->GetPatatasQuantity() == 3) {
+		app->scene->ColaPicked();
+		app->scene->ColaPicked();
+		app->scene->ColaPicked();
+		app->scene->ColaPicked();
+		app->scene->ColaPicked();
+		if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN) {
+			app->scene->PatatasPicked();
+		}
+	}
+	if (app->scene->GetCaramelosQuantity() == 3) {
+		app->scene->VelocidadPicked();
+		app->scene->VelocidadPicked();
+		app->scene->VelocidadPicked();
+		app->scene->VelocidadPicked();
+		app->scene->VelocidadPicked();
+		if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN) {
+			app->scene->CaramelosPicked();
+		}
+	}
+	if (app->scene->GetYogurQuantity() == 3) {
+		app->scene->BirraPicked();
+		app->scene->BirraPicked();
+		app->scene->BirraPicked();
+		app->scene->BirraPicked();
+		app->scene->BirraPicked();
+		if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN) {
+			app->scene->YogurPicked();
+		}
+	}
 	
 
 	return true;
@@ -213,6 +244,11 @@ bool Scene::Update(float dt)
 bool Scene::PostUpdate()
 {
 	bool ret = true;
+
+	//draw patatas tex 3 times
+	
+	
+
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 	{

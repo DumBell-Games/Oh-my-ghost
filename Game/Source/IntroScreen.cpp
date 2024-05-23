@@ -69,7 +69,6 @@ bool IntroScreen::Update(float dt)
     {
         app->fadeToBlack->FadeToBlackTransition((Module*)app->introScreen, (Module*)app->titlescreen, 0.0f);
     }
-
     
     return true;
 }

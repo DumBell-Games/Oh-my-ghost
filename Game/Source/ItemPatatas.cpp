@@ -39,6 +39,8 @@ bool Patatas::Start() {
 
 	//initilize textures
 
+	
+
 	//haz que el ibody se asigne al objeto
 	ibody = app->physics->CreateCircle(position.x + 32, position.y + 32, 24, bodyType::STATIC);
 	ibody->ctype = ColliderType::PATATAS;
@@ -51,6 +53,7 @@ bool Patatas::Start() {
 
 bool Patatas::Update(float dt)
 {
+	
 	app->render->DrawTexture(texture, position.x, position.y);
 
 	if (playerContactP)

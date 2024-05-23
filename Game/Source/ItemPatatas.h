@@ -30,6 +30,7 @@ public:
 
 public:
 	int cantidadPatatas = 0;
+	SDL_Texture* patatasQuestTex;
 	bool isPicked = false;
 
 private:
