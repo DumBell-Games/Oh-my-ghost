@@ -10,6 +10,7 @@
 #include "Physics.h"
 #include "Map.h"
 
+
 Npc::Npc() : Entity(EntityType::NPC)
 {
 	name.Create("Npc");
@@ -28,10 +29,16 @@ bool Npc::Awake() {
 	position.y = parameters.attribute("y").as_int();
 	texturePath = p.GetProperty("texturePath")->strVal;
 
+	//animations
+	
+
 	return true;
 }
 
 bool Npc::Start() {
+
+	palomaIdle = app->map->GetAnimByName("Paloma_SpriteSheet");
+	palomaIdle->PushBack({7806, 5761, 128, 256}, 4);
 
 	texture = app->tex->Load(texturePath.GetString()); 
 		
@@ -44,9 +51,10 @@ bool Npc::Start() {
 	return true;
 }
 
-bool Npc::Update(float dt)
+bool Npc::Update()
 {			
-	app->render->DrawTexture(texture, position.x - 48, position.y - 114);
+	app->render->DrawTexture(palomaIdle->texture, position.x - 48, position.y - 114, &palomaIdle->GetCurrentFrame(), 1.0f, SDL_FLIP_NONE);
+	palomaIdle->Update();
 
 	b2Transform nBodyPos = nBody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;

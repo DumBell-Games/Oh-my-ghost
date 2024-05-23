@@ -28,7 +28,10 @@ InventoryScreen::~InventoryScreen()
 {
 }
 
-bool InventoryScreen::Start() {   
+
+bool InventoryScreen::Start() {
+	
+    buttonFx = app->audio->LoadFx("Assets/Audio/Fx/basic_click.wav");
 
     inventory1 = app->tex->Load("Assets/Textures/InventarioCatCola.png");
     inventory2 = app->tex->Load("Assets/Textures/InventarioCatnip.png");
@@ -44,6 +47,7 @@ bool InventoryScreen::Start() {
     inventory12 = app->tex->Load("Assets/Textures/InventarioMapaEnemigo.png");
     inventory13 = app->tex->Load("Assets/Textures/InventarioMapaMazmorra.png");
     inventory14 = app->tex->Load("Assets/Textures/InventarioUbicacion.png");
+
 
     app->render->camera.x = 0;
     app->render->camera.y = 0;

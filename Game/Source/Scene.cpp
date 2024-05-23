@@ -21,6 +21,7 @@
 #include "ItemBirra.h"
 #include "ItemVelocidad.h"
 #include "InventoryScreen.h"
+#include "Character_Menu.h"
 
 
 #include "Defs.h"
@@ -178,8 +179,12 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) fullscreen = false;
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN) 
 		app->pause->Enable();
-	if(app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
+	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN) 
 		app->inventoryScreen->Enable();
+	
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) 
+		app->characterMenu->Enable();
+	
 	if (fullscreen == true) {
 		app->win->FullscreenMode();
 	}
@@ -197,24 +202,7 @@ bool Scene::PostUpdate()
 {
 	bool ret = true;
 
-	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
-	{
-		//Destroy all the buttons in the title screen
-		/*ListItem<GuiControl*>* controlListMenu = nullptr;
-		for (controlListMenu = app->titlescreen->titleButtons.start; controlListMenu != NULL; controlListMenu = controlListMenu->next)
-		{
-			app->guiManager->DestroyGuiControl(controlListMenu->data);
-		}
-		app->titlescreen->titleButtons.Clear();*/
-
-		/*app->guiManager->active = true;
-		app->guiManager->Enable();
-		app->pause->Enable();
-		app->pause->active = true;
-		app->pause->CreatePauseButtons();*/
-
-		app->fadeToBlack->FadeToBlackTransition((Module*)app->scene, (Module*)app->pause, 0.0f);
-	}
+	
 
 	return ret;
 }
