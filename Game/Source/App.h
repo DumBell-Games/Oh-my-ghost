@@ -82,7 +82,7 @@ public:
 	void Quit() { quit = true; }
 
 	void ToggleDebug() { debug = !debug; }
-
+			
 	bool DebugEnabled() { return debug; }
 
 private:
