@@ -15,6 +15,16 @@
  - Menus
  - Save / Load
  - Combat System - changes on CombatSystem branch
+ - More animations
+ - Art implemented
+ - Logo animated
+ - New 3 quests
+ - Combat system
+ - History improved
+ - Map charges faster
+ - More locations to visit
+ - Locations are more detailed
+ - And much more
  
 ## Controls
 
