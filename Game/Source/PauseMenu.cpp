@@ -45,99 +45,100 @@ bool PauseMenu::Start() {
 
 	return true;
 }
-bool PauseMenu::Update(float dt) {
+bool PauseMenu::Update(float dt) 
+{
     if (buttoncreated == true) {
         // TODO: pasar esto a OnClick() (activando el evento de forma manual con el teclado/mando desde aqui)
         if (inpause == true && PauseButtons.At(0)->data->state == GuiControlState::PRESSED)
 
 
-    
 
-    if (PauseButtons.Count() != 0) {
-        if (app->input->GetButton(ControlID::UP) == KEY_REPEAT) //arriba
-        {
-            if (timer.ReadMSec() >= 200)
+
+            if (PauseButtons.Count() != 0) {
+                if (app->input->GetButton(ControlID::UP) == KEY_REPEAT) //arriba
+                {
+                    if (timer.ReadMSec() >= 200)
+                    {
+                        if (PauseIndex > 1) PauseIndex--;
+                        else PauseIndex = 3;
+                        timer.Start();
+                    }
+                }
+                if (app->input->GetButton(ControlID::DOWN) == KEY_REPEAT) //abajo
+                {
+                    if (timer.ReadMSec() >= 200)
+                    {
+                        if (PauseIndex < 3) PauseIndex++;
+                        else PauseIndex = 1;
+                        timer.Start();
+                    }
+                }
+
+                ListItem<GuiControlButton*>* controlListItem = nullptr;
+                for (controlListItem = PauseButtons.start; controlListItem != NULL; controlListItem = controlListItem->next)
+                {
+                    if (controlListItem->data != nullptr)
+                    {
+                        controlListItem->data->state = GuiControlState::NORMAL;
+                    }
+                }
+                if (PauseButtons[PauseIndex - 1] != nullptr)
+                {
+                    PauseButtons[PauseIndex - 1]->state = GuiControlState::SELECTED;
+                }
+
+                if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN && PauseButtons.Count() >= PauseIndex && timer.ReadMSec() >= 200)
+                {
+                    app->audio->PlayFx(buttonFx);
+                    PauseButtons[PauseIndex - 1]->state = GuiControlState::PRESSED;
+                    PauseButtons[PauseIndex - 1]->NotifyMouseClick();
+                    timer.Start();
+                }
+            }
+        if (AjustesButtons.Count() != 0) {
+            if (app->input->GetButton(ControlID::UP) == KEY_REPEAT) //arriba
             {
-                if (PauseIndex > 1) PauseIndex--;
-                else PauseIndex = 3;
+                if (timer.ReadMSec() >= 200)
+                {
+                    if (AjustesIndex > 1) AjustesIndex--;
+                    else AjustesIndex = 7;
+                    timer.Start();
+                }
+            }
+            if (app->input->GetButton(ControlID::DOWN) == KEY_REPEAT) //abajo
+            {
+                if (timer.ReadMSec() >= 200)
+                {
+                    if (AjustesIndex < 7) AjustesIndex++;
+                    else AjustesIndex = 1;
+                    timer.Start();
+                }
+            }
+
+            ListItem<GuiControlButton*>* controlListItem = nullptr;
+            for (controlListItem = AjustesButtons.start; controlListItem != NULL; controlListItem = controlListItem->next)
+            {
+                if (controlListItem->data != nullptr)
+                {
+                    controlListItem->data->state = GuiControlState::NORMAL;
+                }
+            }
+            if (AjustesButtons[AjustesIndex - 1] != nullptr)
+            {
+                AjustesButtons[AjustesIndex - 1]->state = GuiControlState::SELECTED;
+            }
+
+            if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN && AjustesButtons.Count() >= AjustesIndex && timer.ReadMSec() >= 200)
+            {
+                app->audio->PlayFx(buttonFx);
+                AjustesButtons[AjustesIndex - 1]->state = GuiControlState::PRESSED;
+                AjustesButtons[AjustesIndex - 1]->NotifyMouseClick();
                 timer.Start();
             }
         }
-        if (app->input->GetButton(ControlID::DOWN) == KEY_REPEAT) //abajo
-        {
-            if (timer.ReadMSec() >= 200)
-            {
-                if (PauseIndex < 3) PauseIndex++;
-                else PauseIndex = 1;
-                timer.Start();
-            }
-        }
 
-        ListItem<GuiControlButton*>* controlListItem = nullptr;
-        for (controlListItem = PauseButtons.start; controlListItem != NULL; controlListItem = controlListItem->next)
-        {
-            if (controlListItem->data != nullptr)
-            {
-                controlListItem->data->state = GuiControlState::NORMAL;
-            }
-        }
-        if (PauseButtons[PauseIndex - 1] != nullptr)
-        {
-            PauseButtons[PauseIndex - 1]->state = GuiControlState::SELECTED;
-        }
 
-        if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN && PauseButtons.Count() >= PauseIndex && timer.ReadMSec() >= 200)
-        {
-            app->audio->PlayFx(buttonFx);
-            PauseButtons[PauseIndex - 1]->state = GuiControlState::PRESSED;
-            PauseButtons[PauseIndex - 1]->NotifyMouseClick();
-            timer.Start();
-        }
     }
-    if (AjustesButtons.Count() != 0) {
-        if (app->input->GetButton(ControlID::UP) == KEY_REPEAT) //arriba
-        {
-            if (timer.ReadMSec() >= 200)
-            {
-                if (AjustesIndex > 1) AjustesIndex--;
-                else AjustesIndex = 7;
-                timer.Start();
-            }
-        }
-        if (app->input->GetButton(ControlID::DOWN) == KEY_REPEAT) //abajo
-        {
-           if (timer.ReadMSec() >= 200)
-            {
-                if (AjustesIndex < 7) AjustesIndex++;
-                else AjustesIndex = 1;
-                timer.Start();
-            }
-        }
-
-        ListItem<GuiControlButton*>* controlListItem = nullptr;
-        for (controlListItem = AjustesButtons.start; controlListItem != NULL; controlListItem = controlListItem->next)
-        {
-            if (controlListItem->data != nullptr)
-            {
-                controlListItem->data->state = GuiControlState::NORMAL;
-            }
-        }
-        if (AjustesButtons[AjustesIndex - 1] != nullptr)
-        {
-            AjustesButtons[AjustesIndex - 1]->state = GuiControlState::SELECTED;
-        }
-
-        if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN && AjustesButtons.Count() >= AjustesIndex && timer.ReadMSec() >= 200)
-        {
-            app->audio->PlayFx(buttonFx);
-            AjustesButtons[AjustesIndex - 1]->state = GuiControlState::PRESSED;
-            AjustesButtons[AjustesIndex - 1]->NotifyMouseClick();
-            timer.Start();
-        }
-    }
-
-
-    
 
 	return true;
 }
