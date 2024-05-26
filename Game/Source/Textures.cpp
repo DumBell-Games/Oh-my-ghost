@@ -140,7 +140,8 @@ shared_texture_t const Textures::LoadSP(const char* path, bool preventDuplicates
 
 	shared_texture_t tex = shared_texture_t(Load(path), 
 		[](SDL_Texture* t) {app->tex->UnLoad(t); });
-	noDuplicateTextureList.Add({ SString(path), tex });
+	if (!preventDuplicates)
+		noDuplicateTextureList.Add({ SString(path), tex });
 
 	return tex;
 }
