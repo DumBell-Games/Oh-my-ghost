@@ -4,7 +4,6 @@
 #include "App.h"
 #include "Textures.h"
 #include "Scene.h"
-#include "Npc.h"
 #include "Enemies.h"
 #include "TransitionTrigger.h"
 #include "ItemCola.h"

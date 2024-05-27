@@ -37,7 +37,7 @@
   </input>
 
 	<scene>
-		<player x="8025" y="6164" texturePath="Assets/Textures/springyPaloma.png" ghostTexPath="Assets/Textures/springyFantasma.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg">
+		<player x="21315" y="8232" texturePath="Assets/Textures/springyPaloma.png" ghostTexPath="Assets/Textures/springyFantasma.png" coinfxpath="Assets/Audio/Fx/retro-video-game-coin-pickup-38299.ogg">
 			<animation name="walkR" loop="true" speed="0.08f">
 				<frame x="15" y="1137" w="111" h="144" />
 				<frame x="143" y="1138" w="111" h="143" />
@@ -280,6 +280,38 @@
 				<frame x="3084" y="114" w="115" h="141" />
 				<frame x="3208" y="114" w="119" h="141" />
 			</animation>
+			
+			<animation name="vomito" loop="false" speed="0.04f">
+				<frame x="3" y="3362" w="126" h="204" />
+				<frame x="131" y="3362" w="126" h="204" />
+				<frame x="257" y="3353" w="128" h="218" />
+				<frame x="386" y="3353" w="128" h="218" />
+				<frame x="516" y="3362" w="126" h="204" />
+				<frame x="645" y="3413" w="123" h="161" />
+				<frame x="772" y="3413" w="123" h="161" />
+				<frame x="897" y="3469" w="129" h="112" />
+				<frame x="1025" y="3434" w="126" h="149" />
+				<frame x="1155" y="3474" w="122" h="101" />
+				<frame x="1280" y="3466" w="125" h="112" />
+				<frame x="1411" y="3474" w="122" h="101" />
+				<frame x="1539" y="3474" w="122" h="101" />
+				<frame x="1667" y="3461" w="119" h="114" />
+				<frame x="1796" y="3461" w="118" h="114" />
+				<frame x="1928" y="3465" w="117" h="110" />
+				<frame x="2056" y="3465" w="117" h="110" />
+				<frame x="2185" y="3464" w="116" h="110" />
+				<frame x="2312" y="3463" w="117" h="111" />
+				<frame x="2440" y="3463" w="117" h="112" />
+				<frame x="2568" y="3463" w="117" h="111" />
+				<frame x="2697" y="3464" w="117" h="110" />
+				<frame x="2824" y="3464" w="118" h="111" />
+				<frame x="2953" y="3463" w="118" h="111" />
+				<frame x="3082" y="3463" w="116" h="111" />
+				<frame x="3210" y="3466" w="116" h="111" />
+				<frame x="3348" y="3469" w="98" h="114" />
+				<frame x="3477" y="3469" w="98" h="114" />
+				<frame x="3605" y="3469" w="98" h="114" />
+			</animation>
 
 
 			<animation name="cambioCuerpo" loop="false" speed="0.08f">
@@ -309,7 +341,7 @@
 			</animation>
 
 		</player>
-		<silverWings x="7468" y="5726" texturePath="Assets/Textures/silverWings.png">
+		<silverWings x="7100" y="6177" texturePath="Assets/Textures/silverWings.png">
 			<animation name="silverIdle" loop="true" speed="0.08f">
 				<frame x="1" y="1" w="78" h="144" />
 				<frame x="129" y="1" w="78" h="144" />
@@ -430,13 +462,10 @@
 
 		<enemy x="900" y="472" texturePath="Assets/Textures/pigNpc.png"/>
 
-		<dialogTrigger x="7600" y="5726" repeat ="true">
+		<dialogTrigger x="7200" y="6177" repeat ="true">
 			<sentences>
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="*Anda parece que he poseido a esta Paloma a ver si ahora puedo hablar con la gente*"/>
 			</sentences>
-			<repeat_sentences>
-				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="*Anda parece que he poseido a esta Paloma a ver si ahora puedo hablar con la gente*"/>
-			</repeat_sentences>
 		</dialogTrigger>
 
 		<dialogTrigger x="13572" y="9218" repeat ="true">
@@ -535,7 +564,40 @@
 			</sentences>
 		</dialogTrigger>
 
-
+		<dialogTrigger x="8025" y="6164" repeat ="true">
+			<sentences>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="AAAAAAAAAAA... un mareillo tonto dice, si hasta he hechado la pota..."/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="¿Este soy yo ahora? Mmm voy a preguntarle a la paloma esa "/>
+			</sentences>
+		</dialogTrigger>
+	
+				
+		<dialogTrigger x="21415" y="8332" repeat ="false">
+			<sentences>
+				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringy.png" text="¿Qué? ¿Dónde estoy?"/>
+				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringy.png" text="¿Qué ha pasado? ¿Y mi compañera Copycat, dónde está?"/>
+				<sentence name="Deidad"     facetexturepath="Assets/Textures/Chibi_DjBunny.png" text="Te doy la bienvenida"/>
+				<sentence name="Deidad"     facetexturepath="Assets/Textures/Chibi_DjBunny.png" text="Estas en un lugar complicado de describir"/>
+				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringy.png" text="¿De qué me estás hablando?"/>
+				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringy.png" text="*¿Eh? Este señor debe estar pasado de copas, vaya aires de grandeza tiene…"/>
+				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringy.png" text=""/>
+				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringy.png" text="Entonces si eres todopoderoso devuelveme con Copycat"/>
+				<sentence name="Deidad"     facetexturepath="Assets/Textures/Chibi_DjBunny.png" text="No puedes volver al mundo terrenal, has muerto"/>
+				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringy.png" text="¿Cómo que he muerto? Pero esto no puede ser, tiene que haber alguna manera de poder volver al mundo terrenal. Por favor, devuélveme ahí, Copycat me necesita!"/>
+				<sentence name="Deidad"    facetexturepath="Assets/Textures/Chibi_DjBunny.png" text="Hmmm..."/>
+				<sentence name="Deidad"    facetexturepath="Assets/Textures/Chibi_DjBunny.png" text="¿Ves a ese de ahí? Si le ganas en combate te dejaré volver"/>
+				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringy.png" text="¿A la tortuga esa?"/>
+				<sentence name="Deidad"    facetexturepath="Assets/Textures/Chibi_DjBunny.png" text="Si. Derrotala y volverás al mundo terrenal"/>
+				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringy.png" text="Voy a por tí patatuda"/>
+			</sentences>
+		</dialogTrigger>
+		
+		<dialogTrigger x="21415" y="8532" repeat ="true">
+			<sentences>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="AAAAAAAAAAA... un mareillo tonto dice, si hasta he hechado la pota..."/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="¿Este soy yo ahora? Mmm voy a preguntarle a la paloma esa "/>
+			</sentences>
+		</dialogTrigger>
 
 	</scene>
 

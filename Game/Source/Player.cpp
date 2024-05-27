@@ -54,6 +54,8 @@ void Player::PlayerStartAnims()
 	runFrontal = GetAnimation("runFrontal");
 	cambioCuerpo = GetAnimation("cambioCuerpo");
 
+	vomito = GetAnimation("vomito");
+
 	walkRF = GetAnimation("walkRF");
 	walkLF = GetAnimation("walkLF");
 	walkEspaldaF = GetAnimation("walkEspaldaF");
@@ -101,9 +103,23 @@ bool Player::Start() {
 	arcadeOut = app->physics->CreateRectangleSensor(14849 + 128, 9600 + 64, 256, 128, bodyType::KINEMATIC);
 	arcadeOut->ctype = ColliderType::ARCADEOUT;
 
+	cieloOut = app->physics->CreateRectangleSensor(21529 - 96, 8681 + 64, 256, 128, bodyType::KINEMATIC);
+	cieloOut->ctype = ColliderType::CIELOOUT;
+
+	mansionIn = app->physics->CreateRectangleSensor(10394, 531 + 64, 256, 128, bodyType::KINEMATIC);
+	mansionIn->ctype = ColliderType::MANSIONIN;
+
+	mansionOut = app->physics->CreateRectangleSensor(163866, 5893 + 64, 256, 128, bodyType::KINEMATIC);
+	mansionOut->ctype = ColliderType::MANSIONOUT;
+
+	despachoIn = app->physics->CreateRectangleSensor(18820, 2980 + 64, 256, 128, bodyType::KINEMATIC);
+	despachoIn->ctype = ColliderType::DESPACHOIN;
+
+	despachoOut = app->physics->CreateRectangleSensor(20866, 2176 + 64, 256, 128, bodyType::KINEMATIC);
+	despachoOut->ctype = ColliderType::DESPACHOOUT;
 
 
-	//haz que el rectangulo no rote
+	//hace que el rectangulo no rote
 	pBody->body->SetFixedRotation(true);
 	pBody->listener = this;
 	pBody->ctype = ColliderType::PLAYER;
@@ -325,6 +341,38 @@ bool Player::Update(float dt)
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(4393), PIXEL_TO_METERS(1878)), NULL);
 		tabernaOUT = false;
 	}
+	if (cieloOUT)
+	{
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(8025), PIXEL_TO_METERS(6164)), NULL);
+		currentAnim = vomito;
+		currentAnim->Update();
+		if (vomito->HasFinished())
+		{
+			currentAnim = idleFrontal;
+			currentAnim->Update();
+			cieloOUT = false;
+		}
+	}
+	if (mansionIN)
+	{
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(16386), PIXEL_TO_METERS(5893)), NULL);
+		mansionIN = false;
+	}
+	if (mansionOUT)
+	{
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(10394), PIXEL_TO_METERS(531)), NULL);
+		mansionOUT = false;
+	}
+	if (despachoIN)
+	{
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(20866), PIXEL_TO_METERS(2126)), NULL);
+		despachoIN = false;
+	}	
+	if (despachoOUT)
+	{
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(18820), PIXEL_TO_METERS(2980)), NULL);
+		despachoOUT = false;
+	}
 	if (palomaTouched)
 	{
 		currentAnim = cambioCuerpoF;
@@ -393,6 +441,26 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision TABERNAOUT");
 		tabernaOUT = true;
 		tabernaIN = false;
+		break;
+	case ColliderType::CIELOOUT:
+		LOG("Collision CIELOOUT");
+		cieloOUT = true;
+		break;
+	case ColliderType::MANSIONIN:
+		LOG("Collision MANSIONIN");
+		mansionIN = true;
+		break;
+	case ColliderType::MANSIONOUT:
+		LOG("Collision MANSIONOUT");
+		mansionOUT = true;
+		break;
+	case ColliderType::DESPACHOIN:
+		LOG("Collision DESPACHOIN");
+		despachoIN = true;
+		break;
+	case ColliderType::DESPACHOOUT:
+		LOG("Collision DESPACHOOUT");
+		despachoOUT = true;
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");

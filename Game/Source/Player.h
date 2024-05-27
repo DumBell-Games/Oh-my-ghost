@@ -65,6 +65,12 @@ public:
 	PhysBody* tabernaOut;
 	PhysBody* arcadeIn;
 	PhysBody* arcadeOut;
+	PhysBody* cieloOut;
+	PhysBody* mansionIn;
+	PhysBody* mansionOut;
+	PhysBody* despachoIn;
+	PhysBody* despachoOut;
+
 
 	bool casinoIN = false;
 	bool casinoOUT = false;
@@ -73,6 +79,11 @@ public:
 	bool arcadeIN = false;
 	bool arcadeOUT = false;
 	bool palomaTouched = false;
+	bool cieloOUT = false;
+	bool mansionIN = false;
+	bool mansionOUT = false;
+	bool despachoIN = false;
+	bool despachoOUT = false;
 
 	List<Animation*> springyAnimationList;
 
@@ -91,7 +102,7 @@ public:
 	Animation* torbellino;
 	Animation* cambioCuerpo;
 	Animation* idleFrontal;
-
+	Animation* vomito;
 
 	Animation* walkFrontalF;
 	Animation* walkEspaldaF;

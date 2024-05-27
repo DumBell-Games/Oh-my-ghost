@@ -116,6 +116,12 @@ public:
 		paused = !active;
 		return paused;
 	}
+	bool Play()
+	{
+		paused = !active;
+		active = !paused;
+		return paused;
+	}
 
 public:
 

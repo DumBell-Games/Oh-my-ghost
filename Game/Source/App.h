@@ -180,7 +180,7 @@ private:
 	bool saveRequest = false;
 	bool quit = false;
 
-	bool debug = true;
+	bool debug = false;
 
 };
 

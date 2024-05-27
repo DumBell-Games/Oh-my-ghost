@@ -63,6 +63,7 @@ bool InventoryScreen::PreUpdate() {
     if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN)
     {
         app->fadeToBlack->FadeToBlackTransition(this, (Module*)app->scene, 0);
+        app->entityManager->Play();
     }
 
 	return true;
