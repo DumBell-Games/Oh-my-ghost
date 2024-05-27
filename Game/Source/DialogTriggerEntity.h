@@ -49,7 +49,7 @@ private:
 	const char* texturePath;
 
 	//El path de la textura de la cara general
-	const char* faceTexturePath;
+	SString faceTexturePath;
 
 	//Cuerpo de fisicas, para detectar cuando el jugador esta cerca
 	//y activar el dialogo en caso de que el jugador asi lo quiera

@@ -32,7 +32,7 @@ bool SilverWings::Awake() {
 
 bool SilverWings::Start() {
 
-	VeteranaStartAnims();
+	SilverWingsStartAnims();
  
 	texture = app->tex->Load(parameters.attribute("texturePath").as_string());
 		
@@ -41,18 +41,27 @@ bool SilverWings::Start() {
 	nBody->body->SetFixedRotation(true);	
 	nBody->listener = this;
 	nBody->ctype = ColliderType::PALOMA;
+	
+	currentAnim = silverIdle;
 
 	return true;
 }
 
 bool SilverWings::Update(float dt)
 {	
-	silverIdle->Update();
-	app->render->DrawTexture(texture, position.x - 24, position.y - 56, &silverIdle->GetCurrentFrame());
+	currentAnim->Update();
+	app->render->DrawTexture(texture, position.x - 24, position.y - 56, &currentAnim->GetCurrentFrame());
 	
 	b2Transform nBodyPos = nBody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;
 	position.y = METERS_TO_PIXELS(nBodyPos.p.y) - 32 / 2;
+
+	if (playerTouched)
+	{
+		currentAnim = silverDeath;
+		if (currentAnim->HasFinished())
+		{}
+	}
 
 	return true;
 }
@@ -72,12 +81,16 @@ void SilverWings::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
 		break;
+	case ColliderType::PLAYER:
+		LOG("Collision PLAYER");
+		playerTouched = true;
+		break;
 	default:
 		break;
 	}
 }
 
-void SilverWings::VeteranaStartAnims() {
+void SilverWings::SilverWingsStartAnims() {
 	for (pugi::xml_node animNode = parameters.child("animation"); animNode; animNode = animNode.next_sibling())
 	{
 		Animation* anim = new Animation();
@@ -99,6 +112,7 @@ void SilverWings::VeteranaStartAnims() {
 	}
 
 	silverIdle = GetAnimation("silverIdle");
+	silverDeath = GetAnimation("silverDeath");
 }
 
 Animation* SilverWings::GetAnimation(SString name)

@@ -39,14 +39,14 @@ bool DialogTrigger::Start() {
 	//Cargar dialogos
 	for (pugi::xml_node itemNode = parameters.child("sentences").child("sentence"); itemNode; itemNode = itemNode.next_sibling("sentence"))
 	{
-		dialogues.Add(app->dialogManager->CreateDialog(itemNode, parameters.attribute("name").as_string(), faceTexturePath, fontTarget.c_str(),0, parameters.attribute("mapid").as_int()));
+		dialogues.Add(app->dialogManager->CreateDialog(itemNode, parameters.attribute("name").as_string(), faceTexturePath.GetString(), fontTarget.c_str(), 0, parameters.attribute("mapid").as_int()));
 	}
 
 	//Si el dialogo se reite, cargar las lineas que se repite
 	if (repeatDialog) {
 		for (pugi::xml_node itemNode = parameters.child("repeat_sentences").child("sentence"); itemNode; itemNode = itemNode.next_sibling("sentence"))
 		{
-			dialoguesRepeat.Add(app->dialogManager->CreateDialog(itemNode, parameters.attribute("name").as_string(), faceTexturePath, fontTarget.c_str()));
+			dialoguesRepeat.Add(app->dialogManager->CreateDialog(itemNode, parameters.attribute("name").as_string(), faceTexturePath.GetString(), fontTarget.c_str()));
 		}
 	}
 
@@ -55,7 +55,7 @@ bool DialogTrigger::Start() {
 	texture = app->tex->Load(texturePath);
 
 	if (faceTexturePath != "") {
-		faceTexture = app->tex->Load(faceTexturePath);
+		faceTexture = app->tex->Load(faceTexturePath.GetString());
 	}
 
 	pbody = app->physics->CreateRectangleSensor(position.x, position.y, 150, 256, bodyType::KINEMATIC);

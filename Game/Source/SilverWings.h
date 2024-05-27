@@ -32,7 +32,7 @@ public:
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
-	void VeteranaStartAnims();
+	void SilverWingsStartAnims();
 
 	Animation* GetAnimation(SString name);
 
@@ -48,7 +48,11 @@ public:
 	PhysBody* nBody;
 	
 	List<Animation*> silverAnims;
+	Animation* currentAnim;
 	Animation* silverIdle;
+	Animation* silverDeath;
+
+	bool playerTouched = false;
 
 
 };

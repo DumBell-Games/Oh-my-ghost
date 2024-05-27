@@ -54,7 +54,7 @@ bool DialogManager::Start() {
 bool DialogManager::CleanUp()
 {
 	bool ret = true;
-	ListItem<Dialog*>* item;
+	/*ListItem<Dialog*>* item;
 	item = dialogues.end;
 
 	while (item != NULL && ret == true)
@@ -63,7 +63,7 @@ bool DialogManager::CleanUp()
 		item = item->prev;
 	}
 
-	dialogues.Clear();
+	dialogues.Clear();*/
 
 	return ret;
 }

@@ -106,16 +106,16 @@ bool Player::Start() {
 	cieloOut = app->physics->CreateRectangleSensor(21529 - 96, 8681 + 64, 256, 128, bodyType::KINEMATIC);
 	cieloOut->ctype = ColliderType::CIELOOUT;
 
-	mansionIn = app->physics->CreateRectangleSensor(10394, 531 + 64, 256, 128, bodyType::KINEMATIC);
+	mansionIn = app->physics->CreateRectangleSensor(10394 + 128, 531 + 64, 256, 128, bodyType::KINEMATIC);
 	mansionIn->ctype = ColliderType::MANSIONIN;
 
-	mansionOut = app->physics->CreateRectangleSensor(163866, 5893 + 64, 256, 128, bodyType::KINEMATIC);
+	mansionOut = app->physics->CreateRectangleSensor(16386 + 128, 5893 + 64, 256, 128, bodyType::KINEMATIC);
 	mansionOut->ctype = ColliderType::MANSIONOUT;
 
-	despachoIn = app->physics->CreateRectangleSensor(18820, 2980 + 64, 256, 128, bodyType::KINEMATIC);
+	despachoIn = app->physics->CreateRectangleSensor(18820 + 128, 2980 + 64, 256, 128, bodyType::KINEMATIC);
 	despachoIn->ctype = ColliderType::DESPACHOIN;
 
-	despachoOut = app->physics->CreateRectangleSensor(20866, 2176 + 64, 256, 128, bodyType::KINEMATIC);
+	despachoOut = app->physics->CreateRectangleSensor(20866 + 128, 2176 + 64, 256, 128, bodyType::KINEMATIC);
 	despachoOut->ctype = ColliderType::DESPACHOOUT;
 
 
@@ -341,6 +341,7 @@ bool Player::Update(float dt)
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(4393), PIXEL_TO_METERS(1878)), NULL);
 		tabernaOUT = false;
 	}
+
 	if (cieloOUT)
 	{
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(8025), PIXEL_TO_METERS(6164)), NULL);
@@ -353,24 +354,24 @@ bool Player::Update(float dt)
 			cieloOUT = false;
 		}
 	}
-	if (mansionIN)
+	if (mansionIN || app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 	{
-		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(16386), PIXEL_TO_METERS(5893)), NULL);
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(16386 + 128), PIXEL_TO_METERS(5743 - 64)), NULL);
 		mansionIN = false;
 	}
 	if (mansionOUT)
 	{
-		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(10394), PIXEL_TO_METERS(531)), NULL);
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(10394 + 128), PIXEL_TO_METERS(800)), NULL);
 		mansionOUT = false;
 	}
 	if (despachoIN)
 	{
-		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(20866), PIXEL_TO_METERS(2126)), NULL);
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(20866 + 128), PIXEL_TO_METERS(2126)), NULL);
 		despachoIN = false;
 	}	
 	if (despachoOUT)
 	{
-		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(18820), PIXEL_TO_METERS(2980)), NULL);
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(18820 + 128), PIXEL_TO_METERS(3290)), NULL);
 		despachoOUT = false;
 	}
 	if (palomaTouched)
