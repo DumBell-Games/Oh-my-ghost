@@ -19,6 +19,8 @@ using GuiCallback_f = std::function<void(GuiControl*)>;
 enum class GuiControlType
 {
 	BUTTON,
+	PHYSBUTTON_BOX,
+	PHYSBUTTON_CIRCLE,
 	TOGGLE,
 	CHECKBOX,
 	SLIDER,
@@ -27,7 +29,14 @@ enum class GuiControlType
 	DROPDOWNBOX,
 	INPUTBOX,
 	VALUEBOX,
-	SPINNER
+	SPINNER,
+	GROUP
+};
+
+enum class GuiControlShape
+{
+	BOX,
+	CIRCLE
 };
 
 enum class GuiControlState
