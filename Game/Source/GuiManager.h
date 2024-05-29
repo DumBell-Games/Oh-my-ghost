@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "GuiControl.h"
+#include "GuiGroup.h"
 
 #include "List.h"
 
@@ -28,12 +29,15 @@ public:
 	bool CleanUp();
 
 	// Additional methods
-	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Rect sliderBounds = { 0,0,0,0 });
+	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, bool independentPointer = false, SDL_Rect sliderBounds = { 0,0,0,0 });
 
 	// Creates GuiControl with a function as callback instead of a full module
-	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, GuiCallback_f observer, SDL_Rect sliderBounds = { 0,0,0,0 });
+	GuiControl* CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, GuiCallback_f observer, bool independentPointer = false, SDL_Rect sliderBounds = { 0,0,0,0 });
 
 	void DestroyGuiControl(GuiControl* ctrl);
+
+	// Loads a full GuiGroup from an xml node generated with Tiled
+	List<GuiControl*> LoadLayout(pugi::xml_node layoutLayer);
   
 public:
 

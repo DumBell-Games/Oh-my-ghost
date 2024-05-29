@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="192" height="108" tilewidth="10" tileheight="10" infinite="0" nextlayerid="8" nextobjectid="14">
+ <imagelayer id="3" name="referencia">
+  <image source="ref (Large).jpg" width="1920" height="1072"/>
+ </imagelayer>
+ <imagelayer id="2" name="Fondo" visible="0">
+  <image source="fondoBatalla.png" width="1920" height="1080"/>
+ </imagelayer>
+ <objectgroup id="4" name="AttackMenu">
+  <object id="1" name="attack2" x="1502" y="766.667" width="90" height="90">
+   <ellipse/>
+  </object>
+  <object id="2" name="attack1" x="1486" y="881" width="90" height="90">
+   <ellipse/>
+  </object>
+  <object id="3" name="attack3" x="1601" y="701" width="90" height="90">
+   <ellipse/>
+  </object>
+  <object id="4" name="attack4" x="1718" y="730" width="90" height="90">
+   <ellipse/>
+  </object>
+  <object id="5" name="attack5" x="1590" y="817" width="204" height="204">
+   <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup id="5" name="TeamMenu">
+  <object id="6" name="activeChar" x="215" y="48" width="94" height="94" rotation="45"/>
+  <object id="7" name="char1" x="136" y="43" width="46" height="46" rotation="45"/>
+  <object id="8" name="char2" x="100" y="84" width="46" height="46" rotation="45"/>
+  <object id="9" name="char3" x="137" y="124" width="46" height="46" rotation="45"/>
+ </objectgroup>
+ <objectgroup id="6" name="CharInfo">
+  <object id="10" template="../../UI/combat-charInfo.tx" name="characterInfo1" x="582" y="134"/>
+  <object id="11" name="characterInfo1" x="599" y="627.5" width="360" height="100"/>
+ </objectgroup>
+ <objectgroup id="7" name="CharacterPositions">
+  <object id="12" name="enemyPivot" x="1122" y="538">
+   <point/>
+  </object>
+  <object id="13" name="playerPivot" x="433" y="1045">
+   <point/>
+  </object>
+ </objectgroup>
+</map>

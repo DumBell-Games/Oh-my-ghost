@@ -49,6 +49,7 @@ enum class ColliderType {
 	MANSIONOUT,
 	DESPACHOIN,
 	DESPACHOOUT,
+	GUI,
 	UNKNOWN
 	// ..
 };
@@ -57,7 +58,7 @@ enum class ColliderType {
 class PhysBody
 {
 public:
-	PhysBody() : listener(NULL), body(NULL), ctype(ColliderType::UNKNOWN)
+	PhysBody() : listener(NULL), body(NULL), ctype(ColliderType::UNKNOWN), width(0), height(0)
 	{}
 
 	~PhysBody() {}

@@ -5,7 +5,6 @@
 #include "Defs.h"
 #include "Log.h"
 
-#include "SDL_image/include/SDL_image.h"
 //#pragma comment(lib, "../Game/Source/External/SDL_image/libx86/SDL2_image.lib")
 
 Textures::Textures(bool startEnabled) : Module(startEnabled)
@@ -56,6 +55,7 @@ bool Textures::CleanUp()
 	}
 
 	textures.Clear();
+	noDuplicateTextureList.Clear();
 	IMG_Quit();
 	return true;
 }
@@ -100,6 +100,17 @@ bool Textures::UnLoad(SDL_Texture* texture)
 	return false;
 }
 
+// No elimina realmente la textura, pero si los demás punteros son eliminados, la textura se eliminará
+void Textures::UnLoadSP(shared_texture_t texture)
+{
+	for (ListItem<TextureStruct>* item = noDuplicateTextureList.start; item; item = item->next)
+	{
+		if (item->data.texture == texture) {
+			noDuplicateTextureList.Del(item);
+		}
+	}
+}
+
 // Translate a surface into a texture
 SDL_Texture* const Textures::LoadSurface(SDL_Surface* surface)
 {
@@ -115,6 +126,24 @@ SDL_Texture* const Textures::LoadSurface(SDL_Surface* surface)
 	}
 
 	return texture;
+}
+
+// Carga la textura como un smart pointer, lo cual significa que la textura no sera eliminada hasta que se borre la ultima referencia a ella. Proporciona el parametro preventDuplicates como true para guardar una referencia en el modulo para evitar duplicados (debera liberarse manualmente en ese caso)
+shared_texture_t const Textures::LoadSP(const char* path, bool preventDuplicates)
+{
+	if (preventDuplicates)
+	for (ListItem<TextureStruct>* item = noDuplicateTextureList.start; item; item = item->next)
+	{
+		if (item->data.path == path)
+			return item->data.texture;
+	}
+
+	shared_texture_t tex = shared_texture_t(Load(path), 
+		[](SDL_Texture* t) {app->tex->UnLoad(t); });
+	if (!preventDuplicates)
+		noDuplicateTextureList.Add({ SString(path), tex });
+
+	return tex;
 }
 
 // Retrieve size of a texture

@@ -648,7 +648,7 @@
 		<map id="3" file="casino_plantilla.tmx"/>
 	</map>
 
-	<combat mainX="16" mainY="16" subX="208" subY="16" buttonW="128" buttonH="64">
+	<combat mainX="16" mainY="16" subX="208" subY="16" buttonW="128" buttonH="64" uiLayoutPath="Assets/Screens/Combat/CombatLayout.tmx">
 		<menus>
 			<!--En la implementacion los botones van de abajo hacia arriba-->
 			<main>

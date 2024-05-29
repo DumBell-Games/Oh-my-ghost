@@ -6,6 +6,8 @@
 #include "GuiControl.h"
 #include "ItemData.h"
 
+#include "Textures.h"
+
 #include "SDL/include/SDL_rect.h"
 
 #include <random>
@@ -72,7 +74,9 @@ public:
 
 private:
 
-	GuiControl* NewButton(char menuID, char elementID, const char* text, SDL_Rect bounds, GuiCallback_f onClick, SDL_Rect sliderBounds = {0,0,0,0});
+	GuiControl* NewButton(char menuID, char elementID, const char* text, SDL_Rect bounds, GuiCallback_f onClick, bool independentPtr = false, SDL_Rect sliderBounds = {0,0,0,0});
+
+	bool LoadLayout(pugi::xml_node layoutRoot);
 
 	void CreateButtons(pugi::xml_node menuListNode);
 
@@ -165,10 +169,7 @@ private:
 	int nuevoAliadoActivo = -1;
 	Atac* ataqueEnemigo = nullptr;
 
-
-
-	SDL_Texture* tAliado = nullptr;
-	SDL_Texture* tEnemigo = nullptr;
+	shared_texture_t backgroundTexture = nullptr;
 
 	int turn = 0;
 

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
+<!-- $TexturePacker:SmartUpdate:f89a91c3f0d73cb766051557674d5b6a:8da0b0b9a0ad31a22705be121d8495da:cfc8e95667795f17037bf383e701ebb9$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="Assets/Animation/Aprendiz_Astrobark/Aprendiz.png" width="2048" height="1536" speed="0.08" loop="true">
+    <sprite n="Attack-0" x="0" y="0" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="Attack-1" x="256" y="0" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="Attack-2" x="512" y="0" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="Attack-3" x="768" y="0" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="Attack-4" x="1024" y="0" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="Attack-5" x="1280" y="0" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="Death-0" x="1536" y="0" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="Death-1" x="1792" y="0" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="Death-2" x="0" y="256" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="Death-3" x="256" y="256" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="Death-4" x="512" y="256" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="Death-5" x="768" y="256" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="Death-6" x="1024" y="256" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="Death-7" x="1280" y="256" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="Death-8" x="1536" y="256" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="Death-9" x="1792" y="256" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="Death-10" x="0" y="512" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="Death-11" x="256" y="512" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="Death-12" x="512" y="512" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-0" x="768" y="512" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="Hurt-1" x="1024" y="512" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="Hurt-2" x="1280" y="512" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="Hurt-3" x="1536" y="512" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="Hurt-4" x="1792" y="512" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="Hurt-5" x="0" y="768" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="Hurt-6" x="256" y="768" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="Idle-0" x="512" y="768" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="Idle-1" x="768" y="768" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="Idle-2" x="1024" y="768" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="Idle-3" x="1280" y="768" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="Idle-4" x="1536" y="768" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="Idle-5" x="1792" y="768" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="Idle-6" x="0" y="1024" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="Idle-7" x="256" y="1024" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="Idle-8" x="512" y="1024" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="IdleCombat-0" x="768" y="1024" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="IdleCombat-1" x="1024" y="1024" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="IdleCombat-2" x="1280" y="1024" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="IdleCombat-3" x="1536" y="1024" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="IdleCombat-4" x="1792" y="1024" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="IdleCombat-5" x="0" y="1280" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="IdleCombat-6" x="256" y="1280" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="IdleCombat-7" x="512" y="1280" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="IdleCombat-8" x="768" y="1280" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="IdleCombat-9" x="1536" y="1024" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="IdleCombat-10" x="1024" y="1280" w="128" h="256" pX="1" pY="1"/>
+    <sprite n="IdleCombat-11" x="1280" y="1280" w="128" h="256" pX="1" pY="1"/>
+</TextureAtlas>
