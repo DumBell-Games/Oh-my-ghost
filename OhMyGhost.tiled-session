@@ -1,8 +1,8 @@
 {
-    "activeFile": "",
+    "activeFile": "Output/Assets/Screens/Combat/CombatLayout.tmx",
     "expandedProjectPaths": [
-        "Output/Assets",
         "Output/Assets/Maps",
+        "Output/Assets",
         "Output",
         "."
     ],
@@ -73,12 +73,23 @@
         },
         "Output/Assets/Maps/mapaLPA.tmx#taberna_plantilla": {
             "scaleInDock": 1
+        },
+        "Output/Assets/Screens/Combat/CombatLayout.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 6,
+            "viewCenter": {
+                "x": 903.3333333333333,
+                "y": 671.3333333333333
+            }
         }
     },
     "openFiles": [
+        "Output/Assets/Screens/Combat/CombatLayout.tmx"
     ],
     "project": "OhMyGhost.tiled-project",
+    "property.type": "int",
     "recentFiles": [
+        "Output/Assets/Screens/Combat/CombatLayout.tmx",
         "Output/Assets/Maps/mapaLPA.tmx"
     ]
 }

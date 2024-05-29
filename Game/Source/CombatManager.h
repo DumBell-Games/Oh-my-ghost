@@ -12,6 +12,7 @@
 
 #include <random>
 #include <vector>
+#include "AnimationSet.h"
 
 class InventoryManager;
 struct SDL_Texture;
@@ -40,6 +41,14 @@ enum class PlayerAction {
 	ITEM,
 	CHANGE,
 	NO_ACTION
+};
+
+enum class MenuDirection
+{
+	DOWN_RIGHT,
+	DOWN_LEFT,
+	UP_RIGHT,
+	UP_LEFT
 };
 
 struct CombatData
@@ -74,7 +83,7 @@ public:
 
 private:
 
-	GuiControl* NewButton(char menuID, char elementID, const char* text, SDL_Rect bounds, GuiCallback_f onClick, bool independentPtr = false, SDL_Rect sliderBounds = {0,0,0,0});
+	GuiControl* NewButton(GuiControlType type, char menuID, char elementID, const char* text, SDL_Rect bounds, GuiCallback_f onClick, bool independentPtr = false, SDL_Rect sliderBounds = {0,0,0,0});
 
 	bool LoadLayout(pugi::xml_node layoutRoot);
 
@@ -169,7 +178,15 @@ private:
 	int nuevoAliadoActivo = -1;
 	Atac* ataqueEnemigo = nullptr;
 
-	shared_texture_t backgroundTexture = nullptr;
+	// Animation sets and positions
+
+	iPoint playerPos = { 200,1080 };
+	iPoint enemyPos = { 1300, 300 };
+
+	AnimationSet* playerAnims = nullptr;
+	AnimationSet* enemyAnims = nullptr;
+
+	shared_texture_t bgTexture = nullptr;
 
 	int turn = 0;
 

@@ -3,9 +3,10 @@
 
 #include "Point.h"
 #include "SString.h"
+#include <memory>
 #include "Physics.h"
 
-#include <memory>
+#include "Textures.h"
 
 
 static void DestroyPtr(PhysBody* p);
@@ -23,10 +24,17 @@ public:
 	// Called each loop iteration
 	bool Update(float dt);
 
+	PhysBody* GetPhysBody() { return pbody.get(); }
 
-private:
+	void SetRotation(float degrees);
+
+public:
 
 	Unique_PhysBody pbody;
+
+	shared_texture_t bgTexture;
+	shared_texture_t bgTextureClicked;
+	shared_texture_t fgTexture;
 
 	int mouseX, mouseY;
 };

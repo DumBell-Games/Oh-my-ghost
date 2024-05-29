@@ -2,8 +2,6 @@
 #include "Animation.h"
 #include <PugiXml/src/pugixml.hpp>
 
-struct SDL_Texture;
-
 // Objeto de transicion entre animaciones, admite cualquier cosa que se pueda llamar como una funcion sin parametros que devuelva un booleano (un "functor")
 // NOTE: No se eestá usando en ninguna parte del proyecto al momento de escribir este comentario
 template <typename Condition>
@@ -26,13 +24,22 @@ struct AnimationTransition
 class AnimationSet
 {
 public:
+	int activeAnimation = 0;
+	std::vector<Animation> animations;
+	std::shared_ptr<SDL_Texture> texture;
+
+public:
 	AnimationSet();
+
+	AnimationSet(const char* animPath);
 
 	~AnimationSet();
 
 	void PushBack(const Animation& anim) {
 		animations.push_back(anim);
 	}
+
+	void SetAnimation(SString name);
 
 	void SetAnimation(int index)
 	{
@@ -42,24 +49,20 @@ public:
 			animations[activeAnimation].Reset();
 		}
 	}
+	Animation& GetCurrent() { return animations[activeAnimation]; }
+	SDL_Texture* GetTextureRawPointer() { return texture.get(); }
 
 	void Update()
 	{
 		GetCurrent().Update();
 	}
 
-	void Render(const iPoint& position) {
-		GetCurrent().Render(GetTextureRawPointer(), position);
+	void Render(const iPoint& position, bool useCamera = true) {
+		GetCurrent().Render(GetTextureRawPointer(), position, useCamera);
 	}
 
-	Animation& GetCurrent() { return animations[activeAnimation]; }
 
-	SDL_Texture* GetTextureRawPointer() { return texture.get(); }
 
 	void LoadAnimSet(const char* animPath);
 
-public:
-	int activeAnimation = 0;
-	std::vector<Animation> animations;
-	std::shared_ptr<SDL_Texture> texture;
 };

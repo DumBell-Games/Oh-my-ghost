@@ -13,11 +13,14 @@ GuiControlPhysButton::GuiControlPhysButton(uint32 id, GuiControlType type, SDL_R
 	switch (type)
 	{
 	case GuiControlType::PHYSBUTTON_CIRCLE:
-		pb = app->physics->CreateCircle(bounds.x, bounds.y, bounds.w / 2, STATIC);
+	{
+		int rad = bounds.w / 2;
+		pb = app->physics->CreateCircle(bounds.x + rad, bounds.y + rad, bounds.w / 2, STATIC);
 		break;
+	}
 	case GuiControlType::PHYSBUTTON_BOX:
 	default:
-		pbody = Unique_PhysBody(app->physics->CreateRectangle(bounds.x, bounds.y, bounds.w, bounds.y, STATIC),DestroyPtr);
+		pb = app->physics->CreateRectangle(bounds.x, bounds.y, bounds.w, bounds.y, STATIC);
 		break;
 	}
 	pb->body->GetFixtureList()[0].SetSensor(true);
@@ -36,11 +39,11 @@ bool GuiControlPhysButton::Update(float dt)
 
 	if (state != GuiControlState::DISABLED)
 	{
-		// Check for click
-		app->input->GetMousePosition(mouseX, mouseY);
 
+		// Check for click if clickable
 		if (state != GuiControlState::NON_CLICKABLE)
 		{
+			app->input->GetMousePosition(mouseX, mouseY);
 			for (b2Fixture* f = pbody->body->GetFixtureList(); f; f = f->GetNext())
 			{
 				// mouseX and mouseY are updated in GuiManager
@@ -67,7 +70,12 @@ bool GuiControlPhysButton::Update(float dt)
 
 		// Render
 
-		switch (state)
+		if (bgTexture)
+		{
+			SDL_Texture* toDraw = (state != GuiControlState::PRESSED) ? bgTextureClicked.get() : bgTexture.get();
+			app->render->DrawTexture(toDraw, bounds.x, bounds.y, nullptr, 1.0F, pbody->GetRotation(), bounds.w / 2, bounds.h / 2, false);
+		}
+		else switch (state)
 		{
 		case GuiControlState::NON_CLICKABLE:
 			app->render->DrawRectangle(bounds, 200, 200, 200, 255, true, false);
@@ -83,7 +91,17 @@ bool GuiControlPhysButton::Update(float dt)
 			break;
 		}
 
-		app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h);
+		if (fgTexture)
+		{
+			app->render->DrawTexture(fgTexture.get(), bounds.x, bounds.y, nullptr, 1.0F, pbody->GetRotation(), bounds.w/2, bounds.h/2, false);
+		}
+		else
+			app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h);
 	}
 	return true;
+}
+
+inline void GuiControlPhysButton::SetRotation(float degrees)
+{
+	pbody->body->SetTransform(pbody->body->GetTransform().p, degrees);
 }

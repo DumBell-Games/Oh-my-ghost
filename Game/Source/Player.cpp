@@ -20,6 +20,8 @@
 #include "MusicaTaberna.h"
 
 
+#include "CombatManager.h"
+
 Player::Player() : Entity(EntityType::PLAYER)
 {
 	name.Create("Player");
@@ -413,6 +415,7 @@ bool Player::Update(float dt)
 			currentAnim->Update();
 			cieloOUT = false;
 		}
+
 	}
 	if (mansionIN || app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 	{
@@ -439,6 +442,9 @@ bool Player::Update(float dt)
 	}
 	if (palomaTouched)
 	{
+		// Cambia el personaje activo en peleas para que sea el que se usa en el resto de la demo
+		app->combat->data.activeAlly = 1;
+
 		currentAnim = cambioCuerpoF;
 		currentAnim->Update();
 

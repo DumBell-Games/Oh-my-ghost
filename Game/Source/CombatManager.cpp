@@ -14,6 +14,7 @@
 
 #include <string>
 #include <vector>
+#include "GuiControlPhysButton.h"
 
 CombatManager::CombatManager(bool startEnabled) : Module(startEnabled)
 {
@@ -24,19 +25,21 @@ CombatManager::CombatManager(bool startEnabled) : Module(startEnabled)
 	menuList.push_back(std::vector<GuiControl*>());
 	menuList.push_back(std::vector<GuiControl*>());
 
-	// CODIGO PARA DEBUG, NO DEFINITIVO
+	// CODIGO PARA DEBUG, NO DEFINITIVO (supuestamente)
 
-	Personatge* p1 = new Personatge("personatge1", 10, 10, 5, 2, "Assets/Animation/Springy/SpringyFantasma.xml");
-	p1->atacs.push_back(Atac("Cop de puny1", 10));
-	p1->atacs.push_back(Atac("Cop de puny2", 10));
-	p1->atacs.push_back(Atac("Cop de puny3", 10));
-	p1->atacs.push_back(Atac("Cop de puny4", 10));
+	Personatge* p1 = new Personatge("PJ Tutorial", 10, 10, 5, 2, "Assets/Animation/Springy/SpringyFantasma.xml");
+	p1->atacs.push_back(Atac("Cop de puny1", 10, "Assets/Screen/Combat/Skill.png"));
+	p1->atacs.push_back(Atac("Cop de puny2", 10, "Assets/Screen/Combat/Skill.png"));
+	p1->atacs.push_back(Atac("Cop de puny3", 10, "Assets/Screen/Combat/Skill.png"));
+	p1->atacs.push_back(Atac("Cop de puny4", 10, "Assets/Screen/Combat/Skill.png"));
+	p1->atacs.push_back(Atac("Ultimate", 10, "Assets/Screen/Combat/Skill.png"));
 	data.allies.push_back(p1);
-	Personatge* p2 = new Personatge("personatge2", 5, 30, 2, 1, "Assets/Animation/Springy/SpringyFantasma.xml");
-	p2->atacs.push_back(Atac("Puntada de peu1", 15));
-	p2->atacs.push_back(Atac("Puntada de peu2", 15));
-	p2->atacs.push_back(Atac("Puntada de peu3", 15));
-	p2->atacs.push_back(Atac("Puntada de peu4", 15));
+	Personatge* p2 = new Personatge("PJ PostTutorial", 5, 30, 2, 1, "Assets/Animation/Springy/SpringyPaloma.xml");
+	p2->atacs.push_back(Atac("Puntada de peu1", 15, "Assets/Screen/Combat/Skill.png"));
+	p2->atacs.push_back(Atac("Puntada de peu2", 15, "Assets/Screen/Combat/Skill.png"));
+	p2->atacs.push_back(Atac("Puntada de peu3", 15, "Assets/Screen/Combat/Skill.png"));
+	p2->atacs.push_back(Atac("Puntada de peu4", 15, "Assets/Screen/Combat/Skill.png"));
+	p2->atacs.push_back(Atac("Ultimate", 15, "Assets/Screen/Combat/Skill.png"));
 	data.allies.push_back(p2);
 
 	// FIN CODIGO PARA DEBUG
@@ -68,12 +71,17 @@ bool CombatManager::Awake(pugi::xml_node config)
 	pugi::xml_document layoutDoc;
 	pugi::xml_parse_result result = layoutDoc.load_file(config.attribute("uiLayoutPath").as_string());
 	if (result && LoadLayout(layoutDoc.child("map"))) {
+		CreateButtons(config.child("menus"));
 		LOG("Combat UI layout loaded.");
 	}
 	else
 	{
 		LOG("Couldn't load combat menu layout, falling back to original code-generated layout: %s", result.description());
 		CreateButtons(config.child("menus"));
+
+		CreateAbilityButtons(data.allies[data.activeAlly]);
+		CreateItemButtons(app->inventory);
+		//CreateTeamSwapButtons(menuListNode.child("team"));
 	}
 
 
@@ -109,6 +117,12 @@ bool CombatManager::Start()
 
 	// Carga animaciones de los personajes en combate
 
+	enemyAnims = new AnimationSet(data.enemy->animPath.c_str());
+	playerAnims = new AnimationSet(data.allies[data.activeAlly]->animPath.c_str());
+
+	enemyAnims->SetAnimation("IdleCombat");
+	playerAnims->SetAnimation("IdleCombat");
+	
 
 
 	LOG("Combat Start!");
@@ -160,14 +174,22 @@ bool CombatManager::Update(float dt)
 		break;
 	}
 
+
+	// Render background
+	if (!app->DebugEnabled())
+		app->render->DrawTexture(bgTexture.get(), 0, 0, nullptr, 1.0F, 0, INT_MAX, INT_MAX, false);
+
 	return true;
 }
 
 bool CombatManager::PostUpdate()
 {
-	// Render background
-	if (!app->DebugEnabled())
-		app->render->DrawTexture(backgroundTexture.get(), 0, 0, nullptr, 1.0F, 0, INT_MAX, INT_MAX, false);
+
+	// Render characters
+	enemyAnims->Render(enemyPos, false);
+	playerAnims->Render(playerPos, false);
+	enemyAnims->Update();
+	playerAnims->Update();
 	
 	// Render UI elements
 
@@ -177,6 +199,9 @@ bool CombatManager::PostUpdate()
 bool CombatManager::CleanUp()
 {
 	app->console->RemoveCommand("");
+
+	RELEASE(playerAnims);
+	RELEASE(enemyAnims);
 
 	data.enemy = nullptr;
 	RELEASE(dummyEnemy); // Datos usados con el comando "debugcombat"
@@ -203,9 +228,9 @@ bool CombatManager::CleanUp()
 	return true;
 }
 
-GuiControl* CombatManager::NewButton(char menuID, char elementID, const char* text, SDL_Rect bounds, GuiCallback_f onClick, bool independentPtr, SDL_Rect sliderBounds)
+GuiControl* CombatManager::NewButton(GuiControlType type, char menuID, char elementID, const char* text, SDL_Rect bounds, GuiCallback_f onClick, bool independentPtr, SDL_Rect sliderBounds)
 {
-	GuiControlButton* ret = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, elementID, text, bounds, onClick, independentPtr, sliderBounds);
+	GuiControlButton* ret = (GuiControlButton*)app->guiManager->CreateGuiControl(type, elementID, text, bounds, onClick, independentPtr, sliderBounds);
 	ret->SetOnHover([this, menuID, elementID](GuiControl* g) {currentMenu = (Menus)menuID; currentElement = elementID; });
 
 	return ret;
@@ -222,9 +247,104 @@ bool CombatManager::LoadLayout(pugi::xml_node layoutRoot)
 		{
 			SString path = "Assets/Screens/Combat/";
 			path += bgLayer.child("image").attribute("source").as_string();
-			backgroundTexture = app->tex->LoadSP(path.GetString(), false);
+			bgTexture = app->tex->LoadSP(path.GetString(), false);
 		}
 	}
+
+	for (pugi::xml_node objLayer = layoutRoot.child("objectgroup"); objLayer != NULL; objLayer = objLayer.next_sibling("objectgroup"))
+	{
+		if (strcmp(objLayer.attribute("name").as_string(), "AttackMenu") == 0)
+		{
+			Personatge* p = data.allies[data.activeAlly];
+			// Carga botones de ataque
+			int elementID = 0;
+			constexpr int menuID = enum2val(Menus::ATTACK);
+			for (pugi::xml_node itemNode = objLayer.child("object"); itemNode != NULL && elementID < p->atacs.size(); itemNode = itemNode.next_sibling("object"), elementID++)
+			{
+				SDL_Rect rect;
+				rect.x = itemNode.attribute("x").as_int();
+				rect.y = itemNode.attribute("y").as_int();
+				rect.w = itemNode.attribute("w").as_int();
+				rect.h = itemNode.attribute("h").as_int();
+
+				GuiControlType buttonShape = GuiControlType::PHYSBUTTON_BOX;
+
+				// Otros tipos de forma para botones
+				if (itemNode.child("ellipse") != NULL)
+					buttonShape = GuiControlType::PHYSBUTTON_CIRCLE;
+				// else if()
+
+				SString atkName = (elementID < p->atacs.size()) ? data.allies[data.activeAlly]->atacs[elementID].nom.c_str() : "ERROR";
+
+
+
+				Atac* a = &p->atacs[elementID];
+				GuiCallback_f func = [this, a](GuiControl* g) {
+					LOG("WIP habilidad %s", a->nom.c_str());
+					ataqueAliado = a;
+					accion = PlayerAction::ATTACK;
+					combatState = CombatState::COMBAT; // Al seleccionar el boton de ataque se pasa a ejecutar acciones
+					};
+
+				GuiControlPhysButton* newButton = (GuiControlPhysButton*)NewButton(buttonShape, menuID, elementID, atkName.GetString(), rect, func, false);
+
+				Properties properties;
+				LoadProperties(itemNode, properties);
+
+				// Load button textures
+				Properties::Property* prop;
+				if (prop = properties.GetProperty("bgPath"))
+					newButton->bgTexture = app->tex->LoadSP(prop->strVal.GetString(), true);
+				if (prop = properties.GetProperty("bgClickedPath"))
+				newButton->bgTextureClicked = app->tex->LoadSP(prop->strVal.GetString(), true);
+
+				// Load attack icon
+				newButton->fgTexture = app->tex->LoadSP(a->iconPath.c_str(), true);
+
+				menuList[menuID].push_back(newButton);
+
+			}
+		}
+
+		// Carga botones de objetos
+		else if (strcmp(objLayer.attribute("name").as_string(), "ItemMenu") == 0)
+		{
+			pugi::xml_node itemNode = objLayer.child("object");
+			posSub.x = itemNode.attribute("x").as_int();
+			posSub.y = itemNode.attribute("y").as_int();
+			CreateItemButtons(app->inventory);
+
+			MenuDirection dir = (MenuDirection)itemNode.child("properties").child("property").attribute("direction").as_int();
+
+			int i = 0;
+			for each (GuiControl* g in menuList[enum2val(Menus::ITEM)])
+			{
+				g->bounds.x = posSub.x + ((dir == MenuDirection::DOWN_RIGHT || dir == MenuDirection::UP_RIGHT) ? 1 : -1);
+				g->bounds.y = posSub.y + i * buttonSize.y * ((dir == MenuDirection::UP_LEFT || dir == MenuDirection::UP_RIGHT) ? -1 : 1);
+
+				((GuiControlPhysButton*)g)->GetPhysBody()->body->SetTransform(b2Vec2(g->bounds.x, g->bounds.y), ((GuiControlPhysButton*)g)->GetPhysBody()->GetRotation());
+			}
+		}
+
+		else if (strcmp(objLayer.attribute("name").as_string(), "CharacterPositions") == 0)
+		{
+			for (pugi::xml_node itemNode = objLayer.child("object"); itemNode != NULL; itemNode = itemNode.next_sibling("object"))
+			{
+				if (strcmp(itemNode.attribute("name").as_string(), "playerPivot") == 0)
+				{
+					playerPos.x = itemNode.attribute("x").as_int(playerPos.x);
+					playerPos.y = itemNode.attribute("y").as_int(playerPos.y);
+				}
+				else if (strcmp(itemNode.attribute("name").as_string(), "enemyPivot") == 0)
+				{
+					enemyPos.x = itemNode.attribute("x").as_int(enemyPos.x);
+					enemyPos.y = itemNode.attribute("y").as_int(enemyPos.y);
+				}
+			}
+		}
+	}
+
+
 
 
 	// TODO terminar de importar el layout de combate
@@ -232,7 +352,7 @@ bool CombatManager::LoadLayout(pugi::xml_node layoutRoot)
 
 
 
-	return false;
+	return true;
 }
 
 void CombatManager::CreateButtons(pugi::xml_node menuListNode)
@@ -241,7 +361,7 @@ void CombatManager::CreateButtons(pugi::xml_node menuListNode)
 	std::vector<GuiCallback_f> functions;
 	functions.push_back([this](GuiControl* g) {AttackMenu(g); });
 	functions.push_back([this](GuiControl* g) {ItemMenu(g); });
-	functions.push_back([this](GuiControl* g) {SwapBody(g); });
+	//functions.push_back([this](GuiControl* g) {SwapBody(g); });
 	functions.push_back([this](GuiControl* g) {Flee(g); });
 
 	//MainMenu
@@ -259,12 +379,9 @@ void CombatManager::CreateButtons(pugi::xml_node menuListNode)
 		GuiCallback_f func;
 		if (id >= 0 && id < functions.size())
 			func = functions[id];
-		menuList[enum2val(Menus::MAIN)].push_back(NewButton(0, id, text.GetString(), bounds, func));
+		menuList[enum2val(Menus::MAIN)].push_back(NewButton(GuiControlType::PHYSBUTTON_BOX, 0, id, text.GetString(), bounds, func));
 	}
 
-	CreateAbilityButtons(data.allies[data.activeAlly]);
-	CreateItemButtons(app->inventory);
-	CreateTeamSwapButtons(menuListNode.child("team"));
 
 }
 
@@ -284,7 +401,9 @@ void CombatManager::CreateAbilityButtons(Personatge* p)
 			combatState = CombatState::COMBAT; // Al seleccionar el boton de ataque se pasa a ejecutar acciones
 			};
 		// Crea el boton en la posicion del submenu, la posicion 'y' depende del indice de este boton
-		menuList[enum2val(Menus::ATTACK)].push_back(NewButton(1, i, a->nom.c_str(), bounds, func));
+		GuiControlPhysButton* newButton = (GuiControlPhysButton*)NewButton(GuiControlType::PHYSBUTTON_CIRCLE, 1, i, a->nom.c_str(), bounds, func);
+
+		menuList[enum2val(Menus::ATTACK)].push_back(newButton);
 	}
 	//TODO añadir boton para volver atras
 }
@@ -306,7 +425,10 @@ void CombatManager::CreateItemButtons(InventoryManager* inv)
 				accion = PlayerAction::ITEM;
 				combatState = CombatState::COMBAT;
 				};
-			menuList[enum2val(Menus::ITEM)].push_back(NewButton(3, i, item->name.GetString(), bounds, func));
+			GuiControlPhysButton* newButton = (GuiControlPhysButton*)NewButton(GuiControlType::PHYSBUTTON_BOX, 3, i, item->name.GetString(), bounds, func);
+
+
+			menuList[enum2val(Menus::ITEM)].push_back(newButton);
 			i++;
 		}
 	}
@@ -328,7 +450,11 @@ void CombatManager::CreateTeamSwapButtons(pugi::xml_node menuItem)
 				accion = PlayerAction::CHANGE;
 				combatState = CombatState::COMBAT;
 			};
-			menuList[enum2val(Menus::TEAM)].push_back(NewButton(3, i, p->nom.c_str(), bounds, func));
+			GuiControlPhysButton* newButton = (GuiControlPhysButton*)NewButton(GuiControlType::PHYSBUTTON_BOX, 3, i, p->nom.c_str(), bounds, func);
+			//newButton->SetRotation(45.0f);
+
+
+			menuList[enum2val(Menus::TEAM)].push_back(newButton);
 		}
 	}
 	//TODO añadir boton para volver atras
@@ -338,10 +464,13 @@ bool CombatManager::CombatFinished()
 {
 	bool ret = false;
 	// Gameover si todo el equipo aliado ha sido derrotado
-	for (Personatge* p : data.allies)
+	/*for (Personatge* p : data.allies)
 	{
 		ret = ret && p->salutActual <= 0;
-	}
+	}*/
+
+	//Derrota si el jugador ha sido derrotado
+	ret = data.allies[data.activeAlly]->salutActual <= 0;
 	//victoria si enemigo ha sido derrotado
 	ret |= data.enemy->salutActual <= 0;
 	return ret || fled;
@@ -352,10 +481,15 @@ char CombatManager::CombatResult()
 	bool alliesDefeated = true;
 	bool enemiesDefeated = true;
 
-	for (Personatge* p : data.allies)
+	// Codigo para cuando haya multiples cuerpos en combate
+	/*for (Personatge* p : data.allies)
 	{
 		alliesDefeated &= p->salutActual <= 0;
-	}
+	}*/
+
+	//Chequeo para un solo cuerpo
+	alliesDefeated = data.allies[data.activeAlly]->salutActual <= 0;
+
 	enemiesDefeated &= data.enemy->salutActual <= 0;
 
 	return -((char)alliesDefeated)+((char)enemiesDefeated);
@@ -390,6 +524,12 @@ void CombatManager::HandleMenu()
 	{
 		// Si intenta bajar desde el ultimo elemento, vuelve al inicio restando la cantidad de elementos
 		if (++currentElement >= menuList[currentMenuInt].size()) currentElement -= menuList[currentMenuInt].size();
+	}
+	else if (app->input->GetButton(ControlID::BACK) == KEY_DOWN || app->input->GetMouseButtonDown(SDL_BUTTON_RIGHT) == KEY_DOWN)
+	{
+		// Vuelve al menu principal de combate
+		currentMenu = Menus::MAIN;
+		currentElement = 0;
 	}
 
 	bool notified = false;

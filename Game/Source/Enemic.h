@@ -13,13 +13,14 @@ enum Objectiu { RIVAL, PROPI, TOTS };
 class Atac {
 public:
     std::string nom;
+    std::string iconPath;
     int potencia;
     Estat estat = NORMAL;
     StatusEffect* status = nullptr;
     int probEstat = 0; // % de probabilitat
     Objectiu objectiu = RIVAL;
 
-    Atac(std::string _nom, int _potencia) : nom(_nom), potencia(_potencia){}
+    Atac(std::string _nom, int _potencia, const char* _iconPath = "Assets/Screen/Combat/Skill.png") : nom(_nom), potencia(_potencia), iconPath(_iconPath) {}
 };
 
 

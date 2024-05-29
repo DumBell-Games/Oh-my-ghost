@@ -1448,7 +1448,7 @@
 			<main>
 				<button id="0" text="Atacar"/>
 				<button id="1" text="Objetos"/>
-				<button id="2" text="Cambiar"/>
+				<!--<button id="2" text="Cambiar"/>-->
 				<button id="3" text="Huir"/>
 			</main>
 			<!--
