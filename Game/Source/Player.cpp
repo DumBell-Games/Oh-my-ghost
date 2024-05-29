@@ -364,7 +364,7 @@ bool Player::Update(float dt)
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(10394 + 128), PIXEL_TO_METERS(800)), NULL);
 		mansionOUT = false;
 	}
-	if (despachoIN)
+	if (despachoIN || app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN)
 	{
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(20866 + 128), PIXEL_TO_METERS(2126)), NULL);
 		despachoIN = false;

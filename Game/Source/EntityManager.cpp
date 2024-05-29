@@ -17,6 +17,14 @@
 #include "Veterana.h"
 #include "Conserje.h"
 #include "Deidad.h"
+#include "DjBunny.h"
+#include "AstroBark.h"
+#include "Segismunda.h"
+#include "Vagabundo.h"
+#include "SrBestia.h"
+#include "Dolly.h"
+#include "OsoCarpintero.h"
+#include "Kiwi.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -121,6 +129,30 @@ Entity* EntityManager::CreateEntity(EntityType type, pugi::xml_node& data)
 		break;
 	case EntityType::DEIDAD:
 		entity = new Deidad();
+		break;	
+	case EntityType::DJBUNNY:
+		entity = new DjBunny();
+		break;
+	case EntityType::ASTROBARK:
+		entity = new Astrobark();
+		break;
+	case EntityType::SEGISMUNDA:
+		entity = new Segismunda();
+		break;
+	case EntityType::VAGABUNDO:
+		entity = new Vagabundo();
+		break;
+	case EntityType::MRBESTIA:
+		entity = new SrBestia();
+		break;
+	case EntityType::DOLLY:
+		entity = new Dolly();
+		break;
+	case EntityType::OSO:
+		entity = new Oso();
+		break;
+	case EntityType::KIWI:
+		entity = new Kiwi();
 		break;
 	case EntityType::ENEMY:
 		entity = new Enemy();

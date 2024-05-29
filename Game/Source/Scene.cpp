@@ -27,6 +27,14 @@
 #include "QuestPatatasScreen.h"
 #include "Conserje.h"
 #include "Deidad.h"
+#include "DjBunny.h"
+#include "AstroBark.h"
+#include "Segismunda.h"
+#include "Vagabundo.h"
+#include "SrBestia.h"
+#include "Dolly.h"
+#include "OsoCarpintero.h"
+#include "Kiwi.h"
 
 
 #include "Defs.h"
@@ -125,6 +133,47 @@ bool Scene::Awake(pugi::xml_node config)
 		Deidad* deidad = (Deidad*)app->entityManager->CreateEntity(EntityType::DEIDAD, itemNode);
 		//enemy->parameters = itemNode;
 	}
+	for (pugi::xml_node itemNode = config.child("djbunny"); itemNode; itemNode = itemNode.next_sibling("djbunny"))
+	{
+		DjBunny* djBunny = (DjBunny*)app->entityManager->CreateEntity(EntityType::DJBUNNY, itemNode);
+		//enemy->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("astrobark"); itemNode; itemNode = itemNode.next_sibling("astrobark"))
+	{
+		Astrobark* astrobark = (Astrobark*)app->entityManager->CreateEntity(EntityType::ASTROBARK, itemNode);
+		//enemy->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("segismunda"); itemNode; itemNode = itemNode.next_sibling("segismunda"))
+	{
+		Segismunda* segismunda = (Segismunda*)app->entityManager->CreateEntity(EntityType::SEGISMUNDA, itemNode);
+		//enemy->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("vagabundo"); itemNode; itemNode = itemNode.next_sibling("vagabundo"))
+	{
+		Vagabundo* vagabundo = (Vagabundo*)app->entityManager->CreateEntity(EntityType::VAGABUNDO, itemNode);
+		//enemy->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("srbestia"); itemNode; itemNode = itemNode.next_sibling("srbestia"))
+	{
+		SrBestia* srBestia = (SrBestia*)app->entityManager->CreateEntity(EntityType::MRBESTIA, itemNode);
+		//enemy->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("dolly"); itemNode; itemNode = itemNode.next_sibling("dolly"))
+	{
+		Dolly* dolly = (Dolly*)app->entityManager->CreateEntity(EntityType::DOLLY, itemNode);
+		//enemy->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("oso"); itemNode; itemNode = itemNode.next_sibling("oso"))
+	{
+		Oso* oso = (Oso*)app->entityManager->CreateEntity(EntityType::OSO, itemNode);
+		//enemy->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("kiwi"); itemNode; itemNode = itemNode.next_sibling("kiwi"))
+	{
+		Kiwi* kiwi = (Kiwi*)app->entityManager->CreateEntity(EntityType::KIWI, itemNode);
+		//enemy->parameters = itemNode;
+	}
+
 
 	awoken = true;
 

@@ -44,7 +44,7 @@ bool Deidad::Start() {
 bool Deidad::Update(float dt)
 {	
 	currentAnim->Update();
-	app->render->DrawTexture(texture.get(), position.x - 24, position.y - 80, &currentAnim->GetCurrentFrame());
+	app->render->DrawTexture(texture.get(), position.x, position.y, &currentAnim->GetCurrentFrame());
 	
 
 	return true;

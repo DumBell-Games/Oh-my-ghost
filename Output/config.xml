@@ -426,6 +426,114 @@
 				<frame x="795" y="12" w="215" h="228" />
 			</animation>
 		</deidad>
+		
+		<astrobark x="21000" y="1795" texturePath="Assets/Textures/Astrobark_SpriteSheet.png">
+			<animation name="astroIdle" loop="true" speed="0.08f">
+				<frame x="31" y="35" w="199" h="217" />
+				<frame x="275" y="37" w="222" h="217" />
+				<frame x="527" y="38" w="236" h="216" />
+				<frame x="791" y="38" w="216" h="216" />
+				<frame x="1055" y="34" w="198" h="218" />
+				<frame x="1299" y="36" w="219" h="216" />
+				<frame x="1552" y="39" w="237" h="215" />
+				<frame x="1817" y="38" w="215" h="215" />
+			</animation>
+		</astrobark>
+		
+		<segismunda x="5583" y="1488" texturePath="Assets/Textures/Segismunda_SpriteSheet.png">
+			<animation name="segismundaIdle" loop="true" speed="0.08f">
+				<frame x="2" y="108" w="124" h="148" />
+				<frame x="130" y="108" w="124" h="148" />
+				<frame x="258" y="108" w="124" h="148" />
+				<frame x="386" y="108" w="124" h="148" />
+				<frame x="514" y="108" w="124" h="148" />
+				<frame x="642" y="108" w="124" h="148" />
+				<frame x="770" y="108" w="124" h="148" />
+				<frame x="898" y="108" w="124" h="148" />
+				<frame x="1026" y="108" w="124" h="148" />
+				<frame x="1154" y="108" w="124" h="148" />
+				<frame x="1282" y="108" w="124" h="148" />
+				<frame x="1411" y="108" w="124" h="148" />
+				<frame x="1538" y="108" w="124" h="148" />
+				<frame x="1666" y="108" w="124" h="148" />
+			</animation>
+		</segismunda>
+		
+		<vagabundo x="4095" y="1632" texturePath="Assets/Textures/Vagabundo_Spritesheet.png">
+			<animation name="vagabundoIdle" loop="true" speed="0.04f">
+				<frame x="5" y="63" w="122" h="193" />
+				<frame x="132" y="63" w="122" h="193" />
+				<frame x="261" y="63" w="122" h="193" />
+				<frame x="388" y="63" w="122" h="193" />
+				<frame x="517" y="63" w="122" h="193" />
+				<frame x="645" y="63" w="122" h="193" />
+				<frame x="772" y="63" w="122" h="193" />
+				<frame x="900" y="63" w="122" h="193" />
+			</animation>
+		</vagabundo>
+		
+		<srbestia x="3511" y="6151" texturePath="Assets/Textures/NPC_MrBeast_SpriteSheet.png">
+			<animation name="srIdle" loop="true" speed="0.08f">
+				<frame x="16" y="107" w="100" h="144" />
+				<frame x="144" y="107" w="100" h="144" />
+				<frame x="276" y="107" w="91" h="143" />
+				<frame x="404" y="108" w="91" h="143" />
+				<frame x="528" y="107" w="99" h="144" />
+				<frame x="656" y="106" w="100" h="146" />
+			</animation>
+		</srbestia>
+
+		<dolly x="6239" y="1538" texturePath="Assets/Textures/NPC_Dolly_IDLE_SpriteSheet.png">
+			<animation name="dollyIdle" loop="true" speed="0.04f">
+				<frame x="16" y="101" w="96" h="155" />
+				<frame x="144" y="101" w="96" h="155" />
+				<frame x="273" y="101" w="96" h="155" />
+				<frame x="402" y="101" w="96" h="155" />
+			</animation>
+		</dolly>
+
+		<oso x="6104" y="2002" texturePath="Assets/Textures/NPC_Oso_Carpintero_Sprite.png">
+			<animation name="osoIdle" loop="true" speed="0.08f">
+				<frame x="18" y="45" w="188" h="211" />
+				<frame x="274" y="45" w="188" h="211" />
+				<frame x="529" y="45" w="188" h="211" />
+				<frame x="785" y="45" w="188" h="211" />
+				<frame x="1042" y="45" w="188" h="211" />
+				<frame x="1297" y="45" w="188" h="211" />
+				<frame x="1553" y="34" w="219" h="222" />
+				<frame x="1809" y="34" w="219" h="222" />
+				<frame x="2064" y="50" w="191" h="206" />
+				<frame x="2320" y="50" w="191" h="206" />
+				<frame x="2577" y="50" w="191" h="206" />
+				<frame x="2833" y="50" w="191" h="206" />
+				<frame x="3088" y="50" w="191" h="206" />
+				<frame x="3346" y="46" w="191" h="210" />
+				<frame x="3603" y="46" w="191" h="210" />
+				<frame x="3856" y="46" w="191" h="210" />
+			</animation>
+		</oso>
+		
+		<kiwi x="5633" y="2136" texturePath="Assets/Textures/NPC_Kiwi_Chibi_SpritesSheet.png">
+			<animation name="kiwiIdle" loop="true" speed="0.04f">
+				<frame x="17" y="0" w="94" h="126" />
+				<frame x="145" y="0" w="94" h="126" />
+				<frame x="274" y="0" w="94" h="126" />
+				<frame x="402" y="0" w="94" h="126" />
+				<frame x="529" y="0" w="94" h="126" />
+				<frame x="657" y="0" w="94" h="126" />
+			</animation>
+		</kiwi>
+		
+		<djbunny x="14985" y="7492" texturePath="Assets/Textures/NPC_DJ.Bunny_SpriteSheet.png">
+			<animation name="djIdle" loop="true" speed="0.08f">
+				<frame x="19" y="76" w="107" h="138" />
+				<frame x="147" y="76" w="107" h="138" />
+				<frame x="271" y="76" w="107" h="138" />
+				<frame x="399" y="76" w="107" h="138" />
+				<frame x="523" y="84" w="107" h="138" />
+				<frame x="651" y="84" w="107" h="138" />
+			</animation>
+		</djbunny>  
 
 		<aprendiz x="13442" y="9218" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
 			<animation name="aprendizIdle" loop="true" speed="0.08f">
@@ -442,6 +550,7 @@
 			</animation>
 
 		</aprendiz>
+		
 		<aprendiz x="13301" y="8416" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
 			<animation name="aprendizIdle" loop="true" speed="0.08f">
 				<frame x="5	" y="35" w="117" h="186" />
@@ -577,7 +686,7 @@
 
 		<dialogTrigger x="1900" y="12292" repeat ="true">	
 			<sentences>
-				<sentence name="Jefe del Casino"	facetexturepath="Assets/Textures/Chibi_JefeCasino.png" text="3000 PawCoins al verde, ¡QUE AHORA ME TOCA!"/>
+				<sentence name="Astrobark"	facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="3000 PawCoins al verde, ¡QUE AHORA ME TOCA!"/>
 				<sentence name="Springy"		facetexturepath="Assets/Textures/ChibiSpringy.png" text="*A ver dónde están estos… anda que el lugar este es pequeño…*"/>
 			</sentences>
 		</dialogTrigger>
@@ -606,34 +715,34 @@
 
 		
 		
-		<dialogTrigger x="5583" y="2136"  texturepath ="Chibi_Segismunda.png" repeat ="true">
+		<dialogTrigger x="6239" y="2142"	  repeat ="true">
 			<sentences>
-				<sentence name="Dolly 1"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="Se rumorea que si consigues 3 bolsas de patatas que estan por Fauna Central consegurias una recompensa"/>
+				<sentence name="Oso Carpintero"	facetexturepath="Assets/Textures/Chibi_Oso.png" text="Se rumorea que si consigues 3 bolsas de patatas que estan por Fauna Central consegurias una recompensa"/>
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="¿¡EN SERIO!? Pues ahora mismo voy a buscarlas. ¿Pero que recompensa obtendre?"/>
-				<sentence name="Dolly 1"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="Cuando lo consigas mira tu mochila y tendras tu recompensa"/>
-				<sentence name="Springy 2"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="¡Que guay! Estoy ansioso por saber que conseguiré"/>
+				<sentence name="Oso Carpintero"	facetexturepath="Assets/Textures/Chibi_Oso.png" text="Cuando lo consigas mira tu mochila y tendras tu recompensa"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="¡Que guay! Estoy ansioso por saber que conseguiré"/>
 
 			</sentences>
 		</dialogTrigger>
 
-		<dialogTrigger x="6239" y="2142" texturepath ="Chibi_Segismunda.png" repeat ="true">
+		<dialogTrigger x="6239" y="1488" repeat ="true">
 			<sentences>
-				<sentence name="Dolly 2"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text=" ¿Oye sabes que si consigues 3 bolsas de caramelos que estan por Fauna Central a parte de caries consegurias una recompensa?"/>
+				<sentence name="Dolly"	facetexturepath="Assets/Textures/Chibi_Dolly.png" text=" ¿Oye sabes que si consigues 3 bolsas de caramelos que estan por Fauna Central a parte de caries consegurias una recompensa?"/>
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="Ui, pues no quiero caries pero si quiero la recompensa... me pondré a buscar "/>
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="Y recuerda mirar tu mochila cuando lo tengas todo"/>
-				<sentence name="Dolly 2"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="Valep"/>
+				<sentence name="Dolly"	facetexturepath="Assets/Textures/Chibi_Dolly.png" text="Valep"/>
 
 			</sentences>
 		</dialogTrigger>	
 		
 		
 
-		<dialogTrigger x="5589" y="1488" texturepath ="Chibi_Segismunda.png" repeat ="true">
+		<dialogTrigger x="5633" y="2136" texturepath ="Chibi_Segismunda.png" repeat ="true">
 			<sentences>
-				<sentence name="Dolly"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="Qué lástima que dejaran de fabricar Petisuises... eso sí, parece ser que alguien escondió algunos por el mapa y que detrás de ello hay un gran tesoro..."/>
+				<sentence name="Kiwi"	facetexturepath="Assets/Textures/Chibi_Kiwi.png" text="Qué lástima que dejaran de fabricar Petisuises... eso sí, parece ser que alguien escondió algunos por el mapa y que detrás de ello hay un gran tesoro..."/>
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="ALA que ricos que estaban... ¡¡¡voy a buscarlos!!! "/>
-				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="EHHH cretino! ¡Que los quería yo! Tendré que ir yo primero..."/>
-				<sentence name="Dolly"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="*tendré que correr*"/>
+				<sentence name="Kiwi"	facetexturepath="Assets/Textures/Chibi_Kiwi.png" text="EHHH cretino! ¡Que los quería yo! Tendré que ir yo primero..."/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="*tendré que correr*"/>
 
 			</sentences>
 		</dialogTrigger>	

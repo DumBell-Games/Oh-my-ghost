@@ -95,11 +95,16 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\AstroBark.cpp" />
     <ClCompile Include="Source\Conserje.cpp" />
     <ClCompile Include="Source\Deidad.cpp" />
+    <ClCompile Include="Source\DjBunny.cpp" />
+    <ClCompile Include="Source\Dolly.cpp" />
     <ClCompile Include="Source\GuiControlPhysButton.cpp" />
     <ClCompile Include="Source\Animation.cpp" />
     <ClCompile Include="Source\Aprendiz.cpp" />
+    <ClCompile Include="Source\Kiwi.cpp" />
+    <ClCompile Include="Source\OsoCarpintero.cpp" />
     <ClCompile Include="Source\Path.cpp" />
     <ClCompile Include="Source\AnimationSet.cpp" />
     <ClCompile Include="Source\InventoryManager.cpp" />
@@ -141,21 +146,29 @@
     <ClCompile Include="Source\Reload.cpp" />
     <ClCompile Include="Source\Scene.cpp" />
     <ClCompile Include="Source\Render.cpp" />
+    <ClCompile Include="Source\Segismunda.cpp" />
     <ClCompile Include="Source\SilverWings.cpp" />
+    <ClCompile Include="Source\SrBestia.cpp" />
     <ClCompile Include="Source\TeamScreen.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
+    <ClCompile Include="Source\Vagabundo.cpp" />
     <ClCompile Include="Source\Veterana.cpp" />
     <ClCompile Include="Source\Window.cpp" />
     <ClCompile Include="Source\TransitionTrigger.cpp" />
     <ClCompile Include="Source\tmxTileidAdjustment.h" />
+    <ClInclude Include="Source\AstroBark.h" />
     <ClInclude Include="Source\Conserje.h" />
     <ClInclude Include="Source\Deidad.h" />
+    <ClInclude Include="Source\DjBunny.h" />
+    <ClInclude Include="Source\Dolly.h" />
     <ClInclude Include="Source\GuiControlPhysButton.h" />
     <ClInclude Include="Source\AnimationSet.h" />
     <ClInclude Include="Source\GuiGroup.h" />
     <ClInclude Include="Source\Animation.h" />
     <ClInclude Include="Source\Aprendiz.h" />
+    <ClInclude Include="Source\Kiwi.h" />
+    <ClInclude Include="Source\OsoCarpintero.h" />
     <ClInclude Include="Source\Path.h" />
     <ClInclude Include="Source\EnumUtils.h" />
     <ClInclude Include="Source\InventoryManager.h" />
@@ -201,10 +214,13 @@
     <ClInclude Include="Source\App.h" />
     <ClInclude Include="Source\Module.h" />
     <ClInclude Include="Source\Render.h" />
+    <ClInclude Include="Source\Segismunda.h" />
     <ClInclude Include="Source\SilverWings.h" />
+    <ClInclude Include="Source\SrBestia.h" />
     <ClInclude Include="Source\TeamScreen.h" />
     <ClInclude Include="Source\Textures.h" />
     <ClInclude Include="Source\Timer.h" />
+    <ClInclude Include="Source\Vagabundo.h" />
     <ClInclude Include="Source\Veterana.h" />
     <ClInclude Include="Source\Window.h" />
     <ClInclude Include="Source\Defs.h" />
