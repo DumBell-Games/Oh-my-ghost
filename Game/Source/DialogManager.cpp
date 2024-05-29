@@ -99,7 +99,6 @@ Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, c
 			dialog->options2.Add(dialogOp2);
 		}
 	}
-	app->tex->UnLoadSP(dialog->face_tex);
 
 	return dialog;
 }

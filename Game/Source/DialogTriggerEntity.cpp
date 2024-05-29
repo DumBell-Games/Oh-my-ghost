@@ -52,7 +52,7 @@ bool DialogTrigger::Start() {
 
 
 	//initilize textures
-	texture = app->tex->LoadSP(texturePath);
+	texture = app->tex->LoadSP(texturePath, true);
 
 	if (faceTexturePath != "") {
 		faceTexture = app->tex->LoadSP(faceTexturePath, true);

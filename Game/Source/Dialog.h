@@ -41,6 +41,11 @@ public:
 
 	Dialog(std::string sentence) : sentence(sentence) {}
 
+	~Dialog()
+	{
+		CleanUp();
+	}
+
 	virtual bool CleanUp()
 	{
 
@@ -50,13 +55,14 @@ public:
 		for (item = options1.start; item != NULL; item = item->next)
 		{
 			pDialog = item->data;
+			RELEASE(pDialog);
 		}
 		options1.Clear();
 
 		for (item = options2.start; item != NULL; item = item->next)	
 		{
 			pDialog = item->data;
-			
+			RELEASE(pDialog);
 		}
 		options2.Clear();
 
