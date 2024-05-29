@@ -15,6 +15,16 @@
  - Menus
  - Save / Load
  - Combat System - changes on CombatSystem branch
+ - More animations
+ - Art implemented
+ - Logo animated
+ - New 3 quests
+ - Combat system
+ - History improved
+ - Map charges faster
+ - More locations to visit
+ - Locations are more detailed
+ - And much more
  
 ## Controls
 
@@ -23,6 +33,10 @@
 	- WASD + Shift to run
 	- SPACE to interact and select option
 	- ESC to open pause menu
+ - F2 Change body
+ - F3 Goto casino
+ - F4 Goto arcade
+ - F5 Goto Tabern
 
 - Gamepad
 	- L Joystick to movement

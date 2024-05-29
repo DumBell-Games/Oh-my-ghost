@@ -3,15 +3,21 @@
 
 #include "SDL/include/SDL_rect.h"
 #include "SString.h"
+#include <vector>
+#include "Point.h"
+#include "Log.h"
 #define MAX_FRAMES 1000
+
+struct SDL_Texture;
 
 class Animation
 {
 public:
 	SString name;
 	float speed = 1.0f;
-	SDL_Rect frames[MAX_FRAMES];
-	int durations[MAX_FRAMES];
+	std::vector<SDL_Rect> frames;
+	std::vector<int> durations;
+	std::vector<iPoint> pivots;
 	bool loop = true;
 	// Allows the animation to keep going back and forth
 	bool pingpong = false;
@@ -27,11 +33,13 @@ private:
 
 public:
 
-	void PushBack(const SDL_Rect& rect, int duration)
+	void PushBack(const SDL_Rect& rect, int duration, const iPoint& pivot = { 0,0 })
 	{
-		durations[totalFrames] = duration;
-		if (totalFrames == 0) timeLeft = duration; //first time
-		frames[totalFrames++] = rect;
+		durations.push_back(duration);
+		if (frames.size() == 0) timeLeft = duration;
+		frames.push_back(rect);
+		totalFrames = frames.size();
+		pivots.push_back(pivot);
 	}
 
 	void Reset()
@@ -64,6 +72,8 @@ public:
 		timeLeft -= timeStep * speed;
 	}
 
+	void Render(SDL_Texture* texture, const iPoint& position);
+
 	SDL_Rect& GetCurrentFrame()
 	{
 		int actualFrame = currentFrame;
@@ -75,6 +85,9 @@ public:
 
 	void DeleteAnim() {
 		totalFrames = 0;
+		frames.clear();
+		durations.clear();
+		pivots.clear();
 	}
 
 };

@@ -26,13 +26,13 @@ CombatManager::CombatManager(bool startEnabled) : Module(startEnabled)
 
 	// CODIGO PARA DEBUG, NO DEFINITIVO
 
-	Personatge* p1 = new Personatge("personatge1", 10, 10, 5, 2);
+	Personatge* p1 = new Personatge("personatge1", 10, 10, 5, 2, "Assets/Animation/Springy/SpringyFantasma.xml");
 	p1->atacs.push_back(Atac("Cop de puny1", 10));
 	p1->atacs.push_back(Atac("Cop de puny2", 10));
 	p1->atacs.push_back(Atac("Cop de puny3", 10));
 	p1->atacs.push_back(Atac("Cop de puny4", 10));
 	data.allies.push_back(p1);
-	Personatge* p2 = new Personatge("personatge2", 5, 30, 2, 1);
+	Personatge* p2 = new Personatge("personatge2", 5, 30, 2, 1, "Assets/Animation/Springy/SpringyFantasma.xml");
 	p2->atacs.push_back(Atac("Puntada de peu1", 15));
 	p2->atacs.push_back(Atac("Puntada de peu2", 15));
 	p2->atacs.push_back(Atac("Puntada de peu3", 15));
@@ -65,7 +65,18 @@ bool CombatManager::Awake(pugi::xml_node config)
 	buttonSize.x = config.attribute("buttonW").as_int(0);
 	buttonSize.y = config.attribute("buttonH").as_int(0);
 
-	CreateButtons(config.child("menus"));
+	pugi::xml_document layoutDoc;
+	pugi::xml_parse_result result = layoutDoc.load_file(config.attribute("uiLayoutPath").as_string());
+	if (result && LoadLayout(layoutDoc.child("map"))) {
+		LOG("Combat UI layout loaded.");
+	}
+	else
+	{
+		LOG("Couldn't load combat menu layout, falling back to original code-generated layout: %s", result.description());
+		CreateButtons(config.child("menus"));
+	}
+
+
 	ResetButtonsState();
 	combatState = CombatState::START;
 
@@ -81,16 +92,26 @@ bool CombatManager::Start()
 		Awake(app->GetConfig(this));
 
 	// Se asegura de que el modulo de entidades este pausado para que el jugador no se mueva por el mapa durante el combate
-	if (!app->entityManager->paused)
-		app->entityManager->Pause();
+	if (!((Module*)app->entityManager)->paused)
+		((Module*)app->entityManager)->Pause();
+	// Pausa el modulo de mapa ya que no hace falta mostrar el mapa durante el combate
+	if (!((Module*)app->map)->paused)
+		((Module*)app->map)->Pause();
 	currentMenu = Menus::MAIN;
 	currentElement = 0;
-	LOG("Combat Start!");
 	rng = std::mt19937{ std::random_device{}() }; // Resetea el RNG antes de comenzar el combate
 
+
+
+	// Añade comando solo disponible durante el combate
 	app->console->AddCommand("endcombat", "Termina el combate instantaneamente, como si se hubiera cumplido la condicion de victoria", "endcombat", [this](std::vector<std::string> args) {combatState = CombatState::DIALOG_END; });
 	
 
+	// Carga animaciones de los personajes en combate
+
+
+
+	LOG("Combat Start!");
 	return true;
 }
 
@@ -144,6 +165,11 @@ bool CombatManager::Update(float dt)
 
 bool CombatManager::PostUpdate()
 {
+	// Render background
+	if (!app->DebugEnabled())
+		app->render->DrawTexture(backgroundTexture.get(), 0, 0, nullptr, 1.0F, 0, INT_MAX, INT_MAX, false);
+	
+	// Render UI elements
 
 	return true;
 }
@@ -167,17 +193,46 @@ bool CombatManager::CleanUp()
 		menu.clear();
 	}
 
-	app->entityManager->Pause(); // Unpauses the entityManager and allows player movement
+	 // Unpauses the entityManager and allows player movement
+	if (((Module*)app->entityManager)->paused)
+		((Module*)app->entityManager)->Pause();
+	//Unpauses map so it renders again
+	if (((Module*)app->map)->paused)
+		((Module*)app->map)->Pause();
 
 	return true;
 }
 
-GuiControl* CombatManager::NewButton(char menuID, char elementID, const char* text, SDL_Rect bounds, GuiCallback_f onClick, SDL_Rect sliderBounds)
+GuiControl* CombatManager::NewButton(char menuID, char elementID, const char* text, SDL_Rect bounds, GuiCallback_f onClick, bool independentPtr, SDL_Rect sliderBounds)
 {
-	GuiControlButton* ret = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, elementID, text, bounds, onClick, sliderBounds);
+	GuiControlButton* ret = (GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, elementID, text, bounds, onClick, independentPtr, sliderBounds);
 	ret->SetOnHover([this, menuID, elementID](GuiControl* g) {currentMenu = (Menus)menuID; currentElement = elementID; });
 
 	return ret;
+}
+
+bool CombatManager::LoadLayout(pugi::xml_node layoutRoot)
+{
+	bool ret = true;
+
+	// Encuentra la imagen de fondo
+	for (pugi::xml_node bgLayer = layoutRoot.child("imagelayer"); bgLayer != NULL; bgLayer = bgLayer.next_sibling("imagelayer"))
+	{
+		if (strcmp(bgLayer.attribute("name").as_string(), "Fondo") == 0)
+		{
+			SString path = "Assets/Screens/Combat/";
+			path += bgLayer.child("image").attribute("source").as_string();
+			backgroundTexture = app->tex->LoadSP(path.GetString(), false);
+		}
+	}
+
+
+	// TODO terminar de importar el layout de combate
+
+
+
+
+	return false;
 }
 
 void CombatManager::CreateButtons(pugi::xml_node menuListNode)
@@ -504,7 +559,10 @@ void CombatManager::SwapBody(GuiControl* ctrl)
 
 void CombatManager::Flee(GuiControl* ctrl)
 {
+	currentMenu = Menus::MAIN;
+	currentElement = 0;
 	fled = true; // NOTE % posibilidad de huir?
+	combatState = CombatState::COMBAT_ANIM;
 }
 
 void CombatManager::ResetButtonsState()

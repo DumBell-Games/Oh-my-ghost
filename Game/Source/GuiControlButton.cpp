@@ -21,8 +21,6 @@ bool GuiControlButton::Update(float dt)
 {
 	if (state != GuiControlState::DISABLED)
 	{
-		// L15: DONE 3: Update the state of the GUiButton according to the mouse position
-		app->input->GetMousePosition(mouseX, mouseY);
 
 		//If the position of the mouse if inside the bounds of the button 
 		if (state != GuiControlState::NON_CLICKABLE) {
