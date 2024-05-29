@@ -6,6 +6,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "PropertiesStruct.h"
+#include "Textures.h"
 
 enum class EntityType : char
 {
@@ -23,6 +24,7 @@ enum class EntityType : char
 	SILVERWINGS,
 	APRENDIZ,
 	VETERANA,
+	CONSERJE,
 	UNKNOWN
 };
 
@@ -113,6 +115,8 @@ public:
 	int curacion;
 	int itemFx;
 	PhysBody* ibody;
+	shared_texture_t texture;
+
 
 	// Possible properties, it depends on how generic we
 	// want our Entity class, maybe it's not renderable...

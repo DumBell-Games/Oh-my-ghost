@@ -1,4 +1,4 @@
-#include "SilverWings.h"
+#include "Conserje.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -10,16 +10,16 @@
 #include "Physics.h"
 #include "Map.h"
 
-SilverWings::SilverWings() : Entity(EntityType::SILVERWINGS)
+Conserje::Conserje() : Entity(EntityType::CONSERJE)
 {
-	name.Create("veterana");
+	name.Create("conserje");
 }
 
-SilverWings::~SilverWings() {
+Conserje::~Conserje() {
 
 }
 
-bool SilverWings::Awake() {
+bool Conserje::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -30,9 +30,9 @@ bool SilverWings::Awake() {
 	return true;
 }
 
-bool SilverWings::Start() {
+bool Conserje::Start() {
 
-	SilverWingsStartAnims();
+	ConserjeStartAnims();
  
 	texture = app->tex->LoadSP(parameters.attribute("texturePath").as_string(), true);
 		
@@ -42,12 +42,12 @@ bool SilverWings::Start() {
 	nBody->listener = this;
 	nBody->ctype = ColliderType::PALOMA;
 	
-	currentAnim = silverIdle;
+	currentAnim = conserjeIdle;
 
 	return true;
 }
 
-bool SilverWings::Update(float dt)
+bool Conserje::Update(float dt)
 {	
 	currentAnim->Update();
 	app->render->DrawTexture(texture.get(), position.x - 24, position.y - 56, &currentAnim->GetCurrentFrame());
@@ -56,23 +56,16 @@ bool SilverWings::Update(float dt)
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;
 	position.y = METERS_TO_PIXELS(nBodyPos.p.y) - 32 / 2;
 
-	if (playerTouched)
-	{
-		currentAnim = silverDeath;
-		if (currentAnim->HasFinished())
-		{}
-	}
-
 	return true;
 }
 
-bool SilverWings::CleanUp()
+bool Conserje::CleanUp()
 {
 	return true;
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
-void SilverWings::OnCollision(PhysBody* physA, PhysBody* physB) {
+void Conserje::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
@@ -90,7 +83,7 @@ void SilverWings::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-void SilverWings::SilverWingsStartAnims() {
+void Conserje::ConserjeStartAnims() {
 	for (pugi::xml_node animNode = parameters.child("animation"); animNode; animNode = animNode.next_sibling())
 	{
 		Animation* anim = new Animation();
@@ -108,16 +101,16 @@ void SilverWings::SilverWingsStartAnims() {
 			int h = frameNode.attribute("h").as_int();
 			anim->PushBack({ x,y,w,h }, 10);
 		}
-		silverAnims.Add(anim);
+		conserjeAnims.Add(anim);
 	}
 
-	silverIdle = GetAnimation("silverIdle");
-	silverDeath = GetAnimation("silverDeath");
+	conserjeIdle = GetAnimation("silverIdle");
 }
+	
 
-Animation* SilverWings::GetAnimation(SString name)
+Animation* Conserje::GetAnimation(SString name)
 {
-	for (ListItem<Animation*>* item = silverAnims.start; item != nullptr; item = item->next)
+	for (ListItem<Animation*>* item = conserjeAnims.start; item != nullptr; item = item->next)
 	{
 		if (item->data != nullptr) {
 			if (item->data->name == name) return item->data;

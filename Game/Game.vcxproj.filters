@@ -101,14 +101,17 @@
     <ClCompile Include="Source\Combat.cpp" />
     <ClCompile Include="Source\PropertiesStruct.cpp" />
     <ClCompile Include="Source\tmxTileidAdjustment.h" />
-
     <ClCompile Include="Source\InventoryManager.cpp" />
-
     <ClCompile Include="Source\Character_Menu.cpp" />
     <ClCompile Include="Source\Aprendiz.cpp" />
     <ClCompile Include="Source\Veterana.cpp" />
     <ClCompile Include="Source\SilverWings.cpp" />
     <ClCompile Include="Source\Path.cpp" />
+    <ClCompile Include="Source\GuiControlPhysButton.cpp" />
+    <ClCompile Include="Source\Animation.cpp" />
+    <ClCompile Include="Source\AnimationSet.cpp" />
+    <ClCompile Include="Source\ItemData.cpp" />
+    <ClCompile Include="Source\Conserje.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -254,6 +257,10 @@
     <ClInclude Include="Source\Veterana.h" />
     <ClInclude Include="Source\SilverWings.h" />
     <ClInclude Include="Source\Path.h" />
+    <ClInclude Include="Source\GuiControlPhysButton.h" />
+    <ClInclude Include="Source\AnimationSet.h" />
+    <ClInclude Include="Source\GuiGroup.h" />
+    <ClInclude Include="Source\Conserje.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

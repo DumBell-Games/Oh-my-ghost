@@ -40,7 +40,6 @@ public:
 
 	//L02: DONE 2: Declare player parameters
 	float speed = 0.2f;
-	SDL_Texture* texture = NULL;
 	pugi::xml_node config;
 	uint texW, texH;
 	SString texturePath;

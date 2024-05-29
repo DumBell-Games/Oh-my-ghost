@@ -13,13 +13,13 @@ struct SDL_Texture;
 
 
 
-class Aprendiz : public Entity
+class Conserje : public Entity
 {
 public:
 
-	Aprendiz();
+	Conserje();
 
-	virtual ~Aprendiz();
+	virtual ~Conserje();
 
 	bool Awake();
 
@@ -32,7 +32,7 @@ public:
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
-	void AprendizStartAnims();
+	void ConserjeStartAnims();
 
 	Animation* GetAnimation(SString name);
 
@@ -46,8 +46,11 @@ public:
 
 	PhysBody* nBody;
 	
-	List<Animation*> aprendizAnims;
-	Animation* aprendizIdle;
+	List<Animation*> conserjeAnims;
+	Animation* currentAnim;
+	Animation* conserjeIdle;
+
+	bool playerTouched = false;
 
 
 };

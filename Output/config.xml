@@ -395,6 +395,29 @@
 			
 
 		</silverWings>
+		
+		<conserje x="21248" y="8292" texturePath="Assets/Textures/ConserjeBruno_SpriteSheet.png">
+			<animation name="conserjeIdle" loop="true" speed="0.08f">
+				<frame x="87" y="66" w="122" h="181" />
+				<frame x="343" y="72" w="116" h="173" />
+				<frame x="599" y="72" w="117" h="174" />
+				<frame x="855" y="75" w="117" h="171" />
+				<frame x="1112" y="73" w="117" h="171" />
+				<frame x="1367" y="69" w="124" h="172" />
+				<frame x="1623" y="72" w="124" h="171" />
+				<frame x="1880" y="65" w="130" h="173" />
+				<frame x="2135" y="65" w="130" h="173" />
+				<frame x="2391" y="73" w="117" h="171" />
+				<frame x="2647" y="73" w="117" h="171" />
+				<frame x="2903" y="73" w="117" h="171" />
+				<frame x="3159" y="72" w="117" h="171" />
+				<frame x="3415" y="66" w="122" h="180" />
+				<frame x="3671" y="66" w="122" h="180" />
+
+			</animation>
+
+		</conserje>
+
 
 
 		<aprendiz x="13442" y="9218" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">

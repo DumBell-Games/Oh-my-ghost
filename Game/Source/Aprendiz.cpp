@@ -35,7 +35,7 @@ bool Aprendiz::Start() {
 
 	AprendizStartAnims();
  
-	texture = app->tex->Load(parameters.attribute("texturePath").as_string());
+	texture = app->tex->LoadSP(parameters.attribute("texturePath").as_string(), true);
 		
 	nBody = app->physics->CreateRectangle(position.x + 128, position.y, 140, 200, bodyType::KINEMATIC);
 	//haz que el rectangulo no rote
@@ -49,10 +49,10 @@ bool Aprendiz::Start() {
 bool Aprendiz::Update(float dt)
 {	
 	aprendizIdle->Update();
-	app->render->DrawTexture(texture, position.x - 24, position.y - 56, &aprendizIdle->GetCurrentFrame());
+	app->render->DrawTexture(texture.get(), position.x - 24, position.y - 56, &aprendizIdle->GetCurrentFrame());
 	
 	b2Transform nBodyPos = nBody->body->GetTransform();
-	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;
+	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;	
 	position.y = METERS_TO_PIXELS(nBodyPos.p.y) - 32 / 2;
 
 	return true;

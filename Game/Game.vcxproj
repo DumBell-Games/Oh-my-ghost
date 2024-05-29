@@ -95,6 +95,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Conserje.cpp" />
     <ClCompile Include="Source\GuiControlPhysButton.cpp" />
     <ClCompile Include="Source\Animation.cpp" />
     <ClCompile Include="Source\Aprendiz.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="Source\Window.cpp" />
     <ClCompile Include="Source\TransitionTrigger.cpp" />
     <ClCompile Include="Source\tmxTileidAdjustment.h" />
+    <ClInclude Include="Source\Conserje.h" />
     <ClInclude Include="Source\GuiControlPhysButton.h" />
     <ClInclude Include="Source\AnimationSet.h" />
     <ClInclude Include="Source\GuiGroup.h" />
