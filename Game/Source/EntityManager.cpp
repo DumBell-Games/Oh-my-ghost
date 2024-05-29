@@ -16,6 +16,7 @@
 #include "Aprendiz.h"
 #include "Veterana.h"
 #include "Conserje.h"
+#include "Deidad.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -117,6 +118,9 @@ Entity* EntityManager::CreateEntity(EntityType type, pugi::xml_node& data)
 		break;
 	case EntityType::CONSERJE:
 		entity = new Conserje();
+		break;
+	case EntityType::DEIDAD:
+		entity = new Deidad();
 		break;
 	case EntityType::ENEMY:
 		entity = new Enemy();

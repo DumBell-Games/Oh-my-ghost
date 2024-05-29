@@ -417,8 +417,15 @@
 			</animation>
 
 		</conserje>
-
-
+		
+		<deidad x="21331" y="7700" texturePath="Assets/Textures/Spritesheet_Deidad.png">
+			<animation name="deidadIdle" loop="true" speed="0.08f">
+				<frame x="31" y="13" w="215" h="228" />
+				<frame x="282" y="11" w="215" h="228" />
+				<frame x="535" y="8" w="215" h="228" />
+				<frame x="795" y="12" w="215" h="228" />
+			</animation>
+		</deidad>
 
 		<aprendiz x="13442" y="9218" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
 			<animation name="aprendizIdle" loop="true" speed="0.08f">
@@ -466,7 +473,7 @@
 
 		</aprendiz>
 
-		<veterana x="3542" y="10821" texturePath="Assets/Textures/VeteranaAstroBark_SpritesSheet.png">
+		<veterana x="3542" y="10821" texturePath="Assets/Textures/VeteranaAstrobark_SpritesSheet.png">
 			<animation name="veteranaIdle" loop="true" speed="0.08f">
 				<frame x="13" y="50" w="111" h="204" />
 				<frame x="139" y="48" w="111" h="204" />
@@ -486,7 +493,7 @@
 
 		</veterana>
 
-		<veterana x="1855" y="10750" texturePath="Assets/Textures/VeteranaAstroBark_SpritesSheet.png">
+		<veterana x="1855" y="10750" texturePath="Assets/Textures/VeteranaAstrobark_SpritesSheet.png">
 			<animation name="veteranaIdle" loop="true" speed="0.08f">
 				<frame x="13" y="50" w="111" h="204" />
 				<frame x="139" y="48" w="111" h="204" />
@@ -604,7 +611,7 @@
 				<sentence name="Dolly 1"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="Se rumorea que si consigues 3 bolsas de patatas que estan por Fauna Central consegurias una recompensa"/>
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="¿¡EN SERIO!? Pues ahora mismo voy a buscarlas. ¿Pero que recompensa obtendre?"/>
 				<sentence name="Dolly 1"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="Cuando lo consigas mira tu mochila y tendras tu recompensa"/>
-				<sentence name="Springy 2"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="¡Que guay! Estoy ansioso por saber que conseguiré"/>
+				<sentence name="Springy 2"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="¡Que guay! Estoy ansioso por saber que conseguiré"/>
 
 			</sentences>
 		</dialogTrigger>
@@ -614,7 +621,7 @@
 				<sentence name="Dolly 2"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text=" ¿Oye sabes que si consigues 3 bolsas de caramelos que estan por Fauna Central a parte de caries consegurias una recompensa?"/>
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="Ui, pues no quiero caries pero si quiero la recompensa... me pondré a buscar "/>
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="Y recuerda mirar tu mochila cuando lo tengas todo"/>
-				<sentence name="Veterana 2"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Valep"/>
+				<sentence name="Dolly 2"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="Valep"/>
 
 			</sentences>
 		</dialogTrigger>	
@@ -626,38 +633,32 @@
 				<sentence name="Dolly"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="Qué lástima que dejaran de fabricar Petisuises... eso sí, parece ser que alguien escondió algunos por el mapa y que detrás de ello hay un gran tesoro..."/>
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="ALA que ricos que estaban... ¡¡¡voy a buscarlos!!! "/>
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="EHHH cretino! ¡Que los quería yo! Tendré que ir yo primero..."/>
-				<sentence name="Veterana 2"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="*tendré que correr*"/>
+				<sentence name="Dolly"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="*tendré que correr*"/>
 
 			</sentences>
 		</dialogTrigger>	
 		
-		<dialogTrigger x="21415" y="8332" repeat ="false">
+		<dialogTrigger x="21415" y="8332" repeat ="true">
 			<sentences>
 				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringy.png" text="¿Qué? ¿Dónde estoy?"/>
 				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringy.png" text="¿Qué ha pasado? ¿Y mi compañera Copycat, dónde está?"/>
-				<sentence name="Deidad"     facetexturepath="Assets/Textures/Chibi_DjBunny.png" text="Te doy la bienvenida"/>
-				<sentence name="Deidad"     facetexturepath="Assets/Textures/Chibi_DjBunny.png" text="Estas en un lugar complicado de describir"/>
+				<sentence name="Deidad"     facetexturepath="Assets/Textures/Chibi_Deidad.png" text="Te doy la bienvenida"/>
+				<sentence name="Deidad"     facetexturepath="Assets/Textures/Chibi_Deidad.png" text="Estas en un lugar complicado de describir"/>
 				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringy.png" text="¿De qué me estás hablando?"/>
 				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringy.png" text="*¿Eh? Este señor debe estar pasado de copas, vaya aires de grandeza tiene…"/>
-				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringy.png" text=""/>
 				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringy.png" text="Entonces si eres todopoderoso devuelveme con Copycat"/>
-				<sentence name="Deidad"     facetexturepath="Assets/Textures/Chibi_DjBunny.png" text="No puedes volver al mundo terrenal, has muerto"/>
+				<sentence name="Deidad"     facetexturepath="Assets/Textures/Chibi_Deidad.png" text="No puedes volver al mundo terrenal, has muerto"/>
 				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringy.png" text="¿Cómo que he muerto? Pero esto no puede ser, tiene que haber alguna manera de poder volver al mundo terrenal. Por favor, devuélveme ahí, Copycat me necesita!"/>
-				<sentence name="Deidad"    facetexturepath="Assets/Textures/Chibi_DjBunny.png" text="Hmmm..."/>
-				<sentence name="Deidad"    facetexturepath="Assets/Textures/Chibi_DjBunny.png" text="¿Ves a ese de ahí? Si le ganas en combate te dejaré volver"/>
+				<sentence name="Deidad"    facetexturepath="Assets/Textures/Chibi_Deidad.png" text="Hmmm..."/>
+				<sentence name="Deidad"    facetexturepath="Assets/Textures/Chibi_Deidad.png" text="¿Ves a ese de ahí? Si le ganas en combate te dejaré volver"/>
 				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringy.png" text="¿A la tortuga esa?"/>
-				<sentence name="Deidad"    facetexturepath="Assets/Textures/Chibi_DjBunny.png" text="Si. Derrotala y volverás al mundo terrenal"/>
+				<sentence name="Deidad"    facetexturepath="Assets/Textures/Chibi_Deidad.png" text="Si. Derrotala y volverás al mundo terrenal"/>
 				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringy.png" text="Voy a por tí patatuda"/>
 			</sentences>
-		</dialogTrigger>
-		
-		
-
-
+		</dialogTrigger>	
 
 	</scene>
-				
-		
+					
 
 	<dialogmanager>
 		<textures>

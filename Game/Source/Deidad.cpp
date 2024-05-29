@@ -1,4 +1,4 @@
-#include "Conserje.h"
+#include "Deidad.h"
 #include "App.h"
 #include "Textures.h"
 #include "Audio.h"
@@ -10,16 +10,16 @@
 #include "Physics.h"
 #include "Map.h"
 
-Conserje::Conserje() : Entity(EntityType::CONSERJE)
+Deidad::Deidad() : Entity(EntityType::CONSERJE)
 {
-	name.Create("conserje");
+	name.Create("deidad");
 }
 
-Conserje::~Conserje() {
+Deidad::~Deidad() {
 
 }
 
-bool Conserje::Awake() {
+bool Deidad::Awake() {
 
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
@@ -30,42 +30,33 @@ bool Conserje::Awake() {
 	return true;
 }
 
-bool Conserje::Start() {
+bool Deidad::Start() {
 
-	ConserjeStartAnims();
+	StartAnims();
  
 	texture = app->tex->LoadSP(parameters.attribute("texturePath").as_string(), true);
 		
-	nBody = app->physics->CreateRectangle(position.x + 64, position.y + 64, 130, 180, bodyType::KINEMATIC);
-	//haz que el rectangulo no rote
-	nBody->body->SetFixedRotation(true);	
-	nBody->listener = this;
-	nBody->ctype = ColliderType::NPC;
-	
-	currentAnim = conserjeIdle;
+	currentAnim = deidadIdle;
 
 	return true;
 }
 
-bool Conserje::Update(float dt)
+bool Deidad::Update(float dt)
 {	
 	currentAnim->Update();
-	app->render->DrawTexture(texture.get(), position.x - 24, position.y - 90, &currentAnim->GetCurrentFrame());
+	app->render->DrawTexture(texture.get(), position.x - 24, position.y - 80, &currentAnim->GetCurrentFrame());
 	
-	b2Transform nBodyPos = nBody->body->GetTransform();
-	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;
-	position.y = METERS_TO_PIXELS(nBodyPos.p.y) - 32 / 2;
 
 	return true;
 }
 
-bool Conserje::CleanUp()
+bool Deidad::CleanUp()
 {
 	return true;
 }
 
 // L07 DONE 6: Define OnCollision function for the player. 
-void Conserje::OnCollision(PhysBody* physA, PhysBody* physB) {
+void Deidad::OnCollision(PhysBody* physA, PhysBody* physB) {
 	switch (physB->ctype)
 	{
 	case ColliderType::PLATFORM:
@@ -79,7 +70,7 @@ void Conserje::OnCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-void Conserje::ConserjeStartAnims() {
+void Deidad::StartAnims() {
 	for (pugi::xml_node animNode = parameters.child("animation"); animNode; animNode = animNode.next_sibling())
 	{
 		Animation* anim = new Animation();
@@ -97,16 +88,16 @@ void Conserje::ConserjeStartAnims() {
 			int h = frameNode.attribute("h").as_int();
 			anim->PushBack({ x,y,w,h }, 10);
 		}
-		conserjeAnims.Add(anim);
+		deidadAnims.Add(anim);
 	}
 
-	conserjeIdle = GetAnimation("conserjeIdle");
+	deidadIdle = GetAnimation("deidadIdle");
 }
 	
 
-Animation* Conserje::GetAnimation(SString name)
+Animation* Deidad::GetAnimation(SString name)
 {
-	for (ListItem<Animation*>* item = conserjeAnims.start; item != nullptr; item = item->next)
+	for (ListItem<Animation*>* item = deidadAnims.start; item != nullptr; item = item->next)
 	{
 		if (item->data != nullptr) {
 			if (item->data->name == name) return item->data;

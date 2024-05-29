@@ -26,6 +26,7 @@
 #include "Veterana.h"
 #include "QuestPatatasScreen.h"
 #include "Conserje.h"
+#include "Deidad.h"
 
 
 #include "Defs.h"
@@ -117,6 +118,11 @@ bool Scene::Awake(pugi::xml_node config)
 	for (pugi::xml_node itemNode = config.child("conserje"); itemNode; itemNode = itemNode.next_sibling("conserje"))
 	{
 		Conserje* conserje = (Conserje*)app->entityManager->CreateEntity(EntityType::CONSERJE, itemNode);
+		//enemy->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("deidad"); itemNode; itemNode = itemNode.next_sibling("deidad"))
+	{
+		Deidad* deidad = (Deidad*)app->entityManager->CreateEntity(EntityType::DEIDAD, itemNode);
 		//enemy->parameters = itemNode;
 	}
 

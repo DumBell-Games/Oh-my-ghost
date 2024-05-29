@@ -112,6 +112,7 @@
     <ClCompile Include="Source\AnimationSet.cpp" />
     <ClCompile Include="Source\ItemData.cpp" />
     <ClCompile Include="Source\Conserje.cpp" />
+    <ClCompile Include="Source\Deidad.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -261,6 +262,7 @@
     <ClInclude Include="Source\AnimationSet.h" />
     <ClInclude Include="Source\GuiGroup.h" />
     <ClInclude Include="Source\Conserje.h" />
+    <ClInclude Include="Source\Deidad.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
