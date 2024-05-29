@@ -7,6 +7,7 @@
 #include "List.h"
 #include "Point.h"
 #include "SDL/include/SDL.h"
+#include "Textures.h"
 
 struct SDL_Texture;
 
@@ -37,19 +38,18 @@ private:
 
 public:
 
-private:
-
 	//En caso de querer añadirle una textura a la entidad
-	SDL_Texture* texture;
+	shared_texture_t texture;
 
 	//La textura de la cara general para el dialogo
-	SDL_Texture* faceTexture;
+	shared_texture_t faceTexture;
+private:
 
 	//El path de la textura de la entidad
 	const char* texturePath;
 
 	//El path de la textura de la cara general
-	SString faceTexturePath;
+	const char* faceTexturePath;
 
 	//Cuerpo de fisicas, para detectar cuando el jugador esta cerca
 	//y activar el dialogo en caso de que el jugador asi lo quiera

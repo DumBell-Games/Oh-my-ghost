@@ -7,6 +7,7 @@
 #include "List.h"
 #include <vector>
 #include "SDL_ttf/include/SDL_ttf.h"
+#include "Textures.h"
 
 class DialogManager : public Module
 {

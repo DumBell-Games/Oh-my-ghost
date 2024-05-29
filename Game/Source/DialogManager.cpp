@@ -54,7 +54,7 @@ bool DialogManager::Start() {
 bool DialogManager::CleanUp()
 {
 	bool ret = true;
-	/*ListItem<Dialog*>* item;
+	ListItem<Dialog*>* item;
 	item = dialogues.end;
 
 	while (item != NULL && ret == true)
@@ -63,7 +63,7 @@ bool DialogManager::CleanUp()
 		item = item->prev;
 	}
 
-	dialogues.Clear();*/
+	dialogues.Clear();
 
 	return ret;
 }
@@ -74,7 +74,7 @@ Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, c
 	Dialog* dialog = new Dialog(itemNode.attribute("text").as_string());
 	dialog->name = name;
 	dialog->name = itemNode.attribute("name").as_string(dialog->name.c_str());
-	dialog->face_tex = app->tex->Load(itemNode.attribute("facetexturepath").as_string(faceTexturePath));
+	dialog->face_tex = app->tex->LoadSP(itemNode.attribute("facetexturepath").as_string(faceTexturePath), true);
 	dialog->font = FontSelector(itemNode.attribute("font").as_string(font));
 	dialog->id = itemNode.attribute("id").as_int(0);
 	dialog->mapId = mapID;
@@ -99,6 +99,7 @@ Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, c
 			dialog->options2.Add(dialogOp2);
 		}
 	}
+	app->tex->UnLoadSP(dialog->face_tex);
 
 	return dialog;
 }
@@ -149,7 +150,7 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 	//Imagen del personaje
 	if (dialog->face_tex != nullptr) {
 		                                                               //               y
-		app->render->DrawTexture(dialog->face_tex, 110, 420, 0, 0);
+		app->render->DrawTexture(dialog->face_tex.get(), 110, 420, 0, 0);
 	}
 
 

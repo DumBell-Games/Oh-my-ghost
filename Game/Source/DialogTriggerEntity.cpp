@@ -39,23 +39,23 @@ bool DialogTrigger::Start() {
 	//Cargar dialogos
 	for (pugi::xml_node itemNode = parameters.child("sentences").child("sentence"); itemNode; itemNode = itemNode.next_sibling("sentence"))
 	{
-		dialogues.Add(app->dialogManager->CreateDialog(itemNode, parameters.attribute("name").as_string(), faceTexturePath.GetString(), fontTarget.c_str(), 0, parameters.attribute("mapid").as_int()));
+		dialogues.Add(app->dialogManager->CreateDialog(itemNode, parameters.attribute("name").as_string(), faceTexturePath, fontTarget.c_str(), 0, parameters.attribute("mapid").as_int()));
 	}
 
 	//Si el dialogo se reite, cargar las lineas que se repite
 	if (repeatDialog) {
 		for (pugi::xml_node itemNode = parameters.child("repeat_sentences").child("sentence"); itemNode; itemNode = itemNode.next_sibling("sentence"))
 		{
-			dialoguesRepeat.Add(app->dialogManager->CreateDialog(itemNode, parameters.attribute("name").as_string(), faceTexturePath.GetString(), fontTarget.c_str()));
+			dialoguesRepeat.Add(app->dialogManager->CreateDialog(itemNode, parameters.attribute("name").as_string(), faceTexturePath, fontTarget.c_str()));
 		}
 	}
 
 
 	//initilize textures
-	texture = app->tex->Load(texturePath);
+	texture = app->tex->LoadSP(texturePath);
 
 	if (faceTexturePath != "") {
-		faceTexture = app->tex->Load(faceTexturePath.GetString());
+		faceTexture = app->tex->LoadSP(faceTexturePath, true);
 	}
 
 	pbody = app->physics->CreateRectangleSensor(position.x, position.y, 150, 256, bodyType::KINEMATIC);
@@ -70,7 +70,7 @@ bool DialogTrigger::Start() {
 
 bool DialogTrigger::Update(float dt)
 {
-	app->render->DrawTexture(texture, position.x, position.y);
+	app->render->DrawTexture(texture.get(), position.x, position.y);
 
 	return true;
 }
@@ -78,8 +78,8 @@ bool DialogTrigger::Update(float dt)
 bool DialogTrigger::CleanUp()
 {
 
-	SDL_DestroyTexture(texture);
-	SDL_DestroyTexture(faceTexture);
+	app->tex->UnLoadSP(texture);
+	app->tex->UnLoadSP(faceTexture);
 
 	ListItem<Dialog*>* item;
 	Dialog* pDialog = nullptr;
@@ -89,7 +89,7 @@ bool DialogTrigger::CleanUp()
 		pDialog = item->data;
 		//pDialog->face_tex = faceTexture;
 		pDialog->CleanUp();
-		SDL_DestroyTexture(pDialog->face_tex);
+		app->tex->UnLoadSP(pDialog->face_tex);
 	}
 
 	dialogues.Clear();
@@ -101,7 +101,7 @@ bool DialogTrigger::CleanUp()
 	{
 		pDialog = item->data;
 		//pDialog->face_tex = faceTexture;
-		SDL_DestroyTexture(pDialog->face_tex);
+		app->tex->UnLoadSP(pDialog->face_tex);
 	}
 
 	dialoguesRepeat.Clear();

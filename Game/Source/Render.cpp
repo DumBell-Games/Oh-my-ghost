@@ -5,6 +5,7 @@
 #include "Defs.h"
 #include "Log.h"
 #include <thread>
+#include "Textures.h"
 
 #define VSYNC true
 

@@ -5,6 +5,7 @@
 #include "Input.h"
 #include "Render.h"
 #include "List.h"
+#include "Textures.h"
 
 
 enum class DialogType
@@ -49,14 +50,13 @@ public:
 		for (item = options1.start; item != NULL; item = item->next)
 		{
 			pDialog = item->data;
-			SDL_DestroyTexture(pDialog->face_tex);
 		}
 		options1.Clear();
 
-		for (item = options2.start; item != NULL; item = item->next)
+		for (item = options2.start; item != NULL; item = item->next)	
 		{
 			pDialog = item->data;
-			SDL_DestroyTexture(pDialog->face_tex);
+			
 		}
 		options2.Clear();
 
@@ -83,7 +83,7 @@ public:
 	int mapId;
 
 	//Texturas
-	SDL_Texture* face_tex = nullptr;
+	shared_texture_t face_tex = nullptr;
 	const char* face_tex_path;
 
 	//El texto de las opciones
