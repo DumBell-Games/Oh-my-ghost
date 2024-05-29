@@ -39,8 +39,10 @@ public:
     int exp = 1;
     int expProximNivell = 100;
 
-    Personatge(std::string _nom, int _nivell, int _atac, int _defensa, int _velocitat)
-        : nom(_nom), nivell(_nivell), estat(NORMAL), atac(_atac), defensa(_defensa), velocitat(_velocitat) {
+    std::string animPath;
+
+    Personatge(std::string _nom, int _nivell, int _atac, int _defensa, int _velocitat, const char* _animPath = "Assets/Animation/Aprendiz_Astrobark/Aprendiz.xml")
+        : nom(_nom), nivell(_nivell), estat(NORMAL), atac(_atac), defensa(_defensa), velocitat(_velocitat), animPath(_animPath) {
         salutTotal = 100; // Inicializamos la salud en 100 por defecto
         salutActual = 100;
     }

@@ -81,3 +81,5 @@ ipch/
 *.db
 *.opendb
 packages/
+/Output/Assets/Animation/Aprendiz_Astrobark/AprendizAstroBark_SpriteSheet
+/Output/Assets/Animation/Springy/springyFantasma

@@ -3,6 +3,7 @@
 #include "Textures.h"
 
 #include "GuiControlButton.h"
+#include "GuiControlPhysButton.h"
 #include "Audio.h"
 
 GuiManager::GuiManager(bool startEnabled) : Module(startEnabled)
@@ -18,7 +19,7 @@ bool GuiManager::Start()
 }
 
 // L15: DONE1: Implement CreateGuiControl function that instantiates a new GUI control and add it to the list of controls
-GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, SDL_Rect sliderBounds)
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, Module* observer, bool independentPointer, SDL_Rect sliderBounds)
 {
 	GuiControl* guiControl = nullptr;
 
@@ -26,8 +27,20 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	switch (type)
 	{
 	case GuiControlType::BUTTON:
+	{
 		guiControl = new GuiControlButton(id, bounds, text);
 		break;
+	}
+	case GuiControlType::PHYSBUTTON_BOX:
+	{
+		guiControl = new GuiControlPhysButton(id, type, bounds, text);
+		break;
+	}
+	case GuiControlType::PHYSBUTTON_CIRCLE:
+	{
+		guiControl = new GuiControlPhysButton(id, type, bounds, text);
+		break;
+	}
 	}
 
 	if (guiControl) {
@@ -35,15 +48,16 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 		guiControl->observer = observer;
 
 		// Created GuiControls are add it to the list of controls
-		guiControlsList.Add(guiControl);
+		if (!independentPointer)
+			guiControlsList.Add(guiControl);
 	}
 
 	return guiControl;
 }
 
-GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, GuiCallback_f observer, SDL_Rect sliderBounds)
+GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char* text, SDL_Rect bounds, GuiCallback_f observer, bool independentPointer, SDL_Rect sliderBounds)
 {
-	GuiControl* guiControl = CreateGuiControl(type,id,text,bounds,nullptr,sliderBounds);
+	GuiControl* guiControl = CreateGuiControl(type,id,text,bounds,nullptr, independentPointer,sliderBounds);
 
 	if (guiControl) {
 		//Set the observer
@@ -60,9 +74,14 @@ void GuiManager::DestroyGuiControl(GuiControl* ctrl)
 	RELEASE(ctrl);
 }
 
+List<GuiControl*> GuiManager::LoadLayout(pugi::xml_node layoutLayer)
+{
+	List<GuiControl*> list;
+	return list;
+}
+
 bool GuiManager::Update(float dt)
 {	
-
 	ListItem<GuiControl*>* control = guiControlsList.start;
 
 	while (control != nullptr)

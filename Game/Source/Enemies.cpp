@@ -11,7 +11,7 @@
 #include "CombatManager.h"
 #include "Reload.h"
 
-Enemy::Enemy() : Entity(EntityType::ENEMY) , enemyData("PH",0,0,0,0)
+Enemy::Enemy() : Entity(EntityType::ENEMY) , enemyData("PH",0,0,0,0, "Assets/Animation/Aprendiz_Astrobark/Aprendiz.xml")
 {
 	name.Create("Enemy");
 }
@@ -26,8 +26,16 @@ bool Enemy::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 	texturePath = parameters.attribute("texturePath").as_string();
+	
 
 	//Carga de datos de enemigo para combate
+	Properties properties;
+	LoadProperties(parameters, properties);
+	if (properties.list.Count()> 0)
+	{
+		Properties::Property* p;
+		if (p = properties.GetProperty("animPath")) enemyData.animPath = p->strVal.GetString();
+	}
 
 	return true;
 }
