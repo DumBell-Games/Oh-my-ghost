@@ -25,6 +25,7 @@
 #include "Dolly.h"
 #include "OsoCarpintero.h"
 #include "Kiwi.h"
+#include "Sisebuto.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -144,6 +145,9 @@ Entity* EntityManager::CreateEntity(EntityType type, pugi::xml_node& data)
 		break;
 	case EntityType::MRBESTIA:
 		entity = new SrBestia();
+		break;
+	case EntityType::SISEBUTO:
+		entity = new Sisebuto();
 		break;
 	case EntityType::DOLLY:
 		entity = new Dolly();

@@ -148,6 +148,7 @@
     <ClCompile Include="Source\Render.cpp" />
     <ClCompile Include="Source\Segismunda.cpp" />
     <ClCompile Include="Source\SilverWings.cpp" />
+    <ClCompile Include="Source\Sisebuto.cpp" />
     <ClCompile Include="Source\SrBestia.cpp" />
     <ClCompile Include="Source\TeamScreen.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
@@ -216,6 +217,7 @@
     <ClInclude Include="Source\Render.h" />
     <ClInclude Include="Source\Segismunda.h" />
     <ClInclude Include="Source\SilverWings.h" />
+    <ClInclude Include="Source\Sisebuto.h" />
     <ClInclude Include="Source\SrBestia.h" />
     <ClInclude Include="Source\TeamScreen.h" />
     <ClInclude Include="Source\Textures.h" />

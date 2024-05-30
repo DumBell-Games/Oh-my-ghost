@@ -113,6 +113,15 @@
     <ClCompile Include="Source\ItemData.cpp" />
     <ClCompile Include="Source\Conserje.cpp" />
     <ClCompile Include="Source\Deidad.cpp" />
+    <ClCompile Include="Source\AstroBark.cpp" />
+    <ClCompile Include="Source\DjBunny.cpp" />
+    <ClCompile Include="Source\Dolly.cpp" />
+    <ClCompile Include="Source\Kiwi.cpp" />
+    <ClCompile Include="Source\OsoCarpintero.cpp" />
+    <ClCompile Include="Source\Segismunda.cpp" />
+    <ClCompile Include="Source\SrBestia.cpp" />
+    <ClCompile Include="Source\Vagabundo.cpp" />
+    <ClCompile Include="Source\Sisebuto.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -263,6 +272,15 @@
     <ClInclude Include="Source\GuiGroup.h" />
     <ClInclude Include="Source\Conserje.h" />
     <ClInclude Include="Source\Deidad.h" />
+    <ClInclude Include="Source\AstroBark.h" />
+    <ClInclude Include="Source\DjBunny.h" />
+    <ClInclude Include="Source\Dolly.h" />
+    <ClInclude Include="Source\Kiwi.h" />
+    <ClInclude Include="Source\OsoCarpintero.h" />
+    <ClInclude Include="Source\Segismunda.h" />
+    <ClInclude Include="Source\SrBestia.h" />
+    <ClInclude Include="Source\Vagabundo.h" />
+    <ClInclude Include="Source\Sisebuto.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

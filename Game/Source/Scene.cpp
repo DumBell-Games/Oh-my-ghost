@@ -35,6 +35,7 @@
 #include "Dolly.h"
 #include "OsoCarpintero.h"
 #include "Kiwi.h"
+#include "Sisebuto.h"
 
 
 #include "Defs.h"
@@ -171,6 +172,11 @@ bool Scene::Awake(pugi::xml_node config)
 	for (pugi::xml_node itemNode = config.child("kiwi"); itemNode; itemNode = itemNode.next_sibling("kiwi"))
 	{
 		Kiwi* kiwi = (Kiwi*)app->entityManager->CreateEntity(EntityType::KIWI, itemNode);
+		//enemy->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("sisebuto"); itemNode; itemNode = itemNode.next_sibling("sisebuto"))
+	{
+		Sisebuto* sisebuto = (Sisebuto*)app->entityManager->CreateEntity(EntityType::SISEBUTO, itemNode);
 		//enemy->parameters = itemNode;
 	}
 

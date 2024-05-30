@@ -313,7 +313,6 @@
 				<frame x="3605" y="3469" w="98" h="114" />
 			</animation>
 
-
 			<animation name="cambioCuerpo" loop="false" speed="0.08f">
 				<frame x="2" y="3684" w="127" h="156" />
 				<frame x="134" y="3696" w="123" h="144" />
@@ -339,8 +338,8 @@
 				<frame x="1037" y="4252" w="106" h="93" />
 				<frame x="1159" y="4260" w="114" h="83" />
 			</animation>
-
 		</player>
+		
 		<silverWings x="7100" y="6177" texturePath="Assets/Textures/silverWings.png">
 			<animation name="silverIdle" loop="true" speed="0.08f">
 				<frame x="1" y="1" w="78" h="144" />
@@ -355,8 +354,7 @@
 				<frame x="1150" y="1" w="81" h="144" />
 				<frame x="1278" y="1" w="81" h="144" />
 				<frame x="1406" y="1" w="81" h="144" />
-				<frame x="1537" y="1" w="78" h="144" />
-			
+				<frame x="1537" y="1" w="78" h="144" />			
 			</animation>
 			
 			<animation name="silverDeath" loop="false" speed="0.32f">
@@ -389,11 +387,8 @@
 				<frame x="6681" y="258" w="157" h="145" />
 				<frame x="6937" y="258" w="157" h="145" />
 				<frame x="7194" y="258" w="157" h="145" />
-				<frame x="7450" y="258" w="157" h="145" />
-				
+				<frame x="7450" y="258" w="157" h="145" />				
 			</animation>
-			
-
 		</silverWings>
 		
 		<conserje x="21248" y="8292" texturePath="Assets/Textures/ConserjeBruno_SpriteSheet.png">
@@ -413,9 +408,7 @@
 				<frame x="3159" y="72" w="117" h="171" />
 				<frame x="3415" y="66" w="122" h="180" />
 				<frame x="3671" y="66" w="122" h="180" />
-
-			</animation>
-
+		    </animation>
 		</conserje>
 		
 		<deidad x="21331" y="7700" texturePath="Assets/Textures/Spritesheet_Deidad.png">
@@ -533,7 +526,20 @@
 				<frame x="523" y="84" w="107" h="138" />
 				<frame x="651" y="84" w="107" h="138" />
 			</animation>
-		</djbunny>  
+		</djbunny>
+		
+		<sisebuto x="8648" y="11262" texturePath="Assets/Textures/Spritesheet_Borracho.png">
+			<animation name="sisebutoIdle" loop="true" speed="0.04f">
+				<frame x="10" y="50" w="241" h="154" />
+				<frame x="265" y="50" w="241" h="154" />
+				<frame x="522" y="55" w="243" h="149" />
+				<frame x="778" y="52" w="242" h="152" />
+				<frame x="1035" y="52" w="242" h="153" />
+				<frame x="1290" y="55" w="242" h="149" />
+				<frame x="1546" y="53" w="242" h="150" />
+				<frame x="1802" y="52" w="242" h="151" />
+			</animation>
+		</sisebuto>
 
 		<aprendiz x="13442" y="9218" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
 			<animation name="aprendizIdle" loop="true" speed="0.08f">
@@ -621,6 +627,8 @@
 			</animation>
 
 		</veterana>
+		
+		
 
 
 		<caramelos x="8098" y="6434" texturePath="Assets/Textures/itemCaramelos.png"/>
@@ -712,9 +720,45 @@
 
 			</sentences>
 		</dialogTrigger>
+		
+		<dialogTrigger x="4095" y="1632" repeat ="true">
+			<sentences>
+				<sentence name="Vagabundo"	facetexturepath="Assets/Textures/Chibi_Vagabundo.png" text="zZzZzZZZzZZZ"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="*Anda tiene una cerveza, me la voy a quedar a ver si le interesa a alguien de la taverna*"/>
+				<sentence name="Vagabundo"	facetexturepath="Assets/Textures/Chibi_Vagabundo.png" text="zZzZzZZZzZZZzZzZzZZZzZZZzZzZzZZZzZZZ"/>
 
-		
-		
+			</sentences>
+		</dialogTrigger>
+
+		<dialogTrigger x="5583" y="1488"  repeat ="true">
+			<sentences>
+				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="Aiiiiiiiiiii que mierda de vidaaaaaaaaaa, tengo un marido borracho y mi hijo se fue a descubrir mundo, que sola estoy, QUE SOLAAAAAAA"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="No serás la mujer de Sisebuto, ¿verdad?"/>
+				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="Ai no, ¿que te ha hecho ya ese condenado?"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text=" Nono nada nada, le he pedido información pero me la ha dado incompleta. Me podrías indicar donde…"/>
+				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="AAAAAAIIIIIII que sola estooooooooyyyyyy. El desgraciado de Sisebuto? No se estoy muy solaaaaa"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="*Sola y loca al parecer…*"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="Nooo, me preguntaba si…"/>
+				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="AAAAAAAAIIII que ni para indicar sirvoooooo"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="No pe…"/>
+				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="AAAAAAAAAAAA"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="No, pero… una co…"/>
+				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="AAAAAAAAAAIIIIIIIIIIIIII"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="No pero qué dónde…"/>
+				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="MUY SOLA MUY SOLAAA"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="Señora por favor, que dónde están los secuaces de AstroBark"/>
+				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="¿¿¿Señora??? ¿Tan vieja me ves? Tampoco hace falta ponerse así… que soy una señorita y estoy muy sola…"/>
+				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text=" Pero toma tu información, antes los he visto entrar al arcade pero seguro que van a la discoteca exclusiva Wawka"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="Gracias, hasta luego"/>
+				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="¿Cómo que hasta luego bombón? ¿Haces algo esta noche linda paloma? esta noche tengo casa sola… me preguntaba si…"/>
+				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="ya sabes jeje que Sisebuto nunca se pasa por casa jiji"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="*No se a que se habrá referido pero me apetecen unos bombones, ojala sean de pescadito*"/>
+
+			</sentences>
+		</dialogTrigger>
+
+
+
 		<dialogTrigger x="6239" y="2142"	  repeat ="true">
 			<sentences>
 				<sentence name="Oso Carpintero"	facetexturepath="Assets/Textures/Chibi_Oso.png" text="Se rumorea que si consigues 3 bolsas de patatas que estan por Fauna Central consegurias una recompensa"/>
@@ -733,11 +777,9 @@
 				<sentence name="Dolly"	facetexturepath="Assets/Textures/Chibi_Dolly.png" text="Valep"/>
 
 			</sentences>
-		</dialogTrigger>	
+		</dialogTrigger>
 		
-		
-
-		<dialogTrigger x="5633" y="2136" texturepath ="Chibi_Segismunda.png" repeat ="true">
+		<dialogTrigger x="5633" y="2136" repeat ="true">
 			<sentences>
 				<sentence name="Kiwi"	facetexturepath="Assets/Textures/Chibi_Kiwi.png" text="Qué lástima que dejaran de fabricar Petisuises... eso sí, parece ser que alguien escondió algunos por el mapa y que detrás de ello hay un gran tesoro..."/>
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="ALA que ricos que estaban... ¡¡¡voy a buscarlos!!! "/>
@@ -745,8 +787,34 @@
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="*tendré que correr*"/>
 
 			</sentences>
-		</dialogTrigger>	
-		
+		</dialogTrigger>
+
+
+		<dialogTrigger x="3511" y="6151" repeat ="true">
+			<sentences>
+				<sentence name="Sr.Bestia"	facetexturepath="Assets/Textures/Chibi_SenorBestia.png" text="Pasad putos pobres, que yo os doy dinero para que no déis tanto asco"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="ALA pues me quedo estos 20 PawCoins"/>
+
+			</sentences>
+		</dialogTrigger>
+
+		<dialogTrigger x="8648" y="11262" repeat ="true">
+			<sentences>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="Hola"/>
+				<sentence name="Sisebuto"	facetexturepath="Assets/Textures/Chibi_Sisebuto.png" text="Déjame en paz *burp*, a no ser que me quieras pagar otra ronda, que entonces sí te haré caso"/>
+				<sentence name="Sisebuto"	facetexturepath="Assets/Textures/Chibi_Sisebuto.png" text="..."/>
+				<sentence name="Sisebuto"	facetexturepath="Assets/Textures/Chibi_Sisebuto.png" text="ah… llevas una bebida, bien bien jeje * burp*"/>
+				<sentence name="Sisebuto"	facetexturepath="Assets/Textures/Chibi_Sisebuto.png" text="Dime, que es lo quieres saber ignorante de la vida"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="¿Conoces a Copycat? ¿Dónde está?"/>
+				<sentence name="Sisebuto"	facetexturepath="Assets/Textures/Chibi_Sisebuto.png" text="JA JA JA JA JA JA JA JA JA"/>
+				<sentence name="Sisebuto"	facetexturepath="Assets/Textures/Chibi_Sisebuto.png" text="¿Crees de verdad que si la conociera estaría aquí sentado dándome a la buena vida? *burp*"/>
+				<sentence name="Sisebuto"	facetexturepath="Assets/Textures/Chibi_Sisebuto.png" text="JA JA JA JA JA JA JA JA JA"/>
+				<sentence name="Sisebuto"	facetexturepath="Assets/Textures/Chibi_Sisebuto.png" text="En esta ciudad solo tiene esa información el superhéroe AstroBark pero para dar con él tendrás primero que hablar con sus secuaces a ver si te dan permiso"/>
+				<sentence name="Sisebuto"	facetexturepath="Assets/Textures/Chibi_Sisebuto.png" text="JODER, no has abierto la lata, paloma a ver si me va a apetecer ahora carne de paloma"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="Nooo porfavooor no me coma… y gra..gra..gracias por la información"/>
+			</sentences>
+		</dialogTrigger>
+
 		<dialogTrigger x="21415" y="8332" repeat ="true">
 			<sentences>
 				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringy.png" text="¿Qué? ¿Dónde estoy?"/>

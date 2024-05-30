@@ -84,6 +84,8 @@ bool Player::Start() {
 	texturePlayer = app->tex->Load(parameters.attribute("texturePath").as_string());
 	textureGhost = app->tex->Load(parameters.attribute("ghostTexPath").as_string());
 	
+
+	
 	currentTexture = textureGhost;
 	currentAnim = idleFrontal;
 
