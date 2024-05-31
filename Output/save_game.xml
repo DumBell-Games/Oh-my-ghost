@@ -14,7 +14,7 @@
 		<item type="1" amount="0" />
 		<item type="2" amount="0" />
 		<item type="3" amount="0" />
-		<item type="4" amount="0" />
+		<item type="4" amount="1" />
 		<item type="5" amount="0" />
 	</inventorymanager>
 	<scene />
@@ -29,6 +29,6 @@
 	<:anonymous />
 	<reload />
 	<renderer>
-		<camera x="-7289" y="-11073" />
+		<camera x="-20018" y="-1570" />
 	</renderer>
 </game_state>
