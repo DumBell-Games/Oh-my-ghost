@@ -58,8 +58,16 @@
   <object id="9" name="char3" x="137" y="124" width="46" height="46" rotation="45"/>
  </objectgroup>
  <objectgroup id="6" name="CharInfo">
-  <object id="10" template="../../UI/combat-charInfo.tx" name="characterInfo1" x="582" y="134"/>
-  <object id="11" name="characterInfo1" x="599" y="627.5" width="360" height="100"/>
+  <object id="10" name="characterInfo1" x="582" y="134" width="360" height="100">
+   <properties>
+    <property name="orientation" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="11" name="characterInfo1" x="1004.33" y="634.167" width="360" height="100">
+   <properties>
+    <property name="orientation" type="int" value="0"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="7" name="CharacterPositions">
   <object id="12" name="enemyPivot" x="1232" y="414">

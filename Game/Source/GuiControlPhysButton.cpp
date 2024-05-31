@@ -20,8 +20,10 @@ GuiControlPhysButton::GuiControlPhysButton(uint32 id, GuiControlType type, SDL_R
 	}
 	case GuiControlType::PHYSBUTTON_BOX:
 	default:
+	{
 		pb = app->physics->CreateRectangle(bounds.x, bounds.y, bounds.w, bounds.y, STATIC);
 		break;
+	}
 	}
 	pb->body->GetFixtureList()[0].SetSensor(true);
 	pb->ctype = ColliderType::GUI;
@@ -36,6 +38,7 @@ GuiControlPhysButton::~GuiControlPhysButton()
 
 bool GuiControlPhysButton::Update(float dt)
 {
+	//TODO move physbody to camera-relative position
 
 	if (state != GuiControlState::DISABLED)
 	{
@@ -44,9 +47,9 @@ bool GuiControlPhysButton::Update(float dt)
 		if (state != GuiControlState::NON_CLICKABLE)
 		{
 			app->input->GetMousePosition(mouseX, mouseY);
-			for (b2Fixture* f = pbody->body->GetFixtureList(); f; f = f->GetNext())
+			bool notified = false;
+			for (b2Fixture* f = pbody->body->GetFixtureList(); f && !notified; f = f->GetNext())
 			{
-				// mouseX and mouseY are updated in GuiManager
 				if (f->TestPoint(b2Vec2(PIXEL_TO_METERS(mouseX), PIXEL_TO_METERS(mouseY))))
 				{
 					KeyState k = app->input->GetMouseButtonDown(SDL_BUTTON_LEFT);
@@ -57,8 +60,10 @@ bool GuiControlPhysButton::Update(float dt)
 					else 
 					{
 						state = GuiControlState::FOCUSED;
-						if (k == KEY_UP)
+						if (k == KEY_UP) {
 							NotifyMouseClick();
+							notified = true;
+						}
 					}
 				}
 				else
@@ -70,7 +75,7 @@ bool GuiControlPhysButton::Update(float dt)
 
 		// Render
 
-		if (bgTexture)
+		if (bgTexture.get())
 		{
 			SDL_Texture* toDraw = (state != GuiControlState::PRESSED) ? bgTextureClicked.get() : bgTexture.get();
 			app->render->DrawTexture(toDraw, bounds.x, bounds.y, nullptr, 1.0F, pbody->GetRotation(), bounds.w / 2, bounds.h / 2, false);
@@ -91,7 +96,7 @@ bool GuiControlPhysButton::Update(float dt)
 			break;
 		}
 
-		if (fgTexture)
+		if (fgTexture.get())
 		{
 			app->render->DrawTexture(fgTexture.get(), bounds.x, bounds.y, nullptr, 1.0F, pbody->GetRotation(), bounds.w/2, bounds.h/2, false);
 		}

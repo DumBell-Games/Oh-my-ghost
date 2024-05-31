@@ -218,6 +218,13 @@ bool CombatManager::CleanUp()
 		menu.clear();
 	}
 
+	if (app->guiManager->guiControlsList.Count()>0)
+	for (GuiControl* g : guiElements)
+	{
+		app->guiManager->DestroyGuiControl(g);
+	}
+	guiElements.clear();
+
 	 // Unpauses the entityManager and allows player movement
 	if (((Module*)app->entityManager)->paused)
 		((Module*)app->entityManager)->Pause();
@@ -264,8 +271,8 @@ bool CombatManager::LoadLayout(pugi::xml_node layoutRoot)
 				SDL_Rect rect;
 				rect.x = itemNode.attribute("x").as_int();
 				rect.y = itemNode.attribute("y").as_int();
-				rect.w = itemNode.attribute("w").as_int();
-				rect.h = itemNode.attribute("h").as_int();
+				rect.w = itemNode.attribute("width").as_int();
+				rect.h = itemNode.attribute("height").as_int();
 
 				GuiControlType buttonShape = GuiControlType::PHYSBUTTON_BOX;
 
@@ -326,6 +333,7 @@ bool CombatManager::LoadLayout(pugi::xml_node layoutRoot)
 			}
 		}
 
+		// Carga posicion de personajes
 		else if (strcmp(objLayer.attribute("name").as_string(), "CharacterPositions") == 0)
 		{
 			for (pugi::xml_node itemNode = objLayer.child("object"); itemNode != NULL; itemNode = itemNode.next_sibling("object"))
@@ -342,6 +350,25 @@ bool CombatManager::LoadLayout(pugi::xml_node layoutRoot)
 				}
 			}
 		}
+	
+		// Carga posicion de barras de vida
+		else if (strcmp(objLayer.attribute("name").as_string(), "CharInfo") == 0)
+		{
+			int id = 0;
+			for (pugi::xml_node itemNode = objLayer.child("object"); itemNode != NULL; itemNode = itemNode.next_sibling("object"))
+			{
+				SDL_Rect bounds;
+				bounds.x = itemNode.attribute("x").as_int();
+				bounds.y = itemNode.attribute("y").as_int();
+				bounds.w = itemNode.attribute("width").as_int(20);
+				bounds.h = itemNode.attribute("height").as_int(20);
+
+				GuiControl* g = app->guiManager->CreateGuiControl(GuiControlType::PROGRESS_BAR, id++, "HP", bounds, (Module*)nullptr);
+
+				guiElements.push_back(g);
+			}
+		}
+
 	}
 
 
@@ -554,7 +581,7 @@ void CombatManager::HandleMenu()
 			}
 			// Los otros menus se vuelven invisibles, menos el principal que simplemente se impide hacer clic
 			else
-				g->state = (i == 0) ? GuiControlState::NON_CLICKABLE : GuiControlState::DISABLED;
+				g->state = GuiControlState::DISABLED;//(i == 0) ? GuiControlState::NON_CLICKABLE : GuiControlState::DISABLED;
 			j++;
 		}
 		i++;

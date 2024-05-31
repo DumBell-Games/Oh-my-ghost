@@ -4,6 +4,7 @@
 
 #include "GuiControlButton.h"
 #include "GuiControlPhysButton.h"
+#include "GuiCombatHP.h"
 #include "Audio.h"
 
 GuiManager::GuiManager(bool startEnabled) : Module(startEnabled)
@@ -40,6 +41,10 @@ GuiControl* GuiManager::CreateGuiControl(GuiControlType type, int id, const char
 	{
 		guiControl = new GuiControlPhysButton(id, type, bounds, text);
 		break;
+	}
+	case GuiControlType::PROGRESS_BAR:
+	{
+		guiControl = new GuiCombatHP(id, bounds, text);
 	}
 	}
 

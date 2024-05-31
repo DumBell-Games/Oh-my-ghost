@@ -159,6 +159,9 @@ private:
 
 	std::mt19937 rng;
 
+	// Elementos generales de UI
+	std::vector<GuiControl*> guiElements;
+
 	// Gestion de menu
 	std::vector<std::vector<GuiControl*>> menuList;
 	Menus currentMenu = Menus::MAIN;
