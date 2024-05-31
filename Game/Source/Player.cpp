@@ -105,7 +105,7 @@ bool Player::Start() {
 	arcadeOut = app->physics->CreateRectangleSensor(14849 + 128, 9600 + 64, 256, 128, bodyType::KINEMATIC);
 	arcadeOut->ctype = ColliderType::ARCADEOUT;
 
-	cieloOut = app->physics->CreateRectangleSensor(21529 - 96, 9150 + 64, 256, 128, bodyType::KINEMATIC);
+	cieloOut = app->physics->CreateRectangleSensor(21529 - 96, 8681 + 64, 256, 128, bodyType::KINEMATIC);
 	cieloOut->ctype = ColliderType::CIELOOUT;
 
 	mansionIn = app->physics->CreateRectangleSensor(10394 + 128, 531 + 64, 256, 128, bodyType::KINEMATIC);
