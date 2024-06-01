@@ -622,17 +622,7 @@ void Player::OutCollision(PhysBody* physA, PhysBody* physB) {
 	}
 }
 
-bool Player::LoadState(pugi::xml_node& node)
-{
 
-	return true;
-}
-
-bool Player::SaveState(pugi::xml_node& node)
-{
-	
-	return true;
-}
 
 void Player::SetPosition(iPoint newPos)
 {
@@ -652,4 +642,42 @@ Animation* Player::GetAnimation(SString name)
 	}
 	return nullptr;
 }
+bool Player::LoadState(pugi::xml_node& node)
+{
+	int x = node.attribute("x").as_int();
+	int y = node.attribute("y").as_int();
+	SetPosition(iPoint(x, y)); 
 
+	casinoIN = node.attribute("casinoIN").as_bool();
+	casinoOUT = node.attribute("casinoOUT").as_bool();
+	tabernaIN = node.attribute("tabernaIN").as_bool();
+	tabernaOUT = node.attribute("tabernaOUT").as_bool();
+	arcadeIN = node.attribute("arcadeIN").as_bool();
+	arcadeOUT = node.attribute("arcadeOUT").as_bool();
+	palomaTouched = node.attribute("palomaTouched").as_bool();
+	despachoIN = node.attribute("despachoIN").as_bool();
+	despachoOUT = node.attribute("despachoOUT").as_bool();
+	cervezaPicked = node.attribute("cervezaPicked").as_bool();
+
+	return true;
+}
+
+bool Player::SaveState(pugi::xml_node& node)
+{
+	pugi::xml_node playerNode = node;
+
+	playerNode.append_attribute("x").set_value(position.x);
+	playerNode.append_attribute("y").set_value(position.y);
+	playerNode.append_attribute("casionIN").set_value(casinoIN);
+	playerNode.append_attribute("casionOUT").set_value(casinoOUT);
+	playerNode.append_attribute("tabernaIN").set_value(tabernaIN);
+	playerNode.append_attribute("tabernaOUT").set_value(tabernaOUT);
+	playerNode.append_attribute("arcadeIN").set_value(arcadeIN);
+	playerNode.append_attribute("arcadeOUT").set_value(arcadeOUT);
+	playerNode.append_attribute("palomaTouched").set_value(palomaTouched);
+	playerNode.append_attribute("despachoIN").set_value(despachoIN);
+	playerNode.append_attribute("despachoOUT").set_value(despachoOUT);
+	playerNode.append_attribute("cervezaPicked").set_value(cervezaPicked);
+
+	return true;
+}

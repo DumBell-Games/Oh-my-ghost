@@ -162,9 +162,9 @@ Entity* EntityManager::CreateEntity(EntityType type, pugi::xml_node& data)
 	case EntityType::ENEMY:
 		entity = new Enemy();
 		break;
-	case EntityType::TRANSITION:
+	/*case EntityType::TRANSITION:
 		entity = new TransitionTrigger();
-		break;
+		break;*/
 	case EntityType::COLA:
 		entity = new Cola();
 		break;
@@ -260,12 +260,57 @@ bool EntityManager::PostUpdate()
 	return ret;
 }
 
+
 bool EntityManager::LoadState(pugi::xml_node node) {
 
-	return true;
+	// Eliminar todas las entidades actuales
+	ListItem<Entity*>* item = entities.end;
+	while (item != nullptr) {
+		item->data->CleanUp();
+		RELEASE(item->data);
+		item = item->prev;
+	}
+	entities.Clear();
+
+	// Iterar a través de los nodos de entidad guardados
+	for (pugi::xml_node entityNode = node.child("entity"); entityNode; entityNode = entityNode.next_sibling("entity")) {
+		// Obtener el tipo de la entidad
+		EntityType type = val2enum(entityNode.attribute("type").as_int());
+
+		// Crear la entidad
+		Entity* entity = CreateEntity(type, entityNode);
+		if (entity == nullptr) {
+			LOG("Could not create entity from saved state");
+			return false;
+		}
+
+		// Llamar a LoadState para que la entidad cargue su propio estado
+		if (!entity->LoadState(entityNode)) {
+			LOG("Could not load entity state");
+			return false;
+		}
+
+		// Llamar a Awake y Start si el EntityManager ya fue despertado e iniciado
+		if (entity->active) {
+			if (awoken) entity->Awake();
+			if (started) entity->Start();
+		}
+	}
 }
 
 bool EntityManager::SaveState(pugi::xml_node node) {
+	bool ret = true;
+	bool playerStateSaved = true; // Variable para asegurar que el estado del jugador se guarda solo una vez
+
+	for (ListItem<Entity*>* entity = entities.start; entity; entity = entity->next)
+	{
+		ret = entity->data->SaveState(node.append_child("entity"));
+		if (!ret) {
+			return false;
+		}
+	}
+
+	
 	
 	return true;
 }

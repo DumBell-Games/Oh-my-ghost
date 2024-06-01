@@ -72,12 +72,13 @@ bool Scene::Awake(pugi::xml_node config)
 
 	//L03: DONE 3b: Instantiate the player using the entity manager
 	//L04 DONE 7: Get player paremeters
-	player = (Player*) app->entityManager->CreateEntity(EntityType::PLAYER, config.child("player"));
+	Player* player  = (Player*) app->entityManager->CreateEntity(EntityType::PLAYER, config.child("player"));
 	//Assigns the XML node to a member in player
 	//player->config = config.child("player");
 
 	// iterate all items in the scene
 	// Check https://pugixml.org/docs/quickstart.html#access
+
 	
 	for (pugi::xml_node itemNode = config.child("cola"); itemNode; itemNode = itemNode.next_sibling("cola"))
 	{
@@ -266,8 +267,11 @@ bool Scene::Update(float dt)
 	}
 
 	// L14: DONE 3: Request App to Load / Save when pressing the keys F5 (save) / F6 (load)
-	if (app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN) app->SaveRequest();
-	if (app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN) app->LoadRequest();
+	if (app->input->GetKey(SDL_SCANCODE_F8) == KEY_DOWN) {
+		app->SaveRequest(); 
+		
+	}
+	if (app->input->GetKey(SDL_SCANCODE_F9) == KEY_DOWN) app->LoadRequest();
 	if (app->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN) fullscreen = true;
 	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) fullscreen = false;
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
@@ -347,7 +351,7 @@ bool Scene::PostUpdate()
 		app->pause->active = true;
 		app->pause->CreatePauseButtons();*/
 
-		app->fadeToBlack->FadeToBlackTransition((Module*)app->scene, (Module*)app->pause, 0.0f);
+		
 	}
 
 

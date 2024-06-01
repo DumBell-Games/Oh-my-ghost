@@ -7,6 +7,7 @@
 #include "Render.h"
 #include "PropertiesStruct.h"
 #include "Textures.h"
+#include "EnumUtils.h"
 
 enum class EntityType : char
 {
@@ -76,15 +77,7 @@ public:
 		return true;
 	}
 
-	virtual bool LoadState(pugi::xml_node&)
-	{
-		return true;
-	}
-
-	virtual bool SaveState(pugi::xml_node&)
-	{
-		return true;
-	}
+	
 
 	void Entity::Enable()
 	{
@@ -116,7 +109,19 @@ public:
 	{
 		position = newPos;
 	}
+	virtual bool LoadState(pugi::xml_node& node)
+	{
+		node.append_attribute("type").set_value(enum2val(type));
+		return true;
+	}
 
+	virtual bool SaveState(pugi::xml_node& node)
+	{
+		node.append_attribute("type").set_value(enum2val(type));
+		node.append_attribute("X").set_value(position.x);
+		node.append_attribute("Y").set_value(position.y);
+		return true;
+	}
 
 
 public:

@@ -6,7 +6,53 @@
 	<audio />
 	<physics />
 	<map />
-	<entitymanager />
+	<entitymanager>
+		<entity x="21691" y="8118" casionIN="false" casionOUT="false" tabernaIN="false" tabernaOUT="false" arcadeIN="false" arcadeOUT="false" palomaTouched="false" despachoIN="false" despachoOUT="false" cervezaPicked="false" />
+		<entity type="6" X="3332" Y="6220" />
+		<entity type="6" X="793" Y="3553" />
+		<entity type="6" X="5409" Y="1312" />
+		<entity type="9" X="8098" Y="6434" />
+		<entity type="9" X="2723" Y="806" />
+		<entity type="9" X="6565" Y="2337" />
+		<entity type="8" X="5409" Y="4772" />
+		<entity type="8" X="3487" Y="3107" />
+		<entity type="8" X="5278" Y="2343" />
+		<entity type="2" X="7200" Y="6177" />
+		<entity type="2" X="8025" Y="6164" />
+		<entity type="2" X="13572" Y="9218" />
+		<entity type="2" X="15112" Y="8286" />
+		<entity type="2" X="13431" Y="8406" />
+		<entity type="2" X="13343" Y="7664" />
+		<entity type="2" X="1900" Y="12292" />
+		<entity type="2" X="1985" Y="10750" />
+		<entity type="2" X="3665" Y="10821" />
+		<entity type="2" X="4095" Y="1632" />
+		<entity type="2" X="5583" Y="1488" />
+		<entity type="2" X="6239" Y="2142" />
+		<entity type="2" X="6239" Y="1488" />
+		<entity type="2" X="5633" Y="2136" />
+		<entity type="2" X="3511" Y="6151" />
+		<entity type="2" X="8648" Y="11262" />
+		<entity type="2" X="21415" Y="8332" />
+		<entity type="11" X="7212" Y="6161" />
+		<entity type="12" X="13554" Y="9202" />
+		<entity type="12" X="13412" Y="8400" />
+		<entity type="12" X="13325" Y="7648" />
+		<entity type="13" X="3654" Y="10805" />
+		<entity type="13" X="1967" Y="10734" />
+		<entity type="3" X="750" Y="472" />
+		<entity type="14" X="21196" Y="8590" />
+		<entity type="14" X="21331" Y="7700" />
+		<entity type="14" X="15096" Y="7476" />
+		<entity type="16" X="20984" Y="1778" />
+		<entity type="17" X="5617" Y="1522" />
+		<entity type="19" X="4129" Y="1616" />
+		<entity type="22" X="3545" Y="6185" />
+		<entity type="20" X="6223" Y="1522" />
+		<entity type="21" X="6216" Y="2114" />
+		<entity type="24" X="5617" Y="2119" />
+		<entity type="18" X="8682" Y="11296" />
+	</entitymanager>
 	<combat />
 	<guiManager />
 	<inventorymanager>
