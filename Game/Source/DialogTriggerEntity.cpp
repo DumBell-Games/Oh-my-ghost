@@ -71,23 +71,23 @@ bool DialogTrigger::Start() {
 	//Cargar dialogos
 	for (pugi::xml_node itemNode = parameters.child("sentences").child("sentence"); itemNode; itemNode = itemNode.next_sibling("sentence"))
 	{
-		dialogues.Add(app->dialogManager->CreateDialogs(itemNode, parameters.attribute("name").as_string(), faceTexturePath, fontTarget.c_str(), 0, parameters.attribute("mapid").as_int()));
+		dialogues.Add(app->dialogManager->CreateDialogs(itemNode, parameters.attribute("name").as_string(), faceTexturePath.GetString(), fontTarget.c_str(), 0, parameters.attribute("mapid").as_int()));
 	}
 
 	//Si el dialogo se reite, cargar las lineas que se repite
 	if (repeatDialog) {
 		for (pugi::xml_node itemNode = parameters.child("repeat_sentences").child("sentence"); itemNode; itemNode = itemNode.next_sibling("sentence"))
 		{
-			dialoguesRepeat.Add(app->dialogManager->CreateDialogs(itemNode, parameters.attribute("name").as_string(), faceTexturePath, fontTarget.c_str()));
+			dialoguesRepeat.Add(app->dialogManager->CreateDialogs(itemNode, parameters.attribute("name").as_string(), faceTexturePath.GetString(), fontTarget.c_str()));
 		}
 	}
 
 
 	//initilize textures
-	texture = app->tex->LoadSP(texturePath, true);
+	texture = app->tex->LoadSP(texturePath.GetString(), true);
 
 	if (faceTexturePath != "") {
-		faceTexture = app->tex->LoadSP(faceTexturePath, true);
+		faceTexture = app->tex->LoadSP(faceTexturePath.GetString(), true);
 	}
 
 	pbody = app->physics->CreateRectangleSensor(position.x, position.y, 150, 256, bodyType::KINEMATIC);
@@ -102,7 +102,8 @@ bool DialogTrigger::Start() {
 
 bool DialogTrigger::Update(float dt)
 {
-	app->render->DrawTexture(texture.get(), position.x, position.y);
+	if (texture.get())
+		app->render->DrawTexture(texture.get(), position.x, position.y);
 
 	return true;
 }
@@ -150,18 +151,18 @@ void DialogTrigger::PlayDialog()
 	Dialog* pDialog = nullptr;
 
 	if (orderedDialogs.size() > 0) {
-		//DialogGroup* dg = app->dialogManager->GetDialogs(orderedDialogs[currentDialog]);
-		//
-		////Guard clause
-		//if (dg == nullptr) return;
+		DialogGroup* dg = app->dialogManager->GetDialogs(orderedDialogs[currentDialog]);
+		
+		//Guard clause
+		if (dg == nullptr) return;
 
-		//app->dialogManager->PlayDialog(dg);
+		app->dialogManager->PlayDialog(dg);
 
-		// for (item = dg->dialogs.start; item != NULL; item = item->next)
-		// {
-		// 	pDialog = item->data;
-		// 	app->dialogManager->AddDialog(pDialog);
-		// }
+		//for (item = dg->dialogs.start; item != NULL; item = item->next)
+		//{
+		//	pDialog = item->data;
+		//	app->dialogManager->AddDialog(pDialog);
+		//}
 		played = true;
 		currentDialog++;
 		if (currentDialog >= orderedDialogs.size())

@@ -108,6 +108,14 @@ bool DialogManager::AddDialog(Dialog* dialog)
 	return true;
 }
 
+void DialogManager::PlayDialog(DialogGroup* dg)
+{
+	for (ListItem<Dialog*>* item = dg->dialogs.start; item; item++)
+	{
+		AddDialog(item->data);
+	}
+}
+
 bool DialogManager::ShowDialog(Dialog* dialog)
 {
 	//Mostrar fondo
@@ -370,4 +378,11 @@ void DialogManager::EventManager(DialogEvent actualEvent, DialogEvent eventToAct
 				eventToActivate = DialogEvent::NO_EVENT;
 			}
 	}
+}
+
+DialogGroup* DialogManager::GetDialogs(int id)
+{
+	if (IN_RANGE(id, 0, dialogGroups.Count() - 1))
+		return dialogGroups[id];
+	else return nullptr;
 }
