@@ -27,7 +27,7 @@ bool Video::CleanUp()
 
 void Video::Initialize(char* path)
 {
-	app->win->SetTitle("Video Player");
+	
 	OpenAVI(path);                  // Open The AVI File
 }
 
@@ -90,7 +90,7 @@ bool Video::GrabAVIFrame()
 		return false;
 	}
 
-	app->render->DrawTexture(texture, 0, 0, NULL);
+	app->render->DrawTexture(texture, 0, 0, NULL, SDL_FLIP_VERTICAL);
 
 	if (i % 2 == 0)
 	{

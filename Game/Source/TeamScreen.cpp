@@ -41,7 +41,7 @@ TeamScreen::~TeamScreen()
 // Called before render is available
 bool TeamScreen::Start()
 {
-    logoScreenTex = app->tex->Load("Assets/Screens/TeamLogo.png");
+    //logoScreenTex = app->tex->Load("Assets/Screens/TeamLogo.png");
 
     app->video->Initialize("Assets/Videos/animacionlogo.avi");
 
@@ -68,10 +68,11 @@ bool TeamScreen::Update(float dt)
         app->video->GrabAVIFrame();
 
     }
+
 	// dumbellAnim.Update();
 	// IAnimationPath.Update();
 
-    if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
+    if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN || app->video->isVideoFinished)
     {
         app->fadeToBlack->FadeToBlackTransition((Module*)app->teamScreen, (Module*)app->introScreen, 0.0f);
 
