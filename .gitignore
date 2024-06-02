@@ -1,3 +1,6 @@
+#Avi files
+*.avi
+
 # Prerequisites
 *.d
 
@@ -82,3 +85,4 @@ ipch/
 packages/
 /Output/Assets/Animation/Aprendiz_Astrobark/AprendizAstroBark_SpriteSheet
 /Output/Assets/Animation/Springy/springyFantasma
+/Output/Assets/Videos

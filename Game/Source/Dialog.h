@@ -88,6 +88,8 @@ public:
 	int id;
 	int mapId;
 
+	shared_texture_t background_tex = nullptr;
+
 	//Texturas
 	shared_texture_t face_tex = nullptr;
 	const char* face_tex_path;

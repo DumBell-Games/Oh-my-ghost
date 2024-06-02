@@ -45,6 +45,8 @@ public:
 
 public:
 
+	bool canMove = true;
+
 	//L02: DONE 2: Declare player parameters
 	float speed = 0.2f;
 	SDL_Texture* texturePlayer = NULL;
@@ -117,10 +119,9 @@ public:
 	Animation* torbellinoF;
 	Animation* cambioCuerpoF;
 	Animation* idleFrontalF;
-
-	Timer timeToIdle;
-
+	
 	bool cervezaPicked = false;
+
 	
 };
 

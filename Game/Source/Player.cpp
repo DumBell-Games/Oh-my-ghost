@@ -11,6 +11,7 @@
 #include "Map.h"
 #include "TransitionTrigger.h"
 #include "Window.h"
+#include "DialogManager.h"
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -150,7 +151,15 @@ bool Player::Start() {
 }
 
 bool Player::Update(float dt)
-{	
+{
+	if (app->dialogManager->isPlaying) {
+		canMove = false;
+		pBody->body->SetType(b2_staticBody);
+	}
+	else {
+		canMove = true;
+		pBody->body->SetType(b2_dynamicBody);
+	}
 	if (currentTexture == texturePlayer && currentAnim != cambioCuerpo && currentAnim != cambioCuerpoF)
 	{
 		currentAnim = idleFrontal;
@@ -190,16 +199,27 @@ bool Player::Update(float dt)
 	}
 	//L03: DONE 4: render the player texture and modify the position of the player using WSAD keys and render the texture
 	
-	fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
-	KeyState sprint = app->input->GetButton(BACK);
-	float speed = (sprint == KEY_REPEAT) ? 0.5f : 0.2f;
+	
+	if (canMove) {
+		fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
+		KeyState sprint = app->input->GetButton(BACK);
+		float speed = (sprint == KEY_REPEAT) ? 0.5f : 0.2f;	
+		
+		b2Vec2 impulse = b2Vec2_zero;
 
-	if (joystick.x != 0 || joystick.y != 0)
-	{
-		timeToIdle.Start();
+		impulse.x += speed * joystick.x * dt;
+		impulse.y += speed * joystick.y * dt;
+
+		pBody->body->SetLinearVelocity(impulse);
+		
+		b2Transform pBodyPos = pBody->body->GetTransform();
+
+		position.x = METERS_TO_PIXELS(pBodyPos.p.x) - 32 / 2;
+		position.y = METERS_TO_PIXELS(pBodyPos.p.y) - 32 / 2;
+
 	}
 
-	if (app->input->GetButton(ControlID::UP) == KEY_REPEAT)
+	if (app->input->GetButton(ControlID::UP) == KEY_REPEAT && canMove)
 	{
 		if (currentTexture == texturePlayer)
 		{
@@ -223,7 +243,7 @@ bool Player::Update(float dt)
 		}
 	}
 
-	if (app->input->GetButton(ControlID::DOWN) == KEY_REPEAT)
+	if (app->input->GetButton(ControlID::DOWN) == KEY_REPEAT && canMove)
 	{
 		if (currentTexture == texturePlayer)
 		{
@@ -247,7 +267,7 @@ bool Player::Update(float dt)
 		}
 	}
 
-	if (app->input->GetButton(ControlID::LEFT) == KEY_REPEAT)
+	if (app->input->GetButton(ControlID::LEFT) == KEY_REPEAT && canMove)
 	{
 		if (currentTexture == texturePlayer)
 		{
@@ -271,7 +291,7 @@ bool Player::Update(float dt)
 		}
 	}
 
-	if (app->input->GetButton(ControlID::RIGHT) == KEY_REPEAT)
+	if (app->input->GetButton(ControlID::RIGHT) == KEY_REPEAT && canMove)
 	{
 		if (currentTexture == texturePlayer)
 		{
@@ -294,18 +314,6 @@ bool Player::Update(float dt)
 			}
 		}
 	}
-	
-	b2Vec2 impulse = b2Vec2_zero;
-	
-	impulse.x += speed * joystick.x * dt;
-	impulse.y += speed * joystick.y * dt;
-
-	pBody->body->SetLinearVelocity(impulse);
-	
-	b2Transform pBodyPos = pBody->body->GetTransform();
-	
-	position.x = METERS_TO_PIXELS(pBodyPos.p.x) - 32 / 2;     
-	position.y = METERS_TO_PIXELS(pBodyPos.p.y) - 32 / 2;
 
 	
 	uint w, h;
@@ -347,6 +355,7 @@ bool Player::Update(float dt)
 	if (cieloOUT)
 	{
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(8025), PIXEL_TO_METERS(6164)), NULL);
+		
 		currentAnim = vomito;
 		currentAnim->Update();
 		if (vomito->HasFinished())
@@ -397,7 +406,7 @@ bool Player::Update(float dt)
 
 bool Player::PostUpdate()
 {
-	app->render->DrawTexture(currentTexture, position.x - 48, position.y - 110, &currentAnim->GetCurrentFrame());
+	app->render->DrawTexture(currentTexture, position.x - 56, position.y - 220, &currentAnim->GetCurrentFrame());
 
 	return true;
 }
