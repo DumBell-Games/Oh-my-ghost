@@ -21,6 +21,7 @@
 #include "InventoryManager.h"
 #include "InventoryScreen.h"
 #include "Character_Menu.h"
+#include "Video.h"
 
 #include "DialogManager.h"
 
@@ -67,6 +68,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	dialogManager = new DialogManager(false);
 
 	fadeToBlack = new FadeToBlack(true);
+	video = new Video(false);
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -92,6 +94,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(console);
 	AddModule(dialogManager);
 	AddModule(fadeToBlack);
+	AddModule(video);
 
 	AddModule(reload);
 

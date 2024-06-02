@@ -68,7 +68,7 @@ bool DialogManager::CleanUp()
 	return ret;
 }
 
-Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, const char* faceTexturePath, const char* font, int id, int mapID)
+Dialog* DialogManager::CreateDialogs(pugi::xml_node itemNode, std::string name, const char* faceTexturePath, const char* font, int id, int mapID)
 {
 	//Dialogo a crear
 	Dialog* dialog = new Dialog(itemNode.attribute("text").as_string());
@@ -88,14 +88,14 @@ Dialog* DialogManager::CreateDialog(pugi::xml_node itemNode, std::string name, c
 		//Options1
 		dialog->option1 = itemNode.child("option1").attribute("text").as_string();
 		for (pugi::xml_node optionNode = itemNode.child("option1").child("sentence"); optionNode; optionNode = optionNode.next_sibling("sentence")) {
-			Dialog* dialogOp1 = CreateDialog(optionNode, name, faceTexturePath, font, id);
+			Dialog* dialogOp1 = CreateDialogs(optionNode, name, faceTexturePath, font, id);
 			dialog->options1.Add(dialogOp1);
 		}
 
 		//Options2
 		dialog->option2 = itemNode.child("option2").attribute("text").as_string();
 		for (pugi::xml_node optionNode = itemNode.child("option2").child("sentence"); optionNode; optionNode = optionNode.next_sibling("sentence")) {
-			Dialog* dialogOp2 = CreateDialog(optionNode, name, faceTexturePath, font, id);
+			Dialog* dialogOp2 = CreateDialogs(optionNode, name, faceTexturePath, font, id);
 			dialog->options2.Add(dialogOp2);
 		}
 	}

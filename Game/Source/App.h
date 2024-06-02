@@ -35,6 +35,7 @@ class Physics;
 class GuiManager;
 class DialogManager;
 class FadeToBlack;
+class Video;
 
 class App
 {
@@ -141,6 +142,7 @@ public:
 	GuiManager* guiManager;
 	DialogManager* dialogManager;
 	FadeToBlack* fadeToBlack;
+	Video* video;
 
 
 private:

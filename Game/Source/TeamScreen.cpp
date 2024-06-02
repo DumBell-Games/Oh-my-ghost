@@ -12,6 +12,7 @@
 #include "IntroScreen.h"
 #include "menu.h"
 #include "Scene.h"
+#include "Video.h"
 
 
 TeamScreen::TeamScreen(bool startEnabled) : Module(startEnabled)
@@ -41,6 +42,8 @@ TeamScreen::~TeamScreen()
 bool TeamScreen::Start()
 {
     logoScreenTex = app->tex->Load("Assets/Screens/TeamLogo.png");
+
+    //app->video->Initialize("Assets/Videos/animacionlogo.avi");
 
     app->render->camera.x = 0;
     app->render->camera.y = 0;
@@ -76,9 +79,14 @@ bool TeamScreen::Update(float dt)
 
 bool TeamScreen::PostUpdate()
 {
-    
+    app->video->Initialize("Assets/Videos/animacionlogo.avi"); 
+    if (!app->video->isVideoFinished)
+    {
+        app->video->GrabAVIFrame();
+
+    }
     // app->render->DrawTexture(logoScreenTex, 0, 0,  &IAnimationPath.GetCurrentAnimation()->GetCurrentFrame(), 1.0f);   
-    app->render->DrawTexture(logoScreenTex, 0, 0);
+    //app->render->DrawTexture(logoScreenTex, 0, 0);
 	
 
 
@@ -98,6 +106,8 @@ bool TeamScreen::CleanUp()
         app->tex->UnLoad(logoScreenTex);
         logoScreenTex = nullptr;
     }
+
+    app->video->CloseAVI();
 
     return true;
 }
