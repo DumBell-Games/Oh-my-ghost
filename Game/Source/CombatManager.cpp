@@ -388,7 +388,7 @@ bool CombatManager::LoadLayout(pugi::xml_node layoutRoot)
 
 
 
-	// TODO terminar de importar el layout de combate
+	// TODO terminar de importar el layout de combate si falta algo
 
 
 

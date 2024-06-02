@@ -20,15 +20,17 @@ AnimationSet::~AnimationSet()
 }
 
 void AnimationSet::SetAnimation(SString name) {
-	for (size_t i = 0; i < animations.size(); i++)
+	bool found = false;
+	for (size_t i = 0; i < animations.size() && !found; i++)
 	{
 		if (animations[i].name == name)
 		{
 			activeAnimation = i;
 			GetCurrent().Reset();
-			break;
 		}
 	}
+	if (!found)
+		LOG("Animation \"%s\" not found", name.GetString());
 }
 
 // Loads a set of animations from an XML-formatted TexturePacker sprite sheet

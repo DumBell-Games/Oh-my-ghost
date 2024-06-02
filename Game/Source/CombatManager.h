@@ -181,7 +181,7 @@ private:
 	int nuevoAliadoActivo = -1;
 	Atac* ataqueEnemigo = nullptr;
 
-	// Animation sets and positions
+	// Animation sets and positions (+ defaults if no layout found)
 
 	iPoint playerPos = { 200,1080 };
 	iPoint enemyPos = { 1300, 300 };
@@ -189,7 +189,10 @@ private:
 	AnimationSet* playerAnims = nullptr;
 	AnimationSet* enemyAnims = nullptr;
 
+	// Texturas de combate
+
 	shared_texture_t bgTexture = nullptr;
+	shared_texture_t atkMenuTexture = nullptr;
 
 	int turn = 0;
 
