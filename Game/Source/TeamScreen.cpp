@@ -43,7 +43,7 @@ bool TeamScreen::Start()
 {
     logoScreenTex = app->tex->Load("Assets/Screens/TeamLogo.png");
 
-    //app->video->Initialize("Assets/Videos/animacionlogo.avi");
+    app->video->Initialize("Assets/Videos/animacionlogo.avi");
 
     app->render->camera.x = 0;
     app->render->camera.y = 0;
@@ -63,7 +63,11 @@ bool TeamScreen::Start()
 // Called each loop iteration
 bool TeamScreen::Update(float dt)
 {
+    if (!app->video->isVideoFinished)
+    {
+        app->video->GrabAVIFrame();
 
+    }
 	// dumbellAnim.Update();
 	// IAnimationPath.Update();
 
@@ -79,7 +83,7 @@ bool TeamScreen::Update(float dt)
 
 bool TeamScreen::PostUpdate()
 {
-    app->video->Initialize("Assets/Videos/animacionlogo.avi"); 
+    //app->video->Initialize("Assets/Videos/animacionlogo.avi"); 
     if (!app->video->isVideoFinished)
     {
         app->video->GrabAVIFrame();
