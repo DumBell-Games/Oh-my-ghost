@@ -15,6 +15,7 @@
 #include <string>
 #include <vector>
 #include "GuiControlPhysButton.h"
+#include "GuiCombatHP.h"
 
 CombatManager::CombatManager(bool startEnabled) : Module(startEnabled)
 {
@@ -203,9 +204,6 @@ bool CombatManager::CleanUp()
 	RELEASE(playerAnims);
 	RELEASE(enemyAnims);
 
-	data.enemy = nullptr;
-	RELEASE(dummyEnemy); // Datos usados con el comando "debugcombat"
-
 	currentMenu = Menus::MAIN;
 	currentElement = 0;
 	for (std::vector<GuiControl*>& menu : menuList)
@@ -231,6 +229,10 @@ bool CombatManager::CleanUp()
 	//Unpauses map so it renders again
 	if (((Module*)app->map)->paused)
 		((Module*)app->map)->Pause();
+
+	// Enemigo debe ser liberado al final para evitar problemas con elementos de GUI que usan valores del propio enemigo
+	data.enemy = nullptr;
+	RELEASE(dummyEnemy); // Datos usados con el comando "debugcombat"
 
 	return true;
 }
@@ -363,7 +365,19 @@ bool CombatManager::LoadLayout(pugi::xml_node layoutRoot)
 				bounds.w = itemNode.attribute("width").as_int(20);
 				bounds.h = itemNode.attribute("height").as_int(20);
 
-				GuiControl* g = app->guiManager->CreateGuiControl(GuiControlType::PROGRESS_BAR, id++, "HP", bounds, (Module*)nullptr);
+				GuiCombatHP* g = (GuiCombatHP*)app->guiManager->CreateGuiControl(GuiControlType::PROGRESS_BAR, id++, "HP", bounds, (Module*)nullptr);
+				if (strcmp(itemNode.attribute("name").as_string(), "playerHP") == 0)
+				{
+					g->trackedValue = &data.allies[data.activeAlly]->salutActual;
+					g->maxValue = data.allies[data.activeAlly]->salutTotal;
+					
+				}
+				else if (strcmp(itemNode.attribute("name").as_string(), "enemyHP") == 0)
+				{
+					g->trackedValue = &data.enemy->salutActual;
+					g->maxValue = data.enemy->salutTotal;
+				}
+					
 
 				guiElements.push_back(g);
 			}
@@ -686,7 +700,7 @@ void CombatManager::DoAttack(Personatge* attacker, Personatge* defender, Atac* m
 	if (defender->activeStatus)
 		defender->activeStatus->ApplyToAttack(defenderDefMult, defenderAtkMult);
 	if (!attackInterrupted) {
-		int finalAtk = ((float)(attacker->atac * move->potencia * attackerAtkMult) / (float)(25 * defender->defensa * defenderDefMult)); // damage = [(atk*pow*atkMultiplier)/(25*def*defMultiplier)]
+		int finalAtk = ((float)(attacker->atac * move->potencia * attackerAtkMult) / (float)(5 * defender->defensa * defenderDefMult)); // damage = [(atk*pow*atkMultiplier)/(25*def*defMultiplier)]
 		defender->rebreDanys(finalAtk);
 	}
 

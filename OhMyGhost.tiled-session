@@ -2,9 +2,9 @@
     "activeFile": "Output/Assets/Screens/Combat/CombatLayout.tmx",
     "expandedProjectPaths": [
         "Output/Assets/Maps",
-        "Output/Assets",
         "Output",
-        "."
+        ".",
+        "Output/Assets"
     ],
     "fileStates": {
         "Output/Assets/Maps/mapaLPA.tmx": {
@@ -76,10 +76,10 @@
         },
         "Output/Assets/Screens/Combat/CombatLayout.tmx": {
             "scale": 0.75,
-            "selectedLayer": 6,
+            "selectedLayer": 5,
             "viewCenter": {
-                "x": 903.3333333333333,
-                "y": 671.3333333333333
+                "x": 902,
+                "y": 670
             }
         }
     },

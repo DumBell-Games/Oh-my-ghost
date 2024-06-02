@@ -15,6 +15,8 @@ public:
 public:
 
 	int* trackedValue;
+	int maxValue = 100;
+	int minValue = 0;
 
 	SDL_Rect hpBarBounds;
 

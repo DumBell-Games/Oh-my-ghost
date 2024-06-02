@@ -38,7 +38,9 @@ GuiControlPhysButton::~GuiControlPhysButton()
 
 bool GuiControlPhysButton::Update(float dt)
 {
-	//TODO move physbody to camera-relative position
+	// TODO move physbody to camera-relative position
+	// bounds variable is relative to camera
+	pbody->body->SetTransform({ (float)(-app->render->camera.x + bounds.x), (float)(-app->render->camera.y + bounds.y) }, pbody->GetRotation());
 
 	if (state != GuiControlState::DISABLED)
 	{
