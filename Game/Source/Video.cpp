@@ -76,7 +76,7 @@ bool Video::GrabAVIFrame()
 				- biBitCount holds the depht in bits and is contained in the LPBITMAPINFOHEADER structure
 				- pitch is the length of a row of pixels in bytes (widht x 3)
 	*/	
-	SDL_Surface* surface = SDL_CreateRGBSurfaceFrom(pdata, 1920, 1080, lpbi->biBitCount, 1920 * 3, 0, 0, 0, 0);
+	SDL_Surface* surface = SDL_CreateRGBSurfaceFrom(pdata, width, height, lpbi->biBitCount, width * 3, 0, 0, 0, 0);
 	SDL_Texture* texture = app->tex->LoadSurface(surface);
 
 	//TODO 6.1: Blit the texture of the frame.
