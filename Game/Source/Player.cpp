@@ -427,52 +427,63 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision CASINOIN");
 		casinoIN = true;
 		casinoOUT = false;
+		ciudadIN = false;
 		break;
 	case ColliderType::CASINOOUT:
 		LOG("Collision CASINOOUT");
 		casinoOUT = true;
 		casinoIN = false;
+		ciudadIN = true;
 		
 		break;
 	case ColliderType::ARCADEIN:
 		LOG("Collision ARCADEIN");
 		arcadeIN = true;
 		arcadeOUT = false;
+		ciudadIN = false;
 		break;
 	case ColliderType::ARCADEOUT:
 		LOG("Collision ARCADEOUT");
 		arcadeOUT = true;
 		arcadeIN = false;
+		ciudadIN = true;
 		break;
 	case ColliderType::TABERNAIN:
 		LOG("Collision TABERNAIN");
 		tabernaIN = true;
 		tabernaOUT = false;
+		ciudadIN = false;
 		break;
 	case ColliderType::TABERNAOUT:
 		LOG("Collision TABERNAOUT");
 		tabernaOUT = true;
 		tabernaIN = false;
+		ciudadIN = true;
 		break;
 	case ColliderType::CIELOOUT:
 		LOG("Collision CIELOOUT");
 		cieloOUT = true;
+		ciudadIN = true;
 		break;
 	case ColliderType::MANSIONIN:
 		LOG("Collision MANSIONIN");
 		mansionIN = true;
+		ciudadIN = false;
 		break;
 	case ColliderType::MANSIONOUT:
 		LOG("Collision MANSIONOUT");
 		mansionOUT = true;
+		ciudadIN = true;
 		break;
 	case ColliderType::DESPACHOIN:
 		LOG("Collision DESPACHOIN");
 		despachoIN = true;
+		ciudadIN = false;
 		break;
 	case ColliderType::DESPACHOOUT:
 		LOG("Collision DESPACHOOUT");
 		despachoOUT = true;
+		ciudadIN = false;
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");

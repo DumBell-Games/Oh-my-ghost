@@ -43,7 +43,7 @@ bool TeamScreen::Start()
 {
     //logoScreenTex = app->tex->Load("Assets/Screens/TeamLogo.png");
 
-    app->video->Initialize("Assets/Videos/animacionlogo.avi");
+    app->video->Initialize("Assets/Videos/Logo_Dumbell.avi");
 
     app->render->camera.x = 0;
     app->render->camera.y = 0;

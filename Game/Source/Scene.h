@@ -161,7 +161,12 @@ private:
 	// L15: TODO 2: Declare a GUI Control Button 
 	GuiControlButton* gcButtom;
 
-
+	const char* currentMusic;
+	const char* cieloMusic;
+	const char* tabernaMusic;
+	const char* mansionMusic;
+	const char* arcadeMusic;
+	int ciudadMusic;
 
 	bool fullscreen = false;
 };

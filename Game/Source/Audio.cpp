@@ -234,3 +234,48 @@ bool Audio::FxDown() {
 	}
 	return ret;
 }
+
+//stop specific fx
+bool Audio::StopFx(unsigned int id) {
+	bool ret = false;
+	if (!active)
+		return false;
+
+	if (id > 0 && id <= fx.Count())
+	{
+		Mix_HaltChannel(id);
+		ret = true;
+	}
+
+	return ret;
+}
+
+//resume specific fx
+bool Audio::ResumeFx(unsigned int id) {
+	bool ret = false;
+	if (!active)
+		return false;
+
+	if (id > 0 && id <= fx.Count())
+	{
+		Mix_Resume(id);
+		ret = true;
+	}
+
+	return ret;
+}
+bool Audio::UnloadMusic()
+{
+	bool ret = false;
+
+	if (!active)
+		return false;
+
+	if (music != NULL)
+	{
+		Mix_FreeMusic(music);
+		ret = true;
+	}
+
+	return ret;
+}

@@ -35,6 +35,12 @@ public:
 	// Unload WAV  
 	bool UnloadFx(unsigned int fx);
 
+	bool StopFx(unsigned int fx);
+
+	bool ResumeFx(unsigned int fx);
+
+	bool UnloadMusic();
+
 	bool MusicUp();
 
 	bool MusicDown();

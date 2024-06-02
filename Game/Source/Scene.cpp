@@ -206,8 +206,11 @@ bool Scene::Start()
 
 	// Texture to highligh mouse position 
 	mouseTileTex = app->tex->Load("Assets/Maps/tileSelection.png");
-		
-	app->audio->PlayMusic("Assets/Audio/Fx/centralFauna.wav");
+
+	cieloMusic = "Assets/Audio/Fx/cielo.wav";
+	ciudadMusic = app->audio->LoadFx("Assets/Audio/Fx/centralFauna.wav");
+
+	app->audio->PlayMusic(cieloMusic);
 
 	return true;
 }
@@ -304,7 +307,6 @@ bool Scene::Update(float dt)
 			app->scene->YogurPicked();
 		}
 	}
-	
 
 	return true;
 }
@@ -314,7 +316,12 @@ bool Scene::PostUpdate()
 {
 	bool ret = true;
 
-
+	if (player->cieloOUT)
+	{
+		app->audio->UnloadMusic();
+	}
+	if (player->ciudadIN == true) {
+	}
 
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 	{

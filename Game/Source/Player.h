@@ -44,6 +44,8 @@ public:
 	
 
 public:
+	
+	int ciudadMusic;
 
 	bool canMove = true;
 
@@ -86,6 +88,7 @@ public:
 	bool mansionOUT = false;
 	bool despachoIN = false;
 	bool despachoOUT = false;
+	bool ciudadIN = false;
 
 	List<Animation*> springyAnimationList;
 
