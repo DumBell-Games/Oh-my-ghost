@@ -45,7 +45,7 @@ bool Yogur::Start() {
 	ibody = app->physics->CreateCircle(position.x + 32, position.y + 32, 24, bodyType::STATIC);
 	ibody->ctype = ColliderType::YOGUR;
 	ibody->listener = this;
-	texture = app->tex->Load(texturePath.GetString());
+	texture = app->tex->LoadSP(texturePath, true);
 
 	
 	return true;
@@ -53,7 +53,7 @@ bool Yogur::Start() {
 
 bool Yogur::Update(float dt)
 {
-	app->render->DrawTexture(texture, position.x, position.y);
+	app->render->DrawTexture(texture.get(), position.x, position.y);
 
 	
 	if (playerContactY)
@@ -61,7 +61,7 @@ bool Yogur::Update(float dt)
 		if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
 		{
 			app->physics->DestroyBody(ibody);
-			app->tex->UnLoad(texture);
+			app->tex->UnLoadSP(texture);
 			app->entityManager->DestroyEntity(this);
             app->scene->YogurPicked();
 		}

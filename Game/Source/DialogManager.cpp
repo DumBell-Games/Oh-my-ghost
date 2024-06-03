@@ -45,7 +45,7 @@ bool DialogManager::Start() {
 	indexText = 1;
 
 
-	background_tex = app->tex->Load(background_tex_path.c_str());
+	background_tex = app->tex->LoadSP(background_tex_path.c_str(), true);
 
 	return ret;
 }
@@ -112,7 +112,7 @@ bool DialogManager::AddDialog(Dialog* dialog)
 bool DialogManager::ShowDialog(Dialog* dialog)
 {
 	//Mostrar fondo
-	app->render->DrawTexture(background_tex, dialogPosition.x, dialogPosition.y, 0, 0);
+	app->render->DrawTexture(background_tex.get(), dialogPosition.x, dialogPosition.y, 0, 0);
 
 	std::string actualText = dialog->sentence.substr(0, indexText);
 	

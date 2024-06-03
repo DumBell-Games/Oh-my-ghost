@@ -33,20 +33,20 @@ bool InventoryScreen::Start() {
 	
     buttonFx = app->audio->LoadFx("Assets/Audio/Fx/basic_click.wav");
 
-    inventory1 = app->tex->Load("Assets/Textures/InventarioCatCola.png");
-    inventory2 = app->tex->Load("Assets/Textures/InventarioCatnip.png");
-    inventory3 = app->tex->Load("Assets/Textures/InventarioPatatas.png");
-    inventory4 = app->tex->Load("Assets/Textures/InventarioYogur.png");
-    inventory5 = app->tex->Load("Assets/Textures/InventarioChuches.png");
-    inventory6 = app->tex->Load("Assets/Textures/InventarioCaramelos.png");
-    inventory7 = app->tex->Load("Assets/Textures/InventarioBirra.png");
-    inventory8 = app->tex->Load("Assets/Textures/InventarioHelado.png");
-    inventory9 = app->tex->Load("Assets/Textures/InventarioLeche.png");
-    inventory10 = app->tex->Load("Assets/Textures/InventarioVelocidad.png");
-    inventory11 = app->tex->Load("Assets/Textures/InventarioPastel.png");
-    inventory12 = app->tex->Load("Assets/Textures/InventarioMapaEnemigo.png");
-    inventory13 = app->tex->Load("Assets/Textures/InventarioMapaMazmorra.png");
-    inventory14 = app->tex->Load("Assets/Textures/InventarioUbicacion.png");
+    inventory1 = app->tex->LoadSP("Assets/Textures/InventarioCatCola.png", true);
+    inventory2 = app->tex->LoadSP("Assets/Textures/InventarioCatnip.png", true);
+    inventory3 = app->tex->LoadSP("Assets/Textures/InventarioPatatas.png", true);
+    inventory4 = app->tex->LoadSP("Assets/Textures/InventarioYogur.png", true);
+    inventory5 = app->tex->LoadSP("Assets/Textures/InventarioChuches.png", true);
+    inventory6 = app->tex->LoadSP("Assets/Textures/InventarioCaramelos.png", true);
+    inventory7 = app->tex->LoadSP("Assets/Textures/InventarioBirra.png", true);
+    inventory8 = app->tex->LoadSP("Assets/Textures/InventarioHelado.png", true);
+    inventory9 = app->tex->LoadSP("Assets/Textures/InventarioLeche.png", true);
+    inventory10 = app->tex->LoadSP("Assets/Textures/InventarioVelocidad.png", true);
+    inventory11 = app->tex->LoadSP("Assets/Textures/InventarioPastel.png", true);
+    inventory12 = app->tex->LoadSP("Assets/Textures/InventarioMapaEnemigo.png", true);
+    inventory13 = app->tex->LoadSP("Assets/Textures/InventarioMapaMazmorra.png", true);
+    inventory14 = app->tex->LoadSP("Assets/Textures/InventarioUbicacion.png", true);
 
 
     app->render->camera.x = 0;
@@ -134,20 +134,20 @@ bool InventoryScreen::Update(float dt) {
         inventoryButtons[menuIndex - 1]->NotifyMouseClick();
     }
 
-    if (menuIndex == 1) app->render->DrawTexture(inventory1, 0, 0, 0, NULL);
-    else if (menuIndex == 2) app->render->DrawTexture(inventory2, 0, 0, 0, NULL);
-    else if (menuIndex == 3) app->render->DrawTexture(inventory3, 0, 0, 0, NULL);
-    else if (menuIndex == 4) app->render->DrawTexture(inventory4, 0, 0, 0, NULL);
-    else if (menuIndex == 5) app->render->DrawTexture(inventory5, 0, 0, 0, NULL);
-    else if (menuIndex == 6) app->render->DrawTexture(inventory6, 0, 0, 0, NULL);
-    else if (menuIndex == 7) app->render->DrawTexture(inventory7, 0, 0, 0, NULL);
-    else if (menuIndex == 8) app->render->DrawTexture(inventory8, 0, 0, 0, NULL);
-    else if (menuIndex == 9) app->render->DrawTexture(inventory9, 0, 0, 0, NULL);
-    else if (menuIndex == 10) app->render->DrawTexture(inventory10, 0, 0, 0, NULL);
-    else if (menuIndex == 11) app->render->DrawTexture(inventory11, 0, 0, 0, NULL);
-    else if (menuIndex == 12) app->render->DrawTexture(inventory12, 0, 0, 0, NULL);
-    else if (menuIndex == 13) app->render->DrawTexture(inventory13, 0, 0, 0, NULL);
-    else if (menuIndex == 14) app->render->DrawTexture(inventory14, 0, 0, 0, NULL);
+    if (menuIndex == 1) app->render->DrawTexture(inventory1.get(), 0, 0, 0, NULL);
+    else if (menuIndex == 2) app->render->DrawTexture(inventory2.get(), 0, 0, 0, NULL);
+    else if (menuIndex == 3) app->render->DrawTexture(inventory3.get(), 0, 0, 0, NULL);
+    else if (menuIndex == 4) app->render->DrawTexture(inventory4.get(), 0, 0, 0, NULL);
+    else if (menuIndex == 5) app->render->DrawTexture(inventory5.get(), 0, 0, 0, NULL);
+    else if (menuIndex == 6) app->render->DrawTexture(inventory6.get(), 0, 0, 0, NULL);
+    else if (menuIndex == 7) app->render->DrawTexture(inventory7.get(), 0, 0, 0, NULL);
+    else if (menuIndex == 8) app->render->DrawTexture(inventory8.get(), 0, 0, 0, NULL);
+    else if (menuIndex == 9) app->render->DrawTexture(inventory9.get(), 0, 0, 0, NULL);
+    else if (menuIndex == 10) app->render->DrawTexture(inventory10.get(), 0, 0, 0, NULL);
+    else if (menuIndex == 11) app->render->DrawTexture(inventory11.get(), 0, 0, 0, NULL);
+    else if (menuIndex == 12) app->render->DrawTexture(inventory12.get(), 0, 0, 0, NULL);
+    else if (menuIndex == 13) app->render->DrawTexture(inventory13.get(), 0, 0, 0, NULL);
+    else if (menuIndex == 14) app->render->DrawTexture(inventory14.get(), 0, 0, 0, NULL);
     
     return true;
 }
@@ -171,83 +171,83 @@ bool InventoryScreen::CleanUp(){
 
 	if (inventory1 != nullptr)
 	{
-		app->tex->UnLoad(inventory1);
+		app->tex->UnLoadSP(inventory1);
 		inventory1 = nullptr;
 	}
 
 	if (inventory2 != nullptr)
 	{
-		app->tex->UnLoad(inventory2);
+		app->tex->UnLoadSP(inventory2);
 		inventory2 = nullptr;
 	}
 
 	if (inventory3 != nullptr)
 	{
-		app->tex->UnLoad(inventory3);
+		app->tex->UnLoadSP(inventory3);
 		inventory3 = nullptr;
 	}
 
 	if (inventory4 != nullptr)
 	{
-		app->tex->UnLoad(inventory4);
+		app->tex->UnLoadSP(inventory4);
 		inventory4 = nullptr;
 	}	
     if (inventory5 != nullptr)
     {
-        app->tex->UnLoad(inventory5);
+        app->tex->UnLoadSP(inventory5);
         inventory5 = nullptr;
     }
 
     if (inventory6 != nullptr)
     {
-        app->tex->UnLoad(inventory6);
+        app->tex->UnLoadSP(inventory6);
         inventory6 = nullptr;
     }
 
     if (inventory7 != nullptr)
     {
-        app->tex->UnLoad(inventory7);
+        app->tex->UnLoadSP(inventory7);
         inventory7 = nullptr;
     }
 
     if (inventory8 != nullptr)
     {
-        app->tex->UnLoad(inventory8);
+        app->tex->UnLoadSP(inventory8);
         inventory8 = nullptr;
     }
     if (inventory9 != nullptr)
     {
-        app->tex->UnLoad(inventory9);
+        app->tex->UnLoadSP(inventory9);
         inventory9 = nullptr;
     }
 
     if (inventory10 != nullptr)
     {
-        app->tex->UnLoad(inventory10);
+        app->tex->UnLoadSP(inventory10);
         inventory10 = nullptr;
     }
 
     if (inventory11 != nullptr)
     {
-        app->tex->UnLoad(inventory11);
+        app->tex->UnLoadSP(inventory11);
         inventory11 = nullptr;
     }
 
     if (inventory12 != nullptr)
     {
-        app->tex->UnLoad(inventory12);
+        app->tex->UnLoadSP(inventory12);
         inventory12 = nullptr;
     }
 
 	if (inventory13 != nullptr)
 	{
-		app->tex->UnLoad(inventory13);
+		app->tex->UnLoadSP(inventory13);
 		inventory13 = nullptr;
 	}
 
 	if (inventory14 != nullptr)
 	{
-		app->tex->UnLoad(inventory14);
+		app->tex->UnLoadSP(inventory14);
 		inventory14 = nullptr;
 	}
 

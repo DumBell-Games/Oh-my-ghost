@@ -42,7 +42,7 @@ bool Enemy::Awake() {
 
 bool Enemy::Start() {
 
-	texture = app->tex->Load(texturePath);
+	texture = app->tex->LoadSP(texturePath, true);
 
 	eBody = app->physics->CreateCircle(position.x + 16, position.y + 16, 16, bodyType::KINEMATIC);
 	eBody->listener = this;
@@ -56,7 +56,7 @@ bool Enemy::Update(float dt)
 	if (enemyData.salutActual <= 0)
 		active = false;
 
-	app->render->DrawTexture(texture, position.x, position.y);
+	app->render->DrawTexture(texture.get(), position.x, position.y);
 
 	b2Transform nBodyPos = eBody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;

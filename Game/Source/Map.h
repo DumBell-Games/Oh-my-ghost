@@ -29,7 +29,7 @@ struct TileSet
 	int columns;
 	int tilecount;
 
-	SDL_Texture* texture;
+	shared_texture_t texture;
 	SDL_Rect GetTileRect(int gid) const;
 };
 

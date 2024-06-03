@@ -6,6 +6,7 @@
 #include "GuiManager.h"
 #include "GuiControl.h"
 #include "Timer.h"
+#include "Textures.h"
 
 struct SDL_Texture;
 
@@ -29,10 +30,10 @@ public:
     
 public:
 
-    SDL_Texture* menu1;
-    SDL_Texture* menu2;
-    SDL_Texture* menu3;
-    SDL_Texture* menu4;
+    shared_texture_t menu1;
+    shared_texture_t menu2;
+    shared_texture_t menu3;
+    shared_texture_t menu4;
     int titleSound;
     int menuIndex = 1;
     Timer timer;

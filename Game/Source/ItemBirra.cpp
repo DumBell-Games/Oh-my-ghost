@@ -43,7 +43,7 @@ bool Birra::Start() {
 	ibody = app->physics->CreateCircle(position.x + 32, position.y + 32, 24, bodyType::STATIC);
 	ibody->ctype = ColliderType::BIRRA;
 	ibody->listener = this;
-	texture = app->tex->Load(texturePath);
+	texture = app->tex->LoadSP(texturePath, true);
 
 	
 	return true;
@@ -51,7 +51,7 @@ bool Birra::Start() {
 
 bool Birra::Update(float dt)
 {
-	app->render->DrawTexture(texture, position.x, position.y);
+	app->render->DrawTexture(texture.get(), position.x, position.y);
 
 
 	if (playerContactB)
@@ -59,7 +59,7 @@ bool Birra::Update(float dt)
 		if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
 		{
 			app->physics->DestroyBody(ibody);
-			app->tex->UnLoad(texture);
+			app->tex->UnLoadSP(texture);
 			app->entityManager->DestroyEntity(this);
 			app->scene->BirraPicked();
 			app->scene->GetPlayer()->cervezaPicked = true;

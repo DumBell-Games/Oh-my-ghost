@@ -43,7 +43,7 @@ bool Cola::Start() {
 	ibody = app->physics->CreateCircle(position.x + 32, position.y + 32, 24, bodyType::STATIC);
 	ibody->ctype = ColliderType::COLA;
 	ibody->listener = this;
-	texture = app->tex->Load(texturePath);
+	texture = app->tex->LoadSP(texturePath, true);
 
 	
 	return true;
@@ -51,14 +51,14 @@ bool Cola::Start() {
 
 bool Cola::Update(float dt)
 {
-	app->render->DrawTexture(texture, position.x, position.y);
+	app->render->DrawTexture(texture.get(), position.x, position.y);
 
 	if (playerContactCo)
 	{
 		if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
 		{
 			app->physics->DestroyBody(ibody);
-			app->tex->UnLoad(texture);
+			app->tex->UnLoadSP(texture);
 			app->entityManager->DestroyEntity(this);
 			app->scene->ColaPicked();
 		}

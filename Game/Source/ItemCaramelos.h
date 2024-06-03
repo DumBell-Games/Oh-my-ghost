@@ -38,7 +38,7 @@ public:
 private:
 
 	bool playerContactC;
-	SDL_Texture* texture;
+	shared_texture_t texture;
 	const char* texturePath;
 	uint texW, texH;
 };

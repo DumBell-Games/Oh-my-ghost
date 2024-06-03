@@ -6,6 +6,7 @@
 #include "GuiManager.h"
 #include "GuiControl.h"
 #include "Timer.h"
+#include "Textures.h"
 
 class PauseMenu : public Module
 {
@@ -58,9 +59,9 @@ public:
     int PauseIndex = 1;
     int AjustesIndex = 1;
 
-    SDL_Texture* pause1;
-    SDL_Texture* pause2;
-    SDL_Texture* pause3;
+    shared_texture_t pause1;
+    shared_texture_t pause2;
+    shared_texture_t pause3;
 
     int weigth;
     int heigth;

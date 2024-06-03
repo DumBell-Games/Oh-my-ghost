@@ -38,8 +38,8 @@ private:
 
 private:
 	bool playerContactY;
-	SDL_Texture* texture;
-	SString texturePath;
+	shared_texture_t texture;
+	const char* texturePath;
 	uint texW, texH;
 };
 

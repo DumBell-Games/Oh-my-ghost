@@ -33,10 +33,10 @@ bool TitleScreen::Start()
     buttonFx = app->audio->LoadFx("Assets/Audio/Fx/basic_click.wav");
     menuFx = app->audio->LoadFx("Assets/Audio/Fx/menuFX.wav");
     
-    menu1 = app->tex->Load("Assets/Screens/mainMenu1.jpg");
-    menu2 = app->tex->Load("Assets/Screens/mainMenu2.jpg");
-    menu3 = app->tex->Load("Assets/Screens/mainMenu3.jpg");
-    menu4 = app->tex->Load("Assets/Screens/mainMenu4.jpg");
+    menu1 = app->tex->LoadSP("Assets/Screens/mainMenu1.jpg", true);
+    menu2 = app->tex->LoadSP("Assets/Screens/mainMenu2.jpg", true);
+    menu3 = app->tex->LoadSP("Assets/Screens/mainMenu3.jpg", true);
+    menu4 = app->tex->LoadSP("Assets/Screens/mainMenu4.jpg", true);
 
     app->render->camera.x = 0;
     app->render->camera.y = 0;
@@ -140,10 +140,10 @@ bool TitleScreen::Update(float dt)
 
 bool TitleScreen::PostUpdate()
 {
-    if (menuIndex == 1) app->render->DrawTexture(menu1, 0, 0, NULL);
-    else if (menuIndex == 2) app->render->DrawTexture(menu2, 0, 0, NULL);
-    else if (menuIndex == 3) app->render->DrawTexture(menu3, 0, 0, NULL);
-    else if (menuIndex == 4) app->render->DrawTexture(menu4, 0, 0, NULL);
+    if (menuIndex == 1) app->render->DrawTexture(menu1.get(), 0, 0, NULL);
+    else if (menuIndex == 2) app->render->DrawTexture(menu2.get(), 0, 0, NULL);
+    else if (menuIndex == 3) app->render->DrawTexture(menu3.get(), 0, 0, NULL);
+    else if (menuIndex == 4) app->render->DrawTexture(menu4.get(), 0, 0, NULL);
 
     return true;
 }
@@ -153,25 +153,25 @@ bool TitleScreen::CleanUp()
 {
     if (menu1 != nullptr)
     {
-        app->tex->UnLoad(menu1);
+        app->tex->UnLoadSP(menu1);
         menu1 = nullptr;
     }
 
     if (menu2 != nullptr)
     {
-        app->tex->UnLoad(menu2);
+        app->tex->UnLoadSP(menu2);
         menu2 = nullptr;
     }
 
     if (menu3 != nullptr)
     {
-        app->tex->UnLoad(menu3);
+        app->tex->UnLoadSP(menu3);
         menu3 = nullptr;
     }
 
     if (menu4 != nullptr)
     {
-        app->tex->UnLoad(menu4);
+        app->tex->UnLoadSP(menu4);
         menu4 = nullptr;
     }
 

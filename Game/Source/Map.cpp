@@ -105,7 +105,7 @@ bool Map::Update(float dt)
                     SDL_Rect r = tileset->GetTileRect(gid);
                     iPoint pos = MapToWorld(x, y);
 
-                    app->render->DrawTexture(tileset->texture,
+                    app->render->DrawTexture(tileset->texture.get(),
                         pos.x,
                         pos.y,
                         &r);
@@ -263,7 +263,7 @@ bool Map::Unload()
 
     while (item != NULL)
     {
-        app->tex->UnLoad(item->data->texture);
+        app->tex->UnLoadSP(item->data->texture);
         RELEASE(item->data);
         item = item->next;
     }
@@ -339,7 +339,7 @@ bool Map::LoadTileSet(pugi::xml_node mapFile) {
 
         SString texPath = path;
         texPath += tileset.child("image").attribute("source").as_string();
-        set->texture = app->tex->Load(texPath.GetString());
+        set->texture = app->tex->LoadSP(texPath.GetString(), true);
 
         if (tileset.child("tile").child("animation")) {
 			LoadAnimation(tileset.child("tile"), set);

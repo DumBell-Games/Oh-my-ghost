@@ -82,8 +82,8 @@ bool Player::Start() {
 
 	PlayerStartAnims();
 	
-	texturePlayer = app->tex->Load(parameters.attribute("texturePath").as_string());
-	textureGhost = app->tex->Load(parameters.attribute("ghostTexPath").as_string());
+	texturePlayer = app->tex->LoadSP(parameters.attribute("texturePath").as_string(), true);
+	textureGhost = app->tex->LoadSP(parameters.attribute("ghostTexPath").as_string(), true);
 	
 
 	
@@ -367,7 +367,7 @@ bool Player::Update(float dt)
 	}
 	if (mansionIN || app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 	{
-		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(16386 + 128), PIXEL_TO_METERS(5743 - 64)), NULL);
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(16386 + 128), PIXEL_TO_METERS(5743)), NULL);
 		mansionIN = false;
 	}
 	if (mansionOUT)
@@ -406,7 +406,7 @@ bool Player::Update(float dt)
 
 bool Player::PostUpdate()
 {
-	app->render->DrawTexture(currentTexture, position.x - 56, position.y - 220, &currentAnim->GetCurrentFrame());
+	app->render->DrawTexture(currentTexture.get(), position.x - 56, position.y - 220, &currentAnim->GetCurrentFrame());
 
 	return true;
 }

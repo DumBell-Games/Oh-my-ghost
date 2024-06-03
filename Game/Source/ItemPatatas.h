@@ -30,16 +30,14 @@ public:
 
 public:
 	int cantidadPatatas = 0;
-	SDL_Texture* patatasQuestTex;
 	bool isPicked = false;
-
 private:
 
 	void PlayerContact();
 
 private:
 	bool playerContactP;
-	SDL_Texture* texture;
+    shared_texture_t texture;
 	const char* texturePath;
 	uint texW, texH;
 };

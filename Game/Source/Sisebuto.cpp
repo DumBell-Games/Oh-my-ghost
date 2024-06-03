@@ -55,7 +55,7 @@ bool Sisebuto::PreUpdate()
 bool Sisebuto::Update(float dt)
 {	
 	currentAnim->Update();
-	app->render->DrawTexture(texture.get(), position.x - 50, position.y - 50, &currentAnim->GetCurrentFrame());
+	app->render->DrawTexture(texture.get(), position.x - 120, position.y - 120, &currentAnim->GetCurrentFrame());
 
 	b2Transform nBodyPos = nBody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;

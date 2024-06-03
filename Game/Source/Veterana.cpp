@@ -35,7 +35,7 @@ bool Veterana::Start() {
 
 	VeteranaStartAnims();
  
-	texture = app->tex->Load(parameters.attribute("texturePath").as_string());
+	texture = app->tex->LoadSP(parameters.attribute("texturePath").as_string(), true);
 		
 	nBody = app->physics->CreateRectangle(position.x + 128, position.y, 140, 240, bodyType::KINEMATIC);
 	//haz que el rectangulo no rote
@@ -49,7 +49,7 @@ bool Veterana::Start() {
 bool Veterana::Update(float dt)
 {	
 	veteranaIdle->Update();
-	app->render->DrawTexture(texture, position.x - 48, position.y - 120, &veteranaIdle->GetCurrentFrame());
+	app->render->DrawTexture(texture.get(), position.x - 48, position.y - 120, &veteranaIdle->GetCurrentFrame());
 	
 	b2Transform nBodyPos = nBody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;
@@ -60,6 +60,7 @@ bool Veterana::Update(float dt)
 
 bool Veterana::CleanUp()
 {
+
 	return true;
 }
 

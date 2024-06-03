@@ -30,11 +30,11 @@ bool PauseMenu::Awake() {
 
 bool PauseMenu::Start() {
 
-  buttonFx = app->audio->LoadFx("Assets/Audio/Fx/basic_click.wav");
+      buttonFx = app->audio->LoadFx("Assets/Audio/Fx/basic_click.wav");
 
-  pause1 = app->tex->Load("Assets/Screens/ContinuarSelect_Pausa.png");
-  pause2 = app->tex->Load("Assets/Screens/OpcionesSelect_Pausa.png");
-  pause3 = app->tex->Load("Assets/Screens/SalirSelect_Pausa.png");
+      pause1 = app->tex->LoadSP("Assets/Screens/ContinuarSelect_Pausa.png", true);
+      pause2 = app->tex->LoadSP("Assets/Screens/OpcionesSelect_Pausa.png", true);
+      pause3 = app->tex->LoadSP("Assets/Screens/SalirSelect_Pausa.png", true);
 
     app->render->camera.x = 0;
 	app->render->camera.y = 0;
@@ -145,9 +145,9 @@ bool PauseMenu::PostUpdate() {
     if (inpause == true) {
         weigth = screenWidth - 700;
       
-        if (PauseIndex == 1) app->render->DrawTexture(pause1, weigth, 0, 0, NULL);
-        else if (PauseIndex == 2) app->render->DrawTexture(pause2, weigth, 0, 0, NULL);
-        else if (PauseIndex == 3) app->render->DrawTexture(pause3, weigth, 0, 0, NULL);
+        if (PauseIndex == 1) app->render->DrawTexture(pause1.get(), weigth, 0, 0, NULL);
+        else if (PauseIndex == 2) app->render->DrawTexture(pause2.get(), weigth, 0, 0, NULL);
+        else if (PauseIndex == 3) app->render->DrawTexture(pause3.get(), weigth, 0, 0, NULL);
     }
 
 	return true;
@@ -159,19 +159,19 @@ bool PauseMenu::CleanUp(){
 
         if (pause1 != nullptr)
         {
-            app->tex->UnLoad(pause1);
+            app->tex->UnLoadSP(pause1);
             pause1 = nullptr;
         }
 
         if (pause2 != nullptr)
         {
-            app->tex->UnLoad(pause2);
+            app->tex->UnLoadSP(pause2);
             pause2 = nullptr;
         }
 
         if (pause3 != nullptr)
         {
-            app->tex->UnLoad(pause3);
+            app->tex->UnLoadSP(pause3);
             pause3 = nullptr;
         }
     }

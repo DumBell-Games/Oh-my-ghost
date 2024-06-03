@@ -21,9 +21,9 @@ void Combat::Iniciar() {
 	distribucion = distribucionTemp;
 
 	// Temp -> referencia de textura per parametre	
-	text_pika = app->tex->Load("../Output/Assets/Textures/Pika.png");	
+	/*text_pika = app->tex->Load("../Output/Assets/Textures/Pika.png");	
 	text_dia = app->tex->Load("../Output/Assets/Textures/Dia.png");
-	text_background = app->tex->Load("../Output/Assets/Textures/BackgroundCombat2.png");
+	text_background = app->tex->Load("../Output/Assets/Textures/BackgroundCombat2.png");*/
 
 	rectWin = { 0,0, (int)app->win->width, (int)app->win->height };
 	rectPika = { 200,400, 200,200 };

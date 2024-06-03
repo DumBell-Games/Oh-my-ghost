@@ -190,8 +190,7 @@ bool Scene::Awake(pugi::xml_node config)
 bool Scene::Start()
 {
 	// NOTE: We have to avoid the use of paths in the code, we will move it later to a config file
-	img = app->tex->Load("Assets/Textures/test.png"); 
-	
+		
 	//Music is commented so that you can add your own music
 	//app->audio->PlayMusic("Assets/Audio/Music/music_spy.ogg");
 
@@ -205,7 +204,7 @@ bool Scene::Start()
 	textPosY = (float)windowH / 2 - (float)texH / 2;
 
 	// Texture to highligh mouse position 
-	mouseTileTex = app->tex->Load("Assets/Maps/tileSelection.png");
+	
 
 	cieloMusic = "Assets/Audio/Fx/cielo.wav";
 	ciudadMusic = app->audio->LoadFx("Assets/Audio/Fx/centralFauna.wav");

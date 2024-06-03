@@ -22,7 +22,7 @@ Character_Menu::~Character_Menu()
 }
 
 bool Character_Menu::Start() {
-	character_Menu = app->tex->Load("Assets/Textures/Character menu.png");
+	character_Menu = app->tex->LoadSP("Assets/Textures/Character menu.png", true);
 
 	app->render->camera.x = 0;
 	app->render->camera.y = 0;
@@ -39,7 +39,7 @@ bool Character_Menu::PreUpdate() {
 	return true;
 }
 bool Character_Menu::Update(float dt) {
-	app->render->DrawTexture(character_Menu, 0, 0, 0, NULL);
+	app->render->DrawTexture(character_Menu.get(), 0, 0, 0, NULL);
 
 	nivel.Create("%d", nive);
 	ataque.Create("%d", ataqu);
@@ -73,7 +73,7 @@ bool Character_Menu::PostUpdate() {
 }
 bool Character_Menu::CleanUp() {
 
-	app->tex->UnLoad(character_Menu);
+	app->tex->UnLoadSP(character_Menu);
 	character_Menu = nullptr;
 	
 	return true;

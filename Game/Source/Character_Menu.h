@@ -7,6 +7,7 @@
 #include "GuiControl.h"
 #include "Timer.h"
 #include "Enemic.h"
+#include "Textures.h"
 
 class Character_Menu : public Module
 {
@@ -32,7 +33,7 @@ public:
 	int screenWidth;
 	int screenHeight;
 
-	SDL_Texture* character_Menu;
+	shared_texture_t character_Menu;
 
 	SString nivel;
 	SString vida_maxima;

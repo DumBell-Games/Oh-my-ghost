@@ -81,7 +81,7 @@ private:
 
 	//Para el funcionamiento
 
-	SDL_Texture* background_tex;
+	shared_texture_t background_tex;
 	std::string background_tex_path;
 	int indexText;
 	Timer charTimer;
