@@ -14,21 +14,22 @@
 		<item type="1" amount="0" />
 		<item type="2" amount="0" />
 		<item type="3" amount="0" />
-		<item type="4" amount="1" />
+		<item type="4" amount="0" />
 		<item type="5" amount="0" />
 	</inventorymanager>
 	<scene />
 	<inventory />
 	<:anonymous />
 	<titlescreen />
-	<introScreen />
+	<:anonymous />
 	<teamScreen />
 	<vsync />
 	<debugconsole />
 	<dialogmanager />
 	<:anonymous />
+	<video />
 	<reload />
 	<renderer>
-		<camera x="-20018" y="-1570" />
+		<camera x="-7084" y="-11548" />
 	</renderer>
 </game_state>

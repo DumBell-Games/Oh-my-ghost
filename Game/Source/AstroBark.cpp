@@ -55,7 +55,7 @@ bool Astrobark::PreUpdate()
 bool Astrobark::Update(float dt)
 {	
 	currentAnim->Update();
-	app->render->DrawTexture(texture.get(), position.x - 95, position.y - 90, &currentAnim->GetCurrentFrame());
+	app->render->DrawTexture(texture.get(), position.x - 128, position.y - 128, &currentAnim->GetCurrentFrame());
 
 	b2Transform nBodyPos = nBody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;

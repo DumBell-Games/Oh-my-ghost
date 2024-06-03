@@ -49,7 +49,7 @@ bool Aprendiz::Start() {
 bool Aprendiz::Update(float dt)
 {	
 	aprendizIdle->Update();
-	app->render->DrawTexture(texture.get(), position.x - 24, position.y - 56, &aprendizIdle->GetCurrentFrame());
+	app->render->DrawTexture(texture.get(), position.x - 50, position.y - 120, &aprendizIdle->GetCurrentFrame());
 	
 	b2Transform nBodyPos = nBody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;	

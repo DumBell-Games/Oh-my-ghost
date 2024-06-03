@@ -49,7 +49,7 @@ bool Veterana::Start() {
 bool Veterana::Update(float dt)
 {	
 	veteranaIdle->Update();
-	app->render->DrawTexture(texture, position.x - 24, position.y - 56, &veteranaIdle->GetCurrentFrame());
+	app->render->DrawTexture(texture, position.x - 48, position.y - 120, &veteranaIdle->GetCurrentFrame());
 	
 	b2Transform nBodyPos = nBody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;

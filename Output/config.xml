@@ -543,15 +543,15 @@
 
 		<aprendiz x="13442" y="9218" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
 			<animation name="aprendizIdle" loop="true" speed="0.08f">
-				<frame x="5	" y="35" w="117" h="186" />
-				<frame x="138" y="36" w="108" h="185" />
-				<frame x="270" y="40" w="101" h="182" />
-				<frame x="401" y="42" w="96" h="178" />
-				<frame x="528" y="44" w="96" h="178" />
-				<frame x="655" y="42" w="97" h="179" />
-				<frame x="782" y="40" w="102" h="181" />
-				<frame x="906" y="38" w="108" h="184" />
-				<frame x="1031" y="35" w="116" h="185" />
+				<frame x="0	" y="0" w="128" h="256" />
+				<frame x="128" y="0" w="128" h="256" />
+				<frame x="256" y="0" w="128" h="256" />
+				<frame x="384" y="0" w="128" h="256" />
+				<frame x="512" y="0" w="128" h="256" />
+				<frame x="640" y="0" w="128" h="256" />
+				<frame x="768" y="0" w="128" h="256" />
+				<frame x="896" y="0" w="128" h="256" />
+				<frame x="1024" y="0" w="128" h="256" />
 
 			</animation>
 
@@ -559,15 +559,15 @@
 		
 		<aprendiz x="13301" y="8416" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
 			<animation name="aprendizIdle" loop="true" speed="0.08f">
-				<frame x="5	" y="35" w="117" h="186" />
-				<frame x="138" y="36" w="108" h="185" />
-				<frame x="270" y="40" w="101" h="182" />
-				<frame x="401" y="42" w="96" h="178" />
-				<frame x="528" y="44" w="96" h="178" />
-				<frame x="655" y="42" w="97" h="179" />
-				<frame x="782" y="40" w="102" h="181" />
-				<frame x="906" y="38" w="108" h="184" />
-				<frame x="1031" y="35" w="116" h="185" />
+				<frame x="0	" y="0" w="128" h="256" />
+				<frame x="128" y="0" w="128" h="256" />
+				<frame x="256" y="0" w="128" h="256" />
+				<frame x="384" y="0" w="128" h="256" />
+				<frame x="512" y="0" w="128" h="256" />
+				<frame x="640" y="0" w="128" h="256" />
+				<frame x="768" y="0" w="128" h="256" />
+				<frame x="896" y="0" w="128" h="256" />
+				<frame x="1024" y="0" w="128" h="256" />
 
 			</animation>
 
@@ -575,15 +575,72 @@
 		
 		<aprendiz x="13213" y="7664" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
 			<animation name="aprendizIdle" loop="true" speed="0.08f">
-				<frame x="5	" y="35" w="117" h="186" />
-				<frame x="138" y="36" w="108" h="185" />
-				<frame x="270" y="40" w="101" h="182" />
-				<frame x="401" y="42" w="96" h="178" />
-				<frame x="528" y="44" w="96" h="178" />
-				<frame x="655" y="42" w="97" h="179" />
-				<frame x="782" y="40" w="102" h="181" />
-				<frame x="906" y="38" w="108" h="184" />
-				<frame x="1031" y="35" w="116" h="185" />
+				<frame x="0	" y="0" w="128" h="256" />
+				<frame x="128" y="0" w="128" h="256" />
+				<frame x="256" y="0" w="128" h="256" />
+				<frame x="384" y="0" w="128" h="256" />
+				<frame x="512" y="0" w="128" h="256" />
+				<frame x="640" y="0" w="128" h="256" />
+				<frame x="768" y="0" w="128" h="256" />
+				<frame x="896" y="0" w="128" h="256" />
+				<frame x="1024" y="0" w="128" h="256" />
+			</animation>
+
+		</aprendiz>
+		
+		<aprendiz x="16400" y="5650" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="aprendizIdle" loop="true" speed="0.08f">
+				<frame x="0	" y="0" w="128" h="256" />
+				<frame x="128" y="0" w="128" h="256" />
+				<frame x="256" y="0" w="128" h="256" />
+				<frame x="384" y="0" w="128" h="256" />
+				<frame x="512" y="0" w="128" h="256" />
+				<frame x="640" y="0" w="128" h="256" />
+				<frame x="768" y="0" w="128" h="256" />
+				<frame x="896" y="0" w="128" h="256" />
+				<frame x="1024" y="0" w="128" h="256" />
+			</animation>
+
+		</aprendiz>
+		<aprendiz x="17229" y="3908" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="aprendizIdle" loop="true" speed="0.08f">
+				<frame x="0	" y="0" w="128" h="256" />
+				<frame x="128" y="0" w="128" h="256" />
+				<frame x="256" y="0" w="128" h="256" />
+				<frame x="384" y="0" w="128" h="256" />
+				<frame x="512" y="0" w="128" h="256" />
+				<frame x="640" y="0" w="128" h="256" />
+				<frame x="768" y="0" w="128" h="256" />
+				<frame x="896" y="0" w="128" h="256" />
+				<frame x="1024" y="0" w="128" h="256" />
+			</animation>
+
+		</aprendiz>
+		<aprendiz x="18420" y="4550" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="aprendizIdle" loop="true" speed="0.08f">
+				<frame x="0	" y="0" w="128" h="256" />
+				<frame x="128" y="0" w="128" h="256" />
+				<frame x="256" y="0" w="128" h="256" />
+				<frame x="384" y="0" w="128" h="256" />
+				<frame x="512" y="0" w="128" h="256" />
+				<frame x="640" y="0" w="128" h="256" />
+				<frame x="768" y="0" w="128" h="256" />
+				<frame x="896" y="0" w="128" h="256" />
+				<frame x="1024" y="0" w="128" h="256" />
+			</animation>
+
+		</aprendiz>
+		<aprendiz x="15145" y="3853" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="aprendizIdle" loop="true" speed="0.08f">
+				<frame x="0	" y="0" w="128" h="256" />
+				<frame x="128" y="0" w="128" h="256" />
+				<frame x="256" y="0" w="128" h="256" />
+				<frame x="384" y="0" w="128" h="256" />
+				<frame x="512" y="0" w="128" h="256" />
+				<frame x="640" y="0" w="128" h="256" />
+				<frame x="768" y="0" w="128" h="256" />
+				<frame x="896" y="0" w="128" h="256" />
+				<frame x="1024" y="0" w="128" h="256" />
 			</animation>
 
 		</aprendiz>
@@ -625,8 +682,56 @@
 			</animation>
 		</veterana>
 		
+		<veterana x="15423" y="3070" texturePath="Assets/Textures/VeteranaAstrobark_SpritesSheet.png">
+			<animation name="veteranaIdle" loop="true" speed="0.08f">
+				<frame x="0" y="0" w="128" h="256" />
+				<frame x="128" y="0" w="128" h="256" />
+				<frame x="256" y="0" w="128" h="256" />
+				<frame x="384" y="0" w="128" h="256" />
+				<frame x="512" y="0" w="128" h="256" />
+				<frame x="640" y="0" w="128" h="256" />
+				<frame x="768" y="0" w="128" h="256" />
+				<frame x="896" y="0" w="128" h="256" />
+				<frame x="1024" y="0" w="128" h="256" />
+				<frame x="1152" y="0" w="128" h="256" />
+				<frame x="1280" y="0" w="128" h="256" />
+				<frame x="1408" y="0" w="128" h="256" />
+			</animation>
+		</veterana>
 		
-
+		<veterana x="16447" y="3070" texturePath="Assets/Textures/VeteranaAstrobark_SpritesSheet.png">
+			<animation name="veteranaIdle" loop="true" speed="0.08f">
+				<frame x="0" y="0" w="128" h="256" />
+				<frame x="128" y="0" w="128" h="256" />
+				<frame x="256" y="0" w="128" h="256" />
+				<frame x="384" y="0" w="128" h="256" />
+				<frame x="512" y="0" w="128" h="256" />
+				<frame x="640" y="0" w="128" h="256" />
+				<frame x="768" y="0" w="128" h="256" />
+				<frame x="896" y="0" w="128" h="256" />
+				<frame x="1024" y="0" w="128" h="256" />
+				<frame x="1152" y="0" w="128" h="256" />
+				<frame x="1280" y="0" w="128" h="256" />
+				<frame x="1408" y="0" w="128" h="256" />
+			</animation>
+		</veterana>
+		
+		<veterana x="19007" y="3324" texturePath="Assets/Textures/VeteranaAstrobark_SpritesSheet.png">
+			<animation name="veteranaIdle" loop="true" speed="0.08f">
+				<frame x="0" y="0" w="128" h="256" />
+				<frame x="128" y="0" w="128" h="256" />
+				<frame x="256" y="0" w="128" h="256" />
+				<frame x="384" y="0" w="128" h="256" />
+				<frame x="512" y="0" w="128" h="256" />
+				<frame x="640" y="0" w="128" h="256" />
+				<frame x="768" y="0" w="128" h="256" />
+				<frame x="896" y="0" w="128" h="256" />
+				<frame x="1024" y="0" w="128" h="256" />
+				<frame x="1152" y="0" w="128" h="256" />
+				<frame x="1280" y="0" w="128" h="256" />
+				<frame x="1408" y="0" w="128" h="256" />
+			</animation>
+		</veterana>
 
 		<caramelos x="8098" y="6434" texturePath="Assets/Textures/itemCaramelos.png"/>
 		<caramelos x="2723" y="806" texturePath="Assets/Textures/itemCaramelos.png"/>
@@ -844,8 +949,108 @@
 				<sentence name="Deidad"    facetexturepath="Assets/Textures/Chibi_Deidad.png" text="Si. Derrotala y volverás al mundo terrenal"/>
 				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringy.png" text="Voy a por tí patatuda"/>
 			</sentences>
-		</dialogTrigger>	
+		</dialogTrigger>
 
+		<dialogTrigger x="16525" y="5650" repeat ="true">
+			<sentences>
+				<sentence name="Aprendiz 1" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="¿¿¿¡¡¡COMO!!!??? Se nos ha colado una paloma en la mansión, no puede ser."/>
+				<sentence name="Aprendiz 1" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Sal de aquí ahora mismo si no quieres cabrear al jefe."/>
+				<sentence name="Springy"     facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Si yo solo quiero tener información de Copycat..."/>
+				<sentence name="Springy"     facetexturepath="Assets/Textures/ChibiSpringyP.png" text="...lo que pasa que aquí me lo ponéis muy difícil"/>
+				<sentence name="Aprendiz 1" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Pues no te preocupes que yo también te lo pondré difícil JAJAJA"/>
+				<sentence name="Aprendiz 1" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="pero vaya que para llegar a él necesitarás encontrar la llave de su habitación"/>
+				<sentence name="Aprendiz 1" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Y solo él sabe dónde está"/>
+				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¡Seguro que la encontraré!"/>
+				<sentence name="Aprendiz 1"     facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Eso si consigues pasar de mí…"/>
+			</sentences>
+		</dialogTrigger>
+
+		<dialogTrigger x="17350" y="3908" repeat ="true">
+			<sentences>
+				<sentence name="Aprendiz 2" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Mierda, he metido la negra sin querer..."/>
+				<sentence name="Aprendiz 2" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="¿Qué miras paloma?"/>
+				<sentence name="Aprendiz 2" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="¿No querrás que use tu cabeza como bola verdad?"/>
+				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Nooo, solamente quería saber si has visto una llave"/>
+				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Dejame ver si debajo de alguna bola de aquí esta…"/>
+				<sentence name="Aprendiz 1" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="¿PERO QUÉ HACES?"/>
+				<sentence name="Aprendiz 1" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="YA ME HAS JODIDO TODA LA PARTIDA RATA VOLADORA"/>
+			</sentences>
+		</dialogTrigger>
+
+		<dialogTrigger x="18550" y="4550" repeat ="true">
+			<sentences>
+				<sentence name="Aprendiz 3" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text=" A, ante, bajo, con, contra, de, desde…"/>
+				<sentence name="Aprendiz 3" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Perdona..."/>
+				<sentence name="Aprendiz 3"     facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="ALA YA ME HE PERDIDO *golpea el sofá*"/>
+				<sentence name="Aprendiz 3"     facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Encima me he jodido una uña agghhh"/>
+				<sentence name="Aprendiz 3" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="¿Qué quieres?"/>
+				<sentence name="Springy" facetexturepath="Assets/Textures//ChibiSpringyP.png" text="Estaba buscando una llave, ¿la has visto?"/>
+				<sentence name="Aprendiz 3" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="¿Me ves con cara de saber dónde narices podría haber una llave en esta mansión tan grande?"/>
+				<sentence name="Aprendiz 3" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Anda déjame estudiar los proverbios en paz"/>
+				<sentence name="Springy" facetexturepath="Assets/Textures//ChibiSpringyP.png" text="Se llaman preposiciones por cierto"/>
+				<sentence name="Aprendiz 3" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Ya está, me he cansado, ven que te doy con el libro"/>
+				<sentence name="Springy" facetexturepath="Assets/Textures//ChibiSpringyP.png" text="Aiiii"/>
+			</sentences>
+		</dialogTrigger>
+
+		<dialogTrigger x="15075" y="3853" repeat ="true">
+			<sentences>
+				<sentence name="Aprendiz 4" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Qué aburrido es vigilar la escalera… "/>
+				<sentence name="Aprendiz 4" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="A la próxima tengo que irme a perrear al Wawka... así me distraigo un poco"/>
+				<sentence name="Aprendiz 4" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="¿Pero que miras paloma? No sé ni cómo has entrado"/>
+				<sentence name="Springy"    facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Ui perdón, a veces dejo la mirada perdida sin querer jeje"/>
+				<sentence name="Springy"    facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="¿A qué me dejas pasar buen amigo?"/>
+				<sentence name="Aprendiz 4" facetexturepath="Assets/Textures//ChibiSpringyP.png" text="Muy astuto palomón pero por aquí no pasa ni Dios"/>
+			</sentences>
+		</dialogTrigger>
+
+		<dialogTrigger x="15423" y="3190" repeat ="true">
+			<sentences>
+				<sentence name="Veterana 1" facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Que patéticos que son los aprendices"/>
+				<sentence name="Veterana 1" facetexturepath="Assets/Textures/Chibi_Veterana.png" text="no aguantan ni un rasguño… me tendré que encargar de todo yo"/>
+				<sentence name="Veterana 1" facetexturepath="Assets/Textures/Chibi_Veterana.png" text="como siempre..."/>
+				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringyP.png"  text="Noooooo, con lo fácil que es el diálogo"/>
+			</sentences>
+		</dialogTrigger>
+
+		<dialogTrigger x="16447" y="3190" repeat ="true">
+			<sentences>
+				<sentence name="Veterana 2" facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Vaya veo que has conseguido superar a mi compañera"/>
+				<sentence name="Veterana 2" facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Yo no soy tan debilucha, conmigo no podrás"/>
+				<sentence name="Springy"    facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Jolín, ¿no habrá nadie pacífico por aquí?."/>
+				<sentence name="Veterana 2" facetexturepath="Assets/Textures/ChibiSpringyP.png"  text="Pues yo seguro que no JAJA"/>
+			</sentences>
+		</dialogTrigger>
+
+		<dialogTrigger x="19007" y="3434" repeat ="true">
+			<sentences>
+				<sentence name="Veterana 3" facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Última oportunidad, o te retiras o tendrás que visitar al doctor"/>
+				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Por qué será tan complicado hablar con este señor?"/>
+				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Una ingeniería química se ve más fácil…"/>
+				<sentence name="Veterana 3" facetexturepath="Assets/Textures/Chibi_Veterana.png"  text="Oye pues yo conozco a uno que le está costando la vida hacer esa carrera, es chunga"/>
+				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¿A si? La verdad es que no tiene pinta de fácil para nada no…"/>
+				<sentence name="Veterana 3" facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Pues no…"/>
+				<sentence name="Veterana 3" facetexturepath="Assets/Textures/Chibi_Veterana.png" text="¿Pero qué narices hago yo hablando de esto contigo? Te voy a dar una paliza"/>
+			</sentences>
+		</dialogTrigger>
+
+		<dialogTrigger x="21000" y="1795" repeat ="true">
+			<sentences>
+				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Vaya, vaya…"/>
+				<sentence name="AstroBark"    facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Así que tu eres la paloma que ha estado dando problemas a mis secuaces, ¿no?"/>
+				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Si yo no quería causar ningún problema"/>
+				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png"  text="Yo solo quería y quiero información de Copycat"/>
+				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Que no la encuentro por ningún lado"/>
+				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Pues yo podría darte toda esta información, ya que soy el amo y señor de Central Fauna"/>
+				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Pero no te resultará nada fácil conseguirla, es un secreto de las altas esferas"/>
+				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¿Podría conseguir esa información haciendo algún encargo para ti?"/>
+				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="JAJAJAJA"/>
+				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="¿Crees que con unos simples encargos podrás obtener esa información?"/>
+				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¿Qué tendría que hacer para saber todo lo que necesito?"/>
+				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Pues sería una cosa “Muy Sencilla”, al menos para mí"/>
+				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Derrótame en combate con tus habilidades de paloma"/>
+			</sentences>
+		</dialogTrigger>
 	</scene>
 					
 
