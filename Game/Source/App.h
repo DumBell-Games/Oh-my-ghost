@@ -36,6 +36,13 @@ class GuiManager;
 class DialogManager;
 class FadeToBlack;
 class Video;
+class MusicaCiudad;
+class MusicaCielo;
+class MusicaMansion;
+class MusicaCasino;
+class MusicaTaberna;
+class MusicaDiscoteca;
+
 
 class App
 {
@@ -143,6 +150,13 @@ public:
 	DialogManager* dialogManager;
 	FadeToBlack* fadeToBlack;
 	Video* video;
+	MusicaCiudad* musicaCiudad;
+	MusicaCielo* musicaCielo;
+	MusicaCasino* musicaCasino;
+	MusicaDiscoteca* musicaDisco;
+	MusicaMansion* musicaMansion;
+	MusicaTaberna* musicaTaberna;
+			
 
 
 private:

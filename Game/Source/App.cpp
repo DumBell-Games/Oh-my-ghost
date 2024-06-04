@@ -22,6 +22,15 @@
 #include "InventoryScreen.h"
 #include "Character_Menu.h"
 #include "Video.h"
+#include "MusicaCiudad.h"
+#include "MusicaCielo.h"
+#include "MusicaCasino.h"
+#include "MusicaDiscoteca.h"
+#include "MusicaMansion.h"
+#include "MusicaTaberna.h"
+
+
+
 
 #include "DialogManager.h"
 
@@ -69,6 +78,13 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	fadeToBlack = new FadeToBlack(true);
 	video = new Video(false);
+	musicaCiudad = new MusicaCiudad(false);
+	musicaCielo = new MusicaCielo(false);
+	musicaCasino = new MusicaCasino(false);
+	musicaDisco = new MusicaDiscoteca(false);
+	musicaMansion = new MusicaMansion(false);
+	musicaTaberna = new MusicaTaberna(false);
+
 
 	// Ordered for awake / Start / Update
 	// Reverse order of CleanUp
@@ -95,6 +111,12 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(dialogManager);
 	AddModule(fadeToBlack);
 	AddModule(video);
+	AddModule(musicaCiudad);
+	AddModule(musicaCielo);
+	AddModule(musicaCasino);
+	AddModule(musicaDisco);
+	AddModule(musicaMansion);
+	AddModule(musicaTaberna);
 
 	AddModule(reload);
 

@@ -28,8 +28,14 @@
 	<dialogmanager />
 	<:anonymous />
 	<video />
+	<scene />
+	<scene />
+	<scene />
+	<scene />
+	<scene />
+	<scene />
 	<reload />
 	<renderer>
-		<camera x="-20467" y="-7544" />
+		<camera x="-7049" y="-5608" />
 	</renderer>
 </game_state>

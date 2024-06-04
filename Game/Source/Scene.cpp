@@ -36,6 +36,13 @@
 #include "OsoCarpintero.h"
 #include "Kiwi.h"
 #include "Sisebuto.h"
+#include "Audio.h"
+#include "MusicaCiudad.h"
+#include "MusicaCielo.h"
+#include "MusicaCasino.h"
+#include "MusicaDiscoteca.h"
+#include "MusicaMansion.h"
+#include "MusicaTaberna.h"
 
 
 #include "Defs.h"
@@ -205,11 +212,7 @@ bool Scene::Start()
 
 	// Texture to highligh mouse position 
 	
-
-	cieloMusic = "Assets/Audio/Fx/cielo.wav";
-	ciudadMusic = app->audio->LoadFx("Assets/Audio/Fx/centralFauna.wav");
-
-	app->audio->PlayMusic(cieloMusic);
+	app->musicaCielo->Enable();
 
 	return true;
 }
@@ -315,13 +318,7 @@ bool Scene::PostUpdate()
 {
 	bool ret = true;
 
-	if (player->cieloOUT)
-	{
-		app->audio->UnloadMusic();
-	}
-	if (player->ciudadIN == true) {
-	}
-
+	
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 	{
 		//Destroy all the buttons in the title screen
@@ -376,4 +373,5 @@ bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 
 	return true;
 }
+
 

@@ -89,6 +89,7 @@ public:
 	bool despachoIN = false;
 	bool despachoOUT = false;
 	bool ciudadIN = false;
+	bool ciudadOUT = false;
 
 	List<Animation*> springyAnimationList;
 

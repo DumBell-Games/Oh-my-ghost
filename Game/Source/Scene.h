@@ -136,6 +136,8 @@ public:
 
 public:
 	int cityFx;
+	int ciudadMusic;
+	int cieloMusic;
 
 
 private:
@@ -162,11 +164,11 @@ private:
 	GuiControlButton* gcButtom;
 
 	const char* currentMusic;
-	const char* cieloMusic;
+	
 	const char* tabernaMusic;
 	const char* mansionMusic;
 	const char* arcadeMusic;
-	int ciudadMusic;
+	
 
 	bool fullscreen = false;
 };

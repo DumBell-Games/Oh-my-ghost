@@ -15,6 +15,21 @@
 		<vsync value="true"/>
 	</renderer>
 
+	<sounds>
+		<music>
+			<!--musica por zonas-->
+			<cielo path="Assets/Audio/Music/cielo.ogg"/>
+			<ciudad path="Assets/Audio/Music/centralFauna.ogg"/>
+
+		</music>
+		<fx>
+			<!--player-->
+			
+
+		
+		</fx>
+	</sounds>
+	
 	<window>
 		<resolution width="1920" height="1080" scale="1"/>
 		<fullscreen value="false"/>
@@ -37,7 +52,7 @@
   </input>
 
 	<scene>
-		<player x="21315" y="8100" texturePath="Assets/Textures/springyPaloma.png" ghostTexPath="Assets/Textures/springyFantasma.png">
+		<player x="21295" y="8150" texturePath="Assets/Textures/springyPaloma.png" ghostTexPath="Assets/Textures/springyFantasma.png">
 			<animation name="walkR" loop="true" speed="0.08f">
 				<frame x="0" y="1024" w="128" h="256" />
 				<frame x="128" y="1024" w="128" h="256" />
@@ -411,7 +426,7 @@
 		    </animation>
 		</conserje>
 		
-		<deidad x="21331" y="7700" texturePath="Assets/Textures/Spritesheet_Deidad.png">
+		<deidad x="21300" y="7650" texturePath="Assets/Textures/Spritesheet_Deidad.png">
 			<animation name="deidadIdle" loop="true" speed="0.08f">
 				<frame x="0" y="0" w="256" h="256" />
 				<frame x="256" y="0" w="256" h="256" />
@@ -735,13 +750,13 @@
 
 		<caramelos x="8098" y="6434" texturePath="Assets/Textures/itemCaramelos.png"/>
 		<caramelos x="2723" y="806" texturePath="Assets/Textures/itemCaramelos.png"/>
-		<caramelos x="6565" y="2337" texturePath="Assets/Textures/itemCaramelos.png"/>
+		<caramelos x="6665" y="2237" texturePath="Assets/Textures/itemCaramelos.png"/>
 		<yogur x="3332" y="6220" texturePath="Assets/Textures/itemYogur.png"/>
 		<yogur x="793" y="3553" texturePath="Assets/Textures/itemYogur.png"/>
-		<yogur x="5409" y="1312" texturePath="Assets/Textures/itemYogur.png"/>
+		<yogur x="5609" y="1312" texturePath="Assets/Textures/itemYogur.png"/>
 		<patatas x="5409" y="4772" texturePath="Assets/Textures/itemPatatas.png"/>
 		<patatas x="3487" y="3107" texturePath="Assets/Textures/itemPatatas.png"/>
-		<patatas x="5278" y="2343" texturePath="Assets/Textures/itemPatatas.png"/>
+		<patatas x="5178" y="2243" texturePath="Assets/Textures/itemPatatas.png"/>
 
 		<enemy x="750" y="472" texturePath="Assets/Textures/pigNpc.png"/>
 		
@@ -929,7 +944,7 @@
 			</sentences>
 		</dialogTrigger>
 
-		<dialogTrigger x="21415" y="8332" repeat ="true">
+		<dialogTrigger x="21415" y="8132" repeat ="true">
 			<sentences>
 				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringy.png" text="¿Qué? ¿Dónde estoy?"/>
 				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringy.png" text="¿Qué ha pasado? ¿Y mi compañera Copycat, dónde está?"/>

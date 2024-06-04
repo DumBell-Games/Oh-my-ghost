@@ -12,6 +12,13 @@
 #include "TransitionTrigger.h"
 #include "Window.h"
 #include "DialogManager.h"
+#include "MusicaCiudad.h"
+#include "MusicaCielo.h"
+#include "MusicaCasino.h"
+#include "MusicaDiscoteca.h"
+#include "MusicaMansion.h"
+#include "MusicaTaberna.h"
+
 
 Player::Player() : Entity(EntityType::PLAYER)
 {
@@ -106,7 +113,7 @@ bool Player::Start() {
 	arcadeOut = app->physics->CreateRectangleSensor(14849 + 128, 9600 + 64, 256, 128, bodyType::KINEMATIC);
 	arcadeOut->ctype = ColliderType::ARCADEOUT;
 
-	cieloOut = app->physics->CreateRectangleSensor(21529 - 96, 8681 + 64, 256, 128, bodyType::KINEMATIC);
+	cieloOut = app->physics->CreateRectangleSensor(21529 - 96, 9200 + 64, 256, 128, bodyType::KINEMATIC);
 	cieloOut->ctype = ColliderType::CIELOOUT;
 
 	mansionIn = app->physics->CreateRectangleSensor(10394 + 128, 531 + 64, 256, 128, bodyType::KINEMATIC);
@@ -320,40 +327,53 @@ bool Player::Update(float dt)
 	app->win->GetWindowSize(w, h);
 	app->render->camera.x = (-position.x * app->win->GetScale()) + w / 2;
 	app->render->camera.y = (-position.y * app->win->GetScale()) + h / 2;
+
 	
 	if (casinoIN || app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
 	{
+		app->musicaCasino->Enable();
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(1900), PIXEL_TO_METERS(12488)), NULL);
 		casinoIN = false;
 	}
 	if (casinoOUT)
 	{
+		app->musicaCasino->Disable();
+		app->musicaCiudad->Enable();
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(6420), PIXEL_TO_METERS(894)), NULL);
 		casinoOUT = false;
 	}
 	if (arcadeIN || app->input->GetKey(SDL_SCANCODE_F4) == KEY_DOWN)
 	{
+		app->musicaDisco->Enable();
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(14972), PIXEL_TO_METERS(9512)), NULL);
 		arcadeIN = false;
 	}
 	if (arcadeOUT)
-	{
+	{	
+		app->musicaDisco->Disable();
+		app->musicaCiudad->Enable();
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(3104), PIXEL_TO_METERS(4934)), NULL);
 		arcadeOUT = false;
 	}
 	if (tabernaIN || app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 	{
+		app->musicaTaberna->Enable();
+		ciudadOUT = true;
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(8060), PIXEL_TO_METERS(12104)), NULL);
 		tabernaIN = false;
 	}
 	if (tabernaOUT)
 	{
+		app->musicaTaberna->Disable();
+		app->musicaCiudad->Enable();
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(4393), PIXEL_TO_METERS(1878)), NULL);
 		tabernaOUT = false;
 	}
 
 	if (cieloOUT)
 	{
+		app->musicaCielo->Disable();
+		app->musicaCiudad->Enable();
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(8025), PIXEL_TO_METERS(6164)), NULL);
 		
 		currentAnim = vomito;
@@ -367,11 +387,14 @@ bool Player::Update(float dt)
 	}
 	if (mansionIN || app->input->GetKey(SDL_SCANCODE_F6) == KEY_DOWN)
 	{
+		app->musicaMansion->Enable();
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(16386 + 128), PIXEL_TO_METERS(5743)), NULL);
 		mansionIN = false;
 	}
 	if (mansionOUT)
 	{
+		app->musicaMansion->Disable();
+		app->musicaCiudad->Enable();
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(10394 + 128), PIXEL_TO_METERS(800)), NULL);
 		mansionOUT = false;
 	}
@@ -398,8 +421,7 @@ bool Player::Update(float dt)
 			palomaTouched = false;
 		}
 	}
-	
-	
+
 
 	return true;
 }

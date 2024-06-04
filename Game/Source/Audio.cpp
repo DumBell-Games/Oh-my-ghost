@@ -3,6 +3,7 @@
 
 #include "Defs.h"
 #include "Log.h"
+#include "List.h"
 
 // NOTE: Recommended using: Additional Include Directories,
 // instead of 'hardcoding' library location path in code logic
@@ -85,11 +86,9 @@ bool Audio::CleanUp()
 }
 
 // Play a music file
-bool Audio::PlayMusic(const char* path, float fadeTime, int volume)
+bool Audio::PlayMusic(const char* path, float fadeTime)
 {
 	bool ret = true;
-
-	volume = volumen;
 
 	if (!active)
 		return false;
@@ -118,9 +117,6 @@ bool Audio::PlayMusic(const char* path, float fadeTime, int volume)
 	}
 	else
 	{
-		// Set the volume of the music
-		Mix_VolumeMusic(volume);
-
 		if (fadeTime > 0.0f)
 		{
 			if (Mix_FadeInMusic(music, -1, (int)(fadeTime * 1000.0f)) < 0)
@@ -139,22 +135,46 @@ bool Audio::PlayMusic(const char* path, float fadeTime, int volume)
 		}
 	}
 
+	//Mix_VolumeMusic(volumeMusic);
+
+	playingMusic = true;
+
 	LOG("Successfully playing %s", path);
 	return ret;
 }
 
+bool Audio::StopMusic(float fadeTime)
+{
+	if (!active || music == NULL) {
+		return false;
+	}
+
+	if (fadeTime > 0.0f) {
+		Mix_FadeOutMusic(int(fadeTime * 1000.0f));
+	}
+	else {
+		Mix_HaltMusic();
+	}
+
+	Mix_FreeMusic(music);
+	music = NULL;
+
+	playingMusic = false;
+
+	return true;
+}
 
 // Load WAV
 unsigned int Audio::LoadFx(const char* path)
 {
 	unsigned int ret = 0;
 
-	if(!active)
+	if (!active)
 		return 0;
 
 	Mix_Chunk* chunk = Mix_LoadWAV(path);
 
-	if(chunk == NULL)
+	if (chunk == NULL)
 	{
 		LOG("Cannot load wav %s. Mix_GetError(): %s", path, Mix_GetError());
 	}
@@ -168,22 +188,21 @@ unsigned int Audio::LoadFx(const char* path)
 }
 
 // Play WAV
-bool Audio::PlayFx(unsigned int id, int repeat, int volume)
+bool Audio::PlayFx(unsigned int id, int repeat, int channel)
 {
-	bool ret = false;
-	volume = fx1;
-
-	if (!active)
-		return false;
+	if (!active) {
+		return false; // Audio no activo
+	}
 
 	if (id > 0 && id <= fx.Count())
 	{
-		Mix_Volume(-1, volume); // Establecer el volumen de todos los canales a la vez
-		Mix_PlayChannel(-1, fx[id - 1], repeat);
-		ret = true;
+		Mix_PlayChannel(channel, fx[id - 1], repeat);
 	}
 
-	return ret;
+	// Asociar el ID del efecto de sonido con el canal de reproducción
+	activeChannels[id] = channel;
+
+	return true;
 }
 
 // Unload WAV
@@ -236,18 +255,30 @@ bool Audio::FxDown() {
 }
 
 //stop specific fx
-bool Audio::StopFx(unsigned int id) {
-	bool ret = false;
-	if (!active)
-		return false;
+bool Audio::StopFx(int channel) {
+	Mix_HaltChannel(channel);
+	return false;
+}
 
-	if (id > 0 && id <= fx.Count())
-	{
-		Mix_HaltChannel(id);
-		ret = true;
-	}
+bool Audio::LoadAudioFx(const char* name)
+{
+	pugi::xml_document config;
+	pugi::xml_parse_result parseResult = config.load_file("config.xml");
+	pugi::xml_node audioNode;
+	audioNode = config.child("config").child("sounds").child("fx").child(name);
 
-	return ret;
+	return LoadFx(audioNode.attribute("path").as_string());
+}
+
+
+bool Audio::LoadAudioMusic(const char* name, float fadeTime)
+{
+	pugi::xml_document config;
+	pugi::xml_parse_result parseResult = config.load_file("config.xml");
+	pugi::xml_node audioNode;
+	audioNode = config.child("config").child("sounds").child("music").child(name);
+
+	return PlayMusic(audioNode.attribute("path").as_string(), fadeTime);
 }
 
 //resume specific fx
@@ -277,5 +308,63 @@ bool Audio::UnloadMusic()
 		ret = true;
 	}
 
+	return ret;
+}
+
+//function to change current music
+bool Audio::ChangeMusic(const char* path, float fadeTime)
+{
+	bool ret = true;
+
+	if (!active)
+		return false;
+
+	if (music != NULL)
+	{
+		if (fadeTime > 0.0f)
+		{
+			Mix_FadeOutMusic(int(fadeTime * 1000.0f));
+		}
+		else
+		{
+			Mix_HaltMusic();
+		}
+
+		// this call blocks until fade out is done
+		Mix_FreeMusic(music);
+	}
+
+	music = Mix_LoadMUS(path);
+
+	if (music == NULL)
+	{
+		LOG("Cannot load music %s. Mix_GetError(): %s\n", path, Mix_GetError());
+		ret = false;
+	}
+	else
+	{
+		if (fadeTime > 0.0f)
+		{
+			if (Mix_FadeInMusic(music, -1, (int)(fadeTime * 1000.0f)) < 0)
+			{
+				LOG("Cannot fade in music %s. Mix_GetError(): %s", path, Mix_GetError());
+				ret = false;
+			}
+		}
+		else
+		{
+			if (Mix_PlayMusic(music, -1) < 0)
+			{
+				LOG("Cannot play in music %s. Mix_GetError(): %s", path, Mix_GetError());
+				ret = false;
+			}
+		}
+	}
+
+	//Mix_VolumeMusic(volumeMusic);
+
+	playingMusic = true;
+
+	LOG("Successfully playing %s", path);
 	return ret;
 }
