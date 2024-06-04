@@ -40,7 +40,7 @@ bool SrBestia::Start() {
 	//haz que el rectangulo no rote
 	nBody->body->SetFixedRotation(true);
 	nBody->listener = this;
-	nBody->ctype = ColliderType::NPC;
+	nBody->ctype = ColliderType::MRBESTIA;
 
 	currentAnim = srIdle;
 

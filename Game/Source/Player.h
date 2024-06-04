@@ -125,7 +125,7 @@ public:
 	Animation* idleFrontalF;
 	
 	bool cervezaPicked = false;
-
+	bool bestiaTouched = false;
 	
 };
 

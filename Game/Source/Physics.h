@@ -50,6 +50,7 @@ enum class ColliderType {
 	DESPACHOIN,
 	DESPACHOOUT,
 	GUI,
+	MRBESTIA,
 	UNKNOWN
 	// ..
 };

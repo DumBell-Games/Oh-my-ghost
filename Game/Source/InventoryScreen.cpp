@@ -76,6 +76,7 @@ bool InventoryScreen::Update(float dt) {
     valorCaramelos.Create("x%d", app->scene->GetCaramelosQuantity());
     valorVelocidad.Create("x%d", app->scene->GetVelocidadQuantity());
     valorYogur.Create("x%d", app->scene->GetYogurQuantity());
+    dineroActual.Create("%d", app->scene->GetMonedasQuantity());
 
 
     if (app->input->GetButton(ControlID::UP) == KEY_REPEAT) //arriba
@@ -161,6 +162,9 @@ bool InventoryScreen::PostUpdate() {
     app->render->DrawText(valorCaramelos.GetString(), 100, 650, 64, 64);
 	app->render->DrawText(valorVelocidad.GetString(), 1000, 650, 64, 64);
 	app->render->DrawText(valorPatatas.GetString(), 550, 365, 64, 64);
+    app->render->DrawText(dineroActual.GetString(), 110, 50, 64, 64);
+
+	return true;
 	
 	return true;
 }

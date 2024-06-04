@@ -421,7 +421,11 @@ bool Player::Update(float dt)
 			palomaTouched = false;
 		}
 	}
-
+	if (bestiaTouched)
+	{
+		app->scene->BestiaGift();
+		bestiaTouched = false;
+	}
 
 	return true;
 }
@@ -513,6 +517,9 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::PALOMA:
 		LOG("Collision PALOMA");
 		palomaTouched = true;
+		break;
+	case ColliderType::MRBESTIA:
+		bestiaTouched = true;
 		break;
 	default:
 		break;

@@ -133,11 +133,24 @@ public:
 		else	return velocidad.cantidadVelocidad;
 	}
 
+	int GetMonedasQuantity() {
+		ItemData* i = app->inventory->GetItemByType(ItemType::MONEDAS);
+		if (i) return i->cantidad;
+		else return cantidadMonedas;
+	}
+
+	int BestiaGift() {
+		ItemData* i = app->inventory->GetItemByType(ItemType::MONEDAS);
+		if (i) return i->cantidad++;
+		return cantidadMonedas += 20;
+	}
+
 
 public:
 	int cityFx;
 	int ciudadMusic;
 	int cieloMusic;
+	int cantidadMonedas = 0;
 
 
 private:

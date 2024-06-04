@@ -20,6 +20,7 @@ enum class ItemType : char
 	PATATAS,
 	CARAMELOS,
 	VELOCIDAD,
+	MONEDAS,
 	TOTAL_ITEMS
 };
 
