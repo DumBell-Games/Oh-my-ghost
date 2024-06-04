@@ -228,7 +228,7 @@ TTF_Font* DialogManager::FontSelector(const char* font)
 	return app->render->primary_font;
 }
 
-bool DialogManager::Update(float dt) {
+bool DialogManager::PostUpdate() {
 
 	bool ret = true;
 

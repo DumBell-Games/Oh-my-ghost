@@ -14,6 +14,9 @@
 #include <vector>
 #include "AnimationSet.h"
 
+#include "Dialog.h"
+#include "DialogManager.h"
+
 class InventoryManager;
 struct SDL_Texture;
 
@@ -80,6 +83,9 @@ public:
 	bool PostUpdate() override;
 
 	bool CleanUp() override;
+
+	//Inicia un combate con los parametros proporcionados
+	void BeginCombat(Personatge* enemy, pugi::xml_node startDialogue, pugi::xml_node endDialogue);
 
 private:
 
@@ -148,6 +154,12 @@ private:
 
 	void ResetButtonsState();
 
+	// Dialog functions
+
+	void LoadDialogs(pugi::xml_node startDialog, pugi::xml_node endDialog);
+
+	void LoadDialog(List<Dialog*>& list, pugi::xml_node dialogNode);
+
 public:
 
 	// Datos a usar para el combate. Hace falta rellenar este campo antes de activar el modulo
@@ -171,6 +183,11 @@ private:
 	iPoint posMain;
 	iPoint posSub;
 	iPoint buttonSize;
+
+	// Dialogos
+
+	List<Dialog*> startDialogue;
+	List<Dialog*> endDialogue;
 
 	// Accion del combate
 

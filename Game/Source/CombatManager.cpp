@@ -6,6 +6,7 @@
 #include "App.h"
 #include "DebugConsole.h"
 #include "Reload.h"
+#include "Map.h"
 
 #include "Log.h"
 #include "EnumUtils.h"
@@ -40,7 +41,7 @@ CombatManager::CombatManager(bool startEnabled) : Module(startEnabled)
 	p2->atacs.push_back(Atac("Puntada de peu2", 15, "Assets/Screen/Combat/Skill.png"));
 	p2->atacs.push_back(Atac("Puntada de peu3", 15, "Assets/Screen/Combat/Skill.png"));
 	p2->atacs.push_back(Atac("Puntada de peu4", 15, "Assets/Screen/Combat/Skill.png"));
-	p2->atacs.push_back(Atac("Ultimate", 15, "Assets/Screen/Combat/Skill.png"));
+	p2->atacs.push_back(Atac("Ultimate", 25, "Assets/Screen/Combat/Skill.png"));
 	data.allies.push_back(p2);
 
 	// FIN CODIGO PARA DEBUG
@@ -55,6 +56,11 @@ bool CombatManager::PostInit()
 {
 	app->console->AddCommand("debugcombat", "Inicia un combate con un enemigo de prueba", "debugcombat", [this](std::vector<std::string> args) {
 		data.enemy = dummyEnemy = new Personatge("dummy", 1, 10, 1, 10);
+		dummyEnemy->atacs.push_back(Atac("Mordisco1", 5));
+		dummyEnemy->atacs.push_back(Atac("Mordisco2", 5));
+		dummyEnemy->atacs.push_back(Atac("Mordisco3", 5));
+		dummyEnemy->atacs.push_back(Atac("Mordisco4", 5));
+		dummyEnemy->atacs.push_back(Atac("Ultimate", 25));
 		app->reload->QueueReload("combatStart");
 		});
 	return true;
@@ -69,6 +75,16 @@ bool CombatManager::Awake(pugi::xml_node config)
 	buttonSize.x = config.attribute("buttonW").as_int(0);
 	buttonSize.y = config.attribute("buttonH").as_int(0);
 
+	//Load default dialogs if none found (debug)
+	if (app->DebugEnabled())
+	{
+		if (!startDialogue.start)
+			LoadDialog(startDialogue, config.child("startDialogue"));
+		if (!endDialogue.start)
+			LoadDialog(endDialogue, config.child("endDialogue"));
+	}
+
+	// Load UI layout
 	pugi::xml_document layoutDoc;
 	pugi::xml_parse_result result = layoutDoc.load_file(config.attribute("uiLayoutPath").as_string());
 	if (result && LoadLayout(layoutDoc.child("map"))) {
@@ -223,6 +239,18 @@ bool CombatManager::CleanUp()
 	}
 	guiElements.clear();
 
+	for (ListItem<Dialog*>* item = startDialogue.start; item; item = item->next)
+	{
+		RELEASE(item->data);
+	}
+	startDialogue.Clear();
+
+	for (ListItem<Dialog*>* item = endDialogue.start; item; item = item->next)
+	{
+		RELEASE(item->data);
+	}
+	endDialogue.Clear();
+
 	 // Unpauses the entityManager and allows player movement
 	if (((Module*)app->entityManager)->paused)
 		((Module*)app->entityManager)->Pause();
@@ -235,6 +263,13 @@ bool CombatManager::CleanUp()
 	RELEASE(dummyEnemy); // Datos usados con el comando "debugcombat"
 
 	return true;
+}
+
+void CombatManager::BeginCombat(Personatge* enemy, pugi::xml_node startDialogue, pugi::xml_node endDialogue)
+{
+	data.enemy = enemy;
+	LoadDialogs(startDialogue, endDialogue);
+	Enable();
 }
 
 GuiControl* CombatManager::NewButton(GuiControlType type, char menuID, char elementID, const char* text, SDL_Rect bounds, GuiCallback_f onClick, bool independentPtr, SDL_Rect sliderBounds)
@@ -539,6 +574,14 @@ char CombatManager::CombatResult()
 void CombatManager::HandleStart()
 {
 	// Activar dialogo de inicio
+	ListItem<Dialog*>* item;
+	Dialog* pDialog = nullptr;
+
+	for (item = startDialogue.start; item != NULL; item = item->next)
+	{
+		pDialog = item->data;
+		app->dialogManager->AddDialog(pDialog);
+	}
 
 	// Una vez creado el dialogo, pasa al siguiente estado (para esperar a que se cierre el dialogo)
 	combatState = CombatState::DIALOG_START;
@@ -548,7 +591,7 @@ void CombatManager::HandleStartDialog()
 {
 	// Una vez terminado el dialogo de inicio, pasa a HandleMenu() asignando el valor correcto a la variable combatState
 
-	if (true)
+	if (!app->dialogManager->isPlaying)
 		combatState = CombatState::MENU;
 }
 
@@ -667,18 +710,35 @@ void CombatManager::HandleCombat()
 
 void CombatManager::EnemyChoice()
 {
+	if (data.enemy->atacs.size() == 0) return;
+
+
+	int selectedAttack = rng() % data.enemy->atacs.size();
+	ataqueEnemigo = &(data.enemy->atacs[abs(selectedAttack)]);
 }
 
 void CombatManager::HandleCombatAnimation()
 {
 	if (CombatFinished())
+	{
+		ListItem<Dialog*>* item;
+		Dialog* pDialog = nullptr;
+
+		for (item = endDialogue.start; item != NULL; item = item->next)
+		{
+			pDialog = item->data;
+			app->dialogManager->AddDialog(pDialog);
+		}
+
 		combatState = CombatState::DIALOG_END;
+	}
 	else combatState = CombatState::MENU;
 }
 
 void CombatManager::HandleEndDialog()
 {
-	combatState = CombatState::END;
+	if (!app->dialogManager->isPlaying)
+		combatState = CombatState::END;
 }
 
 void CombatManager::HandleEnd()
@@ -751,4 +811,21 @@ void CombatManager::ResetButtonsState()
 	for (std::vector<GuiControl*>& menu : menuList)
 		for (GuiControl* g : menu)
 			g->state = GuiControlState::NORMAL;
+}
+
+void CombatManager::LoadDialogs(pugi::xml_node startDialog, pugi::xml_node endDialog)
+{
+	LoadDialog(startDialogue, startDialog);
+	LoadDialog(endDialogue, endDialog);
+}
+
+void CombatManager::LoadDialog(List<Dialog*>& list, pugi::xml_node dialogNode)
+{
+
+	for (pugi::xml_node itemNode = dialogNode.child("sentence"); itemNode; itemNode = itemNode.next_sibling("sentence"))
+	{
+		SString faceTexturePath = itemNode.attribute("faceTexturePath").as_string();
+		list.Add(app->dialogManager->CreateDialogs(itemNode, itemNode.attribute("name").as_string(), faceTexturePath.GetString(), "primary", 0, app->map->currentMap));
+	}
+
 }

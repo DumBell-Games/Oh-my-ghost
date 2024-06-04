@@ -1464,6 +1464,12 @@
 				<!--Otros botones autogenerados por equipo-->
 			</team>
 		</menus>
+		<startDialogue>
+			<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¡Que guay! Estoy ansioso por saber que conseguiré"/>
+		</startDialogue>
+		<endDialogue>
+			<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¡Que guay! Estoy ansioso por saber que conseguiré"/>
+		</endDialogue>
 	</combat>
 
 	<reload>
