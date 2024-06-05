@@ -52,6 +52,8 @@ public:
 	Animation* currentAnim;
 	Animation* sisebutoIdle;
 
+	PhysBody* blockSegismunda;
+
 	bool playerTouched = false;
 
 

@@ -61,6 +61,13 @@ bool SrBestia::Update(float dt)
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;
 	position.y = METERS_TO_PIXELS(nBodyPos.p.y) - 32 / 2;
 
+	if (playerTouched && app->scene->GetMonedasQuantity() < 20)
+	{
+		app->scene->BestiaGift();
+		nBody->ctype = ColliderType::NPC;
+		playerTouched = false;
+	}
+
 	return true;
 }
 
@@ -78,6 +85,10 @@ void SrBestia::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
+		break;
+	case ColliderType::PLAYER:
+		LOG("Collision PLAYER");
+		playerTouched = true;
 		break;
 	default:
 		break;

@@ -40,7 +40,11 @@ bool Sisebuto::Start() {
 	//haz que el rectangulo no rote
 	nBody->body->SetFixedRotation(true);
 	nBody->listener = this;
-	nBody->ctype = ColliderType::NPC;
+	nBody->ctype = ColliderType::SISEBUTO;
+
+	blockSegismunda = app->physics->CreateRectangle(5643, 1538, 257, 257, bodyType::STATIC);
+	blockSegismunda->body->SetFixedRotation(true);
+	blockSegismunda->ctype = ColliderType::WALL;
 
 	currentAnim = sisebutoIdle;
 
@@ -61,6 +65,13 @@ bool Sisebuto::Update(float dt)
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;
 	position.y = METERS_TO_PIXELS(nBodyPos.p.y) - 32 / 2;
 
+	if (playerTouched)
+	{
+		app->scene->BirraRemoved();
+		blockSegismunda->body->SetTransform(b2Vec2_zero, 0.0f);
+		playerTouched = false;
+	}
+
 	return true;
 }
 
@@ -78,6 +89,10 @@ void Sisebuto::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
+		break;
+	case ColliderType::PLAYER:
+		LOG("Collision PLAYER");
+		playerTouched = true;
 		break;
 	default:
 		break;

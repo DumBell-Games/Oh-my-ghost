@@ -40,7 +40,11 @@ bool Segismunda::Start() {
 	//haz que el rectangulo no rote
 	nBody->body->SetFixedRotation(true);
 	nBody->listener = this;
-	nBody->ctype = ColliderType::NPC;
+	nBody->ctype = ColliderType::SEGISMUNDA;
+
+	blockArcade = app->physics->CreateRectangle(3009 + 128, 4500 + 64, 257, 129, bodyType::STATIC);
+	blockArcade->body->SetFixedRotation(true);
+	blockArcade->ctype = ColliderType::WALL;
 
 	currentAnim = segismundaIdle;
 
@@ -61,6 +65,12 @@ bool Segismunda::Update(float dt)
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;
 	position.y = METERS_TO_PIXELS(nBodyPos.p.y) - 32 / 2;
 
+	if (playerTouched)
+	{
+		blockArcade->body->SetTransform(b2Vec2_zero, 0.0f);
+		playerTouched = false;
+	}
+
 	return true;
 }
 
@@ -78,6 +88,9 @@ void Segismunda::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
+		break;
+	case ColliderType::PLAYER:
+		playerTouched = true;
 		break;
 	default:
 		break;

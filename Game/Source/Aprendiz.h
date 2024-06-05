@@ -45,7 +45,12 @@ public:
 	SString texturePath;
 
 	PhysBody* nBody;
-	
+	PhysBody* piso2Disco;
+	PhysBody* piso3Disco;
+	PhysBody* casinoDesbloqueado;
+
+	bool playerTouched = false;
+
 	List<Animation*> aprendizAnims;
 	Animation* aprendizIdle;
 

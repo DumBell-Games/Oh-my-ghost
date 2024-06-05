@@ -366,6 +366,7 @@ iPoint Scene::GetPLayerPosition() {
 	return player->position;
 }
 
+
 bool Scene::OnGuiMouseClickEvent(GuiControl* control)
 {
 	// L15: DONE 5: Implement the OnGuiMouseClickEvent method

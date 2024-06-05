@@ -41,7 +41,11 @@ bool Veterana::Start() {
 	//haz que el rectangulo no rote
 	nBody->body->SetFixedRotation(true);	
 	nBody->listener = this;
-	nBody->ctype = ColliderType::NPC;
+	nBody->ctype = ColliderType::VETERANA;
+
+	
+
+
 
 	return true;
 }
@@ -54,6 +58,7 @@ bool Veterana::Update(float dt)
 	b2Transform nBodyPos = nBody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;
 	position.y = METERS_TO_PIXELS(nBodyPos.p.y) - 32 / 2;
+
 
 	return true;
 }
@@ -73,6 +78,10 @@ void Veterana::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
+		break;
+	case ColliderType::PLAYER:
+		LOG("Collision VETERANA");
+		playerTouched = true;
 		break;
 	default:
 		break;

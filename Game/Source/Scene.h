@@ -13,6 +13,7 @@
 #include "ItemYogur.h"
 #include "InventoryManager.h"
 #include "ItemData.h"
+#include "Map.h"
 
 
 struct SDL_Texture;
@@ -90,6 +91,13 @@ public:
 		if (i) i->cantidad++;
 		return birra.cantidadBirra++;
 	}
+		
+	int BirraRemoved() {
+		ItemData* i = app->inventory->GetItemByType(ItemType::BIRRA);
+		if (i && i->cantidad > 0) i->cantidad--;
+		return birra.cantidadBirra > 0 ? birra.cantidadBirra-- : 0;
+	}                      //condicion ? si es verdadero : si es falso
+
 
 	int GetBirraQuantity(){
 		ItemData* i = app->inventory->GetItemByType(ItemType::BIRRA);
@@ -145,6 +153,9 @@ public:
 		return cantidadMonedas += 20;
 	}
 
+	iPoint Scene::GetPlayerTilePosition() {
+		return app->map->WorldToMap(player->position.x, player->position.y);
+	}
 
 public:
 	int cityFx;

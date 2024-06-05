@@ -75,6 +75,12 @@ public:
 	PhysBody* despachoIn;
 	PhysBody* despachoOut;
 
+    PhysBody* piso2Disco;
+    PhysBody* piso3Disco;
+    PhysBody* casinoDesbloqueado;
+	PhysBody* mansionOpen;
+	PhysBody* piso2;
+
 
 	bool casinoIN = false;
 	bool casinoOUT = false;
@@ -126,6 +132,10 @@ public:
 	
 	bool cervezaPicked = false;
 	bool bestiaTouched = false;
+	bool aprendizTouched = false;
+	bool veteranaTouched = false;
+
+
 	
 };
 

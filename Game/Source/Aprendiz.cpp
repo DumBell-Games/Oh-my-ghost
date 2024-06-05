@@ -9,6 +9,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "Map.h"
+#include "Player.h"
 
 
 Aprendiz::Aprendiz() : Entity(EntityType::APRENDIZ)
@@ -41,7 +42,10 @@ bool Aprendiz::Start() {
 	//haz que el rectangulo no rote
 	nBody->body->SetFixedRotation(true);	
 	nBody->listener = this;
-	nBody->ctype = ColliderType::NPC;
+	nBody->ctype = ColliderType::APRENDIZ;
+
+
+
 
 	return true;
 }
@@ -50,10 +54,13 @@ bool Aprendiz::Update(float dt)
 {	
 	aprendizIdle->Update();
 	app->render->DrawTexture(texture.get(), position.x - 50, position.y - 120, &aprendizIdle->GetCurrentFrame());
-	
+
+
 	b2Transform nBodyPos = nBody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;	
 	position.y = METERS_TO_PIXELS(nBodyPos.p.y) - 32 / 2;
+	
+	
 
 	return true;
 }
@@ -72,6 +79,10 @@ void Aprendiz::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
+		break;
+	case ColliderType::PLAYER:
+		LOG("Collision PLAYER");
+		playerTouched = true;	
 		break;
 	default:
 		break;

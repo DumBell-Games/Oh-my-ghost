@@ -47,10 +47,12 @@ public:
 	SString texturePath;
 
 	PhysBody* nBody;
+	PhysBody* blockArcade;
 	
 	List<Animation*> segismundaAnims;
 	Animation* currentAnim;
 	Animation* segismundaIdle;
+
 
 	bool playerTouched = false;
 

@@ -46,9 +46,14 @@ public:
 	SString texturePath;
 
 	PhysBody* nBody;
+
+	PhysBody* piso2;
+	PhysBody* mansionOpen;
 	
 	List<Animation*> veteranaAnims;
 	Animation* veteranaIdle;
+
+	bool playerTouched;
 
 
 };

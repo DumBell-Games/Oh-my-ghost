@@ -92,7 +92,17 @@ bool Player::Start() {
 	texturePlayer = app->tex->LoadSP(parameters.attribute("texturePath").as_string(), true);
 	textureGhost = app->tex->LoadSP(parameters.attribute("ghostTexPath").as_string(), true);
 	
+	piso2Disco = app->physics->CreateRectangle(13318 + 128, 8816 + 64, 244, 150, bodyType::STATIC);
+	piso2Disco->body->SetFixedRotation(true);
+	piso2Disco->ctype = ColliderType::WALL;
 
+	piso3Disco = app->physics->CreateRectangle(13318 + 128, 8054 + 64, 244, 150, bodyType::STATIC);
+	piso3Disco->body->SetFixedRotation(true);
+	piso3Disco->ctype = ColliderType::WALL;
+
+	casinoDesbloqueado = app->physics->CreateRectangle(6332 + 128, 754, 193, 127, bodyType::STATIC);
+	casinoDesbloqueado->body->SetFixedRotation(true);
+	casinoDesbloqueado->ctype = ColliderType::WALL;
 	
 	currentTexture = textureGhost;
 	currentAnim = idleFrontal;
@@ -103,12 +113,12 @@ bool Player::Start() {
 	casinoOut = app->physics->CreateRectangleSensor(1793 + 128, 12542 + 64, 256, 64, bodyType::KINEMATIC);
 	casinoOut->ctype = ColliderType::CASINOOUT;
 
-	tabernaIn = app->physics->CreateRectangleSensor(4289 + 128, 1588 + 64, 192, 126, bodyType::KINEMATIC);
+	tabernaIn = app->physics->CreateRectangleSensor(4289 + 48, 1588 + 16, 192, 126, bodyType::KINEMATIC);
 	tabernaIn->ctype = ColliderType::TABERNAIN;
 	tabernaOut = app->physics->CreateRectangleSensor(7939 + 128, 12159 + 64, 256, 128, bodyType::KINEMATIC);
 	tabernaOut->ctype = ColliderType::TABERNAOUT;
 
-	arcadeIn = app->physics->CreateRectangleSensor(3009 + 128, 4645 + 64, 192, 126, bodyType::KINEMATIC);
+	arcadeIn = app->physics->CreateRectangleSensor(3009 + 128, 4500 + 64, 192, 126, bodyType::KINEMATIC);
 	arcadeIn->ctype = ColliderType::ARCADEIN;
 	arcadeOut = app->physics->CreateRectangleSensor(14849 + 128, 9600 + 64, 256, 128, bodyType::KINEMATIC);
 	arcadeOut->ctype = ColliderType::ARCADEOUT;
@@ -128,6 +138,13 @@ bool Player::Start() {
 	despachoOut = app->physics->CreateRectangleSensor(20866 + 128, 2176 + 64, 256, 128, bodyType::KINEMATIC);
 	despachoOut->ctype = ColliderType::DESPACHOOUT;
 
+	mansionOpen = app->physics->CreateRectangle(10394 + 128, 531 + 64, 257, 129, bodyType::STATIC);
+	mansionOpen->body->SetFixedRotation(true);
+	mansionOpen->ctype = ColliderType::WALL;
+
+	piso2 = app->physics->CreateRectangle(2817 + 64, 10365 + 175, 122, 380, bodyType::STATIC);
+	piso2->body->SetFixedRotation(true);
+	piso2->ctype = ColliderType::WALL;
 
 	//hace que el rectangulo no rote
 	pBody->body->SetFixedRotation(true);
@@ -159,6 +176,11 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
+
+	//move colliders of arcade-casino
+
+	
+
 	if (app->dialogManager->isPlaying) {
 		canMove = false;
 		pBody->body->SetType(b2_staticBody);
@@ -357,6 +379,7 @@ bool Player::Update(float dt)
 	}
 	if (tabernaIN || app->input->GetKey(SDL_SCANCODE_F5) == KEY_DOWN)
 	{
+		app->scene->BirraPicked();
 		app->musicaTaberna->Enable();
 		ciudadOUT = true;
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(8060), PIXEL_TO_METERS(12104)), NULL);
@@ -421,12 +444,33 @@ bool Player::Update(float dt)
 			palomaTouched = false;
 		}
 	}
-	if (bestiaTouched)
+	
+	// esto se va a modificar cuando haya combate por if(combate1 == 1) etc (1 es ganado -1 es perdido)
+	if (aprendizTouched)
 	{
-		app->scene->BestiaGift();
-		bestiaTouched = false;
+		piso2Disco->body->SetTransform(b2Vec2(-10000, 0), 0.0f);
 	}
 
+	// esto se va a modificar cuando haya combate por if(combate1 == 1) etc (1 es ganado -1 es perdido)
+	if (aprendizTouched && position.y > 8054 && position.y < 8574)
+	{
+		piso3Disco->body->SetTransform(b2Vec2_zero, 0.0f);
+	}
+
+	// esto se va a modificar cuando haya combate por if(combate1 == 1) etc (1 es ganado -1 es perdido)
+	if (aprendizTouched && position.y < 8054)
+	{
+		casinoDesbloqueado->body->SetTransform(b2Vec2_zero, 0.0f);
+	}
+
+	if (veteranaTouched)
+	{
+		piso2->body->SetTransform(b2Vec2_zero, 0);
+	}
+	if (veteranaTouched && position.x > 2817)
+	{
+		mansionOpen->body->SetTransform(b2Vec2_zero, 0);
+	}
 	return true;
 }
 
@@ -518,8 +562,13 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision PALOMA");
 		palomaTouched = true;
 		break;
-	case ColliderType::MRBESTIA:
-		bestiaTouched = true;
+	case ColliderType::APRENDIZ:
+		LOG("Collision APRENDIZ");
+		aprendizTouched = true;
+		break;
+	case ColliderType::VETERANA:
+		LOG("Collision APRENDIZ");
+		veteranaTouched = true;
 		break;
 	default:
 		break;
