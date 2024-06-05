@@ -36,6 +36,7 @@ enum class EntityType : char
 	DJBUNNY,
 	KIWI,
 	COBAYA,
+	TIENDAOPEN,
 	UNKNOWN
 };
 

@@ -56,6 +56,7 @@ enum class ColliderType {
 	SEGISMUNDA,
 	APRENDIZ,
 	VETERANA,
+	TIENDAOPEN,
 	UNKNOWN
 	// ..
 };

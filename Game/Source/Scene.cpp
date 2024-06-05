@@ -43,6 +43,8 @@
 #include "MusicaDiscoteca.h"
 #include "MusicaMansion.h"
 #include "MusicaTaberna.h"
+#include "PersonajesScreen.h"
+#include "Tienda.h"
 
 
 #include "Defs.h"
@@ -210,7 +212,7 @@ bool Scene::Start()
 	textPosX = (float)windowW / 2 - (float)texW / 2;
 	textPosY = (float)windowH / 2 - (float)texH / 2;
 
-	// Texture to highligh mouse position 
+	
 	
 	app->musicaCielo->Enable();
 
@@ -264,8 +266,16 @@ bool Scene::Update(float dt)
 	if (app->input->GetKey(SDL_SCANCODE_F11) == KEY_DOWN) fullscreen = false;
 	if (app->input->GetKey(SDL_SCANCODE_ESCAPE) == KEY_DOWN)
 		app->pause->Enable();
-	if (app->input->GetKey(SDL_SCANCODE_I) == KEY_DOWN){
+	if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN){
 		app->inventoryScreen->Enable();
+		app->entityManager->Pause();
+	}
+	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
+		app->personajesScreen->Enable();
+		app->entityManager->Pause();
+	}
+	if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) {
+		app->tienda->Enable();
 		app->entityManager->Pause();
 	}
 

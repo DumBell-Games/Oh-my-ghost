@@ -24,6 +24,8 @@ class CombatManager;
 class Reload;
 class InventoryManager;
 class InventoryScreen;
+class PersonajesScreen;
+class Tienda;
 class Character_Menu;
 class TitleScreen;
 class IntroScreen;
@@ -138,6 +140,8 @@ public:
 	Reload* reload; // Module (un/re)loader
 	InventoryManager* inventory;
 	InventoryScreen* inventoryScreen;
+	PersonajesScreen* personajesScreen;
+	Tienda* tienda;
 	Character_Menu* characterMenu;
 	TitleScreen* titlescreen;
 	IntroScreen* introScreen;

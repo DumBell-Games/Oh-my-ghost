@@ -28,6 +28,8 @@
 #include "MusicaDiscoteca.h"
 #include "MusicaMansion.h"
 #include "MusicaTaberna.h"
+#include "PersonajesScreen.h"
+#include "Tienda.h"
 
 
 
@@ -63,6 +65,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	scene = new Scene(false);
 	inventory = new InventoryManager(false);
 	inventoryScreen = new InventoryScreen(false);
+	personajesScreen = new PersonajesScreen(false);
+	tienda = new Tienda(false);
 	characterMenu = new Character_Menu(false);
 	titlescreen = new TitleScreen(false);
 	introScreen = new IntroScreen(false);
@@ -102,6 +106,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 
 	AddModule(scene);
 	AddModule(inventoryScreen);
+	AddModule(personajesScreen);
+	AddModule(tienda);
 	AddModule(characterMenu);
 	AddModule(titlescreen);
 	AddModule(introScreen);

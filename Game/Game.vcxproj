@@ -115,6 +115,7 @@
     <ClCompile Include="Source\AnimationSet.cpp" />
     <ClCompile Include="Source\InventoryManager.cpp" />
     <ClCompile Include="Source\ItemData.cpp" />
+    <ClCompile Include="Source\PersonajesScreen.cpp" />
     <ClCompile Include="Source\Poison.cpp" />
     <ClCompile Include="Source\Character_Menu.cpp" />
     <ClCompile Include="Source\DebugCommands.h" />
@@ -158,6 +159,8 @@
     <ClCompile Include="Source\SrBestia.cpp" />
     <ClCompile Include="Source\TeamScreen.cpp" />
     <ClCompile Include="Source\Textures.cpp" />
+    <ClCompile Include="Source\Tienda.cpp" />
+    <ClCompile Include="Source\TiendaOpen.cpp" />
     <ClCompile Include="Source\Timer.cpp" />
     <ClCompile Include="Source\Vagabundo.cpp" />
     <ClCompile Include="Source\Veterana.cpp" />
@@ -187,6 +190,7 @@
     <ClInclude Include="Source\EnumUtils.h" />
     <ClInclude Include="Source\InventoryManager.h" />
     <ClInclude Include="Source\ItemData.h" />
+    <ClInclude Include="Source\PersonajesScreen.h" />
     <ClInclude Include="Source\Poison.h" />
     <ClInclude Include="Source\Character_Menu.h" />
     <ClInclude Include="Source\DebugConsole.h" />
@@ -234,6 +238,8 @@
     <ClInclude Include="Source\SrBestia.h" />
     <ClInclude Include="Source\TeamScreen.h" />
     <ClInclude Include="Source\Textures.h" />
+    <ClInclude Include="Source\Tienda.h" />
+    <ClInclude Include="Source\TiendaOpen.h" />
     <ClInclude Include="Source\Timer.h" />
     <ClInclude Include="Source\Vagabundo.h" />
     <ClInclude Include="Source\Veterana.h" />

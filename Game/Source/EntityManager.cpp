@@ -26,6 +26,7 @@
 #include "OsoCarpintero.h"
 #include "Kiwi.h"
 #include "Sisebuto.h"
+#include "TiendaOpen.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -181,6 +182,9 @@ Entity* EntityManager::CreateEntity(EntityType type, pugi::xml_node& data)
 		break;
 	case EntityType::VELOCIDAD:
 		entity = new Velocidad();
+		break;
+	case EntityType::TIENDAOPEN:
+		entity = new TiendaOpen();
 		break;
 	case EntityType::DIALOG_TRIGGER:
 		entity = new DialogTrigger();
