@@ -9,6 +9,7 @@
 #include "SDL_ttf/include/SDL_ttf.h"
 #include "Textures.h"
 
+
 class DialogManager : public Module
 {
 public:
@@ -32,6 +33,10 @@ public:
 
 	//Funcion para crear dialogos
 	Dialog* CreateDialogs(pugi::xml_node itemNode, std::string name = "", const char* faceTexturePath = "", const char* font = "primary", int id = 0, int mapID = 0);
+
+	// Crea un dialogo simple con solo texto
+	Dialog* CreateSimpleDialog(std::string text);
+
 	//Funcion para añadir a la lista de dialogos
 	bool AddDialog(Dialog* dialog);
 

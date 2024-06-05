@@ -23,7 +23,10 @@ public:
 	// Aumenta o reduce el ataque/defensa para el ataque que se esta calculando. Devuelve true si el ataque es interrumpido por el estado alterado
 	virtual bool ApplyToAttack(float& defMultiplier, float& atkMultiplier) = 0;
 
+	virtual std::string GetApplicationMsg() const { return (applicationMsg+name); }
+
 	std::string name;
+	std::string applicationMsg = "Se ha aplicado el estado alterado ";
 	int duration;
 	int timePassed = 0;
 };

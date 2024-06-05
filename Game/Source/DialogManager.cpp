@@ -103,6 +103,18 @@ Dialog* DialogManager::CreateDialogs(pugi::xml_node itemNode, std::string name, 
 	return dialog;
 }
 
+Dialog* DialogManager::CreateSimpleDialog(std::string text)
+{
+	Dialog* d = new Dialog(text);
+		d->name = "";
+		d->face_tex = nullptr;
+		d->font = FontSelector("primary");
+		d->id = 0;
+		d->mapId = 0;
+
+	return d;
+}
+
 bool DialogManager::AddDialog(Dialog* dialog)
 {
 	dialogues.Add(dialog);
@@ -112,7 +124,8 @@ bool DialogManager::AddDialog(Dialog* dialog)
 bool DialogManager::ShowDialog(Dialog* dialog)
 {
 	//Mostrar fondo
-	app->render->DrawTexture(background_tex.get(), dialogPosition.x, dialogPosition.y, 0, 0);
+	if (background_tex.get())
+		app->render->DrawTexture(background_tex.get(), dialogPosition.x, dialogPosition.y, 0, 0);
 
 	std::string actualText = dialog->sentence.substr(0, indexText);
 	
@@ -144,7 +157,8 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 
 	//Textura dialogo
 	textTexture = CreateTextTexture(dialog->font, actualText.c_str(), textColor, _textBoundWidth);
-	app->render->DrawTexture(textTexture, _dialogPosition.x, _dialogPosition.y, 0, 0);
+	if (textTexture)
+		app->render->DrawTexture(textTexture, _dialogPosition.x, _dialogPosition.y, 0, 0);
 	
 	//Imagen del personaje
 	if (dialog->face_tex != nullptr) {
@@ -156,7 +170,8 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 
 	//Nombre personaje
 	textNameTexture = CreateTextTexture(app->render->primary_font, dialog->name.c_str(), textColor, textNameBoundWidth);
-	app->render->DrawTexture(textNameTexture, dialogMargin[3]+ dialogPosition.x + namePosition.x, dialogMargin[0] + dialogPosition.y + namePosition.y, 0, 0);
+	if (textNameTexture)
+		app->render->DrawTexture(textNameTexture, dialogMargin[3]+ dialogPosition.x + namePosition.x, dialogMargin[0] + dialogPosition.y + namePosition.y, 0, 0);
 
 
 	//Opciones
@@ -174,6 +189,7 @@ bool DialogManager::ShowDialog(Dialog* dialog)
 
 	
 
+	// [Roger] Correccion: liberacion de memoria, lo cual debe hacerse siempre que se use la palabra clave 'new' de forma directa o indirecta
 	//Optimizacion de la memoria
 	SDL_DestroyTexture(textTexture);
 	SDL_DestroyTexture(textNameTexture);

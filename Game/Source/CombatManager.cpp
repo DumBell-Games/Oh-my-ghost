@@ -30,18 +30,18 @@ CombatManager::CombatManager(bool startEnabled) : Module(startEnabled)
 	// CODIGO PARA DEBUG, NO DEFINITIVO (supuestamente)
 
 	Personatge* p1 = new Personatge("PJ Tutorial", 10, 10, 5, 2, "Assets/Animation/Springy/SpringyFantasma.xml");
-	p1->atacs.push_back(Atac("Cop de puny1", 10, "Assets/Screen/Combat/Skill.png"));
-	p1->atacs.push_back(Atac("Cop de puny2", 10, "Assets/Screen/Combat/Skill.png"));
-	p1->atacs.push_back(Atac("Cop de puny3", 10, "Assets/Screen/Combat/Skill.png"));
-	p1->atacs.push_back(Atac("Cop de puny4", 10, "Assets/Screen/Combat/Skill.png"));
-	p1->atacs.push_back(Atac("Ultimate", 10, "Assets/Screen/Combat/Skill.png"));
+	p1->atacs.push_back(Atac("Cop de puny1", 10, false, "Assets/Screen/Combat/Skill.png", "Skill1"));
+	p1->atacs.push_back(Atac("Cop de puny2", 10, false, "Assets/Screen/Combat/Skill.png", "Skill2"));
+	p1->atacs.push_back(Atac("Cop de puny3", 10, false, "Assets/Screen/Combat/Skill.png", "Skill1"));
+	p1->atacs.push_back(Atac("Cop de puny4", 10, false, "Assets/Screen/Combat/Skill.png", "Skill2"));
+	p1->atacs.push_back(Atac("Ultimate", 10, true, "Assets/Screen/Combat/Skill.png", "Skill1"));
 	data.allies.push_back(p1);
 	Personatge* p2 = new Personatge("PJ PostTutorial", 5, 30, 2, 1, "Assets/Animation/Springy/SpringyPaloma.xml");
-	p2->atacs.push_back(Atac("Puntada de peu1", 15, "Assets/Screen/Combat/Skill.png"));
-	p2->atacs.push_back(Atac("Puntada de peu2", 15, "Assets/Screen/Combat/Skill.png"));
-	p2->atacs.push_back(Atac("Puntada de peu3", 15, "Assets/Screen/Combat/Skill.png"));
-	p2->atacs.push_back(Atac("Puntada de peu4", 15, "Assets/Screen/Combat/Skill.png"));
-	p2->atacs.push_back(Atac("Ultimate", 25, "Assets/Screen/Combat/Skill.png"));
+	p2->atacs.push_back(Atac("Puntada de peu1", 15, false, "Assets/Screen/Combat/Skill.png", "Skill1"));
+	p2->atacs.push_back(Atac("Puntada de peu2", 15, false, "Assets/Screen/Combat/Skill.png", "Skill2"));
+	p2->atacs.push_back(Atac("Puntada de peu3", 15, false, "Assets/Screen/Combat/Skill.png", "Skill1"));
+	p2->atacs.push_back(Atac("Puntada de peu4", 15, false, "Assets/Screen/Combat/Skill.png", "Skill2"));
+	p2->atacs.push_back(Atac("Ultimate", 25, true, "Assets/Screen/Combat/Skill.png", "Skill1"));
 	data.allies.push_back(p2);
 
 	// FIN CODIGO PARA DEBUG
@@ -55,13 +55,20 @@ CombatManager::~CombatManager()
 bool CombatManager::PostInit()
 {
 	app->console->AddCommand("debugcombat", "Inicia un combate con un enemigo de prueba", "debugcombat", [this](std::vector<std::string> args) {
+		// El enemigo tiene el mismo ataque varias veces porque por ahora la IA no tiene preferencias por determinados ataques, asi que para hacer que no haga casi siempre la ulti se ponen duplicados (si, lo se, esto es un desperdicio de memoria, pero en este caso son menos de 100 bytes por cada ataque)
 		data.enemy = dummyEnemy = new Personatge("dummy", 1, 10, 1, 10);
-		dummyEnemy->atacs.push_back(Atac("Mordisco1", 5));
-		dummyEnemy->atacs.push_back(Atac("Mordisco2", 5));
-		dummyEnemy->atacs.push_back(Atac("Mordisco3", 5));
-		dummyEnemy->atacs.push_back(Atac("Mordisco4", 5));
-		dummyEnemy->atacs.push_back(Atac("Ultimate", 25));
-		app->reload->QueueReload("combatStart");
+		dummyEnemy->atacs.push_back(Atac("Mordisco1", 5, false, "", "Skill1"));
+		dummyEnemy->atacs.push_back(Atac("Mordisco2", 5, false, "", "Skill2"));
+		dummyEnemy->atacs.push_back(Atac("Mordisco1", 5, false, "", "Skill1"));
+		dummyEnemy->atacs.push_back(Atac("Mordisco2", 5, false, "", "Skill2"));
+		dummyEnemy->atacs.push_back(Atac("Mordisco1", 5, false, "", "Skill1"));
+		dummyEnemy->atacs.push_back(Atac("Mordisco2", 5, false, "", "Skill2"));
+		dummyEnemy->atacs.push_back(Atac("Mordisco1", 5, false, "", "Skill1"));
+		dummyEnemy->atacs.push_back(Atac("Mordisco2", 5, false, "", "Skill2"));
+		dummyEnemy->atacs.push_back(Atac("Mordisco1", 5, false, "", "Skill1"));
+		dummyEnemy->atacs.push_back(Atac("Mordisco2", 5, false, "", "Skill2"));
+		dummyEnemy->atacs.push_back(Atac("Ultimate", 25, true, "", "Skill1"));
+		BeginCombat(dummyEnemy, pugi::xml_node(), pugi::xml_node());
 		});
 	return true;
 }
@@ -269,7 +276,7 @@ void CombatManager::BeginCombat(Personatge* enemy, pugi::xml_node startDialogue,
 {
 	data.enemy = enemy;
 	LoadDialogs(startDialogue, endDialogue);
-	Enable();
+	app->reload->QueueReload("combatStart");
 }
 
 GuiControl* CombatManager::NewButton(GuiControlType type, char menuID, char elementID, const char* text, SDL_Rect bounds, GuiCallback_f onClick, bool independentPtr, SDL_Rect sliderBounds)
@@ -501,7 +508,7 @@ void CombatManager::CreateItemButtons(InventoryManager* inv)
 				accion = PlayerAction::ITEM;
 				combatState = CombatState::COMBAT;
 				};
-			GuiControlPhysButton* newButton = (GuiControlPhysButton*)NewButton(GuiControlType::PHYSBUTTON_BOX, 3, i, item->name.GetString(), bounds, func);
+			GuiControlPhysButton* newButton = (GuiControlPhysButton*)NewButton(GuiControlType::PHYSBUTTON_BOX, 3, i, item->name.c_str(), bounds, func);
 
 
 			menuList[enum2val(Menus::ITEM)].push_back(newButton);
@@ -648,8 +655,10 @@ void CombatManager::HandleMenu()
 
 void CombatManager::HandleCombat()
 {
-	//Esconde los menus
-	ResetButtonsState();
+	//Esconde los menus. Menu de ataque siempre es visible
+	ResetButtonsState(GuiControlState::DISABLED);
+	for (GuiControl* m : menuList[enum2val(Menus::ATTACK)])
+	{	m->state = GuiControlState::NON_CLICKABLE;	}
 	currentMenu = Menus::MAIN;
 	currentElement = 0;
 	HandleMenu();
@@ -660,6 +669,9 @@ void CombatManager::HandleCombat()
 	Personatge* ally = data.allies[data.activeAlly];
 	Personatge* enemy = data.enemy;
 
+	// Crea primer bloque de texto + animacion
+	currentTurnStep = 0;
+	turnResults.push_back(new TurnStep());
 	//Check accion aliada, usa objeto o ataca
 	switch (accion)
 	{
@@ -667,8 +679,11 @@ void CombatManager::HandleCombat()
 	{
 		if (ataqueAliado)
 		{
-			DoAttack(ally, enemy, ataqueAliado);
-			// Activar animacion de ataque aqui
+			if (DoAttack(ally, enemy, ataqueAliado))
+			{
+				turnResults.back()->allyAnimationID = playerAnims->GetAnimationId(ataqueAliado->animationID);
+				turnResults.back()->enemyAnimationID = enemyAnims->GetAnimationId("Hurt");
+			}
 		}
 		ataqueAliado = nullptr;
 		break;
@@ -678,12 +693,13 @@ void CombatManager::HandleCombat()
 		if (objetoAliado)
 		{
 			UseItem(data.allies[data.activeAlly], objetoAliado);
-			// Activar animacion de objeto aqui
+			// Activar animacion de objeto aqui (?)
 		}
 		break;
 	}
 	case PlayerAction::CHANGE:
 	{
+		// Esta parte del codigo no está en uso
 		if (nuevoAliadoActivo > -1)
 		{
 			SwapCharacter(nuevoAliadoActivo);
@@ -695,12 +711,17 @@ void CombatManager::HandleCombat()
 		break;
 	}
 
+	// Crea segundo bloque de texto + animacion
+	turnResults.push_back(new TurnStep());
+
 	// TODO implementar orden de turnos
 	if (ataqueEnemigo) {
-		DoAttack(enemy, ally, ataqueEnemigo);
+		if (DoAttack(enemy, ally, ataqueEnemigo))
+		{
+			turnResults.back()->enemyAnimationID = enemyAnims->GetAnimationId(ataqueEnemigo->animationID);
+			turnResults.back()->allyAnimationID = playerAnims->GetAnimationId("Hurt");
+		}
 	}
-
-	//Check animacion completada, si no se ha terminado no pases de este punto y espera al siguiente frame
 
 	// Accion completada, resetea las variables para nuevo turno
 	ataqueAliado = ataqueEnemigo = nullptr;
@@ -719,20 +740,85 @@ void CombatManager::EnemyChoice()
 
 void CombatManager::HandleCombatAnimation()
 {
-	if (CombatFinished())
+	//Check animacion completada
+	if (turnResults.size() > 0)
 	{
-		ListItem<Dialog*>* item;
-		Dialog* pDialog = nullptr;
+		bool stepFinished = false;
+		TurnStep* currentStep = turnResults[currentTurnStep];
 
-		for (item = endDialogue.start; item != NULL; item = item->next)
+		// El primer frame en el que se accede a esta funcion cada turno se activan las animaciones y el dialogo
+		if (!currentStep->started)
 		{
-			pDialog = item->data;
-			app->dialogManager->AddDialog(pDialog);
-		}
+			if (!currentStep->video)
+			{
+				playerAnims->SetAnimation(currentStep->allyAnimationID);
+				enemyAnims->SetAnimation(currentStep->enemyAnimationID);
 
-		combatState = CombatState::DIALOG_END;
+				for (Dialog*& item : currentStep->dialogs)
+				{
+					app->dialogManager->AddDialog(item);
+				}
+			}
+			else
+			{
+				// Ataques ultimate tienen su propio TurnStep con solamente el video
+				// TODO Reproducir video
+			}
+
+			currentStep->started = true;
+		}
+		else
+		{
+			if (!currentStep->video)
+			{
+				if (!app->dialogManager->isPlaying && (playerAnims->GetCurrent().HasFinished() || playerAnims->GetCurrent().loop) && (enemyAnims->GetCurrent().HasFinished() || enemyAnims->GetCurrent().loop))
+				{
+					stepFinished = true;
+				}
+			}
+			else
+			{
+				// Comprueba si ha terminado el video
+				stepFinished = true;
+			}
+		}
+		
+		// Limpia la lista de animaciones y dialogos una vez se han reproducido todos, indicando fin de turno
+		if (stepFinished)
+		{
+			// Incrementa el contador. Si ha salido fuera del vector, indica que ya se han terminado de reproducir animaciones y dialogos de turno
+			if (++currentTurnStep >= turnResults.size())
+			{
+				for (TurnStep*& i : turnResults)
+				{
+					RELEASE(i);
+				}
+				turnResults.clear();
+				currentTurnStep = 0;
+			}
+		}
 	}
-	else combatState = CombatState::MENU;
+	else
+	{
+		playerAnims->SetAnimation("IdleCombat");
+		enemyAnims->SetAnimation("IdleCombat");
+
+		// Fin de turno. Si ha terminado el combate muestra dialogo de fin de combate, en caso contrario vuelve a los menus
+		if (CombatFinished())
+		{
+			ListItem<Dialog*>* item;
+			Dialog* pDialog = nullptr;
+
+			for (item = endDialogue.start; item != NULL; item = item->next)
+			{
+				pDialog = item->data;
+				app->dialogManager->AddDialog(pDialog);
+			}
+
+			combatState = CombatState::DIALOG_END;
+		}
+		else combatState = CombatState::MENU;
+	}
 }
 
 void CombatManager::HandleEndDialog()
@@ -748,7 +834,8 @@ void CombatManager::HandleEnd()
 	combatState = CombatState::DO_NOTHING;
 }
 
-void CombatManager::DoAttack(Personatge* attacker, Personatge* defender, Atac* move)
+// Calcula el daño efectuado, devuelve si el ataque se ha efectuado o no
+bool CombatManager::DoAttack(Personatge* attacker, Personatge* defender, Atac* move)
 {
 	//TODO añadir precision (posibilidad de fallar el ataque)
 	float attackerDefMult = 1, attackerAtkMult = 1;
@@ -757,17 +844,36 @@ void CombatManager::DoAttack(Personatge* attacker, Personatge* defender, Atac* m
 	// Si los estados alterados que tengan el atacante y el atacado afectan al ataque y la defensa respectivamente, se aplican los multiplicadores adecuados. Tambien pueden interrumpir el ataque (paralisis)
 	if (attacker->activeStatus)
 		attackInterrupted = attacker->activeStatus->ApplyToAttack(attackerDefMult, attackerAtkMult);
+	
+	// La interrupcion de ataque no aplica por parte del objetivo
 	if (defender->activeStatus)
 		defender->activeStatus->ApplyToAttack(defenderDefMult, defenderAtkMult);
 	if (!attackInterrupted) {
-		int finalAtk = ((float)(attacker->atac * move->potencia * attackerAtkMult) / (float)(5 * defender->defensa * defenderDefMult)); // damage = [(atk*pow*atkMultiplier)/(25*def*defMultiplier)]
+
+		int finalAtk = ((float)(attacker->atac * move->potencia * attackerAtkMult) / (float)(5 * defender->defensa * defenderDefMult)); // damage = [(atk*pow*atkMultiplier)/(5*def*defMultiplier)]
+
 		defender->rebreDanys(finalAtk);
+		// Crea una linea de dialogo para mostrar al jugador el ataque que ha lanzado el personaje
+		turnResults.back()->dialogs.push_back(app->dialogManager->CreateSimpleDialog(attacker->nom + " usa " + move->nom + "!"));
+
+		// Comprueba si el objetivo tiene un estado alterado, si no lo tiene, comprueba si se aplica estado alterado, si se aplica, se guarda en los datos de personaje y añade el mensaje a la cola
+		if (defender->activeStatus.get() == nullptr && (rng() % 100) < move->probEstat)
+		{
+			defender->activeStatus = std::unique_ptr<StatusEffect>(move->status);
+			turnResults.back()->dialogs.push_back(app->dialogManager->CreateSimpleDialog(move->status->GetApplicationMsg()));
+		}
 	}
+	else
+	{
+		turnResults.back()->dialogs.push_back(app->dialogManager->CreateSimpleDialog(attacker->nom + " no pudo atacar."));
+	}
+	return !attackInterrupted;
 
 }
 
 void CombatManager::UseItem(Personatge* target, ItemData* item)
 {
+	turnResults.back()->dialogs.push_back(app->dialogManager->CreateSimpleDialog(item->name+" usado sobre "+target->nom));
 	item->UseOn(target);
 }
 
@@ -806,11 +912,11 @@ void CombatManager::Flee(GuiControl* ctrl)
 	combatState = CombatState::COMBAT_ANIM;
 }
 
-void CombatManager::ResetButtonsState()
+void CombatManager::ResetButtonsState(GuiControlState state)
 {
 	for (std::vector<GuiControl*>& menu : menuList)
 		for (GuiControl* g : menu)
-			g->state = GuiControlState::NORMAL;
+			g->state = state;
 }
 
 void CombatManager::LoadDialogs(pugi::xml_node startDialog, pugi::xml_node endDialog)

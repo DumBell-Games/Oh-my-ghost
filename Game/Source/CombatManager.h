@@ -54,6 +54,25 @@ enum class MenuDirection
 	UP_LEFT
 };
 
+struct TurnStep
+{
+	~TurnStep()
+	{
+		for (Dialog*& item : dialogs)
+		{
+			RELEASE(item);
+		}
+		dialogs.clear();
+	}
+
+	bool started = false;
+	int allyAnimationID = -1;
+	int enemyAnimationID = -1;
+	std::vector<Dialog*> dialogs;
+	bool video = false;
+	std::string videoPath = "";
+};
+
 struct CombatData
 {
 	CombatData() {}
@@ -136,7 +155,7 @@ private:
 
 	// Realizacion de acciones
 
-	void DoAttack(Personatge* attacker, Personatge* defender, Atac* move);
+	bool DoAttack(Personatge* attacker, Personatge* defender, Atac* move);
 
 	void UseItem(Personatge* target, ItemData* item);
 
@@ -152,7 +171,7 @@ private:
 
 	void Flee(GuiControl* ctrl);
 
-	void ResetButtonsState();
+	void ResetButtonsState(GuiControlState state = GuiControlState::NORMAL);
 
 	// Dialog functions
 
@@ -198,6 +217,10 @@ private:
 	int nuevoAliadoActivo = -1;
 	Atac* ataqueEnemigo = nullptr;
 
+	std::vector<TurnStep*> turnResults;
+
+	int currentTurnStep = 0;
+
 	// Animation sets and positions (+ defaults if no layout found)
 
 	iPoint playerPos = { 200,1080 };
@@ -218,5 +241,7 @@ private:
 	// DEBUG VARS
 	Personatge* dummyEnemy = nullptr;
 
+
+	friend ItemData;
 };
 

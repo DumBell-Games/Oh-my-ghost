@@ -41,14 +41,10 @@ public:
 
 	void SetAnimation(SString name);
 
-	void SetAnimation(int index)
-	{
-		if (index >= 0 && index < animations.size())
-		{
-			activeAnimation = index;
-			animations[activeAnimation].Reset();
-		}
-	}
+	void SetAnimation(int index);
+
+	int GetAnimationId(SString name);
+
 	Animation& GetCurrent() { return animations[activeAnimation]; }
 	SDL_Texture* GetTextureRawPointer() { return texture.get(); }
 

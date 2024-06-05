@@ -19,8 +19,10 @@ public:
     StatusEffect* status = nullptr;
     int probEstat = 0; // % de probabilitat
     Objectiu objectiu = RIVAL;
+    std::string animationID = "";
+    bool isUltimate = false;
 
-    Atac(std::string _nom, int _potencia, const char* _iconPath = "Assets/Screen/Combat/Skill.png") : nom(_nom), potencia(_potencia), iconPath(_iconPath) {}
+    Atac(std::string _nom, int _potencia, bool _isUltimate = false, const char* _iconPath = "Assets/Screen/Combat/Skill.png", const char* animID = "Idle") : nom(_nom), potencia(_potencia), iconPath(_iconPath), animationID(animID) {}
 };
 
 

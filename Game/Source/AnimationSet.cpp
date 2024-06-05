@@ -21,6 +21,7 @@ AnimationSet::~AnimationSet()
 
 void AnimationSet::SetAnimation(SString name) {
 	bool found = false;
+	if (name != "") // Don't bother searching if string is empty
 	for (size_t i = 0; i < animations.size() && !found; i++)
 	{
 		if (animations[i].name == name)
@@ -31,6 +32,29 @@ void AnimationSet::SetAnimation(SString name) {
 	}
 	if (!found)
 		LOG("Animation \"%s\" not found", name.GetString());
+}
+
+void AnimationSet::SetAnimation(int index)
+{
+	if (IN_RANGE(index, 0, animations.size() - 1))
+	{
+		activeAnimation = index;
+		animations[activeAnimation].Reset();
+	}
+}
+
+int AnimationSet::GetAnimationId(SString name)
+{
+	if (name != "") // Don't bother searching if string is empty
+		for (size_t i = 0; i < animations.size(); i++)
+		{
+			if (animations[i].name == name)
+			{
+				return i;
+			}
+		}
+	LOG("Animation \"%s\" not found", name.GetString());
+	return -1;
 }
 
 // Loads a set of animations from an XML-formatted TexturePacker sprite sheet
@@ -68,9 +92,9 @@ void AnimationSet::LoadAnimSet(const char* animPath)
 		a.name = nameComp[0];
 
 		// If the specific animation parameters are not found on the first frame, use the animation set's default values
-		a.speed = rootNode.attribute("speed").as_float(animSpeed);
-		a.loop = rootNode.attribute("loop").as_bool(animLoop);
-		a.pingpong = rootNode.attribute("pingpong").as_bool(animPingpong);
+		a.speed = frameNode.attribute("speed").as_float(animSpeed);
+		a.loop = frameNode.attribute("loop").as_bool(animLoop);
+		a.pingpong = frameNode.attribute("pingpong").as_bool(animPingpong);
 
 		// All consecutive sprites with the same name are part of the same animation
 		while (frameNode != NULL && a.name == nameComp[0])
