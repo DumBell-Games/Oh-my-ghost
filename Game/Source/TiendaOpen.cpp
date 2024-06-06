@@ -24,14 +24,16 @@ TiendaOpen::~TiendaOpen() {
 
 bool TiendaOpen::Awake() {
 
+	position.x = parameters.attribute("x").as_int();
+	position.y = parameters.attribute("y").as_int();
 	return true;
 }
 
 bool TiendaOpen::Start() {
 
-	nBody = app->physics->CreateRectangle(8450 + 128, 1566, 485, 126, bodyType::KINEMATIC);
+	nBody = app->physics->CreateRectangleSensor(position.x + 256, position.y + 128, 485, 126, bodyType::KINEMATIC);
 	//haz que el rectangulo no rote
-	nBody->body->SetFixedRotation(true);
+	nBody->listener = this;
 	nBody->ctype = ColliderType::TIENDAOPEN;
 
 	return true;
@@ -44,13 +46,11 @@ bool TiendaOpen::PreUpdate()
 
 bool TiendaOpen::Update(float dt)
 {	
-	if (playerTouched)
+	/*if (playerTouched)
 	{
-		app->tienda->Enable();
-		app->entityManager->Pause();
-		playerTouched = false;
+		nBody->body->SetTransform(b2Vec2(position.x + 256, position.y), 0);
 	}
-
+	*/
 	return true;
 }
 
@@ -71,7 +71,24 @@ void TiendaOpen::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER:
 		LOG("Collision PLAYER");
-		playerTouched = true;
+		break;
+	default:
+		break;
+	}
+}
+
+//out collision
+void TiendaOpen::OutCollision(PhysBody* physA, PhysBody* physB) {
+	switch (physB->ctype)
+	{
+	case ColliderType::PLATFORM:
+		LOG("Collision PLATFORM");
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("Collision UNKNOWN");
+		break;
+	case ColliderType::PLAYER:
+		LOG("Collision PLAYER");
 		break;
 	default:
 		break;

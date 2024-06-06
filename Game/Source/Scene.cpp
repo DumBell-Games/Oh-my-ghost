@@ -45,6 +45,7 @@
 #include "MusicaTaberna.h"
 #include "PersonajesScreen.h"
 #include "Tienda.h"
+#include "TiendaOpen.h"
 
 
 #include "Defs.h"
@@ -188,6 +189,11 @@ bool Scene::Awake(pugi::xml_node config)
 		Sisebuto* sisebuto = (Sisebuto*)app->entityManager->CreateEntity(EntityType::SISEBUTO, itemNode);
 		//enemy->parameters = itemNode;
 	}
+	for (pugi::xml_node itemNode = config.child("tiendaOpen"); itemNode; itemNode = itemNode.next_sibling("tiendaOpen"))
+	{
+		TiendaOpen* tiendaOpen = (TiendaOpen*)app->entityManager->CreateEntity(EntityType::TIENDAOPEN, itemNode);
+		//enemy->parameters = itemNode;
+	}
 
 
 	awoken = true;
@@ -272,10 +278,6 @@ bool Scene::Update(float dt)
 	}
 	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {
 		app->personajesScreen->Enable();
-		app->entityManager->Pause();
-	}
-	if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) {
-		app->tienda->Enable();
 		app->entityManager->Pause();
 	}
 

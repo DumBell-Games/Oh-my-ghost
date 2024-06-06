@@ -31,6 +31,9 @@ public:
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
+	//out collision
+	void OutCollision(PhysBody* physA, PhysBody* physB);
+
 	void StartAnims();
 
 	Animation* GetAnimation(SString name);

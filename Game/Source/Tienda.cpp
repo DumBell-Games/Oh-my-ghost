@@ -18,7 +18,6 @@
 #include "ItemVelocidad.h"
 #include "ItemYogur.h"
 
-
 Tienda::Tienda(bool startEnabled) : Module(startEnabled)
 {
     name.Create("inventory");
@@ -59,12 +58,7 @@ bool Tienda::Start() {
 }
 bool Tienda::PreUpdate() {
         
-    if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN)
-    {
-        app->fadeToBlack->FadeToBlackTransition(this, (Module*)app->scene, 0);
-        app->entityManager->Play();
-    }
-
+   
 	return true;
 }
 bool Tienda::Update(float dt) {

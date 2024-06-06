@@ -179,7 +179,7 @@ bool Player::Update(float dt)
 
 	//move colliders of arcade-casino
 
-	
+
 
 	if (app->dialogManager->isPlaying) {
 		canMove = false;
@@ -217,34 +217,39 @@ bool Player::Update(float dt)
 		currentAnim = cambioCuerpo;
 		currentAnim->Reset();
 		currentAnim->Update();
-	
+
 	}
 	if (app->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN && currentTexture == textureGhost)
 	{
 		currentAnim = cambioCuerpoF;
 		currentAnim->Reset();
 		currentAnim->Update();
-		
+
 	}
 	//L03: DONE 4: render the player texture and modify the position of the player using WSAD keys and render the texture
-	
-	
+
+
 	if (canMove) {
 		fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
 		KeyState sprint = app->input->GetButton(BACK);
-		float speed = (sprint == KEY_REPEAT) ? 0.5f : 0.2f;	
-		
+		float speed = (sprint == KEY_REPEAT) ? 0.5f : 0.2f;
+
 		b2Vec2 impulse = b2Vec2_zero;
 
 		impulse.x += speed * joystick.x * dt;
 		impulse.y += speed * joystick.y * dt;
 
 		pBody->body->SetLinearVelocity(impulse);
-		
+
 		b2Transform pBodyPos = pBody->body->GetTransform();
 
 		position.x = METERS_TO_PIXELS(pBodyPos.p.x) - 32 / 2;
 		position.y = METERS_TO_PIXELS(pBodyPos.p.y) - 32 / 2;
+
+		uint w, h;
+		app->win->GetWindowSize(w, h);
+		app->render->camera.x = (-position.x * app->win->GetScale()) + w / 2;
+		app->render->camera.y = (-position.y * app->win->GetScale()) + h / 2;
 
 	}
 
@@ -344,13 +349,9 @@ bool Player::Update(float dt)
 		}
 	}
 
-	
-	uint w, h;
-	app->win->GetWindowSize(w, h);
-	app->render->camera.x = (-position.x * app->win->GetScale()) + w / 2;
-	app->render->camera.y = (-position.y * app->win->GetScale()) + h / 2;
 
-	
+
+
 	if (casinoIN || app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
 	{
 		app->musicaCasino->Enable();
@@ -371,7 +372,7 @@ bool Player::Update(float dt)
 		arcadeIN = false;
 	}
 	if (arcadeOUT)
-	{	
+	{
 		app->musicaDisco->Disable();
 		app->musicaCiudad->Enable();
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(3104), PIXEL_TO_METERS(4934)), NULL);
@@ -398,7 +399,7 @@ bool Player::Update(float dt)
 		app->musicaCielo->Disable();
 		app->musicaCiudad->Enable();
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(8025), PIXEL_TO_METERS(6164)), NULL);
-		
+
 		currentAnim = vomito;
 		currentAnim->Update();
 		if (vomito->HasFinished())
@@ -425,7 +426,7 @@ bool Player::Update(float dt)
 	{
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(20866 + 128), PIXEL_TO_METERS(2126)), NULL);
 		despachoIN = false;
-	}	
+	}
 	if (despachoOUT)
 	{
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(18820 + 128), PIXEL_TO_METERS(3290)), NULL);
@@ -435,7 +436,7 @@ bool Player::Update(float dt)
 	{
 		currentAnim = cambioCuerpoF;
 		currentAnim->Update();
-		
+
 		if (currentAnim->HasFinished())
 		{
 			currentTexture = texturePlayer;
@@ -444,7 +445,7 @@ bool Player::Update(float dt)
 			palomaTouched = false;
 		}
 	}
-	
+
 	// esto se va a modificar cuando haya combate por if(combate1 == 1) etc (1 es ganado -1 es perdido)
 	if (aprendizTouched)
 	{
@@ -470,6 +471,22 @@ bool Player::Update(float dt)
 	if (veteranaTouched && position.x > 2817)
 	{
 		mansionOpen->body->SetTransform(b2Vec2_zero, 0);
+	}
+
+	if (tiendaIN)
+	{
+		canMove = false;
+		pBody->body->SetType(b2_staticBody);
+		currentTexture = nullptr;
+		app->scene->OpenTienda();
+
+	}
+	if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN){
+		tiendaIn = false;
+		canMove = true;
+		pBody->body->SetType(b2_dynamicBody);
+		currentTexture = texturePlayer;
+		app->scene->CloseTienda();
 	}
 	return true;
 }
@@ -569,6 +586,11 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::VETERANA:
 		LOG("Collision APRENDIZ");
 		veteranaTouched = true;
+		break;
+	case ColliderType::TIENDAOPEN:
+		LOG("Collision TIENDAOPEN");
+		tiendaIN = true;
+		canMove = false;
 		break;
 	default:
 		break;

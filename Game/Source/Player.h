@@ -74,6 +74,8 @@ public:
 	PhysBody* mansionOut;
 	PhysBody* despachoIn;
 	PhysBody* despachoOut;
+	PhysBody* tiendaIn;
+
 
     PhysBody* piso2Disco;
     PhysBody* piso3Disco;
@@ -96,6 +98,8 @@ public:
 	bool despachoOUT = false;
 	bool ciudadIN = false;
 	bool ciudadOUT = false;
+	bool tiendaIN = false;
+	bool tiendaOUT = false;
 
 	List<Animation*> springyAnimationList;
 

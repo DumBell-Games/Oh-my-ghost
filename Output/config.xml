@@ -354,6 +354,8 @@
 				<frame x="1152" y="4096" w="128" h="256" />
 			</animation>
 		</player>
+
+		<tiendaOpen x="8450" y="1546"/>
 		
 		<silverWings x="7100" y="6177" texturePath="Assets/Textures/silverWings.png">
 			<animation name="silverIdle" loop="true" speed="0.08f">
