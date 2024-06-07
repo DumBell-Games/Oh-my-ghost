@@ -22,6 +22,8 @@ public:
 
 	bool Start();
 
+	bool PreUpdate();
+
 	bool Update(float dt);
 
 	bool PostUpdate();
@@ -138,6 +140,8 @@ public:
 	bool bestiaTouched = false;
 	bool aprendizTouched = false;
 	bool veteranaTouched = false;
+
+	Timer openTiendaTime;
 
 
 	

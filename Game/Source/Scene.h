@@ -17,10 +17,11 @@
 #include "Map.h"
 #include "Tienda.h"
 #include "FadeToBlack.h"
+#include "Physics.h" 
 
 
 struct SDL_Texture;
-class Physbody;
+class PhysBody;
 
 class Scene : public Module
 {
@@ -149,6 +150,24 @@ public:
 		if (i) return i->cantidad;
 		else return cantidadMonedas;
 	}
+	
+	int RestarCincoMonedas() {
+		ItemData* i = app->inventory->GetItemByType(ItemType::MONEDAS);
+		if (i) return i->cantidad;
+		else return cantidadMonedas = cantidadMonedas - 5;
+	}
+
+	int RestarDiezMonedas() {
+		ItemData* i = app->inventory->GetItemByType(ItemType::MONEDAS);
+		if (i) return i->cantidad;
+		else return cantidadMonedas =  cantidadMonedas - 10;
+	}
+	
+	int RestarVeinteMonedas() {
+		ItemData* i = app->inventory->GetItemByType(ItemType::MONEDAS);
+		if (i) return i->cantidad;
+		else return cantidadMonedas = cantidadMonedas - 20;
+	}
 
 	int BestiaGift() {
 		ItemData* i = app->inventory->GetItemByType(ItemType::MONEDAS);
@@ -162,10 +181,15 @@ public:
 
 	void Scene::OpenTienda(){
 		app->tienda->Enable();
+		PlayerQuieto();
 	}
 
 	void Scene::CloseTienda() {
-		app->tienda->Disable();
+		app->fadeToBlack->FadeToBlackTransition((Module*) app->tienda, (Module*) app->scene, 0.0f);
+	}
+
+	void Scene::PlayerQuieto() {
+		return player->pBody->body->SetType(b2_staticBody);
 	}
 
 public:

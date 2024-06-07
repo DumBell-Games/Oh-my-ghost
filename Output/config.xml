@@ -355,7 +355,7 @@
 			</animation>
 		</player>
 
-		<tiendaOpen x="8450" y="1546"/>
+		<tiendaOpen x="8440" y="1500"/>
 		
 		<silverWings x="7100" y="6177" texturePath="Assets/Textures/silverWings.png">
 			<animation name="silverIdle" loop="true" speed="0.08f">
@@ -889,6 +889,8 @@
 				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="ya sabes jeje que Sisebuto nunca se pasa por casa jiji"/>
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="*No se a que se habrá referido pero me apetecen unos bombones"/>
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Ojalá sean de pescadito*"/>
+				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="Por cierto, acaban de abrir una nueva tienda en el pueblo"/>
+				<sentence name="Segismunda"	facetexturepath="Assets/Textures/Chibi_Segismunda.png" text="Por la primera compra, ¡te dan dinero! Mega oferta"/>
 
 			</sentences>
 		</dialogTrigger>

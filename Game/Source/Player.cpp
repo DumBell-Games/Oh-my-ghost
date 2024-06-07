@@ -88,6 +88,8 @@ bool Player::Awake() {
 bool Player::Start() {
 
 	PlayerStartAnims();
+
+	openTiendaTime.Start();
 	
 	texturePlayer = app->tex->LoadSP(parameters.attribute("texturePath").as_string(), true);
 	textureGhost = app->tex->LoadSP(parameters.attribute("ghostTexPath").as_string(), true);
@@ -229,7 +231,7 @@ bool Player::Update(float dt)
 	//L03: DONE 4: render the player texture and modify the position of the player using WSAD keys and render the texture
 
 
-	if (canMove) {
+	if (canMove && tiendaIN == false) {
 		fPoint joystick = app->input->GetAxis(MOVE_HORIZONTAL, MOVE_VERTICAL);
 		KeyState sprint = app->input->GetButton(BACK);
 		float speed = (sprint == KEY_REPEAT) ? 0.5f : 0.2f;
@@ -246,10 +248,7 @@ bool Player::Update(float dt)
 		position.x = METERS_TO_PIXELS(pBodyPos.p.x) - 32 / 2;
 		position.y = METERS_TO_PIXELS(pBodyPos.p.y) - 32 / 2;
 
-		uint w, h;
-		app->win->GetWindowSize(w, h);
-		app->render->camera.x = (-position.x * app->win->GetScale()) + w / 2;
-		app->render->camera.y = (-position.y * app->win->GetScale()) + h / 2;
+		
 
 	}
 
@@ -473,21 +472,27 @@ bool Player::Update(float dt)
 		mansionOpen->body->SetTransform(b2Vec2_zero, 0);
 	}
 
-	if (tiendaIN)
+	if (tiendaIN && openTiendaTime.ReadSec() >= 5)
 	{
-		canMove = false;
-		pBody->body->SetType(b2_staticBody);
-		currentTexture = nullptr;
 		app->scene->OpenTienda();
-
+		canMove = false;
+		currentTexture = nullptr;
+		openTiendaTime.Start();
 	}
-	if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN){
-		tiendaIn = false;
+	if (app->input->GetKey(SDL_SCANCODE_T) == KEY_DOWN) {
+		openTiendaTime.Start();
+		tiendaOUT = true;
+		tiendaIN = false;
+		app->scene->CloseTienda();
 		canMove = true;
 		pBody->body->SetType(b2_dynamicBody);
 		currentTexture = texturePlayer;
-		app->scene->CloseTienda();
 	}
+	uint w, h;
+	app->win->GetWindowSize(w, h);
+	app->render->camera.x = (-position.x * app->win->GetScale()) + w / 2;
+	app->render->camera.y = (-position.y * app->win->GetScale()) + h / 2;
+
 	return true;
 }
 
@@ -589,8 +594,7 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::TIENDAOPEN:
 		LOG("Collision TIENDAOPEN");
-		tiendaIN = true;
-		canMove = false;
+		tiendaIN = true;		
 		break;
 	default:
 		break;

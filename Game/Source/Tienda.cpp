@@ -17,6 +17,7 @@
 #include "ItemPatatas.h"
 #include "ItemVelocidad.h"
 #include "ItemYogur.h"
+#include "InventoryManager.h"
 
 Tienda::Tienda(bool startEnabled) : Module(startEnabled)
 {
@@ -62,7 +63,9 @@ bool Tienda::PreUpdate() {
 	return true;
 }
 bool Tienda::Update(float dt) {
-    
+
+    dineroActual.Create("%d", app->scene->GetMonedasQuantity());
+
     if (app->input->GetButton(ControlID::LEFT) == KEY_REPEAT) //izquierda
     {
         if (timer.ReadMSec() >= 200)
@@ -101,33 +104,145 @@ bool Tienda::Update(float dt) {
         inventoryButtons[menuIndex - 1]->NotifyMouseClick();
     }
 
-    if (menuIndex == 1) app->render->DrawTexture(tienda1.get(), 0, 0, 0, NULL);
-    else if (menuIndex == 2) app->render->DrawTexture(tienda2.get(), 0, 0, 0, NULL);
-    else if (menuIndex == 3) app->render->DrawTexture(tienda3.get(), 0, 0, 0, NULL);
-    else if (menuIndex == 4) app->render->DrawTexture(tienda4.get(), 0, 0, 0, NULL);
-    else if (menuIndex == 5) app->render->DrawTexture(tienda5.get(), 0, 0, 0, NULL);
-    else if (menuIndex == 6) app->render->DrawTexture(tienda6.get(), 0, 0, 0, NULL);
-    else if (menuIndex == 7) app->render->DrawTexture(tienda7.get(), 0, 0, 0, NULL);
-    else if (menuIndex == 8) app->render->DrawTexture(tienda8.get(), 0, 0, 0, NULL);
-    else if (menuIndex == 9) app->render->DrawTexture(tienda9.get(), 0, 0, 0, NULL);
-    else if (menuIndex == 10) app->render->DrawTexture(tienda10.get(), 0, 0, 0, NULL);
-    else if (menuIndex == 11) app->render->DrawTexture(tienda11.get(), 0, 0, 0, NULL);
+    if (menuIndex == 1) {
+        app->render->DrawTexture(tienda1.get(), 0, 0, 0, NULL);
+        if (app->scene->GetMonedasQuantity() > 4)
+        {
+            if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
+            {
+                app->scene->ColaPicked();
+                app->scene->RestarCincoMonedas();
+            }
+        }
+    }
+    else if (menuIndex == 2)
+    {
+        app->render->DrawTexture(tienda2.get(), 0, 0, 0, NULL);
+        if (app->scene->GetMonedasQuantity() > 9)
+        {
+            if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
+            {
+                app->scene->ColaPicked();
+                app->scene->ColaPicked();
+                app->scene->RestarDiezMonedas();
+            }
+        }
+    }
+    else if (menuIndex == 3) {
+        app->render->DrawTexture(tienda3.get(), 0, 0, 0, NULL);
+        if (app->scene->GetMonedasQuantity() > 4)
+        {
+            if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
+            {
+                app->scene->YogurPicked();
+                app->scene->RestarCincoMonedas();
+            }
+        }
+    }
+    else if (menuIndex == 4) {
+        app->render->DrawTexture(tienda4.get(), 0, 0, 0, NULL);
+        if (app->scene->GetMonedasQuantity() > 4)
+        {
+            if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
+            {
+                //chuches
+                app->scene->RestarCincoMonedas();
+            }
+        }
+    }
+    else if (menuIndex == 5) {
+        app->render->DrawTexture(tienda5.get(), 0, 0, 0, NULL);
+        if (app->scene->GetMonedasQuantity() > 4)
+        {
+            if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
+            {
+                app->scene->PatatasPicked();
+                app->scene->RestarCincoMonedas();
+            }
+        }
+    }
+    else if (menuIndex == 6) {
+        app->render->DrawTexture(tienda6.get(), 0, 0, 0, NULL);
+        if (app->scene->GetMonedasQuantity() > 4)
+        {
+            if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
+            {
+                //helado
+                app->scene->RestarCincoMonedas();
+            }
+        }
+    }
+    else if (menuIndex == 7) {
+        app->render->DrawTexture(tienda7.get(), 0, 0, 0, NULL);
+        if (app->scene->GetMonedasQuantity() > 4)
+        {
+            if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
+            {
+                app->scene->VelocidadPicked();
+                app->scene->RestarCincoMonedas();
+            }
+        }
+    }
+    else if (menuIndex == 8) {
+        app->render->DrawTexture(tienda8.get(), 0, 0, 0, NULL);
+        if (app->scene->GetMonedasQuantity() > 9)
+        {
+            if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
+            {
+                app->scene->VelocidadPicked();
+                app->scene->VelocidadPicked();
+                app->scene->RestarDiezMonedas();
+            }
+        }
+    }
+    else if (menuIndex == 9) {
+        app->render->DrawTexture(tienda9.get(), 0, 0, 0, NULL);
+        if (app->scene->GetMonedasQuantity() > 4)
+        {
+            if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
+            {
+                app->scene->BirraPicked();
+                app->scene->RestarCincoMonedas();
+            }
+        }
+    }
+    else if (menuIndex == 10) {
+        app->render->DrawTexture(tienda10.get(), 0, 0, 0, NULL);
+        if (app->scene->GetMonedasQuantity() > 19)
+        {
+            if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
+            {
+                app->scene->CaramelosPicked();
+                app->scene->RestarVeinteMonedas();
+            }
+        }
+    }
+    else if (menuIndex == 11){
+        app->render->DrawTexture(tienda11.get(), 0, 0, 0, NULL);
+        if (app->scene->GetMonedasQuantity() > 4)
+        {
+            if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
+            {
+				//pastel
+				app->scene->RestarCincoMonedas();
+			}
+		}
+    }
     else if (menuIndex == 12) app->render->DrawTexture(tienda12.get(), 0, 0, 0, NULL);
     else if (menuIndex == 13) app->render->DrawTexture(tienda13.get(), 0, 0, 0, NULL);
     
-    
+  
     return true;
 }
 
 bool Tienda::PostUpdate() {
 
-	
+	app->render->DrawText(dineroActual.GetString(), 110, 50, 64, 64);
 	return true;
 }
 
 
 bool Tienda::CleanUp(){
-
 
 	if (tienda1 != nullptr)
 	{
