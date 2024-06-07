@@ -18,6 +18,7 @@
 #include "ItemVelocidad.h"
 #include "ItemYogur.h"
 #include "InventoryManager.h"
+#include "MusicaCiudad.h"
 
 Tienda::Tienda(bool startEnabled) : Module(startEnabled)
 {
@@ -53,7 +54,12 @@ bool Tienda::Start() {
 
 	SDL_GetWindowSize(app->win->window, &screenWidth, &screenHeight);
 
+    buyFx = app->audio->LoadFx("Assets/Audio/Fx/buy.wav");
+    tiendaMusic = app->audio->LoadFx("Assets/Audio/Fx/tiendaFx.wav");
+
     CreateInventoryButtons();
+
+    app->audio->PlayFx(tiendaMusic, 100);
 
 	return true;
 }
@@ -111,6 +117,7 @@ bool Tienda::Update(float dt) {
             if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
             {
                 app->scene->ColaPicked();
+                app->audio->PlayFx(buyFx);
                 app->scene->RestarCincoMonedas();
             }
         }
@@ -124,6 +131,7 @@ bool Tienda::Update(float dt) {
             {
                 app->scene->ColaPicked();
                 app->scene->ColaPicked();
+                app->audio->PlayFx(buyFx);
                 app->scene->RestarDiezMonedas();
             }
         }
@@ -135,6 +143,7 @@ bool Tienda::Update(float dt) {
             if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
             {
                 app->scene->YogurPicked();
+                app->audio->PlayFx(buyFx);
                 app->scene->RestarCincoMonedas();
             }
         }
@@ -146,6 +155,7 @@ bool Tienda::Update(float dt) {
             if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
             {
                 //chuches
+                app->audio->PlayFx(buyFx);
                 app->scene->RestarCincoMonedas();
             }
         }
@@ -157,6 +167,7 @@ bool Tienda::Update(float dt) {
             if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
             {
                 app->scene->PatatasPicked();
+                app->audio->PlayFx(buyFx);
                 app->scene->RestarCincoMonedas();
             }
         }
@@ -168,6 +179,7 @@ bool Tienda::Update(float dt) {
             if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
             {
                 //helado
+                app->audio->PlayFx(buyFx);
                 app->scene->RestarCincoMonedas();
             }
         }
@@ -179,6 +191,7 @@ bool Tienda::Update(float dt) {
             if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
             {
                 app->scene->VelocidadPicked();
+                app->audio->PlayFx(buyFx);
                 app->scene->RestarCincoMonedas();
             }
         }
@@ -191,6 +204,7 @@ bool Tienda::Update(float dt) {
             {
                 app->scene->VelocidadPicked();
                 app->scene->VelocidadPicked();
+                app->audio->PlayFx(buyFx);
                 app->scene->RestarDiezMonedas();
             }
         }
@@ -202,6 +216,7 @@ bool Tienda::Update(float dt) {
             if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
             {
                 app->scene->BirraPicked();
+                app->audio->PlayFx(buyFx);
                 app->scene->RestarCincoMonedas();
             }
         }
@@ -213,6 +228,7 @@ bool Tienda::Update(float dt) {
             if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
             {
                 app->scene->CaramelosPicked();
+                app->audio->PlayFx(buyFx);
                 app->scene->RestarVeinteMonedas();
             }
         }
@@ -224,7 +240,9 @@ bool Tienda::Update(float dt) {
             if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
             {
 				//pastel
+                app->audio->PlayFx(buyFx);
 				app->scene->RestarCincoMonedas();
+
 			}
 		}
     }
@@ -243,6 +261,9 @@ bool Tienda::PostUpdate() {
 
 
 bool Tienda::CleanUp(){
+
+    app->audio->UnloadFx(buyFx);
+	app->audio->UnloadFx(tiendaMusic);
 
 	if (tienda1 != nullptr)
 	{

@@ -173,6 +173,9 @@ bool Player::Start() {
 		}
 	}
 
+	vomitoFx = app->audio->LoadFx("Assets/Audio/Fx/vomito.wav");
+
+
 	return true;
 }
 
@@ -246,9 +249,7 @@ bool Player::Update(float dt)
 		b2Transform pBodyPos = pBody->body->GetTransform();
 
 		position.x = METERS_TO_PIXELS(pBodyPos.p.x) - 32 / 2;
-		position.y = METERS_TO_PIXELS(pBodyPos.p.y) - 32 / 2;
-
-		
+		position.y = METERS_TO_PIXELS(pBodyPos.p.y) - 32 / 2;		
 
 	}
 
@@ -395,6 +396,7 @@ bool Player::Update(float dt)
 
 	if (cieloOUT)
 	{
+		app->audio->PlayFx(vomitoFx);
 		app->musicaCielo->Disable();
 		app->musicaCiudad->Enable();
 		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(8025), PIXEL_TO_METERS(6164)), NULL);
@@ -487,6 +489,7 @@ bool Player::Update(float dt)
 		canMove = true;
 		pBody->body->SetType(b2_dynamicBody);
 		currentTexture = texturePlayer;
+		app->audio->UnloadFx(app->tienda->tiendaMusic);
 	}
 	uint w, h;
 	app->win->GetWindowSize(w, h);
@@ -595,6 +598,24 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::TIENDAOPEN:
 		LOG("Collision TIENDAOPEN");
 		tiendaIN = true;		
+		break;
+	default:
+		break;
+	}
+}
+
+//out collision
+void Player::OutCollision(PhysBody* physA, PhysBody* physB) {
+	switch (physB->ctype)
+	{
+	case ColliderType::PLATFORM:
+		LOG("Collision PLATFORM");
+		break;
+	case ColliderType::UNKNOWN:
+		LOG("Collision UNKNOWN");
+		break;
+	case ColliderType::TIENDAOPEN:
+		LOG("Collision PLAYER");
 		break;
 	default:
 		break;

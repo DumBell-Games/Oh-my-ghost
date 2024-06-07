@@ -65,6 +65,9 @@ public:
 
     Timer timer;
 
+    int tiendaMusic;
+    int buyFx;
+
     //gui list
     List<GuiControlButton*> inventoryButtons;
 };

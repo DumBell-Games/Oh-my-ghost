@@ -18,6 +18,7 @@
 #include "Tienda.h"
 #include "FadeToBlack.h"
 #include "Physics.h" 
+#include "MusicaCiudad.h"
 
 
 struct SDL_Texture;
@@ -180,11 +181,13 @@ public:
 	}
 
 	void Scene::OpenTienda(){
-		app->tienda->Enable();
+		app->musicaCiudad->Disable();
 		PlayerQuieto();
+		app->tienda->Enable();
 	}
 
 	void Scene::CloseTienda() {
+		app->musicaCiudad->Enable();
 		app->fadeToBlack->FadeToBlackTransition((Module*) app->tienda, (Module*) app->scene, 0.0f);
 	}
 

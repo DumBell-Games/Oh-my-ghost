@@ -33,6 +33,9 @@ public:
 	// L07 DONE 6: Define OnCollision function for the player. 
 	void OnCollision(PhysBody* physA, PhysBody* physB);
 
+	//out collision
+	void OutCollision(PhysBody* physA, PhysBody* physB);
+
 	bool LoadState(pugi::xml_node& node);
 
 	bool SaveState(pugi::xml_node& node);
@@ -143,7 +146,8 @@ public:
 
 	Timer openTiendaTime;
 
-
+	int vomitoFx;
+	int entradaEdificioFx;
 	
 };
 

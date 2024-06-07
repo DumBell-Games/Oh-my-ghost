@@ -19,6 +19,8 @@
 	</inventorymanager>
 	<scene />
 	<inventory />
+	<personajesScreen />
+	<inventory />
 	<:anonymous />
 	<titlescreen />
 	<:anonymous />

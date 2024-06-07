@@ -66,6 +66,8 @@ private:
 	//Lista de dialogos a repetir
 	List<Dialog*> dialoguesRepeat;
 
+	int dialogFx;
+
 };
 
 #endif // __DIALOGTRIGGERENTITY_H__
