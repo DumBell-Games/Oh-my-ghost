@@ -19,7 +19,7 @@ vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
 verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
 triangles  => sprite triangulation, 3 vertex indices per triangle
 -->
-<TextureAtlas imagePath="Assets/Animation/Aprendiz_Astrobark/Aprendiz.png" width="2048" height="1536" speed="0.05" loop="true">
+<TextureAtlas imagePath="Assets/Animation/Aprendiz_Astrobark/Aprendiz.png" width="2048" height="1536" speed="0.05" loop="false" pingpong="false">
     <sprite n="Attack-0" x="0" y="0" w="128" h="256" pX="0.5" pY="1"/>
     <sprite n="Attack-1" x="256" y="0" w="128" h="256" pX="0.5" pY="1"/>
     <sprite n="Attack-2" x="512" y="0" w="128" h="256" pX="0.5" pY="1"/>
@@ -46,7 +46,7 @@ triangles  => sprite triangulation, 3 vertex indices per triangle
     <sprite n="Hurt-4" x="1792" y="512" w="128" h="256" pX="0.5" pY="1"/>
     <sprite n="Hurt-5" x="0" y="768" w="128" h="256" pX="0.5" pY="1"/>
     <sprite n="Hurt-6" x="256" y="768" w="128" h="256" pX="0.5" pY="1"/>
-    <sprite n="Idle-0" x="512" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-0" x="512" y="768" w="128" h="256" pX="0.5" pY="1" loop="true"/>
     <sprite n="Idle-1" x="768" y="768" w="128" h="256" pX="0.5" pY="1"/>
     <sprite n="Idle-2" x="1024" y="768" w="128" h="256" pX="0.5" pY="1"/>
     <sprite n="Idle-3" x="1280" y="768" w="128" h="256" pX="0.5" pY="1"/>
@@ -55,7 +55,7 @@ triangles  => sprite triangulation, 3 vertex indices per triangle
     <sprite n="Idle-6" x="0" y="1024" w="128" h="256" pX="0.5" pY="1"/>
     <sprite n="Idle-7" x="256" y="1024" w="128" h="256" pX="0.5" pY="1"/>
     <sprite n="Idle-8" x="512" y="1024" w="128" h="256" pX="0.5" pY="1"/>
-    <sprite n="IdleCombat-0" x="768" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="IdleCombat-0" x="768" y="1024" w="128" h="256" pX="0.5" pY="1" loop="true" />
     <sprite n="IdleCombat-1" x="1024" y="1024" w="128" h="256" pX="0.5" pY="1"/>
     <sprite n="IdleCombat-2" x="1280" y="1024" w="128" h="256" pX="0.5" pY="1"/>
     <sprite n="IdleCombat-3" x="1536" y="1024" w="128" h="256" pX="0.5" pY="1"/>
