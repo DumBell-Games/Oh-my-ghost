@@ -162,6 +162,61 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 	return ret;
 }
 
+// This version of DrawTexture takes the x and y coordinates of the defined center of the texture, or top-left corner if local origin coordinates not set
+bool Render::DrawTextureScaled(SDL_Texture* texture, int x, int y, const SDL_Rect* section, int targetScale, float speed, double angle, int originX, int originY, bool useCamera) const
+{
+	bool ret = true;
+	uint scale = app->win->GetScale();
+
+	originX *= targetScale;
+	originY *= targetScale;
+
+	SDL_Rect rect{ 0,0,0,0 };
+	if (useCamera)
+	{
+		rect.x = (int)(camera.x * speed);
+		rect.y = (int)(camera.y * speed);
+	}
+	rect.x += (x-originX) * scale;
+	rect.y += (y-originY) * scale;
+
+	if (section != NULL)
+	{
+		rect.w = section->w;
+		rect.h = section->h;
+	}
+	else
+	{
+		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
+	}
+
+	rect.w *= scale;
+	rect.h *= scale;
+
+	rect.w *= targetScale;
+	rect.h *= targetScale;
+
+	SDL_Point* p = NULL;
+	SDL_Point pivot;
+
+	if (originX != INT_MAX && originY != INT_MAX)
+	{
+		pivot.x = originX;
+		pivot.y = originY;
+		p = &pivot;
+
+
+	}
+
+	if (SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
+	{
+		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
+		ret = false;
+	}
+
+	return ret;
+}
+
 bool Render::DrawRectangle(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled, bool use_camera) const
 {
 	bool ret = true;

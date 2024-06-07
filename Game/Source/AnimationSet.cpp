@@ -43,6 +43,14 @@ void AnimationSet::SetAnimation(int index)
 	}
 }
 
+// Sets the animation to go back to after finishing the current animation. -1 to stay on current animation
+void AnimationSet::SetDefaultAnimation(SString name)
+{
+	int id = GetAnimationId(name);
+	if (id >= 0)
+		defaultAnimation = id;
+}
+
 int AnimationSet::GetAnimationId(SString name)
 {
 	if (name != "") // Don't bother searching if string is empty

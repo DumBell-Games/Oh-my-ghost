@@ -27,6 +27,7 @@ public:
 	int activeAnimation = 0;
 	std::vector<Animation> animations;
 	std::shared_ptr<SDL_Texture> texture;
+	int defaultAnimation = -1;
 
 public:
 	AnimationSet();
@@ -43,6 +44,8 @@ public:
 
 	void SetAnimation(int index);
 
+	void SetDefaultAnimation(SString name);
+
 	int GetAnimationId(SString name);
 
 	Animation& GetCurrent() { return animations[activeAnimation]; }
@@ -50,11 +53,17 @@ public:
 
 	void Update()
 	{
-		GetCurrent().Update();
+		if (GetCurrent().HasFinished() && defaultAnimation >= 0)
+		{
+			activeAnimation = defaultAnimation;
+			GetCurrent().Reset();
+		}
+		else
+			GetCurrent().Update();
 	}
 
-	void Render(const iPoint& position, bool useCamera = true) {
-		GetCurrent().Render(GetTextureRawPointer(), position, useCamera);
+	void Render(const iPoint& position, bool useCamera = true, int scale = 1) {
+		GetCurrent().Render(GetTextureRawPointer(), position, useCamera, scale);
 	}
 
 

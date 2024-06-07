@@ -34,14 +34,14 @@ CombatManager::CombatManager(bool startEnabled) : Module(startEnabled)
 	p1->atacs.push_back(Atac("Cop de puny2", 10, false, "Assets/Screen/Combat/Skill.png", "Skill2"));
 	p1->atacs.push_back(Atac("Cop de puny3", 10, false, "Assets/Screen/Combat/Skill.png", "Skill1"));
 	p1->atacs.push_back(Atac("Cop de puny4", 10, false, "Assets/Screen/Combat/Skill.png", "Skill2"));
-	p1->atacs.push_back(Atac("Ultimate", 10, true, "Assets/Screen/Combat/Skill.png", "Skill1"));
+	p1->atacs.push_back(Atac("Ultimate", 100, true, "Assets/Screen/Combat/Skill.png", "Skill1"));
 	data.allies.push_back(p1);
 	Personatge* p2 = new Personatge("PJ PostTutorial", 5, 30, 2, 1, "Assets/Animation/Springy/SpringyPaloma.xml");
 	p2->atacs.push_back(Atac("Puntada de peu1", 15, false, "Assets/Screen/Combat/Skill.png", "Skill1"));
 	p2->atacs.push_back(Atac("Puntada de peu2", 15, false, "Assets/Screen/Combat/Skill.png", "Skill2"));
 	p2->atacs.push_back(Atac("Puntada de peu3", 15, false, "Assets/Screen/Combat/Skill.png", "Skill1"));
 	p2->atacs.push_back(Atac("Puntada de peu4", 15, false, "Assets/Screen/Combat/Skill.png", "Skill2"));
-	p2->atacs.push_back(Atac("Ultimate", 25, true, "Assets/Screen/Combat/Skill.png", "Skill1"));
+	p2->atacs.push_back(Atac("Ultimate", 100, true, "Assets/Screen/Combat/Skill.png", "Skill1"));
 	data.allies.push_back(p2);
 
 	// FIN CODIGO PARA DEBUG
@@ -56,18 +56,16 @@ bool CombatManager::PostInit()
 {
 	app->console->AddCommand("debugcombat", "Inicia un combate con un enemigo de prueba", "debugcombat", [this](std::vector<std::string> args) {
 		// El enemigo tiene el mismo ataque varias veces porque por ahora la IA no tiene preferencias por determinados ataques, asi que para hacer que no haga casi siempre la ulti se ponen duplicados (si, lo se, esto es un desperdicio de memoria, pero en este caso son menos de 100 bytes por cada ataque)
-		data.enemy = dummyEnemy = new Personatge("dummy", 1, 10, 1, 10);
+		data.enemy = dummyEnemy = new Personatge("dummy", 1, 10, 1, 10, "Assets/Animation/Jefe_Astrobark/Astrobark.xml");
 		dummyEnemy->atacs.push_back(Atac("Mordisco1", 5, false, "", "Skill1"));
 		dummyEnemy->atacs.push_back(Atac("Mordisco2", 5, false, "", "Skill2"));
+		dummyEnemy->atacs.push_back(Atac("Mordisco1", 5, false, "", "Skill3"));
+		dummyEnemy->atacs.push_back(Atac("Mordisco2", 5, false, "", "Skill4"));
 		dummyEnemy->atacs.push_back(Atac("Mordisco1", 5, false, "", "Skill1"));
 		dummyEnemy->atacs.push_back(Atac("Mordisco2", 5, false, "", "Skill2"));
-		dummyEnemy->atacs.push_back(Atac("Mordisco1", 5, false, "", "Skill1"));
-		dummyEnemy->atacs.push_back(Atac("Mordisco2", 5, false, "", "Skill2"));
-		dummyEnemy->atacs.push_back(Atac("Mordisco1", 5, false, "", "Skill1"));
-		dummyEnemy->atacs.push_back(Atac("Mordisco2", 5, false, "", "Skill2"));
-		dummyEnemy->atacs.push_back(Atac("Mordisco1", 5, false, "", "Skill1"));
-		dummyEnemy->atacs.push_back(Atac("Mordisco2", 5, false, "", "Skill2"));
-		dummyEnemy->atacs.push_back(Atac("Ultimate", 25, true, "", "Skill1"));
+		dummyEnemy->atacs.push_back(Atac("Mordisco1", 5, false, "", "Skill3"));
+		dummyEnemy->atacs.push_back(Atac("Mordisco2", 5, false, "", "Skill4"));
+		dummyEnemy->atacs.push_back(Atac("Ultimate", 250, true, "", "Skill1"));
 		BeginCombat(dummyEnemy, pugi::xml_node(), pugi::xml_node());
 		});
 	return true;
@@ -82,8 +80,8 @@ bool CombatManager::Awake(pugi::xml_node config)
 	buttonSize.x = config.attribute("buttonW").as_int(0);
 	buttonSize.y = config.attribute("buttonH").as_int(0);
 
-	//Load default dialogs if none found (debug)
-	if (app->DebugEnabled())
+	//Load default dialogs if none found (debug only?)
+	//if (app->DebugEnabled())
 	{
 		if (!startDialogue.start)
 			LoadDialog(startDialogue, config.child("startDialogue"));
@@ -144,9 +142,11 @@ bool CombatManager::Start()
 	enemyAnims = new AnimationSet(data.enemy->animPath.c_str());
 	playerAnims = new AnimationSet(data.allies[data.activeAlly]->animPath.c_str());
 
-	enemyAnims->SetAnimation("IdleCombat");
-	playerAnims->SetAnimation("IdleCombat");
+	enemyAnims->SetDefaultAnimation("IdleCombat");
+	playerAnims->SetDefaultAnimation("IdleCombat");
 	
+	enemyAnims->SetAnimation(enemyAnims->defaultAnimation);
+	playerAnims->SetAnimation(playerAnims->defaultAnimation);
 
 
 	LOG("Combat Start!");
@@ -210,8 +210,8 @@ bool CombatManager::PostUpdate()
 {
 
 	// Render characters
-	enemyAnims->Render(enemyPos, false);
-	playerAnims->Render(playerPos, false);
+	enemyAnims->Render(enemyPos, false, 2);
+	playerAnims->Render(playerPos, false, 3);
 	enemyAnims->Update();
 	playerAnims->Update();
 	
@@ -771,7 +771,10 @@ void CombatManager::HandleCombatAnimation()
 		{
 			if (!currentStep->video)
 			{
-				if (!app->dialogManager->isPlaying && (playerAnims->GetCurrent().HasFinished() || playerAnims->GetCurrent().loop) && (enemyAnims->GetCurrent().HasFinished() || enemyAnims->GetCurrent().loop))
+				bool playerAnimFinished = playerAnims->activeAnimation == playerAnims->defaultAnimation;
+				bool enemyAnimFinished = enemyAnims->activeAnimation == enemyAnims->defaultAnimation;
+
+				if (!app->dialogManager->isPlaying && (playerAnimFinished) && (enemyAnimFinished))
 				{
 					stepFinished = true;
 				}
@@ -806,13 +809,27 @@ void CombatManager::HandleCombatAnimation()
 		// Fin de turno. Si ha terminado el combate muestra dialogo de fin de combate, en caso contrario vuelve a los menus
 		if (CombatFinished())
 		{
-			ListItem<Dialog*>* item;
-			Dialog* pDialog = nullptr;
-
-			for (item = endDialogue.start; item != NULL; item = item->next)
+			if (!fled)
 			{
-				pDialog = item->data;
-				app->dialogManager->AddDialog(pDialog);
+				ListItem<Dialog*>* item;
+				Dialog* pDialog = nullptr;
+
+				for (item = endDialogue.start; item != NULL; item = item->next)
+				{
+					pDialog = item->data;
+					app->dialogManager->AddDialog(pDialog);
+				}
+			}
+			else
+			{
+				// Borra el texto que iba a reproducirse originalmente y sustituye por "has huido del combate"
+				for (ListItem<Dialog*>* item = endDialogue.start; item; item = item->next)
+				{
+					RELEASE(item->data);
+				}
+				endDialogue.Clear();
+
+				endDialogue.Add(app->dialogManager->CreateSimpleDialog("Has huido del combate..."));
 			}
 
 			combatState = CombatState::DIALOG_END;

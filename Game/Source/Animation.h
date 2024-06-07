@@ -72,7 +72,7 @@ public:
 		timeLeft -= timeStep * speed;
 	}
 
-	void Render(SDL_Texture* texture, const iPoint& position, bool useCamera = true);
+	void Render(SDL_Texture* texture, const iPoint& position, bool useCamera = true, int scale = 1);
 
 	SDL_Rect& GetCurrentFrame()
 	{

@@ -128,7 +128,8 @@ extern "C" {
  *
  *  By default nearest pixel sampling is used
  */
-#define SDL_HINT_RENDER_SCALE_QUALITY       "SDL_RENDER_SCALE_QUALITY"
+#define SDL_HINT_RENDER_SCALE_QUALITY       "2"
+    //"SDL_RENDER_SCALE_QUALITY"
 
 /**
  *  \brief  A variable controlling whether updates to the SDL screen surface should be synchronized with the vertical refresh, to avoid tearing.
