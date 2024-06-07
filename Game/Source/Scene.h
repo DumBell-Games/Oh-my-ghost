@@ -151,6 +151,42 @@ public:
 		if (i) return i->cantidad;
 		else return cantidadMonedas;
 	}
+
+	int GetChuchesQuantity() {
+		ItemData* i = app->inventory->GetItemByType(ItemType::CHUCHES);
+		if (i) return i->cantidad;
+		else return cantidadChuches;
+	}
+
+	int ChuchesPicked() {
+		ItemData* i = app->inventory->GetItemByType(ItemType::CHUCHES);
+		if (i) i->cantidad++;
+		return cantidadChuches++;
+	}
+
+	int GetPastelQuantity() {
+		ItemData* i = app->inventory->GetItemByType(ItemType::PASTEL);
+		if (i) return i->cantidad;
+		else return cantidadPastel;
+	}
+
+	int PastelPicked() {
+		ItemData* i = app->inventory->GetItemByType(ItemType::PASTEL);
+		if (i) i->cantidad++;
+		return cantidadPastel++;
+	}
+
+	int GetHeladoQuantity() {
+		ItemData* i = app->inventory->GetItemByType(ItemType::HELADO);
+		if (i) return i->cantidad;
+		else return cantidadHelado;
+	}
+
+	int HeladoPicked() {
+		ItemData* i = app->inventory->GetItemByType(ItemType::HELADO);
+		if (i) i->cantidad++;
+		return cantidadHelado++;
+	}
 	
 	int RestarCincoMonedas() {
 		ItemData* i = app->inventory->GetItemByType(ItemType::MONEDAS);
@@ -200,6 +236,9 @@ public:
 	int ciudadMusic;
 	int cieloMusic;
 	int cantidadMonedas = 0;
+	int cantidadChuches = 0;
+	int cantidadPastel = 0;
+	int cantidadHelado = 0;
 
 
 private:

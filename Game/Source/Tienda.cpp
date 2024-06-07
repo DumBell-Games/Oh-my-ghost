@@ -155,6 +155,7 @@ bool Tienda::Update(float dt) {
             if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
             {
                 //chuches
+                app->scene->ChuchesPicked();
                 app->audio->PlayFx(buyFx);
                 app->scene->RestarCincoMonedas();
             }
@@ -179,6 +180,7 @@ bool Tienda::Update(float dt) {
             if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
             {
                 //helado
+                app->scene->HeladoPicked();
                 app->audio->PlayFx(buyFx);
                 app->scene->RestarCincoMonedas();
             }
@@ -240,6 +242,7 @@ bool Tienda::Update(float dt) {
             if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
             {
 				//pastel
+                app->scene->PastelPicked();
                 app->audio->PlayFx(buyFx);
 				app->scene->RestarCincoMonedas();
 

@@ -63,6 +63,9 @@ public:
     SString valorVelocidad;
     SString valorYogur;
     SString dineroActual;
+    SString valorChuches;
+    SString valorPastel;
+    SString valorHelado;
 
     Timer timer;
 
