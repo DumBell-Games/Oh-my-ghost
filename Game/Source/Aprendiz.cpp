@@ -67,6 +67,30 @@ bool Aprendiz::Update(float dt)
 
 bool Aprendiz::CleanUp()
 {
+	// Liberar la textura
+	if (texture)
+	{
+		app->tex->UnLoad(texture.get());
+		texture.reset();
+	}
+
+	// Liberar el cuerpo físico
+	if (nBody)
+	{
+		app->physics->DestroyBody(nBody);
+		nBody = nullptr;
+	}
+
+	// Liberar animaciones
+	for (ListItem<Animation*>* item = aprendizAnims.start; item != nullptr; item = item->next)
+	{
+		if (item->data != nullptr)
+		{
+			delete item->data;
+			item->data = nullptr;
+		}
+	}
+	aprendizAnims.Clear();
 	return true;
 }
 

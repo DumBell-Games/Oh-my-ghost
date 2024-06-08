@@ -68,6 +68,30 @@ bool SilverWings::Update(float dt)
 
 bool SilverWings::CleanUp()
 {
+	// Liberar la textura
+	if (texture)
+	{
+		app->tex->UnLoad(texture.get());
+		texture.reset();
+	}
+
+	// Liberar el cuerpo físico
+	if (nBody)
+	{
+		app->physics->DestroyBody(nBody);
+		nBody = nullptr;
+	}
+
+	// Liberar animaciones
+	for (ListItem<Animation*>* item = silverAnims.start; item != nullptr; item = item->next)
+	{
+		if (item->data != nullptr)
+		{
+			delete item->data;
+			item->data = nullptr;
+		}
+	}
+	silverAnims.Clear();
 	return true;
 }
 

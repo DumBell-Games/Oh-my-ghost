@@ -7,7 +7,7 @@
 	<physics />
 	<map />
 	<entitymanager>
-		<entity x="21691" y="8118" casionIN="false" casionOUT="false" tabernaIN="false" tabernaOUT="false" arcadeIN="false" arcadeOUT="false" palomaTouched="false" despachoIN="false" despachoOUT="false" cervezaPicked="false" />
+		<entity x="21654" y="8330" casionIN="false" casionOUT="false" tabernaIN="false" tabernaOUT="false" arcadeIN="false" arcadeOUT="false" palomaTouched="false" despachoIN="false" despachoOUT="false" cervezaPicked="false" />
 		<entity type="6" X="3332" Y="6220" />
 		<entity type="6" X="793" Y="3553" />
 		<entity type="6" X="5409" Y="1312" />

@@ -66,6 +66,30 @@ bool Dolly::Update(float dt)
 
 bool Dolly::CleanUp()
 {
+	// Liberar la textura
+	if (texture)
+	{
+		app->tex->UnLoad(texture.get());
+		texture.reset();
+	}
+
+	// Liberar el cuerpo físico
+	if (nBody)
+	{
+		app->physics->DestroyBody(nBody);
+		nBody = nullptr;
+	}
+
+	// Liberar animaciones
+	for (ListItem<Animation*>* item = dollyAnims.start; item != nullptr; item = item->next)
+	{
+		if (item->data != nullptr)
+		{
+			delete item->data;
+			item->data = nullptr;
+		}
+	}
+	dollyAnims.Clear();
 	return true;
 }
 

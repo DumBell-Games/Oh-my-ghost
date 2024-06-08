@@ -14,7 +14,7 @@
 
 Character_Menu::Character_Menu(bool startEnabled) : Module(startEnabled)
 {
-
+	name.Create("Character_menu");
 }
 
 Character_Menu::~Character_Menu()
@@ -35,6 +35,7 @@ bool Character_Menu::PreUpdate() {
 	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN)
 	{
 		app->fadeToBlack->FadeToBlackTransition(this, (Module*)app->scene, 0);
+		app->entityManager->Play();
 	}
 	return true;
 }

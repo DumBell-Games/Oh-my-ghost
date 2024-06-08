@@ -57,6 +57,20 @@ bool TransitionTrigger::Update(float dt)
 
 bool TransitionTrigger::CleanUp()
 {
+    // Liberar la textura
+    if (texture)
+    {
+        app->tex->UnLoad(texture.get());
+        texture.reset();
+    }
+
+    // Liberar el cuerpo físico
+    if (pbody)
+    {
+        app->physics->DestroyBody(pbody);
+        pbody = nullptr;
+    }
+
     return true;
 }
 

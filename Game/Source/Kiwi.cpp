@@ -66,6 +66,20 @@ bool Kiwi::Update(float dt)
 
 bool Kiwi::CleanUp()
 {
+	// Liberar la textura
+	
+	if (texture)
+	{
+		app->tex->UnLoad(texture.get());
+		texture.reset();
+	}
+
+	// Liberar el cuerpo físico
+	if (ibody)
+	{
+		app->physics->DestroyBody(ibody);
+		ibody = nullptr;
+	}
 	return true;
 }
 

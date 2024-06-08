@@ -285,8 +285,12 @@ bool Scene::Update(float dt)
 		app->entityManager->Pause();
 	}
 
-	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) 
+	if (app->input->GetKey(SDL_SCANCODE_P) == KEY_DOWN) {
 		app->characterMenu->Enable();
+		app->entityManager->Pause();
+	}
+		
+
 	
 	if (fullscreen == true) {
 		app->win->FullscreenMode();

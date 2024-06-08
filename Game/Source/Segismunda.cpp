@@ -76,6 +76,30 @@ bool Segismunda::Update(float dt)
 
 bool Segismunda::CleanUp()
 {
+	// Liberar la textura
+	if (texture)
+	{
+		app->tex->UnLoad(texture.get());
+		texture.reset();
+	}
+
+	// Liberar el cuerpo físico
+	if (nBody)
+	{
+		app->physics->DestroyBody(nBody);
+		nBody = nullptr;
+	}
+
+	// Liberar animaciones
+	for (ListItem<Animation*>* item = segismundaAnims.start; item != nullptr; item = item->next)
+	{
+		if (item->data != nullptr)
+		{
+			delete item->data;
+			item->data = nullptr;
+		}
+	}
+	segismundaAnims.Clear();
 	return true;
 }
 

@@ -507,7 +507,92 @@ bool Player::PostUpdate()
 }
 
 bool Player::CleanUp()
-{
+{ 
+	// Free textures
+	if (texturePlayer != nullptr)
+	{
+		app->tex->UnLoad(texturePlayer);
+		texturePlayer = nullptr;
+	}
+
+	if (textureGhost != nullptr)
+	{
+		app->tex->UnLoad(textureGhost);
+		textureGhost = nullptr;
+	}
+
+	// Free animations
+	for (ListItem<Animation*>* item = springyAnimationList.start; item != nullptr; item = item->next)
+	{
+		if (item->data != nullptr)
+		{
+			delete item->data;
+		}
+	}
+	springyAnimationList.Clear();
+
+	// Free physics bodies
+	if (pBody != nullptr)
+	{
+		app->physics->DestroyBody(pBody);
+		pBody = nullptr;
+	}
+	if (casinoIn != nullptr)
+	{
+		app->physics->DestroyBody(casinoIn);
+		casinoIn = nullptr;
+	}
+	if (casinoOut != nullptr)
+	{
+		app->physics->DestroyBody(casinoOut);
+		casinoOut = nullptr;
+	}
+	if (tabernaIn != nullptr)
+	{
+		app->physics->DestroyBody(tabernaIn);
+		tabernaIn = nullptr;
+	}
+	if (tabernaOut != nullptr)
+	{
+		app->physics->DestroyBody(tabernaOut);
+		tabernaOut = nullptr;
+	}
+	if (arcadeIn != nullptr)
+	{
+		app->physics->DestroyBody(arcadeIn);
+		arcadeIn = nullptr;
+	}
+	if (arcadeOut != nullptr)
+	{
+		app->physics->DestroyBody(arcadeOut);
+		arcadeOut = nullptr;
+	}
+	if (cieloOut != nullptr)
+	{
+		app->physics->DestroyBody(cieloOut);
+		cieloOut = nullptr;
+	}
+	if (mansionIn != nullptr)
+	{
+		app->physics->DestroyBody(mansionIn);
+		mansionIn = nullptr;
+	}
+	if (mansionOut != nullptr)
+	{
+		app->physics->DestroyBody(mansionOut);
+		mansionOut = nullptr;
+	}
+	if (despachoIn != nullptr)
+	{
+		app->physics->DestroyBody(despachoIn);
+		despachoIn = nullptr;
+	}
+	if (despachoOut != nullptr)
+	{
+		app->physics->DestroyBody(despachoOut);
+		despachoOut = nullptr;
+	}
+
 	return true;
 }
 

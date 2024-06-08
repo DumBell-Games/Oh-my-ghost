@@ -65,7 +65,30 @@ bool Veterana::Update(float dt)
 
 bool Veterana::CleanUp()
 {
+	// Liberar la textura
+	if (texture)
+	{
+		app->tex->UnLoad(texture);
+		texture = nullptr;
+	}
 
+	// Liberar el cuerpo físico
+	if (nBody)
+	{
+		app->physics->DestroyBody(nBody);
+		nBody = nullptr;
+	}
+
+	// Liberar animaciones
+	for (ListItem<Animation*>* item = veteranaAnims.start; item != nullptr; item = item->next)
+	{
+		if (item->data != nullptr)
+		{
+			delete item->data;
+			item->data = nullptr;
+		}
+	}
+	veteranaAnims.Clear();
 	return true;
 }
 

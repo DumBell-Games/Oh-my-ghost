@@ -71,6 +71,22 @@ bool Birra::Update(float dt)
 
 bool Birra::CleanUp()
 {
+	// Liberar la textura
+	if (texture)
+	{
+		app->tex->UnLoad(texture);
+		texture = nullptr;
+	}
+
+	// Liberar el cuerpo físico
+	if (ibody)
+	{
+		app->physics->DestroyBody(ibody);
+		ibody = nullptr;
+	}
+
+	
+	
 	return true;
 }
 
