@@ -511,14 +511,14 @@ bool Player::CleanUp()
 	// Free textures
 	if (texturePlayer != nullptr)
 	{
-		app->tex->UnLoad(texturePlayer);
-		texturePlayer = nullptr;
+		app->tex->UnLoad(texturePlayer.get());
+		
 	}
 
 	if (textureGhost != nullptr)
 	{
-		app->tex->UnLoad(textureGhost);
-		textureGhost = nullptr;
+		app->tex->UnLoad(textureGhost.get());
+		
 	}
 
 	// Free animations

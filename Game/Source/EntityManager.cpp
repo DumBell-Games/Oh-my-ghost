@@ -162,9 +162,9 @@ Entity* EntityManager::CreateEntity(EntityType type, pugi::xml_node& data)
 	case EntityType::ENEMY:
 		entity = new Enemy();
 		break;
-	/*case EntityType::TRANSITION:
+	case EntityType::TRANSITION:
 		entity = new TransitionTrigger();
-		break;*/
+		break;
 	case EntityType::COLA:
 		entity = new Cola();
 		break;
@@ -290,12 +290,8 @@ bool EntityManager::LoadState(pugi::xml_node node) {
 			return false;
 		}
 
-		// Llamar a Awake y Start si el EntityManager ya fue despertado e iniciado
-		if (entity->active) {
-			if (awoken) entity->Awake();
-			if (started) entity->Start();
-		}
 	}
+	return true;
 }
 
 bool EntityManager::SaveState(pugi::xml_node node) {

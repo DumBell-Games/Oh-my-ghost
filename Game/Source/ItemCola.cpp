@@ -73,8 +73,8 @@ bool Cola::CleanUp()
 	// Liberar la textura
 	if (texture)
 	{
-		app->tex->UnLoad(texture);
-		texture = nullptr;
+		app->tex->UnLoad(texture.get());
+		
 	}
 
 	// Liberar el cuerpo físico

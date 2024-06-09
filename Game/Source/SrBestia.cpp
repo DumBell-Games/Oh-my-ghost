@@ -77,7 +77,7 @@ bool SrBestia::CleanUp()
 	if (texture)
 	{
 		app->tex->UnLoad(texture.get());
-		texture.reset();
+		
 	}
 
 	// Liberar el cuerpo físico
