@@ -115,6 +115,7 @@
     <ClCompile Include="Source\AnimationSet.cpp" />
     <ClCompile Include="Source\InventoryManager.cpp" />
     <ClCompile Include="Source\ItemData.cpp" />
+    <ClCompile Include="Source\Perras.cpp" />
     <ClCompile Include="Source\PersonajesScreen.cpp" />
     <ClCompile Include="Source\Poison.cpp" />
     <ClCompile Include="Source\Character_Menu.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="Source\EnumUtils.h" />
     <ClInclude Include="Source\InventoryManager.h" />
     <ClInclude Include="Source\ItemData.h" />
+    <ClInclude Include="Source\Perras.h" />
     <ClInclude Include="Source\PersonajesScreen.h" />
     <ClInclude Include="Source\Poison.h" />
     <ClInclude Include="Source\Character_Menu.h" />

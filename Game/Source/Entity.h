@@ -40,6 +40,7 @@ enum class EntityType : char
 	KIWI,
 	COBAYA,
 	TIENDAOPEN,
+	PERRAS,
 	UNKNOWN
 };
 

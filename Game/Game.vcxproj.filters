@@ -122,6 +122,17 @@
     <ClCompile Include="Source\SrBestia.cpp" />
     <ClCompile Include="Source\Vagabundo.cpp" />
     <ClCompile Include="Source\Sisebuto.cpp" />
+    <ClCompile Include="Source\MusicaCasino.cpp" />
+    <ClCompile Include="Source\MusicaCielo.cpp" />
+    <ClCompile Include="Source\MusicaCiudad.cpp" />
+    <ClCompile Include="Source\MusicaDiscoteca.cpp" />
+    <ClCompile Include="Source\MusicaMansion.cpp" />
+    <ClCompile Include="Source\MusicaTaberna.cpp" />
+    <ClCompile Include="Source\PersonajesScreen.cpp" />
+    <ClCompile Include="Source\Tienda.cpp" />
+    <ClCompile Include="Source\TiendaOpen.cpp" />
+    <ClCompile Include="Source\Video.cpp" />
+    <ClCompile Include="Source\Perras.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -281,6 +292,17 @@
     <ClInclude Include="Source\SrBestia.h" />
     <ClInclude Include="Source\Vagabundo.h" />
     <ClInclude Include="Source\Sisebuto.h" />
+    <ClInclude Include="Source\MusicaCasino.h" />
+    <ClInclude Include="Source\MusicaCielo.h" />
+    <ClInclude Include="Source\MusicaCiudad.h" />
+    <ClInclude Include="Source\MusicaDiscoteca.h" />
+    <ClInclude Include="Source\MusicaMansion.h" />
+    <ClInclude Include="Source\MusicaTaberna.h" />
+    <ClInclude Include="Source\PersonajesScreen.h" />
+    <ClInclude Include="Source\Tienda.h" />
+    <ClInclude Include="Source\TiendaOpen.h" />
+    <ClInclude Include="Source\Video.h" />
+    <ClInclude Include="Source\Perras.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

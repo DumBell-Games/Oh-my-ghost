@@ -46,6 +46,7 @@
 #include "PersonajesScreen.h"
 #include "Tienda.h"
 #include "TiendaOpen.h"
+#include "Perras.h"
 
 
 #include "Defs.h"
@@ -192,6 +193,11 @@ bool Scene::Awake(pugi::xml_node config)
 	for (pugi::xml_node itemNode = config.child("tiendaOpen"); itemNode; itemNode = itemNode.next_sibling("tiendaOpen"))
 	{
 		TiendaOpen* tiendaOpen = (TiendaOpen*)app->entityManager->CreateEntity(EntityType::TIENDAOPEN, itemNode);
+		//enemy->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("perras"); itemNode; itemNode = itemNode.next_sibling("perras"))
+	{
+		Perras* perras = (Perras*)app->entityManager->CreateEntity(EntityType::PERRAS, itemNode);
 		//enemy->parameters = itemNode;
 	}
 

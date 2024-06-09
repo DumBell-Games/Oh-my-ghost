@@ -661,6 +661,256 @@
 			</animation>
 
 		</aprendiz>
+		
+		<perras x="14239" y="7683" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+
+		</perras>
+
+		<perras x="14539" y="7683" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+
+		</perras>
+		<perras x="14839" y="7683" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+
+		</perras>
+		<perras x="15139" y="7683" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+
+		</perras>
+		
+		<perras x="15439" y="7683" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+		</perras>
+		
+		<perras x="15739" y="7683" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+		</perras>
+		
+		<perras x="14239" y="7783" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+
+		</perras>
+
+		<perras x="14539" y="7783" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+
+		</perras>
+		<perras x="14839" y="7783" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+
+		</perras>
+		<perras x="15139" y="7783" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+
+		</perras>
+
+		<perras x="15439" y="7783" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+		</perras>
+
+		<perras x="15739" y="7783" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+		</perras>		
+		<perras x="14239" y="7883" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+
+		</perras>
+
+		<perras x="14539" y="7883" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+
+		</perras>
+		<perras x="14839" y="7883" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+
+		</perras>
+		<perras x="15139" y="7883" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+
+		</perras>
+
+		<perras x="15439" y="7883" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+		</perras>
+
+		<perras x="15739" y="7883" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+		</perras>
+		
+		<perras x="14239" y="7983" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+
+		</perras>
+
+		<perras x="14539" y="7983" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+
+		</perras>
+		<perras x="14839" y="7983" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+
+		</perras>
+		<perras x="15139" y="7983" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+
+		</perras>
+
+		<perras x="15439" y="7983" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+		</perras>
+
+		<perras x="15739" y="7983" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+		</perras>
+		
+		<perras x="14239" y="8083" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+
+		</perras>
+
+		<perras x="14539" y="8083" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+
+		</perras>
+		<perras x="14839" y="8083" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+
+		</perras>
+		<perras x="15139" y="8083" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+
+		</perras>
+
+		<perras x="15439" y="8083" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+		</perras>
+
+		<perras x="15739" y="8083" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
+			<animation name="perras" loop="true" speed="0.06f">
+				<frame x="384" y="512" w="128" h="256" />
+				<frame x="512" y="512" w="128" h="256" />
+				<frame x="640" y="512" w="128" h="256" />
+			</animation>
+		</perras>
+				
 
 		<veterana x="3542" y="10821" texturePath="Assets/Textures/VeteranaAstrobark_SpritesSheet.png">
 			<animation name="veteranaIdle" loop="true" speed="0.08f">
@@ -761,7 +1011,22 @@
 		<patatas x="5178" y="2243" texturePath="Assets/Textures/itemPatatas.png"/>
 
 		<enemy x="750" y="472" texturePath="Assets/Textures/pigNpc.png"/>
-		
+
+
+		<dialogTrigger x="14420" y="7714" repeat ="true">
+			<sentences>
+				<sentence name="Perras"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="¡¡¡QUE NO PARE DJ BUNNY!!!"/>
+				<sentence name="Perras"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Uy como mueve la colita"/>
+			</sentences>
+		</dialogTrigger>
+
+
+		<dialogTrigger x="15084" y="7712" repeat ="true">
+			<sentences>
+				<sentence name="Perras"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="EL PERREO HASTA ABAJO"/>
+				<sentence name="DjBunny"	facetexturepath="Assets/Textures/Chibi_DjBunny.png" text="¡¡¡HASTA ABAJO HASTA ABAJO!!!"/>
+			</sentences>
+		</dialogTrigger>
 		
 		<dialogTrigger x="7200" y="6177" repeat ="true">
 			<sentences>
