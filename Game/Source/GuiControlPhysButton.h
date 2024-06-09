@@ -24,6 +24,8 @@ public:
 	// Called each loop iteration
 	bool Update(float dt);
 
+	bool Render();
+
 	PhysBody* GetPhysBody() { return pbody.get(); }
 
 	void SetRotation(float degrees);

@@ -74,6 +74,11 @@ public:
 		return true;
 	}
 
+	virtual bool Render()
+	{
+		return true;
+	}
+
 	// 
 	void SetTexture(SDL_Texture* tex)
 	{

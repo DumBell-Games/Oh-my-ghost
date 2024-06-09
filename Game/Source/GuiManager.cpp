@@ -6,6 +6,7 @@
 #include "GuiControlPhysButton.h"
 #include "GuiCombatHP.h"
 #include "Audio.h"
+#include "Log.h"
 
 GuiManager::GuiManager(bool startEnabled) : Module(startEnabled)
 {
@@ -82,6 +83,7 @@ void GuiManager::DestroyGuiControl(GuiControl* ctrl)
 List<GuiControl*> GuiManager::LoadLayout(pugi::xml_node layoutLayer)
 {
 	List<GuiControl*> list;
+	LOG("LoadLayout is unfinished");
 	return list;
 }
 
@@ -92,6 +94,19 @@ bool GuiManager::Update(float dt)
 	while (control != nullptr)
 	{
 		control->data->Update(dt);
+		control = control->next;
+	}
+
+	return true;
+}
+
+bool GuiManager::PostUpdate()
+{
+	ListItem<GuiControl*>* control = guiControlsList.start;
+
+	while (control != nullptr)
+	{
+		control->data->Render();
 		control = control->next;
 	}
 

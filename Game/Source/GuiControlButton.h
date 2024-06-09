@@ -17,6 +17,8 @@ public:
 	// Called each loop iteration
 	bool Update(float dt);
 
+	bool Render();
+
 private:
 
 	int mouseX, mouseY;

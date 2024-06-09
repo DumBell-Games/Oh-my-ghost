@@ -25,6 +25,8 @@ public:
 	 // Called each loop iteration
 	 bool Update(float dt);
 
+	 bool PostUpdate();
+
 	// Called before quitting
 	bool CleanUp();
 
