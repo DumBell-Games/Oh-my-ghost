@@ -106,6 +106,12 @@ public:
 	//Inicia un combate con los parametros proporcionados
 	void BeginCombat(Personatge* enemy, pugi::xml_node startDialogue, pugi::xml_node endDialogue);
 
+	//Determines if the combat has finished
+	bool CombatFinished();
+
+	// Devuelve el balance entre enemigos y aliados derrotados. 0 = empate, 1 = victoria, -1 = derrota
+	char CombatResult();
+
 private:
 
 	GuiControl* NewButton(GuiControlType type, char menuID, char elementID, const char* text, SDL_Rect bounds, GuiCallback_f onClick, bool independentPtr = false, SDL_Rect sliderBounds = {0,0,0,0});
@@ -119,11 +125,6 @@ private:
 	void CreateItemButtons(InventoryManager* inv);
 
 	void CreateTeamSwapButtons(pugi::xml_node menuItem);
-
-	bool CombatFinished();
-
-	// Devuelve el balance entre enemigos y aliados derrotados. 0 = empate, 1 = victoria, -1 = derrota
-	char CombatResult();
 
 
 	// Control por mando/teclado (raton va por GUI)
