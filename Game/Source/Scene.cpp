@@ -49,6 +49,7 @@
 #include "Fuego.h"
 #include "MansionOpen.h"
 #include "Cobaya.h"
+#include "Creditos.h"
 
 
 #include "Defs.h"

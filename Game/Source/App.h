@@ -27,6 +27,7 @@ class InventoryScreen;
 class PersonajesScreen;
 class Tienda;
 class Character_Menu;
+class Creditos;
 class ContextoSpringyP1;
 class ContextoSpringySegundaParte;
 class TitleScreen;
@@ -145,6 +146,7 @@ public:
 	PersonajesScreen* personajesScreen;
 	Tienda* tienda;
 	Character_Menu* characterMenu;
+	Creditos* creditos;
 	ContextoSpringyP1* contextoSpringyP1;
 	ContextoSpringySegundaParte* contextoSpringyP2;
 	TitleScreen* titlescreen;

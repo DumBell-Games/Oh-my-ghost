@@ -32,6 +32,7 @@
 #include "Tienda.h"
 #include "ContextoSpringyP1.h"
 #include "ContextoSpringySegundaParte.h"
+#include "Creditos.h"
 
 
 
@@ -79,6 +80,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	pause = new PauseMenu(false);
 	console = new DebugConsole(true);
 	map = new Map(false);
+	creditos = new Creditos(false);
 	combat = new CombatManager(false);
 	reload = new Reload(true);
 	entityManager = new EntityManager(false);
@@ -130,6 +132,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(musicaDisco);
 	AddModule(musicaMansion);
 	AddModule(musicaTaberna);
+	AddModule(creditos);
 
 	AddModule(reload);
 

@@ -100,6 +100,7 @@
     <ClCompile Include="Source\Conserje.cpp" />
     <ClCompile Include="Source\ContextoSpringyP1.cpp" />
     <ClCompile Include="Source\ContextoSpringySegundaParte.cpp" />
+    <ClCompile Include="Source\Creditos.cpp" />
     <ClCompile Include="Source\Deidad.cpp" />
     <ClCompile Include="Source\DjBunny.cpp" />
     <ClCompile Include="Source\Dolly.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="Source\Conserje.h" />
     <ClInclude Include="Source\ContextoSpringyP1.h" />
     <ClInclude Include="Source\ContextoSpringySegundaParte.h" />
+    <ClInclude Include="Source\Creditos.h" />
     <ClInclude Include="Source\Deidad.h" />
     <ClInclude Include="Source\DjBunny.h" />
     <ClInclude Include="Source\Dolly.h" />

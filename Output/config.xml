@@ -1126,7 +1126,7 @@
 			</sentences>
 		</dialogTrigger>
 
-		<dialogTrigger x="15	804" y="8926" repeat ="true">
+		<dialogTrigger x="15804" y="8926" repeat ="true">
 			<sentences>
 				<sentence name="Bibi"		facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="¡¡¡MOOOLAA!!! ¿¿TU ERES SPRINGY NO??"/>
 				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¿Cómo? ¿Es a mí? ¿Como me has reconocido con este aspecto?"/>
