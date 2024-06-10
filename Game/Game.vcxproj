@@ -100,6 +100,7 @@
     <ClCompile Include="Source\Deidad.cpp" />
     <ClCompile Include="Source\DjBunny.cpp" />
     <ClCompile Include="Source\Dolly.cpp" />
+    <ClCompile Include="Source\Fuego.cpp" />
     <ClCompile Include="Source\GuiControlPhysButton.cpp" />
     <ClCompile Include="Source\Animation.cpp" />
     <ClCompile Include="Source\Aprendiz.cpp" />
@@ -174,6 +175,7 @@
     <ClInclude Include="Source\Deidad.h" />
     <ClInclude Include="Source\DjBunny.h" />
     <ClInclude Include="Source\Dolly.h" />
+    <ClInclude Include="Source\Fuego.h" />
     <ClInclude Include="Source\GuiControlPhysButton.h" />
     <ClInclude Include="Source\AnimationSet.h" />
     <ClInclude Include="Source\GuiGroup.h" />

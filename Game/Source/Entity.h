@@ -41,6 +41,7 @@ enum class EntityType : char
 	COBAYA,
 	TIENDAOPEN,
 	PERRAS,
+	FUEGO,
 	UNKNOWN
 };
 

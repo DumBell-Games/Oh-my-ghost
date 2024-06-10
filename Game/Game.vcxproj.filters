@@ -133,6 +133,7 @@
     <ClCompile Include="Source\TiendaOpen.cpp" />
     <ClCompile Include="Source\Video.cpp" />
     <ClCompile Include="Source\Perras.cpp" />
+    <ClCompile Include="Source\Fuego.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -303,6 +304,7 @@
     <ClInclude Include="Source\TiendaOpen.h" />
     <ClInclude Include="Source\Video.h" />
     <ClInclude Include="Source\Perras.h" />
+    <ClInclude Include="Source\Fuego.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

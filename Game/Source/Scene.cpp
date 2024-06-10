@@ -47,6 +47,7 @@
 #include "Tienda.h"
 #include "TiendaOpen.h"
 #include "Perras.h"
+#include "Fuego.h"
 
 
 #include "Defs.h"
@@ -198,6 +199,11 @@ bool Scene::Awake(pugi::xml_node config)
 	for (pugi::xml_node itemNode = config.child("perras"); itemNode; itemNode = itemNode.next_sibling("perras"))
 	{
 		Perras* perras = (Perras*)app->entityManager->CreateEntity(EntityType::PERRAS, itemNode);
+		//enemy->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("fuego"); itemNode; itemNode = itemNode.next_sibling("fuego"))
+	{
+		Fuego* fuego = (Fuego*)app->entityManager->CreateEntity(EntityType::FUEGO, itemNode);
 		//enemy->parameters = itemNode;
 	}
 

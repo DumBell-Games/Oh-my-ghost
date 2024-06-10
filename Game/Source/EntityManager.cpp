@@ -28,6 +28,7 @@
 #include "Sisebuto.h"
 #include "TiendaOpen.h"
 #include "Perras.h"
+#include "Fuego.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -166,6 +167,9 @@ Entity* EntityManager::CreateEntity(EntityType type, pugi::xml_node& data)
 	case EntityType::TRANSITION:
 		entity = new TransitionTrigger();
 		break;
+	case EntityType::FUEGO:
+		entity = new Fuego();
+		break;
 	case EntityType::COLA:
 		entity = new Cola();
 		break;
@@ -192,10 +196,7 @@ Entity* EntityManager::CreateEntity(EntityType type, pugi::xml_node& data)
 		break;
 	case EntityType::DIALOG_TRIGGER:
 		entity = new DialogTrigger();
-		break;
-					
-
-		
+		break;		
 	default:
 		break;
 	}
