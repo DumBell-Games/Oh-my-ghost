@@ -81,7 +81,7 @@ bool CombatManager::Awake(pugi::xml_node config)
 	buttonSize.y = config.attribute("buttonH").as_int(0);
 
 	//Load default dialogs if none found (debug only?)
-	//if (app->DebugEnabled())
+	if (app->DebugEnabled())
 	{
 		if (!startDialogue.start)
 			LoadDialog(startDialogue, config.child("startDialogue"));

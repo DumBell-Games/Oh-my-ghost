@@ -1,0 +1,1 @@
+Los sprites necesarios para abrir correctamente estos proyectos de TexturePacker los tiene Roger (son los spritesheets del gdrive cortados por animación)
