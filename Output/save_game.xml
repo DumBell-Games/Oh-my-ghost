@@ -12,7 +12,7 @@
 	<inventorymanager>
 		<item type="0" amount="0" />
 		<item type="1" amount="0" />
-		<item type="2" amount="1" />
+		<item type="2" amount="2" />
 		<item type="3" amount="0" />
 		<item type="4" amount="0" />
 		<item type="5" amount="0" />
@@ -22,6 +22,8 @@
 	<personajesScreen />
 	<inventory />
 	<:anonymous />
+	<teamScreen />
+	<teamScreen />
 	<titlescreen />
 	<:anonymous />
 	<teamScreen />
@@ -38,6 +40,6 @@
 	<scene />
 	<reload />
 	<renderer>
-		<camera x="-2128" y="-4526" />
+		<camera x="-7084" y="-11548" />
 	</renderer>
 </game_state>

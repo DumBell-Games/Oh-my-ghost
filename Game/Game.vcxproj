@@ -96,6 +96,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\AstroBark.cpp" />
+    <ClCompile Include="Source\Cobaya.cpp" />
     <ClCompile Include="Source\Conserje.cpp" />
     <ClCompile Include="Source\ContextoSpringyP1.cpp" />
     <ClCompile Include="Source\ContextoSpringySegundaParte.cpp" />
@@ -174,6 +175,7 @@
     <ClCompile Include="Source\TransitionTrigger.cpp" />
     <ClCompile Include="Source\tmxTileidAdjustment.h" />
     <ClInclude Include="Source\AstroBark.h" />
+    <ClInclude Include="Source\Cobaya.h" />
     <ClInclude Include="Source\Conserje.h" />
     <ClInclude Include="Source\ContextoSpringyP1.h" />
     <ClInclude Include="Source\ContextoSpringySegundaParte.h" />

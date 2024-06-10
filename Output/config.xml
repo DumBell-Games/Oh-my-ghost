@@ -1025,7 +1025,28 @@
 				<frame x="1408" y="0" w="128" h="256" />
 			</animation>
 		</veterana>
-
+		
+		<cobaya x="15804" y="8926" texturePath="Assets/Textures/SpriteSheetCobaya.png">
+			<animation name="cobayaIdle" loop="true" speed="0.08f">
+				<frame x="0" y="0" w="128" h="256" />
+				<frame x="128" y="0" w="128" h="256" />
+				<frame x="256" y="0" w="128" h="256" />
+				<frame x="384" y="0" w="128" h="256" />
+				<frame x="512" y="0" w="128" h="256" />
+				<frame x="640" y="0" w="128" h="256" />
+				<frame x="768" y="0" w="128" h="256" />
+				<frame x="896" y="0" w="128" h="256" />
+				<frame x="1024" y="0" w="128" h="256" />
+				<frame x="1152" y="0" w="128" h="256" />
+				<frame x="1280" y="0" w="128" h="256" />
+				<frame x="1408" y="0" w="128" h="256" />
+				<frame x="1536" y="0" w="128" h="256" />
+				<frame x="1664" y="0" w="128" h="256" />
+				<frame x="1792" y="0" w="128" h="256" />
+				<frame x="1920" y="0" w="128" h="256" />
+			</animation>
+		</cobaya>
+		
 		<caramelos x="8098" y="6434" texturePath="Assets/Textures/itemCaramelos.png"/>
 		<caramelos x="2723" y="806" texturePath="Assets/Textures/itemCaramelos.png"/>
 		<caramelos x="6665" y="2237" texturePath="Assets/Textures/itemCaramelos.png"/>
@@ -1060,7 +1081,18 @@
 				<sentence name="DjBunny"	facetexturepath="Assets/Textures/Chibi_DjBunny.png" text="¡¡¡HASTA ABAJO HASTA ABAJO!!!"/>
 			</sentences>
 		</dialogTrigger>
-		
+
+		<dialogTrigger x="13572" y="9218" repeat ="true">
+			<sentences>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¡¡¡Holaaa!!! ¿Sabrías decirme dónde está AstroBark?"/>
+				<sentence name="Aprendiz 1"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Pues esa información no te la voy a dar por la cara palomón"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Uyyy perdón no quería ofender, ¿Que tendría que hacer para saber eso?"/>
+				<sentence name="Aprendiz 1"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Pues tendrás que pelearte conmigo"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="No hay otra maner…. uyyy vale parece que no"/>
+			</sentences>
+		</dialogTrigger>
+
+
 		<dialogTrigger x="7200" y="6177" repeat ="true">
 			<sentences>
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="*Anda parece que he poseido a esta Paloma*"/>
@@ -1094,13 +1126,20 @@
 			</sentences>
 		</dialogTrigger>
 
-		<dialogTrigger x="13431" y="8406" repeat ="true">
+		<dialogTrigger x="15	804" y="8926" repeat ="true">
 			<sentences>
-				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="*A ver si este es más majo que el de abajo* ¡Hola! Tu también debes de ser aprendiz de AstroBark ¿verdad?"/>
-				<sentence name="Aprendiz 2"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Si, ¿por qué quieres saberlo?"/>
-				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Me gustaría saber donde puedo encontrar a *PAAAM*"/>
-				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="(se tropezaría con una mesa y del propio impacto le golpearía al segundo aprendiz y éste de la propia rabia empezaría un combate)"/>
-				<sentence name="Aprendiz 2"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Maldito condenadoooo que mi ropa es de Guaucci"/>
+				<sentence name="Bibi"		facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="¡¡¡MOOOLAA!!! ¿¿TU ERES SPRINGY NO??"/>
+				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¿Cómo? ¿Es a mí? ¿Como me has reconocido con este aspecto?"/>
+				<sentence name="Bibi"	    facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="Fácil, soy tu fan número 1"/>
+				<sentence name="Bibi"	    facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="¿Que haces por aquí? ¿Y por qué eres fantasma también?"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Pues eso intento averiguar, estaba intentando buscar a AstroBark"/>	
+				<sentence name="Bibi"		facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="Mmm... pues tendrías que preguntar a..."/>
+				<sentence name="Bibi"		facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="¿Como se llamaban?... Ah si, ¡Los aprendices!"/>
+				<sentence name="Bibi"		facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="Pero necesitarás una llave VIP para entrar..."/>
+				<sentence name="Bibi"		facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="Puedes conseguir una en esa arcade de ahí"/>
+				<sentence name="Bibi"		facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="Pero no es nada fácil, aunque para ti seguro que lo es"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Pues voy a probar suerte, ¡muchas gracias!"/>				
+				<sentence name="Bibi"		facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="¡¡¡TE AMO SPRINGY!!!"/>
 			</sentences>
 		</dialogTrigger>
 

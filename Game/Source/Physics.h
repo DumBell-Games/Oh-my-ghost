@@ -58,6 +58,7 @@ enum class ColliderType {
 	VETERANA,
 	TIENDAOPEN,
 	MANSIONKEY,
+	COBAYA,
 	UNKNOWN
 	// ..
 };

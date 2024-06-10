@@ -48,6 +48,7 @@
 #include "Perras.h"
 #include "Fuego.h"
 #include "MansionOpen.h"
+#include "Cobaya.h"
 
 
 #include "Defs.h"
@@ -209,6 +210,11 @@ bool Scene::Awake(pugi::xml_node config)
 	for (pugi::xml_node itemNode = config.child("mansionOpen"); itemNode; itemNode = itemNode.next_sibling("mansionOpen"))
 	{
 		MansionOpen* mansionOpen = (MansionOpen*)app->entityManager->CreateEntity(EntityType::MANSIONOPEN, itemNode);
+		//enemy->parameters = itemNode;
+	}
+	for (pugi::xml_node itemNode = config.child("cobaya"); itemNode; itemNode = itemNode.next_sibling("cobaya"))
+	{
+		Cobaya* cobaya = (Cobaya*)app->entityManager->CreateEntity(EntityType::COBAYA, itemNode);
 		//enemy->parameters = itemNode;
 	}
 
