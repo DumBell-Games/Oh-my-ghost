@@ -144,6 +144,10 @@ bool Player::Start() {
 	mansionOpen->body->SetFixedRotation(true);
 	mansionOpen->ctype = ColliderType::WALL;
 
+	blockDespacho = app->physics->CreateRectangle(18820 + 128, 2980 + 64, 257, 129, bodyType::STATIC);
+	blockDespacho->body->SetFixedRotation(true);
+	blockDespacho->ctype = ColliderType::WALL;
+
 	piso2 = app->physics->CreateRectangle(2817 + 64, 10365 + 175, 122, 380, bodyType::STATIC);
 	piso2->body->SetFixedRotation(true);
 	piso2->ctype = ColliderType::WALL;
@@ -474,6 +478,11 @@ bool Player::Update(float dt)
 		mansionOpen->body->SetTransform(b2Vec2_zero, 0);
 	}
 
+	if (llavePicked)
+	{
+		blockDespacho->body->SetTransform(b2Vec2_zero, 0);
+	}
+
 	if (tiendaIN && openTiendaTime.ReadSec() >= 5)
 	{
 		app->scene->OpenTienda();
@@ -599,6 +608,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision TIENDAOPEN");
 		tiendaIN = true;		
 		break;
+    case ColliderType::MANSIONKEY:
+        LOG("Collision TIENDAOPEN");
+        llavePicked = true;
+        break;
 	default:
 		break;
 	}

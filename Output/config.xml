@@ -356,6 +356,7 @@
 		</player>
 
 		<tiendaOpen x="8440" y="1500"/>
+		<mansionOpen x="16265" y="2982"/>
 		
 		<silverWings x="7100" y="6177" texturePath="Assets/Textures/silverWings.png">
 			<animation name="silverIdle" loop="true" speed="0.08f">
@@ -937,7 +938,7 @@
 			</animation>
 		</fuego>
 	
-	<veterana x="3542" y="10821" texturePath="Assets/Textures/VeteranaAstrobark_SpritesSheet.png">
+		<veterana x="3542" y="10821" texturePath="Assets/Textures/VeteranaAstrobark_SpritesSheet.png">
 			<animation name="veteranaIdle" loop="true" speed="0.08f">
 				<frame x="0" y="0" w="128" h="256" />
 				<frame x="128" y="0" w="128" h="256" />
@@ -1045,6 +1046,13 @@
 			</sentences>
 		</dialogTrigger>
 
+		<dialogTrigger x="16329" y="3072" repeat ="true">
+			<sentences>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¡¡¡He conseguido la llave!!!"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¡¡¡Por fin podré hablar con AstroBark!!!"/>
+			</sentences>
+		</dialogTrigger>
+
 
 		<dialogTrigger x="15084" y="7712" repeat ="true">
 			<sentences>
@@ -1105,7 +1113,7 @@
 
 		<dialogTrigger x="1900" y="12292" repeat ="true">	
 			<sentences>
-				<sentence name="Astrobark"  facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="3000 PawCoins al verde, ¡QUE AHORA ME TOCA!"/>
+				<sentence name="AstroBark"  facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="3000 PawCoins al verde, ¡QUE AHORA ME TOCA!"/>
 				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringy.png" text="*Anda, ya lo he encontrado!*"/>
 				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringy.png" text="*Voy a ir a hablar con él*"/>
 			</sentences>

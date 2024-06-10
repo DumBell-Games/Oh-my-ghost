@@ -87,6 +87,7 @@ public:
     PhysBody* casinoDesbloqueado;
 	PhysBody* mansionOpen;
 	PhysBody* piso2;
+	PhysBody* blockDespacho;
 
 
 	bool casinoIN = false;
@@ -105,6 +106,7 @@ public:
 	bool ciudadOUT = false;
 	bool tiendaIN = false;
 	bool tiendaOUT = false;
+	
 
 	List<Animation*> springyAnimationList;
 
@@ -143,6 +145,7 @@ public:
 	bool bestiaTouched = false;
 	bool aprendizTouched = false;
 	bool veteranaTouched = false;
+	bool llavePicked = false;
 
 	Timer openTiendaTime;
 

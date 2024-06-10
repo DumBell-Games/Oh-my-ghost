@@ -136,6 +136,7 @@
     <ClCompile Include="Source\Fuego.cpp" />
     <ClCompile Include="Source\ContextoSpringyP1.cpp" />
     <ClCompile Include="Source\ContextoSpringySegundaParte.cpp" />
+    <ClCompile Include="Source\MansionOpen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -309,6 +310,7 @@
     <ClInclude Include="Source\Fuego.h" />
     <ClInclude Include="Source\ContextoSpringyP1.h" />
     <ClInclude Include="Source\ContextoSpringySegundaParte.h" />
+    <ClInclude Include="Source\MansionOpen.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

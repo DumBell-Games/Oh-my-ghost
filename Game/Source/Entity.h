@@ -42,6 +42,7 @@ enum class EntityType : char
 	TIENDAOPEN,
 	PERRAS,
 	FUEGO,
+	MANSIONOPEN,
 	UNKNOWN
 };
 

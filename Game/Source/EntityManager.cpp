@@ -29,6 +29,7 @@
 #include "TiendaOpen.h"
 #include "Perras.h"
 #include "Fuego.h"
+#include "MansionOpen.h"
 
 #include "Defs.h"
 #include "Log.h"
@@ -193,6 +194,9 @@ Entity* EntityManager::CreateEntity(EntityType type, pugi::xml_node& data)
 		break;
 	case EntityType::PERRAS:
 		entity = new Perras();
+		break;
+	case EntityType::MANSIONOPEN:
+		entity = new MansionOpen();
 		break;
 	case EntityType::DIALOG_TRIGGER:
 		entity = new DialogTrigger();
