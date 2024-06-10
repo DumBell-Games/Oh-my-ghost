@@ -60,7 +60,7 @@ bool IntroScreen::Update(float dt)
 
     if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN || app->video->isVideoFinished)
     {
-        app->fadeToBlack->FadeToBlackTransition((Module*)app->introScreen, (Module*)app->titlescreen, 0.0f);
+        app->fadeToBlack->FadeToBlackTransition((Module*)app->introScreen, (Module*)app->contextoSpringyP1, 0.0f);
     }
     
     return true;

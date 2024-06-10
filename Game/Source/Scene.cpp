@@ -24,7 +24,6 @@
 #include "Character_Menu.h"
 #include "Aprendiz.h"
 #include "Veterana.h"
-#include "QuestPatatasScreen.h"
 #include "Conserje.h"
 #include "Deidad.h"
 #include "DjBunny.h"

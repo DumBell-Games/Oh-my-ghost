@@ -134,6 +134,8 @@
     <ClCompile Include="Source\Video.cpp" />
     <ClCompile Include="Source\Perras.cpp" />
     <ClCompile Include="Source\Fuego.cpp" />
+    <ClCompile Include="Source\ContextoSpringyP1.cpp" />
+    <ClCompile Include="Source\ContextoSpringySegundaParte.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -305,6 +307,8 @@
     <ClInclude Include="Source\Video.h" />
     <ClInclude Include="Source\Perras.h" />
     <ClInclude Include="Source\Fuego.h" />
+    <ClInclude Include="Source\ContextoSpringyP1.h" />
+    <ClInclude Include="Source\ContextoSpringySegundaParte.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

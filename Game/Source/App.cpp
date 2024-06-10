@@ -30,6 +30,9 @@
 #include "MusicaTaberna.h"
 #include "PersonajesScreen.h"
 #include "Tienda.h"
+#include "ContextoSpringyP1.h"
+#include "ContextoSpringySegundaParte.h"
+
 
 
 
@@ -68,6 +71,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	personajesScreen = new PersonajesScreen(false);
 	tienda = new Tienda(false);
 	characterMenu = new Character_Menu(false);
+	contextoSpringyP1 = new ContextoSpringyP1(false);
+	contextoSpringyP2 = new ContextoSpringySegundaParte(false);
 	titlescreen = new TitleScreen(false);
 	introScreen = new IntroScreen(false);
 	teamScreen = new TeamScreen(true);
@@ -109,6 +114,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(personajesScreen);
 	AddModule(tienda);
 	AddModule(characterMenu);
+	AddModule(contextoSpringyP1);
+	AddModule(contextoSpringyP2);
 	AddModule(titlescreen);
 	AddModule(introScreen);
 	AddModule(teamScreen);
