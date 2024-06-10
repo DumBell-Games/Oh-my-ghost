@@ -47,6 +47,8 @@ bool Veterana::Start() {
 
 
 
+	veterana = new Personatge("Veterana", 1, 10, 1, 10, "Assets/Animation/VeteranAstroBark/Astrobark.xml");
+
 	return true;
 }
 

@@ -1424,6 +1424,36 @@
 				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Pues sería una cosa “Muy Sencilla”, al menos para mí"/>
 				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Derrótame en combate con tus habilidades de paloma"/>
 			</sentences>
+			<combatAstroBark>
+				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Vaya, vaya…"/>
+				<sentence name="AstroBark"    facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Así que tu eres la paloma que ha estado dando problemas a mis secuaces, ¿no?"/>
+				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Si yo no quería causar ningún problema"/>
+				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringyP.png"  text="Yo solo quería y quiero información de Copycat"/>
+				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Que no la encuentro por ningún lado"/>
+				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Pues yo podría darte toda esta información, ya que soy el amo y señor de Central Fauna"/>
+				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Pero no te resultará nada fácil conseguirla, es un secreto de las altas esferas"/>
+				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¿Podría conseguir esa información haciendo algún encargo para ti?"/>
+				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="JAJAJAJA"/>
+				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="¿Crees que con unos simples encargos podrás obtener esa información?"/>
+				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¿Qué tendría que hacer para saber todo lo que necesito?"/>
+				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Pues sería una cosa “Muy Sencilla”, al menos para mí"/>
+				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Derrótame en combate con tus habilidades de paloma"/>
+			</combatAstroBark>
+			<combatAstroBarkEND>
+				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Vaya, vaya…"/>
+				<sentence name="AstroBark"    facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Así que tu eres la paloma que ha estado dando problemas a mis secuaces, ¿no?"/>
+				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Si yo no quería causar ningún problema"/>
+				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringyP.png"  text="Yo solo quería y quiero información de Copycat"/>
+				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Que no la encuentro por ningún lado"/>
+				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Pues yo podría darte toda esta información, ya que soy el amo y señor de Central Fauna"/>
+				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Pero no te resultará nada fácil conseguirla, es un secreto de las altas esferas"/>
+				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¿Podría conseguir esa información haciendo algún encargo para ti?"/>
+				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="JAJAJAJA"/>
+				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="¿Crees que con unos simples encargos podrás obtener esa información?"/>
+				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¿Qué tendría que hacer para saber todo lo que necesito?"/>
+				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Pues sería una cosa “Muy Sencilla”, al menos para mí"/>
+				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Derrótame en combate con tus habilidades de paloma"/>
+			</combatAstroBarkEND>
 		</dialogTrigger>
 
 	</scene>
