@@ -148,6 +148,9 @@ bool CombatManager::Start()
 	enemyAnims->SetAnimation(enemyAnims->defaultAnimation);
 	playerAnims->SetAnimation(playerAnims->defaultAnimation);
 
+	// Arreglo para que funcionen los botones con formas custom (?)
+	app->render->camera.x = 0;
+	app->render->camera.y = 0;
 
 	LOG("Combat Start!");
 	return true;
@@ -344,13 +347,18 @@ bool CombatManager::LoadLayout(pugi::xml_node layoutRoot)
 
 				// Load button textures
 				Properties::Property* prop;
+				SString bgPath;
+				SString bgClickedPath;
+				SString fgPath;
 				if (prop = properties.GetProperty("bgPath"))
-					newButton->bgTexture = app->tex->LoadSP(prop->strVal.GetString(), true);
+					bgPath = prop->strVal.GetString();
 				if (prop = properties.GetProperty("bgClickedPath"))
-				newButton->bgTextureClicked = app->tex->LoadSP(prop->strVal.GetString(), true);
+				bgClickedPath = prop->strVal.GetString();
 
 				// Load attack icon
-				newButton->fgTexture = app->tex->LoadSP(a->iconPath.c_str(), true);
+				fgPath = a->iconPath.c_str();
+
+				newButton->Init(bgPath.GetString(), bgClickedPath.GetString(), fgPath.GetString());
 
 				menuList[menuID].push_back(newButton);
 

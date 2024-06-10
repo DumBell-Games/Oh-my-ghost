@@ -269,7 +269,75 @@ bool Render::DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b,
 	return ret;
 }
 
-bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera) const
+bool Render::DrawCircle(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled, bool use_camera)
+{
+	return filled ?
+		DrawCircleFilled(x, y, radius, r, g, b, a, use_camera)
+		: DrawCircleEmpty(x, y, radius, r, g, b, a, use_camera);
+}
+
+// Uses the Midpoint Circle Algorithm to draw full circles. position is the circle's center
+bool Render::DrawCircleFilled(int posX, int posY, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool useCamera) const
+{
+	bool ret = true;
+
+	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawColor(renderer, r, g, b, a);
+
+	//Original code taken from https://stackoverflow.com/a/74745126
+	
+	// 35/49 is a biased approximation of 1/sqrt(2)
+	int arrSize = radius * 8 * 35 / 49;
+	arrSize = (arrSize + (8 - 1)) & -8;
+	
+	std::vector<SDL_Point> points;
+	points.reserve(arrSize);
+
+	const int32_t diameter = (radius * 2);
+
+	int32_t x = (radius - 1);
+	int32_t y = 0;
+	int32_t tx = 1;
+	int32_t ty = 1;
+	int32_t error = (tx - diameter);
+
+	while (x >= y)
+	{
+		// Each of the following renders an octant of the circle
+		points.push_back({ posX + x, posY - y });
+		points.push_back({ posX + x, posY + y });
+		points.push_back({ posX - x, posY - y });
+		points.push_back({ posX - x, posY + y });
+		points.push_back({ posX + y, posY - x });
+		points.push_back({ posX + y, posY + x });
+		points.push_back({ posX - y, posY - x });
+		points.push_back({ posX - y, posY + x });
+
+		if (error <= 0)
+		{
+			++y;
+			error += ty;
+			ty += 2;
+		}
+
+		if (error > 0)
+		{
+			--x;
+			tx += 2;
+			error += (tx - diameter);
+		}
+	}
+
+	if (!SDL_RenderDrawLines(renderer, points.data(), points.size()))
+	{
+		LOG("Cannot draw circle to screen. SDL_RenderDrawLines error: %s", SDL_GetError());
+		ret = false;
+	}
+
+	return ret;
+}
+
+bool Render::DrawCircleEmpty(int x, int y, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool use_camera) const
 {
 	bool ret = true;
 	uint scale = app->win->GetScale();

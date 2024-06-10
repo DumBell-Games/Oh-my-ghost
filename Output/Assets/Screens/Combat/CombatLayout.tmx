@@ -7,35 +7,35 @@
   <image source="fondoBatalla.png" width="1920" height="1080"/>
  </imagelayer>
  <objectgroup id="4" name="AttackMenu">
-  <object id="1" name="attack2" x="1601.33" y="700" width="90" height="90">
+  <object id="1" name="attack2" x="1471.33" y="700" width="90" height="90">
    <properties>
     <property name="bgClickedPath" value="Assets/Screens/Combat/AbilityButtonClicked.png"/>
     <property name="bgPath" value="Assets/Screens/Combat/AbilityButton.png"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="2" name="attack1" x="1718" y="729" width="90" height="90">
+  <object id="2" name="attack1" x="1588" y="729" width="90" height="90">
    <properties>
     <property name="bgClickedPath" value="Assets/Screens/Combat/AbilityButtonClicked.png"/>
     <property name="bgPath" value="Assets/Screens/Combat/AbilityButton.png"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="3" name="attack3" x="1501.67" y="766.333" width="90" height="90">
+  <object id="3" name="attack3" x="1371.67" y="766.333" width="90" height="90">
    <properties>
     <property name="bgClickedPath" value="Assets/Screens/Combat/AbilityButtonClicked.png"/>
     <property name="bgPath" value="Assets/Screens/Combat/AbilityButton.png"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="4" name="attack4" x="1486" y="882" width="90" height="90">
+  <object id="4" name="attack4" x="1356" y="882" width="90" height="90">
    <properties>
     <property name="bgClickedPath" value="Assets/Screens/Combat/AbilityButtonClicked.png"/>
     <property name="bgPath" value="Assets/Screens/Combat/AbilityButton.png"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="5" name="attack5" x="1590" y="817" width="204" height="204">
+  <object id="5" name="attack5" x="1460" y="817" width="204" height="204">
    <properties>
     <property name="bgClickedPath" value="Assets/Screens/Combat/BigAbilityButtonClicked.png"/>
     <property name="bgPath" value="Assets/Screens/Combat/BigAbilityButton.png"/>
@@ -44,7 +44,7 @@
   </object>
  </objectgroup>
  <objectgroup id="8" name="ItemMenu">
-  <object id="14" x="1441" y="1033">
+  <object id="14" x="1311" y="1033">
    <properties>
     <property name="direction" type="int" value="0"/>
    </properties>

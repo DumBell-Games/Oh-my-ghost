@@ -20,13 +20,13 @@ GuiControlPhysButton::GuiControlPhysButton(uint32 id, GuiControlType type, SDL_R
 	case GuiControlType::PHYSBUTTON_CIRCLE:
 	{
 		int rad = bounds.w / 2;
-		pb = app->physics->CreateCircle(rad, rad, rad, STATIC);
+		pb = app->physics->CreateCircle(x+rad, y+rad, rad, KINEMATIC);
 		break;
 	}
 	case GuiControlType::PHYSBUTTON_BOX:
 	default:
 	{
-		pb = app->physics->CreateRectangle(0, 0, bounds.w, bounds.y, KINEMATIC);
+		pb = app->physics->CreateRectangle(x, y, bounds.w, bounds.y, KINEMATIC);
 		break;
 	}
 	}
@@ -35,25 +35,32 @@ GuiControlPhysButton::GuiControlPhysButton(uint32 id, GuiControlType type, SDL_R
 
 	pbody = Unique_PhysBody(pb, DestroyPtr);
 
-	bgTexture = app->tex->LoadSP("Assets/Screens/Combat/AtkMenu.png", true);
-
-	//debug
-	pbody->GetPosition(x, y);
-	LOG("boton fisico creado en (%i,%i)", x, y);
-
 }
 
 GuiControlPhysButton::~GuiControlPhysButton()
 {
+	app->tex->UnLoadSP(bgTexture);
+	app->tex->UnLoadSP(bgTextureClicked);
+	app->tex->UnLoadSP(fgTexture);
+}
+
+bool GuiControlPhysButton::Init(const char* bgPath, const char* bgClickedPath, const char* fgPath, const char* text)
+{
+	bgTexture = app->tex->LoadSP(bgPath, true);
+	bgTextureClicked = app->tex->LoadSP(bgClickedPath, true);
+	fgTexture = app->tex->LoadSP(fgPath, true);
+	this->text = text;
+
+	return true;
 }
 
 bool GuiControlPhysButton::Update(float dt)
 {
 	// TODO move physbody to camera-relative position
 	// bounds variable is relative to camera
-	float x = bounds.x;// - app->render->camera.x;
-	float y = bounds.y;// - app->render->camera.y;
-	pbody->body->SetTransform({ x, y }, pbody->GetRotation());
+	//float x = PIXEL_TO_METERS(bounds.x);// - app->render->camera.x;
+	//float y = PIXEL_TO_METERS(bounds.y);// - app->render->camera.y;
+	//pbody->body->SetTransform({ x, y }, pbody->GetRotation());
 
 	if (state != GuiControlState::DISABLED)
 	{
@@ -63,8 +70,8 @@ bool GuiControlPhysButton::Update(float dt)
 		{
 			app->input->GetMousePosition(mouseX, mouseY);
 			float localMouseX, localMouseY;
-			localMouseX = PIXEL_TO_METERS(mouseX - bounds.x);
-			localMouseY = PIXEL_TO_METERS(mouseY - bounds.y);
+			localMouseX = PIXEL_TO_METERS(mouseX);
+			localMouseY = PIXEL_TO_METERS(mouseY);
 			bool notified = false;
 			for (b2Fixture* f = pbody->body->GetFixtureList(); f && !notified; f = f->GetNext())
 			{
@@ -101,7 +108,7 @@ bool GuiControlPhysButton::Render()
 	if (bgTexture.get())
 	{
 		SDL_Texture* toDraw = (state == GuiControlState::PRESSED) ? bgTextureClicked.get() : bgTexture.get();
-		app->render->DrawTexture(toDraw, bounds.x, bounds.y, nullptr, 1.0F, pbody->GetRotation(), bounds.w / 2, bounds.h / 2, true);
+		app->render->DrawTexture(toDraw, bounds.x, bounds.y, nullptr, 1.0F, pbody->GetRotation(), bounds.w / 2, bounds.h / 2, false);
 	}
 	else if (type == GuiControlType::PHYSBUTTON_BOX)switch (state)
 	{
@@ -118,10 +125,31 @@ bool GuiControlPhysButton::Render()
 		app->render->DrawRectangle(bounds, 0, 255, 0, 255, true, false);
 		break;
 	}
+	else if (type == GuiControlType::PHYSBUTTON_CIRCLE)
+	{
+		int rad = bounds.w / 2;
+		int x = bounds.x + rad;
+		int y = bounds.y + rad;
+		switch (state)
+		{
+		case GuiControlState::NON_CLICKABLE:
+			app->render->DrawCircle(x, y, rad, 200, 200, 200, 255, true, false);
+			break;
+		case GuiControlState::NORMAL:
+			app->render->DrawCircle(x, y, rad, 0, 0, 255, 255, true, false);
+			break;
+		case GuiControlState::FOCUSED:
+			app->render->DrawCircle(x, y, rad, 0, 0, 20, 255, true, false);
+			break;
+		case GuiControlState::PRESSED:
+			app->render->DrawCircle(x, y, rad, 0, 255, 0, 255, true, false);
+			break;
+		}
+	}
 
 	if (fgTexture.get())
 	{
-		app->render->DrawTexture(fgTexture.get(), bounds.x, bounds.y, nullptr, 1.0F, pbody->GetRotation(), bounds.w / 2, bounds.h / 2, true);
+		app->render->DrawTexture(fgTexture.get(), bounds.x, bounds.y, nullptr, 1.0F, pbody->GetRotation(), bounds.w / 2, bounds.h / 2, false);
 	}
 	else
 		app->render->DrawText(text.GetString(), bounds.x, bounds.y, bounds.w, bounds.h);
