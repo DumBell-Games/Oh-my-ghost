@@ -20,16 +20,16 @@ verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
 triangles  => sprite triangulation, 3 vertex indices per triangle
 -->
 <TextureAtlas imagePath="Assets/Animation/Springy/SpringyPaloma.png" width="3200" height="1280" speed="0.05" loop="true" pingpong="false">
-    <sprite n="Death-0" x="0" y="0" w="128" h="256" pX="0.5" pY="1" loop="false"/>
-    <sprite n="Death-1" x="128" y="0" w="128" h="256" pX="0.5" pY="1"/>
-    <sprite n="Death-2" x="256" y="0" w="128" h="256" pX="0.5" pY="1"/>
-    <sprite n="Death-3" x="384" y="0" w="128" h="256" pX="0.5" pY="1"/>
-    <sprite n="Death-4" x="512" y="0" w="128" h="256" pX="0.5" pY="1"/>
-    <sprite n="Death-5" x="640" y="0" w="128" h="256" pX="0.5" pY="1"/>
-    <sprite n="Death-6" x="768" y="0" w="128" h="256" pX="0.5" pY="1"/>
-    <sprite n="Death-7" x="896" y="0" w="128" h="256" pX="0.5" pY="1"/>
-    <sprite n="Death-8" x="1024" y="0" w="128" h="256" pX="0.5" pY="1"/>
-    <sprite n="Death-9" x="1152" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Dead-0" x="0" y="0" w="128" h="256" pX="0.5" pY="1" loop="false"/>
+    <sprite n="Dead-1" x="128" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Dead-2" x="256" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Dead-3" x="384" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Dead-4" x="512" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Dead-5" x="640" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Dead-6" x="768" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Dead-7" x="896" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Dead-8" x="1024" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Dead-9" x="1152" y="0" w="128" h="256" pX="0.5" pY="1"/>
     <sprite n="Hurt-0" x="1280" y="0" w="128" h="256" pX="0.5" pY="1" loop="false"/>
     <sprite n="Hurt-1" x="1408" y="0" w="128" h="256" pX="0.5" pY="1"/>
     <sprite n="Hurt-2" x="1536" y="0" w="128" h="256" pX="0.5" pY="1"/>

@@ -8,6 +8,7 @@
 #include "Timer.h"
 #include "SString.h"
 #include "Textures.h"
+#include "ItemData.h"
 
 class InventoryScreen : public Module
 {
@@ -41,6 +42,8 @@ public:
     bool buttoncreated = false;
     int buttonFx;
 
+    std::vector<shared_texture_t> textureList;
+
     shared_texture_t inventory1;
     shared_texture_t inventory2;
     shared_texture_t inventory3;
@@ -71,4 +74,6 @@ public:
 
     //gui list
     List<GuiControlButton*> inventoryButtons;
+
+    ItemData* selectedItem = nullptr;
 };

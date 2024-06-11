@@ -25,7 +25,7 @@ bool Video::CleanUp()
 	return true;
 }
 
-void Video::Initialize(char* path)
+void Video::Initialize(const char* path)
 {
 	
 	OpenAVI(path);                  // Open The AVI File
@@ -55,6 +55,8 @@ void Video::OpenAVI(LPCSTR path)
 	}
 
 	isVideoFinished = false;
+
+	frame = 0;
 }
 
 bool Video::GrabAVIFrame()
@@ -123,6 +125,7 @@ void Video::CloseAVI()
 	AVIStreamRelease(pavi);                     // Release The Stream
 
 	AVIFileExit();                              // Release The File
+	isVideoFinished = true;
 }
 
 
