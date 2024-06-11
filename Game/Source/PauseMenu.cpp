@@ -30,11 +30,12 @@ bool PauseMenu::Awake() {
 
 bool PauseMenu::Start() {
 
-      buttonFx = app->audio->LoadFx("Assets/Audio/Fx/basic_click.wav");
 
-      pause1 = app->tex->LoadSP("Assets/Screens/ContinuarSelect_Pausa.png", true);
-      pause2 = app->tex->LoadSP("Assets/Screens/OpcionesSelect_Pausa.png", true);
-      pause3 = app->tex->LoadSP("Assets/Screens/SalirSelect_Pausa.png", true);
+    buttonFx = app->audio->LoadFx("Assets/Audio/Fx/basic_click.wav");
+
+    pause1 = app->tex->LoadSP("Assets/Screens/ContinuarSelect_Pausa.png", true);
+    pause2 = app->tex->LoadSP("Assets/Screens/OpcionesSelect_Pausa.png", true);
+    pause3 = app->tex->LoadSP("Assets/Screens/SalirSelect_Pausa.png", true);
 
     app->render->camera.x = 0;
 	app->render->camera.y = 0;
@@ -47,6 +48,7 @@ bool PauseMenu::Start() {
 }
 bool PauseMenu::Update(float dt) 
 {
+    app->scene->PlayerQuieto();
     if (buttoncreated == true) {
         // TODO: pasar esto a OnClick() (activando el evento de forma manual con el teclado/mando desde aqui)
 
@@ -143,11 +145,9 @@ bool PauseMenu::Update(float dt)
 }
 bool PauseMenu::PostUpdate() {
     if (inpause == true) {
-        weigth = screenWidth - 700;
-      
-        if (PauseIndex == 1) app->render->DrawTexture(pause1.get(), weigth, 0, 0, NULL);
-        else if (PauseIndex == 2) app->render->DrawTexture(pause2.get(), weigth, 0, 0, NULL);
-        else if (PauseIndex == 3) app->render->DrawTexture(pause3.get(), weigth, 0, 0, NULL);
+        if (PauseIndex == 1) app->render->DrawTexture(pause1.get(), 0, 0, 0, NULL);
+        else if (PauseIndex == 2)   app->render->DrawTexture(pause2.get(), 0, 0, 0, NULL);
+        else if (PauseIndex == 3) app->render->DrawTexture(pause3.get(), 0, 0, 0, NULL);
     }
 
 	return true;
@@ -199,18 +199,18 @@ void PauseMenu::CreatePauseButtons() {
                 buttoncreated = true;
                 int wBt = 390;
                 int hBt = 140;
-                int posBtX = screenWidth - 550;
-                int posBtY = screenHeight - 850;
+                int posBtX = screenWidth - 1100;
+                int posBtY = screenHeight - 500;
                 PauseButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Continuar", { posBtX, posBtY, wBt, hBt }, [this](GuiControl* g) {continuar(g); }));
                 wBt = 370;
                 hBt = 100;
-                posBtX = screenWidth - 535;
-                posBtY = screenHeight - 700;
+                posBtX = screenWidth - 1100;
+                posBtY = screenHeight - 500;
                 PauseButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Opciones", { posBtX, posBtY, wBt, hBt }, [this](GuiControl* g) {opciones(g); }));
                 wBt = 190;
                 hBt = 80;
-                posBtX = screenWidth - 400;
-                posBtY = screenHeight - 300;
+                posBtX = screenWidth - 1100;
+                posBtY = screenHeight - 500;
                 PauseButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Salir", { posBtX, posBtY, wBt, hBt }, [this](GuiControl* g) {salir(g); }));
                 
               
@@ -267,7 +267,8 @@ void PauseMenu::CreatePauseButtons() {
 
     void PauseMenu::continuar(GuiControl * ctrl)
     {
-        app->fadeToBlack->FadeToBlackTransition((Module*)app->pause, (Module*)app->scene, 0.0f);
+        app->pause->Disable();
+        app->scene->PlayerDinamico();
         buttoncreated = false;
         app->audio->PlayFx(buttonFx);
     }

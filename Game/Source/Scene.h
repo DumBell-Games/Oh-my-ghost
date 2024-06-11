@@ -231,6 +231,10 @@ public:
 		return player->pBody->body->SetType(b2_staticBody);
 	}
 
+	void Scene::PlayerDinamico() {
+		return player->pBody->body->SetType(b2_dynamicBody);
+	}
+
 public:
 	int cityFx;
 	int ciudadMusic;

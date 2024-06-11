@@ -130,7 +130,7 @@ bool Player::Start() {
 	cieloOut = app->physics->CreateRectangleSensor(21529 - 96, 9200 + 64, 256, 128, bodyType::KINEMATIC);
 	cieloOut->ctype = ColliderType::CIELOOUT;
 
-	mansionIn = app->physics->CreateRectangleSensor(10394 + 128, 531 + 64, 256, 128, bodyType::KINEMATIC);
+	mansionIn = app->physics->CreateRectangleSensor(10113 + 128, 697 + 64, 256, 128, bodyType::KINEMATIC);
 	mansionIn->ctype = ColliderType::MANSIONIN;
 
 	mansionOut = app->physics->CreateRectangleSensor(16386 + 128, 5893 + 64, 256, 128, bodyType::KINEMATIC);
@@ -142,7 +142,7 @@ bool Player::Start() {
 	despachoOut = app->physics->CreateRectangleSensor(20866 + 128, 2176 + 64, 256, 128, bodyType::KINEMATIC);
 	despachoOut->ctype = ColliderType::DESPACHOOUT;
 
-	mansionOpen = app->physics->CreateRectangle(10394 + 128, 531 + 64, 257, 129, bodyType::STATIC);
+	mansionOpen = app->physics->CreateRectangle(10113 + 128, 697 + 64, 257, 129, bodyType::STATIC);
 	mansionOpen->body->SetFixedRotation(true);
 	mansionOpen->ctype = ColliderType::WALL;
 
@@ -355,9 +355,6 @@ bool Player::Update(float dt)
 		}
 	}
 
-
-
-
 	if (casinoIN || app->input->GetKey(SDL_SCANCODE_F3) == KEY_DOWN)
 	{
 		app->musicaCasino->Enable();
@@ -427,7 +424,7 @@ bool Player::Update(float dt)
 	{
 		app->musicaMansion->Disable();
 		app->musicaCiudad->Enable();
-		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(10394 + 128), PIXEL_TO_METERS(800)), NULL);
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(10113 + 128), PIXEL_TO_METERS(800)), NULL);
 		mansionOUT = false;
 	}
 	if (despachoIN || app->input->GetKey(SDL_SCANCODE_F7) == KEY_DOWN)

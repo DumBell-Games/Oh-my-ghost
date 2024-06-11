@@ -1025,7 +1025,7 @@
 			</combatVeteranaEND>			
 		</veterana>
 		
-		<veterana x="15423" y="3070" texturePath="Assets/Textures/VeteranaAstrobark_SpritesSheet.png">
+		<veterana x="15423" y="3170" texturePath="Assets/Textures/VeteranaAstrobark_SpritesSheet.png">
 			<animation name="veteranaIdle" loop="true" speed="0.08f">
 				<frame x="0" y="0" w="128" h="256" />
 				<frame x="128" y="0" w="128" h="256" />
@@ -1047,7 +1047,7 @@
 			</combatVeteranaEND>
 		</veterana>
 		
-		<veterana x="16447" y="3070" texturePath="Assets/Textures/VeteranaAstrobark_SpritesSheet.png">
+		<veterana x="16447" y="3170" texturePath="Assets/Textures/VeteranaAstrobark_SpritesSheet.png">
 			<animation name="veteranaIdle" loop="true" speed="0.08f">
 				<frame x="0" y="0" w="128" h="256" />
 				<frame x="128" y="0" w="128" h="256" />
