@@ -45,6 +45,18 @@ bool InventoryScreen::Start() {
     inventory10 = app->tex->LoadSP("Assets/Textures/inventario (10).png", true);
     inventory11 = app->tex->LoadSP("Assets/Textures/inventario (11).png", true);
 
+    textureList.push_back(inventory1);
+    textureList.push_back(inventory2);
+    textureList.push_back(inventory3);
+    textureList.push_back(inventory4);
+    textureList.push_back(inventory5);
+    textureList.push_back(inventory6);
+    textureList.push_back(inventory7);
+    textureList.push_back(inventory8);
+    textureList.push_back(inventory9);
+    textureList.push_back(inventory10);
+    textureList.push_back(inventory11);
+
 
     app->render->camera.x = 0;
     app->render->camera.y = 0;
