@@ -33,20 +33,17 @@ bool InventoryScreen::Start() {
 	
     buttonFx = app->audio->LoadFx("Assets/Audio/Fx/basic_click.wav");
 
-    inventory1 = app->tex->LoadSP("Assets/Textures/InventarioCatCola.png", true);
-    inventory2 = app->tex->LoadSP("Assets/Textures/InventarioCatnip.png", true);
-    inventory3 = app->tex->LoadSP("Assets/Textures/InventarioPatatas.png", true);
-    inventory4 = app->tex->LoadSP("Assets/Textures/InventarioYogur.png", true);
-    inventory5 = app->tex->LoadSP("Assets/Textures/InventarioChuches.png", true);
-    inventory6 = app->tex->LoadSP("Assets/Textures/InventarioCaramelos.png", true);
-    inventory7 = app->tex->LoadSP("Assets/Textures/InventarioBirra.png", true);
-    inventory8 = app->tex->LoadSP("Assets/Textures/InventarioHelado.png", true);
-    inventory9 = app->tex->LoadSP("Assets/Textures/InventarioLeche.png", true);
-    inventory10 = app->tex->LoadSP("Assets/Textures/InventarioVelocidad.png", true);
-    inventory11 = app->tex->LoadSP("Assets/Textures/InventarioPastel.png", true);
-    inventory12 = app->tex->LoadSP("Assets/Textures/InventarioMapaEnemigo.png", true);
-    inventory13 = app->tex->LoadSP("Assets/Textures/InventarioMapaMazmorra.png", true);
-    inventory14 = app->tex->LoadSP("Assets/Textures/InventarioUbicacion.png", true);
+    inventory1 = app->tex->LoadSP("Assets/Textures/inventario (1).png", true);
+    inventory2 = app->tex->LoadSP("Assets/Textures/inventario (2).png", true);
+    inventory3 = app->tex->LoadSP("Assets/Textures/inventario (3).png", true);
+    inventory4 = app->tex->LoadSP("Assets/Textures/inventario (4).png", true);
+    inventory5 = app->tex->LoadSP("Assets/Textures/inventario (5).png", true);
+    inventory6 = app->tex->LoadSP("Assets/Textures/inventario (6).png", true);
+    inventory7 = app->tex->LoadSP("Assets/Textures/inventario (7).png", true);
+    inventory8 = app->tex->LoadSP("Assets/Textures/inventario (8).png", true);
+    inventory9 = app->tex->LoadSP("Assets/Textures/inventario (9).png", true);
+    inventory10 = app->tex->LoadSP("Assets/Textures/inventario (10).png", true);
+    inventory11 = app->tex->LoadSP("Assets/Textures/inventario (11).png", true);
 
 
     app->render->camera.x = 0;
@@ -70,24 +67,24 @@ bool InventoryScreen::PreUpdate() {
 }
 bool InventoryScreen::Update(float dt) {
     
-	valorCoca.Create("x%d", app->scene->GetColaQuantity());
-    valorBirra.Create("x%d", app->scene->GetBirraQuantity());
-    valorPatatas.Create("x%d", app->scene->GetPatatasQuantity());
-    valorCaramelos.Create("x%d", app->scene->GetCaramelosQuantity());
-    valorVelocidad.Create("x%d", app->scene->GetVelocidadQuantity());
-    valorYogur.Create("x%d", app->scene->GetYogurQuantity());
-    dineroActual.Create("%d", app->scene->GetMonedasQuantity());
-    valorChuches.Create("x%d", app->scene->GetChuchesQuantity());
-    valorPastel.Create("x%d", app->scene->GetPastelQuantity());
-    valorHelado.Create("x%d", app->scene->GetHeladoQuantity());
+    valorYogur.Create("%d", app->scene->GetYogurQuantity());
+    valorBirra.Create("%d", app->scene->GetBirraQuantity());
+    valorPatatas.Create("%d", app->scene->GetPatatasQuantity());
+    valorVelocidad.Create("%d", app->scene->GetVelocidadQuantity());
+    valorCaramelos.Create("%d", app->scene->GetCaramelosQuantity());
+    valorChuches.Create("%d", app->scene->GetChuchesQuantity());
+    valorPastel.Create("%d", app->scene->GetPastelQuantity());
+    valorHelado.Create("%d", app->scene->GetHeladoQuantity());
+	valorCoca.Create("%d", app->scene->GetColaQuantity());
 
+    dineroActual.Create("%d", app->scene->GetMonedasQuantity());
 
     if (app->input->GetButton(ControlID::UP) == KEY_REPEAT) //arriba
     {
         if (timer.ReadMSec() >= 200)
         {
             if (menuIndex > 1) menuIndex--;
-            else menuIndex = 14;
+            else menuIndex = 11;
             timer.Start();
         }
     }
@@ -95,7 +92,7 @@ bool InventoryScreen::Update(float dt) {
     {
         if (timer.ReadMSec() >= 200)
         {
-            if (menuIndex < 14) menuIndex++;
+            if (menuIndex < 11) menuIndex++;
             else menuIndex = 1;
             timer.Start();
         }
@@ -105,7 +102,7 @@ bool InventoryScreen::Update(float dt) {
         if (timer.ReadMSec() >= 200)
         {
             if (menuIndex > 1) menuIndex--;
-            else menuIndex = 14;
+            else menuIndex = 11;
             timer.Start();
         }
     }
@@ -113,7 +110,7 @@ bool InventoryScreen::Update(float dt) {
     {
         if (timer.ReadMSec() >= 200)
         {
-            if (menuIndex < 14) menuIndex++;
+            if (menuIndex < 11) menuIndex++;
             else menuIndex = 1;
             timer.Start();
         }
@@ -149,9 +146,6 @@ bool InventoryScreen::Update(float dt) {
     else if (menuIndex == 9) app->render->DrawTexture(inventory9.get(), 0, 0, 0, NULL);
     else if (menuIndex == 10) app->render->DrawTexture(inventory10.get(), 0, 0, 0, NULL);
     else if (menuIndex == 11) app->render->DrawTexture(inventory11.get(), 0, 0, 0, NULL);
-    else if (menuIndex == 12) app->render->DrawTexture(inventory12.get(), 0, 0, 0, NULL);
-    else if (menuIndex == 13) app->render->DrawTexture(inventory13.get(), 0, 0, 0, NULL);
-    else if (menuIndex == 14) app->render->DrawTexture(inventory14.get(), 0, 0, 0, NULL);
     
     return true;
 }
@@ -159,17 +153,17 @@ bool InventoryScreen::Update(float dt) {
 bool InventoryScreen::PostUpdate() {
 
     //draw item quantity
-    app->render->DrawText(valorCoca.GetString(), 100, 365, 64, 64);
-	app->render->DrawText(valorBirra.GetString(), 325, 650, 64, 64);
-	app->render->DrawText(valorYogur.GetString(), 775, 365, 64, 64);
-    app->render->DrawText(valorCaramelos.GetString(), 100, 650, 64, 64);
-	app->render->DrawText(valorVelocidad.GetString(), 1000, 650, 64, 64);
-	app->render->DrawText(valorPatatas.GetString(), 550, 365, 64, 64);
-    app->render->DrawText(dineroActual.GetString(), 110, 50, 64, 64);
-    app->render->DrawText(valorChuches.GetString(), 1000, 365, 64, 64);
-    app->render->DrawText(valorHelado.GetString(), 550, 650, 64, 64);
-    app->render->DrawText(valorPastel.GetString(), 213, 935, 64, 64);
+	app->render->DrawText(valorYogur.GetString(), 1000, 390, 18, 27, {(0), (0), (0), (0)});
+	app->render->DrawText(valorBirra.GetString(), 1200, 390, 18, 27, { (0), (0), (0), (0) });
+	app->render->DrawText(valorPatatas.GetString(), 1400, 390, 18, 27, { (0), (0), (0), (0) });
+	app->render->DrawText(valorVelocidad.GetString(), 1600, 390, 18, 27, { (0), (0), (0), (0) });
+    app->render->DrawText(valorCaramelos.GetString(), 1000, 597, 18, 27, { (0), (0), (0), (0) });
+    app->render->DrawText(valorChuches.GetString(), 1200, 597, 18, 27, { (0), (0), (0), (0) });
+    app->render->DrawText(valorPastel.GetString(), 1400, 597, 18, 27, { (0), (0), (0), (0) });
+    app->render->DrawText(valorHelado.GetString(), 1600, 597, 18, 27, { (0), (0), (0), (0) });
+    app->render->DrawText(valorCoca.GetString(), 1000, 804, 18, 27, { (0), (0), (0), (0) });
 	
+    app->render->DrawText(dineroActual.GetString(), 320, 904, 26, 35, { (0), (0), (0), (0) });
 	return true;
 }
 
@@ -298,7 +292,7 @@ void InventoryScreen::CreateInventoryButtons() {
 
         wBt = 190;
         hBt = 40;
-        posBtX = screenWidth - 250;
+        posBtX = screenWidth - 450;
         posBtY = screenHeight - 650;
         inventoryButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 5, "Chuches", { posBtX, posBtY, wBt, hBt }, this));
 
@@ -318,8 +312,8 @@ void InventoryScreen::CreateInventoryButtons() {
 
         wBt = 190;
         hBt = 40;
-        posBtX = screenWidth - 750;
-        posBtY = screenHeight - 450;
+        posBtX = screenWidth - 450;
+        posBtY = screenHeight - 459;
         inventoryButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 8, "Helado", { posBtX, posBtY, wBt, hBt }, this));
 
 		wBt = 190;
@@ -330,14 +324,14 @@ void InventoryScreen::CreateInventoryButtons() {
 
 		wBt = 190;
 		hBt = 40;
-		posBtX = screenWidth - 250;
+		posBtX = screenWidth - 450;
 		posBtY = screenHeight - 450;
 		inventoryButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 10, "Velocidad", { posBtX, posBtY, wBt, hBt }, this));
 
         //fila 3
 		wBt = 190;
 		hBt = 40;
-		posBtX = screenWidth - 1250;
+		posBtX = screenWidth - 450;
 		posBtY = screenHeight - 250;
 		inventoryButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 11, "Pastel", { posBtX, posBtY, wBt, hBt }, this));
 
