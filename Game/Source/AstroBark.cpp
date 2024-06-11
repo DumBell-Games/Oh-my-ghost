@@ -44,7 +44,10 @@ bool Astrobark::Start() {
 	nBody->ctype = ColliderType::NPC;
 
 	astroBark = new Personatge("AstroBark", 1, 10, 1, 10, "Assets/Animation/Jefe_Astrobark/Astrobark.xml");
-
+	astroBark->atacs.push_back(Atac("Ladrido", 5, false, "", "Skill1"));
+	astroBark->atacs.push_back(Atac("Mordiscazo", 5, false, "", "Skill2"));
+	astroBark->atacs.push_back(Atac("Jauría", 5, false, "", "Skill3"));
+	astroBark->atacs.push_back(Atac("Lamerse las heridas", 5, false, "", "Skill4"));
 
 	currentAnim = astroIdle;
 
@@ -87,7 +90,7 @@ void Astrobark::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::PLAYER:
 		LOG("Collision PLAYER");
 		if(astroBark->salutActual > 0)
-		app->combat->BeginCombat(astroBark, parameters.child("combatAstroBark"), parameters.child("combatAstroBarkEND"));
+		app->combat->BeginCombat(astroBark, parameters.child("astrobarkCombatIN"), parameters.child("astrobarkCombatEND"));
 		break;
 	default:
 		break;

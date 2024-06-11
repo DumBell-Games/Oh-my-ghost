@@ -47,12 +47,7 @@ bool Aprendiz::Start() {
 
 	aprendizCombat = new Personatge("Aprendiz", 1, 10, 1, 10, "Assets/Animation/Aprendiz_Astrobark/Aprendiz.xml");
 
-	aprendizCombat->atacs.push_back(Atac("Mordiscazo", 5, false, "", "Atac-0"));
-	aprendizCombat->atacs.push_back(Atac("Mordiscazo", 5, false, "", "Atac-1"));
-	aprendizCombat->atacs.push_back(Atac("Mordiscazo", 5, false, "", "Atac-2"));
-	aprendizCombat->atacs.push_back(Atac("Mordiscazo", 5, false, "", "Atac-3"));
-	aprendizCombat->atacs.push_back(Atac("Mordiscazo", 5, false, "", "Atac-4"));
-	aprendizCombat->atacs.push_back(Atac("Mordiscazo", 5, false, "", "Atac-5"));
+	aprendizCombat->atacs.push_back(Atac("Mordiscazo", 5, false, "", "Atac"));
 
 
 	return true;

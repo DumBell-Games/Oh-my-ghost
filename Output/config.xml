@@ -449,6 +449,12 @@
 				<frame x="1536" y="0" w="256" h="256" />
 				<frame x="1792" y="0" w="256" h="256" />
 			</animation>
+			<astrobarkCombatIN>
+				<sentence facetexturepath="Assets/Textures/Chibi_Astrobark.png" text = "Jefe AstroBark te desafía"/>
+			</astrobarkCombatIN>
+			<astrobarkCombatEND>
+				<sentence name="AstroBark"	facetexturepath="Assets/Textures/Chibi_AstrBark.png" text="JAJAJAJA pues ahora tendras lo que quieres saber paloma"/>
+			</astrobarkCombatEND>
 		</astrobark>
 		
 		<segismunda x="5583" y="1488" texturePath="Assets/Textures/Segismunda_SpriteSheet.png">
