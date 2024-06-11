@@ -110,6 +110,13 @@ bool Tienda::Update(float dt) {
         inventoryButtons[menuIndex - 1]->NotifyMouseClick();
     }
 
+    
+  
+    return true;
+}
+
+bool Tienda::PostUpdate() {
+
     if (menuIndex == 1) {
         app->render->DrawTexture(tienda1.get(), 0, 0, 0, NULL);
         if (app->scene->GetMonedasQuantity() > 4)
@@ -235,30 +242,24 @@ bool Tienda::Update(float dt) {
             }
         }
     }
-    else if (menuIndex == 11){
+    else if (menuIndex == 11) {
         app->render->DrawTexture(tienda11.get(), 0, 0, 0, NULL);
         if (app->scene->GetMonedasQuantity() > 4)
         {
             if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN)
             {
-				//pastel
+                //pastel
                 app->scene->PastelPicked();
                 app->audio->PlayFx(buyFx);
-				app->scene->RestarCincoMonedas();
+                app->scene->RestarCincoMonedas();
 
-			}
-		}
+            }
+        }
     }
     else if (menuIndex == 12) app->render->DrawTexture(tienda12.get(), 0, 0, 0, NULL);
     else if (menuIndex == 13) app->render->DrawTexture(tienda13.get(), 0, 0, 0, NULL);
-    
-  
-    return true;
-}
 
-bool Tienda::PostUpdate() {
-
-	app->render->DrawText(dineroActual.GetString(), 110, 50, 64, 64);
+	app->render->DrawText(dineroActual.GetString(), 981, 201, 21, 30);
 	return true;
 }
 

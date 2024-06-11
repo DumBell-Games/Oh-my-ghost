@@ -13,6 +13,7 @@
 #include "menu.h"
 #include "Scene.h"
 #include "Video.h"
+#include "ContextoSpringyP1.h"
 
 
 ContextoSpringySegundaParte::ContextoSpringySegundaParte(bool startEnabled) : Module(startEnabled)
@@ -82,9 +83,9 @@ bool ContextoSpringySegundaParte::PostUpdate()
 // Called before quitting
 bool ContextoSpringySegundaParte::CleanUp()
 {
-    if (logoFX > 0) {
-        app->audio->UnloadFx(logoFX);
-        logoFX = 0;
+    if (app->contextoSpringyP1->logoFX > 0) {
+        app->audio->UnloadFx(app->contextoSpringyP1->logoFX);
+        app->contextoSpringyP1->logoFX = 0;
     }
 
     if (logoScreenTex != nullptr)

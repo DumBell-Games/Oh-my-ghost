@@ -17,6 +17,7 @@
 #include <iostream>
 #include "Combat.h"
 #include <vector>
+#include "Creditos.h"
 
 TitleScreen::TitleScreen(bool startEnabled) : Module(startEnabled)
 {
@@ -33,10 +34,10 @@ bool TitleScreen::Start()
     buttonFx = app->audio->LoadFx("Assets/Audio/Fx/basic_click.wav");
     menuFx = app->audio->LoadFx("Assets/Audio/Fx/menuFX.wav");
     
-    menu1 = app->tex->LoadSP("Assets/Screens/mainMenu1.jpg", true);
-    menu2 = app->tex->LoadSP("Assets/Screens/mainMenu2.jpg", true);
-    menu3 = app->tex->LoadSP("Assets/Screens/mainMenu3.jpg", true);
-    menu4 = app->tex->LoadSP("Assets/Screens/mainMenu4.jpg", true);
+    menu1 = app->tex->LoadSP("Assets/Screens/mainMenu1.png", true);
+    menu2 = app->tex->LoadSP("Assets/Screens/mainMenu2.png", true);
+    menu3 = app->tex->LoadSP("Assets/Screens/mainMenu3.png", true);
+    menu4 = app->tex->LoadSP("Assets/Screens/mainMenu4.png", true);
 
     app->render->camera.x = 0;
     app->render->camera.y = 0;
@@ -109,6 +110,7 @@ bool TitleScreen::PostUpdate()
     else if (menuIndex == 3) app->render->DrawTexture(menu3.get(), 0, 0, NULL);
     else if (menuIndex == 4) app->render->DrawTexture(menu4.get(), 0, 0, NULL);
 
+
     return true;
 }
 
@@ -158,6 +160,7 @@ bool TitleScreen::CleanUp()
 void NewGame(GuiControl* ctrl);
 void Continue(GuiControl* ctrl);
 void Options(GuiControl* ctrl);
+void Credits(GuiControl* ctrl);
 void Exit(GuiControl* ctrl);
 
 void TitleScreen::CreateTitleButtons()
@@ -173,12 +176,12 @@ void TitleScreen::CreateTitleButtons()
         hBt = 40;
         posBtX = screenWidth / 2 - 220;
         posBtY = screenHeight / 2 + 100;
-        titleButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Continue", { posBtX, posBtY, wBt, hBt }, Continue));
+        titleButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 2, "Options", { posBtX, posBtY, wBt, hBt }, Options));
         wBt = 190;
         hBt = 40;
         posBtX = screenWidth / 2 - 220;
         posBtY = screenHeight / 2 + 210;
-        titleButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Optiones", { posBtX, posBtY, wBt, hBt }, Options));
+        titleButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 3, "Credits", { posBtX, posBtY, wBt, hBt }, Credits));
         wBt = 30;
         hBt = 30;
         posBtX = screenWidth / 2 + 450;
@@ -201,7 +204,12 @@ void Options(GuiControl* ctrl)
 {
 }
 
+void Credits(GuiControl* ctrl)
+{
+    app->fadeToBlack->FadeToBlackTransition((Module*)app->titlescreen, (Module*)app->creditos, 0.0f);
+}
+
 void Exit(GuiControl* ctrl)
 {
-    app->Quit();
+    app->Quit(); 
 }

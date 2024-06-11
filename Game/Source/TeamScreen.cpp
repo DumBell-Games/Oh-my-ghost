@@ -12,6 +12,7 @@
 #include "IntroScreen.h"
 #include "menu.h"
 #include "Scene.h"
+#include "Creditos.h"
 #include "Video.h"
 
 
@@ -32,6 +33,7 @@ TeamScreen::TeamScreen(bool startEnabled) : Module(startEnabled)
 	IAnimationPath.PushBack({ 0.0f, 0.0f }, 200, &dumbellAnim);*/
 
     name.Create("teamScreen");
+
 }
 
 // Destructor
@@ -42,6 +44,8 @@ TeamScreen::~TeamScreen()
 bool TeamScreen::Start()
 {
     //logoScreenTex = app->tex->Load("Assets/Screens/TeamLogo.png");
+
+    app->creditos->Disable();
 
     app->video->Initialize("Assets/Videos/Logo_Dumbell.avi");
 

@@ -10,6 +10,7 @@
 #include "Physics.h"
 #include "Map.h"
 #include "Player.h"
+#include "CombatManager.h"
 
 
 Aprendiz::Aprendiz() : Entity(EntityType::APRENDIZ)
@@ -44,7 +45,14 @@ bool Aprendiz::Start() {
 	nBody->listener = this;
 	nBody->ctype = ColliderType::APRENDIZ;
 
+	aprendizCombat = new Personatge("Aprendiz", 1, 10, 1, 10, "Assets/Animation/Aprendiz_Astrobark/Aprendiz.xml");
 
+	aprendizCombat->atacs.push_back(Atac("Mordiscazo", 5, false, "", "Atac-0"));
+	aprendizCombat->atacs.push_back(Atac("Mordiscazo", 5, false, "", "Atac-1"));
+	aprendizCombat->atacs.push_back(Atac("Mordiscazo", 5, false, "", "Atac-2"));
+	aprendizCombat->atacs.push_back(Atac("Mordiscazo", 5, false, "", "Atac-3"));
+	aprendizCombat->atacs.push_back(Atac("Mordiscazo", 5, false, "", "Atac-4"));
+	aprendizCombat->atacs.push_back(Atac("Mordiscazo", 5, false, "", "Atac-5"));
 
 
 	return true;
@@ -83,6 +91,10 @@ void Aprendiz::OnCollision(PhysBody* physA, PhysBody* physB) {
 	case ColliderType::PLAYER:
 		LOG("Collision PLAYER");
 		playerTouched = true;	
+		if (aprendizCombat->salutActual > 0)
+		{
+			app->combat->BeginCombat(aprendizCombat, parameters.child("aprendizCombatIN"), parameters.child("aprendizCombatEND"));
+		}
 		break;
 	default:
 		break;

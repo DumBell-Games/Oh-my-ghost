@@ -297,35 +297,35 @@
 			</animation>
 			
 			<animation name="vomito" loop="false" speed="0.04f">
-				<frame x="0" y="3328" w="128" h="256" />
-				<frame x="128" y="3328" w="128" h="256" />
-				<frame x="256" y="3328" w="128" h="256" />
-				<frame x="384" y="3328" w="128" h="256" />
-				<frame x="512" y="3328" w="128" h="256" />
-				<frame x="640" y="3328" w="128" h="256" />
-				<frame x="768" y="3328" w="128" h="256" />
-				<frame x="896" y="3328" w="128" h="256" />
-				<frame x="1024" y="3328" w="128" h="256" />
-				<frame x="1152" y="3328" w="128" h="256" />
-				<frame x="1280" y="3328" w="128" h="256" />
-				<frame x="1408" y="3328" w="128" h="256" />
-				<frame x="1536" y="3328" w="128" h="256" />
-				<frame x="1664" y="3328" w="128" h="256" />
-				<frame x="1792" y="3328" w="128" h="256" />
-				<frame x="1920" y="3328" w="128" h="256" />
-				<frame x="2048" y="3328" w="128" h="256" />
-				<frame x="2176" y="3328" w="128" h="256" />
-				<frame x="2304" y="3328" w="128" h="256" />
-				<frame x="2432" y="3328" w="128" h="256" />
-				<frame x="2560" y="3328" w="128" h="256" />
-				<frame x="2688" y="3328" w="128" h="256" />
-				<frame x="2816" y="3328" w="128" h="256" />
-				<frame x="2944" y="3328" w="128" h="256" />
-				<frame x="3072" y="3328" w="128" h="256" />
-				<frame x="3200" y="3328" w="128" h="256" />
-				<frame x="3328" y="3328" w="128" h="256" />
-				<frame x="3456" y="3328" w="128" h="256" />
-				<frame x="3584" y="3328" w="128" h="256" />
+				<frame x="1" y="3328" w="128" h="256" />
+				<frame x="129" y="3328" w="128" h="256" />
+				<frame x="257" y="3328" w="128" h="256" />
+				<frame x="385" y="3328" w="128" h="256" />
+				<frame x="513" y="3328" w="128" h="256" />
+				<frame x="641" y="3328" w="128" h="256" />
+				<frame x="769" y="3328" w="128" h="256" />
+				<frame x="897" y="3328" w="128" h="256" />
+				<frame x="1025" y="3328" w="128" h="256" />
+				<frame x="1153" y="3328" w="128" h="256" />
+				<frame x="1281" y="3328" w="128" h="256" />
+				<frame x="1409" y="3328" w="128" h="256" />
+				<frame x="1537" y="3328" w="128" h="256" />
+				<frame x="1665" y="3328" w="128" h="256" />
+				<frame x="1793" y="3328" w="128" h="256" />
+				<frame x="1921" y="3328" w="128" h="256" />
+				<frame x="2049" y="3328" w="128" h="256" />
+				<frame x="2177" y="3328" w="128" h="256" />
+				<frame x="2305" y="3328" w="128" h="256" />
+				<frame x="2433" y="3328" w="128" h="256" />
+				<frame x="2561" y="3328" w="128" h="256" />
+				<frame x="2689" y="3328" w="128" h="256" />
+				<frame x="2817" y="3328" w="128" h="256" />
+				<frame x="2945" y="3328" w="128" h="256" />
+				<frame x="3073" y="3328" w="128" h="256" />
+				<frame x="3201" y="3328" w="128" h="256" />
+				<frame x="3329" y="3328" w="128" h="256" />
+				<frame x="3457" y="3328" w="128" h="256" />
+				<frame x="3585" y="3328" w="128" h="256" />
 			</animation>
 
 			<animation name="cambioCuerpo" loop="false" speed="0.08f">
@@ -572,7 +572,13 @@
 				<frame x="1024" y="0" w="128" h="256" />
 
 			</animation>
-
+			<aprendizCombatIN>
+				<sentence facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text = "Aprendiz 1 te desafía"/>
+			</aprendizCombatIN>
+			<aprendizCombatEND>
+				<sentence name="Aprendiz 1"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text=" …  Maldito palomo cojo… ¿Pero te has creído que yo sé algo?"/>
+				<sentence name="Aprendiz 1"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Pregunta a los demás aprendices de Wawka que si saben más."/>
+			</aprendizCombatEND>
 		</aprendiz>
 		
 		<aprendiz x="13301" y="8416" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
@@ -588,7 +594,15 @@
 				<frame x="1024" y="0" w="128" h="256" />
 
 			</animation>
-
+			<aprendizCombatIN>
+				<sentence facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text = "Aprendiz 2 te desafía"/>
+			</aprendizCombatIN>
+			<aprendizCombatEND>
+				<sentence name="Aprendiz 2"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Yo solo sé que no se nada..."/>
+				<sentence name="Aprendiz 2"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Perdón... desde que suspendí filosofía..."/>
+				<sentence name="Aprendiz 2"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Tengo un pequeño trauma"/>
+				<sentence name="Aprendiz 2"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Mi compañero de arriba seguro tiene más info"/>
+			</aprendizCombatEND>
 		</aprendiz>
 		
 		<aprendiz x="13213" y="7664" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
@@ -603,7 +617,12 @@
 				<frame x="896" y="0" w="128" h="256" />
 				<frame x="1024" y="0" w="128" h="256" />
 			</animation>
-
+			<aprendizCombatIN>
+				<sentence facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text = "Aprendiz 3 te desafía"/>
+			</aprendizCombatIN>
+			<aprendizCombatEND>
+				<sentence name="Aprendiz 3"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Joder paloma si que eres fuerte, para tener más información tienes que ir al casino"/>
+			</aprendizCombatEND>
 		</aprendiz>
 		
 		<aprendiz x="16400" y="5650" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
@@ -618,7 +637,12 @@
 				<frame x="896" y="0" w="128" h="256" />
 				<frame x="1024" y="0" w="128" h="256" />
 			</animation>
-
+			<aprendizCombatIN>
+				<sentence facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text = "Aprendiz 1 te desafía"/>
+			</aprendizCombatIN>
+			<aprendizCombatEND>
+				<sentence name="Aprendiz 1"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Joder paloma si que eres fuerte, para tener más información tienes que ir al casino"/>
+			</aprendizCombatEND>
 		</aprendiz>
 		<aprendiz x="17229" y="3908" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
 			<animation name="aprendizIdle" loop="true" speed="0.08f">
@@ -632,7 +656,12 @@
 				<frame x="896" y="0" w="128" h="256" />
 				<frame x="1024" y="0" w="128" h="256" />
 			</animation>
-
+			<aprendizCombatIN>
+				<sentence facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text = "Aprendiz 2 te desafía"/>
+			</aprendizCombatIN>
+			<aprendizCombatEND>
+				<sentence name="Aprendiz 2"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Joder paloma si que eres fuerte, para tener más información tienes que ir al casino"/>
+			</aprendizCombatEND>
 		</aprendiz>
 		<aprendiz x="18420" y="4550" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
 			<animation name="aprendizIdle" loop="true" speed="0.08f">
@@ -646,7 +675,12 @@
 				<frame x="896" y="0" w="128" h="256" />
 				<frame x="1024" y="0" w="128" h="256" />
 			</animation>
-
+			<aprendizCombatIN>
+				<sentence facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text = "Aprendiz 1 te desafía"/>
+			</aprendizCombatIN>
+			<aprendizCombatEND>
+				<sentence name="Aprendiz 1"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Joder paloma si que eres fuerte, para tener más información tienes que ir al casino"/>
+			</aprendizCombatEND>
 		</aprendiz>
 		<aprendiz x="15145" y="3853" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
 			<animation name="aprendizIdle" loop="true" speed="0.08f">
@@ -660,7 +694,12 @@
 				<frame x="896" y="0" w="128" h="256" />
 				<frame x="1024" y="0" w="128" h="256" />
 			</animation>
-
+			<aprendizCombatIN>
+				<sentence facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text = "Aprendiz 1 te desafía"/>
+			</aprendizCombatIN>
+			<aprendizCombatEND>
+				<sentence name="Aprendiz 1"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Joder paloma si que eres fuerte, para tener más información tienes que ir al casino"/>
+			</aprendizCombatEND>
 		</aprendiz>
 		
 		<perras x="14239" y="7683" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
@@ -1090,8 +1129,18 @@
 				<sentence name="Aprendiz 1"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Pues tendrás que pelearte conmigo"/>
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="No hay otra maner…. uyyy vale parece que no"/>
 			</sentences>
+			
 		</dialogTrigger>
 
+		<dialogTrigger x="13431" y="8406" repeat ="true">
+			<sentences>
+				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringyP.png" text="A ver si este es más majo que el de abajo ¡Hola! Tu también debes de ser aprendiz de AstroBark ¿verdad?"/>
+				<sentence name="Aprendiz 2" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Si, ¿por qué quieres saberlo?"/>
+				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Me gustaría saber donde puedo encontrar a PAAAM"/>
+				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringyP.png" text="(se tropezaría con una mesa y del propio impacto le golpearía al segundo aprendiz y éste de la propia rabia empezaría un combate)"/>
+				<sentence name="Aprendiz 2" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Maldito condenadoooo que mi ropa es de Guaucci"/>
+			</sentences>
+		</dialogTrigger>
 
 		<dialogTrigger x="7200" y="6177" repeat ="true">
 			<sentences>
@@ -1100,7 +1149,7 @@
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Mmm... Probaré a ir a un lugar bastante social... como la taverna"/>
 			</sentences>
 		</dialogTrigger>
-		
+
 		<dialogTrigger x="8025" y="6164" repeat ="true">
 			<sentences>
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="AAAAAAAAAAA... un mareillo tonto dice, si hasta he hechado la pota..."/>
@@ -1108,15 +1157,6 @@
 			</sentences>
 		</dialogTrigger>
 
-		<dialogTrigger x="13572" y="9218" repeat ="true">
-			<sentences>
-				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¡¡¡Holaaa!!! ¿Sabrías decirme dónde está AstroBark?"/>
-				<sentence name="Aprendiz 1"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Pues esa información no te la voy a dar por la cara palomón"/>
-				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Uyyy perdón no quería ofender, ¿Que tendría que hacer para saber eso?"/>
-				<sentence name="Aprendiz 1"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Pues tendrás que pelearte conmigo"/>
-				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="No hay otra maner…. uyyy vale parece que no"/>	
-			</sentences>
-		</dialogTrigger>
 
 		<dialogTrigger x="15112" y="8286" repeat ="true">
 			<sentences>
@@ -1132,25 +1172,26 @@
 				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¿Cómo? ¿Es a mí? ¿Como me has reconocido con este aspecto?"/>
 				<sentence name="Bibi"	    facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="Fácil, soy tu fan número 1"/>
 				<sentence name="Bibi"	    facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="¿Que haces por aquí? ¿Y por qué eres fantasma también?"/>
-				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Pues eso intento averiguar, estaba intentando buscar a AstroBark"/>	
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Pues eso intento averiguar, estaba intentando buscar a AstroBark"/>
 				<sentence name="Bibi"		facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="Mmm... pues tendrías que preguntar a..."/>
 				<sentence name="Bibi"		facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="¿Como se llamaban?... Ah si, ¡Los aprendices!"/>
 				<sentence name="Bibi"		facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="Pero necesitarás una llave VIP para entrar..."/>
 				<sentence name="Bibi"		facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="Puedes conseguir una en esa arcade de ahí"/>
 				<sentence name="Bibi"		facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="Pero no es nada fácil, aunque para ti seguro que lo es"/>
-				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Pues voy a probar suerte, ¡muchas gracias!"/>				
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Pues voy a probar suerte, ¡muchas gracias!"/>
 				<sentence name="Bibi"		facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="¡¡¡TE AMO SPRINGY!!!"/>
 			</sentences>
 		</dialogTrigger>
 
 		<dialogTrigger x="13343" y="7664" repeat ="true">
 			<sentences>
-				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¡Hola! Dice el Sócrates de abajo que tienes más información de AstroBark, ¿me la vas a dar o también hará falta una prueba?"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¡Hola! Dice el Sócrates de abajo que tienes más información de AstroBark"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¿Me la podrías contar?"/>
 				<sentence name="Aprendiz 3"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Eh… pues… no se… quizás tendrás que superar la prueba de mis garras"/>
 			</sentences>
 		</dialogTrigger>
 
-		<dialogTrigger x="1900" y="12292" repeat ="true">	
+		<dialogTrigger x="1900" y="12292" repeat ="true">
 			<sentences>
 				<sentence name="AstroBark"  facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="3000 PawCoins al verde, ¡QUE AHORA ME TOCA!"/>
 				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringy.png" text="*Anda, ya lo he encontrado!*"/>
@@ -1165,7 +1206,7 @@
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Pues jope, si que me está costando llegar hacia el..."/>
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¿Hay algo que pueda hacer para obtener información?"/>
 				<sentence name="Veterana 1"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Siempre hay opciones... *se afila las garras*"/>
-				
+
 			</sentences>
 		</dialogTrigger>
 
@@ -1184,7 +1225,7 @@
 
 			</sentences>
 		</dialogTrigger>
-		
+
 		<dialogTrigger x="4335" y="1550" repeat ="true">
 			<sentences>
 				<sentence name="Vagabundo"	facetexturepath="Assets/Textures/Chibi_Vagabundo.png" text="Caramba, ¿Vas a entrar al bar? Yo de tí no lo haría sin esto..."/>
@@ -1254,7 +1295,7 @@
 
 			</sentences>
 		</dialogTrigger>
-		
+
 		<dialogTrigger x="5633" y="2136" repeat ="true">
 			<sentences>
 				<sentence name="Kiwi"	facetexturepath="Assets/Textures/Chibi_Kiwi.png" text="Qué lástima que dejaran de fabricar Petisuises..."/>
@@ -1346,8 +1387,8 @@
 				<sentence name="Aprendiz 2" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="¿No querrás que use tu cabeza como bola verdad?"/>
 				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Nooo, solamente quería saber si has visto una llave"/>
 				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Dejame ver si debajo de alguna bola de aquí esta…"/>
-				<sentence name="Aprendiz 1" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="¿PERO QUÉ HACES?"/>
-				<sentence name="Aprendiz 1" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="YA ME HAS JODIDO TODA LA PARTIDA RATA VOLADORA"/>
+				<sentence name="Aprendiz 2" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="¿PERO QUÉ HACES?"/>
+				<sentence name="Aprendiz 2" facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="YA ME HAS JODIDO TODA LA PARTIDA RATA VOLADORA"/>
 			</sentences>
 		</dialogTrigger>
 
@@ -1424,36 +1465,6 @@
 				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Pues sería una cosa “Muy Sencilla”, al menos para mí"/>
 				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Derrótame en combate con tus habilidades de paloma"/>
 			</sentences>
-			<combatAstroBark>
-				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Vaya, vaya…"/>
-				<sentence name="AstroBark"    facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Así que tu eres la paloma que ha estado dando problemas a mis secuaces, ¿no?"/>
-				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Si yo no quería causar ningún problema"/>
-				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringyP.png"  text="Yo solo quería y quiero información de Copycat"/>
-				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Que no la encuentro por ningún lado"/>
-				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Pues yo podría darte toda esta información, ya que soy el amo y señor de Central Fauna"/>
-				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Pero no te resultará nada fácil conseguirla, es un secreto de las altas esferas"/>
-				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¿Podría conseguir esa información haciendo algún encargo para ti?"/>
-				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="JAJAJAJA"/>
-				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="¿Crees que con unos simples encargos podrás obtener esa información?"/>
-				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¿Qué tendría que hacer para saber todo lo que necesito?"/>
-				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Pues sería una cosa “Muy Sencilla”, al menos para mí"/>
-				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Derrótame en combate con tus habilidades de paloma"/>
-			</combatAstroBark>
-			<combatAstroBarkEND>
-				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Vaya, vaya…"/>
-				<sentence name="AstroBark"    facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Así que tu eres la paloma que ha estado dando problemas a mis secuaces, ¿no?"/>
-				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Si yo no quería causar ningún problema"/>
-				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringyP.png"  text="Yo solo quería y quiero información de Copycat"/>
-				<sentence name="Springy"    facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Que no la encuentro por ningún lado"/>
-				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Pues yo podría darte toda esta información, ya que soy el amo y señor de Central Fauna"/>
-				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Pero no te resultará nada fácil conseguirla, es un secreto de las altas esferas"/>
-				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¿Podría conseguir esa información haciendo algún encargo para ti?"/>
-				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="JAJAJAJA"/>
-				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="¿Crees que con unos simples encargos podrás obtener esa información?"/>
-				<sentence name="Springy" facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¿Qué tendría que hacer para saber todo lo que necesito?"/>
-				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Pues sería una cosa “Muy Sencilla”, al menos para mí"/>
-				<sentence name="AstroBark" facetexturepath="Assets/Textures/Chibi_Astrobark.png" text="Derrótame en combate con tus habilidades de paloma"/>
-			</combatAstroBarkEND>
 		</dialogTrigger>
 
 	</scene>

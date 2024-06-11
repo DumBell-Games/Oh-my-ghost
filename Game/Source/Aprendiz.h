@@ -4,6 +4,7 @@
 #include "Point.h"
 #include "PropertiesStruct.h"
 #include "Animation.h"
+#include "Enemic.h"
 
 #include "SDL/include/SDL.h"
 #include "Box2D/Box2D/Box2D.h"
@@ -43,6 +44,8 @@ public:
 	pugi::xml_node config;
 	uint texW, texH;
 	SString texturePath;
+
+	Personatge* aprendizCombat;
 
 	PhysBody* nBody;
 	PhysBody* piso2Disco;

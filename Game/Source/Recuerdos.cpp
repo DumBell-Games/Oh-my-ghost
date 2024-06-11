@@ -124,6 +124,12 @@ bool Recuerdos::Update(float dt) {
         inventoryButtons[menuIndex - 1]->NotifyMouseClick();
     }
 
+  
+    
+    return true;
+}
+
+bool Recuerdos::PostUpdate() {
     if (menuIndex == 1) app->render->DrawTexture(inventory1.get(), 0, 0, 0, NULL);
     else if (menuIndex == 2) app->render->DrawTexture(inventory2.get(), 0, 0, 0, NULL);
     else if (menuIndex == 3) app->render->DrawTexture(inventory3.get(), 0, 0, 0, NULL);
@@ -135,12 +141,6 @@ bool Recuerdos::Update(float dt) {
     else if (menuIndex == 9) app->render->DrawTexture(inventory9.get(), 0, 0, 0, NULL);
     else if (menuIndex == 10) app->render->DrawTexture(inventory10.get(), 0, 0, 0, NULL);
     else if (menuIndex == 11) app->render->DrawTexture(inventory11.get(), 0, 0, 0, NULL);
-    
-    return true;
-}
-
-bool Recuerdos::PostUpdate() {
-
  
 	return true;
 }

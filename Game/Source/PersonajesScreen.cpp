@@ -105,6 +105,13 @@ bool PersonajesScreen::Update(float dt) {
         inventoryButtons[menuIndex - 1]->NotifyMouseClick();
     }
 
+   
+    
+    return true;
+}
+
+bool PersonajesScreen::PostUpdate() {
+
     if (menuIndex == 1) app->render->DrawTexture(personaje1.get(), 0, 0, 0, NULL);
     else if (menuIndex == 2) app->render->DrawTexture(personaje2.get(), 0, 0, 0, NULL);
     else if (menuIndex == 3) app->render->DrawTexture(personaje3.get(), 0, 0, 0, NULL);
@@ -114,11 +121,6 @@ bool PersonajesScreen::Update(float dt) {
     else if (menuIndex == 7) app->render->DrawTexture(personaje7.get(), 0, 0, 0, NULL);
     else if (menuIndex == 8) app->render->DrawTexture(personaje8.get(), 0, 0, 0, NULL);
     else if (menuIndex == 9) app->render->DrawTexture(personaje9.get(), 0, 0, 0, NULL);
-    
-    return true;
-}
-
-bool PersonajesScreen::PostUpdate() {
 
     //draw item quantity
     

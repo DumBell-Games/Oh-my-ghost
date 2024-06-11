@@ -26,9 +26,6 @@ bool Veterana::Awake() {
 	position.x = parameters.attribute("x").as_int();
 	position.y = parameters.attribute("y").as_int();
 
-	//animations
-	
-
 	return true;
 }
 
@@ -43,12 +40,8 @@ bool Veterana::Start() {
 	nBody->body->SetFixedRotation(true);	
 	nBody->listener = this;
 	nBody->ctype = ColliderType::VETERANA;
-
-	
-
-
-
-	veterana = new Personatge("Veterana", 1, 10, 1, 10, "Assets/Animation/VeteranAstroBark/Astrobark.xml");
+		
+	//veterana = new Personatge("Veterana", 1, 10, 1, 10, "Assets/Animation/VeteranAstroBark/Astrobark.xml");
 
 	return true;
 }
@@ -84,8 +77,8 @@ void Veterana::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER:
 		LOG("Collision PLAYER");
-		if (veterana->salutActual > 0)
-			app->combat->BeginCombat(veterana, parameters.child("combatAstroBark"), parameters.child("combatAstroBarkEND"));
+		/*if (veterana->salutActual > 0)
+			app->combat->BeginCombat(veterana, parameters.child("combatAstroBark"), parameters.child("combatAstroBarkEND"));*/
 		break;
 	default:
 		break;

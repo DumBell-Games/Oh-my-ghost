@@ -29,7 +29,10 @@ bool Creditos::Start()
 {
     //logoScreenTex = app->tex->Load("Assets/Screens/TeamLogo.png");
 
-    app->video->Initialize("Assets/Videos/creditos.avi");
+    if (app->creditos->isEnabled)
+    {
+        app->video->Initialize("Assets/Videos/creditos.avi");
+    }
 
     app->render->camera.x = 0;
     app->render->camera.y = 0;

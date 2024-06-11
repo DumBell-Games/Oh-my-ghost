@@ -135,6 +135,12 @@ bool InventoryScreen::Update(float dt) {
         inventoryButtons[menuIndex - 1]->NotifyMouseClick();
     }
 
+   
+    
+    return true;
+}
+
+bool InventoryScreen::PostUpdate() {
     if (menuIndex == 1) app->render->DrawTexture(inventory1.get(), 0, 0, 0, NULL);
     else if (menuIndex == 2) app->render->DrawTexture(inventory2.get(), 0, 0, 0, NULL);
     else if (menuIndex == 3) app->render->DrawTexture(inventory3.get(), 0, 0, 0, NULL);
@@ -146,12 +152,6 @@ bool InventoryScreen::Update(float dt) {
     else if (menuIndex == 9) app->render->DrawTexture(inventory9.get(), 0, 0, 0, NULL);
     else if (menuIndex == 10) app->render->DrawTexture(inventory10.get(), 0, 0, 0, NULL);
     else if (menuIndex == 11) app->render->DrawTexture(inventory11.get(), 0, 0, 0, NULL);
-    
-    return true;
-}
-
-bool InventoryScreen::PostUpdate() {
-
     //draw item quantity
 	app->render->DrawText(valorYogur.GetString(), 1000, 390, 18, 27, {(0), (0), (0), (0)});
 	app->render->DrawText(valorBirra.GetString(), 1200, 390, 18, 27, { (0), (0), (0), (0) });
@@ -268,7 +268,7 @@ void InventoryScreen::CreateInventoryButtons() {
         //fila 1
         int wBt = 190;
         int hBt = 40;
-        int posBtX = screenWidth - 1250;
+        int posBtX = screenWidth - 1000;
         int posBtY = screenHeight - 650;
         inventoryButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 1, "Cola", { posBtX, posBtY, wBt, hBt }, this));
 
@@ -299,7 +299,7 @@ void InventoryScreen::CreateInventoryButtons() {
         //fila 2
         wBt = 190;
         hBt = 40;
-        posBtX = screenWidth - 1250;
+        posBtX = screenWidth - 1000;
         posBtY = screenHeight - 450;
         inventoryButtons.Add((GuiControlButton*)app->guiManager->CreateGuiControl(GuiControlType::BUTTON, 6, "Caramelos", { posBtX, posBtY, wBt, hBt }, this));
 
