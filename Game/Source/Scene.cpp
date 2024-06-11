@@ -50,6 +50,7 @@
 #include "MansionOpen.h"
 #include "Cobaya.h"
 #include "Creditos.h"
+#include "Recuerdos.h"
 
 
 #include "Defs.h"
@@ -298,6 +299,10 @@ bool Scene::Update(float dt)
 		app->pause->Enable();
 	if (app->input->GetKey(SDL_SCANCODE_TAB) == KEY_DOWN){
 		app->inventoryScreen->Enable();
+		app->entityManager->Pause();
+	}
+	if (app->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN){
+		app->recuerdos->Enable();
 		app->entityManager->Pause();
 	}
 	if (app->input->GetKey(SDL_SCANCODE_E) == KEY_DOWN) {

@@ -139,6 +139,7 @@
     <ClCompile Include="Source\MansionOpen.cpp" />
     <ClCompile Include="Source\Cobaya.cpp" />
     <ClCompile Include="Source\Creditos.cpp" />
+    <ClCompile Include="Source\Recuerdos.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -315,6 +316,7 @@
     <ClInclude Include="Source\MansionOpen.h" />
     <ClInclude Include="Source\Cobaya.h" />
     <ClInclude Include="Source\Creditos.h" />
+    <ClInclude Include="Source\Recuerdos.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

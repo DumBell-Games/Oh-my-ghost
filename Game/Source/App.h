@@ -25,6 +25,7 @@ class Reload;
 class InventoryManager;
 class InventoryScreen;
 class PersonajesScreen;
+class Recuerdos;
 class Tienda;
 class Character_Menu;
 class Creditos;
@@ -144,6 +145,7 @@ public:
 	InventoryManager* inventory;
 	InventoryScreen* inventoryScreen;
 	PersonajesScreen* personajesScreen;
+	Recuerdos* recuerdos;
 	Tienda* tienda;
 	Character_Menu* characterMenu;
 	Creditos* creditos;

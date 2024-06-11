@@ -33,9 +33,7 @@
 #include "ContextoSpringyP1.h"
 #include "ContextoSpringySegundaParte.h"
 #include "Creditos.h"
-
-
-
+#include "Recuerdos.h"
 
 
 #include "DialogManager.h"
@@ -70,6 +68,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	inventory = new InventoryManager(false);
 	inventoryScreen = new InventoryScreen(false);
 	personajesScreen = new PersonajesScreen(false);
+	recuerdos = new Recuerdos(false);
 	tienda = new Tienda(false);
 	characterMenu = new Character_Menu(false);
 	contextoSpringyP1 = new ContextoSpringyP1(false);
@@ -114,6 +113,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(scene);
 	AddModule(inventoryScreen);
 	AddModule(personajesScreen);
+	AddModule(recuerdos);
 	AddModule(tienda);
 	AddModule(characterMenu);
 	AddModule(contextoSpringyP1);
