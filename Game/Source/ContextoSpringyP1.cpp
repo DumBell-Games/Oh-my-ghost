@@ -49,12 +49,6 @@ bool ContextoSpringyP1::Start()
 // Called each loop iteration
 bool ContextoSpringyP1::Update(float dt)
 {
-    if (!app->video->isVideoFinished)
-    {
-        app->video->GrabAVIFrame();
-
-    }
-
 	// dumbellAnim.Update();
 	// IAnimationPath.Update();
 

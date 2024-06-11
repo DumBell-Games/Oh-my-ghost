@@ -52,18 +52,7 @@ bool Creditos::Start()
 // Called each loop iteration
 bool Creditos::Update(float dt)
 {
-    if (!app->video->isVideoFinished)
-    {
-        app->video->GrabAVIFrame();
-
-    }
-   
-
-	// dumbellAnim.Update();
-	// IAnimationPath.Update();
-
-
-       
+         
     return true;
 }
 

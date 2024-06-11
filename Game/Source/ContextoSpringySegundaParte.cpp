@@ -30,7 +30,7 @@ bool ContextoSpringySegundaParte::Start()
 {
     //logoScreenTex = app->tex->Load("Assets/Screens/TeamLogo.png");
 
-    app->video->Initialize("Assets/Videos/OhMyGhost_Cinematica_Context_SegundaParte.avi");
+    app->video->Initialize("Assets/Videos/OhMyGhost_Cinematica_Introducción_CorregidaParteDos.avi");
 
     app->render->camera.x = 0;
     app->render->camera.y = 0;
@@ -45,13 +45,7 @@ bool ContextoSpringySegundaParte::Start()
 // Called each loop iteration
 bool ContextoSpringySegundaParte::Update(float dt)
 {
-    if (!app->video->isVideoFinished)
-    {
-        app->video->GrabAVIFrame();
-
-    }
-
-	// dumbellAnim.Update();
+    // dumbellAnim.Update();
 	// IAnimationPath.Update();
 
     if (app->input->GetButton(ControlID::CONFIRM) == KEY_DOWN || app->video->isVideoFinished)

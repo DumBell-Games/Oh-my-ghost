@@ -66,12 +66,7 @@ bool TeamScreen::Start()
 
 // Called each loop iteration
 bool TeamScreen::Update(float dt)
-{
-    if (!app->video->isVideoFinished)
-    {
-        app->video->GrabAVIFrame();
-
-    }
+{ 
 
 	// dumbellAnim.Update();
 	// IAnimationPath.Update();
