@@ -87,6 +87,8 @@ bool CombatManager::Awake(pugi::xml_node config)
 			LoadDialog(startDialogue, config.child("startDialogue"));
 		if (!endDialogue.start)
 			LoadDialog(endDialogue, config.child("endDialogue"));
+		if (!defeatDialogue.start)
+			LoadDialog(defeatDialogue, config.child("defeatDialogue"));
 	}
 
 	// Load UI layout

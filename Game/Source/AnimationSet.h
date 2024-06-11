@@ -54,7 +54,7 @@ public:
 
 	void Update()
 	{
-		if (GetCurrent().HasFinished() && defaultAnimation >= 0)
+		if (GetCurrent().HasFinished() && !manualAnimChange && defaultAnimation >= 0)
 		{
 			activeAnimation = defaultAnimation;
 			GetCurrent().Reset();
