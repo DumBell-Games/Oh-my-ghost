@@ -12,7 +12,7 @@
 	<inventorymanager>
 		<item type="0" amount="0" />
 		<item type="1" amount="0" />
-		<item type="2" amount="2" />
+		<item type="2" amount="1" />
 		<item type="3" amount="0" />
 		<item type="4" amount="0" />
 		<item type="5" amount="0" />
@@ -38,8 +38,9 @@
 	<scene />
 	<scene />
 	<scene />
+	<creditos />
 	<reload />
 	<renderer>
-		<camera x="-7084" y="-11548" />
+		<camera x="-924" y="-11932" />
 	</renderer>
 </game_state>

@@ -1495,11 +1495,14 @@
 			</team>
 		</menus>
 		<startDialogue>
-			<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¡Que guay! Estoy ansioso por saber que conseguiré"/>
+			<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¿De donde salio este? Bueno, parece que quiere pelear, asi que adelante!"/>
 		</startDialogue>
 		<endDialogue>
-			<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¡Que guay! Estoy ansioso por saber que conseguiré"/>
+			<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¡Victoria!"/>
 		</endDialogue>
+		<defeatDialogue>
+			<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Uff, he sido derrotado..."/>
+		</defeatDialogue>
 	</combat>
 
 	<reload>
