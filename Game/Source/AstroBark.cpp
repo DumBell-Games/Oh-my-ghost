@@ -47,11 +47,13 @@ bool Astrobark::Start() {
 	nBody->listener = this;
 	nBody->ctype = ColliderType::NPC;
 
-	astroBark = new Personatge("AstroBark", 1, 10, 1, 10, "Assets/Animation/Jefe_Astrobark/Astrobark.xml");
+	astroBark = new Personatge("AstroBark", 1, 10, 2, 10, "Assets/Animation/Jefe_Astrobark/Astrobark.xml");
 	astroBark->atacs.push_back(Atac("Ladrido", 5, false, "", "Skill1"));
 	astroBark->atacs.push_back(Atac("Mordiscazo", 5, false, "", "Skill2"));
 	astroBark->atacs.push_back(Atac("Jauría", 5, false, "", "Skill3"));
 	astroBark->atacs.push_back(Atac("Lamerse las heridas", 5, false, "", "Skill4"));
+	astroBark->atacs.push_back(Atac("LA RABIA", 30, true, "", "Assets/Videos/GolpeFinalAB.avi"));
+	astroBark->atacs.push_back(Atac("LA RABIA", 30, true, "", "Assets/Videos/GolpeFinalAB.avi"));
 
 	currentAnim = astroIdle;
 

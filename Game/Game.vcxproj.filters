@@ -146,6 +146,7 @@
     <ClCompile Include="Source\CargaAstroBark.cpp" />
     <ClCompile Include="Source\CargaVeterana.cpp" />
     <ClCompile Include="Source\CargaAprendiz.cpp" />
+    <ClCompile Include="Source\Options.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -329,6 +330,7 @@
     <ClInclude Include="Source\CargaAstroBark.h" />
     <ClInclude Include="Source\CargaVeterana.h" />
     <ClInclude Include="Source\CargaAprendiz.h" />
+    <ClInclude Include="Source\Options.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

@@ -122,6 +122,7 @@
     <ClCompile Include="Source\MusicaDiscoteca.cpp" />
     <ClCompile Include="Source\MusicaMansion.cpp" />
     <ClCompile Include="Source\MusicaTaberna.cpp" />
+    <ClCompile Include="Source\Options.cpp" />
     <ClCompile Include="Source\OsoCarpintero.cpp" />
     <ClCompile Include="Source\Path.cpp" />
     <ClCompile Include="Source\AnimationSet.cpp" />
@@ -211,6 +212,7 @@
     <ClInclude Include="Source\MusicaDiscoteca.h" />
     <ClInclude Include="Source\MusicaMansion.h" />
     <ClInclude Include="Source\MusicaTaberna.h" />
+    <ClInclude Include="Source\Options.h" />
     <ClInclude Include="Source\OsoCarpintero.h" />
     <ClInclude Include="Source\Path.h" />
     <ClInclude Include="Source\EnumUtils.h" />

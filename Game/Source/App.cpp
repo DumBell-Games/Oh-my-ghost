@@ -128,7 +128,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(characterMenu);
 	AddModule(cargaVeterana);
 	AddModule(cargaAB);
-	AddModule(cargaAprendiz);
+	AddModule(cargaAprendiz);	
 	AddModule(contextoSpringyP1);
 	AddModule(contextoSpringyP2);
 	AddModule(titlescreen);
