@@ -19,7 +19,7 @@ vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
 verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
 triangles  => sprite triangulation, 3 vertex indices per triangle
 -->
-<TextureAtlas imagePath="Assets/Animations/Springy/SpringyFantasma.png" width="3968" height="1536" speed="0.08" loop="true" pingpong="false">
+<TextureAtlas imagePath="Assets/Animation/Springy/SpringyFantasma.png" width="3968" height="1536" speed="0.05" loop="true" pingpong="false">
     <sprite n="Death-0" x="0" y="0" w="128" h="256" pX="0.5" pY="1" loop="false"/>
     <sprite n="Death-1" x="128" y="0" w="128" h="256" pX="0.5" pY="1"/>
     <sprite n="Death-2" x="256" y="0" w="128" h="256" pX="0.5" pY="1"/>

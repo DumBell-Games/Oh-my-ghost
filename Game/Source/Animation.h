@@ -1,7 +1,7 @@
 #ifndef __ANIMATION_H__
 #define __ANIMATION_H__
 
-#include "SDL/include/SDL_rect.h"
+#include "SDL/include/SDL.h"
 #include "SString.h"
 #include <vector>
 #include "Point.h"
@@ -72,7 +72,7 @@ public:
 		timeLeft -= timeStep * speed;
 	}
 
-	void Render(SDL_Texture* texture, const iPoint& position);
+	void Render(SDL_Texture* texture, const iPoint& position, bool useCamera = true, int scale = 1);
 
 	SDL_Rect& GetCurrentFrame()
 	{

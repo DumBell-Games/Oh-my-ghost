@@ -2,7 +2,7 @@
 #define __ITEMDATA_H__
 
 #include "Point.h"
-#include "SString.h"
+#include <string>
 #include "Input.h"
 #include "Render.h"
 #include "Enemic.h"
@@ -56,12 +56,7 @@ public:
 		return true;
 	}
 
-	virtual void UseOn(Personatge* p)
-	{
-		p->salutActual += curacion;
-		if (p->salutActual > p->salutTotal) p->salutActual = p->salutTotal;
-		cantidad--;
-	}
+	virtual std::string UseOn(Personatge* p);
 
 
 
@@ -69,7 +64,7 @@ public:
 
 	bool active = true;
 	
-	SString name;
+	std::string name;
 	ItemType type;
 	pugi::xml_node parameters; 
 	SString descripcion;

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
+<!-- $TexturePacker:SmartUpdate:96977e1f2c08edb82e2a005f3b16911e:b6695b87fcb03aba37f389fd307f8824:363fd4582ee7072a5304dab8a3f5efc0$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="Assets/Animation/Jefe_Astrobark/Astrobark.png" width="2560" height="3328" speed="0.05" loop="false" pingpong="false">
+    <sprite n="Dead-0" x="0" y="0" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Dead-1" x="512" y="0" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Dead-2" x="1024" y="0" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Dead-3" x="1536" y="0" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Dead-4" x="2048" y="0" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Dead-5" x="0" y="256" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-0" x="512" y="256" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-1" x="1024" y="256" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-2" x="1536" y="256" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-3" x="2048" y="256" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-4" x="0" y="512" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-5" x="512" y="512" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-6" x="1024" y="512" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-7" x="1536" y="512" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="IdleCombat-1" x="2048" y="512" w="256" h="256" pX="0.5" pY="1" loop="true"/>
+    <sprite n="IdleCombat-2" x="0" y="768" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="IdleCombat-3" x="512" y="768" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="IdleCombat-4" x="1024" y="768" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="IdleCombat-5" x="1536" y="768" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="IdleCombat-6" x="2048" y="768" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="IdleCombat-7" x="0" y="1024" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="IdleCombat-8" x="512" y="1024" w="256" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill1-0" x="1024" y="1024" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill1-1" x="1536" y="1024" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill1-2" x="2048" y="1024" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill1-3" x="0" y="1280" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill1-4" x="512" y="1280" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill1-5" x="1024" y="1280" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill1-6" x="1536" y="1280" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill1-7" x="2048" y="1280" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill1-8" x="0" y="1536" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill2-0" x="512" y="1536" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill2-1" x="1024" y="1536" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill2-2" x="1536" y="1536" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill2-3" x="2048" y="1536" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill2-4" x="0" y="1792" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill2-5" x="512" y="1792" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill2-6" x="1024" y="1792" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill2-7" x="1536" y="1792" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill2-8" x="2048" y="1792" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill2-9" x="0" y="2048" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill2-10" x="512" y="2048" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill2-11" x="1024" y="2048" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill3-0" x="1024" y="1024" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill3-1" x="1536" y="2048" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill3-2" x="2048" y="2048" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill3-3" x="0" y="2304" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill3-4" x="512" y="2304" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill3-5" x="1024" y="2304" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill3-6" x="1536" y="2304" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill3-7" x="2048" y="2304" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill3-8" x="0" y="2560" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill3-9" x="512" y="2560" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill3-10" x="1024" y="2560" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill3-11" x="1536" y="2560" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill4-0" x="2048" y="2560" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill4-1" x="0" y="2816" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill4-2" x="512" y="2816" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill4-3" x="1024" y="2816" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill4-4" x="1536" y="2816" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill4-5" x="2048" y="2816" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill4-6" x="0" y="3072" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill4-7" x="512" y="3072" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill4-8" x="1024" y="3072" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill4-9" x="1536" y="3072" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill4-10" x="2048" y="3072" w="512" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill4-11" x="2048" y="2560" w="512" h="256" pX="0.5" pY="1"/>
+</TextureAtlas>

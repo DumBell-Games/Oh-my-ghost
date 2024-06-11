@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker https://www.codeandweb.com/texturepacker -->
+<!-- $TexturePacker:SmartUpdate:5821d8e14a0015d8b2988ec18ff2361b:8ae7831617a21a74a022be8d5a744ac1:b950396ad82df474e11ecca4b30bd01b$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+with polygon mode enabled:
+vertices   => points in sprite coordinate system (x0,y0,x1,y1,x2,y2, ...)
+verticesUV => points in sheet coordinate system (x0,y0,x1,y1,x2,y2, ...)
+triangles  => sprite triangulation, 3 vertex indices per triangle
+-->
+<TextureAtlas imagePath="Assets/Animation/Springy/SpringyPaloma.png" width="3200" height="1280" speed="0.05" loop="true" pingpong="false">
+    <sprite n="Death-0" x="0" y="0" w="128" h="256" pX="0.5" pY="1" loop="false"/>
+    <sprite n="Death-1" x="128" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Death-2" x="256" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Death-3" x="384" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Death-4" x="512" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Death-5" x="640" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Death-6" x="768" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Death-7" x="896" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Death-8" x="1024" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Death-9" x="1152" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-0" x="1280" y="0" w="128" h="256" pX="0.5" pY="1" loop="false"/>
+    <sprite n="Hurt-1" x="1408" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-2" x="1536" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-3" x="1664" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-4" x="1792" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-5" x="1920" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-6" x="2048" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-7" x="2176" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-8" x="2304" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-9" x="1664" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-10" x="1792" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-11" x="1920" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-12" x="2432" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-13" x="2560" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-14" x="2560" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-15" x="2688" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-16" x="2816" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-17" x="2944" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-18" x="3072" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-19" x="0" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-20" x="2560" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-21" x="2560" y="0" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-22" x="128" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-23" x="256" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-24" x="384" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Hurt-25" x="512" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-0" x="640" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-1" x="640" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-2" x="640" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-3" x="768" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-4" x="768" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-5" x="896" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-6" x="1024" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-7" x="1152" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-8" x="1152" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-9" x="1280" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-10" x="1280" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-11" x="1280" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-12" x="1408" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-13" x="640" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-14" x="640" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-15" x="640" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-16" x="1536" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-17" x="768" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-18" x="896" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-19" x="896" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-20" x="1152" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-21" x="1152" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-22" x="1664" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-23" x="1792" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-24" x="1792" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Idle-25" x="1920" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="IdleCombat-0" x="2048" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="IdleCombat-1" x="2176" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="IdleCombat-2" x="2304" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="IdleCombat-3" x="2432" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="IdleCombat-4" x="2560" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="IdleCombat-5" x="2688" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunDown-0" x="2816" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunDown-1" x="2944" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunDown-2" x="3072" y="256" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunDown-3" x="0" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunDown-4" x="128" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunDown-5" x="256" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunLeft-0" x="384" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunLeft-1" x="512" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunLeft-2" x="640" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunLeft-3" x="768" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunLeft-4" x="896" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunLeft-5" x="1024" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunRight-0" x="1152" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunRight-1" x="1280" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunRight-2" x="1408" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunRight-3" x="1536" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunRight-4" x="1664" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunRight-5" x="1792" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunUp-0" x="1920" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunUp-1" x="2048" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunUp-2" x="2176" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunUp-3" x="2304" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunUp-4" x="2432" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="RunUp-5" x="2560" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill1-0" x="2688" y="512" w="128" h="256" pX="0.5" pY="1" loop="false"/>
+    <sprite n="Skill1-1" x="2816" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill1-2" x="2944" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill1-3" x="3072" y="512" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill1-4" x="0" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill1-5" x="0" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill2-0" x="128" y="768" w="128" h="256" pX="0.5" pY="1" loop="false"/>
+    <sprite n="Skill2-1" x="256" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill2-2" x="256" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill2-3" x="384" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill2-4" x="512" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill2-5" x="512" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill2-6" x="640" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill2-7" x="768" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill2-8" x="896" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill2-9" x="1024" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Skill2-10" x="1152" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Swap-0" x="1280" y="768" w="128" h="256" pX="0.5" pY="1" loop="false"/>
+    <sprite n="Swap-1" x="1408" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Swap-2" x="1536" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Swap-3" x="1664" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Swap-4" x="1792" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Swap-5" x="1408" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Swap-6" x="1536" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Swap-7" x="1920" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Swap-8" x="1920" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="Swap-9" x="2048" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkDown-0" x="2176" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkDown-1" x="2304" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkDown-2" x="2432" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkDown-3" x="2560" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkDown-4" x="2688" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkDown-5" x="2816" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkDown-6" x="2944" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkDown-7" x="3072" y="768" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkDown-8" x="0" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkDown-9" x="0" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkLeft-0" x="128" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkLeft-1" x="256" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkLeft-2" x="256" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkLeft-3" x="384" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkLeft-4" x="512" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkLeft-5" x="512" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkLeft-6" x="640" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkLeft-7" x="768" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkLeft-8" x="768" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkLeft-9" x="896" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkLeft-10" x="1024" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkLeft-11" x="1024" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkRight-0" x="1152" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkRight-1" x="1152" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkRight-2" x="1152" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkRight-3" x="1280" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkRight-4" x="1280" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkRight-5" x="1408" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkRight-6" x="1536" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkRight-7" x="1536" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkRight-8" x="1664" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkRight-9" x="1792" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkRight-10" x="1792" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkRight-11" x="1920" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkUp-0" x="2048" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkUp-1" x="2048" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkUp-2" x="2176" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkUp-3" x="2304" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkUp-4" x="2304" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkUp-5" x="2432" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkUp-6" x="2560" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkUp-7" x="2560" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkUp-8" x="2688" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkUp-9" x="2816" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkUp-10" x="2816" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkUp-11" x="2944" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+    <sprite n="WalkUp-12" x="3072" y="1024" w="128" h="256" pX="0.5" pY="1"/>
+</TextureAtlas>

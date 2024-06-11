@@ -140,13 +140,14 @@ public:
 	MapLayer* navigationLayer;
 	TransitionData transitionData = {-1,-1};
 
+	int currentMap = 0;
+
 private:
 
 	bool mapLoaded;
 	int blockedGid = 49; // TODO asignar el Gid correcto
 
 	List<SString> mapNames;
-	int currentMap = 0;
 
 	// Debug command
 	friend static void WarpTo(Map* map, std::vector<std::string> args);

@@ -1,18 +1,18 @@
 {
-    "activeFile": "",
+    "activeFile": "Output/Assets/Screens/Combat/CombatLayout.tmx",
     "expandedProjectPaths": [
         "Output/Assets",
-        "Output/Assets/Maps",
+        ".",
         "Output",
-        "."
+        "Output/Assets/Maps"
     ],
     "fileStates": {
         "Output/Assets/Maps/mapaLPA.tmx": {
             "scale": 0.015625,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 19040,
-                "y": 20640
+                "x": 18976,
+                "y": 20576
             }
         },
         "Output/Assets/Maps/mapaLPA.tmx#AprendizAstroBark_SpriteSheet": {
@@ -22,6 +22,9 @@
         "Output/Assets/Maps/mapaLPA.tmx#AstroBark_Spritesheets": {
             "scaleInDock": 1,
             "scaleInEditor": 1
+        },
+        "Output/Assets/Maps/mapaLPA.tmx#MesaNivel": {
+            "scaleInDock": 1
         },
         "Output/Assets/Maps/mapaLPA.tmx#Paloma_SpriteSheet": {
             "scaleInDock": 1
@@ -47,6 +50,9 @@
         "Output/Assets/Maps/mapaLPA.tmx#prueba_cielo": {
             "scaleInDock": 1
         },
+        "Output/Assets/Maps/mapaLPA.tmx#prueba_cielo_bigger": {
+            "scaleInDock": 1
+        },
         "Output/Assets/Maps/mapaLPA.tmx#sprite_tienda_topo": {
             "scaleInDock": 1
         },
@@ -57,6 +63,9 @@
             "scaleInDock": 1
         },
         "Output/Assets/Maps/mapaLPA.tmx#sprites_suelos_arreglados - copia": {
+            "scaleInDock": 1
+        },
+        "Output/Assets/Maps/mapaLPA.tmx#sprites_suelos_arreglados2": {
             "scaleInDock": 1
         },
         "Output/Assets/Maps/mapaLPA.tmx#sprites_taberna": {
@@ -73,12 +82,23 @@
         },
         "Output/Assets/Maps/mapaLPA.tmx#taberna_plantilla": {
             "scaleInDock": 1
+        },
+        "Output/Assets/Screens/Combat/CombatLayout.tmx": {
+            "scale": 0.75,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 1607.3333333333335,
+                "y": 808.6666666666665
+            }
         }
     },
     "openFiles": [
+        "Output/Assets/Screens/Combat/CombatLayout.tmx"
     ],
     "project": "OhMyGhost.tiled-project",
+    "property.type": "string",
     "recentFiles": [
+        "Output/Assets/Screens/Combat/CombatLayout.tmx",
         "Output/Assets/Maps/mapaLPA.tmx"
     ]
 }

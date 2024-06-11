@@ -140,6 +140,7 @@
     <ClCompile Include="Source\Cobaya.cpp" />
     <ClCompile Include="Source\Creditos.cpp" />
     <ClCompile Include="Source\Recuerdos.cpp" />
+    <ClCompile Include="Source\GuiCombatHP.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -317,6 +318,8 @@
     <ClInclude Include="Source\Cobaya.h" />
     <ClInclude Include="Source\Creditos.h" />
     <ClInclude Include="Source\Recuerdos.h" />
+    <ClInclude Include="Source\GuiCombatHP.h" />
+
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">

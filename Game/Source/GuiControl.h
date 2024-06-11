@@ -30,6 +30,7 @@ enum class GuiControlType
 	INPUTBOX,
 	VALUEBOX,
 	SPINNER,
+	PROGRESS_BAR,
 	GROUP
 };
 
@@ -64,11 +65,16 @@ public:
 		text(text)
 	{
 		color.r = 255; color.g = 255; color.b = 255;
-		texture = NULL;
+		SetTexture(nullptr);
 	}
 
 	// Called each loop iteration
 	virtual bool Update(float dt)
+	{
+		return true;
+	}
+
+	virtual bool Render()
 	{
 		return true;
 	}
@@ -114,7 +120,7 @@ public:
 
 public:
 
-	uint32 id;
+	uint32 id = 0;
 	GuiControlType type;
 	GuiControlState state;
 

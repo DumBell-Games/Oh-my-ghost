@@ -9,6 +9,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "Map.h"
+#include "CombatManager.h"
 
 Astrobark::Astrobark() : Entity(EntityType::ASTROBARK)
 {
@@ -42,6 +43,9 @@ bool Astrobark::Start() {
 	nBody->listener = this;
 	nBody->ctype = ColliderType::NPC;
 
+	astroBark = new Personatge("AstroBark", 1, 10, 1, 10, "Assets/Animation/Jefe_Astrobark/Astrobark.xml");
+
+
 	currentAnim = astroIdle;
 
 	return true;
@@ -54,6 +58,7 @@ bool Astrobark::PreUpdate()
 
 bool Astrobark::Update(float dt)
 {	
+	
 	currentAnim->Update();
 	app->render->DrawTexture(texture.get(), position.x - 128, position.y - 128, &currentAnim->GetCurrentFrame());
 
@@ -78,6 +83,11 @@ void Astrobark::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
+		break;
+	case ColliderType::PLAYER:
+		LOG("Collision PLAYER");
+		if(astroBark->salutActual > 0)
+		app->combat->BeginCombat(astroBark, parameters.child("combatAstroBark"), parameters.child("combatAstroBarkEND"));
 		break;
 	default:
 		break;
