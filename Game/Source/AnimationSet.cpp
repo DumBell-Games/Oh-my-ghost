@@ -19,27 +19,29 @@ AnimationSet::~AnimationSet()
 
 }
 
-void AnimationSet::SetAnimation(SString name) {
+// Sets the specified animation to be played. boolean value determines whether the animation goes back to the default once finished
+void AnimationSet::SetAnimation(SString name, bool returnToDefault) {
 	bool found = false;
 	if (name != "") // Don't bother searching if string is empty
 	for (size_t i = 0; i < animations.size() && !found; i++)
 	{
 		if (animations[i].name == name)
 		{
-			activeAnimation = i;
-			GetCurrent().Reset();
+			SetAnimation(i, returnToDefault);
 		}
 	}
 	if (!found)
 		LOG("Animation \"%s\" not found", name.GetString());
 }
 
-void AnimationSet::SetAnimation(int index)
+// Sets the specified animation to be played. boolean value determines whether the animation goes back to the default once finished
+void AnimationSet::SetAnimation(int index, bool returnToDefault)
 {
 	if (IN_RANGE(index, 0, animations.size() - 1))
 	{
 		activeAnimation = index;
 		animations[activeAnimation].Reset();
+		manualAnimChange = !returnToDefault;
 	}
 }
 

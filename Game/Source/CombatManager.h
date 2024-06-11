@@ -91,6 +91,7 @@ public:
 
 	~CombatManager();
 
+	// Executed right after app initialization no matter the module's state
 	bool PostInit() override;
 
 	bool Awake(pugi::xml_node config) override;
@@ -104,7 +105,7 @@ public:
 	bool CleanUp() override;
 
 	//Inicia un combate con los parametros proporcionados
-	void BeginCombat(Personatge* enemy, pugi::xml_node startDialogue, pugi::xml_node endDialogue);
+	void BeginCombat(Personatge* enemy, pugi::xml_node startDialogue = pugi::xml_node(), pugi::xml_node endDialogue = pugi::xml_node(), pugi::xml_node defeatDialogue = pugi::xml_node());
 
 	//Determines if the combat has finished
 	bool CombatFinished();
@@ -176,7 +177,7 @@ private:
 
 	// Dialog functions
 
-	void LoadDialogs(pugi::xml_node startDialog, pugi::xml_node endDialog);
+	void LoadDialogs(pugi::xml_node startDialog, pugi::xml_node endDialog, pugi::xml_node defeatDialog);
 
 	void LoadDialog(List<Dialog*>& list, pugi::xml_node dialogNode);
 
@@ -208,6 +209,7 @@ private:
 
 	List<Dialog*> startDialogue;
 	List<Dialog*> endDialogue;
+	List<Dialog*> defeatDialogue;
 
 	// Accion del combate
 

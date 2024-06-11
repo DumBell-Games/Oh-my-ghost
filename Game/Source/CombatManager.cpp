@@ -275,10 +275,10 @@ bool CombatManager::CleanUp()
 	return true;
 }
 
-void CombatManager::BeginCombat(Personatge* enemy, pugi::xml_node startDialogue, pugi::xml_node endDialogue)
+void CombatManager::BeginCombat(Personatge* enemy, pugi::xml_node startDialogue, pugi::xml_node endDialogue, pugi::xml_node defeatDialogue)
 {
 	data.enemy = enemy;
-	LoadDialogs(startDialogue, endDialogue);
+	LoadDialogs(startDialogue, endDialogue, defeatDialogue);
 	app->reload->QueueReload("combatStart");
 }
 
@@ -719,15 +719,19 @@ void CombatManager::HandleCombat()
 		break;
 	}
 
-	// Crea segundo bloque de texto + animacion
-	turnResults.push_back(new TurnStep());
+	// Si el enemigo ha sido derrotado, no puede atacar
+	if (data.enemy->salutActual>0)
+	{
+		// Crea segundo bloque de texto + animacion
+		turnResults.push_back(new TurnStep());
 
-	// TODO implementar orden de turnos
-	if (ataqueEnemigo) {
-		if (DoAttack(enemy, ally, ataqueEnemigo))
-		{
-			turnResults.back()->enemyAnimationID = enemyAnims->GetAnimationId(ataqueEnemigo->animationID);
-			turnResults.back()->allyAnimationID = playerAnims->GetAnimationId("Hurt");
+		// TODO implementar orden de turnos
+		if (ataqueEnemigo) {
+			if (DoAttack(enemy, ally, ataqueEnemigo))
+			{
+				turnResults.back()->enemyAnimationID = enemyAnims->GetAnimationId(ataqueEnemigo->animationID);
+				turnResults.back()->allyAnimationID = playerAnims->GetAnimationId("Hurt");
+			}
 		}
 	}
 
@@ -819,10 +823,15 @@ void CombatManager::HandleCombatAnimation()
 		{
 			if (!fled)
 			{
-				ListItem<Dialog*>* item;
+				char combatResult = CombatResult();
+				if (combatResult <= 0) playerAnims->SetAnimation("Dead", false);
+				if (combatResult >= 0) enemyAnims->SetAnimation("Dead", false);
+
+				// Si el jugador ha sido derrotado muestra el dialogo de derrota, incluso si el enemigo tambien fue derrotado
+				ListItem<Dialog*>* item = combatResult > 0 ? endDialogue.start : defeatDialogue.start;
 				Dialog* pDialog = nullptr;
 
-				for (item = endDialogue.start; item != NULL; item = item->next)
+				for (; item != NULL; item = item->next)
 				{
 					pDialog = item->data;
 					app->dialogManager->AddDialog(pDialog);
@@ -848,7 +857,10 @@ void CombatManager::HandleCombatAnimation()
 
 void CombatManager::HandleEndDialog()
 {
-	if (!app->dialogManager->isPlaying)
+	bool playerAnimFinished = playerAnims->activeAnimation == playerAnims->defaultAnimation;
+	bool enemyAnimFinished = enemyAnims->activeAnimation == enemyAnims->defaultAnimation;
+
+	if (!app->dialogManager->isPlaying && playerAnimFinished && enemyAnimFinished)
 		combatState = CombatState::END;
 }
 
@@ -944,10 +956,11 @@ void CombatManager::ResetButtonsState(GuiControlState state)
 			g->state = state;
 }
 
-void CombatManager::LoadDialogs(pugi::xml_node startDialog, pugi::xml_node endDialog)
+void CombatManager::LoadDialogs(pugi::xml_node startDialog, pugi::xml_node endDialog, pugi::xml_node defeatDialog)
 {
 	LoadDialog(startDialogue, startDialog);
 	LoadDialog(endDialogue, endDialog);
+	LoadDialog(defeatDialogue, defeatDialog);
 }
 
 void CombatManager::LoadDialog(List<Dialog*>& list, pugi::xml_node dialogNode)

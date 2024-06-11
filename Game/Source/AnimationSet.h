@@ -28,6 +28,7 @@ public:
 	std::vector<Animation> animations;
 	std::shared_ptr<SDL_Texture> texture;
 	int defaultAnimation = -1;
+	bool manualAnimChange = false;
 
 public:
 	AnimationSet();
@@ -40,9 +41,9 @@ public:
 		animations.push_back(anim);
 	}
 
-	void SetAnimation(SString name);
+	void SetAnimation(SString name, bool returnToDefault = true);
 
-	void SetAnimation(int index);
+	void SetAnimation(int index, bool returnToDefault = true);
 
 	void SetDefaultAnimation(SString name);
 
