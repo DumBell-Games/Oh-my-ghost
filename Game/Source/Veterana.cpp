@@ -9,6 +9,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "Map.h"
+#include "CombatManager.h"
 
 
 Veterana::Veterana() : Entity(EntityType::VETERANA)
@@ -47,6 +48,8 @@ bool Veterana::Start() {
 
 
 
+	veterana = new Personatge("Veterana", 1, 10, 1, 10, "Assets/Animation/VeteranAstroBark/Astrobark.xml");
+
 	return true;
 }
 
@@ -80,8 +83,9 @@ void Veterana::OnCollision(PhysBody* physA, PhysBody* physB) {
 		LOG("Collision UNKNOWN");
 		break;
 	case ColliderType::PLAYER:
-		LOG("Collision VETERANA");
-		playerTouched = true;
+		LOG("Collision PLAYER");
+		if (veterana->salutActual > 0)
+			app->combat->BeginCombat(veterana, parameters.child("combatAstroBark"), parameters.child("combatAstroBarkEND"));
 		break;
 	default:
 		break;

@@ -12,6 +12,10 @@
 
 #include <random>
 #include <vector>
+#include "AnimationSet.h"
+
+#include "Dialog.h"
+#include "DialogManager.h"
 
 class InventoryManager;
 struct SDL_Texture;
@@ -42,6 +46,33 @@ enum class PlayerAction {
 	NO_ACTION
 };
 
+enum class MenuDirection
+{
+	DOWN_RIGHT,
+	DOWN_LEFT,
+	UP_RIGHT,
+	UP_LEFT
+};
+
+struct TurnStep
+{
+	~TurnStep()
+	{
+		for (Dialog*& item : dialogs)
+		{
+			RELEASE(item);
+		}
+		dialogs.clear();
+	}
+
+	bool started = false;
+	int allyAnimationID = -1;
+	int enemyAnimationID = -1;
+	std::vector<Dialog*> dialogs;
+	bool video = false;
+	std::string videoPath = "";
+};
+
 struct CombatData
 {
 	CombatData() {}
@@ -60,6 +91,7 @@ public:
 
 	~CombatManager();
 
+	// Executed right after app initialization no matter the module's state
 	bool PostInit() override;
 
 	bool Awake(pugi::xml_node config) override;
@@ -72,9 +104,18 @@ public:
 
 	bool CleanUp() override;
 
+	//Inicia un combate con los parametros proporcionados
+	void BeginCombat(Personatge* enemy, pugi::xml_node startDialogue = pugi::xml_node(), pugi::xml_node endDialogue = pugi::xml_node(), pugi::xml_node defeatDialogue = pugi::xml_node());
+
+	//Determines if the combat has finished
+	bool CombatFinished();
+
+	// Devuelve el balance entre enemigos y aliados derrotados. 0 = empate, 1 = victoria, -1 = derrota
+	char CombatResult();
+
 private:
 
-	GuiControl* NewButton(char menuID, char elementID, const char* text, SDL_Rect bounds, GuiCallback_f onClick, bool independentPtr = false, SDL_Rect sliderBounds = {0,0,0,0});
+	GuiControl* NewButton(GuiControlType type, char menuID, char elementID, const char* text, SDL_Rect bounds, GuiCallback_f onClick, bool independentPtr = false, SDL_Rect sliderBounds = {0,0,0,0});
 
 	bool LoadLayout(pugi::xml_node layoutRoot);
 
@@ -85,11 +126,6 @@ private:
 	void CreateItemButtons(InventoryManager* inv);
 
 	void CreateTeamSwapButtons(pugi::xml_node menuItem);
-
-	bool CombatFinished();
-
-	// Devuelve el balance entre enemigos y aliados derrotados. 0 = empate, 1 = victoria, -1 = derrota
-	char CombatResult();
 
 
 	// Control por mando/teclado (raton va por GUI)
@@ -121,7 +157,7 @@ private:
 
 	// Realizacion de acciones
 
-	void DoAttack(Personatge* attacker, Personatge* defender, Atac* move);
+	bool DoAttack(Personatge* attacker, Personatge* defender, Atac* move);
 
 	void UseItem(Personatge* target, ItemData* item);
 
@@ -137,7 +173,13 @@ private:
 
 	void Flee(GuiControl* ctrl);
 
-	void ResetButtonsState();
+	void ResetButtonsState(GuiControlState state = GuiControlState::NORMAL);
+
+	// Dialog functions
+
+	void LoadDialogs(pugi::xml_node startDialog, pugi::xml_node endDialog, pugi::xml_node defeatDialog);
+
+	void LoadDialog(List<Dialog*>& list, pugi::xml_node dialogNode);
 
 public:
 
@@ -150,6 +192,9 @@ private:
 
 	std::mt19937 rng;
 
+	// Elementos generales de UI
+	std::vector<GuiControl*> guiElements;
+
 	// Gestion de menu
 	std::vector<std::vector<GuiControl*>> menuList;
 	Menus currentMenu = Menus::MAIN;
@@ -160,6 +205,12 @@ private:
 	iPoint posSub;
 	iPoint buttonSize;
 
+	// Dialogos
+
+	List<Dialog*> startDialogue;
+	List<Dialog*> endDialogue;
+	List<Dialog*> defeatDialogue;
+
 	// Accion del combate
 
 	PlayerAction accion = PlayerAction::NO_ACTION;
@@ -169,7 +220,22 @@ private:
 	int nuevoAliadoActivo = -1;
 	Atac* ataqueEnemigo = nullptr;
 
-	shared_texture_t backgroundTexture = nullptr;
+	std::vector<TurnStep*> turnResults;
+
+	int currentTurnStep = 0;
+
+	// Animation sets and positions (+ defaults if no layout found)
+
+	iPoint playerPos = { 200,1080 };
+	iPoint enemyPos = { 1300, 300 };
+
+	AnimationSet* playerAnims = nullptr;
+	AnimationSet* enemyAnims = nullptr;
+
+	// Texturas de combate
+
+	shared_texture_t bgTexture = nullptr;
+	shared_texture_t atkMenuTexture = nullptr;
 
 	int turn = 0;
 
@@ -178,5 +244,7 @@ private:
 	// DEBUG VARS
 	Personatge* dummyEnemy = nullptr;
 
+
+	friend ItemData;
 };
 

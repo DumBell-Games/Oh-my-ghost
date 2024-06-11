@@ -131,7 +131,7 @@ SDL_Texture* const Textures::LoadSurface(SDL_Surface* surface)
 // Carga la textura como un smart pointer, lo cual significa que la textura no sera eliminada hasta que se borre la ultima referencia a ella. Proporciona el parametro preventDuplicates como true para guardar una referencia en el modulo para evitar duplicados (debera liberarse manualmente en ese caso)
 shared_texture_t const Textures::LoadSP(const char* path, bool preventDuplicates)
 {
-	if (preventDuplicates)
+	if (preventDuplicates && strcmp(path, "") != 0)
 	for (ListItem<TextureStruct>* item = noDuplicateTextureList.start; item; item = item->next)
 	{
 		if (item->data.path == path)

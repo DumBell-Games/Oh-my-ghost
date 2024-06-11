@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="192" height="108" tilewidth="10" tileheight="10" infinite="0" nextlayerid="8" nextobjectid="14">
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="192" height="108" tilewidth="10" tileheight="10" infinite="0" nextlayerid="9" nextobjectid="15">
  <imagelayer id="3" name="referencia">
   <image source="ref (Large).jpg" width="1920" height="1072"/>
  </imagelayer>
@@ -7,20 +7,48 @@
   <image source="fondoBatalla.png" width="1920" height="1080"/>
  </imagelayer>
  <objectgroup id="4" name="AttackMenu">
-  <object id="1" name="attack2" x="1502" y="766.667" width="90" height="90">
+  <object id="1" name="attack2" x="1471.33" y="700" width="90" height="90">
+   <properties>
+    <property name="bgClickedPath" value="Assets/Screens/Combat/AbilityButtonClicked.png"/>
+    <property name="bgPath" value="Assets/Screens/Combat/AbilityButton.png"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="2" name="attack1" x="1486" y="881" width="90" height="90">
+  <object id="2" name="attack1" x="1588" y="729" width="90" height="90">
+   <properties>
+    <property name="bgClickedPath" value="Assets/Screens/Combat/AbilityButtonClicked.png"/>
+    <property name="bgPath" value="Assets/Screens/Combat/AbilityButton.png"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="3" name="attack3" x="1601" y="701" width="90" height="90">
+  <object id="3" name="attack3" x="1371.67" y="766.333" width="90" height="90">
+   <properties>
+    <property name="bgClickedPath" value="Assets/Screens/Combat/AbilityButtonClicked.png"/>
+    <property name="bgPath" value="Assets/Screens/Combat/AbilityButton.png"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="4" name="attack4" x="1718" y="730" width="90" height="90">
+  <object id="4" name="attack4" x="1356" y="882" width="90" height="90">
+   <properties>
+    <property name="bgClickedPath" value="Assets/Screens/Combat/AbilityButtonClicked.png"/>
+    <property name="bgPath" value="Assets/Screens/Combat/AbilityButton.png"/>
+   </properties>
    <ellipse/>
   </object>
-  <object id="5" name="attack5" x="1590" y="817" width="204" height="204">
+  <object id="5" name="attack5" x="1460" y="817" width="204" height="204">
+   <properties>
+    <property name="bgClickedPath" value="Assets/Screens/Combat/BigAbilityButtonClicked.png"/>
+    <property name="bgPath" value="Assets/Screens/Combat/BigAbilityButton.png"/>
+   </properties>
    <ellipse/>
+  </object>
+ </objectgroup>
+ <objectgroup id="8" name="ItemMenu">
+  <object id="14" x="1311" y="1033">
+   <properties>
+    <property name="direction" type="int" value="0"/>
+   </properties>
+   <point/>
   </object>
  </objectgroup>
  <objectgroup id="5" name="TeamMenu">
@@ -30,14 +58,24 @@
   <object id="9" name="char3" x="137" y="124" width="46" height="46" rotation="45"/>
  </objectgroup>
  <objectgroup id="6" name="CharInfo">
-  <object id="10" template="../../UI/combat-charInfo.tx" name="characterInfo1" x="582" y="134"/>
-  <object id="11" name="characterInfo1" x="599" y="627.5" width="360" height="100"/>
+  <object id="10" name="enemyHP" x="582" y="134" width="360" height="100">
+   <properties>
+    <property name="orientation" type="int" value="0"/>
+    <property name="texPath" value="Assets/Screens/Combat/HpBarLeft.png"/>
+   </properties>
+  </object>
+  <object id="11" name="playerHP" x="1004.33" y="634.167" width="360" height="100">
+   <properties>
+    <property name="orientation" type="int" value="0"/>
+    <property name="texPath" value="Assets/Screens/Combat/HpBarRight.png"/>
+   </properties>
+  </object>
  </objectgroup>
  <objectgroup id="7" name="CharacterPositions">
-  <object id="12" name="enemyPivot" x="1122" y="538">
+  <object id="12" name="enemyPivot" x="1314.67" y="530">
    <point/>
   </object>
-  <object id="13" name="playerPivot" x="433" y="1045">
+  <object id="13" name="playerPivot" x="466.333" y="1043">
    <point/>
   </object>
  </objectgroup>

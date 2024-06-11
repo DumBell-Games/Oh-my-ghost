@@ -2,8 +2,6 @@
 #include "Animation.h"
 #include <PugiXml/src/pugixml.hpp>
 
-struct SDL_Texture;
-
 // Objeto de transicion entre animaciones, admite cualquier cosa que se pueda llamar como una funcion sin parametros que devuelva un booleano (un "functor")
 // NOTE: No se eestá usando en ninguna parte del proyecto al momento de escribir este comentario
 template <typename Condition>
@@ -26,7 +24,16 @@ struct AnimationTransition
 class AnimationSet
 {
 public:
+	int activeAnimation = 0;
+	std::vector<Animation> animations;
+	std::shared_ptr<SDL_Texture> texture;
+	int defaultAnimation = -1;
+	bool manualAnimChange = false;
+
+public:
 	AnimationSet();
+
+	AnimationSet(const char* animPath);
 
 	~AnimationSet();
 
@@ -34,32 +41,34 @@ public:
 		animations.push_back(anim);
 	}
 
-	void SetAnimation(int index)
-	{
-		if (index >= 0 && index < animations.size())
-		{
-			activeAnimation = index;
-			animations[activeAnimation].Reset();
-		}
-	}
+	void SetAnimation(SString name, bool returnToDefault = true);
+
+	void SetAnimation(int index, bool returnToDefault = true);
+
+	void SetDefaultAnimation(SString name);
+
+	int GetAnimationId(SString name);
+
+	Animation& GetCurrent() { return animations[activeAnimation]; }
+	SDL_Texture* GetTextureRawPointer() { return texture.get(); }
 
 	void Update()
 	{
-		GetCurrent().Update();
+		if (GetCurrent().HasFinished() && defaultAnimation >= 0)
+		{
+			activeAnimation = defaultAnimation;
+			GetCurrent().Reset();
+		}
+		else
+			GetCurrent().Update();
 	}
 
-	void Render(const iPoint& position) {
-		GetCurrent().Render(GetTextureRawPointer(), position);
+	void Render(const iPoint& position, bool useCamera = true, int scale = 1) {
+		GetCurrent().Render(GetTextureRawPointer(), position, useCamera, scale);
 	}
 
-	Animation& GetCurrent() { return animations[activeAnimation]; }
 
-	SDL_Texture* GetTextureRawPointer() { return texture.get(); }
 
 	void LoadAnimSet(const char* animPath);
 
-public:
-	int activeAnimation = 0;
-	std::vector<Animation> animations;
-	std::shared_ptr<SDL_Texture> texture;
 };

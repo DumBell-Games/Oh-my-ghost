@@ -4,6 +4,7 @@
 #include "Point.h"
 #include "PropertiesStruct.h"
 #include "Animation.h"
+#include "Enemic.h"
 
 #include "SDL/include/SDL.h"
 #include "Box2D/Box2D/Box2D.h"
@@ -49,6 +50,9 @@ public:
 
 	PhysBody* piso2;
 	PhysBody* mansionOpen;
+	
+
+	Personatge* veterana;
 	
 	List<Animation*> veteranaAnims;
 	Animation* veteranaIdle;

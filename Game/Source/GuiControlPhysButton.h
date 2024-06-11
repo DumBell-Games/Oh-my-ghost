@@ -3,9 +3,10 @@
 
 #include "Point.h"
 #include "SString.h"
+#include <memory>
 #include "Physics.h"
 
-#include <memory>
+#include "Textures.h"
 
 
 static void DestroyPtr(PhysBody* p);
@@ -20,13 +21,24 @@ public:
 
 	virtual ~GuiControlPhysButton();
 
+	bool Init(const char* bgPath, const char* bgClickedPath, const char* fgPath, const char* text = "");
+
 	// Called each loop iteration
 	bool Update(float dt);
 
+	bool Render();
 
-private:
+	PhysBody* GetPhysBody() { return pbody.get(); }
+
+	void SetRotation(float degrees);
+
+public:
 
 	Unique_PhysBody pbody;
+
+	shared_texture_t bgTexture;
+	shared_texture_t bgTextureClicked;
+	shared_texture_t fgTexture;
 
 	int mouseX, mouseY;
 };
