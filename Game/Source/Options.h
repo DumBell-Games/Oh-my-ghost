@@ -59,9 +59,19 @@ public:
     int PauseIndex = 1;
     int AjustesIndex = 1;
 
-    shared_texture_t pause1;
-    shared_texture_t pause2;
-    shared_texture_t pause3;
+    shared_texture_t optionsBackground;
+    shared_texture_t fullScreen;
+    shared_texture_t fullscreenOFF;
+    shared_texture_t fullscreenON;
+    shared_texture_t Vsync;
+    shared_texture_t VsyncON;
+    shared_texture_t VsyncOFF;
+    shared_texture_t Musica;
+    shared_texture_t MusicaON;
+    shared_texture_t MusicaOFF;
+    shared_texture_t Fx;
+    shared_texture_t FxON;
+    shared_texture_t FxOFF;
 
     int weigth;
     int heigth;

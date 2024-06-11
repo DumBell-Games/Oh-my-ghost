@@ -18,6 +18,7 @@
 #include "Combat.h"
 #include <vector>
 #include "Creditos.h"
+#include "Options.h"
 
 TitleScreen::TitleScreen(bool startEnabled) : Module(startEnabled)
 {

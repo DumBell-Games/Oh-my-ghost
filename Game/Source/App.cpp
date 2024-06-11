@@ -39,6 +39,7 @@
 #include "CargaVeterana.h"
 #include "CargaAstroBark.h"
 #include "CargaAprendiz.h"
+#include "Options.h"
 
 
 #include "DialogManager.h"
@@ -85,6 +86,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	introScreen = new IntroScreen(false);
 	teamScreen = new TeamScreen(true);
 	pause = new PauseMenu(false);
+	options = new Options(false);
 	console = new DebugConsole(true);
 	map = new Map(false);
 	creditos = new Creditos(false);
@@ -135,6 +137,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(introScreen);
 	AddModule(teamScreen);
 	AddModule(pause);
+	AddModule(options);
 	AddModule(console);
 	AddModule(dialogManager);
 	AddModule(fadeToBlack);

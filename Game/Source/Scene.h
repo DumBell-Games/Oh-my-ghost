@@ -228,7 +228,7 @@ public:
 	}
 
 	void Scene::PlayerQuieto() {
-		return player->pBody->body->SetType(b2_staticBody);
+ 		return player->pBody->body->SetType(b2_staticBody);
 	}
 
 	void Scene::PlayerDinamico() {

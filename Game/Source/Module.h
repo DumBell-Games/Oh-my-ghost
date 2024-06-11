@@ -116,6 +116,13 @@ public:
 		paused = !active;
 		return paused;
 	}
+	bool DoblePausa()
+	{
+		paused = !paused;
+		active = !active;
+		return paused;
+		return paused;
+	}
 	bool Play()
 	{
 		paused = !active;

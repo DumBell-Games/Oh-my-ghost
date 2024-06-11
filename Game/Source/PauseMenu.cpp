@@ -11,6 +11,7 @@
 #include "Input.h"
 #include "Scene.h"
 #include "menu.h"
+#include "Options.h"
 
 
 PauseMenu::PauseMenu(bool startEnabled) : Module(startEnabled)
@@ -276,6 +277,7 @@ void PauseMenu::CreatePauseButtons() {
     {
         inpause = false;
         inajustes = true;
+        app->fadeToBlack->FadeToBlackTransition((Module*)app->pause, (Module*)app->options, 0.0f);
         CleanUp();
         
         CreatePauseButtons();
