@@ -41,7 +41,11 @@ bool Veterana::Start() {
 	nBody->listener = this;
 	nBody->ctype = ColliderType::VETERANA;
 		
-	//veterana = new Personatge("Veterana", 1, 10, 1, 10, "Assets/Animation/VeteranAstroBark/Astrobark.xml");
+	veterana = new Personatge("Veterana", 1, 10, 1, 10, "Assets/Animation/Veteran_Astrobark/Veteran.xml");
+
+	veterana->atacs.push_back(Atac("Ladrido", 5, false, "", "Skill1"));
+	veterana->atacs.push_back(Atac("Jauria", 5, false, "", "Skill2"));
+
 
 	return true;
 }
@@ -54,7 +58,6 @@ bool Veterana::Update(float dt)
 	b2Transform nBodyPos = nBody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;
 	position.y = METERS_TO_PIXELS(nBodyPos.p.y) - 32 / 2;
-
 
 	return true;
 }
@@ -77,8 +80,8 @@ void Veterana::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER:
 		LOG("Collision PLAYER");
-		/*if (veterana->salutActual > 0)
-			app->combat->BeginCombat(veterana, parameters.child("combatAstroBark"), parameters.child("combatAstroBarkEND"));*/
+		if (veterana->salutActual > 0)
+			app->combat->BeginCombat(veterana, parameters.child("combatVeteranaIN"), parameters.child("combatVeteranaEND"));
 		break;
 	default:
 		break;

@@ -114,6 +114,7 @@
     <ClCompile Include="Source\MusicaCasino.cpp" />
     <ClCompile Include="Source\MusicaCielo.cpp" />
     <ClCompile Include="Source\MusicaCiudad.cpp" />
+    <ClCompile Include="Source\MusicaCombate.cpp" />
     <ClCompile Include="Source\MusicaDiscoteca.cpp" />
     <ClCompile Include="Source\MusicaMansion.cpp" />
     <ClCompile Include="Source\MusicaTaberna.cpp" />
@@ -198,6 +199,7 @@
     <ClInclude Include="Source\MusicaCasino.h" />
     <ClInclude Include="Source\MusicaCielo.h" />
     <ClInclude Include="Source\MusicaCiudad.h" />
+    <ClInclude Include="Source\MusicaCombate.h" />
     <ClInclude Include="Source\MusicaDiscoteca.h" />
     <ClInclude Include="Source\MusicaMansion.h" />
     <ClInclude Include="Source\MusicaTaberna.h" />

@@ -43,6 +43,7 @@ class DialogManager;
 class FadeToBlack;
 class Video;
 class MusicaCiudad;
+class MusicaCombate;
 class MusicaCielo;
 class MusicaMansion;
 class MusicaCasino;

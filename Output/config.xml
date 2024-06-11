@@ -576,14 +576,13 @@
 				<frame x="768" y="0" w="128" h="256" />
 				<frame x="896" y="0" w="128" h="256" />
 				<frame x="1024" y="0" w="128" h="256" />
-
 			</animation>
 			<aprendizCombatIN>
 				<sentence facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text = "Aprendiz 1 te desafía"/>
 			</aprendizCombatIN>
 			<aprendizCombatEND>
 				<sentence name="Aprendiz 1"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text=" …  Maldito palomo cojo… ¿Pero te has creído que yo sé algo?"/>
-				<sentence name="Aprendiz 1"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Pregunta a los demás aprendices de Wawka que si saben más."/>
+				<sentence name="Aprendiz 1"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Pregunta a los demás aprendices que si saben más."/>
 			</aprendizCombatEND>
 		</aprendiz>
 		
@@ -647,7 +646,7 @@
 				<sentence facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text = "Aprendiz 1 te desafía"/>
 			</aprendizCombatIN>
 			<aprendizCombatEND>
-				<sentence name="Aprendiz 1"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Joder paloma si que eres fuerte, para tener más información tienes que ir al casino"/>
+				<sentence name="Aprendiz 1"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text=""/>
 			</aprendizCombatEND>
 		</aprendiz>
 		<aprendiz x="17229" y="3908" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
@@ -682,10 +681,10 @@
 				<frame x="1024" y="0" w="128" h="256" />
 			</animation>
 			<aprendizCombatIN>
-				<sentence facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text = "Aprendiz 1 te desafía"/>
+				<sentence facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text = "Aprendiz 3 te desafía"/>
 			</aprendizCombatIN>
 			<aprendizCombatEND>
-				<sentence name="Aprendiz 1"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Joder paloma si que eres fuerte, para tener más información tienes que ir al casino"/>
+				<sentence name="Aprendiz 3"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Joder paloma si que eres fuerte, para tener más información tienes que ir al casino"/>
 			</aprendizCombatEND>
 		</aprendiz>
 		<aprendiz x="15145" y="3853" texturePath="Assets/Textures/AprendizAstroBark_SpriteSheet.png">
@@ -701,10 +700,10 @@
 				<frame x="1024" y="0" w="128" h="256" />
 			</animation>
 			<aprendizCombatIN>
-				<sentence facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text = "Aprendiz 1 te desafía"/>
+				<sentence facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text = "Aprendiz 4 te desafía"/>
 			</aprendizCombatIN>
 			<aprendizCombatEND>
-				<sentence name="Aprendiz 1"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Joder paloma si que eres fuerte, para tener más información tienes que ir al casino"/>
+				<sentence name="Aprendiz 4"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Joder paloma si que eres fuerte, para tener más información tienes que ir al casino"/>
 			</aprendizCombatEND>
 		</aprendiz>
 		
@@ -997,9 +996,16 @@
 				<frame x="1152" y="0" w="128" h="256" />
 				<frame x="1280" y="0" w="128" h="256" />
 				<frame x="1408" y="0" w="128" h="256" />
-				
-
 			</animation>
+			<combatVeteranaIN>
+				<sentence facetexturepath="Assets/Textures/Chibi_Veterana.png" text = "Veterana 2 te desafía"/>
+			</combatVeteranaIN>
+			<combatVeteranaEND>
+				<sentence name="Veterana 1"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Vale vale... te contaré lo que sé"/>
+				<sentence name="Veterana 1"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="AstroBark está en su mansión"/>
+				<sentence name="Veterana 1"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Eso sí, será imposible de que llegues a él"/>
+				<sentence name="Veterana 1"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Puesto que tiene un gran equipo de seguridad."/>
+			</combatVeteranaEND>
 
 		</veterana>
 
@@ -1018,6 +1024,15 @@
 				<frame x="1280" y="0" w="128" h="256" />
 				<frame x="1408" y="0" w="128" h="256" />
 			</animation>
+			<combatVeteranaIN>
+				<sentence facetexturepath="Assets/Textures/Chibi_Veterana.png" text = "Veterana 1 te desafía"/>
+			</combatVeteranaIN>		
+			<combatVeteranaEND>
+				<sentence name="Veterana 1"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Yo soy una tumba pero..."/>
+				<sentence name="Veterana 1"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Pregúntale a la otra veterana"/>
+				<sentence name="Veterana 1"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="La que está junto al coche"/>
+				<sentence name="Veterana 1"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Ella quizá te cuente algo"/>
+			</combatVeteranaEND>			
 		</veterana>
 		
 		<veterana x="15423" y="3070" texturePath="Assets/Textures/VeteranaAstrobark_SpritesSheet.png">
@@ -1035,6 +1050,12 @@
 				<frame x="1280" y="0" w="128" h="256" />
 				<frame x="1408" y="0" w="128" h="256" />
 			</animation>
+			<combatVeteranaIN>
+				<sentence facetexturepath="Assets/Textures/Chibi_Veterana.png" text = "Veterana 1 te desafía"/>
+			</combatVeteranaIN>
+			<combatVeteranaEND>
+				<sentence name="Veterana 1"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Grrr..."/>
+			</combatVeteranaEND>
 		</veterana>
 		
 		<veterana x="16447" y="3070" texturePath="Assets/Textures/VeteranaAstrobark_SpritesSheet.png">
@@ -1052,6 +1073,12 @@
 				<frame x="1280" y="0" w="128" h="256" />
 				<frame x="1408" y="0" w="128" h="256" />
 			</animation>
+			<combatVeteranaIN>
+				<sentence facetexturepath="Assets/Textures/Chibi_Veterana.png" text = "Veterana 2 te desafía"/>
+			</combatVeteranaIN>
+			<combatVeteranaEND>
+				<sentence name="Veterana 2"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Con mi compañera no podrás, ya verás"/>
+			</combatVeteranaEND>
 		</veterana>
 		
 		<veterana x="19007" y="3324" texturePath="Assets/Textures/VeteranaAstrobark_SpritesSheet.png">
@@ -1069,6 +1096,12 @@
 				<frame x="1280" y="0" w="128" h="256" />
 				<frame x="1408" y="0" w="128" h="256" />
 			</animation>
+			<combatVeteranaIN>
+				<sentence facetexturepath="Assets/Textures/Chibi_Veterana.png" text = "Veterana 3 te desafía"/>
+			</combatVeteranaIN>
+			<combatVeteranaEND>
+				<sentence name="Veterana 3"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Esta ahí dentro... pasa..."/>
+			</combatVeteranaEND>
 		</veterana>
 		
 		<cobaya x="15804" y="8926" texturePath="Assets/Textures/SpriteSheetCobaya.png">
@@ -1181,10 +1214,8 @@
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Pues eso intento averiguar, estaba intentando buscar a AstroBark"/>
 				<sentence name="Bibi"		facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="Mmm... pues tendrías que preguntar a..."/>
 				<sentence name="Bibi"		facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="¿Como se llamaban?... Ah si, ¡Los aprendices!"/>
-				<sentence name="Bibi"		facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="Pero necesitarás una llave VIP para entrar..."/>
-				<sentence name="Bibi"		facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="Puedes conseguir una en esa arcade de ahí"/>
-				<sentence name="Bibi"		facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="Pero no es nada fácil, aunque para ti seguro que lo es"/>
-				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Pues voy a probar suerte, ¡muchas gracias!"/>
+				<sentence name="Bibi"		facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="Están en la zona VIP, justo ahí"/>
+				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Pues voy a ir para allá, ¡muchas gracias!"/>
 				<sentence name="Bibi"		facetexturepath="Assets/Textures/Chibi_Cobaya.png" text="¡¡¡TE AMO SPRINGY!!!"/>
 			</sentences>
 		</dialogTrigger>
@@ -1212,7 +1243,8 @@
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="Pues jope, si que me está costando llegar hacia el..."/>
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringyP.png" text="¿Hay algo que pueda hacer para obtener información?"/>
 				<sentence name="Veterana 1"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Siempre hay opciones... *se afila las garras*"/>
-
+				
+					
 			</sentences>
 		</dialogTrigger>
 

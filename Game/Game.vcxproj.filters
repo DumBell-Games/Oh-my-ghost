@@ -141,6 +141,7 @@
     <ClCompile Include="Source\Creditos.cpp" />
     <ClCompile Include="Source\Recuerdos.cpp" />
     <ClCompile Include="Source\GuiCombatHP.cpp" />
+    <ClCompile Include="Source\MusicaCombate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -319,7 +320,7 @@
     <ClInclude Include="Source\Creditos.h" />
     <ClInclude Include="Source\Recuerdos.h" />
     <ClInclude Include="Source\GuiCombatHP.h" />
-
+    <ClInclude Include="Source\MusicaCombate.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
