@@ -107,7 +107,7 @@ Dialog* DialogManager::CreateSimpleDialog(std::string text)
 {
 	Dialog* d = new Dialog(text);
 		d->name = "";
-		d->face_tex = nullptr;
+		d->face_tex = app->tex->LoadSP("Assets/Texutres/Chibi_Deidad.png",true);
 		d->font = FontSelector("primary");
 		d->id = 0;
 		d->mapId = 0;
