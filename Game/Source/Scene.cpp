@@ -376,7 +376,7 @@ bool Scene::PostUpdate()
 		app->pause->active = true;
 		app->pause->CreatePauseButtons();*/
 
-		app->fadeToBlack->FadeToBlackTransition((Module*)app->scene, (Module*)app->pause, 0.0f);
+		
 	}
 
 
