@@ -19,10 +19,11 @@ public:
     StatusEffect* status = nullptr;
     int probEstat = 0; // % de probabilitat
     Objectiu objectiu = RIVAL;
+    // Nombre de la animación a reproducir. Si el ataque es un ultimate (isUltimate == true), ruta a un video
     std::string animationID = "";
     bool isUltimate = false;
 
-    Atac(std::string _nom, int _potencia, bool _isUltimate = false, const char* _iconPath = "Assets/Screen/Combat/Skill.png", const char* animID = "Idle") : nom(_nom), potencia(_potencia), iconPath(_iconPath), animationID(animID) {}
+    Atac(std::string _nom, int _potencia, bool _isUltimate = false, const char* _iconPath = "Assets/Screen/Combat/Skill.png", const char* animID = "Idle") : nom(_nom), potencia(_potencia), isUltimate(_isUltimate), iconPath(_iconPath), animationID(animID) {}
 };
 
 

@@ -7,6 +7,7 @@
 #include "DebugConsole.h"
 #include "Reload.h"
 #include "Map.h"
+#include "Video.h"
 
 #include "Log.h"
 #include "EnumUtils.h"
@@ -29,19 +30,21 @@ CombatManager::CombatManager(bool startEnabled) : Module(startEnabled)
 
 	// CODIGO PARA DEBUG, NO DEFINITIVO (supuestamente)
 
-	Personatge* p1 = new Personatge("PJ Tutorial", 10, 10, 5, 2, "Assets/Animation/Springy/SpringyFantasma.xml");
-	p1->atacs.push_back(Atac("Cop de puny1", 10, false, "Assets/Screen/Combat/Skill.png", "Skill1"));
-	p1->atacs.push_back(Atac("Cop de puny2", 10, false, "Assets/Screen/Combat/Skill.png", "Skill2"));
-	p1->atacs.push_back(Atac("Cop de puny3", 10, false, "Assets/Screen/Combat/Skill.png", "Skill1"));
-	p1->atacs.push_back(Atac("Cop de puny4", 10, false, "Assets/Screen/Combat/Skill.png", "Skill2"));
-	p1->atacs.push_back(Atac("Ultimate", 100, true, "Assets/Screen/Combat/Skill.png", "Skill1"));
+	// Personaje tutorial
+	Personatge* p1 = new Personatge("Springy", 10, 10, 5, 2, "Assets/Animation/Springy/SpringyFantasma.xml");
+	p1->atacs.push_back(Atac("Cop de puny1", 2, false, "Assets/Screen/Combat/Skill.png", "Skill1"));
+	p1->atacs.push_back(Atac("Cop de puny2", 2, false, "Assets/Screen/Combat/Skill.png", "Skill2"));
+	p1->atacs.push_back(Atac("Cop de puny3", 2, false, "Assets/Screen/Combat/Skill.png", "Skill1"));
+	p1->atacs.push_back(Atac("Cop de puny4", 2, false, "Assets/Screen/Combat/Skill.png", "Skill2"));
+	p1->atacs.push_back(Atac("Ultimate", 30, true, "Assets/Screen/Combat/Skill.png", "Assets/Videos/GolpeFinalSpringy.avi"));
 	data.allies.push_back(p1);
-	Personatge* p2 = new Personatge("PJ PostTutorial", 5, 30, 2, 1, "Assets/Animation/Springy/SpringyPaloma.xml");
-	p2->atacs.push_back(Atac("Puntada de peu1", 15, false, "Assets/Screen/Combat/Skill.png", "Skill1"));
-	p2->atacs.push_back(Atac("Puntada de peu2", 15, false, "Assets/Screen/Combat/Skill.png", "Skill2"));
-	p2->atacs.push_back(Atac("Puntada de peu3", 15, false, "Assets/Screen/Combat/Skill.png", "Skill1"));
-	p2->atacs.push_back(Atac("Puntada de peu4", 15, false, "Assets/Screen/Combat/Skill.png", "Skill2"));
-	p2->atacs.push_back(Atac("Ultimate", 100, true, "Assets/Screen/Combat/Skill.png", "Skill1"));
+	// Personaje post-tutorial
+	Personatge* p2 = new Personatge("Springy", 5, 30, 2, 1, "Assets/Animation/Springy/SpringyPaloma.xml");
+	p2->atacs.push_back(Atac("Puntada de peu1", 5, false, "Assets/Screen/Combat/Skill.png", "Skill1"));
+	p2->atacs.push_back(Atac("Puntada de peu2", 5, false, "Assets/Screen/Combat/Skill.png", "Skill2"));
+	p2->atacs.push_back(Atac("Puntada de peu3", 5, false, "Assets/Screen/Combat/Skill.png", "Skill1"));
+	p2->atacs.push_back(Atac("Puntada de peu4", 5, false, "Assets/Screen/Combat/Skill.png", "Skill2"));
+	p2->atacs.push_back(Atac("Ultimate", 30, true, "Assets/Screen/Combat/Skill.png", "Assets/Videos/GolpeFinalSpringy.avi"));
 	data.allies.push_back(p2);
 
 	// FIN CODIGO PARA DEBUG
@@ -65,7 +68,7 @@ bool CombatManager::PostInit()
 		dummyEnemy->atacs.push_back(Atac("Mordisco2", 5, false, "", "Skill2"));
 		dummyEnemy->atacs.push_back(Atac("Mordisco1", 5, false, "", "Skill3"));
 		dummyEnemy->atacs.push_back(Atac("Mordisco2", 5, false, "", "Skill4"));
-		dummyEnemy->atacs.push_back(Atac("Ultimate", 250, true, "", "Skill1"));
+		dummyEnemy->atacs.push_back(Atac("Ultimate", 30, true, "", "Assets/Videos/GolpeFinalAB.avi"));
 		BeginCombat(dummyEnemy, pugi::xml_node(), pugi::xml_node());
 		});
 	return true;
@@ -213,14 +216,17 @@ bool CombatManager::Update(float dt)
 
 bool CombatManager::PostUpdate()
 {
-
 	// Render characters
+
 	enemyAnims->Render(enemyPos, false, 2);
 	playerAnims->Render(playerPos, false, 3);
 	enemyAnims->Update();
 	playerAnims->Update();
 	
-	// Render UI elements
+	// Render video if applicable
+
+	if (!app->video->isVideoFinished)
+		app->video->GrabAVIFrame();
 
 	return true;
 }
@@ -691,7 +697,20 @@ void CombatManager::HandleCombat()
 		{
 			if (DoAttack(ally, enemy, ataqueAliado))
 			{
-				turnResults.back()->allyAnimationID = playerAnims->GetAnimationId(ataqueAliado->animationID);
+				if (ataqueAliado->isUltimate)
+				{
+					turnResults.push_back(new TurnStep());
+
+					turnResults.back()->video = true;
+					turnResults.back()->videoPath = ataqueAliado->animationID;
+
+					turnResults.push_back(new TurnStep());
+				}
+				else
+				{
+					// Solo asigna animacion a aliado si no es ataque ultimate
+					turnResults.back()->allyAnimationID = playerAnims->GetAnimationId(ataqueAliado->animationID);
+				}
 				turnResults.back()->enemyAnimationID = enemyAnims->GetAnimationId("Hurt");
 			}
 		}
@@ -731,7 +750,20 @@ void CombatManager::HandleCombat()
 		if (ataqueEnemigo) {
 			if (DoAttack(enemy, ally, ataqueEnemigo))
 			{
-				turnResults.back()->enemyAnimationID = enemyAnims->GetAnimationId(ataqueEnemigo->animationID);
+				if (ataqueEnemigo->isUltimate)
+				{
+					turnResults.push_back(new TurnStep());
+
+					turnResults.back()->video = true;
+					turnResults.back()->videoPath = ataqueEnemigo->animationID;
+
+					turnResults.push_back(new TurnStep());
+				}
+				else
+				{
+					// Solo asigna animacion a enemigo si no es ataque ultimate
+					turnResults.back()->enemyAnimationID = enemyAnims->GetAnimationId(ataqueEnemigo->animationID);
+				}
 				turnResults.back()->allyAnimationID = playerAnims->GetAnimationId("Hurt");
 			}
 		}
@@ -776,7 +808,7 @@ void CombatManager::HandleCombatAnimation()
 			else
 			{
 				// Ataques ultimate tienen su propio TurnStep con solamente el video
-				// TODO Reproducir video
+				app->video->Initialize(currentStep->videoPath.c_str());
 			}
 
 			currentStep->started = true;
@@ -796,7 +828,9 @@ void CombatManager::HandleCombatAnimation()
 			else
 			{
 				// Comprueba si ha terminado el video
-				stepFinished = true;
+				stepFinished = app->video->isVideoFinished;
+				if (stepFinished)
+					app->video->CloseAVI();
 			}
 		}
 		
@@ -830,7 +864,7 @@ void CombatManager::HandleCombatAnimation()
 				if (combatResult >= 0) enemyAnims->SetAnimation("Dead", false);
 
 				// Si el jugador ha sido derrotado muestra el dialogo de derrota, incluso si el enemigo tambien fue derrotado
-				ListItem<Dialog*>* item = combatResult > 0 ? endDialogue.start : defeatDialogue.start;
+				ListItem<Dialog*>* item = (combatResult > 0) ? endDialogue.start : defeatDialogue.start;
 				Dialog* pDialog = nullptr;
 
 				for (; item != NULL; item = item->next)
@@ -859,8 +893,8 @@ void CombatManager::HandleCombatAnimation()
 
 void CombatManager::HandleEndDialog()
 {
-	bool playerAnimFinished = playerAnims->activeAnimation == playerAnims->defaultAnimation;
-	bool enemyAnimFinished = enemyAnims->activeAnimation == enemyAnims->defaultAnimation;
+	bool playerAnimFinished = playerAnims->GetCurrent().HasFinished() || playerAnims->activeAnimation == playerAnims->defaultAnimation;
+	bool enemyAnimFinished = enemyAnims->GetCurrent().HasFinished() || enemyAnims->activeAnimation == enemyAnims->defaultAnimation;
 
 	if (!app->dialogManager->isPlaying && playerAnimFinished && enemyAnimFinished)
 		combatState = CombatState::END;
