@@ -36,6 +36,9 @@
 #include "Recuerdos.h"
 #include "MusicaCombate.h"
 #include "MusicaCombateAstroBark.h"
+#include "CargaVeterana.h"
+#include "CargaAstroBark.h"
+#include "CargaAprendiz.h"
 
 
 #include "DialogManager.h"
@@ -73,6 +76,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	recuerdos = new Recuerdos(false);
 	tienda = new Tienda(false);
 	characterMenu = new Character_Menu(false);
+	cargaVeterana = new CargaVeterana(false);
+	cargaAB = new CargaAB(false);
+	cargaAprendiz = new CargaAprendiz(false);
 	contextoSpringyP1 = new ContextoSpringyP1(false);
 	contextoSpringyP2 = new ContextoSpringySegundaParte(false);
 	titlescreen = new TitleScreen(false);
@@ -120,6 +126,9 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(recuerdos);
 	AddModule(tienda);
 	AddModule(characterMenu);
+	AddModule(cargaVeterana);
+	AddModule(cargaAB);
+	AddModule(cargaAprendiz);
 	AddModule(contextoSpringyP1);
 	AddModule(contextoSpringyP2);
 	AddModule(titlescreen);

@@ -5,6 +5,7 @@
 #include "PropertiesStruct.h"
 #include "Animation.h"
 #include "Enemic.h"
+#include "Timer.h"
 
 #include "SDL/include/SDL.h"
 #include "Box2D/Box2D/Box2D.h"
@@ -57,6 +58,8 @@ public:
 
 	bool playerTouched = false;
 	bool musicaMansion = false;
+
+	Timer loadScreenTime;
 
 
 };

@@ -15,6 +15,7 @@
 #include "MusicaCiudad.h"
 #include "MusicaMansion.h"
 #include "MusicaDiscoteca.h"
+#include "CargaAprendiz.h"
 
 
 
@@ -70,6 +71,7 @@ bool Aprendiz::Update(float dt)
 	position.y = METERS_TO_PIXELS(nBodyPos.p.y) - 32 / 2;
 	
 	if (playerTouched) {
+		app->cargaAprendiz->Enable();
 		if (aprendizCombat->salutActual > 0){
 			app->combat->BeginCombat(aprendizCombat, parameters.child("aprendizCombatIN"), parameters.child("aprendizCombatEND"));
 		}

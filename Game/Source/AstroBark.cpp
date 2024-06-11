@@ -12,6 +12,7 @@
 #include "CombatManager.h"
 #include "MusicaCombateAstroBark.h"
 #include "MusicaMansion.h"
+#include "CargaAstroBark.h"
 
 
 Astrobark::Astrobark() : Entity(EntityType::ASTROBARK)
@@ -73,6 +74,7 @@ bool Astrobark::Update(float dt)
 	position.y = METERS_TO_PIXELS(nBodyPos.p.y) - 32 / 2;
 	
 	if (playerTouched) {
+		app->cargaAB->Enable();
 		if (astroBark->salutActual > 0) {
 			app->combat->BeginCombat(astroBark, parameters.child("astrobarkCombatIN"), parameters.child("astrobarkCombatEND"));
 		}

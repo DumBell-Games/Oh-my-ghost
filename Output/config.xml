@@ -449,8 +449,7 @@
 				<frame x="1536" y="0" w="256" h="256" />
 				<frame x="1792" y="0" w="256" h="256" />
 			</animation>
-			<astrobarkCombatIN>
-				<sentence facetexturepath="Assets/Textures/Chibi_Astrobark.png" text = "Jefe AstroBark te desafía"/>
+			<astrobarkCombatIN>				
 			</astrobarkCombatIN>
 			<astrobarkCombatEND>
 				<sentence name="AstroBark"	facetexturepath="Assets/Textures/Chibi_AstrBark.png" text="JAJAJAJA pues ahora tendras lo que quieres saber paloma"/>
@@ -578,7 +577,6 @@
 				<frame x="1024" y="0" w="128" h="256" />
 			</animation>
 			<aprendizCombatIN>
-				<sentence facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text = "Aprendiz 1 te desafía"/>
 			</aprendizCombatIN>
 			<aprendizCombatEND>
 				<sentence name="Aprendiz 1"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text=" …  Maldito palomo cojo… ¿Pero te has creído que yo sé algo?"/>
@@ -600,7 +598,6 @@
 
 			</animation>
 			<aprendizCombatIN>
-				<sentence facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text = "Aprendiz 2 te desafía"/>
 			</aprendizCombatIN>
 			<aprendizCombatEND>
 				<sentence name="Aprendiz 2"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Yo solo sé que no se nada..."/>
@@ -623,7 +620,6 @@
 				<frame x="1024" y="0" w="128" h="256" />
 			</animation>
 			<aprendizCombatIN>
-				<sentence facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text = "Aprendiz 3 te desafía"/>
 			</aprendizCombatIN>
 			<aprendizCombatEND>
 				<sentence name="Aprendiz 3"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Joder paloma si que eres fuerte, para tener más información tienes que ir al casino"/>
@@ -643,7 +639,6 @@
 				<frame x="1024" y="0" w="128" h="256" />
 			</animation>
 			<aprendizCombatIN>
-				<sentence facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text = "Aprendiz 1 te desafía"/>
 			</aprendizCombatIN>
 			<aprendizCombatEND>
 				<sentence name="Aprendiz 1"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text=""/>
@@ -662,7 +657,6 @@
 				<frame x="1024" y="0" w="128" h="256" />
 			</animation>
 			<aprendizCombatIN>
-				<sentence facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text = "Aprendiz 2 te desafía"/>
 			</aprendizCombatIN>
 			<aprendizCombatEND>
 				<sentence name="Aprendiz 2"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Joder paloma si que eres fuerte, para tener más información tienes que ir al casino"/>
@@ -681,7 +675,6 @@
 				<frame x="1024" y="0" w="128" h="256" />
 			</animation>
 			<aprendizCombatIN>
-				<sentence facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text = "Aprendiz 3 te desafía"/>
 			</aprendizCombatIN>
 			<aprendizCombatEND>
 				<sentence name="Aprendiz 3"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Joder paloma si que eres fuerte, para tener más información tienes que ir al casino"/>
@@ -700,7 +693,6 @@
 				<frame x="1024" y="0" w="128" h="256" />
 			</animation>
 			<aprendizCombatIN>
-				<sentence facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text = "Aprendiz 4 te desafía"/>
 			</aprendizCombatIN>
 			<aprendizCombatEND>
 				<sentence name="Aprendiz 4"	facetexturepath="Assets/Textures/Chibi_Aprendiz.png" text="Joder paloma si que eres fuerte, para tener más información tienes que ir al casino"/>
@@ -998,7 +990,6 @@
 				<frame x="1408" y="0" w="128" h="256" />
 			</animation>
 			<combatVeteranaIN>
-				<sentence facetexturepath="Assets/Textures/Chibi_Veterana.png" text = "Veterana 2 te desafía"/>
 			</combatVeteranaIN>
 			<combatVeteranaEND>
 				<sentence name="Veterana 1"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Vale vale... te contaré lo que sé"/>
@@ -1025,7 +1016,6 @@
 				<frame x="1408" y="0" w="128" h="256" />
 			</animation>
 			<combatVeteranaIN>
-				<sentence facetexturepath="Assets/Textures/Chibi_Veterana.png" text = "Veterana 1 te desafía"/>
 			</combatVeteranaIN>		
 			<combatVeteranaEND>
 				<sentence name="Veterana 1"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Yo soy una tumba pero..."/>
@@ -1051,7 +1041,6 @@
 				<frame x="1408" y="0" w="128" h="256" />
 			</animation>
 			<combatVeteranaIN>
-				<sentence facetexturepath="Assets/Textures/Chibi_Veterana.png" text = "Veterana 1 te desafía"/>
 			</combatVeteranaIN>
 			<combatVeteranaEND>
 				<sentence name="Veterana 1"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Grrr..."/>
@@ -1074,7 +1063,6 @@
 				<frame x="1408" y="0" w="128" h="256" />
 			</animation>
 			<combatVeteranaIN>
-				<sentence facetexturepath="Assets/Textures/Chibi_Veterana.png" text = "Veterana 2 te desafía"/>
 			</combatVeteranaIN>
 			<combatVeteranaEND>
 				<sentence name="Veterana 2"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Con mi compañera no podrás, ya verás"/>
@@ -1097,7 +1085,6 @@
 				<frame x="1408" y="0" w="128" h="256" />
 			</animation>
 			<combatVeteranaIN>
-				<sentence facetexturepath="Assets/Textures/Chibi_Veterana.png" text = "Veterana 3 te desafía"/>
 			</combatVeteranaIN>
 			<combatVeteranaEND>
 				<sentence name="Veterana 3"	facetexturepath="Assets/Textures/Chibi_Veterana.png" text="Esta ahí dentro... pasa..."/>
@@ -1134,9 +1121,6 @@
 		<patatas x="5409" y="4772" texturePath="Assets/Textures/itemPatatas.png"/>
 		<patatas x="3487" y="3107" texturePath="Assets/Textures/itemPatatas.png"/>
 		<patatas x="5178" y="2243" texturePath="Assets/Textures/itemPatatas.png"/>
-
-		<enemy x="750" y="472" texturePath="Assets/Textures/pigNpc.png"/>
-
 
 		<dialogTrigger x="14420" y="7714" repeat ="true">
 			<sentences>

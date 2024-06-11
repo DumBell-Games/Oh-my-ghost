@@ -14,6 +14,7 @@
 #include "MusicaMansion.h"
 #include "MusicaDiscoteca.h"
 #include "MusicaCasino.h"
+#include "CargaVeterana.h"
 
 
 Veterana::Veterana() : Entity(EntityType::VETERANA)
@@ -63,6 +64,7 @@ bool Veterana::Update(float dt)
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;
 	position.y = METERS_TO_PIXELS(nBodyPos.p.y) - 32 / 2;
 	if (playerTouched) {
+		app->cargaVeterana->Enable();
 		if (veterana->salutActual > 0) {
 			app->combat->BeginCombat(veterana, parameters.child("veteranaCombatIN"), parameters.child("veteranaCombatEND"));
 		}
@@ -93,7 +95,7 @@ bool Veterana::Update(float dt)
 		if (musicaCasino)
 		{
 			app->musicaCombate->Disable();
-			app->musicaDisco->Enable();
+			app->musicaCasino->Enable();
 			musicaCasino = false;
 		}
 	}
