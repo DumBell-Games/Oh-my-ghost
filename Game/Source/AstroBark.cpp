@@ -10,6 +10,9 @@
 #include "Physics.h"
 #include "Map.h"
 #include "CombatManager.h"
+#include "MusicaCombateAstroBark.h"
+#include "MusicaMansion.h"
+
 
 Astrobark::Astrobark() : Entity(EntityType::ASTROBARK)
 {
@@ -68,6 +71,24 @@ bool Astrobark::Update(float dt)
 	b2Transform nBodyPos = nBody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;
 	position.y = METERS_TO_PIXELS(nBodyPos.p.y) - 32 / 2;
+	
+	if (playerTouched) {
+		if (astroBark->salutActual > 0) {
+			app->combat->BeginCombat(astroBark, parameters.child("astrobarkCombatIN"), parameters.child("astrobarkCombatEND"));
+		}
+		app->musicaCombateAB->Enable();
+		app->musicaMansion->Disable();
+	
+		
+		playerTouched = false;
+	}
+
+	if (astroBark->salutActual <= 0)
+	{
+		app->musicaCombateAB->Disable();
+		app->musicaMansion->Enable();
+
+	}
 
 	return true;
 }
@@ -89,8 +110,7 @@ void Astrobark::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER:
 		LOG("Collision PLAYER");
-		if(astroBark->salutActual > 0)
-		app->combat->BeginCombat(astroBark, parameters.child("astrobarkCombatIN"), parameters.child("astrobarkCombatEND"));
+		playerTouched = true;
 		break;
 	default:
 		break;

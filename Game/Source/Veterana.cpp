@@ -10,6 +10,10 @@
 #include "Physics.h"
 #include "Map.h"
 #include "CombatManager.h"
+#include "MusicaCombate.h"
+#include "MusicaMansion.h"
+#include "MusicaDiscoteca.h"
+#include "MusicaCasino.h"
 
 
 Veterana::Veterana() : Entity(EntityType::VETERANA)
@@ -58,6 +62,41 @@ bool Veterana::Update(float dt)
 	b2Transform nBodyPos = nBody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;
 	position.y = METERS_TO_PIXELS(nBodyPos.p.y) - 32 / 2;
+	if (playerTouched) {
+		if (veterana->salutActual > 0) {
+			app->combat->BeginCombat(veterana, parameters.child("veteranaCombatIN"), parameters.child("veteranaCombatEND"));
+		}
+		if (app->musicaMansion->isEnabled)
+		{
+			app->musicaMansion->Disable();
+			app->musicaCombate->Enable();
+			musicaMansion = true;
+		}
+		if (app->musicaCasino->isEnabled)
+		{
+			app->musicaCasino->Disable();
+			app->musicaCombate->Enable();
+			musicaCasino = true;
+		}
+		playerTouched = false;
+	}
+
+	if (veterana->salutActual <= 0)
+	{
+		if (musicaMansion)
+		{
+			app->musicaCombate->Disable();
+			app->musicaMansion->Enable();
+			musicaMansion = false;
+
+		}
+		if (musicaCasino)
+		{
+			app->musicaCombate->Disable();
+			app->musicaDisco->Enable();
+			musicaCasino = false;
+		}
+	}
 
 	return true;
 }
@@ -80,8 +119,7 @@ void Veterana::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER:
 		LOG("Collision PLAYER");
-		if (veterana->salutActual > 0)
-			app->combat->BeginCombat(veterana, parameters.child("combatVeteranaIN"), parameters.child("combatVeteranaEND"));
+		playerTouched = true;
 		break;
 	default:
 		break;

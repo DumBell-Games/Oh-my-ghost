@@ -23,10 +23,9 @@ bool MusicaCombate::Start()
 	LOG("Loading Scene");
 	bool ret = true;
 	
-	casinoMusic = app->audio->LoadFx("Assets/Audio/Fx/combatMusic.wav");
+	casinoMusic = app->audio->LoadFx("Assets/Audio/Fx/combatMusic.wav");	
 
-	app->audio->PlayFx(casinoMusic);
-	app->musicaCiudad->Disable();
+	app->audio->PlayFx(casinoMusic, 100);
 
 	return ret;
 }

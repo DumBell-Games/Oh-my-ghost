@@ -58,6 +58,8 @@ public:
 	Animation* veteranaIdle;
 
 	bool playerTouched;
+	bool musicaMansion = false;
+	bool musicaCasino = false;
 
 
 };
