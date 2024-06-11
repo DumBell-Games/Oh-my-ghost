@@ -44,6 +44,7 @@ class FadeToBlack;
 class Video;
 class MusicaCiudad;
 class MusicaCombate;
+class MusicaCombateAB;
 class MusicaCielo;
 class MusicaMansion;
 class MusicaCasino;
@@ -164,6 +165,8 @@ public:
 	FadeToBlack* fadeToBlack;
 	Video* video;
 	MusicaCiudad* musicaCiudad;
+	MusicaCombate* musicaCombate;
+	MusicaCombateAB* musicaCombateAB;
 	MusicaCielo* musicaCielo;
 	MusicaCasino* musicaCasino;
 	MusicaDiscoteca* musicaDisco;

@@ -56,6 +56,7 @@ public:
 	Personatge* astroBark;
 
 	bool playerTouched = false;
+	bool musicaMansion = false;
 
 
 };

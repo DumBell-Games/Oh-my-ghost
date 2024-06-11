@@ -34,6 +34,8 @@
 #include "ContextoSpringySegundaParte.h"
 #include "Creditos.h"
 #include "Recuerdos.h"
+#include "MusicaCombate.h"
+#include "MusicaCombateAstroBark.h"
 
 
 #include "DialogManager.h"
@@ -89,6 +91,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	fadeToBlack = new FadeToBlack(true);
 	video = new Video(false);
 	musicaCiudad = new MusicaCiudad(false);
+	musicaCombate = new MusicaCombate(false);
+	musicaCombateAB = new MusicaCombateAB(false);
 	musicaCielo = new MusicaCielo(false);
 	musicaCasino = new MusicaCasino(false);
 	musicaDisco = new MusicaDiscoteca(false);
@@ -127,6 +131,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(fadeToBlack);
 	AddModule(video);
 	AddModule(musicaCiudad);
+	AddModule(musicaCombate);
+	AddModule(musicaCombateAB);
 	AddModule(musicaCielo);
 	AddModule(musicaCasino);
 	AddModule(musicaDisco);

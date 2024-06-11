@@ -11,6 +11,12 @@
 #include "Map.h"
 #include "Player.h"
 #include "CombatManager.h"
+#include "MusicaCombate.h"
+#include "MusicaCiudad.h"
+#include "MusicaMansion.h"
+#include "MusicaDiscoteca.h"
+
+
 
 
 Aprendiz::Aprendiz() : Entity(EntityType::APRENDIZ)
@@ -63,6 +69,41 @@ bool Aprendiz::Update(float dt)
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;	
 	position.y = METERS_TO_PIXELS(nBodyPos.p.y) - 32 / 2;
 	
+	if (playerTouched) {
+		if (aprendizCombat->salutActual > 0){
+			app->combat->BeginCombat(aprendizCombat, parameters.child("aprendizCombatIN"), parameters.child("aprendizCombatEND"));
+		}
+		if(app->musicaMansion->isEnabled)
+		{
+			app->musicaMansion->Disable();	
+			app->musicaCombate->Enable(); 
+			musicaMansion = true;
+		}
+		if(app->musicaDisco->isEnabled)
+		{
+			app->musicaDisco->Disable();
+			app->musicaCombate->Enable(); 
+			musicaDiscoteca = true;
+		}
+		playerTouched = false;
+	}
+
+	if (aprendizCombat->salutActual <= 0)
+	{
+		if(musicaMansion)
+		{
+			app->musicaCombate->Disable();
+			app->musicaMansion->Enable();
+			musicaMansion = false;
+
+		}		
+		if (musicaDiscoteca)
+		{
+			app->musicaCombate->Disable();
+			app->musicaDisco->Enable();
+			musicaDiscoteca = false;
+		}
+	}
 	
 
 	return true;
@@ -85,11 +126,7 @@ void Aprendiz::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::PLAYER:
 		LOG("Collision PLAYER");
-		playerTouched = true;	
-		if (aprendizCombat->salutActual > 0)
-		{
-			app->combat->BeginCombat(aprendizCombat, parameters.child("aprendizCombatIN"), parameters.child("aprendizCombatEND"));
-		}
+		playerTouched = true;
 		break;
 	default:
 		break;
