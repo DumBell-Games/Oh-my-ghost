@@ -27,9 +27,9 @@ public:
 
 	bool Start();
 
-	bool PreUpdate();
-
 	bool Update(float dt);
+
+	bool PostUpdate();
 
 	bool CleanUp();
 
@@ -58,6 +58,9 @@ public:
 
 	bool playerTouched = false;
 	bool musicaMansion = false;
+
+	bool videoTriggered = false;
+	bool videoPlayed = false;
 
 	Timer loadScreenTime;
 

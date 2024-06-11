@@ -105,7 +105,7 @@ public:
 	bool CleanUp() override;
 
 	//Inicia un combate con los parametros proporcionados
-	void BeginCombat(Personatge* enemy, pugi::xml_node startDialogue = pugi::xml_node(), pugi::xml_node endDialogue = pugi::xml_node(), pugi::xml_node defeatDialogue = pugi::xml_node());
+	void BeginCombat(Personatge* enemy, pugi::xml_node startDialogue = pugi::xml_node(), pugi::xml_node endDialogue = pugi::xml_node(), pugi::xml_node defeatDialogue = pugi::xml_node(), bool canEscape = true);
 
 	//Determines if the combat has finished
 	bool CombatFinished();
@@ -239,6 +239,7 @@ private:
 
 	int turn = 0;
 
+	bool canFlee = true;
 	bool fled = false;
 
 	// DEBUG VARS

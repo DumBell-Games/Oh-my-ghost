@@ -29,6 +29,8 @@ void Video::Initialize(const char* path)
 {
 	
 	OpenAVI(path);                  // Open The AVI File
+
+	isVideoFinished = false;
 }
 
 void Video::OpenAVI(LPCSTR path)
@@ -54,7 +56,6 @@ void Video::OpenAVI(LPCSTR path)
 		return;
 	}
 
-	isVideoFinished = false;
 
 	frame = 0;
 }
@@ -92,7 +93,7 @@ bool Video::GrabAVIFrame()
 		return false;
 	}
 
-	app->render->DrawTexture(texture, 0, 0, NULL, SDL_FLIP_VERTICAL);
+	app->render->DrawTexture(texture, 0, 0, NULL, 1.0F, 0, INT_MAX, INT_MAX, false);
 
 	if (i % 2 == 0)
 	{

@@ -158,6 +158,8 @@ bool CombatManager::Start()
 	app->render->camera.y = 0;
 
 	LOG("Combat Start!");
+	fled = false;
+
 	return true;
 }
 
@@ -283,7 +285,7 @@ bool CombatManager::CleanUp()
 	return true;
 }
 
-void CombatManager::BeginCombat(Personatge* enemy, pugi::xml_node startDialogue, pugi::xml_node endDialogue, pugi::xml_node defeatDialogue)
+void CombatManager::BeginCombat(Personatge* enemy, pugi::xml_node startDialogue, pugi::xml_node endDialogue, pugi::xml_node defeatDialogue, bool canEscape)
 {
 	data.enemy = enemy;
 	LoadDialogs(startDialogue, endDialogue, defeatDialogue);
@@ -981,7 +983,7 @@ void CombatManager::Flee(GuiControl* ctrl)
 {
 	currentMenu = Menus::MAIN;
 	currentElement = 0;
-	fled = true; // NOTE % posibilidad de huir?
+	fled = true && canFlee; // NOTE % posibilidad de huir?
 	combatState = CombatState::COMBAT_ANIM;
 }
 

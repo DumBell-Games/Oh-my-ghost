@@ -10,6 +10,7 @@
 #include "Physics.h"
 #include "Map.h"
 #include "CombatManager.h"
+#include "Video.h"
 #include "MusicaCombateAstroBark.h"
 #include "MusicaMansion.h"
 #include "CargaAstroBark.h"
@@ -60,38 +61,63 @@ bool Astrobark::Start() {
 	return true;
 }
 
-bool Astrobark::PreUpdate()
-{
-	return true;
-}
-
 bool Astrobark::Update(float dt)
 {	
-	
-	currentAnim->Update();
-	app->render->DrawTexture(texture.get(), position.x - 128, position.y - 128, &currentAnim->GetCurrentFrame());
+	if (astroBark->salutActual> 0)
+	{
+		currentAnim->Update();
+		app->render->DrawTexture(texture.get(), position.x - 128, position.y - 128, &currentAnim->GetCurrentFrame());
 
-	b2Transform nBodyPos = nBody->body->GetTransform();
-	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;
-	position.y = METERS_TO_PIXELS(nBodyPos.p.y) - 32 / 2;
-	
-	if (playerTouched) {
-		app->cargaAB->Enable();
-		if (astroBark->salutActual > 0) {
-			app->combat->BeginCombat(astroBark, parameters.child("astrobarkCombatIN"), parameters.child("astrobarkCombatEND"));
-		}
-		app->musicaCombateAB->Enable();
-		app->musicaMansion->Disable();
-	
+		b2Transform nBodyPos = nBody->body->GetTransform();
+		position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;
+		position.y = METERS_TO_PIXELS(nBodyPos.p.y) - 32 / 2;
 		
-		playerTouched = false;
+		if (playerTouched) {
+			app->cargaAB->Enable();
+			if (astroBark->salutActual > 0) {
+				app->combat->BeginCombat(astroBark, parameters.child("astrobarkCombatIN"), parameters.child("astrobarkCombatEND"), pugi::xml_node(), false);
+			}
+			app->musicaCombateAB->Enable();
+			app->musicaMansion->Disable();
+		
+			
+			playerTouched = false;
+		}
 	}
 
 	if (astroBark->salutActual <= 0)
 	{
 		app->musicaCombateAB->Disable();
 		app->musicaMansion->Enable();
+		
+	}
 
+	return true;
+}
+
+bool Astrobark::PostUpdate()
+{
+
+	if (!videoPlayed && astroBark->salutActual <= 0)
+	{
+		if (!videoTriggered)
+		{
+			app->video->Initialize("Assets/Videos/OhMyGhost_Cinematica_Context_1.avi");
+			videoTriggered = true;
+		}
+		else
+		{
+			if (!app->video->isVideoFinished)
+			{
+				app->video->GrabAVIFrame();
+			}
+			else
+			{
+				app->video->CloseAVI();
+				videoPlayed = true;
+			}
+		}
+		
 	}
 
 	return true;
@@ -99,6 +125,13 @@ bool Astrobark::Update(float dt)
 
 bool Astrobark::CleanUp()
 {
+	for (ListItem<Animation*>* item = astroAnims.start; item; item = item->next)
+	{
+		RELEASE(item->data);
+	}
+	astroAnims.Clear();
+
+	RELEASE(astroBark);
 	return true;
 }
 
