@@ -4,6 +4,7 @@
 #include "Point.h"
 #include "PropertiesStruct.h"
 #include "Animation.h"
+#include "Enemic.h"
 
 #include "SDL/include/SDL.h"
 #include "Box2D/Box2D/Box2D.h"
@@ -45,6 +46,8 @@ public:
 	SString texturePath;
 
 	PhysBody* nBody;
+
+	Personatge* conserje;
 	
 	List<Animation*> conserjeAnims;
 	Animation* currentAnim;

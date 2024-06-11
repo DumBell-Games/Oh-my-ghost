@@ -9,6 +9,7 @@
 #include "Point.h"
 #include "Physics.h"
 #include "Map.h"
+#include "CombatManager.h"
 
 Conserje::Conserje() : Entity(EntityType::CONSERJE)
 {
@@ -40,7 +41,9 @@ bool Conserje::Start() {
 	//haz que el rectangulo no rote
 	nBody->body->SetFixedRotation(true);	
 	nBody->listener = this;
-	nBody->ctype = ColliderType::NPC;
+	nBody->ctype = ColliderType::CONSERJE;
+
+	conserje = new Personatge("Conserje", 1, 10, 1, 10, "Assets/Animation/Conserje/Conserje.xml");
 	
 	currentAnim = conserjeIdle;
 
@@ -73,6 +76,11 @@ void Conserje::OnCollision(PhysBody* physA, PhysBody* physB) {
 		break;
 	case ColliderType::UNKNOWN:
 		LOG("Collision UNKNOWN");
+		break;
+	case ColliderType::PLAYER:
+		LOG("Collision PLAYER");
+		if(conserje->salutActual > 0)
+		app->combat->BeginCombat(conserje, parameters.child("conserjeCombatIN"), parameters.child("conserjeCombatEND"));
 		break;
 	default:
 		break;

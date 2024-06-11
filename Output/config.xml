@@ -427,6 +427,18 @@
 				<frame x="3410" y="0" w="128" h="256" />
 				<frame x="3666" y="0" w="128" h="256" />
 		    </animation>
+			<conserjeCombatIN>
+				<sentence name ="Bruno" facetexturepath="Assets/Textures/Chibi_Conserge.png" text="Bienvenido"/>
+				<sentence name ="Bruno" facetexturepath="Assets/Textures/Chibi_Conserge.png" text="Dispones de 3 menús disponibles:"/>
+				<sentence name ="Bruno" facetexturepath="Assets/Textures/Chibi_Conserge.png" text="LUCHAR: aquí encontrarás tus movimientos disponibles"/>
+				<sentence name ="Bruno" facetexturepath="Assets/Textures/Chibi_Conserge.png" text="OBJETOS: Objetos disponibles para usar."/>
+				<sentence name ="Bruno" facetexturepath="Assets/Textures/Chibi_Conserge.png" text="HUIR: ¿es acaso esa una elección?"/>
+				<sentence name ="Bruno" facetexturepath="Assets/Textures/Chibi_Conserge.png" text="Bueno, si la necesitas, ya sabes donde está..."/>
+			</conserjeCombatIN>
+			<conserjeCombatEND>
+				<sentence name ="Deidad" facetexturepath="Assets/Textures/Chibi_Deidad.png" text="Ya has superado mi prueba"/>
+				<sentence name ="Deidad" facetexturepath="Assets/Textures/Chibi_Deidad.png" text="Puedes volver al mundo terrenal"/>
+			</conserjeCombatEND>
 		</conserje>
 		
 		<deidad x="21300" y="7650" texturePath="Assets/Textures/Spritesheet_Deidad.png">

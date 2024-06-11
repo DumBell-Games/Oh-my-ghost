@@ -88,7 +88,7 @@ public:
 	PhysBody* mansionOpen;
 	PhysBody* piso2;
 	PhysBody* blockDespacho;
-
+	PhysBody* blockCielo;
 
 	bool casinoIN = false;
 	bool casinoOUT = false;
@@ -106,6 +106,8 @@ public:
 	bool ciudadOUT = false;
 	bool tiendaIN = false;
 	bool tiendaOUT = false;
+
+	bool conserjeTouched = false;
 	
 
 	List<Animation*> springyAnimationList;

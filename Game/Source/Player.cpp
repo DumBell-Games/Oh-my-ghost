@@ -130,6 +130,10 @@ bool Player::Start() {
 	cieloOut = app->physics->CreateRectangleSensor(21529 - 96, 9200 + 64, 256, 128, bodyType::KINEMATIC);
 	cieloOut->ctype = ColliderType::CIELOOUT;
 
+	blockCielo = app->physics->CreateRectangle(21529 - 96, 9200 + 64, 257, 129, bodyType::KINEMATIC);
+	blockCielo->body->SetFixedRotation(true);
+	blockCielo->ctype = ColliderType::WALL;
+
 	mansionIn = app->physics->CreateRectangleSensor(10113 + 128, 697 + 64, 256, 128, bodyType::KINEMATIC);
 	mansionIn->ctype = ColliderType::MANSIONIN;
 
@@ -486,6 +490,13 @@ bool Player::Update(float dt)
 		blockDespacho->body->SetTransform(b2Vec2_zero, 0);
 	}
 
+	if (conserjeTouched)
+	{
+		blockCielo->body->SetTransform(b2Vec2_zero, 0);
+		conserjeTouched = false;
+	
+	}
+
 	if (tiendaIN && openTiendaTime.ReadSec() >= 5)
 	{
 		app->scene->OpenTienda();
@@ -615,6 +626,10 @@ void Player::OnCollision(PhysBody* physA, PhysBody* physB) {
         LOG("Collision TIENDAOPEN");
         llavePicked = true;
         break;
+	case ColliderType::CONSERJE:
+		LOG("Collision CONSERJE");
+		conserjeTouched = true;
+		break;
 	default:
 		break;
 	}
