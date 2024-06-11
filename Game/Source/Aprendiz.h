@@ -57,6 +57,7 @@ public:
 	List<Animation*> aprendizAnims;
 	Animation* aprendizIdle;
 
+
 	bool musicaMansion = false;
 	bool musicaDiscoteca = false;
 

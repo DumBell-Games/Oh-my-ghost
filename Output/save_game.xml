@@ -23,17 +23,23 @@
 	<recuerdos />
 	<inventory />
 	<:anonymous />
+	<CargaVeterana />
+	<CargaAB />
+	<cargaAprendiz />
 	<teamScreen />
 	<teamScreen />
 	<titlescreen />
 	<:anonymous />
 	<teamScreen />
 	<vsync />
+	<Options />
 	<debugconsole />
 	<dialogmanager />
 	<:anonymous />
 	<video />
 	<scene />
+	<scene />
+	<MusicaCombateAB />
 	<scene />
 	<scene />
 	<scene />
@@ -42,6 +48,6 @@
 	<creditos />
 	<reload />
 	<renderer>
-		<camera x="-6081" y="-5653" />
+		<camera x="-13996" y="-8956" />
 	</renderer>
 </game_state>

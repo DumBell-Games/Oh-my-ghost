@@ -33,7 +33,11 @@ bool MusicaCombateAB::Start()
 //clean up
 bool MusicaCombateAB::CleanUp()
 {	
-	app->audio->UnloadFx(casinoMusic);
+	if (casinoMusic != NULL)
+	{
+		app->audio->UnloadFx(casinoMusic);
+		casinoMusic = NULL;
+	}
 
 	return true;
 }

@@ -47,6 +47,7 @@ class DialogManager;
 class FadeToBlack;
 class Video;
 class MusicaCiudad;
+class MusicaCFinal;
 class MusicaCombate;
 class MusicaCombateAB;
 class MusicaCielo;
@@ -173,6 +174,7 @@ public:
 	FadeToBlack* fadeToBlack;
 	Video* video;
 	MusicaCiudad* musicaCiudad;
+	MusicaCFinal* musicaCFinal;
 	MusicaCombate* musicaCombate;
 	MusicaCombateAB* musicaCombateAB;
 	MusicaCielo* musicaCielo;

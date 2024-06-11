@@ -153,6 +153,12 @@ public:
 
 	int vomitoFx;
 	int entradaEdificioFx;
+
+	shared_texture_t cambioJugador;
+	shared_texture_t cambioJugadorFantasma;
+	shared_texture_t cambioJugadorPaloma;
+	shared_texture_t cambioMochila;
+	shared_texture_t miniMap;
 	
 };
 

@@ -487,7 +487,7 @@
 			</animation>
 		</segismunda>
 		
-		<vagabundo x="4095" y="1632" texturePath="Assets/Textures/Vagabundo_Spritesheet.png">
+		<vagabundo x="4295" y="1632" texturePath="Assets/Textures/Vagabundo_Spritesheet.png">
 			<animation name="vagabundoIdle" loop="true" speed="0.04f">
 				<frame x="5" y="63" w="122" h="193" />
 				<frame x="132" y="63" w="122" h="193" />
@@ -1260,7 +1260,7 @@
 			</sentences>
 		</dialogTrigger>
 
-		<dialogTrigger x="4335" y="1550" repeat ="true">
+		<dialogTrigger x="4585" y="1550" repeat ="true">
 			<sentences>
 				<sentence name="Vagabundo"	facetexturepath="Assets/Textures/Chibi_Vagabundo.png" text="Caramba, ¿Vas a entrar al bar? Yo de tí no lo haría sin esto..."/>
 				<sentence name="Springy"	facetexturepath="Assets/Textures/ChibiSpringy.png" text="*Anda me ha dado una cerveza a ver que puedo hacer con esto...*"/>

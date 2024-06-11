@@ -63,24 +63,26 @@ bool Veterana::Update(float dt)
 	b2Transform nBodyPos = nBody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;
 	position.y = METERS_TO_PIXELS(nBodyPos.p.y) - 32 / 2;
-	if (playerTouched) {
-		app->cargaVeterana->Enable();
-		if (veterana->salutActual > 0) {
-			app->combat->BeginCombat(veterana, parameters.child("veteranaCombatIN"), parameters.child("veteranaCombatEND"));
+	if (veterana->salutActual > 0) {
+		if (playerTouched) {
+			app->cargaVeterana->Enable();
+			if (veterana->salutActual > 0) {
+				app->combat->BeginCombat(veterana, parameters.child("veteranaCombatIN"), parameters.child("veteranaCombatEND"));
+			}
+			if (app->musicaMansion->isEnabled)
+			{
+				app->musicaMansion->Disable();
+				app->musicaCombate->Enable();
+				musicaMansion = true;
+			}
+			if (app->musicaCasino->isEnabled)
+			{
+				app->musicaCasino->Disable();
+				app->musicaCombate->Enable();
+				musicaCasino = true;
+			}
+			playerTouched = false;
 		}
-		if (app->musicaMansion->isEnabled)
-		{
-			app->musicaMansion->Disable();
-			app->musicaCombate->Enable();
-			musicaMansion = true;
-		}
-		if (app->musicaCasino->isEnabled)
-		{
-			app->musicaCasino->Disable();
-			app->musicaCombate->Enable();
-			musicaCasino = true;
-		}
-		playerTouched = false;
 	}
 
 	if (veterana->salutActual <= 0)

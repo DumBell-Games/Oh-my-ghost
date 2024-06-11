@@ -244,6 +244,8 @@ public:
 	int cantidadPastel = 0;
 	int cantidadHelado = 0;
 
+	
+
 
 private:
 	SDL_Texture* img;

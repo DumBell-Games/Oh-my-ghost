@@ -14,6 +14,8 @@
 #include "MusicaCombateAstroBark.h"
 #include "MusicaMansion.h"
 #include "CargaAstroBark.h"
+#include "Creditos.h"
+#include "MusicaCinematicaFinal.h"
 
 
 Astrobark::Astrobark() : Entity(EntityType::ASTROBARK)
@@ -85,12 +87,6 @@ bool Astrobark::Update(float dt)
 		}
 	}
 
-	if (astroBark->salutActual <= 0)
-	{
-		app->musicaCombateAB->Disable();
-		app->musicaMansion->Enable();
-		
-	}
 
 	return true;
 }
@@ -100,6 +96,8 @@ bool Astrobark::PostUpdate()
 
 	if (!videoPlayed && astroBark->salutActual <= 0)
 	{
+		app->musicaCombateAB->Disable();
+		app->musicaCFinal->Enable();
 		if (!videoTriggered)
 		{
 			app->video->Initialize("Assets/Videos/OhMyGhost_Cinematica_Context_1.avi");
@@ -115,6 +113,7 @@ bool Astrobark::PostUpdate()
 			{
 				app->video->CloseAVI();
 				videoPlayed = true;
+				app->creditos->Enable();
 			}
 		}
 		

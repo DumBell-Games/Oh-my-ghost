@@ -39,6 +39,7 @@
 #include "CargaVeterana.h"
 #include "CargaAstroBark.h"
 #include "CargaAprendiz.h"
+#include "MusicaCinematicaFinal.h"
 #include "Options.h"
 
 
@@ -99,6 +100,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	fadeToBlack = new FadeToBlack(true);
 	video = new Video(false);
 	musicaCiudad = new MusicaCiudad(false);
+	musicaCFinal = new MusicaCFinal(false);
 	musicaCombate = new MusicaCombate(false);
 	musicaCombateAB = new MusicaCombateAB(false);
 	musicaCielo = new MusicaCielo(false);
@@ -143,6 +145,7 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(fadeToBlack);
 	AddModule(video);
 	AddModule(musicaCiudad);
+	AddModule(musicaCFinal);
 	AddModule(musicaCombate);
 	AddModule(musicaCombateAB);
 	AddModule(musicaCielo);

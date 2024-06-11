@@ -147,6 +147,7 @@
     <ClCompile Include="Source\CargaVeterana.cpp" />
     <ClCompile Include="Source\CargaAprendiz.cpp" />
     <ClCompile Include="Source\Options.cpp" />
+    <ClCompile Include="Source\MusicaCinematicaFinal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Defs.h">
@@ -331,6 +332,7 @@
     <ClInclude Include="Source\CargaVeterana.h" />
     <ClInclude Include="Source\CargaAprendiz.h" />
     <ClInclude Include="Source\Options.h" />
+    <ClInclude Include="Source\MusicaCinematicaFinal.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="External">
@@ -371,5 +373,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="NewFile.txt" />
   </ItemGroup>
 </Project>

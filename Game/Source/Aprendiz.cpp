@@ -44,6 +44,7 @@ bool Aprendiz::Start() {
 
 	AprendizStartAnims();
  
+
 	texture = app->tex->LoadSP(parameters.attribute("texturePath").as_string(), true);
 		
 	nBody = app->physics->CreateRectangle(position.x + 128, position.y, 140, 200, bodyType::KINEMATIC);
@@ -69,27 +70,28 @@ bool Aprendiz::Update(float dt)
 	b2Transform nBodyPos = nBody->body->GetTransform();
 	position.x = METERS_TO_PIXELS(nBodyPos.p.x) - 32 / 2;	
 	position.y = METERS_TO_PIXELS(nBodyPos.p.y) - 32 / 2;
-	
-	if (playerTouched) {
-		app->cargaAprendiz->Enable();
-		if (aprendizCombat->salutActual > 0){
-			app->combat->BeginCombat(aprendizCombat, parameters.child("aprendizCombatIN"), parameters.child("aprendizCombatEND"));
+	if (aprendizCombat->salutActual > 0)
+	{
+		if (playerTouched) {
+			app->cargaAprendiz->Enable();
+			if (aprendizCombat->salutActual > 0) {
+				app->combat->BeginCombat(aprendizCombat, parameters.child("aprendizCombatIN"), parameters.child("aprendizCombatEND"));
+			}
+			if (app->musicaMansion->isEnabled)
+			{
+				app->musicaMansion->Disable();
+				app->musicaCombate->Enable();
+				musicaMansion = true;
+			}
+			if (app->musicaDisco->isEnabled)
+			{
+				app->musicaDisco->Disable();
+				app->musicaCombate->Enable();
+				musicaDiscoteca = true;
+			}
+			playerTouched = false;
 		}
-		if(app->musicaMansion->isEnabled)
-		{
-			app->musicaMansion->Disable();	
-			app->musicaCombate->Enable(); 
-			musicaMansion = true;
-		}
-		if(app->musicaDisco->isEnabled)
-		{
-			app->musicaDisco->Disable();
-			app->musicaCombate->Enable(); 
-			musicaDiscoteca = true;
-		}
-		playerTouched = false;
 	}
-
 	if (aprendizCombat->salutActual <= 0)
 	{
 		if(musicaMansion)

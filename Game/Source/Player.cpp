@@ -117,7 +117,7 @@ bool Player::Start() {
 	casinoOut = app->physics->CreateRectangleSensor(1793 + 128, 12542 + 64, 256, 64, bodyType::KINEMATIC);
 	casinoOut->ctype = ColliderType::CASINOOUT;
 
-	tabernaIn = app->physics->CreateRectangleSensor(4289 + 48, 1588 + 16, 192, 126, bodyType::KINEMATIC);
+	tabernaIn = app->physics->CreateRectangleSensor(4539 + 48, 1588 + 16, 192, 126, bodyType::KINEMATIC);
 	tabernaIn->ctype = ColliderType::TABERNAIN;
 	tabernaOut = app->physics->CreateRectangleSensor(7939 + 128, 12159 + 64, 256, 128, bodyType::KINEMATIC);
 	tabernaOut->ctype = ColliderType::TABERNAOUT;
@@ -163,6 +163,12 @@ bool Player::Start() {
 	pBody->listener = this;
 	pBody->ctype = ColliderType::PLAYER;
 
+	cambioJugadorFantasma = app->tex->LoadSP("Assets/Textures/fantasmaHUD.png", true);
+	cambioJugadorPaloma = app->tex->LoadSP("Assets/Textures/palomaHUD.png", true);
+	cambioMochila = app->tex->LoadSP("Assets/Textures/Libro-inventario.png", true);
+	miniMap = app->tex->LoadSP("Assets/Textures/miniMapa.png", true);
+
+
 	//initialize audio effect
 	pickCoinFxId = app->audio->LoadFx(parameters.attribute("coinfxpath").as_string());
 
@@ -191,9 +197,15 @@ bool Player::Start() {
 
 bool Player::Update(float dt)
 {
-
 	//move colliders of arcade-casino
-
+	if (currentTexture == textureGhost)
+	{
+		cambioJugador = cambioJugadorFantasma;
+	}
+	if(currentTexture == texturePlayer)
+	{
+		cambioJugador = cambioJugadorPaloma;
+	}
 
 
 	if (app->dialogManager->isPlaying) {
@@ -397,7 +409,7 @@ bool Player::Update(float dt)
 	{
 		app->musicaTaberna->Disable();
 		app->musicaCiudad->Enable();
-		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(4393), PIXEL_TO_METERS(1878)), NULL);
+		pBody->body->SetTransform(b2Vec2(PIXEL_TO_METERS(4539), PIXEL_TO_METERS(1878)), NULL);
 		tabernaOUT = false;
 	}
 
@@ -524,6 +536,10 @@ bool Player::Update(float dt)
 
 bool Player::PostUpdate()
 {
+	app->render->DrawTexture(cambioJugador.get(), 20, 40, 0, NULL);
+	app->render->DrawTexture(cambioMochila.get(), 1700, 40, 0, NULL);
+
+	app->render->DrawTexture(miniMap.get(), 1600, 750, 0, NULL);
 	app->render->DrawTexture(currentTexture.get(), position.x - 56, position.y - 220, &currentAnim->GetCurrentFrame());
 
 	return true;

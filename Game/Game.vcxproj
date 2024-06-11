@@ -116,6 +116,7 @@
     <ClCompile Include="Source\MansionOpen.cpp" />
     <ClCompile Include="Source\MusicaCasino.cpp" />
     <ClCompile Include="Source\MusicaCielo.cpp" />
+    <ClCompile Include="Source\MusicaCinematicaFinal.cpp" />
     <ClCompile Include="Source\MusicaCiudad.cpp" />
     <ClCompile Include="Source\MusicaCombate.cpp" />
     <ClCompile Include="Source\MusicaCombateAstroBark.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="Source\MansionOpen.h" />
     <ClInclude Include="Source\MusicaCasino.h" />
     <ClInclude Include="Source\MusicaCielo.h" />
+    <ClInclude Include="Source\MusicaCinematicaFinal.h" />
     <ClInclude Include="Source\MusicaCiudad.h" />
     <ClInclude Include="Source\MusicaCombate.h" />
     <ClInclude Include="Source\MusicaCombateAstroBark.h" />
@@ -295,6 +297,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="NewFile.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
