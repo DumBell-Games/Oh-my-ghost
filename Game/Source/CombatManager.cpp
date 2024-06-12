@@ -34,6 +34,8 @@ CombatManager::CombatManager(bool startEnabled) : Module(startEnabled)
 	Personatge* p1 = new Personatge("Springy", 10, 10, 5, 2, "Assets/Animation/Springy/SpringyFantasma.xml");
 	p1->atacs.push_back(Atac("Cop de puny1", 2, false, "Assets/Screen/Combat/Skill1.png", "Skill1"));
 	p1->atacs.push_back(Atac("Cop de puny2", 2, false, "Assets/Screen/Combat/Skill2.png", "Skill2"));
+	p1->atacs.push_back(Atac("Cop de puny3", 2, false, "Assets/Screen/Combat/Skill.png", "Skill1"));
+	p1->atacs.push_back(Atac("Cop de puny4", 2, false, "Assets/Screen/Combat/Skill.png", "Skill2"));
 	p1->atacs.push_back(Atac("Ultimate", 30, true, "Assets/Screen/Combat/UI/Large/Ultimate.png", "Assets/Videos/GolpeFinalSpringy.avi"));
 	data.allies.push_back(p1);
 	// Personaje post-tutorial
