@@ -32,18 +32,18 @@ CombatManager::CombatManager(bool startEnabled) : Module(startEnabled)
 
 	// Personaje tutorial
 	Personatge* p1 = new Personatge("Springy", 10, 10, 5, 2, "Assets/Animation/Springy/SpringyFantasma.xml");
-	p1->atacs.push_back(Atac("Cop de puny1", 2, false, "Assets/Screens/Combat/UI/Small/Skill1.png", "Skill1"));
-	p1->atacs.push_back(Atac("Cop de puny2", 2, false, "Assets/Screens/Combat/UI/Small/Skill2.png", "Skill2"));
-	p1->atacs.push_back(Atac("Cop de puny3", 2, false, "Assets/Screens/Combat/UI/Small/Skill3.png", "Skill1"));
-	p1->atacs.push_back(Atac("Cop de puny4", 2, false, "Assets/Screens/Combat/UI/Small/Skill4.png", "Skill2"));
+	p1->atacs.push_back(Atac("Rest", 5, false, "Assets/Screens/Combat/UI/Small/Skill1.png", "Skill1"));
+	p1->atacs.push_back(Atac("Booh!", 5, false, "Assets/Screens/Combat/UI/Small/Skill2.png", "Skill2"));
+	p1->atacs.push_back(Atac("Rest", 5, false, "Assets/Screens/Combat/UI/Small/Skill3.png", "Skill1"));
+	p1->atacs.push_back(Atac("Booh!", 5, false, "Assets/Screens/Combat/UI/Small/Skill4.png", "Skill2"));
 	p1->atacs.push_back(Atac("Ultimate", 30, true, "Assets/Screens/Combat/UI/Large/Ultimate.png", "Assets/Videos/GolpeFinalSpringy.avi"));
 	data.allies.push_back(p1);
 	// Personaje post-tutorial
 	Personatge* p2 = new Personatge("Springy", 5, 30, 2, 1, "Assets/Animation/Springy/SpringyPaloma.xml");
-	p2->atacs.push_back(Atac("Puntada de peu1", 5, false, "Assets/Screens/Combat/UI/Small/Skill1.png", "Skill1"));
-	p2->atacs.push_back(Atac("Puntada de peu2", 5, false, "Assets/Screens/Combat/UI/Small/Skill2.png", "Skill2"));
-	p2->atacs.push_back(Atac("Puntada de peu3", 5, false, "Assets/Screens/Combat/UI/Small/Skill3.png", "Skill1"));
-	p2->atacs.push_back(Atac("Puntada de peu4", 5, false, "Assets/Screens/Combat/UI/Small/Skill4.png", "Skill2"));
+	p2->atacs.push_back(Atac("Rest", 5, false, "Assets/Screens/Combat/UI/Small/Skill1.png", "Skill1"));
+	p2->atacs.push_back(Atac("Booh!", 5, false, "Assets/Screens/Combat/UI/Small/Skill2.png", "Skill2"));
+	p2->atacs.push_back(Atac("Mano divina", 5, false, "Assets/Screens/Combat/UI/Small/Skill3.png", "Skill1"));
+	p2->atacs.push_back(Atac("Torbellino", 5, false, "Assets/Screens/Combat/UI/Small/Skill4.png", "Skill2"));
 	p2->atacs.push_back(Atac("Ultimate", 30, true, "Assets/Screens/Combat/UI/Large/Ultimate.png", "Assets/Videos/GolpeFinalSpringy.avi"));
 	data.allies.push_back(p2);
 
