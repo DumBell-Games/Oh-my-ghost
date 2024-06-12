@@ -235,6 +235,8 @@ private:
 	// Texturas de combate
 
 	shared_texture_t bgTexture = nullptr;
+	shared_texture_t platformsTexture = nullptr;
+
 	shared_texture_t atkMenuTexture = nullptr;
 
 	int turn = 0;

@@ -32,19 +32,19 @@ CombatManager::CombatManager(bool startEnabled) : Module(startEnabled)
 
 	// Personaje tutorial
 	Personatge* p1 = new Personatge("Springy", 10, 10, 5, 2, "Assets/Animation/Springy/SpringyFantasma.xml");
-	p1->atacs.push_back(Atac("Cop de puny1", 2, false, "Assets/Screen/Combat/Skill.png", "Skill1"));
-	p1->atacs.push_back(Atac("Cop de puny2", 2, false, "Assets/Screen/Combat/Skill.png", "Skill2"));
-	p1->atacs.push_back(Atac("Cop de puny3", 2, false, "Assets/Screen/Combat/Skill.png", "Skill1"));
-	p1->atacs.push_back(Atac("Cop de puny4", 2, false, "Assets/Screen/Combat/Skill.png", "Skill2"));
-	p1->atacs.push_back(Atac("Ultimate", 30, true, "Assets/Screen/Combat/Skill.png", "Assets/Videos/GolpeFinalSpringy.avi"));
+	p1->atacs.push_back(Atac("Cop de puny1", 2, false, "Assets/Screens/Combat/UI/Small/Skill1.png", "Skill1"));
+	p1->atacs.push_back(Atac("Cop de puny2", 2, false, "Assets/Screens/Combat/UI/Small/Skill2.png", "Skill2"));
+	p1->atacs.push_back(Atac("Cop de puny3", 2, false, "Assets/Screens/Combat/UI/Small/Skill3.png", "Skill1"));
+	p1->atacs.push_back(Atac("Cop de puny4", 2, false, "Assets/Screens/Combat/UI/Small/Skill4.png", "Skill2"));
+	p1->atacs.push_back(Atac("Ultimate", 30, true, "Assets/Screens/Combat/UI/Large/Ultimate.png", "Assets/Videos/GolpeFinalSpringy.avi"));
 	data.allies.push_back(p1);
 	// Personaje post-tutorial
 	Personatge* p2 = new Personatge("Springy", 5, 30, 2, 1, "Assets/Animation/Springy/SpringyPaloma.xml");
-	p2->atacs.push_back(Atac("Puntada de peu1", 5, false, "Assets/Screen/Combat/Skill.png", "Skill1"));
-	p2->atacs.push_back(Atac("Puntada de peu2", 5, false, "Assets/Screen/Combat/Skill.png", "Skill2"));
-	p2->atacs.push_back(Atac("Puntada de peu3", 5, false, "Assets/Screen/Combat/Skill.png", "Skill1"));
-	p2->atacs.push_back(Atac("Puntada de peu4", 5, false, "Assets/Screen/Combat/Skill.png", "Skill2"));
-	p2->atacs.push_back(Atac("Ultimate", 30, true, "Assets/Screen/Combat/Skill.png", "Assets/Videos/GolpeFinalSpringy.avi"));
+	p2->atacs.push_back(Atac("Puntada de peu1", 5, false, "Assets/Screens/Combat/UI/Small/Skill1.png", "Skill1"));
+	p2->atacs.push_back(Atac("Puntada de peu2", 5, false, "Assets/Screens/Combat/UI/Small/Skill2.png", "Skill2"));
+	p2->atacs.push_back(Atac("Puntada de peu3", 5, false, "Assets/Screens/Combat/UI/Small/Skill3.png", "Skill1"));
+	p2->atacs.push_back(Atac("Puntada de peu4", 5, false, "Assets/Screens/Combat/UI/Small/Skill4.png", "Skill2"));
+	p2->atacs.push_back(Atac("Ultimate", 30, true, "Assets/Screens/Combat/UI/Large/Ultimate.png", "Assets/Videos/GolpeFinalSpringy.avi"));
 	data.allies.push_back(p2);
 
 	// FIN CODIGO PARA DEBUG
@@ -211,13 +211,18 @@ bool CombatManager::Update(float dt)
 
 	// Render background
 	if (!app->DebugEnabled())
+	{
 		app->render->DrawTexture(bgTexture.get(), 0, 0, nullptr, 1.0F, 0, INT_MAX, INT_MAX, false);
+		app->render->DrawTexture(platformsTexture.get(), 0, 0);
+			
+	}
 
 	return true;
 }
 
 bool CombatManager::PostUpdate()
 {
+
 	// Render characters
 
 	enemyAnims->Render(enemyPos, false, 2);
@@ -309,11 +314,29 @@ bool CombatManager::LoadLayout(pugi::xml_node layoutRoot)
 	{
 		if (strcmp(bgLayer.attribute("name").as_string(), "Fondo") == 0)
 		{
-			SString path = "Assets/Screens/Combat/";
+			SString rootPath = "Assets/Screens/Combat/";
+
+			// Carga el fondo segun el contrincante
+			SString path = rootPath.GetString();
+			if (data.enemy->nom == "Astrobark")
+				path += "Fondos/Fondo astrobark.png";
+			else if (data.enemy->nom == "Aprendiz")
+				path += "Fondos/Fondoayudante.png";
+			else if (data.enemy->nom == "Veterana")
+				path += "Fondos/FondoVeterana.png";
+			else if (data.enemy->nom == "Conserje")
+				path += "Fondos/Fondo conserge.png";
+			else
 			path += bgLayer.child("image").attribute("source").as_string();
+
 			bgTexture = app->tex->LoadSP(path.GetString(), false);
+
 		}
 	}
+
+	SString platformsPath = "Assets/Screens/Combat/Plataformas/";
+	platformsPath += (data.activeAlly >= 1) ? "Plataformas.png" : "Plataformanubes.png";
+	platformsTexture = app->tex->LoadSP(platformsPath.GetString());
 
 	for (pugi::xml_node objLayer = layoutRoot.child("objectgroup"); objLayer != NULL; objLayer = objLayer.next_sibling("objectgroup"))
 	{
@@ -430,13 +453,26 @@ bool CombatManager::LoadLayout(pugi::xml_node layoutRoot)
 				{
 					g->trackedValue = &data.allies[data.activeAlly]->salutActual;
 					g->maxValue = data.allies[data.activeAlly]->salutTotal;
-					
+					g->text = data.allies[data.activeAlly]->nom.c_str();
+					g->flip = SDL_FLIP_HORIZONTAL;
 				}
 				else if (strcmp(itemNode.attribute("name").as_string(), "enemyHP") == 0)
 				{
 					g->trackedValue = &data.enemy->salutActual;
 					g->maxValue = data.enemy->salutTotal;
+					g->text = data.enemy->nom.c_str();
 				}
+
+				SString frontPath, backPath, maskPath;
+				Properties p;
+				LoadProperties(itemNode, p);
+				if (Properties::Property* prop = p.GetProperty("frontPath"))
+					frontPath = prop->strVal.GetString();
+				if (Properties::Property* prop = p.GetProperty("backPath"))
+					backPath = prop->strVal.GetString();
+				if (Properties::Property* prop = p.GetProperty("maskPath"))
+					maskPath = prop->strVal.GetString();
+				g->Init(frontPath.GetString(), backPath.GetString(), maskPath.GetString());
 					
 
 				guiElements.push_back(g);

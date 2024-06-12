@@ -44,6 +44,7 @@ public:
 	shared_texture_t const LoadSP(const char* path, bool preventDuplicates = false);
 	bool UnLoad(SDL_Texture* texture);
 	void UnLoadSP(shared_texture_t texture);
+	SDL_Texture* Add(SDL_Texture* texture);
 	void GetSize(const SDL_Texture* texture, uint& width, uint& height) const;
 
 public:

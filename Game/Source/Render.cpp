@@ -28,7 +28,7 @@ bool Render::Awake(pugi::xml_node config)
 	LOG("Create SDL rendering context");
 	bool ret = true;
 
-	Uint32 flags = SDL_RENDERER_ACCELERATED;
+	Uint32 flags = SDL_RENDERER_ACCELERATED | SDL_RENDERER_TARGETTEXTURE;
 
 	// L04: DONE 6: Load the VSYNC status from config.xml and adapt the code to set it on / off
 	if (config.child("vsync").attribute("value").as_bool()) {
@@ -116,7 +116,7 @@ void Render::ResetViewPort()
 }
 
 // Blit to screen
-bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivotX, int pivotY, bool useCamera) const
+bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section, float speed, double angle, int pivotX, int pivotY, bool useCamera, SDL_RendererFlip flip) const
 {
 	bool ret = true;
 	uint scale = app->win->GetScale();
@@ -153,7 +153,7 @@ bool Render::DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* sec
 		p = &pivot;
 	}
 
-	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, SDL_FLIP_NONE) != 0)
+	if(SDL_RenderCopyEx(renderer, texture, section, &rect, angle, p, flip) != 0)
 	{
  		LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 		ret = false;
@@ -217,12 +217,12 @@ bool Render::DrawTextureScaled(SDL_Texture* texture, int x, int y, const SDL_Rec
 	return ret;
 }
 
-bool Render::DrawRectangle(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled, bool use_camera) const
+bool Render::DrawRectangle(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a, bool filled, bool use_camera, SDL_BlendMode blend_mode) const
 {
 	bool ret = true;
 	uint scale = app->win->GetScale();
 
-	SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+	SDL_SetRenderDrawBlendMode(renderer, blend_mode);
 	SDL_SetRenderDrawColor(renderer, r, g, b, a);
 
 	SDL_Rect rec(rect);
@@ -383,6 +383,31 @@ bool Render::DrawText(const char* text, int posx, int posy, int w, int h, SDL_Co
 	SDL_FreeSurface(surface);
 
 	return true;
+}
+
+// Creates a new textured from a base texture and a mask
+SDL_Texture* Render::ApplyMask(SDL_Texture* target, SDL_Texture* source, SDL_Texture* mask)
+{
+	int w, h;
+	Uint32 format;
+	SDL_QueryTexture(source, &format, nullptr, &w, &h);
+	SDL_Texture* tex = SDL_CreateTexture(renderer, format, SDL_TextureAccess::SDL_TEXTUREACCESS_TARGET,w, h);
+
+	// Set blendmodes for masking
+	SDL_SetTextureBlendMode(source, SDL_BLENDMODE_NONE);
+	SDL_SetTextureBlendMode(mask, SDL_BLENDMODE_MOD);
+
+	// Clear the texture
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+	SDL_RenderClear(renderer);
+
+	// Render source first, then mask. Rendering the mask removes any non-opaque pixels
+	SDL_RenderCopy(renderer, source, nullptr, nullptr);
+	SDL_RenderCopy(renderer, mask, nullptr, nullptr);
+
+	//Go back to rendering to window
+	SDL_SetRenderTarget(renderer, nullptr);
+	return nullptr;
 }
 
 // L14: TODO 6: Implement a method to load the state

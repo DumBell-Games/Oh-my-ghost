@@ -120,8 +120,8 @@ App::App(int argc, char* args[]) : argc(argc), args(args)
 	AddModule(physics);
 	AddModule(map);
 	AddModule(entityManager);
-	AddModule(combat);
 	AddModule(guiManager);
+	AddModule(combat);
 	AddModule(inventory);
 
 	AddModule(scene);
@@ -180,7 +180,7 @@ App::~App()
 
 void App::AddModule(Module* module)
 {
-	module->Init();
+	module->Init ();
 	modules.Add(module);
 }
 

@@ -15,7 +15,7 @@ public:
 	Module(bool startEnabled = true) : active(startEnabled), awoken(false), needsAwaking(false)
 	{}
 
-	virtual void Init()
+	virtual void Init ()
 	{
 		isEnabled = active;
 	}

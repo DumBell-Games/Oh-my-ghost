@@ -35,14 +35,16 @@ public:
 	void ResetViewPort();
 
 	// Drawing
-	bool DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section = NULL, float speed = 1.0f, double angle = 0, int pivotX = INT_MAX, int pivotY = INT_MAX, bool useCamera = true) const;
+	bool DrawTexture(SDL_Texture* texture, int x, int y, const SDL_Rect* section = NULL, float speed = 1.0f, double angle = 0, int pivotX = INT_MAX, int pivotY = INT_MAX, bool useCamera = true, SDL_RendererFlip flip = SDL_FLIP_NONE) const;
 	bool DrawTextureScaled(SDL_Texture* texture, int x, int y, const SDL_Rect* section = NULL, int targetScale = 1, float speed = 1.0f, double angle = 0, int pivotX = INT_MAX, int pivotY = INT_MAX, bool useCamera = true) const;
-	bool DrawRectangle(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool filled = true, bool useCamera = true) const;
+	bool DrawRectangle(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool filled = true, bool useCamera = true, SDL_BlendMode blend_mode = SDL_BLENDMODE_BLEND) const;
 	bool DrawLine(int x1, int y1, int x2, int y2, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool useCamera = true) const;
 	bool DrawCircle(int x1, int y1, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool filled = false, bool useCamera = true);
 	bool DrawCircleFilled(int x1, int y1, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool useCamera = true) const;
 	bool DrawCircleEmpty(int x1, int y1, int radius, Uint8 r, Uint8 g, Uint8 b, Uint8 a = 255, bool useCamera = true) const;
 	bool DrawText(const char* text, int posX, int posY, int w, int h, SDL_Color color = { 255, 255, 255, 255 }, TTF_Font* font = nullptr);
+
+	SDL_Texture* ApplyMask(SDL_Texture* target, SDL_Texture* source, SDL_Texture* mask);
 
 	// Set background color
 	void SetBackgroundColor(SDL_Color color);
