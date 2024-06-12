@@ -105,9 +105,11 @@ bool GuiControlPhysButton::Update(float dt)
 
 bool GuiControlPhysButton::Render()
 {
-	if (bgTexture.get())
+	if (state == GuiControlState::DISABLED) return true;
+
+	if (bgTexture.get() && bgTextureClicked.get())
 	{
-		SDL_Texture* toDraw = (state == GuiControlState::PRESSED) ? bgTextureClicked.get() : bgTexture.get();
+		SDL_Texture* toDraw = (state == GuiControlState::FOCUSED) ? bgTextureClicked.get() : bgTexture.get();
 		app->render->DrawTexture(toDraw, bounds.x, bounds.y, nullptr, 1.0F, pbody->GetRotation(), bounds.w / 2, bounds.h / 2, false);
 	}
 	else if (type == GuiControlType::PHYSBUTTON_BOX)switch (state)

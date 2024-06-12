@@ -161,7 +161,7 @@
             <key>trimMargin</key>
             <uint>0</uint>
             <key>trimMode</key>
-            <enum type="SpriteSettings::TrimMode">Crop</enum>
+            <enum type="SpriteSettings::TrimMode">None</enum>
             <key>tracerTolerance</key>
             <int>200</int>
             <key>heuristicMask</key>
@@ -174,22 +174,6 @@
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
             <key type="filename">../Output/Assets/Animation/Conserje/ConserjeBruno_SpriteSheet/Dead-0.png</key>
-            <key type="filename">../Output/Assets/Animation/Conserje/ConserjeBruno_SpriteSheet/Hurt-0.png</key>
-            <key type="filename">../Output/Assets/Animation/Conserje/ConserjeBruno_SpriteSheet/Skill2-0.png</key>
-            <struct type="IndividualSpriteSettings">
-                <key>pivotPoint</key>
-                <point_f>0.5,1</point_f>
-                <key>spriteScale</key>
-                <double>1</double>
-                <key>scale9Enabled</key>
-                <false/>
-                <key>scale9Borders</key>
-                <rect>64,64,128,128</rect>
-                <key>scale9Paddings</key>
-                <rect>64,64,128,128</rect>
-                <key>scale9FromFile</key>
-                <false/>
-            </struct>
             <key type="filename">../Output/Assets/Animation/Conserje/ConserjeBruno_SpriteSheet/Dead-1.png</key>
             <key type="filename">../Output/Assets/Animation/Conserje/ConserjeBruno_SpriteSheet/Dead-10.png</key>
             <key type="filename">../Output/Assets/Animation/Conserje/ConserjeBruno_SpriteSheet/Dead-11.png</key>
@@ -206,6 +190,7 @@
             <key type="filename">../Output/Assets/Animation/Conserje/ConserjeBruno_SpriteSheet/Dead-7.png</key>
             <key type="filename">../Output/Assets/Animation/Conserje/ConserjeBruno_SpriteSheet/Dead-8.png</key>
             <key type="filename">../Output/Assets/Animation/Conserje/ConserjeBruno_SpriteSheet/Dead-9.png</key>
+            <key type="filename">../Output/Assets/Animation/Conserje/ConserjeBruno_SpriteSheet/Hurt-0.png</key>
             <key type="filename">../Output/Assets/Animation/Conserje/ConserjeBruno_SpriteSheet/Hurt-1.png</key>
             <key type="filename">../Output/Assets/Animation/Conserje/ConserjeBruno_SpriteSheet/Hurt-10.png</key>
             <key type="filename">../Output/Assets/Animation/Conserje/ConserjeBruno_SpriteSheet/Hurt-11.png</key>
@@ -260,6 +245,7 @@
             <key type="filename">../Output/Assets/Animation/Conserje/ConserjeBruno_SpriteSheet/Skill1-7.png</key>
             <key type="filename">../Output/Assets/Animation/Conserje/ConserjeBruno_SpriteSheet/Skill1-8.png</key>
             <key type="filename">../Output/Assets/Animation/Conserje/ConserjeBruno_SpriteSheet/Skill1-9.png</key>
+            <key type="filename">../Output/Assets/Animation/Conserje/ConserjeBruno_SpriteSheet/Skill2-0.png</key>
             <key type="filename">../Output/Assets/Animation/Conserje/ConserjeBruno_SpriteSheet/Skill2-1.png</key>
             <key type="filename">../Output/Assets/Animation/Conserje/ConserjeBruno_SpriteSheet/Skill2-2.png</key>
             <key type="filename">../Output/Assets/Animation/Conserje/ConserjeBruno_SpriteSheet/Skill2-3.png</key>
@@ -269,7 +255,7 @@
             <key type="filename">../Output/Assets/Animation/Conserje/ConserjeBruno_SpriteSheet/Skill2-7.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
-                <point_f>0.5,0.5</point_f>
+                <point_f>0.5,1</point_f>
                 <key>spriteScale</key>
                 <double>1</double>
                 <key>scale9Enabled</key>

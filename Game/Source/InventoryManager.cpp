@@ -67,7 +67,7 @@ bool InventoryManager::Start() {
 		pItem = item->data;
 
 		if (pItem->active == false) continue;
-		ret = item->data->Init();
+		ret = item->data->Init ();
 	}
 
 	started = true;
@@ -147,7 +147,7 @@ ItemData* InventoryManager::CreateItem(ItemType type, pugi::xml_node& data)
 		item->parameters = data;
 		if (item->active) {
 			// Si EntityManager ya está activo, activa la entidad directamente a menos de que esté explicitamente desactivada en su constructor
-			if (started) item->Init();
+			if (started) item->Init ();
 		}
 	}
 

@@ -5,7 +5,7 @@
 
 #include "CombatManager.h"
 
-bool ItemData::Init()
+bool ItemData::Init ()
 {
 	name = parameters.attribute("name").as_string("Macguffin usado");
 	descripcion.Create(parameters.attribute("description").as_string("Objeto que no recuerdas por qué tienes en tu inventario. (Objeto bug, reporta al desarrollador a menos de que hayas modificado el archivo de guardado"));

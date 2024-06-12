@@ -111,6 +111,14 @@ void Textures::UnLoadSP(shared_texture_t texture)
 	}
 }
 
+SDL_Texture* Textures::Add(SDL_Texture* texture)
+{
+	// Prevent adding duplicates
+	if (textures.Find(texture) == -1)
+		textures.Add(texture);
+	return texture;
+}
+
 // Translate a surface into a texture
 SDL_Texture* const Textures::LoadSurface(SDL_Surface* surface)
 {

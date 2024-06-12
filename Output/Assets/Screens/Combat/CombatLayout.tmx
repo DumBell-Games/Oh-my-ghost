@@ -1,50 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="192" height="108" tilewidth="10" tileheight="10" infinite="0" nextlayerid="9" nextobjectid="15">
- <imagelayer id="3" name="referencia">
+ <imagelayer id="3" name="referencia" visible="0">
   <image source="ref (Large).jpg" width="1920" height="1072"/>
  </imagelayer>
- <imagelayer id="2" name="Fondo" visible="0">
-  <image source="fondoBatalla.png" width="1920" height="1080"/>
+ <imagelayer id="2" name="Fondo">
+  <image source="Fondos/Fondo astrobark.png" width="1920" height="1080"/>
  </imagelayer>
  <objectgroup id="4" name="AttackMenu">
-  <object id="1" name="attack2" x="1471.33" y="700" width="90" height="90">
+  <object id="1" name="attack1" x="1772" y="734.33" width="90" height="90">
    <properties>
-    <property name="bgClickedPath" value="Assets/Screens/Combat/AbilityButtonClicked.png"/>
-    <property name="bgPath" value="Assets/Screens/Combat/AbilityButton.png"/>
+    <property name="bgClickedPath" value="Assets/Screens/Combat/UI/Small/AbilityButtonClicked.png"/>
+    <property name="bgPath" value="Assets/Screens/Combat/UI/Small/AbilityButton.png"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="2" name="attack1" x="1588" y="729" width="90" height="90">
+  <object id="2" name="attack1" x="1655" y="705" width="90" height="90">
    <properties>
-    <property name="bgClickedPath" value="Assets/Screens/Combat/AbilityButtonClicked.png"/>
-    <property name="bgPath" value="Assets/Screens/Combat/AbilityButton.png"/>
+    <property name="bgClickedPath" value="Assets/Screens/Combat/UI/Small/AbilityButtonClicked.png"/>
+    <property name="bgPath" value="Assets/Screens/Combat/UI/Small/AbilityButton.png"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="3" name="attack3" x="1371.67" y="766.333" width="90" height="90">
+  <object id="3" name="attack3" x="1555.67" y="771.666" width="90" height="90">
    <properties>
-    <property name="bgClickedPath" value="Assets/Screens/Combat/AbilityButtonClicked.png"/>
-    <property name="bgPath" value="Assets/Screens/Combat/AbilityButton.png"/>
+    <property name="bgClickedPath" value="Assets/Screens/Combat/UI/Small/AbilityButtonClicked.png"/>
+    <property name="bgPath" value="Assets/Screens/Combat/UI/Small/AbilityButton.png"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="4" name="attack4" x="1356" y="882" width="90" height="90">
+  <object id="4" name="attack4" x="1540" y="887.333" width="90" height="90">
    <properties>
-    <property name="bgClickedPath" value="Assets/Screens/Combat/AbilityButtonClicked.png"/>
-    <property name="bgPath" value="Assets/Screens/Combat/AbilityButton.png"/>
+    <property name="bgClickedPath" value="Assets/Screens/Combat/UI/Small/AbilityButtonClicked.png"/>
+    <property name="bgPath" value="Assets/Screens/Combat/UI/Small/AbilityButton.png"/>
    </properties>
    <ellipse/>
   </object>
-  <object id="5" name="attack5" x="1460" y="817" width="204" height="204">
+  <object id="5" name="attack5" x="1644" y="822.333" width="204" height="204">
    <properties>
-    <property name="bgClickedPath" value="Assets/Screens/Combat/BigAbilityButtonClicked.png"/>
-    <property name="bgPath" value="Assets/Screens/Combat/BigAbilityButton.png"/>
+    <property name="bgClickedPath" value="Assets/Screens/Combat/UI/Large/AbilityButtonClicked.png"/>
+    <property name="bgPath" value="Assets/Screens/Combat/UI/Large/AbilityButton.png"/>
    </properties>
    <ellipse/>
   </object>
  </objectgroup>
  <objectgroup id="8" name="ItemMenu">
-  <object id="14" x="1311" y="1033">
+  <object id="14" name="ItemMenuPos" x="1521.67" y="1061">
    <properties>
     <property name="direction" type="int" value="0"/>
    </properties>
@@ -58,24 +58,28 @@
   <object id="9" name="char3" x="137" y="124" width="46" height="46" rotation="45"/>
  </objectgroup>
  <objectgroup id="6" name="CharInfo">
-  <object id="10" name="enemyHP" x="582" y="134" width="360" height="100">
+  <object id="10" name="enemyHP" x="540.667" y="414" width="360" height="100">
    <properties>
+    <property name="backPath" value="Assets/Screens/Combat/HpBarBack.png"/>
+    <property name="frontPath" value="Assets/Screens/Combat/HpBarFront.png"/>
+    <property name="maskPath" value="Assets/Screens/Combat/HpBarMask.png"/>
     <property name="orientation" type="int" value="0"/>
-    <property name="texPath" value="Assets/Screens/Combat/HpBarLeft.png"/>
    </properties>
   </object>
-  <object id="11" name="playerHP" x="1004.33" y="634.167" width="360" height="100">
+  <object id="11" name="playerHP" x="946.997" y="827.5" width="360" height="100">
    <properties>
+    <property name="backPath" value="Assets/Screens/Combat/HpBarBack.png"/>
+    <property name="frontPath" value="Assets/Screens/Combat/HpBarFront.png"/>
+    <property name="maskPath" value="Assets/Screens/Combat/HpBarMask.png"/>
     <property name="orientation" type="int" value="0"/>
-    <property name="texPath" value="Assets/Screens/Combat/HpBarRight.png"/>
    </properties>
   </object>
  </objectgroup>
  <objectgroup id="7" name="CharacterPositions">
-  <object id="12" name="enemyPivot" x="1314.67" y="530">
+  <object id="12" name="enemyPivot" x="1206.67" y="575.333">
    <point/>
   </object>
-  <object id="13" name="playerPivot" x="466.333" y="1043">
+  <object id="13" name="playerPivot" x="629" y="1032.33">
    <point/>
   </object>
  </objectgroup>

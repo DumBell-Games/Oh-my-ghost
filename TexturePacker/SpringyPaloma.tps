@@ -50,7 +50,7 @@
         <key>dxtCompressionMode</key>
         <enum type="SettingsBase::DxtCompressionMode">DXT_PERCEPTUAL</enum>
         <key>ditherType</key>
-        <enum type="SettingsBase::DitherType">NearestNeighbour</enum>
+        <enum type="SettingsBase::DitherType">PngQuantLow</enum>
         <key>backgroundColor</key>
         <uint>0</uint>
         <key>libGdx</key>
@@ -68,13 +68,13 @@
         <key>jpgQuality</key>
         <uint>80</uint>
         <key>pngOptimizationLevel</key>
-        <uint>1</uint>
+        <uint>0</uint>
         <key>webpQualityLevel</key>
         <uint>101</uint>
         <key>textureSubPath</key>
         <string>Assets/Animations/Springy/</string>
         <key>textureFormat</key>
-        <enum type="SettingsBase::TextureFormat">png</enum>
+        <enum type="SettingsBase::TextureFormat">png8</enum>
         <key>borderPadding</key>
         <uint>0</uint>
         <key>maxTextureSize</key>
@@ -282,6 +282,46 @@
             <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill2-7.png</key>
             <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill2-8.png</key>
             <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill2-9.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-0.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-1.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-10.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-11.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-12.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-13.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-14.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-15.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-16.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-17.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-18.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-19.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-2.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-20.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-21.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-22.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-3.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-4.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-5.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-6.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-7.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-8.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill3-9.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill4-0.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill4-1.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill4-10.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill4-11.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill4-12.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill4-13.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill4-14.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill4-15.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill4-16.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill4-2.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill4-3.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill4-4.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill4-5.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill4-6.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill4-7.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill4-8.png</key>
+            <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Skill4-9.png</key>
             <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Swap-0.png</key>
             <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Swap-1.png</key>
             <key type="filename">../Output/Assets/Animation/Springy/springyPaloma/Swap-2.png</key>

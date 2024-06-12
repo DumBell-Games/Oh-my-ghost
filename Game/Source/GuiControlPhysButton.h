@@ -21,7 +21,7 @@ public:
 
 	virtual ~GuiControlPhysButton();
 
-	bool Init(const char* bgPath, const char* bgClickedPath, const char* fgPath, const char* text = "");
+	bool Init (const char* bgPath, const char* bgClickedPath, const char* fgPath, const char* text = "");
 
 	// Called each loop iteration
 	bool Update(float dt);
